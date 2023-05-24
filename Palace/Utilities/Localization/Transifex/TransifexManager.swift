@@ -15,7 +15,7 @@ import Transifex
 
     TXNative.initialize(
       locales: locales,
-      token: TPPSecrets.transifexToken ?? ""
+      token: ""
     )
 
     TXNative.fetchTranslations()
