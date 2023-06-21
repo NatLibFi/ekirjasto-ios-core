@@ -8,7 +8,7 @@
 
 import UIKit
 
-private let TPPRoundedButtonPadding: CGFloat = 6.0
+private let TPPRoundedButtonPadding: CGFloat = 10.0 //Edited by Ellibs
 
 @objc enum TPPRoundedButtonType: Int {
   case normal
@@ -67,9 +67,10 @@ private let TPPRoundedButtonPadding: CGFloat = 6.0
   // MARK: - UI
   private func setupUI() {
     titleLabel?.font = UIFont.palaceFont(ofSize: 14)
-    layer.borderColor = tintColor.cgColor
-    layer.borderWidth = 1
-    layer.cornerRadius = 3
+    //layer.borderColor = tintColor.cgColor //Disabled by Ellibs
+    //layer.borderWidth = 1                 //Disabled by Ellibs
+    //layer.cornerRadius = 3                //Disabled by Ellibs
+    layer.backgroundColor = UIColor(named: "ColorEkirjastoLightestGreen")?.cgColor //Added by Ellibs
     
     label.textColor = self.tintColor
     label.font = UIFont.palaceFont(ofSize: 9)

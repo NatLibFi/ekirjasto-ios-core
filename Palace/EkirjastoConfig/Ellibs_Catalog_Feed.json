@@ -3,20 +3,20 @@
     {
       "links": [
         {
-          "href": "https://circulation-beta.ellibs.com/ellibs-test/groups/",
+          "href": "https://circulation-beta.ellibs.com/op-library/groups/",
           "type": "application/atom+xml;profile=opds-catalog;kind=acquisition",
           "rel": "http://opds-spec.org/catalog"
         },
         {
-          "href": "https://circulation-beta.ellibs.com/ellibs-test/groups/",
+          "href": "https://circulation-beta.ellibs.com/op-library/groups/",
           "rel": "start"
         },
         {
-          "href": "https://circulation-beta.ellibs.com/ellibs-test/groups/",
+          "href": "https://circulation-beta.ellibs.com/op-library/groups/",
           "rel": "self"
         },
         {
-          "href": "https://circulation-beta.ellibs.com/ellibs-test/authentication_document",
+          "href": "https://circulation-beta.ellibs.com/op-library/authentication_document",
           "type": "application/vnd.opds.authentication.v1.0+json"
         },
         {

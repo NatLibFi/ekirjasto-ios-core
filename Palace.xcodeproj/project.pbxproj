@@ -305,7 +305,6 @@
 		331263052A287F53006BA87D /* TPPXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 111559EC19B8FA590003BE94 /* TPPXML.m */; };
 		331263062A287F53006BA87D /* TPPSignInBusinessLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731A5B1124621F2B00B5E663 /* TPPSignInBusinessLogic.swift */; };
 		331263072A287F53006BA87D /* TPPBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11580AC71986A77B00949A15 /* TPPBookCell.m */; };
-		331263092A287F53006BA87D /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BEF01826BD94D600C2A50B /* UIFont+Extensions.swift */; };
 		3312630A2A287F53006BA87D /* TPPSignInBusinessLogic+CardCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74752F627FF044400F5E7FA /* TPPSignInBusinessLogic+CardCreation.swift */; };
 		3312630B2A287F53006BA87D /* TPPPDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7861C462846868800B3A38A /* TPPPDFViewController.swift */; };
 		3312630C2A287F53006BA87D /* TPPEncryptedPDFViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E708F722284783250028405B /* TPPEncryptedPDFViewer.swift */; };
@@ -531,7 +530,6 @@
 		331263E82A287F53006BA87D /* TPPBookRegistry+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523124A285C3828007D1DB5 /* TPPBookRegistry+Extensions.swift */; };
 		331263E92A287F53006BA87D /* TPPIndeterminateProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 113DB8A619C24E54004E1154 /* TPPIndeterminateProgressView.m */; };
 		331263EA2A287F53006BA87D /* NSString+TPPStringAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 119BEB88198C43A600121439 /* NSString+TPPStringAdditions.m */; };
-		331263EB2A287F53006BA87D /* TPPKeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B6E76E1F6859A4007EE361 /* TPPKeychainManager.swift */; };
 		331263EC2A287F53006BA87D /* TPPRequestExecuting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DE8979260BEA13003D9135 /* TPPRequestExecuting.swift */; };
 		331263ED2A287F53006BA87D /* TPPCookiesWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089E42C5249A823800310360 /* TPPCookiesWebViewController.swift */; };
 		331263EE2A287F53006BA87D /* TPPSamlIDPCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826CD2824AA21B2000F4030 /* TPPSamlIDPCell.swift */; };
@@ -567,7 +565,6 @@
 		3312640C2A287F53006BA87D /* Font+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54DD4E5275C8EAA0013C200 /* Font+Extensions.swift */; };
 		3312640D2A287F53006BA87D /* TPPLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 52592BB721220A1100587288 /* TPPLocalization.m */; };
 		3312640E2A287F53006BA87D /* TPPReaderTOCBusinessLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386C1F624525AFF004C78BD /* TPPReaderTOCBusinessLogic.swift */; };
-		3312640F2A287F53006BA87D /* TPPSecrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17071060242A923400E2648F /* TPPSecrets.swift */; };
 		331264102A287F53006BA87D /* TPPReaderTOCCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386C1F9245276CA004C78BD /* TPPReaderTOCCell.swift */; };
 		331264112A287F53006BA87D /* TPPUserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CE5304243C020800315E63 /* TPPUserAccount.swift */; };
 		331264122A287F53006BA87D /* TPPBookDetailDownloadFailedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1111973E1988226F0014462F /* TPPBookDetailDownloadFailedView.m */; };
@@ -630,14 +627,12 @@
 		3312644D2A287F53006BA87D /* ReaderClientCert.sig in Resources */ = {isa = PBXBuildFile; fileRef = 085D31FB1BE7BE86007F7672 /* ReaderClientCert.sig */; };
 		3312644E2A287F53006BA87D /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 17E81F32261FF758001003C2 /* Localizable.stringsdict */; };
 		3312644F2A287F53006BA87D /* software-licenses.html in Resources */ = {isa = PBXBuildFile; fileRef = 2D6256901D41582A0080A81F /* software-licenses.html */; };
-		331264502A287F53006BA87D /* TPP_Launch_Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E65977C41F82AC91003CD6BC /* TPP_Launch_Screen.storyboard */; };
 		331264512A287F53006BA87D /* Accounts.json in Resources */ = {isa = PBXBuildFile; fileRef = 03F94CCE1DD627AA00CE8F4F /* Accounts.json */; };
 		331264522A287F53006BA87D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A823D819192BABA400B55DE2 /* InfoPlist.strings */; };
 		331264532A287F53006BA87D /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5BEEFF526BD919D00C2A50B /* OpenSans-Bold.ttf */; };
 		331264542A287F53006BA87D /* reader.html in Resources */ = {isa = PBXBuildFile; fileRef = 11C113CF19F842B9005B3F63 /* reader.html */; };
 		331264552A287F53006BA87D /* DetailSummaryTemplate.html in Resources */ = {isa = PBXBuildFile; fileRef = 110F853C19D5FA7300052DF7 /* DetailSummaryTemplate.html */; };
 		331264562A287F53006BA87D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5506DE326C4688D009FA623 /* Colors.xcassets */; };
-		331264572A287F53006BA87D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A823D822192BABA400B55DE2 /* Images.xcassets */; };
 		331264582A287F53006BA87D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E50221BF29881CAC00A8A80B /* Localizable.strings */; };
 		331264592A287F53006BA87D /* sdk.css in Resources */ = {isa = PBXBuildFile; fileRef = 5A69290F1B95ACD100FB4C10 /* sdk.css */; };
 		3312645A2A287F53006BA87D /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5BEF01C26BDA9EA00C2A50B /* OpenSans-SemiBold.ttf */; };
@@ -654,8 +649,17 @@
 		331264682A287F53006BA87D /* NYPLAudiobookToolkit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5534255293FB23F004FF34A /* NYPLAudiobookToolkit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		331264692A287F53006BA87D /* PureLayout.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 21986921267E29D70041369E /* PureLayout.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3312646A2A287F53006BA87D /* Minizip.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2198690C267E29B00041369E /* Minizip.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		335223872A28BC2800CD514D /* Ekirjasto-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 335223852A28BC2500CD514D /* Ekirjasto-Info.plist */; };
-		337E63AC2A28A40900FF7886 /* TPPConfiguration+Ellibs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337E63AB2A28A40800FF7886 /* TPPConfiguration+Ellibs.swift */; };
+		33266EF92A4036DC003BC347 /* UIFont+Ekirjasto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33266EF82A4036DC003BC347 /* UIFont+Ekirjasto.swift */; };
+		33266EFB2A4037B6003BC347 /* Asap-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33266EFA2A4037B6003BC347 /* Asap-Regular.ttf */; };
+		33266F012A40456D003BC347 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33266F002A40456D003BC347 /* Images.xcassets */; };
+		33266F032A40459E003BC347 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33266F022A40459E003BC347 /* Colors.xcassets */; };
+		33266F042A40476B003BC347 /* Ekirjasto-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 335223852A28BC2500CD514D /* Ekirjasto-Info.plist */; };
+		3360FBA72A41B2E100AC1905 /* Ekirjasto_Launch_Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3360FBA52A41B2DA00AC1905 /* Ekirjasto_Launch_Screen.storyboard */; };
+		3360FBA82A41B2E500AC1905 /* TPP_Launch_Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E65977C41F82AC91003CD6BC /* TPP_Launch_Screen.storyboard */; };
+		3360FBAA2A41B59200AC1905 /* EkirjastoArrowDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3360FBA92A41B59200AC1905 /* EkirjastoArrowDownButton.swift */; };
+		3375701D2A2F684D00547CE1 /* TPPKeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B6E76E1F6859A4007EE361 /* TPPKeychainManager.swift */; };
+		3375701E2A2F685500547CE1 /* TPPSecrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17071060242A923400E2648F /* TPPSecrets.swift */; };
+		337E63AC2A28A40900FF7886 /* TPPConfiguration+Ekirjasto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337E63AB2A28A40800FF7886 /* TPPConfiguration+Ekirjasto.swift */; };
 		337E63B92A28A7D100FF7886 /* TPPAppDelegate+SE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734731222514235900BE3D2C /* TPPAppDelegate+SE.swift */; };
 		337E63BC2A28AFCE00FF7886 /* Ellibs_Catalog_Feed.json in Resources */ = {isa = PBXBuildFile; fileRef = 337E63BA2A28AF3900FF7886 /* Ellibs_Catalog_Feed.json */; };
 		52545185217A76FF00BBC1B4 /* TPPUserNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52545184217A76FF00BBC1B4 /* TPPUserNotifications.swift */; };
@@ -975,7 +979,6 @@
 		73EB0B5C25821DF4006BC997 /* readium-shared-js_all.js in Resources */ = {isa = PBXBuildFile; fileRef = 5A69290D1B95ACC600FB4C10 /* readium-shared-js_all.js */; };
 		73EB0B5D25821DF4006BC997 /* ReaderClientCert.sig in Resources */ = {isa = PBXBuildFile; fileRef = 085D31FB1BE7BE86007F7672 /* ReaderClientCert.sig */; };
 		73EB0B5E25821DF4006BC997 /* software-licenses.html in Resources */ = {isa = PBXBuildFile; fileRef = 2D6256901D41582A0080A81F /* software-licenses.html */; };
-		73EB0B5F25821DF4006BC997 /* TPP_Launch_Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E65977C41F82AC91003CD6BC /* TPP_Launch_Screen.storyboard */; };
 		73EB0B6025821DF4006BC997 /* Accounts.json in Resources */ = {isa = PBXBuildFile; fileRef = 03F94CCE1DD627AA00CE8F4F /* Accounts.json */; };
 		73EB0B6125821DF4006BC997 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A823D819192BABA400B55DE2 /* InfoPlist.strings */; };
 		73EB0B6225821DF4006BC997 /* reader.html in Resources */ = {isa = PBXBuildFile; fileRef = 11C113CF19F842B9005B3F63 /* reader.html */; };
@@ -1247,7 +1250,6 @@
 		E7B20B47285B3BC800C49FE1 /* TPPPDFPreviewGridController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B20B45285B3BC800C49FE1 /* TPPPDFPreviewGridController.swift */; };
 		E7B20B49285B4E5600C49FE1 /* TPPPDFLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B20B48285B4E5600C49FE1 /* TPPPDFLabel.swift */; };
 		E7B20B4A285B4E5600C49FE1 /* TPPPDFLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B20B48285B4E5600C49FE1 /* TPPPDFLabel.swift */; };
-		E7BF790D296F5F7600137D9F /* FirebaseMessaging.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7BF790C296F5F7600137D9F /* FirebaseMessaging.xcframework */; };
 		E7BF790F296F5FA300137D9F /* FirebaseMessaging.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7BF790C296F5F7600137D9F /* FirebaseMessaging.xcframework */; };
 		E7BF7911296F5FB300137D9F /* FirebaseMessaging.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7BF790C296F5F7600137D9F /* FirebaseMessaging.xcframework */; };
 		E7C0F2F1299586E8003A10C5 /* Strings+objC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C0F2F0299586E8003A10C5 /* Strings+objC.swift */; };
@@ -1670,9 +1672,15 @@
 		2DFAC8EB1CD8DDD1003D9EC0 /* TPPOPDSCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPPOPDSCategory.h; sourceTree = "<group>"; };
 		2DFAC8EC1CD8DDD1003D9EC0 /* TPPOPDSCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPPOPDSCategory.m; sourceTree = "<group>"; };
 		3312646E2A287F53006BA87D /* Ekirjasto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ekirjasto.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		335223852A28BC2500CD514D /* Ekirjasto-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Ekirjasto-Info.plist"; sourceTree = SOURCE_ROOT; };
-		337E63AB2A28A40800FF7886 /* TPPConfiguration+Ellibs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TPPConfiguration+Ellibs.swift"; sourceTree = "<group>"; };
-		337E63BA2A28AF3900FF7886 /* Ellibs_Catalog_Feed.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Ellibs_Catalog_Feed.json; sourceTree = SOURCE_ROOT; };
+		33266EF82A4036DC003BC347 /* UIFont+Ekirjasto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Ekirjasto.swift"; sourceTree = "<group>"; };
+		33266EFA2A4037B6003BC347 /* Asap-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Asap-Regular.ttf"; sourceTree = "<group>"; };
+		33266F002A40456D003BC347 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		33266F022A40459E003BC347 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		335223852A28BC2500CD514D /* Ekirjasto-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Ekirjasto-Info.plist"; path = "Palace/EkirjastoConfig/Ekirjasto-Info.plist"; sourceTree = SOURCE_ROOT; };
+		3360FBA52A41B2DA00AC1905 /* Ekirjasto_Launch_Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Ekirjasto_Launch_Screen.storyboard; sourceTree = "<group>"; };
+		3360FBA92A41B59200AC1905 /* EkirjastoArrowDownButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EkirjastoArrowDownButton.swift; sourceTree = "<group>"; };
+		337E63AB2A28A40800FF7886 /* TPPConfiguration+Ekirjasto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TPPConfiguration+Ekirjasto.swift"; sourceTree = "<group>"; };
+		337E63BA2A28AF3900FF7886 /* Ellibs_Catalog_Feed.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Ellibs_Catalog_Feed.json; path = Palace/EkirjastoConfig/Ellibs_Catalog_Feed.json; sourceTree = SOURCE_ROOT; };
 		52545184217A76FF00BBC1B4 /* TPPUserNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPPUserNotifications.swift; sourceTree = "<group>"; };
 		52592BB721220A1100587288 /* TPPLocalization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPPLocalization.m; sourceTree = "<group>"; };
 		52592BBB21220A4F00587288 /* TPPLocalization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TPPLocalization.h; sourceTree = "<group>"; };
@@ -2193,7 +2201,6 @@
 				E7BF790F296F5FA300137D9F /* FirebaseMessaging.xcframework in Frameworks */,
 				5AEA9E011B947419009F71DB /* libc++.dylib in Frameworks */,
 				2DA4F2331C68363B008853D7 /* LocalAuthentication.framework in Frameworks */,
-				E7BF790D296F5F7600137D9F /* FirebaseMessaging.xcframework in Frameworks */,
 				08A352261BDE8E700040BF1D /* SystemConfiguration.framework in Frameworks */,
 				08A352241BDE8E640040BF1D /* Security.framework in Frameworks */,
 				08A352201BDE8E410040BF1D /* CFNetwork.framework in Frameworks */,
@@ -2358,6 +2365,27 @@
 			path = AdobeDRM;
 			sourceTree = "<group>";
 		};
+		33266EF72A4036A5003BC347 /* Ekirjasto */ = {
+			isa = PBXGroup;
+			children = (
+				33266EFA2A4037B6003BC347 /* Asap-Regular.ttf */,
+				33266EF82A4036DC003BC347 /* UIFont+Ekirjasto.swift */,
+			);
+			path = Ekirjasto;
+			sourceTree = "<group>";
+		};
+		33266EFF2A404545003BC347 /* EkirjastoConfig */ = {
+			isa = PBXGroup;
+			children = (
+				3360FBA52A41B2DA00AC1905 /* Ekirjasto_Launch_Screen.storyboard */,
+				337E63BA2A28AF3900FF7886 /* Ellibs_Catalog_Feed.json */,
+				335223852A28BC2500CD514D /* Ekirjasto-Info.plist */,
+				33266F002A40456D003BC347 /* Images.xcassets */,
+				33266F022A40459E003BC347 /* Colors.xcassets */,
+			);
+			path = EkirjastoConfig;
+			sourceTree = "<group>";
+		};
 		5A569A271B8351C6003B5B61 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -2460,7 +2488,7 @@
 				730EDFFF251567820038DD9F /* TPPLibraryNavigationController.h */,
 				730EE000251567820038DD9F /* TPPLibraryNavigationController.m */,
 				52545184217A76FF00BBC1B4 /* TPPUserNotifications.swift */,
-				337E63AB2A28A40800FF7886 /* TPPConfiguration+Ellibs.swift */,
+				337E63AB2A28A40800FF7886 /* TPPConfiguration+Ekirjasto.swift */,
 			);
 			path = AppInfrastructure;
 			sourceTree = "<group>";
@@ -3056,6 +3084,7 @@
 				11B20E6C19D9F6DD00877A23 /* TPPReloadView.h */,
 				11B20E6D19D9F6DD00877A23 /* TPPReloadView.m */,
 				17E81F07261522B3001003C2 /* TPPRoundedButton.swift */,
+				3360FBA92A41B59200AC1905 /* EkirjastoArrowDownButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3271,8 +3300,7 @@
 		A823D817192BABA400B55DE2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				335223852A28BC2500CD514D /* Ekirjasto-Info.plist */,
-				337E63BA2A28AF3900FF7886 /* Ellibs_Catalog_Feed.json */,
+				33266EFF2A404545003BC347 /* EkirjastoConfig */,
 				E5BEEFF126BD918700C2A50B /* Fonts */,
 				737B9F83244FC648002B4464 /* README.md */,
 				73CEF839252706E3006B2820 /* PalaceConfig */,
@@ -3468,6 +3496,7 @@
 		E5BEEFF126BD918700C2A50B /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				33266EF72A4036A5003BC347 /* Ekirjasto */,
 				E5BEF01826BD94D600C2A50B /* UIFont+Extensions.swift */,
 				E5BEEFF526BD919D00C2A50B /* OpenSans-Bold.ttf */,
 				E5BEEFF826BD919E00C2A50B /* OpenSans-Regular.ttf */,
@@ -3732,7 +3761,7 @@
 			attributes = {
 				CLASSPREFIX = TPP;
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 1320;
+				LastUpgradeCheck = 1420;
 				ORGANIZATIONNAME = "The Palace Project";
 				TargetAttributes = {
 					2D2B47711D08F807007F7764 = {
@@ -3938,16 +3967,17 @@
 				337E63BC2A28AFCE00FF7886 /* Ellibs_Catalog_Feed.json in Resources */,
 				3312644E2A287F53006BA87D /* Localizable.stringsdict in Resources */,
 				3312644F2A287F53006BA87D /* software-licenses.html in Resources */,
-				331264502A287F53006BA87D /* TPP_Launch_Screen.storyboard in Resources */,
+				33266F012A40456D003BC347 /* Images.xcassets in Resources */,
 				331264512A287F53006BA87D /* Accounts.json in Resources */,
+				33266F042A40476B003BC347 /* Ekirjasto-Info.plist in Resources */,
 				331264522A287F53006BA87D /* InfoPlist.strings in Resources */,
 				331264532A287F53006BA87D /* OpenSans-Bold.ttf in Resources */,
 				331264542A287F53006BA87D /* reader.html in Resources */,
 				331264552A287F53006BA87D /* DetailSummaryTemplate.html in Resources */,
 				331264562A287F53006BA87D /* Colors.xcassets in Resources */,
-				331264572A287F53006BA87D /* Images.xcassets in Resources */,
 				331264582A287F53006BA87D /* Localizable.strings in Resources */,
-				335223872A28BC2800CD514D /* Ekirjasto-Info.plist in Resources */,
+				33266F032A40459E003BC347 /* Colors.xcassets in Resources */,
+				3360FBA72A41B2E100AC1905 /* Ekirjasto_Launch_Screen.storyboard in Resources */,
 				331264592A287F53006BA87D /* sdk.css in Resources */,
 				3312645A2A287F53006BA87D /* OpenSans-SemiBold.ttf in Resources */,
 				3312645B2A287F53006BA87D /* OpenDyslexic3-Bold.ttf in Resources */,
@@ -3956,6 +3986,7 @@
 				3312645E2A287F53006BA87D /* TPPReaderPositions.storyboard in Resources */,
 				3312645F2A287F53006BA87D /* host_app_feedback.js in Resources */,
 				331264602A287F53006BA87D /* Localizable.strings in Resources */,
+				33266EFB2A4037B6003BC347 /* Asap-Regular.ttf in Resources */,
 				331264612A287F53006BA87D /* txstrings.json in Resources */,
 				331264622A287F53006BA87D /* readium-shared-js_all.js.bundles.js in Resources */,
 				331264632A287F53006BA87D /* OpenDyslexic3-Regular.ttf in Resources */,
@@ -3976,7 +4007,6 @@
 				73EB0B5D25821DF4006BC997 /* ReaderClientCert.sig in Resources */,
 				17E81F2F261FF758001003C2 /* Localizable.stringsdict in Resources */,
 				73EB0B5E25821DF4006BC997 /* software-licenses.html in Resources */,
-				73EB0B5F25821DF4006BC997 /* TPP_Launch_Screen.storyboard in Resources */,
 				73EB0B6025821DF4006BC997 /* Accounts.json in Resources */,
 				73EB0B6125821DF4006BC997 /* InfoPlist.strings in Resources */,
 				E5BEF00326BD919F00C2A50B /* OpenSans-Bold.ttf in Resources */,
@@ -3990,6 +4020,7 @@
 				73EB0B6725821DF4006BC997 /* OpenDyslexic3-Bold.ttf in Resources */,
 				73EB0B6925821DF4006BC997 /* readium-shared-js_all.js.map in Resources */,
 				E50221C429881CDD00A8A80B /* Localizable.strings in Resources */,
+				3360FBA82A41B2E500AC1905 /* TPP_Launch_Screen.storyboard in Resources */,
 				73D8D27A25A68D3B00DF5F69 /* TPPReaderPositions.storyboard in Resources */,
 				73EB0B6A25821DF4006BC997 /* host_app_feedback.js in Resources */,
 				E50221CE29881D2800A8A80B /* Localizable.strings in Resources */,
@@ -4242,6 +4273,7 @@
 				331262FE2A287F53006BA87D /* TPPBook+Extensions.swift in Sources */,
 				331262FF2A287F53006BA87D /* TPPBook.swift in Sources */,
 				331263002A287F53006BA87D /* BookButtonType.swift in Sources */,
+				3375701D2A2F684D00547CE1 /* TPPKeychainManager.swift in Sources */,
 				331263012A287F53006BA87D /* TPPKeychainStoredVariable.swift in Sources */,
 				331263022A287F53006BA87D /* View.swift in Sources */,
 				331263032A287F53006BA87D /* TPPPDFDocument.swift in Sources */,
@@ -4249,7 +4281,6 @@
 				331263052A287F53006BA87D /* TPPXML.m in Sources */,
 				331263062A287F53006BA87D /* TPPSignInBusinessLogic.swift in Sources */,
 				331263072A287F53006BA87D /* TPPBookCell.m in Sources */,
-				331263092A287F53006BA87D /* UIFont+Extensions.swift in Sources */,
 				3312630A2A287F53006BA87D /* TPPSignInBusinessLogic+CardCreation.swift in Sources */,
 				3312630B2A287F53006BA87D /* TPPPDFViewController.swift in Sources */,
 				3312630C2A287F53006BA87D /* TPPEncryptedPDFViewer.swift in Sources */,
@@ -4310,6 +4341,7 @@
 				331263432A287F53006BA87D /* TPPPDFPreviewGrid.swift in Sources */,
 				331263442A287F53006BA87D /* TPPLinearView.m in Sources */,
 				331263452A287F53006BA87D /* View+Extensions.swift in Sources */,
+				33266EF92A4036DC003BC347 /* UIFont+Ekirjasto.swift in Sources */,
 				331263462A287F53006BA87D /* TPPReaderBookmarksBusinessLogic.swift in Sources */,
 				331263472A287F53006BA87D /* TPPOnboardingViewController.swift in Sources */,
 				331263482A287F53006BA87D /* TPPAgeCheckViewController.swift in Sources */,
@@ -4370,6 +4402,7 @@
 				3312637F2A287F53006BA87D /* NSError+NYPLAdditions.swift in Sources */,
 				331263802A287F53006BA87D /* TPPReachability.m in Sources */,
 				331263812A287F53006BA87D /* TPPCatalogLaneCell.m in Sources */,
+				3360FBAA2A41B59200AC1905 /* EkirjastoArrowDownButton.swift in Sources */,
 				331263822A287F53006BA87D /* URLResponse+NYPL.swift in Sources */,
 				331263832A287F53006BA87D /* TPPSettings+SE.swift in Sources */,
 				331263842A287F53006BA87D /* TPPSettingsAccountDetailViewController.m in Sources */,
@@ -4413,7 +4446,7 @@
 				331263AA2A287F53006BA87D /* AdobeDRMLibraryService.swift in Sources */,
 				331263AB2A287F53006BA87D /* TPPBookDetailTableView.swift in Sources */,
 				331263AC2A287F53006BA87D /* TPPReauthenticator.swift in Sources */,
-				337E63AC2A28A40900FF7886 /* TPPConfiguration+Ellibs.swift in Sources */,
+				337E63AC2A28A40900FF7886 /* TPPConfiguration+Ekirjasto.swift in Sources */,
 				331263AD2A287F53006BA87D /* TPPAnnouncementBusinessLogic.swift in Sources */,
 				331263AE2A287F53006BA87D /* Account.swift in Sources */,
 				331263AF2A287F53006BA87D /* BarcodeScanner.swift in Sources */,
@@ -4476,7 +4509,6 @@
 				331263E82A287F53006BA87D /* TPPBookRegistry+Extensions.swift in Sources */,
 				331263E92A287F53006BA87D /* TPPIndeterminateProgressView.m in Sources */,
 				331263EA2A287F53006BA87D /* NSString+TPPStringAdditions.m in Sources */,
-				331263EB2A287F53006BA87D /* TPPKeychainManager.swift in Sources */,
 				331263EC2A287F53006BA87D /* TPPRequestExecuting.swift in Sources */,
 				331263ED2A287F53006BA87D /* TPPCookiesWebViewController.swift in Sources */,
 				331263EE2A287F53006BA87D /* TPPSamlIDPCell.swift in Sources */,
@@ -4513,13 +4545,13 @@
 				3312640C2A287F53006BA87D /* Font+Extensions.swift in Sources */,
 				3312640D2A287F53006BA87D /* TPPLocalization.m in Sources */,
 				3312640E2A287F53006BA87D /* TPPReaderTOCBusinessLogic.swift in Sources */,
-				3312640F2A287F53006BA87D /* TPPSecrets.swift in Sources */,
 				331264102A287F53006BA87D /* TPPReaderTOCCell.swift in Sources */,
 				331264112A287F53006BA87D /* TPPUserAccount.swift in Sources */,
 				331264122A287F53006BA87D /* TPPBookDetailDownloadFailedView.m in Sources */,
 				331264132A287F53006BA87D /* TPPMyBooksDownloadCenter.m in Sources */,
 				331264142A287F53006BA87D /* TPPPDFPreviewGridCell.swift in Sources */,
 				331264152A287F53006BA87D /* TPPSettingsView.swift in Sources */,
+				3375701E2A2F685500547CE1 /* TPPSecrets.swift in Sources */,
 				331264162A287F53006BA87D /* TPPOPDSFeed.m in Sources */,
 				331264172A287F53006BA87D /* TPPOPDSLink.m in Sources */,
 				331264182A287F53006BA87D /* TPPSettingsViewController.swift in Sources */,
@@ -5424,18 +5456,17 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "Ekirjasto-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Ellibs-SimplyE";
+				INFOPLIST_FILE = "Palace/EkirjastoConfig/Ekirjasto-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Ekirjasto;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.28;
-				PRODUCT_BUNDLE_IDENTIFIER = fi.ellibs.simplye;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ellibs.simplye;
 				PRODUCT_MODULE_NAME = Palace;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2e185b6c-271e-4b02-a05e-860b8c3831f6";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG SIMPLYE";
@@ -5482,18 +5513,17 @@
 					"DEBUG=0",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "Ekirjasto-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Ellibs-SimplyE";
+				INFOPLIST_FILE = "Palace/EkirjastoConfig/Ekirjasto-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Ekirjasto;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.28;
-				PRODUCT_BUNDLE_IDENTIFIER = fi.ellibs.simplye;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ellibs.simplye;
 				PRODUCT_MODULE_NAME = Palace;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b3d9154d-70e1-48d6-a0c5-869431277a5c";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SIMPLYE;

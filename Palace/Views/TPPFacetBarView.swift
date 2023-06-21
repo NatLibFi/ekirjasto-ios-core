@@ -9,7 +9,7 @@ import Foundation
  
   private let accountSiteButton = UIButton()
   private let borderHeight = 1.0 / UIScreen.main.scale;
-  private let toolbarHeight = CGFloat(40.0);
+  private let toolbarHeight = CGFloat(60.0); //Edited by Ellibs
 
   weak var delegate: TPPFacetBarViewDelegate?
   
@@ -19,8 +19,8 @@ import Foundation
     let topBorderView = UIView()
     let bottomBorderView = UIView()
     
-    topBorderView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.9)
-    bottomBorderView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.9)
+    topBorderView.backgroundColor = UIColor(named: "ColorEkirjastoLightestGreen") //Edited by Ellibs
+    bottomBorderView.backgroundColor = UIColor(named: "ColorEkirjastoLightestGreen") //Edited by Ellibs
         
     view.addSubview(bottomBorderView)
     view.addSubview(topBorderView)
@@ -105,7 +105,8 @@ import Foundation
 
   override func draw(_ rect: CGRect) {
     super.draw(rect)
-    logoView.layer.cornerRadius = logoView.frame.height/2
+    //Disabled by Ellibs
+    //logoView.layer.cornerRadius = logoView.frame.height/2
   }
 
   private func setupViews() {
@@ -114,22 +115,27 @@ import Foundation
     facetView.isHidden = true;
 
     addSubview(facetView)
-    addSubview(logoView)
+    //Disabled by Ellibs
+    //addSubview(logoView)
     addSubview(entryPointView)
     setupConstraints()
-    updateLogo()
+    //Disabled by Ellibs
+    //updateLogo()
   }
   
   private func setupConstraints() {
     entryPointView.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.zero, excludingEdge: .bottom)
-    facetView.autoPinEdge(toSuperviewEdge: .leading)
+    facetView.autoPinEdge(toSuperviewEdge: .leading, withInset: 10)             //Edited by Ellibs
     facetView.autoPinEdge(toSuperviewEdge: .trailing)
     
     entryPointView.autoPinEdge(.bottom, to: .top, of: facetView)
-    logoView.autoPinEdge(.top, to: .bottom, of: facetView, withOffset: 10.0)
-    logoView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 10.0)
-    logoView.autoAlignAxis(toSuperviewMarginAxis: .vertical)
-    logoView.autoConstrainAttribute(.width, to: .width, of: self, withMultiplier: 0.8, relation: .lessThanOrEqual)
+    facetView.autoPinEdge(.top, to: .bottom, of: facetView, withOffset: 10.0)   //Added by Ellibs
+    facetView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 10.0)            //Added by Ellibs
+    //Disabled by Ellibs
+    //logoView.autoPinEdge(.top, to: .bottom, of: facetView, withOffset: 10.0)
+    //logoView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 10.0)
+    //logoView.autoAlignAxis(toSuperviewMarginAxis: .vertical)
+    //logoView.autoConstrainAttribute(.width, to: .width, of: self, withMultiplier: 0.8, relation: .lessThanOrEqual)
   }
 
   @objc func updateLogo() {

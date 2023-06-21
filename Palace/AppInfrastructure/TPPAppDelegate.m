@@ -65,9 +65,11 @@ didFinishLaunchingWithOptions:(__attribute__((unused)) NSDictionary *)launchOpti
   self.window.tintAdjustmentMode = UIViewTintAdjustmentModeNormal;
   [self.window makeKeyAndVisible];
   
+  [[UITabBar appearance] setUnselectedItemTintColor:[TPPConfiguration inactiveIconColor]]; //Added by Ellibs
   [[UITabBar appearance] setTintColor: [TPPConfiguration iconColor]];
   [[UITabBar appearance] setBackgroundColor:[TPPConfiguration backgroundColor]];
   [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName: [UIFont palaceFontOfSize:12.0]} forState:UIControlStateNormal];
+  [UITabBarItem appearance].titlePositionAdjustment = UIOffsetMake(0.0, 5.0); //Added by Ellibs
 
   [[UINavigationBar appearance] setTintColor: [TPPConfiguration iconColor]];
   [[UINavigationBar appearance] setStandardAppearance:[TPPConfiguration defaultAppearance]];

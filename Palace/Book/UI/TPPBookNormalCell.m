@@ -24,17 +24,17 @@
 - (void)layoutSubviews
 {
   [super layoutSubviews];
-  self.cover.frame = CGRectMake(20,
-                                5,
+  self.cover.frame = CGRectMake((20 / UIScreen.mainScreen.scale),               //Edited by Ellibs
+                                (20 / UIScreen.mainScreen.scale),               //Edited by Ellibs
                                 (CGRectGetHeight([self contentFrame]) - 10) * (10 / 12.0),
                                 CGRectGetHeight([self contentFrame]) - 10);
   self.cover.contentMode = UIViewContentModeScaleAspectFit;
 
   // The extra five height pixels account for a bug in |sizeThatFits:| that does not properly take
   // into account |lineHeightMultiple|.
-  CGFloat const titleWidth = CGRectGetWidth([self contentFrame]) - 120;
-  self.title.frame = CGRectMake(115,
-                                5,
+  CGFloat const titleWidth = CGRectGetWidth([self contentFrame]) - 140;         //Edited by Ellibs
+  self.title.frame = CGRectMake(130,                                            //Edited by Ellibs
+                                (20 / UIScreen.mainScreen.scale),               //Edited by Ellibs
                                 titleWidth,
                                 [self.title sizeThatFits:
                                  CGSizeMake(titleWidth, CGFLOAT_MAX)].height + 5);
@@ -44,13 +44,13 @@
   CGRect authorsRect = CGRectMake(0, 0, authorsSize.width, authorsSize.height);
   self.authors.frame = authorsRect;
   CGRect authorFrame = self.authors.frame;
-  authorFrame.origin = CGPointMake(115, CGRectGetMaxY(self.title.frame));
-  authorFrame.size.width = CGRectGetWidth([self contentFrame]) - 120;
+  authorFrame.origin = CGPointMake(130, CGRectGetMaxY(self.title.frame) + 10);  //Edited by Ellibs
+  authorFrame.size.width = CGRectGetWidth([self contentFrame]) - 140;           //Edited by Ellibs
   self.authors.frame = authorFrame;
   
   [self.buttonsView sizeToFit];
   CGRect frame = self.buttonsView.frame;
-  frame.origin = CGPointMake(115,
+  frame.origin = CGPointMake(130,                                               //Edited by Ellibs
                              (CGRectGetHeight([self contentFrame]) -
                               CGRectGetHeight(frame) - 5));
   self.buttonsView.frame = frame;

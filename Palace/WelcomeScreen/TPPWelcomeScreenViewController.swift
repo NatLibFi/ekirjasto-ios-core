@@ -58,7 +58,7 @@ import PureLayout
     logoView.autoAlignAxis(toSuperviewAxis: .vertical)
 
     view1.autoAlignAxis(toSuperviewAxis: .vertical)
-    view1.autoPinEdge(.top, to: .bottom, of: logoView, withOffset: -12)
+    view1.autoPinEdge(.top, to: .bottom, of: logoView, withOffset: 20) //Edited by Ellibs
     view1.autoPinEdge(toSuperviewMargin: .left)
     view1.autoPinEdge(toSuperviewMargin: .right)
     view1.autoPinEdge(toSuperviewEdge: .bottom)

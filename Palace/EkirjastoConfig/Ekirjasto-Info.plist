@@ -74,6 +74,7 @@
 	<string>We use your screenshots to help support you by understanding what you see on the screen or share with us via screen capture. You must upload those images and we do not do that in the background or programmatically.</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Asap-Regular.ttf</string>
 		<string>OpenDyslexic3-Regular.ttf</string>
 		<string>OpenDyslexic3-Bold.ttf</string>
 		<string>OpenSans-Regular.ttf</string>
@@ -86,7 +87,7 @@
 		<string>fetch</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
-	<string>TPP_Launch_Screen</string>
+	<string>Ekirjasto_Launch_Screen.storyboard</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

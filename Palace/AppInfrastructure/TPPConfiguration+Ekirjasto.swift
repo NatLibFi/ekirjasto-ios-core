@@ -1,5 +1,5 @@
 //
-//  TPPConfiguration+Ellibs.swift
+//  TPPConfiguration+Ekirjasto.swift
 //  Ekirjasto
 //
 //  Created by Nianzu on 1.6.2023.
@@ -83,15 +83,23 @@ extension TPPConfiguration {
   
   @objc static func iconColor() -> UIColor {
     if #available(iOS 13, *) {
-      return UIColor(named: "ColorIcon")!
+      return UIColor(named: "ColorEkirjastoIcon")!
     } else {
       return .black
     }
   }
   
+  @objc static func inactiveIconColor() -> UIColor {
+    if #available(iOS 13, *) {
+      return UIColor(named: "ColorEkirjastoLighterGreen")!
+    } else {
+      return .lightGray
+    }
+  }
+  
   @objc static func compatiblePrimaryColor() -> UIColor {
     if #available(iOS 13, *) {
-      return UIColor.label
+      return UIColor(named: "ColorEkirjastoLabel")!
     } else {
       return .black
     }
@@ -103,5 +111,9 @@ extension TPPConfiguration {
     } else {
       return .white;
     }
+  }
+  
+  @objc static func ekirjastoFontName() -> String {
+    return "Asap-Regular"
   }
 }
