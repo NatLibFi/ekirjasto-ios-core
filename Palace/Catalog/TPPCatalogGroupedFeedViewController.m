@@ -115,10 +115,15 @@ static CGFloat const kTableViewCrossfadeDuration = 0.3;
     self.navigationItem.rightBarButtonItem.enabled = NO;
 
     // prevent possible unusable Search box when going to Search page
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]
-                                             initWithTitle:NSLocalizedString(@"Back", @"Back button text")
-                                             style:UIBarButtonItemStylePlain
-                                             target:nil action:nil];
+    // self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]
+    //                                          initWithTitle:NSLocalizedString(@"Back", @"Back button text")
+    //                                          style:UIBarButtonItemStylePlain
+    //                                          target:nil action:nil]; //Disabled by Ellibs
+    
+    NSDictionary *titleAttributes = @{NSForegroundColorAttributeName:[TPPConfiguration compatiblePrimaryColor]}; //Added by Ellibs
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", @"Back Button")  style:UIBarButtonItemStylePlain target:nil action:nil]; //Added by Ellibs
+    [backButton setTitleTextAttributes:titleAttributes forState:UIControlStateNormal]; //Added by Ellibs
+    self.navigationItem.backBarButtonItem = backButton; //Added by Ellibs
     
     [self fetchOpenSearchDescription];
   }
@@ -310,13 +315,19 @@ viewForHeaderInSection:(NSInteger const)section
   
   {
     UIButton *const button = [UIButton buttonWithType:UIButtonTypeSystem];
-    button.titleLabel.font = [UIFont palaceFontOfSize:13];
-    NSString *const title = NSLocalizedString(@"More...", nil);
+    button.titleLabel.font = [UIFont palaceFontOfSize:14]; //Edited by Ellibs
+    NSString *const title = NSLocalizedString(@"More", nil); //Edited by Ellibs
+    button.semanticContentAttribute = UISemanticContentAttributeForceRightToLeft; //Added by Ellibs
+    UIImage *readmoreArrow = [UIImage imageNamed:@"ArrowRight"]; //Added by Ellibs
+    [button setImage:readmoreArrow forState:UIControlStateNormal]; //Added by Ellibs
+    button.imageEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0); //Added by Ellibs
+    button.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10); //Added by Ellibs
+    [button setTitleColor:[TPPConfiguration compatiblePrimaryColor] forState:UIControlStateNormal]; //Added by Ellibs
     [button setTitle:title forState:UIControlStateNormal];
     [button sizeToFit];
-    button.frame = CGRectMake(CGRectGetWidth(view.frame) - CGRectGetWidth(button.frame) - 10,
+    button.frame = CGRectMake(CGRectGetWidth(view.frame) - CGRectGetWidth(button.frame) - 30, //Edited by Ellibs
                               13,
-                              CGRectGetWidth(button.frame),
+                              CGRectGetWidth(button.frame)+30, //Edited by Ellibs
                               CGRectGetHeight(button.frame));
     button.tag = section;
     TPPCatalogLane *const lane = self.feed.lanes[button.tag];

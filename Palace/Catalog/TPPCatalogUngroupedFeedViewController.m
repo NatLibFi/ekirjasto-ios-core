@@ -86,10 +86,15 @@ static const CGFloat kCollectionViewCrossfadeDuration = 0.3;
     self.navigationItem.rightBarButtonItem.enabled = NO;
 
     // prevent possible unusable Search box when going to Search page
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]
-                                             initWithTitle:NSLocalizedString(@"Back", @"Back button text")
-                                             style:UIBarButtonItemStylePlain
-                                             target:nil action:nil];
+    // self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]
+    //                                          initWithTitle:NSLocalizedString(@"Back", @"Back button text")
+    //                                          style:UIBarButtonItemStylePlain
+    //                                          target:nil action:nil]; //Disabled by Ellibs
+
+    NSDictionary *titleAttributes = @{NSForegroundColorAttributeName:[TPPConfiguration compatiblePrimaryColor]}; //Added by Ellibs
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", @"Back Button")  style:UIBarButtonItemStylePlain target:nil action:nil]; //Added by Ellibs
+    [backButton setTitleTextAttributes:titleAttributes forState:UIControlStateNormal]; //Added by Ellibs
+    self.navigationItem.backBarButtonItem = backButton; //Added by Ellibs
     
     [self fetchOpenSearchDescription];
   }

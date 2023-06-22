@@ -44,12 +44,12 @@
 @property (nonatomic) TPPBookDetailDownloadingView *downloadingView;
 @property (nonatomic) TPPBookDetailNormalView *normalView;
 
-@property (nonatomic) UILabel *summarySectionLabel;
+@property (nonatomic) EkirjastoRoundedLabel *summarySectionLabel; //Edited by Ellibs
 @property (nonatomic) UITextView *summaryTextView;
 @property (nonatomic) NSLayoutConstraint *textHeightConstraint;
 @property (nonatomic) UIButton *readMoreLabel;
 
-@property (nonatomic) UILabel *infoSectionLabel;
+@property (nonatomic) EkirjastoRoundedLabel *infoSectionLabel;
 @property (nonatomic) UILabel *publishedLabelKey;
 @property (nonatomic) UILabel *publisherLabelKey;
 @property (nonatomic) UILabel *categoriesLabelKey;
@@ -170,13 +170,13 @@ static NSString *DetailHTMLTemplate = nil;
 
 - (void)updateFonts
 {
-  self.titleLabel.font = [UIFont customFontForTextStyle:UIFontTextStyleHeadline];
-  self.subtitleLabel.font = [UIFont customFontForTextStyle:UIFontTextStyleCaption2];
+  self.titleLabel.font = [UIFont palaceFontOfSize:20]; //Edited by Ellibs
+  self.subtitleLabel.font = [UIFont palaceFontOfSize:18]; //Edited by Ellibs
   self.audiobookLabel.font = [UIFont customFontForTextStyle:UIFontTextStyleCaption2];
-  self.authorsLabel.font = [UIFont customFontForTextStyle:UIFontTextStyleCaption2];
+  self.authorsLabel.font = [UIFont palaceFontOfSize:18]; //Edited by Ellibs
   self.readMoreLabel.titleLabel.font = [UIFont palaceFontOfSize:14];
-  self.summarySectionLabel.font = [UIFont customBoldFontForTextStyle:UIFontTextStyleCaption1];
-  self.infoSectionLabel.font = [UIFont customBoldFontForTextStyle:UIFontTextStyleCaption1];
+  self.summarySectionLabel.font = [UIFont palaceFontOfSize:14]; //Edited by Ellibs
+  self.infoSectionLabel.font = [UIFont palaceFontOfSize:14]; //Edited by Ellibs
   [self.footerTableView reloadData];
 }
 
@@ -194,9 +194,9 @@ static NSString *DetailHTMLTemplate = nil;
 
 - (void)createBookDescriptionViews
 {
-  self.summarySectionLabel = [[UILabel alloc] init];
+  self.summarySectionLabel = [[EkirjastoRoundedLabel alloc] init]; //Edited by Ellibs
   self.summarySectionLabel.text = NSLocalizedString(@"Description", nil);
-  self.infoSectionLabel = [[UILabel alloc] init];
+  self.infoSectionLabel = [[EkirjastoRoundedLabel alloc] init];
   self.infoSectionLabel.text = NSLocalizedString(@"Information", nil);
   
   self.summaryTextView = [[UITextView alloc] init];
@@ -209,7 +209,7 @@ static NSString *DetailHTMLTemplate = nil;
   self.summaryTextView.adjustsFontForContentSizeCategory = YES;
 
   NSString *htmlString = [[NSString stringWithFormat:DetailHTMLTemplate,
-                           [UIFont systemFontOfSize: 12],
+                           [UIFont palaceFontOfSize:18], //Edited by Ellibs
                            self.book.summary ?: @""] stringByDecodingHTMLEntities];
 
   NSData *htmlData = [htmlString dataUsingEncoding:NSUnicodeStringEncoding];
@@ -239,10 +239,16 @@ static NSString *DetailHTMLTemplate = nil;
   self.readMoreLabel = [[UIButton alloc] init];
   self.readMoreLabel.hidden = YES;
   self.readMoreLabel.titleLabel.textAlignment = NSTextAlignmentRight;
+  self.readMoreLabel.semanticContentAttribute = UISemanticContentAttributeForceRightToLeft; //Added by Ellibs
+  UIImage *readmoreArrow = [UIImage imageNamed:@"ArrowRight"]; //Added by Ellibs
+  [self.readMoreLabel setImage:readmoreArrow forState:UIControlStateNormal]; //Added by Ellibs
+  self.readMoreLabel.imageEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0); //Added by Ellibs
+  self.readMoreLabel.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10); //Added by Ellibs
+  [self.readMoreLabel setTitleColor:[TPPConfiguration compatiblePrimaryColor] forState:UIControlStateNormal]; //Added by Ellibs
   [self.readMoreLabel addTarget:self action:@selector(readMoreTapped:) forControlEvents:UIControlEventTouchUpInside];
   
   [self.readMoreLabel setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-  [self.readMoreLabel setTitle:NSLocalizedString(@"More...", nil) forState:UIControlStateNormal];
+  [self.readMoreLabel setTitle:NSLocalizedString(@"More", nil) forState:UIControlStateNormal]; //Edited by Ellibs
   [self.readMoreLabel setTitleColor:[TPPConfiguration mainColor] forState:UIControlStateNormal];
 }
 
@@ -380,9 +386,9 @@ static NSString *DetailHTMLTemplate = nil;
   self.narratorsLabelValue.numberOfLines = 0;
   
   self.topFootnoteSeparater = [[UIView alloc] init];
-  self.topFootnoteSeparater.backgroundColor = [UIColor lightGrayColor];
+  self.topFootnoteSeparater.backgroundColor = [TPPConfiguration inactiveIconColor]; //Edited by Ellibs
   self.bottomFootnoteSeparator = [[UIView alloc] init];
-  self.bottomFootnoteSeparator.backgroundColor = [UIColor lightGrayColor];
+  self.bottomFootnoteSeparator.backgroundColor = [TPPConfiguration inactiveIconColor]; //Edited by Ellibs
   
   self.footerTableView = [[TPPBookDetailTableView alloc] init];
   self.footerTableView.isAccessibilityElement = NO;
@@ -399,7 +405,7 @@ static NSString *DetailHTMLTemplate = nil;
   UILabel *label = [[UILabel alloc] init];
   label.textAlignment = alignment;
   label.text = string;
-  label.font = [UIFont customFontForTextStyle:UIFontTextStyleCaption2];
+  label.font = [UIFont palaceFontOfSize:14]; //Edited by Ellibs
   return label;
 }
 
@@ -429,7 +435,7 @@ static NSString *DetailHTMLTemplate = nil;
   [self.visualEffectView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero excludingEdge:ALEdgeBottom];
   [self.visualEffectView autoPinEdge:ALEdgeBottom toEdge:ALEdgeTop ofView:self.normalView];
   
-  [self.coverImageView autoPinEdgeToSuperviewMargin:ALEdgeLeading];
+  [self.coverImageView autoPinEdgeToSuperviewMargin:ALEdgeLeading withInset:-13]; //Edited by Ellibs
   [self.coverImageView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:VerticalPadding];
   [self.coverImageView autoMatchDimension:ALDimensionWidth toDimension:ALDimensionHeight ofView:self.coverImageView withMultiplier:CoverImageAspectRatio];
   [self.coverImageView autoSetDimension:ALDimensionWidth toSize:CoverImageMaxWidth relation:NSLayoutRelationLessThanOrEqual];
@@ -446,7 +452,7 @@ static NSString *DetailHTMLTemplate = nil;
   NSLayoutConstraint *titleLabelConstraint = [self.titleLabel autoPinEdgeToSuperviewMargin:ALEdgeTrailing];
   
   [self.subtitleLabel autoPinEdge:ALEdgeLeading toEdge:ALEdgeTrailing ofView:self.coverImageView withOffset:MainTextPaddingLeft];
-  [self.subtitleLabel autoPinEdge:ALEdgeTrailing toEdge:ALEdgeTrailing ofView:self.titleLabel];
+  [self.subtitleLabel autoPinEdge:ALEdgeTrailing toEdge:ALEdgeTrailing ofView:self.titleLabel withOffset:10]; //Edited by Ellibs
   [self.subtitleLabel autoConstrainAttribute:ALAttributeTop toAttribute:ALAttributeBaseline ofView:self.titleLabel withOffset:SubtitleBaselineOffset];
 
   [self.audiobookLabel autoPinEdge:ALEdgeLeading toEdge:ALEdgeTrailing ofView:self.coverImageView withOffset:MainTextPaddingLeft];
@@ -499,7 +505,7 @@ static NSString *DetailHTMLTemplate = nil;
   [self.readMoreLabel autoPinEdgeToSuperviewMargin:ALEdgeLeading];
   [self.readMoreLabel autoPinEdgeToSuperviewMargin:ALEdgeTrailing];
   [self.readMoreLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.summaryTextView];
-  [self.readMoreLabel autoPinEdge:ALEdgeBottom toEdge:ALEdgeTop ofView:self.topFootnoteSeparater];
+  [self.readMoreLabel autoPinEdge:ALEdgeBottom toEdge:ALEdgeTop ofView:self.topFootnoteSeparater withOffset:-15]; //Edited by Ellibs
   
   [self.infoSectionLabel autoPinEdgeToSuperviewMargin:ALEdgeLeading];
   

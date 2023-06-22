@@ -44,7 +44,11 @@
   self.title = book.title;
   UILabel *label = [[UILabel alloc] init];
   self.navigationItem.titleView = label;
-  self.navigationItem.backButtonTitle = NSLocalizedString(@"Back", @"Back Button");
+  //self.navigationItem.backButtonTitle = NSLocalizedString(@"Back", @"Back Button"); //Disabled by Ellibs
+  NSDictionary *titleAttributes = @{NSForegroundColorAttributeName:[TPPConfiguration compatiblePrimaryColor]}; //Added by Ellibs
+  UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", @"Back Button")  style:UIBarButtonItemStylePlain target:nil action:nil]; //Added by Ellibs
+  [backButton setTitleTextAttributes:titleAttributes forState:UIControlStateNormal]; //Added by Ellibs
+  self.navigationItem.backBarButtonItem = backButton; //Added by Ellibs
   self.bookDetailView = [[TPPBookDetailView alloc] initWithBook:self.book
                                                         delegate:self];
   self.bookDetailView.state = [[TPPBookRegistry shared]

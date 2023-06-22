@@ -67,37 +67,19 @@ private let ButtonPadding: CGFloat = 6.0
   // MARK: - UI
   private func setupUI() {
     titleLabel?.font = UIFont.palaceFont(ofSize: 14)
-    label.textColor = self.tintColor
-    label.font = UIFont.palaceFont(ofSize: 9)
-    
-    addSubview(label)
-    addSubview(iconView)
   }
   
   private func updateViews() {
-    let padX = ButtonPadding + 2
-    let padY = ButtonPadding
-  
-    self.iconView.image = UIImage.init(named: "ArrowDownEkirjasto")?.withRenderingMode(.alwaysTemplate)
-    self.iconView.isHidden = false
-    self.label.isHidden = false
-    self.label.text = self.endDate?.timeUntilString(suffixType: .short) ?? ""
-    self.label.sizeToFit()
-    
-    self.iconView.frame = CGRect(x: padX, y: padY/2, width: 14, height: 14)
-    var frame = self.label.frame
-    frame.origin = CGPoint(x: self.iconView.center.x - frame.size.width/2, y: self.iconView.frame.maxY)
-    self.label.frame = frame
-    self.contentEdgeInsets = UIEdgeInsets(top: padY, left: self.iconView.frame.maxX + padX, bottom: padY, right: padX)
-  
   }
   
   private func updateColors() {
     let color: UIColor = self.isEnabled ? UIColor(named: "ColorEkirjastoGreen")! : UIColor.gray
-    self.layer.borderColor = color.cgColor
-    self.label.textColor = color
-    self.iconView.tintColor = color
     setTitleColor(color, for: .normal)
+    setImage(UIImage(named: "ArrowDownEkirjasto"), for: .normal)
+    self.imageEdgeInsets = UIEdgeInsets(top: 3, left: 3, bottom: 0, right: 0)
+    self.contentHorizontalAlignment = .trailing
+    self.semanticContentAttribute = .forceRightToLeft
+    self.tintColor = UIColor(named: "ColorEkirjastoGreen")!
   }
   
   // Override UIView functions

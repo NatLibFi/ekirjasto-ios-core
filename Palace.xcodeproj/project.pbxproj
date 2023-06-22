@@ -657,6 +657,7 @@
 		3360FBA72A41B2E100AC1905 /* Ekirjasto_Launch_Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3360FBA52A41B2DA00AC1905 /* Ekirjasto_Launch_Screen.storyboard */; };
 		3360FBA82A41B2E500AC1905 /* TPP_Launch_Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E65977C41F82AC91003CD6BC /* TPP_Launch_Screen.storyboard */; };
 		3360FBAA2A41B59200AC1905 /* EkirjastoArrowDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3360FBA92A41B59200AC1905 /* EkirjastoArrowDownButton.swift */; };
+		336F0D582A432860009E37F6 /* EkirjastoRoundedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336F0D572A432860009E37F6 /* EkirjastoRoundedLabel.swift */; };
 		3375701D2A2F684D00547CE1 /* TPPKeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B6E76E1F6859A4007EE361 /* TPPKeychainManager.swift */; };
 		3375701E2A2F685500547CE1 /* TPPSecrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17071060242A923400E2648F /* TPPSecrets.swift */; };
 		337E63AC2A28A40900FF7886 /* TPPConfiguration+Ekirjasto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337E63AB2A28A40800FF7886 /* TPPConfiguration+Ekirjasto.swift */; };
@@ -1679,6 +1680,7 @@
 		335223852A28BC2500CD514D /* Ekirjasto-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Ekirjasto-Info.plist"; path = "Palace/EkirjastoConfig/Ekirjasto-Info.plist"; sourceTree = SOURCE_ROOT; };
 		3360FBA52A41B2DA00AC1905 /* Ekirjasto_Launch_Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Ekirjasto_Launch_Screen.storyboard; sourceTree = "<group>"; };
 		3360FBA92A41B59200AC1905 /* EkirjastoArrowDownButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EkirjastoArrowDownButton.swift; sourceTree = "<group>"; };
+		336F0D572A432860009E37F6 /* EkirjastoRoundedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EkirjastoRoundedLabel.swift; sourceTree = "<group>"; };
 		337E63AB2A28A40800FF7886 /* TPPConfiguration+Ekirjasto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TPPConfiguration+Ekirjasto.swift"; sourceTree = "<group>"; };
 		337E63BA2A28AF3900FF7886 /* Ellibs_Catalog_Feed.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Ellibs_Catalog_Feed.json; path = Palace/EkirjastoConfig/Ellibs_Catalog_Feed.json; sourceTree = SOURCE_ROOT; };
 		52545184217A76FF00BBC1B4 /* TPPUserNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPPUserNotifications.swift; sourceTree = "<group>"; };
@@ -2370,6 +2372,7 @@
 			children = (
 				33266EFA2A4037B6003BC347 /* Asap-Regular.ttf */,
 				33266EF82A4036DC003BC347 /* UIFont+Ekirjasto.swift */,
+				336F0D572A432860009E37F6 /* EkirjastoRoundedLabel.swift */,
 			);
 			path = Ekirjasto;
 			sourceTree = "<group>";
@@ -4402,6 +4405,7 @@
 				3312637F2A287F53006BA87D /* NSError+NYPLAdditions.swift in Sources */,
 				331263802A287F53006BA87D /* TPPReachability.m in Sources */,
 				331263812A287F53006BA87D /* TPPCatalogLaneCell.m in Sources */,
+				336F0D582A432860009E37F6 /* EkirjastoRoundedLabel.swift in Sources */,
 				3360FBAA2A41B59200AC1905 /* EkirjastoArrowDownButton.swift in Sources */,
 				331263822A287F53006BA87D /* URLResponse+NYPL.swift in Sources */,
 				331263832A287F53006BA87D /* TPPSettings+SE.swift in Sources */,
