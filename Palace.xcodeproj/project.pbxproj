@@ -135,8 +135,6 @@
 		217595DB27B6800100BA0FDD /* TPPReaderSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217595D927B6800100BA0FDD /* TPPReaderSettingsView.swift */; };
 		217595DD27B680D400BA0FDD /* TPPReaderSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217595DC27B680D400BA0FDD /* TPPReaderSettingsVC.swift */; };
 		217595DE27B680D400BA0FDD /* TPPReaderSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217595DC27B680D400BA0FDD /* TPPReaderSettingsVC.swift */; };
-		2178984D269F174500374A6B /* NYPLAEToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E585662526979AC100A5FBD5 /* NYPLAEToolkit.framework */; };
-		2178984E269F174500374A6B /* NYPLAEToolkit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E585662526979AC100A5FBD5 /* NYPLAEToolkit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		219747FC26D9218400FA25DF /* TPPLCPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219747F626D9218400FA25DF /* TPPLCPClient.swift */; };
 		2198690D267E29B00041369E /* Minizip.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2198690C267E29B00041369E /* Minizip.xcframework */; };
 		2198690E267E29B00041369E /* Minizip.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2198690C267E29B00041369E /* Minizip.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -663,6 +661,13 @@
 		337E63AC2A28A40900FF7886 /* TPPConfiguration+Ekirjasto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337E63AB2A28A40800FF7886 /* TPPConfiguration+Ekirjasto.swift */; };
 		337E63B92A28A7D100FF7886 /* TPPAppDelegate+SE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734731222514235900BE3D2C /* TPPAppDelegate+SE.swift */; };
 		337E63BC2A28AFCE00FF7886 /* Ellibs_Catalog_Feed.json in Resources */ = {isa = PBXBuildFile; fileRef = 337E63BA2A28AF3900FF7886 /* Ellibs_Catalog_Feed.json */; };
+		33D320E32A5BF1C90032E6E9 /* LCPPassphraseAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5AB4E25D201BD005DFF05 /* LCPPassphraseAuthenticationService.swift */; };
+		33D320E42A5BF1EE0032E6E9 /* TPPLCPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219747F626D9218400FA25DF /* TPPLCPClient.swift */; };
+		33D320E62A5BF4A60032E6E9 /* ReadiumLCP in Frameworks */ = {isa = PBXBuildFile; productRef = 33D320E52A5BF4A60032E6E9 /* ReadiumLCP */; };
+		33F69AA12A5BFACB00B0C835 /* R2LCPClient.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F287782956566800EEB1E0 /* R2LCPClient.xcframework */; };
+		33F69AA22A5BFACB00B0C835 /* R2LCPClient.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E7F287782956566800EEB1E0 /* R2LCPClient.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		33F69AA32A5BFD6900B0C835 /* LicensesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A9908F27EE4EF400D9486F /* LicensesService.swift */; };
+		33F69AA42A5BFDF100B0C835 /* LCPAudiobooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212B99D2258A36FD00C8BF79 /* LCPAudiobooks.swift */; };
 		52545185217A76FF00BBC1B4 /* TPPUserNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52545184217A76FF00BBC1B4 /* TPPUserNotifications.swift */; };
 		52592BB821220A1100587288 /* TPPLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 52592BB721220A1100587288 /* TPPLocalization.m */; };
 		5A69290E1B95ACC600FB4C10 /* readium-shared-js_all.js in Resources */ = {isa = PBXBuildFile; fileRef = 5A69290D1B95ACC600FB4C10 /* readium-shared-js_all.js */; };
@@ -1114,7 +1119,6 @@
 		E5824BF229988C4F00DE76C2 /* TPPSAMLHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 730263AB2540DE4200A53891 /* TPPSAMLHelper.m */; };
 		E5824BF629988CA600DE76C2 /* TPPMyBooksDownloadCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1196F75A1970727C00F62670 /* TPPMyBooksDownloadCenter.m */; };
 		E5824BF729988CA700DE76C2 /* TPPMyBooksDownloadCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1196F75A1970727C00F62670 /* TPPMyBooksDownloadCenter.m */; };
-		E58565CF269774C400A5FBD5 /* AudioEngine.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E58565CE269774C400A5FBD5 /* AudioEngine.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E59526EB28D24FC000C179DA /* AudiobookSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59526EA28D24FC000C179DA /* AudiobookSample.swift */; };
 		E59892E128A9AC2600C44A85 /* Sample.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59892E028A9AC2600C44A85 /* Sample.swift */; };
 		E59892ED28AC909000C44A85 /* AudiobookSampleToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59892EC28AC909000C44A85 /* AudiobookSampleToolbar.swift */; };
@@ -1135,8 +1139,6 @@
 		E5BEF01A26BD94D600C2A50B /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BEF01826BD94D600C2A50B /* UIFont+Extensions.swift */; };
 		E5BEF02826BDAB3A00C2A50B /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5BEF01C26BDA9EA00C2A50B /* OpenSans-SemiBold.ttf */; };
 		E5BEF02A26BDAB3A00C2A50B /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5BEF01C26BDA9EA00C2A50B /* OpenSans-SemiBold.ttf */; };
-		E5C1F55227990A89005FC6B2 /* OverdriveProcessor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5C1F53027990929005FC6B2 /* OverdriveProcessor.framework */; };
-		E5C1F55327990A96005FC6B2 /* OverdriveProcessor.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5C1F53027990929005FC6B2 /* OverdriveProcessor.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E5C2C422268BA5140046F415 /* TPPRegistryDebuggingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C2C421268BA5140046F415 /* TPPRegistryDebuggingCell.swift */; };
 		E5D3288A292C0D34008BFD01 /* txstrings.json in Resources */ = {isa = PBXBuildFile; fileRef = E5D32881292C0D34008BFD01 /* txstrings.json */; };
 		E5D3288B292C0D68008BFD01 /* txstrings.json in Resources */ = {isa = PBXBuildFile; fileRef = E5D32881292C0D34008BFD01 /* txstrings.json */; };
@@ -1364,10 +1366,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				E5288CBE293FB69400F3B3D2 /* NYPLAudiobookToolkit.framework in Embed Frameworks */,
-				E5C1F55327990A96005FC6B2 /* OverdriveProcessor.framework in Embed Frameworks */,
-				E58565CF269774C400A5FBD5 /* AudioEngine.xcframework in Embed Frameworks */,
 				E7F2877A2956566900EEB1E0 /* R2LCPClient.xcframework in Embed Frameworks */,
-				2178984E269F174500374A6B /* NYPLAEToolkit.framework in Embed Frameworks */,
 				21986923267E29D70041369E /* PureLayout.xcframework in Embed Frameworks */,
 				2198690E267E29B00041369E /* Minizip.xcframework in Embed Frameworks */,
 			);
@@ -1393,6 +1392,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				33F69AA22A5BFACB00B0C835 /* R2LCPClient.xcframework in Embed Frameworks */,
 				331264682A287F53006BA87D /* NYPLAudiobookToolkit.framework in Embed Frameworks */,
 				331264692A287F53006BA87D /* PureLayout.xcframework in Embed Frameworks */,
 				3312646A2A287F53006BA87D /* Minizip.xcframework in Embed Frameworks */,
@@ -2094,6 +2094,7 @@
 				331264202A287F53006BA87D /* FirebaseCrashlytics.xcframework in Frameworks */,
 				331264212A287F53006BA87D /* PureLayout.xcframework in Frameworks */,
 				331264222A287F53006BA87D /* CoreMedia.framework in Frameworks */,
+				33D320E62A5BF4A60032E6E9 /* ReadiumLCP in Frameworks */,
 				331264232A287F53006BA87D /* CoreVideo.framework in Frameworks */,
 				331264242A287F53006BA87D /* AVFoundation.framework in Frameworks */,
 				331264252A287F53006BA87D /* AudioToolbox.framework in Frameworks */,
@@ -2118,6 +2119,7 @@
 				331264382A287F53006BA87D /* SwiftSoup in Frameworks */,
 				331264392A287F53006BA87D /* CFNetwork.framework in Frameworks */,
 				3312643A2A287F53006BA87D /* GoogleAppMeasurement.xcframework in Frameworks */,
+				33F69AA12A5BFACB00B0C835 /* R2LCPClient.xcframework in Frameworks */,
 				3312643B2A287F53006BA87D /* CoreLocation.framework in Frameworks */,
 				3312643C2A287F53006BA87D /* UIKit.framework in Frameworks */,
 				3312643D2A287F53006BA87D /* Foundation.framework in Frameworks */,
@@ -2185,10 +2187,8 @@
 			files = (
 				E7F287792956566900EEB1E0 /* R2LCPClient.xcframework in Frameworks */,
 				E5288CBD293FB61C00F3B3D2 /* NYPLAudiobookToolkit.framework in Frameworks */,
-				E5C1F55227990A89005FC6B2 /* OverdriveProcessor.framework in Frameworks */,
 				03B092301E78871A00AD338D /* MediaPlayer.framework in Frameworks */,
 				E77D021A2931337000544180 /* R2Navigator in Frameworks */,
-				2178984D269F174500374A6B /* NYPLAEToolkit.framework in Frameworks */,
 				03B092281E78859E00AD338D /* CoreMedia.framework in Frameworks */,
 				03B0922E1E7886ED00AD338D /* CoreVideo.framework in Frameworks */,
 				03B0922C1E7886C900AD338D /* AVFoundation.framework in Frameworks */,
@@ -3696,6 +3696,7 @@
 				331262D72A287F53006BA87D /* R2Streamer */,
 				331262D82A287F53006BA87D /* SwiftSoup */,
 				331262DA2A287F53006BA87D /* SQLite */,
+				33D320E52A5BF4A60032E6E9 /* ReadiumLCP */,
 			);
 			productName = Simplified;
 			productReference = 3312646E2A287F53006BA87D /* Ekirjasto.app */;
@@ -4241,6 +4242,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33F69AA42A5BFDF100B0C835 /* LCPAudiobooks.swift in Sources */,
+				33F69AA32A5BFD6900B0C835 /* LicensesService.swift in Sources */,
+				33D320E42A5BF1EE0032E6E9 /* TPPLCPClient.swift in Sources */,
+				33D320E32A5BF1C90032E6E9 /* LCPPassphraseAuthenticationService.swift in Sources */,
 				331262DD2A287F53006BA87D /* LibraryService.swift in Sources */,
 				331262DE2A287F53006BA87D /* TPPR2Owner.swift in Sources */,
 				331262DF2A287F53006BA87D /* TPPLibraryDescriptionCell.swift in Sources */,
@@ -5459,6 +5464,7 @@
 					"SIMPLYE=1",
 					"DEBUG=1",
 					"$(inherited)",
+					"LCP=1",
 				);
 				INFOPLIST_FILE = "Palace/EkirjastoConfig/Ekirjasto-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Ekirjasto;
@@ -5473,7 +5479,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG SIMPLYE";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG SIMPLYE LCP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Palace/AppInfrastructure/Palace-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
@@ -5516,6 +5522,7 @@
 					"SIMPLYE=1",
 					"DEBUG=0",
 					"$(inherited)",
+					"LCP=1",
 				);
 				INFOPLIST_FILE = "Palace/EkirjastoConfig/Ekirjasto-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Ekirjasto;
@@ -5530,7 +5537,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SIMPLYE;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "SIMPLYE LCP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Palace/AppInfrastructure/Palace-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.2;
@@ -6034,6 +6041,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 331262DB2A287F53006BA87D /* XCRemoteSwiftPackageReference "SQLite.swift" */;
 			productName = SQLite;
+		};
+		33D320E52A5BF4A60032E6E9 /* ReadiumLCP */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E77D02182931337000544180 /* XCRemoteSwiftPackageReference "swift-toolkit" */;
+			productName = ReadiumLCP;
 		};
 		E77D02192931337000544180 /* R2Navigator */ = {
 			isa = XCSwiftPackageProductDependency;
