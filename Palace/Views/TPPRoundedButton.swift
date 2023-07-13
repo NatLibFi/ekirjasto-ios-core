@@ -28,16 +28,18 @@ private let TPPRoundedButtonPadding: CGFloat = 10.0 //Edited by Ellibs
     }
   }
   private var isFromDetailView: Bool
+  private var isReturnButton: Bool? = false
   
   // UI Components
   private let label: UILabel = UILabel()
   private let iconView: UIImageView = UIImageView()
   
   // Initializer
-  init(type: TPPRoundedButtonType, endDate: Date?, isFromDetailView: Bool) {
+  init(type: TPPRoundedButtonType, endDate: Date?, isFromDetailView: Bool, isReturnButton: Bool?) {
     self.type = type
     self.endDate = endDate
     self.isFromDetailView = isFromDetailView
+    self.isReturnButton = isReturnButton
     
     super.init(frame: CGRect.zero)
     
@@ -108,9 +110,16 @@ private let TPPRoundedButtonPadding: CGFloat = 10.0 //Edited by Ellibs
   
   private func updateColors() {
     let color: UIColor = self.isEnabled ? self.tintColor : UIColor.gray
-    self.layer.borderColor = color.cgColor
-    self.label.textColor = color
-    self.iconView.tintColor = color
+    self.layer.cornerRadius = 2
+    if(self.isReturnButton == true) {
+      self.layer.borderWidth = 1.5
+      self.layer.borderColor = UIColor(named: "ColorEkirjastoGreen")?.cgColor
+      self.backgroundColor = UIColor.clear
+    } else {
+      self.layer.borderColor = color.cgColor
+      self.label.textColor = color
+      self.iconView.tintColor = color
+    }
     setTitleColor(color, for: .normal)
   }
   
@@ -154,8 +163,8 @@ private let TPPRoundedButtonPadding: CGFloat = 10.0 //Edited by Ellibs
 }
 
 extension TPPRoundedButton {
-  @objc (initWithType:isFromDetailView:)
-  convenience init(type: TPPRoundedButtonType, isFromDetailView: Bool) {
-    self.init(type: type, endDate: nil, isFromDetailView: isFromDetailView)
+  @objc (initWithType:isFromDetailView:isReturnButton:)
+  convenience init(type: TPPRoundedButtonType, isFromDetailView: Bool, isReturnButton: Bool) {
+    self.init(type: type, endDate: nil, isFromDetailView: isFromDetailView, isReturnButton: isReturnButton)
   }
 }

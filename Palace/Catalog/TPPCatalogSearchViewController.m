@@ -126,8 +126,9 @@
                                             self.bottomLayoutGuide.length,
                                             0);
   if (!UIEdgeInsetsEqualToEdgeInsets(self.collectionView.contentInset, newInsets)) {
-    self.collectionView.contentInset = newInsets;
-    self.collectionView.scrollIndicatorInsets = newInsets;
+    //self.collectionView.contentInset = newInsets; //disabled by Ellibs
+    self.collectionView.contentInset = UIEdgeInsetsMake(130, 0, self.bottomLayoutGuide.length, 0); //Added by Ellibs
+    //self.collectionView.scrollIndicatorInsets = newInsets; //disabled by Ellibs
   }
 }
 
@@ -302,15 +303,16 @@ didSelectItemAtIndexPath:(NSIndexPath *const)indexPath
     [self.facetBarView removeFromSuperview];
   }
 
-  self.facetBarView = [[TPPFacetBarView alloc] initWithOrigin:CGPointZero width:self.view.bounds.size.width];
-  self.facetBarView.entryPointView.delegate = self;
-  self.facetBarView.entryPointView.dataSource = self;
-  self.facetBarView.alpha = 0;
+  //Disable by Ellibs
+  //self.facetBarView = [[TPPFacetBarView alloc] initWithOrigin:CGPointZero width:self.view.bounds.size.width];
+  //self.facetBarView.entryPointView.delegate = self;
+  //self.facetBarView.entryPointView.dataSource = self;
+  //self.facetBarView.alpha = 0;
 
-  [self.view addSubview:self.facetBarView];
-  [self.facetBarView autoPinEdgeToSuperviewEdge:ALEdgeLeading];
-  [self.facetBarView autoPinEdgeToSuperviewEdge:ALEdgeTrailing];
-  [self.facetBarView autoPinEdgeToSuperviewMargin:ALEdgeTop];
+  //[self.view addSubview:self.facetBarView];
+  //[self.facetBarView autoPinEdgeToSuperviewEdge:ALEdgeLeading];
+  //[self.facetBarView autoPinEdgeToSuperviewEdge:ALEdgeTrailing];
+  //[self.facetBarView autoPinEdgeToSuperviewMargin:ALEdgeTop];
 }
 
 #pragma mark NYPLEntryPointViewDelegate

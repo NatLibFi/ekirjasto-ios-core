@@ -46,27 +46,27 @@
   self.constraints = [[NSMutableArray alloc] init];
   self.samplesEnabled = samplesEnabled;
   
-  self.deleteButton = [[TPPRoundedButton alloc] initWithType:TPPRoundedButtonTypeNormal isFromDetailView:NO];
+  self.deleteButton = [[TPPRoundedButton alloc] initWithType:TPPRoundedButtonTypeNormal isFromDetailView:NO isReturnButton:YES];
   self.deleteButton.titleLabel.minimumScaleFactor = 0.8f;
   [self.deleteButton addTarget:self action:@selector(didSelectReturn) forControlEvents:UIControlEventTouchUpInside];
   [self addSubview:self.deleteButton];
 
-  self.downloadButton = [[TPPRoundedButton alloc] initWithType:TPPRoundedButtonTypeNormal isFromDetailView:NO];
+  self.downloadButton = [[TPPRoundedButton alloc] initWithType:TPPRoundedButtonTypeNormal isFromDetailView:NO isReturnButton:NO];
   self.downloadButton.titleLabel.minimumScaleFactor = 0.8f;
   [self.downloadButton addTarget:self action:@selector(didSelectDownload) forControlEvents:UIControlEventTouchUpInside];
   [self addSubview:self.downloadButton];
 
-  self.readButton = [[TPPRoundedButton alloc] initWithType:TPPRoundedButtonTypeNormal isFromDetailView:NO];
+  self.readButton = [[TPPRoundedButton alloc] initWithType:TPPRoundedButtonTypeNormal isFromDetailView:NO isReturnButton:NO];
   self.readButton.titleLabel.minimumScaleFactor = 0.8f;
   [self.readButton addTarget:self action:@selector(didSelectRead) forControlEvents:UIControlEventTouchUpInside];
   [self addSubview:self.readButton];
   
-  self.cancelButton = [[TPPRoundedButton alloc] initWithType:TPPRoundedButtonTypeNormal isFromDetailView:NO];
+  self.cancelButton = [[TPPRoundedButton alloc] initWithType:TPPRoundedButtonTypeNormal isFromDetailView:NO isReturnButton:NO];
   self.cancelButton.titleLabel.minimumScaleFactor = 0.8f;
   [self.cancelButton addTarget:self action:@selector(didSelectCancel) forControlEvents:UIControlEventTouchUpInside];
   [self addSubview:self.cancelButton];
   
-  self.sampleButton = [[TPPRoundedButton alloc] initWithType:TPPRoundedButtonTypeNormal isFromDetailView:NO];
+  self.sampleButton = [[TPPRoundedButton alloc] initWithType:TPPRoundedButtonTypeNormal isFromDetailView:NO isReturnButton:NO];
   self.sampleButton.titleLabel.minimumScaleFactor = 0.8f;
   [self.sampleButton addTarget:self action:@selector(didSelectSample) forControlEvents:UIControlEventTouchUpInside];
   [self addSubview:self.sampleButton];

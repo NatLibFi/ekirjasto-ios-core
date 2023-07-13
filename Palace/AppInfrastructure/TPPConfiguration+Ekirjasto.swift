@@ -121,7 +121,15 @@ extension TPPConfiguration {
     if #available(iOS 13, *) {
       return UIColor(named: "ColorEkirjastoYellow")!
     } else {
-      return .black
+      return .lightGray
+    }
+  }
+
+  @objc static func ekirjastoLightGrey() -> UIColor {
+    if #available(iOS 13, *) {
+      return UIColor(named: "ColorEkirjastoLightGrey")!
+    } else {
+      return .lightGray
     }
   }
 }

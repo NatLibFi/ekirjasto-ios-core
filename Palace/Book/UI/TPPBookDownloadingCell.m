@@ -103,7 +103,7 @@
   self.authorsLabel.textColor = [TPPConfiguration backgroundColor];
   [self.contentView addSubview:self.authorsLabel];
   
-  self.cancelButton = [[TPPRoundedButton alloc] initWithType:TPPRoundedButtonTypeNormal isFromDetailView:NO];
+  self.cancelButton = [[TPPRoundedButton alloc] initWithType:TPPRoundedButtonTypeNormal isFromDetailView:NO isReturnButton:NO];
   self.cancelButton.backgroundColor = [TPPConfiguration backgroundColor];
   self.cancelButton.layer.borderWidth = 0;
   [self.cancelButton setTitle:NSLocalizedString(@"Cancel", nil)

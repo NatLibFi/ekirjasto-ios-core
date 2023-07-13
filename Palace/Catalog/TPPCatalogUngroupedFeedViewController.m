@@ -52,9 +52,9 @@ static const CGFloat kCollectionViewCrossfadeDuration = 0.3;
 
 - (UIEdgeInsets)scrollIndicatorInsets
 {
-  return UIEdgeInsetsMake(CGRectGetMaxY(self.facetBarView.frame),
+  return UIEdgeInsetsMake(50,
                           0,
-                          self.parentViewController.bottomLayoutGuide.length,
+                          self.parentViewController.bottomLayoutGuide.length - self.facetBarView.frame.size.height,
                           0);
 }
 
@@ -109,6 +109,7 @@ static const CGFloat kCollectionViewCrossfadeDuration = 0.3;
   self.facetBarView.facetView.delegate = self;
   self.facetBarView.facetView.dataSource = self.facetViewDataSource;
   
+  [self.facetBarView removeLogo]; //Added by Ellibs
   [self.view addSubview:self.facetBarView];
   [self.facetBarView autoPinEdgeToSuperviewEdge:ALEdgeLeading];
   [self.facetBarView autoPinEdgeToSuperviewEdge:ALEdgeTrailing];
@@ -307,7 +308,11 @@ didSelectFacetAtIndexPath:(NSIndexPath *const)indexPath
 
 - (void)updateActivityIndicator
 {
-  UIEdgeInsets insets = [self scrollIndicatorInsets];
+  //UIEdgeInsets insets = [self scrollIndicatorInsets]; //Disabled by Ellibs
+  UIEdgeInsets insets = UIEdgeInsetsMake(CGRectGetMaxY(self.facetBarView.frame),
+                          0,
+                          self.parentViewController.bottomLayoutGuide.length,
+                          0); //Added by Ellibs
   if(self.feed.currentlyFetchingNextURL) {
     insets.bottom += kActivityIndicatorPadding + self.collectionViewActivityIndicator.frame.size.height;
     CGRect frame = self.collectionViewActivityIndicator.frame;

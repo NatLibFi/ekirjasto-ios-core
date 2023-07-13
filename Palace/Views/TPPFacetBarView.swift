@@ -9,7 +9,7 @@ import Foundation
  
   private let accountSiteButton = UIButton()
   private let borderHeight = 1.0 / UIScreen.main.scale;
-  private let toolbarHeight = CGFloat(60.0); //Edited by Ellibs
+  private let toolbarHeight = CGFloat(40.0);
 
   weak var delegate: TPPFacetBarViewDelegate?
   
@@ -19,8 +19,8 @@ import Foundation
     let topBorderView = UIView()
     let bottomBorderView = UIView()
     
-    topBorderView.backgroundColor = UIColor(named: "ColorEkirjastoLightestGreen") //Edited by Ellibs
-    bottomBorderView.backgroundColor = UIColor(named: "ColorEkirjastoLightestGreen") //Edited by Ellibs
+    topBorderView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.9)
+    bottomBorderView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.9)
         
     view.addSubview(bottomBorderView)
     view.addSubview(topBorderView)
@@ -37,8 +37,8 @@ import Foundation
     logoView.backgroundColor = TPPConfiguration.readerBackgroundColor()
     
     let imageHolder = UIView()
-    imageHolder.autoSetDimension(.height, toSize: 50.0)
-    imageHolder.autoSetDimension(.width, toSize: 50.0)
+    imageHolder.autoSetDimension(.height, toSize: 40.0)
+    imageHolder.autoSetDimension(.width, toSize: 40.0)
     imageHolder.addSubview(imageView)
     
     imageView.autoPinEdgesToSuperviewEdges()
@@ -46,17 +46,17 @@ import Foundation
     let container = UIView()
     logoView.addSubview(container)
     container.addSubview(imageHolder)
+        
+    container.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0))
+    imageHolder.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 10.0, left: 0.0, bottom: 0.0, right: 0.0), excludingEdge: .trailing)
     
-    container.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 10.0))
-    imageHolder.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0), excludingEdge: .trailing)
+    //let titleContainer = UIView()
+    //titleContainer.addSubview(titleLabel)
+    //titleLabel.autoPinEdgesToSuperviewEdges()
     
-    let titleContainer = UIView()
-    titleContainer.addSubview(titleLabel)
-    titleLabel.autoPinEdgesToSuperviewEdges()
-    
-    container.addSubview(titleContainer)
-    titleContainer.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0), excludingEdge: .leading)
-    titleContainer.autoPinEdge(.leading, to: .trailing, of: imageView, withOffset: 10.0)
+    //container.addSubview(titleContainer)
+    //titleContainer.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0), excludingEdge: .leading)
+    //titleContainer.autoPinEdge(.leading, to: .trailing, of: imageView, withOffset: 10.0)
     
     logoView.addSubview(accountSiteButton)
     accountSiteButton.autoPinEdgesToSuperviewEdges()
@@ -76,8 +76,8 @@ import Foundation
   }()
   
   private lazy var imageView: UIImageView = {
-    let view = UIImageView(image: AccountsManager.shared.currentAccount?.logo)
-    view.contentMode = .scaleAspectFit
+    let view = UIImageView(image: UIImage(named: "LaunchImageLogo"))
+    view.contentMode = .scaleAspectFill
     return view
   }()
   
@@ -105,42 +105,42 @@ import Foundation
 
   override func draw(_ rect: CGRect) {
     super.draw(rect)
-    //Disabled by Ellibs
     //logoView.layer.cornerRadius = logoView.frame.height/2
   }
 
   private func setupViews() {
     backgroundColor = TPPConfiguration.backgroundColor()
-    entryPointView.isHidden = true;
+    entryPointView.isHidden = false;
     facetView.isHidden = true;
 
     addSubview(facetView)
-    //Disabled by Ellibs
-    //addSubview(logoView)
+    addSubview(logoView)
     addSubview(entryPointView)
     setupConstraints()
-    //Disabled by Ellibs
-    //updateLogo()
+    updateLogo()
   }
   
   private func setupConstraints() {
     entryPointView.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.zero, excludingEdge: .bottom)
-    facetView.autoPinEdge(toSuperviewEdge: .leading, withInset: 10)             //Edited by Ellibs
+    facetView.autoPinEdge(toSuperviewEdge: .leading)
     facetView.autoPinEdge(toSuperviewEdge: .trailing)
     
     entryPointView.autoPinEdge(.bottom, to: .top, of: facetView)
-    facetView.autoPinEdge(.top, to: .bottom, of: facetView, withOffset: 10.0)   //Added by Ellibs
-    facetView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 10.0)            //Added by Ellibs
-    //Disabled by Ellibs
-    //logoView.autoPinEdge(.top, to: .bottom, of: facetView, withOffset: 10.0)
-    //logoView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 10.0)
-    //logoView.autoAlignAxis(toSuperviewMarginAxis: .vertical)
-    //logoView.autoConstrainAttribute(.width, to: .width, of: self, withMultiplier: 0.8, relation: .lessThanOrEqual)
+    logoView.autoPinEdge(.top, to: .bottom, of: facetView, withOffset: 10.0)
+    logoView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 10.0)
+    logoView.autoAlignAxis(toSuperviewMarginAxis: .vertical)
+    logoView.autoConstrainAttribute(.width, to: .width, of: self, withMultiplier: 0.8, relation: .lessThanOrEqual)
   }
 
   @objc func updateLogo() {
-    imageView.image = AccountsManager.shared.currentAccount?.logo
-    titleLabel.text = AccountsManager.shared.currentAccount?.name
+    imageView.image = UIImage(named: "LaunchImageLogo")
+    //titleLabel.text = AccountsManager.shared.currentAccount?.name
+  }
+  
+  @objc func removeLogo() {
+    self.logoView.removeFromSuperview()
+    facetView.autoPinEdge(.top, to: .bottom, of: facetView, withOffset: 10.0)   //Added by Ellibs
+    facetView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 10.0)          
   }
   
   @objc private func showAccountPage() {

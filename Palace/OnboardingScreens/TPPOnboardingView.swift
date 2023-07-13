@@ -15,14 +15,16 @@ struct TPPOnboardingView: View {
   private var activationDistance: CGFloat = 0.8
   
   private var onboardingImageNames =
-    ["Onboarding-1", "Onboarding-2", "Onboarding-3"]
+    ["Onboarding-1", "Onboarding-2", "Onboarding-3", "Onboarding-4"]
   @GestureState private var translation: CGFloat = 0
+  
+  @State private var showLoginView = false
   
   @State private var currentIndex = 0 {
     didSet {
       // Dismiss the view after the user swipes past the last slide.
       if currentIndex == onboardingImageNames.count {
-        dismissView()
+        showLoginView = true
       }
     }
   }
@@ -36,9 +38,13 @@ struct TPPOnboardingView: View {
   
   var body: some View {
     ZStack(alignment: .top) {
-      onboardingSlides()
-      pagerDots()
-      closeButton()
+      if(showLoginView) {
+        EkirjastoLoginView(dismissView: self.dismissView)
+      } else {
+        onboardingSlides()
+        pagerDots()
+        closeButton()
+      }
     }
     .edgesIgnoringSafeArea(.all)
     .statusBar(hidden: true)
@@ -93,12 +99,12 @@ struct TPPOnboardingView: View {
     HStack {
       Spacer()
       Button {
-        dismissView()
+        showLoginView = true
       } label: {
         Image(systemName: "xmark.circle.fill")
           .font(.title)
           .foregroundColor(.gray)
-          .padding()
+          .padding(.top, 50)
       }
       .accessibility(label: Text(Strings.Generic.close))
     }
