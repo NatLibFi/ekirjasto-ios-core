@@ -398,9 +398,12 @@ Authenticating with any of those barcodes should work.
       [workingSection addObjectsFromArray:[self cellsForAuthMethod:self.businessLogic.selectedAuthentication]];
     }
     
-    if (self.businessLogic.canResetPassword) {
-      [workingSection addObject:@(CellKindPasswordReset)];
-    }
+    //Disabled by Ellibs
+    //if (self.businessLogic.canResetPassword) {
+      //[workingSection addObject:@(CellKindPasswordReset)];
+    //}
+    [workingSection addObject:@(CellKindPasswordReset)];
+    [workingSection addObject:@(CellKindRegistration)];
     
   } else {
     [workingSection addObjectsFromArray:[self cellsForAuthMethod:self.businessLogic.selectedAuthentication]];
@@ -942,8 +945,40 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
 }
 
 - (UITableViewCell *)createPasswordResetCell {
+  //UITableViewCell *cell = [[UITableViewCell alloc] init];
+  //cell.textLabel.text = NSLocalizedString(@"Forgot your password?", "Password Reset");
+  //cell.textLabel.text = NSLocalizedString(@"Salasana unohtunut?", "Password Reset");
+  //return cell;
+  
+  UIView *containerView = [[UIView alloc] init];
+  UILabel *regTitle = [[UILabel alloc] init];
+  UILabel *regButton = [[UILabel alloc] init];
+  
+  containerView.backgroundColor = [TPPConfiguration backgroundColor];
+
+  regTitle.font = [UIFont palaceFontOfSize: 14];
+  regTitle.numberOfLines = 2;
+  regTitle.text = NSLocalizedString(@"Salasano unohtunut?", nil);
+  regButton.font = [UIFont palaceFontOfSize: 14];
+  NSMutableAttributedString *regButtonString = [[NSMutableAttributedString alloc] initWithString:@"Tilaa uusi salasana"];
+  [regButtonString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [regButtonString length])];
+  [regButton setAttributedText:regButtonString];
+  regButton.textColor = [TPPConfiguration mainColor];
+
+  [containerView addSubview:regTitle];
+  [containerView addSubview:regButton];
+  [regTitle autoPinEdgeToSuperviewMargin:ALEdgeLeft];
+  [regTitle autoConstrainAttribute:ALAttributeTop toAttribute:ALAttributeMarginTop ofView:[regTitle superview] withOffset:sVerticalMarginPadding];
+  [regTitle autoConstrainAttribute:ALAttributeBottom toAttribute:ALAttributeMarginBottom ofView:[regTitle superview] withOffset:-sVerticalMarginPadding];
+  [regButton autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:regTitle withOffset:5.0 relation:NSLayoutRelationGreaterThanOrEqual];
+  [regButton autoAlignAxisToSuperviewMarginAxis:ALAxisHorizontal];
+  [regButton setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+
   UITableViewCell *cell = [[UITableViewCell alloc] init];
-  cell.textLabel.text = NSLocalizedString(@"Forgot your password?", "Password Reset");
+  [cell.contentView addSubview:containerView];
+  cell.separatorInset = UIEdgeInsetsMake(0, cell.bounds.size.width, 0, 0);
+  containerView.preservesSuperviewLayoutMargins = YES;
+  [containerView autoPinEdgesToSuperviewEdges];
   return cell;
 }
 
@@ -953,11 +988,14 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
   UILabel *regTitle = [[UILabel alloc] init];
   UILabel *regButton = [[UILabel alloc] init];
 
-  regTitle.font = [UIFont customFontForTextStyle:UIFontTextStyleBody];
+  containerView.backgroundColor = [TPPConfiguration backgroundColor];
+  regTitle.font = [UIFont palaceFontOfSize: 14];
   regTitle.numberOfLines = 2;
-  regTitle.text = NSLocalizedString(@"Don't have a library card?", @"Title for registration. Asking the user if they already have a library card.");
-  regButton.font = [UIFont customFontForTextStyle:UIFontTextStyleBody];
-  regButton.text = NSLocalizedString(@"Create Card", nil);
+  regTitle.text = NSLocalizedString(@"Puuttuvatko tunnukset?", nil);
+  regButton.font = [UIFont palaceFontOfSize: 14];
+  NSMutableAttributedString *regButtonString = [[NSMutableAttributedString alloc] initWithString:@"Rekisteröidy käyttäjäksi"];
+  [regButtonString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [regButtonString length])];
+  [regButton setAttributedText:regButtonString];
   regButton.textColor = [TPPConfiguration mainColor];
 
   [containerView addSubview:regTitle];
@@ -965,13 +1003,13 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
   [regTitle autoPinEdgeToSuperviewMargin:ALEdgeLeft];
   [regTitle autoConstrainAttribute:ALAttributeTop toAttribute:ALAttributeMarginTop ofView:[regTitle superview] withOffset:sVerticalMarginPadding];
   [regTitle autoConstrainAttribute:ALAttributeBottom toAttribute:ALAttributeMarginBottom ofView:[regTitle superview] withOffset:-sVerticalMarginPadding];
-  [regButton autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:regTitle withOffset:8.0 relation:NSLayoutRelationGreaterThanOrEqual];
-  [regButton autoPinEdgeToSuperviewMargin:ALEdgeRight];
+  [regButton autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:regTitle withOffset:5.0 relation:NSLayoutRelationGreaterThanOrEqual];
   [regButton autoAlignAxisToSuperviewMarginAxis:ALAxisHorizontal];
   [regButton setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
 
   UITableViewCell *cell = [[UITableViewCell alloc] init];
   [cell.contentView addSubview:containerView];
+  cell.separatorInset = UIEdgeInsetsMake(0, cell.bounds.size.width, 0, 0);
   containerView.preservesSuperviewLayoutMargins = YES;
   [containerView autoPinEdgesToSuperviewEdges];
   return cell;
@@ -1042,8 +1080,10 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
   [imageViewHolder autoSetDimension:ALDimensionWidth toSize:50.0];
 
   UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 75, 75)];
-  imageView.image = self.selectedAccount.logo;
-  imageView.contentMode = UIViewContentModeScaleAspectFit;
+  //imageView.image = self.selectedAccount.logo; //disabled by Ellibs
+  imageView.image =  [UIImage imageNamed:@"LaunchImageLogo"]; //Added by Ellibs
+  //imageView.contentMode = UIViewContentModeScaleAspectFit; //disabled by Ellibs
+  imageView.contentMode = UIViewContentModeScaleAspectFill; //Added by Ellibs
   [imageViewHolder addSubview: imageView];
 
   [imageView autoPinEdgesToSuperviewEdges];
@@ -1058,16 +1098,18 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
   titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
   titleLabel.font = [UIFont boldSystemFontOfSize:18.0];
   titleLabel.text = self.selectedAccount.name;
-  [containerView addSubview: titleLabel];
+  //[containerView addSubview: titleLabel]; //disabled by Ellibs
 
   self.tableView.tableHeaderView = headerView;
 
   [containerView autoAlignAxisToSuperviewAxis:ALAxisHorizontal];
   [containerView autoAlignAxisToSuperviewAxis:ALAxisVertical];
   [containerView autoPinEdgesToSuperviewMarginsWithInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
-  [imageViewHolder autoPinEdgesToSuperviewMarginsExcludingEdge:ALEdgeTrailing];
-  [titleLabel autoPinEdgesToSuperviewMarginsExcludingEdge:ALEdgeLeading];
-  [imageViewHolder autoPinEdge:ALEdgeTrailing toEdge:ALEdgeLeading ofView:titleLabel withOffset:-10];
+  [imageViewHolder autoAlignAxisToSuperviewMarginAxis:ALAxisVertical]; //Added by Ellibs
+  //Disabled by Ellibs
+  //[imageViewHolder autoPinEdgesToSuperviewMarginsExcludingEdge:ALEdgeTrailing];
+  //[titleLabel autoPinEdgesToSuperviewMarginsExcludingEdge:ALEdgeLeading];
+  //[imageViewHolder autoPinEdge:ALEdgeTrailing toEdge:ALEdgeLeading ofView:titleLabel withOffset:-10];
 }
 
 - (UIView *)tableView:(UITableView *)__unused tableView viewForFooterInSection:(NSInteger)section
