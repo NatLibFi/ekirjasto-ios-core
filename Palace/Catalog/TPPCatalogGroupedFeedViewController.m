@@ -33,7 +33,6 @@ static CGFloat const kTableViewCrossfadeDuration = 0.3;
 @property (nonatomic) NSUInteger indexOfNextLaneRequiringImageDownload;
 @property (nonatomic) UIRefreshControl *refreshControl;
 @property (nonatomic) TPPOpenSearchDescription *searchDescription;
-@property (nonatomic) EkirjastoFacetFilterView *filterSegmentedControl;
 @property (nonatomic) TPPFacetBarView *facetBarView;
 @property (nonatomic) UITableView *tableView;
 @property (nonatomic) TPPBook *mostRecentBookSelected;
@@ -100,15 +99,9 @@ static CGFloat const kTableViewCrossfadeDuration = 0.3;
   self.facetBarView.entryPointView.dataSource = self;
   self.facetBarView.delegate = self;
   
-  self.filterSegmentedControl = [[EkirjastoFacetFilterView alloc] init];
-  [self.view addSubview:self.filterSegmentedControl];
-  [self.filterSegmentedControl autoPinEdgeToSuperviewEdge:ALEdgeLeading];
-  [self.filterSegmentedControl autoPinEdgeToSuperviewEdge:ALEdgeTrailing];
-  [self.filterSegmentedControl autoPinEdgeToSuperviewMargin:ALEdgeTop];
-  
   [self.view addSubview:self.facetBarView];
   
-  [self.facetBarView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.filterSegmentedControl];
+  [self.facetBarView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:self.facetBarView.frame.size.height + 54]; // Added by Ellibs
   [self.facetBarView autoPinEdgeToSuperviewEdge:ALEdgeLeading];
   [self.facetBarView autoPinEdgeToSuperviewEdge:ALEdgeTrailing];
   
