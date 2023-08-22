@@ -91,7 +91,7 @@ extension TPPConfiguration {
   
   @objc static func inactiveIconColor() -> UIColor {
     if #available(iOS 13, *) {
-      return UIColor(named: "ColorEkirjastoLighterGreen")!
+      return UIColor(named: "ColorEkirjastoLightestGreen")!
     } else {
       return .lightGray
     }

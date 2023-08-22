@@ -112,7 +112,7 @@ private let TPPRoundedButtonPadding: CGFloat = 10.0 //Edited by Ellibs
     let color: UIColor = self.isEnabled ? self.tintColor : UIColor.gray
     self.layer.cornerRadius = 2
     if(self.isReturnButton == true) {
-      self.layer.borderWidth = 1.5
+      self.layer.borderWidth = 0.8
       self.layer.borderColor = UIColor(named: "ColorEkirjastoGreen")?.cgColor
       self.backgroundColor = UIColor.clear
     } else {

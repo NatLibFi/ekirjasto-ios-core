@@ -166,7 +166,7 @@ TPPBookCell *TPPBookCellDequeue(UICollectionView *const collectionView,
                                       1,
                                       CGRectGetHeight(self.contentView.frame));
       self.borderRight = [[UIView alloc] initWithFrame:frame];
-      self.borderRight.backgroundColor = [UIColor lightGrayColor];
+      self.borderRight.backgroundColor = [UIColor colorNamed:@"ColorEkirjastoLightestGreen"];
       self.borderRight.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin |
                                            UIViewAutoresizingFlexibleHeight);
       [self.contentView addSubview:self.borderRight];
@@ -177,11 +177,22 @@ TPPBookCell *TPPBookCellDequeue(UICollectionView *const collectionView,
                                       CGRectGetWidth(self.contentView.frame),
                                       1);
       self.borderBottom = [[UIView alloc] initWithFrame:frame];
-      self.borderBottom.backgroundColor = [UIColor lightGrayColor];
+      self.borderBottom.backgroundColor = [UIColor colorNamed:@"ColorEkirjastoLightestGreen"];
       self.borderBottom.autoresizingMask = (UIViewAutoresizingFlexibleTopMargin |
                                             UIViewAutoresizingFlexibleWidth);
       [self.contentView addSubview:self.borderBottom];
     }
+  } else {
+    CGRect const frame = CGRectMake(0,
+                                    CGRectGetMaxY(self.contentView.frame) + 15,
+                                    CGRectGetWidth(self.contentView.frame) - 30,
+                                    1);
+    self.borderBottom = [[UIView alloc] initWithFrame:frame];
+    self.borderBottom.backgroundColor = [UIColor colorNamed:@"ColorEkirjastoLightestGreen"];
+    self.borderBottom.autoresizingMask = (UIViewAutoresizingFlexibleTopMargin |
+                                          UIViewAutoresizingFlexibleWidth);
+    [self.contentView addSubview:self.borderBottom];
+    self.borderBottom.center = CGPointMake(self.contentView.frame.size.width / 2, CGRectGetMaxY(self.contentView.frame) + 15);
   }
   
   return self;

@@ -56,7 +56,8 @@ struct NormalBookCell: View {
       ImageProviders.MyBooksView.audiobookBadge
         .resizable()
         .frame(width: 24, height: 24)
-        .background(Color(TPPConfiguration.palaceRed()))
+        .background(Color(UIColor(named: "ColorEkirjastoGreen")!)) //Edited by Ellibs
+        .border(width: 1.5, edges: [.top, .bottom, .leading, .trailing], color: Color.white) //added by Ellibs
         .bottomrRightJustified()
     }
   }

@@ -14,6 +14,7 @@ class TPPSettingsViewController: NSObject {
     let controller = UIHostingController(rootView: TPPSettingsView())
     controller.title = Strings.Settings.settings
     controller.tabBarItem.image = UIImage(named: "Settings")
+    controller.tabBarItem.selectedImage = UIImage(named: "SettingsSelected")
     let navigationController = UINavigationController(rootViewController: controller)
 
     return navigationController

@@ -15,6 +15,7 @@
   if(!self) return nil;
   
   self.tabBarItem.image = [UIImage imageNamed:@"Holds"];
+  self.tabBarItem.selectedImage = [UIImage imageNamed:@"HoldsSelected"];
   [vc updateBadge];
 
 #ifdef SIMPLYE

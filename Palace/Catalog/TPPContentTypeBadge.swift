@@ -18,7 +18,10 @@ final class TPPContentBadgeImageView: UIImageView {
 
   @objc required init(badgeImage: TPPBadgeImage) {
     super.init(image: UIImage(named: badgeImage.assetName()))
-    backgroundColor = TPPConfiguration.palaceRed()
+    backgroundColor = UIColor(named: "ColorEkirjastoGreen") //edited by Ellibs
+    tintColor = UIColor(named: "ColorEkirjastoBlack") //Added by Ellibs
+    layer.borderWidth = 1.5 //Added by Ellibs
+    layer.borderColor = UIColor.white.cgColor //Added by Ellibs
     contentMode = .scaleAspectFit
   }
 

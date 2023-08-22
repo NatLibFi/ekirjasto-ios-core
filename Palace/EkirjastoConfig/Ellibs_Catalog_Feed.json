@@ -47,7 +47,7 @@
         "href": "http://admin.librarypilot.com/",
         "type": "application/opds+json",
         "rel": "self"
-      },
+      }
   ],
   "metadata": {
     "title": "Ellibs-Test",
