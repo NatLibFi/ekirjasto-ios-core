@@ -21,17 +21,22 @@ struct EkirjastoLoginView: View {
           
           Button(action: {self.dismissView(); self.signIn()}) {
             Text("Kirjaudu palveluun")
+            Image("ArrowRight")
+              .padding(.leading, 10)
+              .foregroundColor(Color("ColorEkirjastoGreen"))
+          }
+          .frame(width: 300, height: 50)
+          .clipShape(RoundedRectangle(cornerRadius: 10))
+          .background(Color("ColorEkirjastoLightestGreen"))
+          
+          Button(action: {self.dismissView(); self.signUp()}) {
+            Text("Rekisteröidy palveluun")
+            Image("ArrowRight")
+              .padding(.leading, 10)
           }
           .frame(width: 300, height: 50)
           .clipShape(RoundedRectangle(cornerRadius: 10))
           .background(Color("ColorEkirjastoLighterGreen"))
-          
-          Button(action: {self.dismissView(); self.signUp()}) {
-            Text("Rekisteröidy palveluun")
-          }
-          .frame(width: 300, height: 50)
-          .clipShape(RoundedRectangle(cornerRadius: 10))
-          .background(Color("ColorEkirjastoGreen"))
         }
       }
     }

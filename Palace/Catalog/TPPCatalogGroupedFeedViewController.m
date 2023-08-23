@@ -300,9 +300,9 @@ viewForHeaderInSection:(NSInteger const)section
     [button setTitle:title forState:UIControlStateNormal];
     [button sizeToFit];
     if (CGRectGetWidth(button.frame) > self.tableView.frame.size.width - 100) {
-      button.frame = CGRectMake(7, 5, self.tableView.frame.size.width - 100, CGRectGetHeight(button.frame));
+      button.frame = CGRectMake(10, 5, self.tableView.frame.size.width - 100, CGRectGetHeight(button.frame));
     } else {
-      button.frame = CGRectMake(7, 5, CGRectGetWidth(button.frame), CGRectGetHeight(button.frame));
+      button.frame = CGRectMake(10, 5, CGRectGetWidth(button.frame), CGRectGetHeight(button.frame));
     }
     button.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     button.tag = section;
