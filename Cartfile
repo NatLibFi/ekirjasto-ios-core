@@ -2,5 +2,5 @@ binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseCrashlyticsBinary
 binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseAnalyticsBinary.json"
 binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseMessagingBinary.json"
 binary "https://liblcp.dita.digital/readium/liblcp/ios/carthage/test/liblcp.json" ~> 3.0.0
-github "readium/r2-lcp-swift" "develop"
+github "readium/swift-toolkit" ~> 2.5.1
 github "PureLayout/PureLayout" ~> 3.1.2
