@@ -73,13 +73,14 @@ private let ButtonPadding: CGFloat = 6.0
   }
   
   private func updateColors() {
-    let color: UIColor = self.isEnabled ? UIColor(named: "ColorEkirjastoGreen")! : UIColor.gray
+    let color: UIColor = self.isEnabled ? UIColor(named: "ColorEkirjastoBlack")! : UIColor.gray
     setTitleColor(color, for: .normal)
     setImage(UIImage(named: "ArrowDownEkirjasto"), for: .normal)
-    self.imageEdgeInsets = UIEdgeInsets(top: 3, left: 3, bottom: 0, right: 0)
+    self.imageEdgeInsets = UIEdgeInsets(top: 1, left: 8, bottom: -1, right: -8)
     self.contentHorizontalAlignment = .trailing
     self.semanticContentAttribute = .forceRightToLeft
     self.tintColor = UIColor(named: "ColorEkirjastoGreen")!
+    titleLabel?.font = UIFont.boldPalaceFont(ofSize: 13)
   }
   
   // Override UIView functions

@@ -320,6 +320,7 @@ viewForHeaderInSection:(NSInteger const)section
     button.semanticContentAttribute = UISemanticContentAttributeForceRightToLeft; //Added by Ellibs
     UIImage *readmoreArrow = [UIImage imageNamed:@"ArrowRight"]; //Added by Ellibs
     [button setImage:readmoreArrow forState:UIControlStateNormal]; //Added by Ellibs
+    button.tintColor = [TPPConfiguration iconColor]; //Added by Ellibs
     button.imageEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0); //Added by Ellibs
     button.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10); //Added by Ellibs
     [button setTitleColor:[TPPConfiguration compatiblePrimaryColor] forState:UIControlStateNormal]; //Added by Ellibs

@@ -242,13 +242,14 @@ static NSString *DetailHTMLTemplate = nil;
   self.readMoreLabel.semanticContentAttribute = UISemanticContentAttributeForceRightToLeft; //Added by Ellibs
   UIImage *readmoreArrow = [UIImage imageNamed:@"ArrowRight"]; //Added by Ellibs
   [self.readMoreLabel setImage:readmoreArrow forState:UIControlStateNormal]; //Added by Ellibs
-  self.readMoreLabel.imageEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0); //Added by Ellibs
+  self.readMoreLabel.tintColor = [TPPConfiguration iconColor]; //Added by Ellibs
+  self.readMoreLabel.imageEdgeInsets = UIEdgeInsetsMake(1, 10, -1, 0); //Added by Ellibs
   self.readMoreLabel.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10); //Added by Ellibs
   [self.readMoreLabel setTitleColor:[TPPConfiguration compatiblePrimaryColor] forState:UIControlStateNormal]; //Added by Ellibs
   [self.readMoreLabel addTarget:self action:@selector(readMoreTapped:) forControlEvents:UIControlEventTouchUpInside];
   
   [self.readMoreLabel setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-  [self.readMoreLabel setTitle:NSLocalizedString(@"More", nil) forState:UIControlStateNormal]; //Edited by Ellibs
+  [self.readMoreLabel setTitle:NSLocalizedString(@"Read more", nil) forState:UIControlStateNormal]; //Edited by Ellibs
   [self.readMoreLabel setTitleColor:[TPPConfiguration mainColor] forState:UIControlStateNormal];
 }
 
@@ -582,7 +583,7 @@ static NSString *DetailHTMLTemplate = nil;
   [self.bottomFootnoteSeparator autoPinEdgeToSuperviewMargin:ALEdgeLeft];
   [self.bottomFootnoteSeparator autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.narratorsLabelValue withOffset:VerticalPadding];
   
-  [self.footerTableView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero excludingEdge:ALEdgeTop];
+  [self.footerTableView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(0, 10, 0, 0) excludingEdge:ALEdgeTop];
   [self.footerTableView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.narratorsLabelValue withOffset:VerticalPadding];
 }
 

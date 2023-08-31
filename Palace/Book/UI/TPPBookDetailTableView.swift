@@ -300,7 +300,7 @@ private let standardCellHeight: CGFloat = 44.0
     }
     headerButton.titleLabel?.font = UIFont.palaceFont(ofSize: 20)
     headerButton.titleLabel?.textAlignment = NSTextAlignment.left
-    headerButton.titleLabel?.autoPinEdge(toSuperviewEdge: .left)
+    headerButton.titleLabel?.autoPinEdge(toSuperviewEdge: .left, withInset: -10)
     headerButton.titleLabel?.lineBreakMode = NSLineBreakMode.byTruncatingTail;
 
     moreButton.addTarget(self, action: #selector(moreBooksTapped(sender:)), for: .touchUpInside)
@@ -312,10 +312,12 @@ private let standardCellHeight: CGFloat = 44.0
       moreButton.setTitleColor(.black, for: .normal)
     }
     moreButton.titleLabel?.font = UIFont.palaceFont(ofSize: 14) //Edited by Ellibs
-    moreButton.titleLabel?.textAlignment = NSTextAlignment.right
-    moreButton.titleLabel?.autoPinEdge(toSuperviewEdge: .right)
-    //moreButton.setImage(UIImage(named: "ArrowRight"), for: .normal) //Added by Ellibs//Added by Ellibs
-    
+    moreButton.tintColor = UIColor(named: "ColorEkirjastoGreen") //Added by Ellibs
+    moreButton.contentHorizontalAlignment = .trailing //Added by Ellibs
+    moreButton.semanticContentAttribute = .forceRightToLeft //Added by Ellibs
+    moreButton.setImage(UIImage(named: "ArrowRight"), for: .normal) //Added by Ellibs
+    moreButton.widthAnchor.constraint(equalToConstant: 50).isActive = true //Added by Ellibs
+    moreButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: -11, bottom: 0, right: 11) //Added by Ellibs
     container.addSubview(headerButton)
     container.addSubview(moreButton)
     headerButton.autoAlignAxis(toSuperviewAxis: .horizontal)

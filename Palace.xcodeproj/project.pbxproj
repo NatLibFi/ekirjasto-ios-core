@@ -655,6 +655,7 @@
 		3360FBA72A41B2E100AC1905 /* Ekirjasto_Launch_Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3360FBA52A41B2DA00AC1905 /* Ekirjasto_Launch_Screen.storyboard */; };
 		3360FBA82A41B2E500AC1905 /* TPP_Launch_Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E65977C41F82AC91003CD6BC /* TPP_Launch_Screen.storyboard */; };
 		336F0D582A432860009E37F6 /* EkirjastoRoundedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336F0D572A432860009E37F6 /* EkirjastoRoundedLabel.swift */; };
+		3372514A2A9F4ED30072DA02 /* Asap-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 337251492A9F4ED30072DA02 /* Asap-Bold.ttf */; };
 		3375701D2A2F684D00547CE1 /* TPPKeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B6E76E1F6859A4007EE361 /* TPPKeychainManager.swift */; };
 		3375701E2A2F685500547CE1 /* TPPSecrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17071060242A923400E2648F /* TPPSecrets.swift */; };
 		3379F8112A5D3C4B00E9945F /* EkirjastoFacetFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3379F8102A5D3C4B00E9945F /* EkirjastoFacetFilterView.swift */; };
@@ -1682,6 +1683,7 @@
 		335223852A28BC2500CD514D /* Ekirjasto-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Ekirjasto-Info.plist"; path = "Palace/EkirjastoConfig/Ekirjasto-Info.plist"; sourceTree = SOURCE_ROOT; };
 		3360FBA52A41B2DA00AC1905 /* Ekirjasto_Launch_Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Ekirjasto_Launch_Screen.storyboard; sourceTree = "<group>"; };
 		336F0D572A432860009E37F6 /* EkirjastoRoundedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EkirjastoRoundedLabel.swift; sourceTree = "<group>"; };
+		337251492A9F4ED30072DA02 /* Asap-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Asap-Bold.ttf"; sourceTree = "<group>"; };
 		3379F8102A5D3C4B00E9945F /* EkirjastoFacetFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EkirjastoFacetFilterView.swift; sourceTree = "<group>"; };
 		3379F81E2A5D418400E9945F /* EkirjastoArrowDownButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EkirjastoArrowDownButton.swift; sourceTree = "<group>"; };
 		3379F8212A5D792900E9945F /* EkirjastoLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EkirjastoLoginView.swift; sourceTree = "<group>"; };
@@ -2375,6 +2377,7 @@
 			isa = PBXGroup;
 			children = (
 				33266EFA2A4037B6003BC347 /* Asap-Regular.ttf */,
+				337251492A9F4ED30072DA02 /* Asap-Bold.ttf */,
 				33266EF82A4036DC003BC347 /* UIFont+Ekirjasto.swift */,
 				336F0D572A432860009E37F6 /* EkirjastoRoundedLabel.swift */,
 			);
@@ -3989,6 +3992,7 @@
 				33266F032A40459E003BC347 /* Colors.xcassets in Resources */,
 				3360FBA72A41B2E100AC1905 /* Ekirjasto_Launch_Screen.storyboard in Resources */,
 				331264592A287F53006BA87D /* sdk.css in Resources */,
+				3372514A2A9F4ED30072DA02 /* Asap-Bold.ttf in Resources */,
 				3312645A2A287F53006BA87D /* OpenSans-SemiBold.ttf in Resources */,
 				3312645B2A287F53006BA87D /* OpenDyslexic3-Bold.ttf in Resources */,
 				3312645C2A287F53006BA87D /* readium-shared-js_all.js.map in Resources */,
@@ -5475,7 +5479,7 @@
 					"LCP=1",
 				);
 				INFOPLIST_FILE = "Palace/EkirjastoConfig/Ekirjasto-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Ekirjasto;
+				INFOPLIST_KEY_CFBundleDisplayName = "E-kirjasto";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5533,7 +5537,7 @@
 					"LCP=1",
 				);
 				INFOPLIST_FILE = "Palace/EkirjastoConfig/Ekirjasto-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Ekirjasto;
+				INFOPLIST_KEY_CFBundleDisplayName = "E-kirjasto";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -17,7 +17,13 @@ struct EkirjastoLoginView: View {
           Image("LaunchImageLogo")
             .resizable()
             .aspectRatio(contentMode: .fit)
+            .frame(width: 200)
+          
+          Image("introPhones")
+            .resizable()
+            .aspectRatio(contentMode: .fit)
             .frame(width: 300)
+            .padding(.vertical, 50)
           
           Button(action: {self.dismissView(); self.signIn()}) {
             Text("Kirjaudu palveluun")
@@ -25,7 +31,7 @@ struct EkirjastoLoginView: View {
               .padding(.leading, 10)
               .foregroundColor(Color("ColorEkirjastoGreen"))
           }
-          .frame(width: 300, height: 50)
+          .frame(width: 300, height: 40)
           .clipShape(RoundedRectangle(cornerRadius: 10))
           .background(Color("ColorEkirjastoLightestGreen"))
           
@@ -34,7 +40,7 @@ struct EkirjastoLoginView: View {
             Image("ArrowRight")
               .padding(.leading, 10)
           }
-          .frame(width: 300, height: 50)
+          .frame(width: 300, height: 40)
           .clipShape(RoundedRectangle(cornerRadius: 10))
           .background(Color("ColorEkirjastoLighterGreen"))
         }

@@ -61,6 +61,7 @@
   self.tabBarItem.title = NSLocalizedString(@"Browse Books", nil);
   self.tabBarItem.image = [UIImage imageNamed:@"Catalog"];
   self.tabBarItem.selectedImage = [UIImage imageNamed:@"CatalogSelected"];
+  self.tabBarItem.imageInsets = UIEdgeInsetsMake(8.0, 0.0, -8.0, 0.0);
   self.navigationItem.title = NSLocalizedString(@"Browse Books", nil);
   
   [self loadTopLevelCatalogViewController];

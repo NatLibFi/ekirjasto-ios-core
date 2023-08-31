@@ -15,6 +15,7 @@ class TPPMyBooksViewController: NSObject {
     controller.title = Strings.MyBooksView.navTitle
     controller.tabBarItem.image = UIImage(named: "MyBooks")
     controller.tabBarItem.selectedImage = UIImage(named: "MyBooksSelected")
+    controller.tabBarItem.imageInsets = UIEdgeInsets(top: 8.0, left: 0.0, bottom: -8.0, right: 0.0);
     return UINavigationController(rootViewController: controller)
   }
 }

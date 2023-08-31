@@ -69,8 +69,7 @@ didFinishLaunchingWithOptions:(__attribute__((unused)) NSDictionary *)launchOpti
   [[UITabBar appearance] setTintColor: [TPPConfiguration compatiblePrimaryColor]];
   [[UITabBar appearance] setBackgroundColor:[TPPConfiguration backgroundColor]];
 
-  
-  [UITabBarItem appearance].titlePositionAdjustment = UIOffsetMake(0.0, 5.0); //Added by Ellibs
+  [UITabBarItem appearance].titlePositionAdjustment = UIOffsetMake(5.0, 15.0); //Added by Ellibs
 
   [[UINavigationBar appearance] setTintColor: [TPPConfiguration iconColor]];
   [[UINavigationBar appearance] setStandardAppearance:[TPPConfiguration defaultAppearance]];

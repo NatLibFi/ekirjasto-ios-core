@@ -116,6 +116,10 @@ extension TPPConfiguration {
   @objc static func ekirjastoFontName() -> String {
     return "Asap-Regular"
   }
+
+  @objc static func ekirjastoFontNameBold() -> String {
+    return "Asap-Bold"
+  }
   
   @objc static func ekirjastoYellow() -> UIColor {
     if #available(iOS 13, *) {

@@ -18,6 +18,6 @@ extension UIFont {
   }
   
   @objc class func boldPalaceFont(ofSize fontSize: CGFloat) -> UIFont {
-    UIFont(name: TPPConfiguration.ekirjastoFontName(), size: fontSize)!
+    UIFont(name: TPPConfiguration.ekirjastoFontNameBold(), size: fontSize)!
   }
 }

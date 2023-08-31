@@ -69,9 +69,9 @@ private let TPPRoundedButtonPadding: CGFloat = 10.0 //Edited by Ellibs
   // MARK: - UI
   private func setupUI() {
     titleLabel?.font = UIFont.palaceFont(ofSize: 14)
-    //layer.borderColor = tintColor.cgColor //Disabled by Ellibs
-    //layer.borderWidth = 1                 //Disabled by Ellibs
-    //layer.cornerRadius = 3                //Disabled by Ellibs
+    layer.borderColor = UIColor(named: "ColorEkirjastoGreen")?.cgColor
+    layer.borderWidth = 1
+    layer.cornerRadius = 3
     layer.backgroundColor = UIColor(named: "ColorEkirjastoLightestGreen")?.cgColor //Added by Ellibs
     
     label.textColor = self.tintColor
@@ -116,7 +116,7 @@ private let TPPRoundedButtonPadding: CGFloat = 10.0 //Edited by Ellibs
       self.layer.borderColor = UIColor(named: "ColorEkirjastoGreen")?.cgColor
       self.backgroundColor = UIColor.clear
     } else {
-      self.layer.borderColor = color.cgColor
+      self.layer.borderColor = UIColor(named: "ColorEkirjastoGreen")?.cgColor
       self.label.textColor = color
       self.iconView.tintColor = color
     }
