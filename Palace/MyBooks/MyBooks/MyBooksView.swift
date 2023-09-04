@@ -109,7 +109,7 @@ struct MyBooksView: View {
         showDetailForBook = book
       } label: {
         BookCell(model: model)
-          .border(width: 0.5, edges: [.bottom, .trailing], color: self.model.isPad ? Color(TPPConfiguration.mainColor()) : .clear)
+          .border(width: 0.5, edges: [.bottom, .trailing], color: Color("ColorEkirjastoLightestGreen"))
       }
       .sheet(item: $showDetailForBook) { item in
         UIViewControllerWrapper(TPPBookDetailViewController(book: item), updater: { _ in })
@@ -118,6 +118,13 @@ struct MyBooksView: View {
     } else {
       return NavigationLink(destination: UIViewControllerWrapper(TPPBookDetailViewController(book: book), updater: { _ in })) {
         BookCell(model: model)
+          .padding(.leading, -25)
+          .padding(.vertical, 10)
+          .border(width: 0.5, edges: [.bottom ], color: Color("ColorEkirjastoLightestGreen"))
+          .padding(.top, -25)
+          .padding(.bottom, 10)
+          .padding(.leading, 20)
+          .padding(.trailing, 20)
       }
       .anyView()
     }

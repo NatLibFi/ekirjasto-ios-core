@@ -42,7 +42,7 @@ struct EkirjastoLoginView: View {
           }
           .frame(width: 300, height: 40)
           .clipShape(RoundedRectangle(cornerRadius: 10))
-          .background(Color("ColorEkirjastoLighterGreen"))
+          .background(Color("ColorEkirjastoGreen"))
         }
       }
     }

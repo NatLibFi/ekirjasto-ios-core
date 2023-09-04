@@ -33,7 +33,7 @@ struct ButtonView: View {
     }
     .font(Font(uiFont: UIFont.palaceFont(ofSize: 14)))
     .fixedSize()
-    .buttonStyle(AnimatedButton(backgroundColor: backgroundFill))
+    .buttonStyle(AnimatedButton(backgroundColor: indicatorDate != nil ? Color("ColorEkirjastoLighterGreen") : backgroundFill))
     .accessibilityLabel(accessiblityString)
   }
   
@@ -44,7 +44,7 @@ struct ButtonView: View {
           .resizable()
           .square(length: 14)
         Text(endDate)
-          .font(.system(size: 9))
+          .font(Font(uiFont: UIFont.palaceFont(ofSize: 9)))
       }
       .foregroundColor(Color(TPPConfiguration.mainColor()))
     }
@@ -61,7 +61,7 @@ struct AnimatedButton: ButtonStyle {
       .background(backgroundColor)
       .overlay(
         RoundedRectangle(cornerRadius: 3)
-          .stroke(backgroundColor ?? Color(TPPConfiguration.mainColor()), lineWidth: 1)
+          .stroke(Color("ColorEkirjastoGreen"), lineWidth: 1)
       )
       .opacity(configuration.isPressed ? 0.5 : 1.0)
   }
