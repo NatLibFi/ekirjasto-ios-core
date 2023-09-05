@@ -117,7 +117,7 @@
   }
   if ([book defaultBookContentType] == TPPBookContentTypeAudiobook) {
     self.title.accessibilityLabel = [book.title stringByAppendingString:@". Audiobook."];
-    [TPPContentBadgeImageView pinWithBadge:self.contentBadge toView:self.cover];
+    [TPPContentBadgeImageView pinWithBadge:self.contentBadge toView:self.cover isLane:NO];
     self.contentBadge.hidden = NO;
   } else {
     self.title.accessibilityLabel = nil;

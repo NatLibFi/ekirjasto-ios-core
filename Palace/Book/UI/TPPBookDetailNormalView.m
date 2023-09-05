@@ -72,7 +72,7 @@ typedef NS_ENUM (NSInteger, NYPLProblemReportButtonState) {
   CGPathCloseSubpath(visiblePath);
   
   UIColor *aColor = [TPPConfiguration ekirjastoYellow]; //Edited by Ellibs
-  if((_state != TPPBookButtonsStateCanBorrow ) && (_state != TPPBookButtonsStateDownloadNeeded)) {
+  if((_state != TPPBookButtonsStateCanBorrow ) && (_state != TPPBookButtonsStateDownloadNeeded) && (_state != TPPBookButtonsStateDownloadSuccessful)) {
     aColor =  [TPPConfiguration ekirjastoLightGrey];
   } //Added by Ellibs
   [aColor setFill];

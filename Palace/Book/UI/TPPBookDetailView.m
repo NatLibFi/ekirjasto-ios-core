@@ -445,7 +445,7 @@ static NSString *DetailHTMLTemplate = nil;
   [self.blurCoverImageView autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.coverImageView];
   [self.blurCoverImageView autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self.coverImageView];
 
-  [TPPContentBadgeImageView pinWithBadge:self.contentTypeBadge toView:self.coverImageView];
+  [TPPContentBadgeImageView pinWithBadge:self.contentTypeBadge toView:self.coverImageView isLane:NO];
   
   [self.titleLabel autoPinEdge:ALEdgeLeading toEdge:ALEdgeTrailing ofView:self.coverImageView withOffset:MainTextPaddingLeft];
   [self.titleLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.coverImageView];

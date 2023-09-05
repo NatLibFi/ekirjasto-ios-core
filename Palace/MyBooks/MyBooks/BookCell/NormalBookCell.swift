@@ -55,10 +55,12 @@ struct NormalBookCell: View {
     if model.book.defaultBookContentType == .audiobook {
       ImageProviders.MyBooksView.audiobookBadge
         .resizable()
-        .frame(width: 24, height: 24)
-        .background(Color(UIColor(named: "ColorEkirjastoGreen")!)) //Edited by Ellibs
+        .frame(width: 32, height: 32)
+        .background(Color(UIColor(named: "ColorEkirjastoIcon")!)) //Edited by Ellibs
         .border(width: 1.5, edges: [.top, .bottom, .leading, .trailing], color: Color.white) //added by Ellibs
         .bottomrRightJustified()
+        .padding(.trailing, -6)
+        .padding(.bottom, 12)
     }
   }
   
@@ -96,6 +98,7 @@ struct NormalBookCell: View {
           .foregroundColor(Color(TPPConfiguration.accentColor()))
         Spacer()
       }
-      .opacity(model.showUnreadIndicator ? 1.0 : 0.0)
+      //.opacity(model.showUnreadIndicator ? 1.0 : 0.0)
+      .opacity(0.0)
   }
 }
