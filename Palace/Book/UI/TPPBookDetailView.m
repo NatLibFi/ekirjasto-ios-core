@@ -72,8 +72,8 @@
 
 static CGFloat const SubtitleBaselineOffset = 10;
 static CGFloat const AuthorBaselineOffset = 12;
-static CGFloat const CoverImageAspectRatio = 0.8;
-static CGFloat const CoverImageMaxWidth = 160.0;
+static CGFloat const CoverImageAspectRatio = 0.9;
+static CGFloat const CoverImageMaxWidth = 130;
 static CGFloat const TabBarHeight = 80.0;
 static CGFloat const SampleToolbarHeight = 80.0;
 static CGFloat const TitleLabelMinimumWidth = 185.0;
@@ -255,8 +255,8 @@ static NSString *DetailHTMLTemplate = nil;
 
 - (void)createHeaderLabels
 {
-  UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleSystemMaterial];
-  self.visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+  //UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleSystemMaterial];
+  //self.visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
 
   self.coverImageView = [[UIImageView alloc] init];
   self.coverImageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -436,7 +436,7 @@ static NSString *DetailHTMLTemplate = nil;
   [self.visualEffectView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero excludingEdge:ALEdgeBottom];
   [self.visualEffectView autoPinEdge:ALEdgeBottom toEdge:ALEdgeTop ofView:self.normalView];
   
-  [self.coverImageView autoPinEdgeToSuperviewMargin:ALEdgeLeading withInset:-13]; //Edited by Ellibs
+  [self.coverImageView autoPinEdgeToSuperviewMargin:ALEdgeLeading withInset:-15]; //Edited by Ellibs
   [self.coverImageView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:VerticalPadding];
   [self.coverImageView autoMatchDimension:ALDimensionWidth toDimension:ALDimensionHeight ofView:self.coverImageView withMultiplier:CoverImageAspectRatio];
   [self.coverImageView autoSetDimension:ALDimensionWidth toSize:CoverImageMaxWidth relation:NSLayoutRelationLessThanOrEqual];

@@ -36,7 +36,7 @@
   
   self.percentageLabel = [[UILabel alloc] init];
   self.percentageLabel.font = [UIFont palaceFontOfSize:18]; //Edited by Ellibs
-  self.percentageLabel.textColor = [TPPConfiguration compatiblePrimaryColor]; //Edited by Ellibs
+  self.percentageLabel.textColor = [TPPConfiguration ekirjastoBlack]; //Edited by Ellibs
   self.percentageLabel.textAlignment = NSTextAlignmentRight;
   self.percentageLabel.text = TPPLocalizationNotNeeded(@"0%");
   [self addSubview:self.percentageLabel];
@@ -117,6 +117,7 @@
   _downloadStarted = downloadStarted;
   NSString *status = downloadStarted ? @"Downloading" : @"Requesting";
   self.progressLabel.text = NSLocalizedString(status, nil);
+  self.progressLabel.textColor = [TPPConfiguration ekirjastoBlack]; //Added by Ellibs
   [self setNeedsLayout];
 }
 

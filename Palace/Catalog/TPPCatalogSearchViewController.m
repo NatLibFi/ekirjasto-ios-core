@@ -77,6 +77,10 @@
   self.searchBar = [[UISearchBar alloc] init];
   self.searchBar.delegate = self;
   self.searchBar.placeholder = self.searchDescription.humanReadableDescription;
+  self.searchBar.searchTextField.leftView.tintColor = [UIColor colorNamed:@"ColorEkirjastoSearchBarText"];
+  self.searchBar.searchTextField.textColor = [UIColor colorNamed:@"ColorEkirjastoAlwaysBlack"];
+  self.searchBar.searchTextField.tintColor = [UIColor colorNamed:@"ColorEkirjastoSearchBarText"];
+  self.searchBar.searchTextField.backgroundColor = [UIColor colorNamed:@"ColorEkirjastoSearchBar"];
   [self.searchBar sizeToFit];
   [self.searchBar becomeFirstResponder];
   

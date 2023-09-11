@@ -33,11 +33,12 @@ final class TPPContentBadgeImageView: UIImageView {
     if (badge.superview == nil) {
       view.addSubview(badge)
     }
-    badge.autoSetDimensions(to: CGSize(width: 32, height: 32))
-    badge.autoPinEdge(.trailing, to: .trailing, of: view, withOffset: 6)
+    badge.autoSetDimensions(to: CGSize(width: 30, height: 30))
     if(!isLane) {
+      badge.autoPinEdge(.trailing, to: .trailing, of: view, withOffset: 6)
       badge.autoPinEdge(.bottom, to: .bottom, of: view, withOffset: -18)
     } else {
+      badge.autoPinEdge(.trailing, to: .trailing, of: view, withOffset: -6)
       badge.autoPinEdge(.bottom, to: .bottom, of: view)
     }
   }

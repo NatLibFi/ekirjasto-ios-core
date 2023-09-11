@@ -109,7 +109,7 @@ private let TPPRoundedButtonPadding: CGFloat = 10.0 //Edited by Ellibs
   }
   
   private func updateColors() {
-    let color: UIColor = self.isEnabled ? self.tintColor : UIColor.gray
+    var color: UIColor = self.isEnabled ? self.tintColor : UIColor.gray
     self.layer.cornerRadius = 2
     if(self.isReturnButton == true) {
       self.layer.borderWidth = 0.8
@@ -117,8 +117,9 @@ private let TPPRoundedButtonPadding: CGFloat = 10.0 //Edited by Ellibs
       self.backgroundColor = UIColor.clear
     } else {
       self.layer.borderColor = UIColor(named: "ColorEkirjastoGreen")?.cgColor
-      self.label.textColor = color
+      color = UIColor(named: "ColorEkirjastoButtonTextWithBackground")!
       self.iconView.tintColor = color
+      self.label.textColor = color
     }
     setTitleColor(color, for: .normal)
   }

@@ -28,7 +28,7 @@
   self.messageLabel = [[UILabel alloc] init];
   self.messageLabel.font = [UIFont customFontForTextStyle:UIFontTextStyleBody];
   self.messageLabel.textAlignment = NSTextAlignmentCenter;
-  self.messageLabel.textColor = [TPPConfiguration compatiblePrimaryColor]; //Edited by Ellibs
+  self.messageLabel.textColor = [TPPConfiguration ekirjastoBlack]; //Edited by Ellibs
   self.messageLabel.text = NSLocalizedString(@"The download could not be completed.\nScroll down to 'View Issues' to see details.", nil);
   self.messageLabel.numberOfLines = 0;
   [self addSubview:self.messageLabel];
@@ -40,6 +40,49 @@
                                              object:nil];
   
   return self;
+}
+
+- (void)drawRect:(__unused CGRect)rect
+{
+  //Inner drop-shadow
+  CGRect bounds = [self bounds];
+  CGContextRef context = UIGraphicsGetCurrentContext();
+  
+  UIGraphicsPushContext(context); //Added By Ellibs
+  CGContextSetFillColorWithColor(context, [TPPConfiguration backgroundColor].CGColor); //Added By Ellibs
+  CGContextFillRect(context, rect); //Added By Ellibs
+  UIGraphicsPopContext(); //Added By Ellibs
+  
+  CGMutablePathRef visiblePath = CGPathCreateMutable();
+  CGPathMoveToPoint(visiblePath, NULL, bounds.origin.x, bounds.origin.y);
+  CGPathAddLineToPoint(visiblePath, NULL, bounds.origin.x + bounds.size.width - 20, bounds.origin.y); //Edited by Ellibs
+  CGPathAddLineToPoint(visiblePath, NULL, bounds.origin.x + bounds.size.width - 20, bounds.origin.y + bounds.size.height); //Edited by Ellibs
+  CGPathAddLineToPoint(visiblePath, NULL, bounds.origin.x + 20, bounds.origin.y + bounds.size.height); //Edited by Ellibs
+  CGPathAddLineToPoint(visiblePath, NULL, bounds.origin.x + 20, bounds.origin.y); //Edited by Ellibs
+  CGPathCloseSubpath(visiblePath);
+  
+  UIColor *aColor = [TPPConfiguration ekirjastoLightGrey]; //Edited by Ellibs
+  [aColor setFill];
+  CGContextAddPath(context, visiblePath);
+  CGContextFillPath(context);
+  
+  CGMutablePathRef path = CGPathCreateMutable();
+  CGPathAddRect(path, NULL, CGRectInset(bounds, -42, -42));
+  CGPathAddPath(path, NULL, visiblePath);
+  CGPathCloseSubpath(path);
+  CGContextAddPath(context, visiblePath);
+  CGContextClip(context);
+  
+  //Disabled by Ellibs
+  //aColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.5f];
+  //CGContextSaveGState(context);
+  //CGContextSetShadowWithColor(context, CGSizeMake(0.0f, 0.0f), 5.0f, [aColor CGColor]);
+  //[aColor setFill];
+  //CGContextSaveGState(context);
+  //CGContextAddPath(context, path);
+  //CGContextEOFillPath(context);
+  CGPathRelease(path);
+  CGPathRelease(visiblePath);
 }
 
 - (void)dealloc

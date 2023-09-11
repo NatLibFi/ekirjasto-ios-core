@@ -29,7 +29,7 @@ typedef NS_ENUM (NSInteger, NYPLProblemReportButtonState) {
   
   self.messageLabel = [[UILabel alloc] init];
   self.messageLabel.font = [UIFont palaceFontOfSize: 18]; //Edited by Ellibs
-  self.messageLabel.textColor = [TPPConfiguration compatiblePrimaryColor]; //Edited by Ellibs
+  self.messageLabel.textColor = [TPPConfiguration ekirjastoBlack]; //Edited by Ellibs
   self.messageLabel.numberOfLines = 0;
   self.messageLabel.textAlignment = NSTextAlignmentCenter;
   [self addSubview:self.messageLabel];
@@ -72,7 +72,7 @@ typedef NS_ENUM (NSInteger, NYPLProblemReportButtonState) {
   CGPathCloseSubpath(visiblePath);
   
   UIColor *aColor = [TPPConfiguration ekirjastoYellow]; //Edited by Ellibs
-  if((_state != TPPBookButtonsStateCanBorrow ) && (_state != TPPBookButtonsStateDownloadNeeded) && (_state != TPPBookButtonsStateDownloadSuccessful)) {
+  if((_state != TPPBookButtonsStateCanBorrow ) && (_state != TPPBookButtonsStateDownloadNeeded) && (_state != TPPBookButtonsStateDownloadSuccessful) && (_state != TPPBookButtonsStateUsed)) {
     aColor =  [TPPConfiguration ekirjastoLightGrey];
   } //Added by Ellibs
   [aColor setFill];

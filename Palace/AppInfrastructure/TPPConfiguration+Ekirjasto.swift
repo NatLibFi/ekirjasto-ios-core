@@ -128,6 +128,14 @@ extension TPPConfiguration {
       return .lightGray
     }
   }
+  
+  @objc static func ekirjastoBlack() -> UIColor {
+    if #available(iOS 13, *) {
+      return UIColor(named: "ColorEkirjastoAlwaysBlack")!
+    } else {
+      return .lightGray
+    }
+  }
 
   @objc static func ekirjastoLightGrey() -> UIColor {
     if #available(iOS 13, *) {

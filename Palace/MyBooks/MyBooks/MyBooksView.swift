@@ -94,6 +94,7 @@ struct MyBooksView: View {
         .disabled(model.isLoading)
       }
     }
+    .padding(.bottom, 20)
     .onAppear { model.loadData() }
   }
     
@@ -119,7 +120,7 @@ struct MyBooksView: View {
       return NavigationLink(destination: UIViewControllerWrapper(TPPBookDetailViewController(book: book), updater: { _ in })) {
         BookCell(model: model)
           .padding(.leading, -25)
-          .padding(.vertical, 10)
+          .padding(.vertical, 15)
           .border(width: 0.5, edges: [.bottom ], color: Color("ColorEkirjastoLightestGreen"))
           .padding(.top, -25)
           .padding(.bottom, 10)

@@ -58,9 +58,9 @@ import Foundation
     //titleContainer.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0), excludingEdge: .leading)
     //titleContainer.autoPinEdge(.leading, to: .trailing, of: imageView, withOffset: 10.0)
     
-    logoView.addSubview(accountSiteButton)
-    accountSiteButton.autoPinEdgesToSuperviewEdges()
-    accountSiteButton.addTarget(self, action: #selector(showAccountPage), for: .touchUpInside)
+    //logoView.addSubview(accountSiteButton)
+    //accountSiteButton.autoPinEdgesToSuperviewEdges()
+    //accountSiteButton.addTarget(self, action: #selector(showAccountPage), for: .touchUpInside)
     return logoView
   }()
   
@@ -128,7 +128,7 @@ import Foundation
     entryPointView.autoPinEdge(.bottom, to: .top, of: facetView)
     logoView.autoPinEdge(.top, to: .bottom, of: facetView, withOffset: 10.0)
     logoView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 10.0)
-    logoView.autoAlignAxis(toSuperviewMarginAxis: .vertical)
+    logoView.autoAlignAxis(.vertical, toSameAxisOf: self, withOffset: -15)
     logoView.autoConstrainAttribute(.width, to: .width, of: self, withMultiplier: 0.8, relation: .lessThanOrEqual)
   }
 

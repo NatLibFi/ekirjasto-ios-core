@@ -26,7 +26,7 @@ struct EkirjastoLoginView: View {
             .padding(.vertical, 50)
           
           Button(action: {self.dismissView(); self.signIn()}) {
-            Text("Kirjaudu palveluun")
+            Text("Kirjaudu palveluun").foregroundColor(Color("ColorEkirjastoButtonTextWithBackground"))
             Image("ArrowRight")
               .padding(.leading, 10)
               .foregroundColor(Color("ColorEkirjastoGreen"))
@@ -36,9 +36,10 @@ struct EkirjastoLoginView: View {
           .background(Color("ColorEkirjastoLightestGreen"))
           
           Button(action: {self.dismissView(); self.signUp()}) {
-            Text("Rekisteröidy palveluun")
+            Text("Rekisteröidy palveluun").foregroundColor(Color("ColorEkirjastoButtonTextWithBackground"))
             Image("ArrowRight")
               .padding(.leading, 10)
+              .foregroundColor(Color("ColorEkirjastoButtonTextWithBackground"))
           }
           .frame(width: 300, height: 40)
           .clipShape(RoundedRectangle(cornerRadius: 10))
