@@ -13,7 +13,7 @@ import Combine
 struct NormalBookCell: View {
   @ObservedObject var model: BookCellModel
   private let cellHeight: CGFloat = 125
-  private let imageViewWidth: CGFloat = 80
+  private let imageViewWidth: CGFloat = 100
 
   var body: some View {
     HStack(alignment: .center) {
