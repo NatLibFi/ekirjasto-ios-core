@@ -28,8 +28,8 @@
                                 (20 / UIScreen.mainScreen.scale),               //Edited by Ellibs
                                 (CGRectGetHeight([self contentFrame]) - 10) * (10 / 12.0),
                                 CGRectGetHeight([self contentFrame]) - 10);
-  self.cover.layer.borderColor = [TPPConfiguration ekirjastoYellow].CGColor;
-  self.cover.layer.borderWidth = 2;
+  //self.cover.layer.borderColor = [TPPConfiguration ekirjastoYellow].CGColor;
+  //self.cover.layer.borderWidth = 2;
   
 
   // The extra five height pixels account for a bug in |sizeThatFits:| that does not properly take
@@ -146,8 +146,7 @@
   }
   
   if([book defaultBookContentType] == TPPBookContentTypeAudiobook) {
-    self.cover.contentMode = UIViewContentModeScaleAspectFill;
-    self.cover.clipsToBounds = YES;
+    self.cover.contentMode = UIViewContentModeScaleToFill;
   } else {
     self.cover.contentMode = UIViewContentModeScaleAspectFit;
   }
