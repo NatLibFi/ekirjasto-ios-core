@@ -630,7 +630,6 @@
 		331264532A287F53006BA87D /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5BEEFF526BD919D00C2A50B /* OpenSans-Bold.ttf */; };
 		331264542A287F53006BA87D /* reader.html in Resources */ = {isa = PBXBuildFile; fileRef = 11C113CF19F842B9005B3F63 /* reader.html */; };
 		331264552A287F53006BA87D /* DetailSummaryTemplate.html in Resources */ = {isa = PBXBuildFile; fileRef = 110F853C19D5FA7300052DF7 /* DetailSummaryTemplate.html */; };
-		331264562A287F53006BA87D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5506DE326C4688D009FA623 /* Colors.xcassets */; };
 		331264582A287F53006BA87D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E50221BF29881CAC00A8A80B /* Localizable.strings */; };
 		331264592A287F53006BA87D /* sdk.css in Resources */ = {isa = PBXBuildFile; fileRef = 5A69290F1B95ACD100FB4C10 /* sdk.css */; };
 		3312645A2A287F53006BA87D /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5BEF01C26BDA9EA00C2A50B /* OpenSans-SemiBold.ttf */; };
@@ -652,6 +651,7 @@
 		33266F012A40456D003BC347 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33266F002A40456D003BC347 /* Images.xcassets */; };
 		33266F032A40459E003BC347 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33266F022A40459E003BC347 /* Colors.xcassets */; };
 		33266F042A40476B003BC347 /* Ekirjasto-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 335223852A28BC2500CD514D /* Ekirjasto-Info.plist */; };
+		334A8AC62AAF28EE0081C9B6 /* UIButton+EkirjastoImageWithLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334A8AC52AAF28EE0081C9B6 /* UIButton+EkirjastoImageWithLabel.swift */; };
 		3360FBA72A41B2E100AC1905 /* Ekirjasto_Launch_Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3360FBA52A41B2DA00AC1905 /* Ekirjasto_Launch_Screen.storyboard */; };
 		3360FBA82A41B2E500AC1905 /* TPP_Launch_Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E65977C41F82AC91003CD6BC /* TPP_Launch_Screen.storyboard */; };
 		336F0D582A432860009E37F6 /* EkirjastoRoundedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336F0D572A432860009E37F6 /* EkirjastoRoundedLabel.swift */; };
@@ -1680,6 +1680,7 @@
 		33266EFA2A4037B6003BC347 /* Asap-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Asap-Regular.ttf"; sourceTree = "<group>"; };
 		33266F002A40456D003BC347 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		33266F022A40459E003BC347 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		334A8AC52AAF28EE0081C9B6 /* UIButton+EkirjastoImageWithLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+EkirjastoImageWithLabel.swift"; sourceTree = "<group>"; };
 		335223852A28BC2500CD514D /* Ekirjasto-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Ekirjasto-Info.plist"; path = "Palace/EkirjastoConfig/Ekirjasto-Info.plist"; sourceTree = SOURCE_ROOT; };
 		3360FBA52A41B2DA00AC1905 /* Ekirjasto_Launch_Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Ekirjasto_Launch_Screen.storyboard; sourceTree = "<group>"; };
 		336F0D572A432860009E37F6 /* EkirjastoRoundedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EkirjastoRoundedLabel.swift; sourceTree = "<group>"; };
@@ -2915,6 +2916,7 @@
 				E551B359267D396A0026FC1B /* TPPLoadingViewController.swift */,
 				21C184DB27B12347008CC4F8 /* UINavigationBar+appearance.swift */,
 				E523124C28641505007D1DB5 /* LoadingViewController.swift */,
+				334A8AC52AAF28EE0081C9B6 /* UIButton+EkirjastoImageWithLabel.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -3987,7 +3989,6 @@
 				331264532A287F53006BA87D /* OpenSans-Bold.ttf in Resources */,
 				331264542A287F53006BA87D /* reader.html in Resources */,
 				331264552A287F53006BA87D /* DetailSummaryTemplate.html in Resources */,
-				331264562A287F53006BA87D /* Colors.xcassets in Resources */,
 				331264582A287F53006BA87D /* Localizable.strings in Resources */,
 				33266F032A40459E003BC347 /* Colors.xcassets in Resources */,
 				3360FBA72A41B2E100AC1905 /* Ekirjasto_Launch_Screen.storyboard in Resources */,
@@ -4542,6 +4543,7 @@
 				331263F52A287F53006BA87D /* TPPBookButtonsView.m in Sources */,
 				331263F62A287F53006BA87D /* TPPMyBooksSimplifiedBearerToken.m in Sources */,
 				331263F72A287F53006BA87D /* TPPAnnotations.swift in Sources */,
+				334A8AC62AAF28EE0081C9B6 /* UIButton+EkirjastoImageWithLabel.swift in Sources */,
 				331263F82A287F53006BA87D /* AdaptableGridLayout.swift in Sources */,
 				331263F92A287F53006BA87D /* TPPPDFNavigation.swift in Sources */,
 				331263FA2A287F53006BA87D /* RefreshableView.swift in Sources */,
