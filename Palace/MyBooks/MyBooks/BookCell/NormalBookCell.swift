@@ -23,7 +23,7 @@ struct NormalBookCell: View {
         infoView
         Spacer()
         buttons
-      }
+      }.padding(.leading, 8)
       .alert(item: $model.showAlert) { alert in
         Alert(
           title: Text(alert.title),
@@ -35,7 +35,7 @@ struct NormalBookCell: View {
       Spacer()
     }
     .multilineTextAlignment(.leading)
-    .padding(5)
+    .padding(EdgeInsets(top: 0, leading: 5, bottom: 5, trailing: 5))
     .frame(height: cellHeight)
     .onDisappear { model.isLoading = false }
   }
@@ -44,7 +44,9 @@ struct NormalBookCell: View {
     ZStack {
       Image(uiImage: model.image)
         .resizable()
-        .aspectRatio(contentMode: .fit)
+        .scaledToFit()
+        .frame(height: 125, alignment: .top)
+        .padding(.top, 10)
       audiobookIndicator
     }
     .frame(width: imageViewWidth)
@@ -60,7 +62,7 @@ struct NormalBookCell: View {
         .border(width: 1.5, edges: [.top, .bottom, .leading, .trailing], color: Color.white) //added by Ellibs
         .bottomrRightJustified()
         .padding(.trailing, -6)
-        .padding(.bottom, 12)
+        .padding(.bottom, 32)
     }
   }
   

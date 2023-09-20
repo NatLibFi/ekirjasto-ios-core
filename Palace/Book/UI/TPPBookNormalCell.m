@@ -28,10 +28,7 @@
                                 (20 / UIScreen.mainScreen.scale),               //Edited by Ellibs
                                 (CGRectGetHeight([self contentFrame]) - 10) * (10 / 12.0),
                                 CGRectGetHeight([self contentFrame]) - 10);
-  //self.cover.layer.borderColor = [TPPConfiguration ekirjastoYellow].CGColor;
-  //self.cover.layer.borderWidth = 2;
   
-
   // The extra five height pixels account for a bug in |sizeThatFits:| that does not properly take
   // into account |lineHeightMultiple|.
   CGFloat const titleWidth = CGRectGetWidth([self contentFrame]) - 155;         //Edited by Ellibs

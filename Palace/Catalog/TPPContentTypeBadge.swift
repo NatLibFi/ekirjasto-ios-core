@@ -36,7 +36,7 @@ final class TPPContentBadgeImageView: UIImageView {
     badge.autoSetDimensions(to: CGSize(width: 30, height: 30))
     if(!isLane) {
       badge.autoPinEdge(.trailing, to: .trailing, of: view, withOffset: 6)
-      badge.autoPinEdge(.bottom, to: .bottom, of: view, withOffset: -18)
+      badge.autoPinEdge(.bottom, to: .bottom, of: view, withOffset: -6)
     } else {
       badge.autoPinEdge(.trailing, to: .trailing, of: view, withOffset: -6)
       badge.autoPinEdge(.bottom, to: .bottom, of: view)
