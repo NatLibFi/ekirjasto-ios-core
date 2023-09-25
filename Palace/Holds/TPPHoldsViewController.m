@@ -113,6 +113,7 @@
 
   self.facetBarView = [[TPPFacetBarView alloc] initWithOrigin:CGPointZero width:self.view.bounds.size.width];
   self.facetBarView.delegate = self;
+  [self.facetBarView removeLogo]; //Added by Ellibs
   
   [self.view addSubview:self.facetBarView];
   
@@ -163,6 +164,15 @@
     sections++;
   }
   return sections;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+  if(self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular) {
+    return 0.0;
+  } {
+    return 25.0;
+  }
 }
 
 - (void)collectionView:(__attribute__((unused)) UICollectionView *)collectionView

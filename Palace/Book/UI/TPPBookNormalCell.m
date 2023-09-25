@@ -33,7 +33,7 @@
   // into account |lineHeightMultiple|.
   CGFloat const titleWidth = CGRectGetWidth([self contentFrame]) - 155;         //Edited by Ellibs
   self.title.frame = CGRectMake(145,                                            //Edited by Ellibs
-                                (20 / UIScreen.mainScreen.scale),               //Edited by Ellibs
+                                (10 / UIScreen.mainScreen.scale),               //Edited by Ellibs
                                 titleWidth,
                                 [self.title sizeThatFits:
                                  CGSizeMake(titleWidth, CGFLOAT_MAX)].height + 5);

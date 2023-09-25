@@ -136,6 +136,15 @@
   }
 }
 
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+  if(self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular) {
+    return 0.0;
+  } {
+    return 25.0;
+  }
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
   [super viewWillDisappear:animated];
