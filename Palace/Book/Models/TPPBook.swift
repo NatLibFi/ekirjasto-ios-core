@@ -37,6 +37,7 @@ let SubtitleKey: String = "subtitle"
 let SummaryKey: String = "summary"
 let TitleKey: String = "title"
 let UpdatedKey: String = "updated"
+let TimeTrackingURLURLKey: String = "time-tracking-url"
 
 @objc class TPPBook: NSObject {
   @objc var acquisitions: [TPPOPDSAcquisition]
@@ -60,6 +61,7 @@ let UpdatedKey: String = "updated"
   @objc var seriesURL: URL?
   @objc var revokeURL: URL?
   @objc var reportURL: URL?
+  @objc var timeTrackingURL: URL?
   @objc var contributors: [String: Any]?
   @objc var bookTokenLock: NSRecursiveLock
   
@@ -95,6 +97,7 @@ let UpdatedKey: String = "updated"
     seriesURL: URL?,
     revokeURL: URL?,
     reportURL: URL?,
+    timeTrackingURL: URL?,
     contributors: [String: Any]?
   ) {
     self.acquisitions = acquisitions
@@ -118,6 +121,7 @@ let UpdatedKey: String = "updated"
     self.seriesURL = seriesURL
     self.revokeURL = revokeURL
     self.reportURL = reportURL
+    self.timeTrackingURL = timeTrackingURL
     self.contributors = contributors
     self.bookTokenLock = NSRecursiveLock()
   }
@@ -180,6 +184,7 @@ let UpdatedKey: String = "updated"
       seriesURL: entry.seriesLink?.href,
       revokeURL: revoke,
       reportURL: report,
+      timeTrackingURL: entry.timeTrackingLink?.href,
       contributors: entry.contributors
     )
   }
@@ -367,6 +372,7 @@ let UpdatedKey: String = "updated"
       seriesURL: URL(string: dictionary[SeriesLinkKey] as? String ?? ""),
       revokeURL: revokeURL,
       reportURL: reportURL,
+      timeTrackingURL: URL(string: dictionary[TimeTrackingURLURLKey] as? String ?? ""),
       contributors: nil
     )
   }
@@ -394,6 +400,7 @@ let UpdatedKey: String = "updated"
       seriesURL: book.seriesURL,
       revokeURL: self.revokeURL,
       reportURL: self.reportURL,
+      timeTrackingURL: self.timeTrackingURL,
       contributors: book.contributors
     )
   }
@@ -423,7 +430,8 @@ let UpdatedKey: String = "updated"
       SubtitleKey: subtitle as Any,
       SummaryKey: summary as Any,
       TitleKey: title as Any,
-      UpdatedKey: updated.rfc339String as Any
+      UpdatedKey: updated.rfc339String as Any,
+      TimeTrackingURLURLKey: timeTrackingURL?.absoluteString as Any
     ]
   }
 
@@ -451,12 +459,9 @@ let UpdatedKey: String = "updated"
   /// @discussion
   /// A compatibility method to allow the app to continue to function until the
   /// user interface and other components support handling multiple valid
-  /// acquisition possibilities. Its use should be avoided wherever possible and
-  /// it will eventually be removed.
+  /// acquisition possibilities.
   ///
-  /// @seealso @b https://jira.nypl.org/browse/SIMPLY-2588
-  ///
-  /// @return An acquisition leading to an EPUB or @c nil.
+  /// @return An acquisition leading to the first supported format or @c nil.
   @objc var defaultAcquisition: TPPOPDSAcquisition? {
     guard acquisitions.count > 0 else {
       Log.debug("", "ERROR: No acquisitions found when computing a default. This is an OPDS violation.")
@@ -527,8 +532,6 @@ let UpdatedKey: String = "updated"
   /// acquisition possibilities. Its use should be avoided wherever possible and
   /// it will eventually be removed.
   ///
-  /// @seealso @b https://jira.nypl.org/browse/SIMPLY-2588
-  ///
   /// @return The default acquisition leading to an EPUB if it has a borrow
   /// relation, else @c nil.
   @objc var defaultAcquisitionIfBorrow: TPPOPDSAcquisition? {
@@ -542,8 +545,6 @@ let UpdatedKey: String = "updated"
   /// acquisition possibilities. Its use should be avoided wherever possible and
   /// it will eventually be removed.
   ///
-  /// @seealso @b https://jira.nypl.org/browse/SIMPLY-2588
-  ///
   /// @return The default acquisition leading to an EPUB if it has an open access
   /// relation, else @c nil.
   @objc var defaultAcquisitionIfOpenAccess: TPPOPDSAcquisition? {
@@ -554,39 +555,27 @@ let UpdatedKey: String = "updated"
   /// @discussion
   /// Assigns the book content type based on the inner-most type listed
   /// in the acquistion path. If multiple acquisition paths exist, default
-  /// to epub+zip before moving down to other supported types. The UI
-  /// does not yet support more than one supported type.
-  ///
-  /// @seealso @b https://jira.nypl.org/browse/SIMPLY-2588
+  /// to the first supported one.
+  /// The UI does not yet support more than one supported type.
   ///
   /// @return The default TPPBookContentType
   @objc var defaultBookContentType: TPPBookContentType {
     guard let acquisition = defaultAcquisition else {
       return .unsupported
     }
-
     let paths = TPPOPDSAcquisitionPath.supportedAcquisitionPaths(
       forAllowedTypes: TPPOPDSAcquisitionPath.supportedTypes(),
       allowedRelations: NYPLOPDSAcquisitionRelationSetAll,
       acquisitions: [acquisition])
-
-    var defaultType: TPPBookContentType = .unsupported
-
-    paths.forEach {
-      let finalTypeString = $0.types.last
-      let contentType = TPPBookContentType.from(mimeType: finalTypeString)
-      
-      if contentType == TPPBookContentType.epub {
-        defaultType = contentType
-        return
-      }
-
-      if defaultType == .unsupported {
-        defaultType = contentType
+    for path in paths {
+      if let mimeType = path.types.last {
+        let contentType = TPPBookContentType.from(mimeType: mimeType)
+        if contentType != .unsupported {
+          return contentType
+        }
       }
     }
-    
-    return defaultType
+    return .unsupported
   }
 }
 

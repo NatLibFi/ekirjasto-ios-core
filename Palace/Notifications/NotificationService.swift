@@ -50,8 +50,7 @@ class NotificationService: NSObject, UNUserNotificationCenterDelegate, Messaging
   
   @objc
   /// Runs configuration function, registers the app for remote notifications.
-  func setupPushNotifications() {
-    FirebaseApp.configure()
+  func setupPushNotifications(completion: ((_ granted: Bool) -> Void)? = nil) {
     notificationCenter.delegate = self
     notificationCenter.requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
       if granted {
@@ -59,8 +58,18 @@ class NotificationService: NSObject, UNUserNotificationCenterDelegate, Messaging
           UIApplication.shared.registerForRemoteNotifications()
         }
       }
+      completion?(granted)
     }
     Messaging.messaging().delegate = self
+  }
+  
+  func getNotificationStatus(completion: @escaping (_ areEnabled: Bool) -> Void) {
+    notificationCenter.getNotificationSettings { notificationSettings in
+      switch notificationSettings.authorizationStatus {
+      case .authorized, .provisional: completion(true)
+      default: completion(false)
+      }
+    }
   }
   
   /// Check if token exists on the server
@@ -123,12 +132,48 @@ class NotificationService: NSObject, UNUserNotificationCenterDelegate, Messaging
   /// Update token when user account changes
   func updateToken() {
     Messaging.messaging().token { token, _ in
-      if let token = token {
+      if let token {
         self.checkTokenExists(token) { exists, _ in
           if let exists = exists, !exists {
             self.saveToken(token)
           }
         }
+      }
+    }
+  }
+  
+  /// Delete token
+  /// - Parameters:
+  ///   - token: FCM token value
+  ///   - account: Library account
+  func deleteToken(_ token: String, account: Account) {
+    guard let catalogHref = account.catalogUrl,
+          let requestUrl = URL(string: "\(catalogHref)patrons/me/devices"),
+          let requestBody = TokenData(token: token).data
+    else {
+      return
+    }
+    var request = URLRequest(url: requestUrl)
+    request.httpMethod = "DELETE"
+    request.httpBody = requestBody
+    _ = TPPNetworkExecutor.shared.addBearerAndExecute(request) { result, response, error in
+      if let error = error {
+        TPPErrorLogger.logError(error,
+                                summary: "Couldn't delete token data",
+                                metadata: [
+                                  "requestURL": requestUrl,
+                                  "tokenData": String(data: requestBody, encoding: .utf8) ?? "",
+                                  "statusCode": (response as? HTTPURLResponse)?.statusCode ?? 0
+                                ]
+        )
+      }
+    }
+  }
+  
+  func deleteToken(for account: Account) {
+    Messaging.messaging().token { token, _ in
+      if let token {
+        self.deleteToken(token, account: account)
       }
     }
   }
@@ -145,11 +190,16 @@ class NotificationService: NSObject, UNUserNotificationCenterDelegate, Messaging
   
   /// Called when the app is in foreground
   func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-    completionHandler([.alert, .badge, .sound])
+    // Shows notification banner on screen
+    completionHandler([.banner, .badge, .sound])
+    // Update loans
+    TPPBookRegistry.shared.sync()
   }
   
   /// Called when the user responded to the notification by opening the application, dismissing the notification or choosing a UNNotificationAction
   func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
     completionHandler()
+    // Update loans
+    TPPBookRegistry.shared.sync()
   }
 }

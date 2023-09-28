@@ -6,7 +6,6 @@
 #import "TPPCatalogNavigationController.h"
 #import "TPPConfiguration.h"
 #import "TPPLinearView.h"
-#import "TPPMyBooksDownloadCenter.h"
 #import "TPPOPDS.h"
 #import "TPPRootTabBarController.h"
 #import "TPPSettingsAccountDetailViewController.h"
@@ -159,7 +158,7 @@ Authenticating with any of those barcodes should work.
                         libraryAccountsProvider:AccountsManager.shared
                         urlSettingsProvider: TPPSettings.shared
                         bookRegistry:[TPPBookRegistry shared]
-                        bookDownloadsCenter:[TPPMyBooksDownloadCenter sharedDownloadCenter]
+                        bookDownloadsCenter:[MyBooksDownloadCenter shared]
                         userAccountProvider:[TPPUserAccount class]
                         uiDelegate:self
                         drmAuthorizer:drmAuthorizer];
@@ -212,6 +211,8 @@ Authenticating with any of those barcodes should work.
   self.view.backgroundColor = [TPPConfiguration backgroundColor];
   self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
   [self setupHeaderView];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:@"LocationAuthorizationDidChange" object:nil];
 
   UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleMedium];
   activityIndicator.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2);
@@ -246,6 +247,14 @@ Authenticating with any of those barcodes should work.
       }
     }];
   }
+}
+
+- (void)appWillEnterForeground {
+  [self.tableView reloadData];
+}
+
+- (void)reloadData {
+  [self.tableView reloadData];
 }
 
 - (void)displayErrorMessage:(NSString *)errorMessage
@@ -377,7 +386,7 @@ Authenticating with any of those barcodes should work.
       [workingSection addObject:[[TPPInfoHeaderCellType alloc] initWithInformation:libraryInfo]];
     }
 
-    if (self.businessLogic.libraryAccount.details.auths.count > 1) {
+    if (self.businessLogic.libraryAccount.details.auths.count > 1 && !self.businessLogic.libraryAccount.details.defaultAuth.isToken) {
       // multiple authentication methods
       for (AccountDetailsAuthentication *authenticationMethod in self.businessLogic.libraryAccount.details.auths) {
         // show all possible login methods
@@ -485,6 +494,17 @@ Authenticating with any of those barcodes should work.
   [self.tableView reloadData];
 }
 
+/**
+ * Update Library Card value
+ *
+ *@param username user name or library card value
+ */
+- (void)setUserName:(nonnull NSString *)username
+{
+  usernameTextField.text = username;
+  [PINTextField becomeFirstResponder];
+}
+
 #pragma mark - Account SignOut
 
 - (void)logOut
@@ -556,7 +576,7 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
             cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed: @"CheckedCircle"]];
             weakSelf.selectedAccount.details.userAboveAgeLimit = aboveAgeLimit;
             if (!aboveAgeLimit) {
-              [[TPPMyBooksDownloadCenter sharedDownloadCenter] reset:weakSelf.selectedAccountId];
+              [[MyBooksDownloadCenter shared] reset:weakSelf.selectedAccountId];
               [[TPPBookRegistry shared] reset:weakSelf.selectedAccountId];
             }
             TPPCatalogNavigationController *catalog = (TPPCatalogNavigationController*)[TPPRootTabBarController sharedController].viewControllers[0];
@@ -613,8 +633,6 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
     }
     case CellKindRegistration: {
       [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-      UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-      [self didSelectRegularSignupOnCell:cell];
       break;
     }
     case CellKindSyncButton: {
@@ -706,6 +724,7 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
                                                          viewController:nil
                                                                animated:YES
                                                              completion:nil];
+      [self.tableView reloadData];
       return;
     }
 
@@ -862,7 +881,11 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
       return self.logInSignOutCell;
     }
     case CellKindRegistration: {
-      return [self createRegistrationCell];
+      RegistrationCell *cell =  [RegistrationCell new];
+      [cell configureWithTitle:nil body:nil buttonTitle:nil buttonAction:^{
+        [self didSelectRegularSignupOnCell:cell];
+      }];
+      return cell;
     }
     case CellKindAgeCheck: {
       self.ageCheckCell = [[UITableViewCell alloc]
