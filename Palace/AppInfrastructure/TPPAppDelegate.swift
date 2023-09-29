@@ -22,7 +22,7 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
   // MARK: - Application Lifecycle
   
   func applicationDidFinishLaunching(_ application: UIApplication) {
-    FirebaseApp.configure()
+    //FirebaseApp.configure()
     TPPErrorLogger.configureCrashAnalytics()
 
     // Perform data migrations as early as possible before anything has a chance to access them
@@ -52,9 +52,12 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
     window?.makeKeyAndVisible()
     window?.rootViewController = TPPRootTabBarController.shared()
     
-    UITabBar.appearance().tintColor = TPPConfiguration.iconColor()
+    UITabBar.appearance().tintColor = TPPConfiguration.compatiblePrimaryColor() //Edited by Ebblis
     UITabBar.appearance().backgroundColor = TPPConfiguration.backgroundColor()
     UITabBarItem.appearance().setTitleTextAttributes([.font: UIFont.palaceFont(ofSize: 12)], for: .normal)
+    
+    UITabBar.appearance().unselectedItemTintColor = TPPConfiguration.compatiblePrimaryColor() //Added by Ellibs
+    UITabBarItem.appearance().titlePositionAdjustment = UIOffset(horizontal: 5.0, vertical: 15.0) //Added by Ellibs
     
     UINavigationBar.appearance().tintColor = TPPConfiguration.iconColor()
     UINavigationBar.appearance().standardAppearance = TPPConfiguration.defaultAppearance()
