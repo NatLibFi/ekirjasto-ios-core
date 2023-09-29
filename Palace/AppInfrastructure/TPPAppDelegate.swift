@@ -52,12 +52,24 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
     window?.makeKeyAndVisible()
     window?.rootViewController = TPPRootTabBarController.shared()
     
+    let itemAppearance = UITabBarItemAppearance()
+    itemAppearance.normal.badgePositionAdjustment.horizontal = 3
+    itemAppearance.normal.badgePositionAdjustment.vertical = 1
+    itemAppearance.normal.badgeBackgroundColor = UIColor(named: "ColorEkirjastoRedCircle")
+    itemAppearance.normal.badgeTextAttributes = [.foregroundColor: UIColor(named: "ColorEkirjastoAlwaysBlack")!, .font: UIFont.boldPalaceFont(ofSize: 11)]
+    itemAppearance.normal.titlePositionAdjustment = UIOffset(horizontal: 5.0, vertical: 15.0)
+    itemAppearance.normal.titleTextAttributes = [.foregroundColor: TPPConfiguration.compatiblePrimaryColor(), .font: UIFont.palaceFont(ofSize: 12)]
+    
+    let appearance = UITabBarAppearance()
+    appearance.stackedLayoutAppearance = itemAppearance
+    appearance.inlineLayoutAppearance = itemAppearance
+    appearance.compactInlineLayoutAppearance = itemAppearance
+
+    UITabBar.appearance().standardAppearance = appearance
+    
     UITabBar.appearance().tintColor = TPPConfiguration.compatiblePrimaryColor() //Edited by Ebblis
     UITabBar.appearance().backgroundColor = TPPConfiguration.backgroundColor()
     UITabBarItem.appearance().setTitleTextAttributes([.font: UIFont.palaceFont(ofSize: 12)], for: .normal)
-    
-    UITabBar.appearance().unselectedItemTintColor = TPPConfiguration.compatiblePrimaryColor() //Added by Ellibs
-    UITabBarItem.appearance().titlePositionAdjustment = UIOffset(horizontal: 5.0, vertical: 15.0) //Added by Ellibs
     
     UINavigationBar.appearance().tintColor = TPPConfiguration.iconColor()
     UINavigationBar.appearance().standardAppearance = TPPConfiguration.defaultAppearance()
