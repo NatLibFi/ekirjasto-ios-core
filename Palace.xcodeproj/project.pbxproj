@@ -638,6 +638,7 @@
 		337E63BC2A28AFCE00FF7886 /* Ellibs_Catalog_Feed.json in Resources */ = {isa = PBXBuildFile; fileRef = 337E63BA2A28AF3900FF7886 /* Ellibs_Catalog_Feed.json */; };
 		3385F5ED2AC550BC00433661 /* R2LCPClient.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F287782956566800EEB1E0 /* R2LCPClient.xcframework */; };
 		3385F5EE2AC550BC00433661 /* R2LCPClient.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E7F287782956566800EEB1E0 /* R2LCPClient.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		33C1160F2AE7A914007CABEB /* EkirjastoSuomiIdentificationWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C1160E2AE7A914007CABEB /* EkirjastoSuomiIdentificationWebView.swift */; };
 		33D320E32A5BF1C90032E6E9 /* LCPPassphraseAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5AB4E25D201BD005DFF05 /* LCPPassphraseAuthenticationService.swift */; };
 		33D320E42A5BF1EE0032E6E9 /* TPPLCPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219747F626D9218400FA25DF /* TPPLCPClient.swift */; };
 		33D320E62A5BF4A60032E6E9 /* ReadiumLCP in Frameworks */ = {isa = PBXBuildFile; productRef = 33D320E52A5BF4A60032E6E9 /* ReadiumLCP */; };
@@ -1717,6 +1718,7 @@
 		3379F8212A5D792900E9945F /* EkirjastoLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EkirjastoLoginView.swift; sourceTree = "<group>"; };
 		337E63AB2A28A40800FF7886 /* TPPConfiguration+Ekirjasto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TPPConfiguration+Ekirjasto.swift"; sourceTree = "<group>"; };
 		337E63BA2A28AF3900FF7886 /* Ellibs_Catalog_Feed.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Ellibs_Catalog_Feed.json; path = Palace/EkirjastoConfig/Ellibs_Catalog_Feed.json; sourceTree = SOURCE_ROOT; };
+		33C1160E2AE7A914007CABEB /* EkirjastoSuomiIdentificationWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EkirjastoSuomiIdentificationWebView.swift; sourceTree = "<group>"; };
 		52545184217A76FF00BBC1B4 /* TPPUserNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPPUserNotifications.swift; sourceTree = "<group>"; };
 		52592BB721220A1100587288 /* TPPLocalization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPPLocalization.m; sourceTree = "<group>"; };
 		52592BBB21220A4F00587288 /* TPPLocalization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TPPLocalization.h; sourceTree = "<group>"; };
@@ -3135,6 +3137,7 @@
 				17E81F07261522B3001003C2 /* TPPRoundedButton.swift */,
 				3379F8102A5D3C4B00E9945F /* EkirjastoFacetFilterView.swift */,
 				3379F8212A5D792900E9945F /* EkirjastoLoginView.swift */,
+				33C1160E2AE7A914007CABEB /* EkirjastoSuomiIdentificationWebView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -4658,6 +4661,7 @@
 				331263D12A287F53006BA87D /* OPDS2LinkArray.swift in Sources */,
 				331263D22A287F53006BA87D /* ExtendedNavBarView.swift in Sources */,
 				331263D32A287F53006BA87D /* OPDS2Link.swift in Sources */,
+				33C1160F2AE7A914007CABEB /* EkirjastoSuomiIdentificationWebView.swift in Sources */,
 				331263D42A287F53006BA87D /* TPPSignInBusinessLogic+BookmarkSyncing.swift in Sources */,
 				331263D52A287F53006BA87D /* EmailAddress.swift in Sources */,
 				331263D62A287F53006BA87D /* TPPBookAuthor.swift in Sources */,

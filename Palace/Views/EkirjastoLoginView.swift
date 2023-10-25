@@ -11,6 +11,8 @@ import SwiftUI
 struct EkirjastoLoginView: View {
   var dismissView: () -> Void
   
+  @State var displaySuomiIdentificationWebView = false
+  
     var body: some View {
       ZStack {
         VStack {
@@ -35,7 +37,7 @@ struct EkirjastoLoginView: View {
           .clipShape(RoundedRectangle(cornerRadius: 10))
           .background(Color("ColorEkirjastoLightestGreen"))
           
-          Button(action: {self.dismissView(); self.signUp()}) {
+          Button(action: {self.signUp()}) {
             Text("Rekisteröidy palveluun").foregroundColor(Color("ColorEkirjastoButtonTextWithBackground"))
             Image("ArrowRight")
               .padding(.leading, 10)
@@ -45,13 +47,17 @@ struct EkirjastoLoginView: View {
           .clipShape(RoundedRectangle(cornerRadius: 10))
           .background(Color("ColorEkirjastoGreen"))
         }
-      }
+      }.sheet(isPresented: $displaySuomiIdentificationWebView, content: {
+        SuomiIdentificationWebView(closeWebView: {
+          displaySuomiIdentificationWebView = false
+          self.dismissView()
+        })
+      })
     }
   
   func signIn(){
-    
   }
   func signUp(){
-    
+    displaySuomiIdentificationWebView = true
   }
 }
