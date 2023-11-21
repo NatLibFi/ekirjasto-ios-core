@@ -9,6 +9,7 @@
 import Foundation
 import FirebaseCore
 import FirebaseDynamicLinks
+import GoogleSignIn
 
 @main
 class TPPAppDelegate: UIResponder, UIApplicationDelegate {
@@ -141,6 +142,11 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
       }
       return true
     }
+    
+    if GIDSignIn.sharedInstance.handle(url){
+      return true
+    }
+    
     return false
   }
   
