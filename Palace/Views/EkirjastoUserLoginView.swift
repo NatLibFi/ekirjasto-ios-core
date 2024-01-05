@@ -60,7 +60,6 @@ struct EkirjastoUserLoginView: View {
     }
   
   func sendAuthCodeGoogle(_ authCode:String){
-    
     var request = URLRequest(url:URL(string:"https://e-kirjasto.loikka.dev/v1/auth/google")!)
     request.setValue("application/json", forHTTPHeaderField: "content-type")
     let content = "{ \"code\" : \"\(authCode)\" }"
@@ -124,6 +123,7 @@ struct EkirjastoUserLoginView: View {
   }
   
   func loginApple(_ auth : ASAuthorization){
+    
     let credential = auth.credential as? ASAuthorizationAppleIDCredential
     
     sendAuthCodeApple(String(bytes: credential!.authorizationCode!.bytes, encoding: .utf8)! , String(bytes: credential!.identityToken!.bytes, encoding: .utf8)!)
