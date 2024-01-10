@@ -16,19 +16,13 @@ struct SuomiIdentificationWebView: UIViewRepresentable {
     if(account == nil){
       account = AccountsManager.shared.accounts().first
       account?.loadAuthenticationDocument(completion: { Bool in
-        //type "http://e-kirjasto.fi/authtype/ekirjasto"
-        
-        //let accounts = AccountsManager.shared.accounts()
-        
-        
         
         context.coordinator.closeWebView = closeWebView
         
         DispatchQueue.main.async {
           let authentication = account?.authenticationDocument?.authentication?.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})
           let link = authentication?.links?.first(where: {$0.rel == "tunnistus_start"})
-          let start = link//currentAccount!.authenticationDocument!.authentication!.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})!.links!.first(where: {$0.rel == "tunnistus_start"})
-          //let host = "e-kirjasto.loikka.dev"
+          let start = link
           uiView.navigationDelegate = context.coordinator
           uiView.load(URLRequest(url: URL(string: start!.href)!))
         }
@@ -39,8 +33,7 @@ struct SuomiIdentificationWebView: UIViewRepresentable {
       DispatchQueue.main.async {
         let authentication = account?.authenticationDocument?.authentication?.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})
         let link = authentication?.links?.first(where: {$0.rel == "tunnistus_start"})
-        let start = link//currentAccount!.authenticationDocument!.authentication!.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})!.links!.first(where: {$0.rel == "tunnistus_start"})
-        //let host = "e-kirjasto.loikka.dev"
+        let start = link
         uiView.navigationDelegate = context.coordinator
         uiView.load(URLRequest(url: URL(string: start!.href)!))
       }

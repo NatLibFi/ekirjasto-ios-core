@@ -14,12 +14,12 @@ import AuthenticationServices
 
 struct EkirjastoUserLoginView: View {
     
-    @State var showBrowser = false
+    @State var _loginSuomi = false
   
     var body: some View {
-      if showBrowser {
+      if _loginSuomi {
         SuomiIdentificationWebView(closeWebView: {
-          showBrowser = false
+          _loginSuomi = false
         })
       }else{
         VStack{
@@ -39,12 +39,7 @@ struct EkirjastoUserLoginView: View {
             }
           }.signInWithAppleButtonStyle(.black)
             .frame(width: 300, height: 40)
-          
-          /*Label {
-            Text("Sign in with Suomi.fi e-identification").foregroundColor(Color.white)
-          } icon: {
-            Image("Placeholder").frame(maxWidth: 10, maxHeight: 10)
-          }*/
+
           Label("Sign in with Suomi.fi e-identification",image:"").foregroundColor(Color.white).frame(height: 40).onTouchDownUp { down, value in
             if !down {
               loginSuomi()
@@ -119,7 +114,7 @@ struct EkirjastoUserLoginView: View {
   }
   
   func loginSuomi(){
-    showBrowser = true
+    _loginSuomi = true
   }
   
   func loginApple(_ auth : ASAuthorization){
