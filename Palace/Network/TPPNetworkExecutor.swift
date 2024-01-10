@@ -337,6 +337,42 @@ extension TPPNetworkExecutor {
     }
   }
 
+  func authenticateWithToken(_ token: String){
+    let currentAccount = AccountsManager.shared.currentAccount
+    let authenticationDocument = currentAccount?.authenticationDocument
+    let authentication = authenticationDocument?.authentication?.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})
+    
+    let link = authentication?.links?.first(where: {$0.rel == "authenticate"})
+    
+    var request = URLRequest(url: URL(string:link!.href)!)
+    request.httpMethod = "POST"
+    print("token \(token)")
+    request.setValue(
+      "Bearer \(token)",
+      forHTTPHeaderField: "Authorization"
+    )
+    URLSession.shared.dataTask(with: request){ data, response, error in
+      print("auth error: \(error.debugDescription))")
+      print("auth result: \(String(bytes: data!.bytes, encoding: .utf8))")
+      
+      if(data != nil){
+        let json = try? JSONSerialization.jsonObject(with: data!)
+        let jsonRoot = json as? [String: Any]
+        let accessToken = jsonRoot!["access_token"] as! String
+        
+        let sharedAccount = TPPUserAccount.sharedAccount()
+        
+        
+        sharedAccount.setAuthToken(accessToken,barcode: nil, pin: nil, expirationDate: nil)
+        
+      }
+    }.resume()
+    
+    
+    //let (data, _) = try await URLSession.shared.data(for: request)
+    
+  }
+  
   func executeTokenRefresh(username: String, password: String, completion: @escaping (Result<TokenResponse, Error>) -> Void) {
     guard let tokenURL = TPPUserAccount.sharedAccount().authDefinition?.tokenURL else {
       Log.error(#file, "Unable to refresh token, missing credentials")

@@ -12,24 +12,40 @@ struct SuomiIdentificationWebView: UIViewRepresentable {
   var closeWebView : (() -> Void)?
   
   func updateUIView(_ uiView: WKWebView, context: Context) {
-    let currentAccount = AccountsManager.shared.currentAccount
-    //type "http://e-kirjasto.fi/authtype/ekirjasto"
-    
-    let accounts = AccountsManager.shared.accounts()
-    
-    let authentication = currentAccount?.authenticationDocument?.authentication?.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})
-    
-    let link = authentication?.links?.first(where: {$0.rel == "tunnistus_start"})
-    
-    let start = link//currentAccount!.authenticationDocument!.authentication!.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})!.links!.first(where: {$0.rel == "tunnistus_start"})
-    //let host = "e-kirjasto.loikka.dev"
-    
-    
-    context.coordinator.closeWebView = closeWebView
-    uiView.navigationDelegate = context.coordinator
-    DispatchQueue.main.async {
-      uiView.load(URLRequest(url: URL(string: start!.href)!))
+    var account = AccountsManager.shared.currentAccount
+    if(account == nil){
+      account = AccountsManager.shared.accounts().first
+      account?.loadAuthenticationDocument(completion: { Bool in
+        //type "http://e-kirjasto.fi/authtype/ekirjasto"
+        
+        //let accounts = AccountsManager.shared.accounts()
+        
+        
+        
+        context.coordinator.closeWebView = closeWebView
+        
+        DispatchQueue.main.async {
+          let authentication = account?.authenticationDocument?.authentication?.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})
+          let link = authentication?.links?.first(where: {$0.rel == "tunnistus_start"})
+          let start = link//currentAccount!.authenticationDocument!.authentication!.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})!.links!.first(where: {$0.rel == "tunnistus_start"})
+          //let host = "e-kirjasto.loikka.dev"
+          uiView.navigationDelegate = context.coordinator
+          uiView.load(URLRequest(url: URL(string: start!.href)!))
+        }
+      })
+    }else{
+      context.coordinator.closeWebView = closeWebView
+      
+      DispatchQueue.main.async {
+        let authentication = account?.authenticationDocument?.authentication?.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})
+        let link = authentication?.links?.first(where: {$0.rel == "tunnistus_start"})
+        let start = link//currentAccount!.authenticationDocument!.authentication!.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})!.links!.first(where: {$0.rel == "tunnistus_start"})
+        //let host = "e-kirjasto.loikka.dev"
+        uiView.navigationDelegate = context.coordinator
+        uiView.load(URLRequest(url: URL(string: start!.href)!))
+      }
     }
+    
   }
   
   func makeCoordinator() -> Coordinator {
@@ -46,16 +62,18 @@ struct SuomiIdentificationWebView: UIViewRepresentable {
     var closeWebView : (() -> Void)?
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
-      let currentAccount = AccountsManager.shared.currentAccount
-      let authentication = currentAccount?.authenticationDocument?.authentication?.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})
-      
-      let link = authentication?.links?.first(where: {$0.rel == "tunnistus_finish"})
-      let finish = link//currentAccount!.authenticationDocument!.authentication!.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})!.links!.first(where: {$0.rel == "tunnistus_finish"})
       
       if let urlString = navigationResponse.response.url?.absoluteString {
-        if urlString == finish!.href {
+        if urlString.contains("saml2acs") {
+          
+          
           webView.configuration.websiteDataStore.httpCookieStore.getAllCookies() { (cookies) in
-            for cookie in cookies {
+            let token = cookies.first(where: {$0.name == "SESSION_FE54"})?.value
+            let exp = cookies.first(where: {$0.name == "SESSION_FE54_EXP"})?.value
+            
+            TPPNetworkExecutor.shared.authenticateWithToken(token!)
+
+            /*for cookie in cookies {
               switch cookie.name {
               case "SESSION_FE54":
                 print("TOKEN: \(cookie.value)")
@@ -64,7 +82,7 @@ struct SuomiIdentificationWebView: UIViewRepresentable {
               default:
                 break
               }
-            }
+            }*/
           }
           self.closeWebView?()
         }
