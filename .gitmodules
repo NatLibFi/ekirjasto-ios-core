@@ -12,5 +12,5 @@
 	url = https://github.com/ThePalaceProject/mobile-bookmark-spec.git
 [submodule "ios-audiobooktoolkit"]
 	path = ios-audiobooktoolkit
-	url = ssh://git.lingsoft.fi/home/git/nypl_audiobook_toolkit.git
-	branch = merge-upstream
+	url = https://github.com/NatLibFi/ekirjasto-ios-audiotoolkit
+	branch = main
