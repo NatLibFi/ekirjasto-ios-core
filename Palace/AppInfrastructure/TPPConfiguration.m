@@ -1,5 +1,4 @@
 #import "TPPConfiguration.h"
-#import "TPPAppDelegate.h"
 
 #import "UILabel+NYPLAppearanceAdditions.h"
 #import "UIButton+NYPLAppearanceAdditions.h"
@@ -34,7 +33,7 @@
 + (UIColor *)backgroundColor
 {
   if (@available(iOS 13, *)) {
-    return [UIColor colorNamed: @"ColorBackground"];
+    return [UIColor colorNamed: @"ColorEkirjastoBackground"]; //Edited by Ellibs
   }
   return [UIColor colorWithWhite:250/255.0 alpha:1.0];
 }

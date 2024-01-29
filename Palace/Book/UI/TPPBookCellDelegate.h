@@ -1,4 +1,4 @@
-@import NYPLAudiobookToolkit;
+@import PalaceAudiobookToolkit;
 
 #import "TPPBookDownloadFailedCell.h"
 #import "TPPBookDownloadingCell.h"
@@ -14,5 +14,6 @@ shared cover registry, shared download center, et cetera. */
 
 + (instancetype)sharedDelegate;
 @property (nonatomic) TPPBook *book;
+@property (nonatomic) bool isSyncing;
 
 @end

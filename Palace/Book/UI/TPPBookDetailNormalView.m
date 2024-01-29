@@ -28,8 +28,8 @@ typedef NS_ENUM (NSInteger, NYPLProblemReportButtonState) {
   if(!self) return nil;
   
   self.messageLabel = [[UILabel alloc] init];
-  self.messageLabel.font = [UIFont customFontForTextStyle:UIFontTextStyleBody];
-  self.messageLabel.textColor = [TPPConfiguration backgroundColor];
+  self.messageLabel.font = [UIFont palaceFontOfSize: 18]; //Edited by Ellibs
+  self.messageLabel.textColor = [TPPConfiguration ekirjastoBlack]; //Edited by Ellibs
   self.messageLabel.numberOfLines = 0;
   self.messageLabel.textAlignment = NSTextAlignmentCenter;
   [self addSubview:self.messageLabel];
@@ -57,16 +57,24 @@ typedef NS_ENUM (NSInteger, NYPLProblemReportButtonState) {
   //Inner drop-shadow
   CGRect bounds = [self bounds];
   CGContextRef context = UIGraphicsGetCurrentContext();
+  
+  UIGraphicsPushContext(context); //Added By Ellibs
+  CGContextSetFillColorWithColor(context, [TPPConfiguration backgroundColor].CGColor); //Added By Ellibs
+  CGContextFillRect(context, rect); //Added By Ellibs
+  UIGraphicsPopContext(); //Added By Ellibs
 
   CGMutablePathRef visiblePath = CGPathCreateMutable();
   CGPathMoveToPoint(visiblePath, NULL, bounds.origin.x, bounds.origin.y);
-  CGPathAddLineToPoint(visiblePath, NULL, bounds.origin.x + bounds.size.width, bounds.origin.y);
-  CGPathAddLineToPoint(visiblePath, NULL, bounds.origin.x + bounds.size.width, bounds.origin.y + bounds.size.height);
-  CGPathAddLineToPoint(visiblePath, NULL, bounds.origin.x, bounds.origin.y + bounds.size.height);
-  CGPathAddLineToPoint(visiblePath, NULL, bounds.origin.x, bounds.origin.y);
+  CGPathAddLineToPoint(visiblePath, NULL, bounds.origin.x + bounds.size.width - 20, bounds.origin.y); //Edited by Ellibs
+  CGPathAddLineToPoint(visiblePath, NULL, bounds.origin.x + bounds.size.width - 20, bounds.origin.y + bounds.size.height); //Edited by Ellibs
+  CGPathAddLineToPoint(visiblePath, NULL, bounds.origin.x + 20, bounds.origin.y + bounds.size.height); //Edited by Ellibs
+  CGPathAddLineToPoint(visiblePath, NULL, bounds.origin.x + 20, bounds.origin.y); //Edited by Ellibs
   CGPathCloseSubpath(visiblePath);
   
-  UIColor *aColor = [TPPConfiguration mainColor];
+  UIColor *aColor = [TPPConfiguration ekirjastoYellow]; //Edited by Ellibs
+  if((_state != TPPBookButtonsStateCanBorrow ) && (_state != TPPBookButtonsStateDownloadNeeded) && (_state != TPPBookButtonsStateDownloadSuccessful) && (_state != TPPBookButtonsStateUsed)) {
+    aColor =  [TPPConfiguration ekirjastoLightGrey];
+  } //Added by Ellibs
   [aColor setFill];
   CGContextAddPath(context, visiblePath);
   CGContextFillPath(context);
@@ -78,13 +86,14 @@ typedef NS_ENUM (NSInteger, NYPLProblemReportButtonState) {
   CGContextAddPath(context, visiblePath);
   CGContextClip(context);
   
-  aColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.5f];
-  CGContextSaveGState(context);
-  CGContextSetShadowWithColor(context, CGSizeMake(0.0f, 0.0f), 5.0f, [aColor CGColor]);
-  [aColor setFill];
-  CGContextSaveGState(context);
-  CGContextAddPath(context, path);
-  CGContextEOFillPath(context);
+  //Disable by Ellibs
+  //aColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.5f];
+  //CGContextSaveGState(context);
+  //CGContextSetShadowWithColor(context, CGSizeMake(0.0f, 0.0f), 5.0f, [aColor CGColor]);
+  //[aColor setFill];
+  //CGContextSaveGState(context);
+  //CGContextAddPath(context, path);
+  //CGContextEOFillPath(context);
   CGPathRelease(path);
   CGPathRelease(visiblePath);
 }

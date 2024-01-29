@@ -8,7 +8,7 @@
 
 import UIKit
 
-private let TPPRoundedButtonPadding: CGFloat = 6.0
+private let TPPRoundedButtonPadding: CGFloat = 10.0 //Edited by Ellibs
 
 @objc enum TPPRoundedButtonType: Int {
   case normal
@@ -28,16 +28,18 @@ private let TPPRoundedButtonPadding: CGFloat = 6.0
     }
   }
   private var isFromDetailView: Bool
+  private var isReturnButton: Bool? = false
   
   // UI Components
   private let label: UILabel = UILabel()
   private let iconView: UIImageView = UIImageView()
   
   // Initializer
-  init(type: TPPRoundedButtonType, endDate: Date?, isFromDetailView: Bool) {
+  init(type: TPPRoundedButtonType, endDate: Date?, isFromDetailView: Bool, isReturnButton: Bool?) {
     self.type = type
     self.endDate = endDate
     self.isFromDetailView = isFromDetailView
+    self.isReturnButton = isReturnButton
     
     super.init(frame: CGRect.zero)
     
@@ -67,9 +69,10 @@ private let TPPRoundedButtonPadding: CGFloat = 6.0
   // MARK: - UI
   private func setupUI() {
     titleLabel?.font = UIFont.palaceFont(ofSize: 14)
-    layer.borderColor = tintColor.cgColor
+    layer.borderColor = UIColor(named: "ColorEkirjastoGreen")?.cgColor
     layer.borderWidth = 1
     layer.cornerRadius = 3
+    layer.backgroundColor = UIColor(named: "ColorEkirjastoLightestGreen")?.cgColor //Added by Ellibs
     
     label.textColor = self.tintColor
     label.font = UIFont.palaceFont(ofSize: 9)
@@ -106,10 +109,18 @@ private let TPPRoundedButtonPadding: CGFloat = 6.0
   }
   
   private func updateColors() {
-    let color: UIColor = self.isEnabled ? self.tintColor : UIColor.gray
-    self.layer.borderColor = color.cgColor
-    self.label.textColor = color
-    self.iconView.tintColor = color
+    var color: UIColor = self.isEnabled ? self.tintColor : UIColor.gray
+    self.layer.cornerRadius = 2
+    if(self.isReturnButton == true) {
+      self.layer.borderWidth = 0.8
+      self.layer.borderColor = UIColor(named: "ColorEkirjastoGreen")?.cgColor
+      self.backgroundColor = UIColor.clear
+    } else {
+      self.layer.borderColor = UIColor(named: "ColorEkirjastoGreen")?.cgColor
+      color = UIColor(named: "ColorEkirjastoButtonTextWithBackground")!
+      self.iconView.tintColor = color
+      self.label.textColor = color
+    }
     setTitleColor(color, for: .normal)
   }
   
@@ -153,8 +164,8 @@ private let TPPRoundedButtonPadding: CGFloat = 6.0
 }
 
 extension TPPRoundedButton {
-  @objc (initWithType:isFromDetailView:)
-  convenience init(type: TPPRoundedButtonType, isFromDetailView: Bool) {
-    self.init(type: type, endDate: nil, isFromDetailView: isFromDetailView)
+  @objc (initWithType:isFromDetailView:isReturnButton:)
+  convenience init(type: TPPRoundedButtonType, isFromDetailView: Bool, isReturnButton: Bool) {
+    self.init(type: type, endDate: nil, isFromDetailView: isFromDetailView, isReturnButton: isReturnButton)
   }
 }

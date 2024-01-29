@@ -1,0 +1,56 @@
+{
+  "catalogs": [
+    {
+      "links": [
+        {
+          "href": "https://circulation-beta.ellibs.com/ellibs-test/groups/",
+          "type": "application/atom+xml;profile=opds-catalog;kind=acquisition",
+          "rel": "http://opds-spec.org/catalog"
+        },
+        {
+          "href": "https://circulation-beta.ellibs.com/ellibs-test/groups/",
+          "rel": "start"
+        },
+        {
+          "href": "https://circulation-beta.ellibs.com/ellibs-test/groups/",
+          "rel": "self"
+        },
+        {
+          "href": "https://circulation-beta.ellibs.com/ellibs-test/authentication_document",
+          "type": "application/vnd.opds.authentication.v1.0+json"
+        },
+        {
+          "href": "https://openebooks.net/",
+          "type": "text/html",
+          "rel": "alternate"
+        },
+        {
+            "href": "https://librarysimplified.org/licenses/",
+            "type": "text/html",
+            "rel": "license"
+        },
+        {
+          "href": "mailto:support@ellibs.com",
+          "rel": "help"
+        }
+      ],
+      "metadata": {
+        "updated": "2023-02-27T17:51:51Z",
+        "description": "Ellibs testikokoelma",
+        "id": "urn:uuid:e1a01c16-04e7-4781-89fd-b442dd1be001",
+        "title": "Ellibs testikokoelma"
+      }
+    }
+  ],
+  "links": [
+      {
+        "href": "http://admin.librarypilot.com/",
+        "type": "application/opds+json",
+        "rel": "self"
+      }
+  ],
+  "metadata": {
+    "title": "Ellibs-Test",
+    "adobe_vendor_id": "NYPL"
+  }
+}

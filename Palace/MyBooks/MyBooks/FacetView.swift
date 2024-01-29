@@ -24,8 +24,8 @@ struct FacetView: View {
       .actionSheet(isPresented: $showAlert) { alert }
       .font(Font(uiFont: UIFont.palaceFont(ofSize: 12)))
       dividerView
-      accountLogoView
-        .horizontallyCentered()
+      //accountLogoView
+      //  .horizontallyCentered() //Disabled by Ellibs
     }
   }
 
@@ -38,15 +38,22 @@ struct FacetView: View {
       showAlert = true
     }) {
       Text(model.activeSort.localizedString)
+        .font(Font(uiFont: UIFont.boldPalaceFont(ofSize: 13)))
+      Image("ArrowDown")
+        .resizable()
+        .scaledToFill()
+        .frame(width: 19, height: 19)
+        .foregroundColor(Color("ColorEkirjastoGreen"))
+        .padding(EdgeInsets(top: 1, leading: -8, bottom: -1, trailing: 8))
     }
-    .frame(width: 65, height: 30)
-    .border(Color(TPPConfiguration.mainColor()), width: 1)
-    .cornerRadius(2)
+    //.frame(width: 65, height: 30)
+    //.border(Color(TPPConfiguration.mainColor()), width: 1)
+    //.cornerRadius(2)
   }
   
   private var dividerView: some View {
     Rectangle()
-      .fill(Color(UIColor.lightGray.withAlphaComponent(0.9)))
+      .fill(Color("ColorEkirjastoLightestGreen"))
       .frame(height: 1.0)
       .edgesIgnoringSafeArea(.horizontal)
   }
@@ -75,7 +82,7 @@ struct FacetView: View {
         model.showAccountScreen = true
       } label: {
           HStack {
-            Image(uiImage: account.logo)
+            Image(uiImage: model.logo ?? UIImage())
               .resizable()
               .aspectRatio(contentMode: .fit)
               .square(length: 50)

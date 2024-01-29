@@ -64,8 +64,9 @@
     
     if ([book defaultBookContentType] == TPPBookContentTypeAudiobook) {
       TPPContentBadgeImageView *badge = [[TPPContentBadgeImageView alloc] initWithBadgeImage:TPPBadgeImageAudiobook];
-      [TPPContentBadgeImageView pinWithBadge:badge toView:button];
+      [TPPContentBadgeImageView pinWithBadge:badge toView:button isLane:YES];
       button.accessibilityLabel = [@"Audiobook: " stringByAppendingString:book.title];
+      button.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 6, 0);
     }
   }];
   

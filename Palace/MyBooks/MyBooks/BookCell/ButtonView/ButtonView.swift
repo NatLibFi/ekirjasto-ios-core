@@ -33,7 +33,8 @@ struct ButtonView: View {
     }
     .font(Font(uiFont: UIFont.palaceFont(ofSize: 14)))
     .fixedSize()
-    .buttonStyle(AnimatedButton(backgroundColor: backgroundFill))
+    .foregroundColor(indicatorDate != nil ? Color("ColorEkirjastoButtonTextWithBackground") : Color("ColorEkirjastoLabel"))
+    .buttonStyle(AnimatedButton(backgroundColor: indicatorDate != nil ? Color("ColorEkirjastoLightestGreen") : backgroundFill))
     .accessibilityLabel(accessiblityString)
   }
   
@@ -43,10 +44,11 @@ struct ButtonView: View {
         ImageProviders.MyBooksView.clock
           .resizable()
           .square(length: 14)
+          .foregroundColor(Color("ColorEkirjastoButtonTextWithBackground"))
         Text(endDate)
-          .font(.system(size: 9))
+          .font(Font(uiFont: UIFont.palaceFont(ofSize: 9)))
+          .foregroundColor(Color("ColorEkirjastoButtonTextWithBackground"))
       }
-      .foregroundColor(Color(TPPConfiguration.mainColor()))
     }
   }
 }
@@ -61,7 +63,7 @@ struct AnimatedButton: ButtonStyle {
       .background(backgroundColor)
       .overlay(
         RoundedRectangle(cornerRadius: 3)
-          .stroke(backgroundColor ?? Color(TPPConfiguration.mainColor()), lineWidth: 1)
+          .stroke(Color("ColorEkirjastoGreen"), lineWidth: 1)
       )
       .opacity(configuration.isPressed ? 0.5 : 1.0)
   }

@@ -15,6 +15,8 @@
   if(!self) return nil;
   
   self.tabBarItem.image = [UIImage imageNamed:@"Holds"];
+  self.tabBarItem.selectedImage = [UIImage imageNamed:@"HoldsSelected"];
+  self.tabBarItem.imageInsets = UIEdgeInsetsMake(8.0, 0.0, -8.0, 0.0);
   [vc updateBadge];
 
 #ifdef SIMPLYE

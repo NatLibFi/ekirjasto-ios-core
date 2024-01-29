@@ -23,7 +23,7 @@ struct NormalBookCell: View {
         infoView
         Spacer()
         buttons
-      }
+      }.padding(.leading, 8)
       .alert(item: $model.showAlert) { alert in
         Alert(
           title: Text(alert.title),
@@ -35,7 +35,7 @@ struct NormalBookCell: View {
       Spacer()
     }
     .multilineTextAlignment(.leading)
-    .padding(5)
+    .padding(EdgeInsets(top: 0, leading: 5, bottom: 5, trailing: 5))
     .frame(height: cellHeight)
     .onDisappear { model.isLoading = false }
   }
@@ -44,7 +44,9 @@ struct NormalBookCell: View {
     ZStack {
       Image(uiImage: model.image)
         .resizable()
-        .aspectRatio(contentMode: .fit)
+        .scaledToFit()
+        .frame(height: 125, alignment: .top)
+        .padding(.top, 10)
       audiobookIndicator
     }
     .frame(width: imageViewWidth)
@@ -55,9 +57,12 @@ struct NormalBookCell: View {
     if model.book.defaultBookContentType == .audiobook {
       ImageProviders.MyBooksView.audiobookBadge
         .resizable()
-        .frame(width: 24, height: 24)
-        .background(Color(TPPConfiguration.palaceRed()))
+        .frame(width: 30, height: 30)
+        .background(Color(UIColor(named: "ColorEkirjastoIcon")!)) //Edited by Ellibs
+        .border(width: 1.5, edges: [.top, .bottom, .leading, .trailing], color: Color.white) //added by Ellibs
         .bottomrRightJustified()
+        .padding(.trailing, -6)
+        .padding(.bottom, 32)
     }
   }
   
@@ -70,7 +75,7 @@ struct NormalBookCell: View {
         .accessibilityLabel(model.book.defaultBookContentType == .audiobook ? "\(model.book.title). Audiobook." : model.book.title)
       Text(model.authors)
         .font(Font(uiFont: UIFont.palaceFont(ofSize: 12)))
-    }
+    }.padding(.leading, 10)
   }
   
   @ViewBuilder private var buttons: some View {
@@ -84,7 +89,7 @@ struct NormalBookCell: View {
         .disabled(type.isDisabled)
         .opacity(type.isDisabled ? 0.5 : 1.0)
       }
-    }
+    }.padding(.leading, 10)
   }
   
   @ViewBuilder private var unreadImageView: some View {
@@ -95,6 +100,7 @@ struct NormalBookCell: View {
           .foregroundColor(Color(TPPConfiguration.accentColor()))
         Spacer()
       }
-      .opacity(model.showUnreadIndicator ? 1.0 : 0.0)
+      //.opacity(model.showUnreadIndicator ? 1.0 : 0.0)
+      .opacity(0.0)
   }
 }

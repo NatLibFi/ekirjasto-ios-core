@@ -3,7 +3,6 @@
 #import "TPPCatalogFeedViewController.h"
 #import "TPPCatalogLane.h"
 #import "TPPCatalogLaneCell.h"
-#import "TPPMyBooksDownloadCenter.h"
 #import "TPPMyBooksDownloadInfo.h"
 #import "TPPRootTabBarController.h"
 #import "TPPSession.h"
@@ -44,7 +43,11 @@
   self.title = book.title;
   UILabel *label = [[UILabel alloc] init];
   self.navigationItem.titleView = label;
-  self.navigationItem.backButtonTitle = NSLocalizedString(@"Back", @"Back Button");
+  //self.navigationItem.backButtonTitle = NSLocalizedString(@"Back", @"Back Button"); //Disabled by Ellibs
+  NSDictionary *titleAttributes = @{NSForegroundColorAttributeName:[TPPConfiguration compatiblePrimaryColor]}; //Added by Ellibs
+  UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", @"Back Button")  style:UIBarButtonItemStylePlain target:nil action:nil]; //Added by Ellibs
+  [backButton setTitleTextAttributes:titleAttributes forState:UIControlStateNormal]; //Added by Ellibs
+  self.navigationItem.backBarButtonItem = backButton; //Added by Ellibs
   self.bookDetailView = [[TPPBookDetailView alloc] initWithBook:self.book
                                                         delegate:self];
   self.bookDetailView.state = [[TPPBookRegistry shared]
@@ -138,15 +141,15 @@
 - (void)didSelectCancelDownloadFailedForBookDetailView:
 (__attribute__((unused)) TPPBookDetailView *)detailView
 {
-  [[TPPMyBooksDownloadCenter sharedDownloadCenter]
-   cancelDownloadForBookIdentifier:self.book.identifier];
+  [[MyBooksDownloadCenter shared]
+   cancelDownloadFor:self.book.identifier];
 }
   
 - (void)didSelectCancelDownloadingForBookDetailView:
 (__attribute__((unused)) TPPBookDetailView *)detailView
 {
-  [[TPPMyBooksDownloadCenter sharedDownloadCenter]
-   cancelDownloadForBookIdentifier:self.book.identifier];
+  [[MyBooksDownloadCenter shared]
+   cancelDownloadFor:self.book.identifier];
 }
 
 #pragma mark - TPPCatalogLaneCellDelegate
@@ -293,11 +296,11 @@
 - (void)myBooksDidChange
 {
   [TPPMainThreadRun asyncIfNeeded:^{
-    __auto_type myBooks = [TPPMyBooksDownloadCenter sharedDownloadCenter];
+    __auto_type myBooks = [MyBooksDownloadCenter shared];
     __auto_type bookID = self.book.identifier;
-    TPPMyBooksDownloadRightsManagement rights = [myBooks downloadInfoForBookIdentifier:bookID].rightsManagement;
-    self.bookDetailView.downloadProgress = [myBooks downloadProgressForBookIdentifier:bookID];
-    self.bookDetailView.downloadStarted = (rights != TPPMyBooksDownloadRightsManagementUnknown);
+    MyBooksDownloadRightsManagement rights = [myBooks downloadInfoForBookIdentifier:bookID].rightsManagement;
+    self.bookDetailView.downloadProgress = [myBooks downloadProgressFor:bookID];
+    self.bookDetailView.downloadStarted = (rights != MyBooksDownloadRightsManagementUnknown);
   }];
 }
 

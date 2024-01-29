@@ -23,7 +23,10 @@ struct Strings {
   }
 
   struct Error {
+    static let loginFailedErrorTitle = NSLocalizedString("Login Failed", comment: "")
     static let loadFailedError = NSLocalizedString("The page could not load due to a conection error.", comment: "")
+    static let invalidCredentialsErrorTitle = NSLocalizedString("Invalid Credentials", comment: "")
+    static let invalidCredentialsErrorMessage = NSLocalizedString("Please check your username and password and try again.", comment: "")
     static let unknownRequestError = NSLocalizedString("An unknown error occurred. Please check your connection or try again later.", comment: "A generic error message for when a network request fails")
     static let connectionFailed = NSLocalizedString(
       "Connection Failed",
@@ -153,6 +156,9 @@ struct Strings {
   
   struct TPPEPUBViewController {
     static let readerSettings = NSLocalizedString("Reader settings", comment: "Reader settings")
+    static let emptySearchView = NSLocalizedString("There are no results", comment: "No search results available.")
+    static let endOfResults = NSLocalizedString("Reached the end of the results.", comment: "Reached the end of the results."
+)
   }
   
   struct TPPLastReadPositionSynchronizer {
@@ -265,5 +271,20 @@ struct Strings {
     static let removeReservationMessage = NSLocalizedString("Are you sure you want ot remove \"%@\" from your reservations? You will no longer be in line for this book.", comment: "Message shown in an alert to the user prior to returning a reserved title.")
     static let downloading = NSLocalizedString("Downloading", comment: "")
     static let downloadFailedMessage = NSLocalizedString("The download could not be completed.", comment: "")
+  }
+  
+  struct TPPAccountRegistration {
+    static let doesUserHaveLibraryCard = NSLocalizedString("Don't have a library card?", comment: "Title for registration. Asking the user if they already have a library card.")
+    static let geolocationInstructions = NSLocalizedString("The Palace App requires a one-time location check in order to verify your library service area. Once you choose \"Create Card\", please select \"Allow Once\" in the popup so we can verify this information.", comment: "Body for registration. Explaining the reason for requesting the user's location and instructions for how to provide permission.")
+    static let createCard = NSLocalizedString("Create Card", comment: "")
+    static let deniedLocationAccessMessage = NSLocalizedString("The Palace App requires a one-time location check in order to verify your library service area. You have disabled location services for this app. To enable, please select the 'Open Settings' button below then continue with card creation.", comment: "Registration message shown to user when location access has been denied.")
+    static let deniedLocationAccessMessageBoldText = NSLocalizedString("You have disabled location services for this app.",comment: "Registration message shown to user when location access has been denied.")
+    static let openSettings = NSLocalizedString("Open Settings", comment: "")
+  }
+  
+  struct MyDownloadCenter {
+    static let borrowFailed = NSLocalizedString("Borrow Failed", comment: "")
+    static let borrowFailedMessage = NSLocalizedString("Borrowing %@ could not be completed.", comment: "")
+    static let loanAlreadyExistsAlertMessage = NSLocalizedString("You have already checked out this loan. You may need to refresh your My Books list to download the title.", comment: "")
   }
 }

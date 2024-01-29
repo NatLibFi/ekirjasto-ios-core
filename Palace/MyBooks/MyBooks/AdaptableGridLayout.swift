@@ -21,7 +21,7 @@ struct AdaptableGridLayout <Content: View>: View {
     } else {
       VStack(alignment: .leading, spacing: 10) {
         content()
-      }
+      }.padding(.top, 15)
     }
   }
 }

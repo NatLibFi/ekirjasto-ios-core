@@ -101,6 +101,7 @@ fileprivate let nullString = "null"
   case clientSideUserInterruption = 911
   case problemDocAvailable = 912
   case malformedURL = 913
+  case invalidOrNoHTTPResponse = 914
 
   // DRM
   case epubDecodingError = 1000
@@ -146,8 +147,6 @@ fileprivate let nullString = "null"
     guard Bundle.main.applicationEnvironment == .production else { return }
     
     #if FEATURE_CRASH_REPORTING
-    FirebaseApp.configure()
-
     if let deviceID = UIDevice.current.identifierForVendor?.uuidString {
       Crashlytics.crashlytics().setCustomValue(deviceID, forKey: "PalaceDeviceID")
     }

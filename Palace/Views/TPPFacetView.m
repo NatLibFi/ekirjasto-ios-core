@@ -92,7 +92,7 @@ CGFloat const toolbarHeight = 40;
                        stringByAppendingString:@":"];
     [self.linearView addSubview:groupLabel];
 
-    TPPRoundedButton *const button = [[TPPRoundedButton alloc] initWithType:TPPRoundedButtonTypeNormal isFromDetailView:NO];
+    ArrowDownButton *const button = [[ArrowDownButton alloc] initWithType:ArrowDownButtonTypeNormal isFromDetailView:NO];
     button.tag = groupIndex;
     button.titleLabel.font = [UIFont palaceFontOfSize:12];
     if([self.dataSource facetView:self isActiveFacetForFacetGroupAtIndex:groupIndex]) {

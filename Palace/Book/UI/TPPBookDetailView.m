@@ -44,24 +44,26 @@
 @property (nonatomic) TPPBookDetailDownloadingView *downloadingView;
 @property (nonatomic) TPPBookDetailNormalView *normalView;
 
-@property (nonatomic) UILabel *summarySectionLabel;
+@property (nonatomic) EkirjastoRoundedLabel *summarySectionLabel; //Edited by Ellibs
 @property (nonatomic) UITextView *summaryTextView;
 @property (nonatomic) NSLayoutConstraint *textHeightConstraint;
 @property (nonatomic) UIButton *readMoreLabel;
 
-@property (nonatomic) UILabel *infoSectionLabel;
+@property (nonatomic) EkirjastoRoundedLabel *infoSectionLabel;
 @property (nonatomic) UILabel *publishedLabelKey;
 @property (nonatomic) UILabel *publisherLabelKey;
 @property (nonatomic) UILabel *categoriesLabelKey;
 @property (nonatomic) UILabel *distributorLabelKey;
 @property (nonatomic) UILabel *bookFormatLabelKey;
 @property (nonatomic) UILabel *narratorsLabelKey;
+@property (nonatomic) UILabel *bookDurationLabelKey;
 @property (nonatomic) UILabel *publishedLabelValue;
 @property (nonatomic) UILabel *publisherLabelValue;
 @property (nonatomic) UILabel *categoriesLabelValue;
 @property (nonatomic) UILabel *distributorLabelValue;
 @property (nonatomic) UILabel *bookFormatLabelValue;
 @property (nonatomic) UILabel *narratorsLabelValue;
+@property (nonatomic) UILabel *bookDurationLabelValue;
 
 @property (nonatomic) TPPBookDetailTableView *footerTableView;
 
@@ -72,8 +74,8 @@
 
 static CGFloat const SubtitleBaselineOffset = 10;
 static CGFloat const AuthorBaselineOffset = 12;
-static CGFloat const CoverImageAspectRatio = 0.8;
-static CGFloat const CoverImageMaxWidth = 160.0;
+static CGFloat const CoverImageAspectRatio = 0.9;
+static CGFloat const CoverImageMaxWidth = 130;
 static CGFloat const TabBarHeight = 80.0;
 static CGFloat const SampleToolbarHeight = 80.0;
 static CGFloat const TitleLabelMinimumWidth = 185.0;
@@ -145,12 +147,22 @@ static NSString *DetailHTMLTemplate = nil;
   [self.containerView addSubview:self.distributorLabelKey];
   [self.containerView addSubview:self.bookFormatLabelKey];
   [self.containerView addSubview:self.narratorsLabelKey];
+
+  if (self.book.isAudiobook) {
+    [self.containerView addSubview:self.bookDurationLabelKey];
+  }
+
   [self.containerView addSubview:self.publishedLabelValue];
   [self.containerView addSubview:self.publisherLabelValue];
   [self.containerView addSubview:self.categoriesLabelValue];
   [self.containerView addSubview:self.distributorLabelValue];
   [self.containerView addSubview:self.bookFormatLabelValue];
   [self.containerView addSubview:self.narratorsLabelValue];
+  
+  if (self.book.isAudiobook) {
+    [self.containerView addSubview:self.bookDurationLabelValue];
+  }
+  
   [self.containerView addSubview:self.footerTableView];
   [self.containerView addSubview:self.bottomFootnoteSeparator];
   
@@ -170,13 +182,13 @@ static NSString *DetailHTMLTemplate = nil;
 
 - (void)updateFonts
 {
-  self.titleLabel.font = [UIFont customFontForTextStyle:UIFontTextStyleHeadline];
-  self.subtitleLabel.font = [UIFont customFontForTextStyle:UIFontTextStyleCaption2];
+  self.titleLabel.font = [UIFont palaceFontOfSize:20]; //Edited by Ellibs
+  self.subtitleLabel.font = [UIFont palaceFontOfSize:18]; //Edited by Ellibs
   self.audiobookLabel.font = [UIFont customFontForTextStyle:UIFontTextStyleCaption2];
-  self.authorsLabel.font = [UIFont customFontForTextStyle:UIFontTextStyleCaption2];
+  self.authorsLabel.font = [UIFont palaceFontOfSize:18]; //Edited by Ellibs
   self.readMoreLabel.titleLabel.font = [UIFont palaceFontOfSize:14];
-  self.summarySectionLabel.font = [UIFont customBoldFontForTextStyle:UIFontTextStyleCaption1];
-  self.infoSectionLabel.font = [UIFont customBoldFontForTextStyle:UIFontTextStyleCaption1];
+  self.summarySectionLabel.font = [UIFont palaceFontOfSize:14]; //Edited by Ellibs
+  self.infoSectionLabel.font = [UIFont palaceFontOfSize:14]; //Edited by Ellibs
   [self.footerTableView reloadData];
 }
 
@@ -194,9 +206,9 @@ static NSString *DetailHTMLTemplate = nil;
 
 - (void)createBookDescriptionViews
 {
-  self.summarySectionLabel = [[UILabel alloc] init];
+  self.summarySectionLabel = [[EkirjastoRoundedLabel alloc] init]; //Edited by Ellibs
   self.summarySectionLabel.text = NSLocalizedString(@"Description", nil);
-  self.infoSectionLabel = [[UILabel alloc] init];
+  self.infoSectionLabel = [[EkirjastoRoundedLabel alloc] init];
   self.infoSectionLabel.text = NSLocalizedString(@"Information", nil);
   
   self.summaryTextView = [[UITextView alloc] init];
@@ -209,7 +221,7 @@ static NSString *DetailHTMLTemplate = nil;
   self.summaryTextView.adjustsFontForContentSizeCategory = YES;
 
   NSString *htmlString = [[NSString stringWithFormat:DetailHTMLTemplate,
-                           [UIFont systemFontOfSize: 12],
+                           [UIFont palaceFontOfSize:18], //Edited by Ellibs
                            self.book.summary ?: @""] stringByDecodingHTMLEntities];
 
   NSData *htmlData = [htmlString dataUsingEncoding:NSUnicodeStringEncoding];
@@ -239,17 +251,24 @@ static NSString *DetailHTMLTemplate = nil;
   self.readMoreLabel = [[UIButton alloc] init];
   self.readMoreLabel.hidden = YES;
   self.readMoreLabel.titleLabel.textAlignment = NSTextAlignmentRight;
+  self.readMoreLabel.semanticContentAttribute = UISemanticContentAttributeForceRightToLeft; //Added by Ellibs
+  UIImage *readmoreArrow = [UIImage imageNamed:@"ArrowRight"]; //Added by Ellibs
+  [self.readMoreLabel setImage:readmoreArrow forState:UIControlStateNormal]; //Added by Ellibs
+  self.readMoreLabel.tintColor = [TPPConfiguration iconColor]; //Added by Ellibs
+  self.readMoreLabel.imageEdgeInsets = UIEdgeInsetsMake(1, 10, -1, 0); //Added by Ellibs
+  self.readMoreLabel.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10); //Added by Ellibs
+  [self.readMoreLabel setTitleColor:[TPPConfiguration compatiblePrimaryColor] forState:UIControlStateNormal]; //Added by Ellibs
   [self.readMoreLabel addTarget:self action:@selector(readMoreTapped:) forControlEvents:UIControlEventTouchUpInside];
   
   [self.readMoreLabel setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-  [self.readMoreLabel setTitle:NSLocalizedString(@"More...", nil) forState:UIControlStateNormal];
+  [self.readMoreLabel setTitle:NSLocalizedString(@"Read more", nil) forState:UIControlStateNormal]; //Edited by Ellibs
   [self.readMoreLabel setTitleColor:[TPPConfiguration mainColor] forState:UIControlStateNormal];
 }
 
 - (void)createHeaderLabels
 {
-  UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleSystemMaterial];
-  self.visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+  //UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleSystemMaterial];
+  //self.visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
 
   self.coverImageView = [[UIImageView alloc] init];
   self.coverImageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -348,8 +367,10 @@ static NSString *DetailHTMLTemplate = nil;
   NSString *const bookFormatKeyString = NSLocalizedString(@"Book format:", nil);
 
   NSString *const narratorsKeyString =
-    self.book.narrators ? [NSString stringWithFormat:@"%@: ", NSLocalizedString(@"Narrators:", nil)] : nil;
+    self.book.narrators ? [NSString stringWithFormat:@"%@: ", NSLocalizedString(@"Narrators", nil)] : nil;
   
+  NSString *const bookDurationKeyString = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"Duration", nil)];
+
   NSString *const categoriesValueString = self.book.categories;
   NSString *const publishedValueString = self.book.published ? [dateFormatter stringFromDate:self.book.published] : nil;
   NSString *const publisherValueString = self.book.publisher;
@@ -368,7 +389,8 @@ static NSString *DetailHTMLTemplate = nil;
   self.distributorLabelKey = [self createFooterLabelWithString:distributorKeyString alignment:NSTextAlignmentRight];
   self.bookFormatLabelKey = [self createFooterLabelWithString:bookFormatKeyString alignment:NSTextAlignmentRight];
   self.narratorsLabelKey = [self createFooterLabelWithString:narratorsKeyString alignment:NSTextAlignmentRight];
-  
+  self.bookDurationLabelKey = [self createFooterLabelWithString:bookDurationKeyString alignment:NSTextAlignmentRight];
+
   self.categoriesLabelValue = [self createFooterLabelWithString:categoriesValueString alignment:NSTextAlignmentLeft];
   self.categoriesLabelValue.numberOfLines = 2;
   self.publisherLabelValue = [self createFooterLabelWithString:publisherValueString alignment:NSTextAlignmentLeft];
@@ -377,12 +399,14 @@ static NSString *DetailHTMLTemplate = nil;
   self.distributorLabelValue = [self createFooterLabelWithString:self.book.distributor alignment:NSTextAlignmentLeft];
   self.bookFormatLabelValue = [self createFooterLabelWithString:bookFormatValueString alignment:NSTextAlignmentLeft];
   self.narratorsLabelValue = [self createFooterLabelWithString:narratorsValueString alignment:NSTextAlignmentLeft];
+  self.bookDurationLabelValue = [self createFooterLabelWithString:[self displayStringForDuration: self.book.bookDuration] alignment:NSTextAlignmentLeft];
+
   self.narratorsLabelValue.numberOfLines = 0;
   
   self.topFootnoteSeparater = [[UIView alloc] init];
-  self.topFootnoteSeparater.backgroundColor = [UIColor lightGrayColor];
+  self.topFootnoteSeparater.backgroundColor = [TPPConfiguration inactiveIconColor]; //Edited by Ellibs
   self.bottomFootnoteSeparator = [[UIView alloc] init];
-  self.bottomFootnoteSeparator.backgroundColor = [UIColor lightGrayColor];
+  self.bottomFootnoteSeparator.backgroundColor = [TPPConfiguration inactiveIconColor]; //Edited by Ellibs
   
   self.footerTableView = [[TPPBookDetailTableView alloc] init];
   self.footerTableView.isAccessibilityElement = NO;
@@ -399,8 +423,16 @@ static NSString *DetailHTMLTemplate = nil;
   UILabel *label = [[UILabel alloc] init];
   label.textAlignment = alignment;
   label.text = string;
-  label.font = [UIFont customFontForTextStyle:UIFontTextStyleCaption2];
+  label.font = [UIFont palaceFontOfSize:14]; //Edited by Ellibs
   return label;
+}
+
+- (NSString *) displayStringForDuration: (NSString *) durationInSeconds {
+  double totalSeconds = [durationInSeconds doubleValue];
+  int hours = (int)(totalSeconds / 3600);
+  int minutes = (int)((totalSeconds - (hours * 3600)) / 60);
+  
+  return [NSString stringWithFormat:@"%d hours, %d minutes", hours, minutes];
 }
 
 - (void)setupAutolayoutConstraints
@@ -429,7 +461,7 @@ static NSString *DetailHTMLTemplate = nil;
   [self.visualEffectView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero excludingEdge:ALEdgeBottom];
   [self.visualEffectView autoPinEdge:ALEdgeBottom toEdge:ALEdgeTop ofView:self.normalView];
   
-  [self.coverImageView autoPinEdgeToSuperviewMargin:ALEdgeLeading];
+  [self.coverImageView autoPinEdgeToSuperviewMargin:ALEdgeLeading withInset:-15]; //Edited by Ellibs
   [self.coverImageView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:VerticalPadding];
   [self.coverImageView autoMatchDimension:ALDimensionWidth toDimension:ALDimensionHeight ofView:self.coverImageView withMultiplier:CoverImageAspectRatio];
   [self.coverImageView autoSetDimension:ALDimensionWidth toSize:CoverImageMaxWidth relation:NSLayoutRelationLessThanOrEqual];
@@ -438,7 +470,7 @@ static NSString *DetailHTMLTemplate = nil;
   [self.blurCoverImageView autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.coverImageView];
   [self.blurCoverImageView autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self.coverImageView];
 
-  [TPPContentBadgeImageView pinWithBadge:self.contentTypeBadge toView:self.coverImageView];
+  [TPPContentBadgeImageView pinWithBadge:self.contentTypeBadge toView:self.coverImageView isLane:NO];
   
   [self.titleLabel autoPinEdge:ALEdgeLeading toEdge:ALEdgeTrailing ofView:self.coverImageView withOffset:MainTextPaddingLeft];
   [self.titleLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.coverImageView];
@@ -446,7 +478,7 @@ static NSString *DetailHTMLTemplate = nil;
   NSLayoutConstraint *titleLabelConstraint = [self.titleLabel autoPinEdgeToSuperviewMargin:ALEdgeTrailing];
   
   [self.subtitleLabel autoPinEdge:ALEdgeLeading toEdge:ALEdgeTrailing ofView:self.coverImageView withOffset:MainTextPaddingLeft];
-  [self.subtitleLabel autoPinEdge:ALEdgeTrailing toEdge:ALEdgeTrailing ofView:self.titleLabel];
+  [self.subtitleLabel autoPinEdge:ALEdgeTrailing toEdge:ALEdgeTrailing ofView:self.titleLabel withOffset:10]; //Edited by Ellibs
   [self.subtitleLabel autoConstrainAttribute:ALAttributeTop toAttribute:ALAttributeBaseline ofView:self.titleLabel withOffset:SubtitleBaselineOffset];
 
   [self.audiobookLabel autoPinEdge:ALEdgeLeading toEdge:ALEdgeTrailing ofView:self.coverImageView withOffset:MainTextPaddingLeft];
@@ -499,7 +531,7 @@ static NSString *DetailHTMLTemplate = nil;
   [self.readMoreLabel autoPinEdgeToSuperviewMargin:ALEdgeLeading];
   [self.readMoreLabel autoPinEdgeToSuperviewMargin:ALEdgeTrailing];
   [self.readMoreLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.summaryTextView];
-  [self.readMoreLabel autoPinEdge:ALEdgeBottom toEdge:ALEdgeTop ofView:self.topFootnoteSeparater];
+  [self.readMoreLabel autoPinEdge:ALEdgeBottom toEdge:ALEdgeTop ofView:self.topFootnoteSeparater withOffset:-15]; //Edited by Ellibs
   
   [self.infoSectionLabel autoPinEdgeToSuperviewMargin:ALEdgeLeading];
   
@@ -527,6 +559,13 @@ static NSString *DetailHTMLTemplate = nil;
   [self.narratorsLabelValue autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.bookFormatLabelValue];
   [self.narratorsLabelValue autoPinEdge:ALEdgeLeading toEdge:ALEdgeTrailing ofView:self.narratorsLabelKey withOffset:MainTextPaddingLeft];
 
+  if (self.book.hasDuration) {
+    [self.bookDurationLabelValue autoPinEdgeToSuperviewMargin:ALEdgeTrailing relation:NSLayoutRelationGreaterThanOrEqual];
+    [self.bookDurationLabelValue autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.narratorsLabelValue];
+    [self.bookDurationLabelValue autoPinEdge:ALEdgeLeading toEdge:ALEdgeTrailing ofView:self.bookDurationLabelKey withOffset:MainTextPaddingLeft];
+  }
+
+  [self.publishedLabelKey autoPinEdgeToSuperviewMargin:ALEdgeLeading];
   [self.publishedLabelKey autoPinEdgeToSuperviewMargin:ALEdgeLeading];
   [self.publishedLabelKey autoPinEdge:ALEdgeTrailing toEdge:ALEdgeTrailing ofView:self.publisherLabelKey];
   [self.publishedLabelKey autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.publishedLabelValue];
@@ -556,7 +595,13 @@ static NSString *DetailHTMLTemplate = nil;
   [self.narratorsLabelKey autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.narratorsLabelValue];
   [self.narratorsLabelKey setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
 
-
+  if (self.book.hasDuration) {
+    [self.bookDurationLabelKey autoPinEdgeToSuperviewMargin:ALEdgeLeading];
+    [self.bookDurationLabelKey autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.bookDurationLabelValue];
+    [self.bookDurationLabelKey autoPinEdge:ALEdgeTrailing toEdge:ALEdgeTrailing ofView:self.narratorsLabelKey];
+    [self.bookDurationLabelKey setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+  }
+  
   if (self.closeButton) {
     [self.closeButton autoPinEdgeToSuperviewMargin:ALEdgeTrailing];
     [self.closeButton autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.titleLabel];
@@ -574,9 +619,14 @@ static NSString *DetailHTMLTemplate = nil;
   [self.bottomFootnoteSeparator autoSetDimension:ALDimensionHeight toSize: 1.0f / [UIScreen mainScreen].scale];
   [self.bottomFootnoteSeparator autoPinEdgeToSuperviewEdge:ALEdgeRight];
   [self.bottomFootnoteSeparator autoPinEdgeToSuperviewMargin:ALEdgeLeft];
-  [self.bottomFootnoteSeparator autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.narratorsLabelValue withOffset:VerticalPadding];
+
+  if (self.book.hasDuration) {
+    [self.bottomFootnoteSeparator autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.bookDurationLabelKey withOffset:VerticalPadding];
+  } else {
+    [self.bottomFootnoteSeparator autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.narratorsLabelValue withOffset:VerticalPadding];
+  }
   
-  [self.footerTableView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero excludingEdge:ALEdgeTop];
+  [self.footerTableView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(0, 10, 0, 0) excludingEdge:ALEdgeTop];
   [self.footerTableView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.narratorsLabelValue withOffset:VerticalPadding];
 }
 

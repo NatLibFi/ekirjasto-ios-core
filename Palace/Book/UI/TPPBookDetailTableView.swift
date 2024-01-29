@@ -298,23 +298,26 @@ private let standardCellHeight: CGFloat = 44.0
     } else {
       headerButton.setTitleColor(.black, for: .normal)
     }
-    headerButton.titleLabel?.font = UIFont.customBoldFont(forTextStyle: UIFont.TextStyle.caption1)
+    headerButton.titleLabel?.font = UIFont.palaceFont(ofSize: 20)
     headerButton.titleLabel?.textAlignment = NSTextAlignment.left
-    headerButton.titleLabel?.autoPinEdge(toSuperviewEdge: .left)
+    headerButton.titleLabel?.autoPinEdge(toSuperviewEdge: .left, withInset: -10)
     headerButton.titleLabel?.lineBreakMode = NSLineBreakMode.byTruncatingTail;
 
     moreButton.addTarget(self, action: #selector(moreBooksTapped(sender:)), for: .touchUpInside)
     moreButton.tag = section
-    moreButton.setTitle(Strings.Generic.more, for: .normal)
+    moreButton.setTitle("More", for: .normal) //Edited by Ellibs
     if #available(iOS 13.0, *) {
       moreButton.setTitleColor(.label, for: .normal)
     } else {
       moreButton.setTitleColor(.black, for: .normal)
     }
-    moreButton.titleLabel?.font = UIFont.customFont(forTextStyle: UIFont.TextStyle.caption1)
-    moreButton.titleLabel?.textAlignment = NSTextAlignment.right
-    moreButton.titleLabel?.autoPinEdge(toSuperviewEdge: .right)
-    
+    moreButton.titleLabel?.font = UIFont.palaceFont(ofSize: 14) //Edited by Ellibs
+    moreButton.tintColor = UIColor(named: "ColorEkirjastoGreen") //Added by Ellibs
+    moreButton.contentHorizontalAlignment = .trailing //Added by Ellibs
+    moreButton.semanticContentAttribute = .forceRightToLeft //Added by Ellibs
+    moreButton.setImage(UIImage(named: "ArrowRight"), for: .normal) //Added by Ellibs
+    moreButton.widthAnchor.constraint(equalToConstant: 50).isActive = true //Added by Ellibs
+    moreButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: -11, bottom: 0, right: 11) //Added by Ellibs
     container.addSubview(headerButton)
     container.addSubview(moreButton)
     headerButton.autoAlignAxis(toSuperviewAxis: .horizontal)

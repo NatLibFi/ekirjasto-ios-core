@@ -31,6 +31,8 @@
 @property (nonatomic) NSString *title;
 @property (nonatomic) NSDate *updated;
 @property (nonatomic) NSDictionary<NSString *, NSArray<NSString *>*> *contributors;
+@property (nonatomic) TPPOPDSLink *timeTrackingLink;
+@property (nonatomic) NSString *duration;
 
 @end
 
@@ -46,6 +48,11 @@
   {
     NSMutableArray *const authorStrings = [NSMutableArray array];
     NSMutableArray<TPPOPDSLink *> const *authorLinks = [NSMutableArray array];
+    
+    if ([[entryXML childrenWithName:@"duration"] count] > 0) {
+      TPPXML *durationXML = [[entryXML childrenWithName:@"duration"] firstObject];
+      self.duration = durationXML.value;
+    }
     
     for(TPPXML *const authorXML in [entryXML childrenWithName:@"author"]) {
       TPPXML *const nameXML = [authorXML firstChildWithName:@"name"];
@@ -116,7 +123,7 @@
     NSMutableArray<TPPOPDSAcquisition *> *const mutableAcquisitions = [NSMutableArray array];
     
     for (TPPXML *const linkXML in [entryXML childrenWithName:@"link"]) {
-
+      
       // Try parsing the link as an acquisition first to avoid creating an NYPLOPDSLink
       // for no reason.
       if ([[linkXML attributes][@"rel"] containsString:TPPOPDSRelationAcquisition]) {
@@ -127,22 +134,22 @@
         }
       } else if ([[linkXML attributes][@"rel"] containsString: TPPOPDSRelationPreview]) {
         // Try parsing the link as a preview
-          TPPOPDSAcquisition *const acquisition = [TPPOPDSAcquisition acquisitionWithLinkXML:linkXML];
-          if (acquisition) {
-            self.previewLink = acquisition;
-          }
+        TPPOPDSAcquisition *const acquisition = [TPPOPDSAcquisition acquisitionWithLinkXML:linkXML];
+        if (acquisition) {
+          self.previewLink = acquisition;
         }
-
-        // It may sometimes bet the case that `!acquisition` if the acquisition used a
-        // non-standard relation. As such, we do not log an error here and let things
-        // continue so the link can be added to `self.links`.
-
+      }
+      
+      // It may sometimes bet the case that `!acquisition` if the acquisition used a
+      // non-standard relation. As such, we do not log an error here and let things
+      // continue so the link can be added to `self.links`.
+      
       TPPOPDSLink *const link = [[TPPOPDSLink alloc] initWithXML:linkXML];
       if(!link) {
         TPPLOG(@"Ignoring malformed 'link' element.");
         continue;
       }
-
+            
       if ([link.rel isEqualToString:@"http://www.w3.org/ns/oa#annotationService"]){
         self.annotations = link;
       } else if ([link.rel isEqualToString:@"alternate"]){
@@ -150,11 +157,14 @@
         self.analytics = [NSURL URLWithString:[link.href.absoluteString stringByReplacingOccurrencesOfString:@"/works/" withString:@"/analytics/"]];
       } else if ([link.rel isEqualToString:@"related"]){
         self.relatedWorks = link;
-      } else {
+      } else if ([link.rel isEqualToString:TPPOPDSRelationTimeTrackingLink]) {
+        // The app should track and report audiobook playback time if this link is present
+        self.timeTrackingLink = link;
+      }  else {
         [mutableLinks addObject:link];
       }
     }
-
+    
     self.acquisitions = [mutableAcquisitions copy];
     self.links = [mutableLinks copy];
   }

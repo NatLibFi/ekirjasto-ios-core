@@ -24,17 +24,16 @@
 - (void)layoutSubviews
 {
   [super layoutSubviews];
-  self.cover.frame = CGRectMake(20,
-                                5,
+  self.cover.frame = CGRectMake((20 / UIScreen.mainScreen.scale),               //Edited by Ellibs
+                                (20 / UIScreen.mainScreen.scale),               //Edited by Ellibs
                                 (CGRectGetHeight([self contentFrame]) - 10) * (10 / 12.0),
                                 CGRectGetHeight([self contentFrame]) - 10);
-  self.cover.contentMode = UIViewContentModeScaleAspectFit;
-
+  
   // The extra five height pixels account for a bug in |sizeThatFits:| that does not properly take
   // into account |lineHeightMultiple|.
-  CGFloat const titleWidth = CGRectGetWidth([self contentFrame]) - 120;
-  self.title.frame = CGRectMake(115,
-                                5,
+  CGFloat const titleWidth = CGRectGetWidth([self contentFrame]) - 155;         //Edited by Ellibs
+  self.title.frame = CGRectMake(145,                                            //Edited by Ellibs
+                                (10 / UIScreen.mainScreen.scale),               //Edited by Ellibs
                                 titleWidth,
                                 [self.title sizeThatFits:
                                  CGSizeMake(titleWidth, CGFLOAT_MAX)].height + 5);
@@ -44,13 +43,13 @@
   CGRect authorsRect = CGRectMake(0, 0, authorsSize.width, authorsSize.height);
   self.authors.frame = authorsRect;
   CGRect authorFrame = self.authors.frame;
-  authorFrame.origin = CGPointMake(115, CGRectGetMaxY(self.title.frame));
-  authorFrame.size.width = CGRectGetWidth([self contentFrame]) - 120;
+  authorFrame.origin = CGPointMake(145, CGRectGetMaxY(self.title.frame) + 10);  //Edited by Ellibs
+  authorFrame.size.width = CGRectGetWidth([self contentFrame]) - 155;           //Edited by Ellibs
   self.authors.frame = authorFrame;
   
   [self.buttonsView sizeToFit];
   CGRect frame = self.buttonsView.frame;
-  frame.origin = CGPointMake(115,
+  frame.origin = CGPointMake(145,                                               //Edited by Ellibs
                              (CGRectGetHeight([self contentFrame]) -
                               CGRectGetHeight(frame) - 5));
   self.buttonsView.frame = frame;
@@ -59,6 +58,7 @@
                                    CGRectGetWidth(unreadImageViewFrame) - 5);
   unreadImageViewFrame.origin.y = 5;
   self.unreadImageView.frame = unreadImageViewFrame;
+  [self.unreadImageView setHidden:YES];
 }
 
 #pragma mark -
@@ -117,7 +117,7 @@
   }
   if ([book defaultBookContentType] == TPPBookContentTypeAudiobook) {
     self.title.accessibilityLabel = [book.title stringByAppendingString:@". Audiobook."];
-    [TPPContentBadgeImageView pinWithBadge:self.contentBadge toView:self.cover];
+    [TPPContentBadgeImageView pinWithBadge:self.contentBadge toView:self.cover isLane:NO];
     self.contentBadge.hidden = NO;
   } else {
     self.title.accessibilityLabel = nil;
@@ -140,6 +140,12 @@
          self.cover.image = image;
        }
      }];
+  }
+  
+  if([book defaultBookContentType] == TPPBookContentTypeAudiobook) {
+    self.cover.contentMode = UIViewContentModeScaleToFill;
+  } else {
+    self.cover.contentMode = UIViewContentModeScaleAspectFit;
   }
   
   [self setNeedsLayout];

@@ -113,6 +113,7 @@
 
   self.facetBarView = [[TPPFacetBarView alloc] initWithOrigin:CGPointZero width:self.view.bounds.size.width];
   self.facetBarView.delegate = self;
+  [self.facetBarView removeLogo]; //Added by Ellibs
   
   [self.view addSubview:self.facetBarView];
   
@@ -165,6 +166,15 @@
   return sections;
 }
 
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+  if(self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular) {
+    return 0.0;
+  } {
+    return 25.0;
+  }
+}
+
 - (void)collectionView:(__attribute__((unused)) UICollectionView *)collectionView
 didSelectItemAtIndexPath:(NSIndexPath *const)indexPath
 {
@@ -202,16 +212,16 @@ didSelectItemAtIndexPath:(NSIndexPath *const)indexPath
     UILabel *title = view.subviews.count > 0 ? view.subviews[0] : nil;
     if(!title) {
       title = [[UILabel alloc] init];
-      title.textColor = [TPPConfiguration compatibleTextColor];
+      title.textColor = [UIColor colorNamed:@"ColorEkirjastoAlwaysBlack"];
           
       title.font = [UIFont palaceFontOfSize:12];
       [view addSubview:title];
     }
     if([self bookArrayForSection:indexPath.section] == self.reservedBooks) {
-      view.layer.backgroundColor = [TPPConfiguration mainColor].CGColor;
+      view.layer.backgroundColor = [UIColor colorNamed:@"ColorEkirjastoYellow"].CGColor; //Edited by Ellibs
       title.text = NSLocalizedString(@"AVAILABLE FOR CHECKOUT", nil);
     } else {
-      view.layer.backgroundColor = [UIColor colorWithRed:172.0/255.0 green:177.0/255.0 blue:182.0/255 alpha:1.0].CGColor;
+      view.layer.backgroundColor = [UIColor colorNamed:@"ColorPedingReservationHeader"].CGColor; //Edited by Ellibs
       title.text = NSLocalizedString(@"WAITING FOR AVAILABILITY", nil);
     }
     [title sizeToFit];

@@ -41,13 +41,13 @@
   self.viewController = [[TPPCatalogFeedViewController alloc]
                          initWithURL:urlToLoad];
   
-  self.viewController.title = NSLocalizedString(@"Catalog", nil);
+  self.viewController.title = NSLocalizedString(@"Browse Books", nil);
 
 #ifdef SIMPLYE
   [self setNavigationLeftBarButtonForVC:self.viewController];
 #endif
 
-  self.viewController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Catalog", nil) style:UIBarButtonItemStylePlain target:nil action:nil];
+  self.viewController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Browse Books", nil) style:UIBarButtonItemStylePlain target:nil action:nil];
 
   self.viewControllers = @[self.viewController];
 }
@@ -58,9 +58,11 @@
 {
   self = [super init];
   
-  self.tabBarItem.title = NSLocalizedString(@"Catalog", nil);
+  self.tabBarItem.title = NSLocalizedString(@"Browse Books", nil);
   self.tabBarItem.image = [UIImage imageNamed:@"Catalog"];
-  self.navigationItem.title = NSLocalizedString(@"Catalog", nil);
+  self.tabBarItem.selectedImage = [UIImage imageNamed:@"CatalogSelected"];
+  self.tabBarItem.imageInsets = UIEdgeInsetsMake(8.0, 0.0, -8.0, 0.0);
+  self.navigationItem.title = NSLocalizedString(@"Browse Books", nil);
   
   [self loadTopLevelCatalogViewController];
   
@@ -224,16 +226,17 @@
       TPPRootTabBarController *vc = [TPPRootTabBarController sharedController];
       [vc safelyPresentViewController:navController animated:YES completion:nil];
 
+
       // Present onboarding screens above the welcome screen.
       UIViewController *onboardingVC = [TPPOnboardingViewController makeSwiftUIViewWithDismissHandler:^{
-        [[self presentedViewController] dismissViewControllerAnimated:YES completion:^{
-#ifdef FEATURE_DRM_CONNECTOR
-          if ([AdobeCertificate.defaultCertificate hasExpired] == YES) {
-            [vc safelyPresentViewController:[TPPAlertUtils expiredAdobeDRMAlert] animated:YES completion:nil];
-          }
-#endif
-        }];
-      }];
+         [[self presentedViewController] dismissViewControllerAnimated:YES completion:^{
+      #ifdef FEATURE_DRM_CONNECTOR
+           if ([AdobeCertificate.defaultCertificate hasExpired] == YES) {
+             [vc safelyPresentViewController:[TPPAlertUtils expiredAdobeDRMAlert] animated:YES completion:nil];
+           }
+      #endif
+         }];
+       }];
       [vc safelyPresentViewController:onboardingVC animated:YES completion:nil];
     };
     if (TPPUserAccount.sharedAccount.authDefinition.needsAgeCheck) {

@@ -41,6 +41,12 @@ class NotificationService: NSObject, UNUserNotificationCenterDelegate, Messaging
     NotificationCenter.default.addObserver(forName: NSNotification.Name.TPPCurrentAccountDidChange, object: nil, queue: nil) { _ in
       self.updateToken()
     }
+    // Update library token when the user signes in (but has already added the library)
+    NotificationCenter.default.addObserver(forName: NSNotification.Name.TPPIsSigningIn, object: nil, queue: nil) { notification in
+      if let isSigningIn = notification.object as? Bool, !isSigningIn {
+        self.updateToken()
+      }
+    }
   }
   
   @objc
@@ -50,8 +56,7 @@ class NotificationService: NSObject, UNUserNotificationCenterDelegate, Messaging
   
   @objc
   /// Runs configuration function, registers the app for remote notifications.
-  func setupPushNotifications() {
-    FirebaseApp.configure()
+  func setupPushNotifications(completion: ((_ granted: Bool) -> Void)? = nil) {
     notificationCenter.delegate = self
     notificationCenter.requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
       if granted {
@@ -59,8 +64,18 @@ class NotificationService: NSObject, UNUserNotificationCenterDelegate, Messaging
           UIApplication.shared.registerForRemoteNotifications()
         }
       }
+      completion?(granted)
     }
     Messaging.messaging().delegate = self
+  }
+  
+  func getNotificationStatus(completion: @escaping (_ areEnabled: Bool) -> Void) {
+    notificationCenter.getNotificationSettings { notificationSettings in
+      switch notificationSettings.authorizationStatus {
+      case .authorized, .provisional: completion(true)
+      default: completion(false)
+      }
+    }
   }
   
   /// Check if token exists on the server
@@ -72,10 +87,9 @@ class NotificationService: NSObject, UNUserNotificationCenterDelegate, Messaging
   /// - 200: exists
   /// - 404 doesn't exist
   /// `exists` is `nil` for any other response status code.
-  private func checkTokenExists(_ token: String, completion: @escaping (Bool?, Error?) -> Void) {
-    guard let account = AccountsManager.shared.currentAccount,
-          let catalogHref = account.catalogUrl,
-          let requestUrl = URL(string: "\(catalogHref)patrons/me/devices?device_token=\(token)")
+  private func checkTokenExists(_ token: String, endpointUrl: URL, completion: @escaping (Bool?, Error?) -> Void) {
+    guard
+      let requestUrl = URL(string: "\(endpointUrl.absoluteString)?device_token=\(token)")
     else {
       return
     }
@@ -93,15 +107,11 @@ class NotificationService: NSObject, UNUserNotificationCenterDelegate, Messaging
   
   /// Save token to the server
   /// - Parameter token: FCM token value
-  private func saveToken(_ token: String) {
-    guard let account = AccountsManager.shared.currentAccount,
-          let catalogHref = account.catalogUrl,
-          let requestUrl = URL(string: "\(catalogHref)patrons/me/devices"),
-          let requestBody = TokenData(token: token).data
-    else {
+  private func saveToken(_ token: String, endpointUrl: URL) {
+    guard let requestBody = TokenData(token: token).data else {
       return
     }
-    var request = URLRequest(url: requestUrl)
+    var request = URLRequest(url: endpointUrl)
     request.httpMethod = "PUT"
     request.httpBody = requestBody
     _ = TPPNetworkExecutor.shared.addBearerAndExecute(request) { result, response, error in
@@ -109,7 +119,7 @@ class NotificationService: NSObject, UNUserNotificationCenterDelegate, Messaging
         TPPErrorLogger.logError(error,
                                 summary: "Couldn't upload token data",
                                 metadata: [
-                                  "requestURL": requestUrl,
+                                  "requestURL": endpointUrl,
                                   "tokenData": String(data: requestBody, encoding: .utf8) ?? "",
                                   "statusCode": (response as? HTTPURLResponse)?.statusCode ?? 0
                                 ]
@@ -122,12 +132,55 @@ class NotificationService: NSObject, UNUserNotificationCenterDelegate, Messaging
   ///
   /// Update token when user account changes
   func updateToken() {
-    Messaging.messaging().token { token, _ in
-      if let token = token {
-        self.checkTokenExists(token) { exists, _ in
-          if let exists = exists, !exists {
-            self.saveToken(token)
+    AccountsManager.shared.currentAccount?.getProfileDocument { profileDocument in
+      guard let endpointHref = profileDocument?.linksWith(.deviceRegistration).first?.href,
+            let endpointUrl = URL(string: endpointHref)
+      else {
+        return
+      }
+      Messaging.messaging().token { token, _ in
+        if let token {
+          self.checkTokenExists(token, endpointUrl: endpointUrl) { exists, _ in
+            if let exists = exists, !exists {
+              self.saveToken(token, endpointUrl: endpointUrl)
+            }
           }
+        }
+      }
+    }
+  }
+    
+  private func deleteToken(_ token: String, endpointUrl: URL) {
+    guard let requestBody = TokenData(token: token).data else {
+      return
+    }
+    var request = URLRequest(url: endpointUrl)
+    request.httpMethod = "DELETE"
+    request.httpBody = requestBody
+    _ = TPPNetworkExecutor.shared.addBearerAndExecute(request) { result, response, error in
+      if let error = error {
+        TPPErrorLogger.logError(error,
+                                summary: "Couldn't delete token data",
+                                metadata: [
+                                  "requestURL": endpointUrl,
+                                  "tokenData": String(data: requestBody, encoding: .utf8) ?? "",
+                                  "statusCode": (response as? HTTPURLResponse)?.statusCode ?? 0
+                                ]
+        )
+      }
+    }
+  }
+
+  func deleteToken(for account: Account) {
+    account.getProfileDocument { profileDocument in
+      guard let endpointHref = profileDocument?.linksWith(.deviceRegistration).first?.href,
+            let endpointUrl = URL(string: endpointHref)
+      else {
+        return
+      }
+      Messaging.messaging().token { token, _ in
+        if let token {
+          self.deleteToken(token, endpointUrl: endpointUrl)
         }
       }
     }
@@ -145,11 +198,16 @@ class NotificationService: NSObject, UNUserNotificationCenterDelegate, Messaging
   
   /// Called when the app is in foreground
   func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-    completionHandler([.alert, .badge, .sound])
+    // Shows notification banner on screen
+    completionHandler([.banner, .badge, .sound])
+    // Update loans
+    TPPBookRegistry.shared.sync()
   }
   
   /// Called when the user responded to the notification by opening the application, dismissing the notification or choosing a UNNotificationAction
   func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
     completionHandler()
+    // Update loans
+    TPPBookRegistry.shared.sync()
   }
 }

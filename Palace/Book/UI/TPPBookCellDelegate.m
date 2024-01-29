@@ -8,7 +8,6 @@
 #import "TPPBookDownloadFailedCell.h"
 #import "TPPBookDownloadingCell.h"
 #import "TPPBookNormalCell.h"
-#import "TPPMyBooksDownloadCenter.h"
 #import "TPPRootTabBarController.h"
 
 #import "NSURLRequest+NYPLURLRequestAdditions.h"
@@ -29,9 +28,10 @@
 @property (nonatomic) NSTimer *timer;
 @property (nonatomic) NSDate *lastServerUpdate;
 @property (nonatomic) id<AudiobookManager> manager;
-@property (nonatomic, weak) AudiobookPlayerViewController *audiobookViewController;
+@property (nonatomic, weak) UIViewController *audiobookViewController;
 @property (strong) NSLock *refreshAudiobookLock;
 @property (nonatomic, strong) LoadingViewController *loadingViewController;
+@property (nonatomic, strong) AudiobookBookmarkBusinessLogic *audiobookBookmarkBusinessLogic;
 
 @end
 
@@ -57,10 +57,10 @@ static const int kServerUpdateDelay = 15;
 - (instancetype)init
 {
   self = [super init];
-    
+  
   _refreshAudiobookLock = [[NSLock alloc] init];
   _lastServerUpdate = [NSDate date];
-
+  
   return self;
 }
 
@@ -71,14 +71,14 @@ static const int kServerUpdateDelay = 15;
 
 #pragma mark TPPBookButtonsDelegate
 
-- (void)didSelectReturnForBook:(TPPBook *)book
+- (void)didSelectReturnForBook:(TPPBook *)book completion:(void (^ __nullable)(void))completion
 {
-  [[TPPMyBooksDownloadCenter sharedDownloadCenter] returnBookWithIdentifier:book.identifier];
+  [[MyBooksDownloadCenter shared] returnBookWithIdentifier:book.identifier completion: completion];
 }
 
 - (void)didSelectDownloadForBook:(TPPBook *)book
 {
-  [[TPPMyBooksDownloadCenter sharedDownloadCenter] startDownloadForBook:book];
+  [[MyBooksDownloadCenter shared] startDownloadFor:book withRequest:nil];
 }
 
 - (void)didSelectReadForBook:(TPPBook *)book
@@ -87,22 +87,28 @@ static const int kServerUpdateDelay = 15;
   // Try to prevent blank books bug
 
   TPPUserAccount *user = [TPPUserAccount sharedAccount];
-  if ([user hasCredentials]
-      && [AdobeCertificate.defaultCertificate hasExpired] == NO
-      && ![[NYPLADEPT sharedInstance] isUserAuthorized:[user userID]
-                                            withDevice:[user deviceID]]) {
-    // NOTE: This was cut and pasted while refactoring preexisting work:
-    // "This handles a bug that seems to occur when the user updates,
-    // where the barcode and pin are entered but according to ADEPT the device
-    // is not authorized. To be used, the account must have a barcode and pin."
-    TPPReauthenticator *reauthenticator = [[TPPReauthenticator alloc] init];
-    [reauthenticator authenticateIfNeeded:user
-                 usingExistingCredentials:YES
-                 authenticationCompletion:^{
-      dispatch_async(dispatch_get_main_queue(), ^{
-        [self openBook:book];   // with successful DRM activation
-      });
-    }];
+  if ([user hasCredentials]) {
+    if ([user hasAuthToken]) {
+      [self openBook:book];
+    } else
+      if ([AdobeCertificate.defaultCertificate hasExpired] == NO
+          && ![[NYPLADEPT sharedInstance] isUserAuthorized:[user userID]
+                                                withDevice:[user deviceID]]) {
+        // NOTE: This was cut and pasted while refactoring preexisting work:
+        // "This handles a bug that seems to occur when the user updates,
+        // where the barcode and pin are entered but according to ADEPT the device
+        // is not authorized. To be used, the account must have a barcode and pin."
+        TPPReauthenticator *reauthenticator = [[TPPReauthenticator alloc] init];
+        [reauthenticator authenticateIfNeeded:user
+                     usingExistingCredentials:YES
+                     authenticationCompletion:^{
+          dispatch_async(dispatch_get_main_queue(), ^{
+            [self openBook:book];   // with successful DRM activation
+          });
+        }];
+      } else {
+        [self openBook:book];
+      }
   } else {
     [self openBook:book];
   }
@@ -146,7 +152,7 @@ static const int kServerUpdateDelay = 15;
 - (void)openPDF:(TPPBook *)book {
 #if LCP
   if ([LCPPDFs canOpenBook:book]) {
-    NSURL *bookUrl = [[TPPMyBooksDownloadCenter sharedDownloadCenter] fileURLForBookIndentifier:book.identifier];
+    NSURL *bookUrl = [[MyBooksDownloadCenter shared] fileUrlFor:book.identifier];
     LCPPDFs *decryptor = [[LCPPDFs alloc] initWithUrl:bookUrl];
     [decryptor extractWithUrl:bookUrl completion:^(NSURL *encryptedUrl, NSError *error) {
       if (error) {
@@ -181,7 +187,7 @@ static const int kServerUpdateDelay = 15;
 /// Present Palace PDF reader
 /// @param book PDF Book object
 - (void)presentPDF:(TPPBook *)book {
-  NSURL *bookUrl = [[TPPMyBooksDownloadCenter sharedDownloadCenter] fileURLForBookIndentifier:book.identifier];
+  NSURL *bookUrl = [[MyBooksDownloadCenter shared] fileUrlFor:book.identifier];
   NSData *data = [[NSData alloc] initWithContentsOfURL:bookUrl options:NSDataReadingMappedAlways error:nil];
 
   TPPPDFDocumentMetadata *metadata = [[TPPPDFDocumentMetadata alloc] initWith:book.identifier];
@@ -194,7 +200,7 @@ static const int kServerUpdateDelay = 15;
 }
 
 - (void)openAudiobook:(TPPBook *)book {
-  NSURL *const url = [[TPPMyBooksDownloadCenter sharedDownloadCenter] fileURLForBookIndentifier:book.identifier];
+  NSURL *const url = [[MyBooksDownloadCenter shared] fileUrlFor:book.identifier];
   NSData *const data = [NSData dataWithContentsOfURL:url];
   if (data == nil) {
     [self presentCorruptedItemErrorForBook:book fromURL:url];
@@ -239,7 +245,7 @@ static const int kServerUpdateDelay = 15;
   [AudioBookVendorsHelper updateVendorKeyWithBook:json completion:^(NSError * _Nullable error) {
     [NSOperationQueue.mainQueue addOperationWithBlock:^{
       id<Audiobook> const audiobook = [AudiobookFactory audiobook:json bookID:book.identifier decryptor:audiobookDrmDecryptor token:book.bearerToken];
-      
+
       if (!audiobook) {
         if (error) {
           [self presentDRMKeyError:error];
@@ -249,33 +255,49 @@ static const int kServerUpdateDelay = 15;
         return;
       }
 
+      AudiobookTimeTracker *timeTracker;
+      if (book.timeTrackingURL) {
+        timeTracker = [[AudiobookTimeTracker alloc] initWithLibraryId:AccountsManager.shared.currentAccount.uuid bookId:book.identifier timeTrackingUrl:book.timeTrackingURL];
+      }
+      
       AudiobookMetadata *const metadata = [[AudiobookMetadata alloc]
                                            initWithTitle:book.title
                                            authors:@[book.authors]];
       id<AudiobookManager> const manager = [[DefaultAudiobookManager alloc]
                                             initWithMetadata:metadata
-                                            audiobook:audiobook];
-      manager.refreshDelegate = self;
-      manager.annotationsDelegate = self;
+                                            audiobook:audiobook
+                                            playbackTrackerDelegate:timeTracker];
+      
+      
+      self.book = book;
+      self.audiobookBookmarkBusinessLogic = [[AudiobookBookmarkBusinessLogic alloc] initWithBook:book];
 
-      AudiobookPlayerViewController *const audiobookVC = [[AudiobookPlayerViewController alloc]
-                                                          initWithAudiobookManager:manager];
+      manager.refreshDelegate = self;
+      manager.playbackPositionDelegate = self;
+      manager.bookmarkDelegate = self.audiobookBookmarkBusinessLogic;
+
+      AudiobookPlayer *audiobookPlayer = [[AudiobookPlayer alloc] initWithAudiobookManager:manager];
 
       [self registerCallbackForLogHandler];
 
       [[TPPBookRegistry shared] coverImageFor:book handler:^(UIImage *image) {
         if (image) {
-          [audiobookVC.coverView setImage:image];
+          [audiobookPlayer updateImage:image];
         }
       }];
 
-      audiobookVC.hidesBottomBarWhenPushed = YES;
-      audiobookVC.view.tintColor = [TPPConfiguration mainColor];
-      [[TPPRootTabBarController sharedController] pushViewController:audiobookVC animated:YES];
+      [[TPPRootTabBarController sharedController] pushViewController:audiobookPlayer animated:YES];
 
-      __weak AudiobookPlayerViewController *weakAudiobookVC = audiobookVC;
+      __weak UIViewController *weakAudiobookVC = audiobookPlayer;
       [manager setPlaybackCompletionHandler:^{
-        NSSet<NSString *> *types = [[NSSet alloc] initWithObjects:ContentTypeFindaway, ContentTypeOpenAccessAudiobook, ContentTypeFeedbooksAudiobook, nil];
+        NSSet<NSString *> *types = [[NSSet alloc] initWithObjects:
+                                    ContentTypeFindaway,
+                                    ContentTypeBearerToken,
+                                    ContentTypeOpenAccessAudiobook,
+                                    ContentTypeOverdriveAudiobook,
+                                    ContentTypeFeedbooksAudiobook,
+                                    nil
+        ];
         NSArray<TPPOPDSAcquisitionPath *> *paths = [TPPOPDSAcquisitionPath
                                                      supportedAcquisitionPathsForAllowedTypes:types
                                                     allowedRelations:(TPPOPDSAcquisitionRelationSetBorrow |
@@ -285,7 +307,7 @@ static const int kServerUpdateDelay = 15;
           UIAlertController *alert = [TPPReturnPromptHelper audiobookPromptWithCompletion:^(BOOL returnWasChosen) {
             if (returnWasChosen) {
               [weakAudiobookVC.navigationController popViewControllerAnimated:YES];
-              [self didSelectReturnForBook:book];
+              [self didSelectReturnForBook:book completion:nil];
             }
             [TPPAppStoreReviewPrompt presentIfAvailable];
           }];
@@ -296,12 +318,11 @@ static const int kServerUpdateDelay = 15;
         }
       }];
 
-      [self startLoading:audiobookVC];
+      [self startLoading:audiobookPlayer];
 
       TPPBookLocation *localAudiobookLocation = [[TPPBookRegistry shared] locationForIdentifier:book.identifier];
       NSData *localLocationData = [localAudiobookLocation.locationString dataUsingEncoding:NSUTF8StringEncoding];
       ChapterLocation *localLocation = [ChapterLocation fromData:localLocationData];
-      localLocation.lastSavedTimeStamp = localAudiobookLocation.timeStamp;
   
       // Player error handler
       void (^moveCompletionHandler)(NSError *) = ^(NSError *error) {
@@ -332,7 +353,7 @@ static const int kServerUpdateDelay = 15;
         }];
       }];
       
-      [self scheduleTimerForAudiobook:book manager:manager viewController:audiobookVC];
+      [self scheduleTimerForAudiobook:book manager:manager viewController:audiobookPlayer];
     }];
   }];
 }
@@ -417,7 +438,7 @@ static const int kServerUpdateDelay = 15;
       NSString *logLevel = (level == LogLevelInfo ?
                             @"info" :
                             (level == LogLevelWarn ? @"warning" : @"error"));
-      NSString *summary = [NSString stringWithFormat:@"NYPLAudiobookToolkit::AudiobookManager %@", logLevel];
+      NSString *summary = [NSString stringWithFormat:@"PalaceAudiobookToolkit::AudiobookManager %@", logLevel];
       [TPPErrorLogger logErrorWithCode:TPPErrorCodeAudiobookExternalError
                                 summary:summary
                                metadata:@{ @"context": msg ?: @"N/A" }];
@@ -427,10 +448,9 @@ static const int kServerUpdateDelay = 15;
 
 - (void)scheduleTimerForAudiobook:(TPPBook *)book
                           manager:(id<AudiobookManager>)manager
-                   viewController:(AudiobookPlayerViewController *)viewController
+                   viewController:(UIViewController *)viewController
 {
   self.audiobookViewController = viewController;
-  self.book = book;
   self.manager = manager;
   // Target-Selector method required for iOS <10.0
   self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
@@ -445,7 +465,6 @@ static const int kServerUpdateDelay = 15;
   if (!self.audiobookViewController) {
     [self.timer invalidate];
     self.timer = nil;
-    self.book = nil;
     self.manager = nil;
     return;
   }
@@ -465,7 +484,7 @@ static const int kServerUpdateDelay = 15;
     previousPlayheadOffset = playheadOffset;
   
     [[TPPBookRegistry shared]
-     setLocation:[[TPPBookLocation alloc] initWithLocationString:string renderer:@"NYPLAudiobookToolkit"]
+     setLocation:[[TPPBookLocation alloc] initWithLocationString:string renderer:@"PalaceAudiobookToolkit"]
      forIdentifier:self.book.identifier];
     
     if ([[NSDate date] timeIntervalSinceDate: self.lastServerUpdate] >= kServerUpdateDelay) {
@@ -518,21 +537,21 @@ static const int kServerUpdateDelay = 15;
 
 - (void)didSelectCancelForBookDownloadFailedCell:(TPPBookDownloadFailedCell *const)cell
 {
-  [[TPPMyBooksDownloadCenter sharedDownloadCenter]
-   cancelDownloadForBookIdentifier:cell.book.identifier];
+  [[MyBooksDownloadCenter shared]
+   cancelDownloadFor:cell.book.identifier];
 }
 
 - (void)didSelectTryAgainForBookDownloadFailedCell:(TPPBookDownloadFailedCell *const)cell
 {
-  [[TPPMyBooksDownloadCenter sharedDownloadCenter] startDownloadForBook:cell.book];
+  [[MyBooksDownloadCenter shared] startDownloadFor: cell.book withRequest:nil];
 }
 
 #pragma mark TPPBookDownloadingCellDelegate
 
 - (void)didSelectCancelForBookDownloadingCell:(TPPBookDownloadingCell *const)cell
 {
-  [[TPPMyBooksDownloadCenter sharedDownloadCenter]
-   cancelDownloadForBookIdentifier:cell.book.identifier];
+  [[MyBooksDownloadCenter shared]
+   cancelDownloadFor:cell.book.identifier];
 }
 
 #pragma mark Audiobook Manager Refresh Delegate
@@ -547,7 +566,7 @@ static const int kServerUpdateDelay = 15;
 #if FEATURE_OVERDRIVE
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateODAudiobookManifest) name:NSNotification.TPPMyBooksDownloadCenterDidChange object:nil];
 #endif
-  [[TPPMyBooksDownloadCenter sharedDownloadCenter] startDownloadForBook:self.book];
+  [[MyBooksDownloadCenter shared] startDownloadFor:self.book withRequest:nil];
 }
 
 #if FEATURE_OVERDRIVE
@@ -555,7 +574,7 @@ static const int kServerUpdateDelay = 15;
   if ([[TPPBookRegistry shared] stateFor:self.book.identifier] == TPPBookStateDownloadSuccessful) {
     OverdriveAudiobook *odAudiobook = (OverdriveAudiobook *)self.manager.audiobook;
 
-    NSURL *const url = [[TPPMyBooksDownloadCenter sharedDownloadCenter] fileURLForBookIndentifier:self.book.identifier];
+    NSURL *const url = [[MyBooksDownloadCenter shared] fileUrlFor: self.book.identifier];
     NSData *const data = [NSData dataWithContentsOfURL:url];
     if (data == nil) {
       [self presentCorruptedItemErrorForBook:self.book fromURL:url];
