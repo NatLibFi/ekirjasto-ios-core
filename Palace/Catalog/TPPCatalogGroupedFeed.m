@@ -16,7 +16,7 @@
 
 @property (nonatomic) NSArray *lanes;
 @property (nonatomic) NSURL *openSearchURL;
-@property (nonatomic) NSString *title;
+@property (nonatomic,readwrite) NSString *title;
 @property (nonatomic) NSArray<TPPCatalogFacet *> *entryPoints;
 
 

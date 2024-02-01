@@ -10,34 +10,19 @@ import SwiftUI
 
 struct SuomiIdentificationWebView: UIViewRepresentable {
   var closeWebView : (() -> Void)?
+  var authenticationDocument : OPDS2AuthenticationDocument? = nil
   
   func updateUIView(_ uiView: WKWebView, context: Context) {
-    var account = AccountsManager.shared.currentAccount
-    if(account == nil){
-      account = AccountsManager.shared.accounts().first
-      account?.loadAuthenticationDocument(completion: { Bool in
-        
-        context.coordinator.closeWebView = closeWebView
-        
-        DispatchQueue.main.async {
-          let authentication = account?.authenticationDocument?.authentication?.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})
-          let link = authentication?.links?.first(where: {$0.rel == "tunnistus_start"})
-          let start = link
-          uiView.navigationDelegate = context.coordinator
-          uiView.load(URLRequest(url: URL(string: start!.href)!))
-        }
-      })
-    }else{
-      context.coordinator.closeWebView = closeWebView
+
+    context.coordinator.closeWebView = closeWebView
       
-      DispatchQueue.main.async {
-        let authentication = account?.authenticationDocument?.authentication?.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})
-        let link = authentication?.links?.first(where: {$0.rel == "tunnistus_start"})
-        let start = link
-        uiView.navigationDelegate = context.coordinator
-        uiView.load(URLRequest(url: URL(string: start!.href)!))
-      }
-    }
+    let authentication = authenticationDocument?.authentication?.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})
+    let link = authentication?.links?.first(where: {$0.rel == "tunnistus_start"})
+    let start = link
+    uiView.navigationDelegate = context.coordinator
+    uiView.load(URLRequest(url: URL(string: start!.href)!))
+
+    
     
   }
   

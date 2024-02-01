@@ -17,7 +17,9 @@ struct EkirjastoLoginView: View {
     var body: some View {
       ZStack {
         if(showLoginView){
-            EkirjastoUserLoginView()
+          EkirjastoUserLoginView(dismissView: {
+            self.dismissView()
+          })
         }else{
           VStack {
             Image("LaunchImageLogo")
@@ -53,10 +55,10 @@ struct EkirjastoLoginView: View {
           }
         }
       }.sheet(isPresented: $displaySuomiIdentificationWebView, content: {
-        SuomiIdentificationWebView(closeWebView: {
-          displaySuomiIdentificationWebView = false
-          self.dismissView()
-        })
+        //SuomiIdentificationWebView(closeWebView: {
+          //displaySuomiIdentificationWebView = false
+          //self.dismissView()
+        //})
       })
         
     }
@@ -65,6 +67,8 @@ struct EkirjastoLoginView: View {
     showLoginView = true
   }
   func signUp(){
-    displaySuomiIdentificationWebView = true
+    //workaround to skip regular login. and to get to simple login
+    self.dismissView()
+    //displaySuomiIdentificationWebView = true
   }
 }
