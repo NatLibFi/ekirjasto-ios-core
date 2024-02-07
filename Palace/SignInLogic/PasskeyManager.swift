@@ -86,10 +86,11 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
   
   private func performLogin(_ username: String, _ pk : PasskeyLoginStartResponse.PublicKey, completion : @escaping (String?) -> Void){
     
-    let publicKeyCredentialProvider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: "e-kirjasto.loikka.dev?mode=developer")
+    let publicKeyCredentialProvider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: "e-kirjasto.loikka.dev")
     
     let registrationRequest = publicKeyCredentialProvider.createCredentialRegistrationRequest(challenge: pk.challenge.data(using: .utf8)!,
                                                                                               name: username, userID: pk.user.id.data(using: .utf8)!)
+    
     
     let authController = ASAuthorizationController(authorizationRequests: [ registrationRequest ] )
     authController.delegate = self
