@@ -670,8 +670,8 @@
 		363C620C2B14F08C00858AA5 /* UserProfileDocument+Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75423242AFC381E008CB7EF /* UserProfileDocument+Links.swift */; };
 		3672BB9C2B14DFE400F320E8 /* PalaceAudiobookToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F9BABE2A8E6811001697DE /* PalaceAudiobookToolkit.framework */; };
 		3672BB9D2B14DFE400F320E8 /* PalaceAudiobookToolkit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E7F9BABE2A8E6811001697DE /* PalaceAudiobookToolkit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		36833E4C2B5E937000D7B6B2 /* PasskeyLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36833E4B2B5E937000D7B6B2 /* PasskeyLogin.swift */; };
-		36833E4D2B5EDBD500D7B6B2 /* PasskeyLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36833E4B2B5E937000D7B6B2 /* PasskeyLogin.swift */; };
+		36833E4C2B5E937000D7B6B2 /* PasskeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36833E4B2B5E937000D7B6B2 /* PasskeyManager.swift */; };
+		36833E4D2B5EDBD500D7B6B2 /* PasskeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36833E4B2B5E937000D7B6B2 /* PasskeyManager.swift */; };
 		3688FADE2B67FEFE00A95558 /* EkirjastoLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3688FADD2B67FEFE00A95558 /* EkirjastoLoginViewController.swift */; };
 		3688FADF2B67FEFE00A95558 /* EkirjastoLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3688FADD2B67FEFE00A95558 /* EkirjastoLoginViewController.swift */; };
 		3688FAE02B67FEFE00A95558 /* EkirjastoLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3688FADD2B67FEFE00A95558 /* EkirjastoLoginViewController.swift */; };
@@ -1746,7 +1746,7 @@
 		337E63BA2A28AF3900FF7886 /* Ellibs_Catalog_Feed.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Ellibs_Catalog_Feed.json; path = Palace/EkirjastoConfig/Ellibs_Catalog_Feed.json; sourceTree = SOURCE_ROOT; };
 		33C1160E2AE7A914007CABEB /* EkirjastoSuomiIdentificationWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EkirjastoSuomiIdentificationWebView.swift; sourceTree = "<group>"; };
 		363C62092B14EEA300858AA5 /* EkirjastoUserLoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EkirjastoUserLoginView.swift; sourceTree = "<group>"; };
-		36833E4B2B5E937000D7B6B2 /* PasskeyLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasskeyLogin.swift; sourceTree = "<group>"; };
+		36833E4B2B5E937000D7B6B2 /* PasskeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasskeyManager.swift; sourceTree = "<group>"; };
 		3688FADD2B67FEFE00A95558 /* EkirjastoLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EkirjastoLoginViewController.swift; sourceTree = "<group>"; };
 		52545184217A76FF00BBC1B4 /* TPPUserNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPPUserNotifications.swift; sourceTree = "<group>"; };
 		52592BB721220A1100587288 /* TPPLocalization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPPLocalization.m; sourceTree = "<group>"; };
@@ -2639,7 +2639,7 @@
 				73B501C024F48D4B00FBAD7D /* TPPUserAccountFrontEndValidation.swift */,
 				734B789025659611006FB8AD /* URLResponse+TPPAuthentication.swift */,
 				E56067742A4C8858002ACE93 /* TokenRequest.swift */,
-				36833E4B2B5E937000D7B6B2 /* PasskeyLogin.swift */,
+				36833E4B2B5E937000D7B6B2 /* PasskeyManager.swift */,
 			);
 			path = SignInLogic;
 			sourceTree = "<group>";
@@ -4445,7 +4445,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36833E4D2B5EDBD500D7B6B2 /* PasskeyLogin.swift in Sources */,
+				36833E4D2B5EDBD500D7B6B2 /* PasskeyManager.swift in Sources */,
 				33F69AA42A5BFDF100B0C835 /* LCPAudiobooks.swift in Sources */,
 				33FCF7F02AC45884008E3B72 /* AudiobookDataManager.swift in Sources */,
 				33F69AA32A5BFD6900B0C835 /* LicensesService.swift in Sources */,
@@ -5252,7 +5252,7 @@
 				E523A455299FCD4B00EF833B /* BookButtonType.swift in Sources */,
 				11396FB9193D289100E16EE8 /* NSDate+NYPLDateAdditions.m in Sources */,
 				21E7E07B24FEA7E800189224 /* DPLAAudiobooks.swift in Sources */,
-				36833E4C2B5E937000D7B6B2 /* PasskeyLogin.swift in Sources */,
+				36833E4C2B5E937000D7B6B2 /* PasskeyManager.swift in Sources */,
 				52545185217A76FF00BBC1B4 /* TPPUserNotifications.swift in Sources */,
 				E53CDA882A2FBCD800C6008A /* LocationManager.swift in Sources */,
 				1183F341194F723D00DC322F /* TPPCatalogLane.m in Sources */,
@@ -5720,7 +5720,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 161;
-				DEVELOPMENT_TEAM = EMLZHTC29P;
+				DEVELOPMENT_TEAM = QA5XMCRV5M;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5743,7 +5743,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.28;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ellibs.simplye;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
 				PRODUCT_MODULE_NAME = Palace;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -5778,7 +5778,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 161;
-				DEVELOPMENT_TEAM = EMLZHTC29P;
+				DEVELOPMENT_TEAM = QA5XMCRV5M;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5801,7 +5801,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.28;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ellibs.simplye;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
 				PRODUCT_MODULE_NAME = Palace;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -93,8 +93,20 @@ extension TPPNetworkExecutor: TPPRequestExecuting {
           }else{
             var updatedRequest = req
             updatedRequest.hasRetried = true
-            EkirjastoLoginViewController.show {
-              self.executeRequest(updatedRequest, completion: completion)
+            if let httpResponse = response as? HTTPURLResponse {
+              if httpResponse.statusCode == 401 {
+                self.authenticateWithToken(TPPUserAccount.sharedAccount().authToken!) { status in
+                  if status == 401 {
+                    EkirjastoLoginViewController.show {
+                      self.executeRequest(updatedRequest, completion: completion)
+                    }
+                  }else if status == 200 {
+                    self.executeRequest(updatedRequest, completion: completion)
+                  }else {
+                    completion(result)
+                  }
+                }
+              }
             }
           }
           
@@ -111,13 +123,24 @@ extension TPPNetworkExecutor: TPPRequestExecuting {
           
           if case .failure(let error, let response) = result {
             if let httpResponse = response as? HTTPURLResponse {
-              EkirjastoLoginViewController.show {
-                self.executeRequest(req, completion: completion)
+              if httpResponse.statusCode == 401 {
+                self.authenticateWithToken(TPPUserAccount.sharedAccount().authToken!) { status in
+                  if status == 401 {
+                    EkirjastoLoginViewController.show {
+                      self.executeRequest(req, completion: completion)
+                    }
+                  }else if status == 200 {
+                    self.executeRequest(req, completion: completion)
+                  }else{
+                    completion(result)
+                  }
+                }
               }
             }
+          }else {
+            completion(result)
           }
           
-          completion(result)
         })
       }
     } else {
@@ -366,7 +389,7 @@ extension TPPNetworkExecutor {
     }
   }
 
-  func authenticateWithToken(_ token: String){
+  func authenticateWithToken(_ token: String, completion: ((Int?)->Void)? = nil){
     let currentAccount = AccountsManager.shared.currentAccount
     let authenticationDocument = currentAccount?.authenticationDocument
     let authentication = authenticationDocument?.authentication?.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})
@@ -380,6 +403,7 @@ extension TPPNetworkExecutor {
       "Bearer \(token)",
       forHTTPHeaderField: "Authorization"
     )
+    print("acess token \(token)")
     URLSession.shared.dataTask(with: request){ data, response, error in
       
       if(data != nil){
@@ -393,8 +417,14 @@ extension TPPNetworkExecutor {
         sharedAccount.setAuthToken(accessToken,barcode: nil, pin: nil, expirationDate: nil)
         
       }
+      if let httpResponse = response as? HTTPURLResponse {
+        completion?(httpResponse.statusCode)
+      }else{
+        completion?(nil)
+      }
+      
+      
     }.resume()
-    
     
   }
   

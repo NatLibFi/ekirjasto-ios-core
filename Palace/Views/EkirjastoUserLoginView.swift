@@ -89,7 +89,7 @@ struct EkirjastoUserLoginView: View {
   func loginPasskey(){
     let authentication = authDoc?.authentication?.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})
     
-    let passKeyLogin = PasskeyLogin(authentication!)
+    let passKeyLogin = PasskeyManager(authentication!)
     
     passKeyLogin.login(passkeyUserEmail) { loginToken in
       if loginToken == nil {

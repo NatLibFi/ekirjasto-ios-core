@@ -8,10 +8,13 @@
 	<array>
 		<string>applinks:thepalaceproject.org</string>
 		<string>applinks:thepalaceproject.page.link</string>
+		<string>webcredentials:e-kirjasto.loikka.dev</string>
 	</array>
 	<key>keychain-access-groups</key>
 	<array>
 		<string>$(AppIdentifierPrefix)88CBA74T8K.org.thepalaceproject.palace.SharedKeychainGroup</string>
+		<string>$(AppIdentifierPrefix)fi.kansalliskirjasto.e-kirjasto</string>
+		<string>$(AppIdentifierPrefix)LSUJCHYK8B.app.loikka.e-kirjasto</string>
 	</array>
 </dict>
 </plist>
