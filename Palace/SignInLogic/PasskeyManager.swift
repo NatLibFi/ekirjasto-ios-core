@@ -55,7 +55,9 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
     auth = authentication
     anchor = PasskeyManager.windowBy(vc: TPPRootTabBarController.shared())!
   }
-  
+  deinit {
+      print("deinit!")
+  }
   
   
   public func login(_ username : String, completion : @escaping (String?) -> Void){
@@ -83,20 +85,32 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
     }.resume()
   }
   
-  
+  var authController : ASAuthorizationController? = nil
   private func performLogin(_ username: String, _ pk : PasskeyLoginStartResponse.PublicKey, completion : @escaping (String?) -> Void){
     
     let publicKeyCredentialProvider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: "e-kirjasto.loikka.dev")
     
-    let registrationRequest = publicKeyCredentialProvider.createCredentialRegistrationRequest(challenge: pk.challenge.data(using: .utf8)!,
-                                                                                              name: username, userID: pk.user.id.data(using: .utf8)!)
+    let registrationRequest = publicKeyCredentialProvider.createCredentialAssertionRequest(challenge: pk.challenge.data(using: .utf8)!)//publicKeyCredentialProvider.createCredentialRegistrationRequest(challenge: pk.challenge.data(using: .utf8)!,
+                                //                                                              name: username, userID: pk.user.id.data(using: .utf8)!)
     
     
-    let authController = ASAuthorizationController(authorizationRequests: [ registrationRequest ] )
-    authController.delegate = self
-    authController.presentationContextProvider = self
+    //@Environment(\.authorizationController) var authController
     
-    authController.performRequests()
+    
+    authController = ASAuthorizationController(authorizationRequests: [ registrationRequest ] )
+    authController!.delegate = self
+    authController!.presentationContextProvider = self
+    /*Task {
+      do{
+        let result = try await authController.performRequest(registrationRequest)
+        print("result: \(result)")
+      }catch{
+        print("auth error: \(error)")
+      }
+      
+    }*/
+    
+    authController!.performRequests()
 
     
   }
@@ -139,19 +153,19 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
         let startResponse = try JSONDecoder().decode(PasskeyLoginStartResponse.self, from: data!)
         
         self.performLogin(username, startResponse.publicKey) { cred in
-          
+          completion(nil)
         }
       }catch {
         print("abc \(error)")
       }
       //can we check for 200 code from response?
       if _error == nil {
-       completion(nil)
+      // completion(nil)
         // self.finishRegister(username,self.placholderKey) { token in
        //   completion(token)
        // }
       }else{
-        completion(nil)
+        //completion(nil)
       }
       
     }.resume()

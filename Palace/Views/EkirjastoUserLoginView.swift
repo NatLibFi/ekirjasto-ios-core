@@ -13,6 +13,8 @@ import AuthenticationServices
 struct EkirjastoUserLoginView: View {
     
   var dismissView: () -> Void
+  
+  @State var passKeyLogin : PasskeyManager? = nil
   @State var _loginSuomi = false
   @State var _passKey = false
   @State var authDoc : OPDS2AuthenticationDocument? = nil
@@ -50,6 +52,8 @@ struct EkirjastoUserLoginView: View {
   private var passkeyEmail: some View {
     VStack{
       TextField("Email", text: $passkeyUserEmail)
+        .textInputAutocapitalization(.never)
+        .autocorrectionDisabled()
       Button(action: loginPasskey){
         Text("Continue")
       }
@@ -85,15 +89,14 @@ struct EkirjastoUserLoginView: View {
   }
   
   
-  
   func loginPasskey(){
     let authentication = authDoc?.authentication?.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})
     
-    let passKeyLogin = PasskeyManager(authentication!)
+    self.passKeyLogin = PasskeyManager(authentication!)
     
-    passKeyLogin.login(passkeyUserEmail) { loginToken in
+    self.passKeyLogin!.login(passkeyUserEmail) { loginToken in
       if loginToken == nil {
-        passKeyLogin.register(passkeyUserEmail) { registerToken in
+        self.passKeyLogin!.register(passkeyUserEmail) { registerToken in
           
         }
       }

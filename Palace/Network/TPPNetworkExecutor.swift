@@ -390,7 +390,10 @@ extension TPPNetworkExecutor {
   }
 
   func authenticateWithToken(_ token: String, completion: ((Int?)->Void)? = nil){
-    let currentAccount = AccountsManager.shared.currentAccount
+    var currentAccount = AccountsManager.shared.currentAccount
+    if currentAccount?.authenticationDocument == nil {
+      currentAccount = AccountsManager.shared.accounts().first
+    }
     let authenticationDocument = currentAccount?.authenticationDocument
     let authentication = authenticationDocument?.authentication?.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})
     
