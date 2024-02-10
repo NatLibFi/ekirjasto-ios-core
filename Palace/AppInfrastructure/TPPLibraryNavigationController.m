@@ -25,16 +25,23 @@
 #ifdef SIMPLYE
 - (void)setNavigationLeftBarButtonForVC:(UIViewController *)vc
 {
+  // Finland: action disabled for E-kirjasto.
   vc.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
                                          initWithImage:[UIImage imageNamed:@"MyLibraryIcon"] style:(UIBarButtonItemStylePlain)
-                                         target:self
-                                         action:@selector(switchLibrary)];
-  vc.navigationItem.leftBarButtonItem.accessibilityLabel = NSLocalizedString(@"AccessibilitySwitchLibrary", nil);
+                                         target:nil
+                                         action:nil];
+  // Finland: This is not working as a button for E-kirjasto, instead this is just an icon.
+  vc.navigationItem.leftBarButtonItem.accessibilityLabel = NSLocalizedString(@"AccessibilityLibraryIconWithButtonDisabled", nil);
 }
 
 // for converting this to Swift, see https://bit.ly/3mM9QoH
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunreachable-code"
 - (void)switchLibrary
 {
+  // Finland: function disabled for E-kirjasto.
+  return;
+  
   UIViewController *viewController = self.visibleViewController;
 
   UIAlertControllerStyle style;
@@ -78,6 +85,7 @@
 
   [[TPPRootTabBarController sharedController] safelyPresentViewController:alert animated:YES completion:nil];
 }
+#pragma clang diagnostic pop
 
 - (void) loadAccount:(Account *)account {
     BOOL workflowsInProgress;
