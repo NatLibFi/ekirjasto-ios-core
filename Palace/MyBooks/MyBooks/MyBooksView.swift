@@ -133,13 +133,10 @@ struct MyBooksView: View {
   
   @ViewBuilder private var leadingBarButton: some View {
     Button {
-      selectNewLibrary.toggle()
+      reloadView()
     } label: {
       ImageProviders.MyBooksView.myLibraryIcon
-    }
-    .actionSheet(isPresented: $selectNewLibrary) {
-      libraryPicker
-    }
+    } .accessibilityLabel(DisplayStrings.accessibilityReloadMyBooks)
   }
   
   @ViewBuilder private var trailingBarButton: some View {
@@ -148,6 +145,10 @@ struct MyBooksView: View {
     } label: {
       ImageProviders.MyBooksView.search
     }
+  }
+  
+  private func reloadView() {
+    model.refresh()
   }
   
   private var libraryPicker: ActionSheet {

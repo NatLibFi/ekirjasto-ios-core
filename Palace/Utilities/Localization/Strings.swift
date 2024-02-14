@@ -254,6 +254,7 @@ struct Strings {
     static let addLibrary = NSLocalizedString("Add Library", comment: "Title of button to add a new library")
     static let accountSyncingAlertTitle = NSLocalizedString("Please wait", comment: "")
     static let accountSyncingAlertMessage = NSLocalizedString("Please wait a moment before switching library accounts", comment: "")
+    static let accessibilityReloadMyBooks = NSLocalizedString("accessibilityReloadMyBooks", comment: "")
   }
   
   struct FacetView {
