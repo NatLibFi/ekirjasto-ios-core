@@ -44,6 +44,8 @@ struct EkirjastoUserLoginView: View {
       }.frame(maxWidth: .infinity, maxHeight: .infinity)
       .background(Color("ColorEkirjastoGreen"))
     }
+  
+
 
   }
   
@@ -95,8 +97,9 @@ struct EkirjastoUserLoginView: View {
     self.passKeyLogin = PasskeyManager(authentication!)
     
     self.passKeyLogin!.login(passkeyUserEmail) { loginToken in
-      if loginToken == nil {
-        self.passKeyLogin!.register(passkeyUserEmail) { registerToken in
+      //let savedToken = TPPUserAccount.sharedAccount().authToken
+      if loginToken == nil, let savedToken = TPPUserAccount.sharedAccount().authToken {
+        self.passKeyLogin!.register(passkeyUserEmail,savedToken) { registerToken in
           
         }
       }
