@@ -398,7 +398,6 @@ extension TPPNetworkExecutor {
     let authentication = authenticationDocument?.authentication?.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})
     
     let link = authentication?.links?.first(where: {$0.rel == "authenticate"})
-    
     var request = URLRequest(url: URL(string:link!.href)!)
     request.httpMethod = "POST"
     print("token \(token)")
@@ -412,12 +411,15 @@ extension TPPNetworkExecutor {
       if(data != nil){
         let json = try? JSONSerialization.jsonObject(with: data!)
         let jsonRoot = json as? [String: Any]
-        let accessToken = jsonRoot!["access_token"] as! String
+        let accessToken = jsonRoot?["access_token"] as? String
         
-        let sharedAccount = TPPUserAccount.sharedAccount()
+        if let accessToken = accessToken {
+          let sharedAccount = TPPUserAccount.sharedAccount()
+          sharedAccount.setAuthToken(accessToken,barcode: nil, pin: nil, expirationDate: nil)
+        }else{
+          print("authenticateWithToken error: \(error?.localizedDescription) data: \(String(data:data!,encoding: .utf8))")
+        }
         
-        
-        sharedAccount.setAuthToken(accessToken,barcode: nil, pin: nil, expirationDate: nil)
         
       }
       if let httpResponse = response as? HTTPURLResponse {

@@ -470,6 +470,10 @@ private enum StorageKey: String {
   func setAuthToken(_ token: String, barcode: String?, pin: String?, expirationDate: Date?) {
     credentials = .token(authToken: token, barcode: barcode, pin: pin, expirationDate: expirationDate)
   }
+  
+  func setEKirjastoToken(_ token: String){
+    
+  }
 
   @objc(setCookies:)
   func setCookies(_ cookies: [HTTPCookie]) {

@@ -21,9 +21,7 @@ struct SuomiIdentificationWebView: UIViewRepresentable {
     let start = link
     print("suomi.fi start.href: \(start?.href)")
     uiView.navigationDelegate = context.coordinator
-    uiView.load(URLRequest(url: URL(string: start!.href + "&state=app:T0002")!))
-
-    
+    uiView.load(URLRequest(url: URL(string: start!.href + "&state=app")!))
     
   }
   
@@ -40,14 +38,12 @@ struct SuomiIdentificationWebView: UIViewRepresentable {
   class Coordinator : NSObject, WKNavigationDelegate {
     var closeWebView : (() -> Void)?
     
-    func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
+    /*func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
       
       print("suomi.fi response url: \(navigationResponse.response.url?.absoluteString)")
       
       if let url = navigationResponse.response.url {
-      
         if url.absoluteString.contains("saml2acs") || url.absoluteString.contains("finish") {
-          
           let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
           let token = urlComponents?.queryItems?.first(where: {$0.name == "token"})?.value
           
@@ -56,12 +52,6 @@ struct SuomiIdentificationWebView: UIViewRepresentable {
           }
           
           webView.configuration.websiteDataStore.httpCookieStore.getAllCookies() { (cookies) in
-            /*let token = cookies.first(where: {$0.name == "SESSION_FE54"})?.value
-            let exp = cookies.first(where: {$0.name == "SESSION_FE54_EXP"})?.value
-            
-            if let token = token {
-              TPPNetworkExecutor.shared.authenticateWithToken(token)
-            }*/
 
             for cookie in cookies {
               print("cookie name:\(cookie.name) value:\(cookie.value)")
@@ -70,6 +60,35 @@ struct SuomiIdentificationWebView: UIViewRepresentable {
           self.closeWebView?()
         }
         decisionHandler(.allow)
+      }
+    }*/
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+      
+      print("suomi.fi response url: \(webView.url?.absoluteString)")
+      
+      if let url = webView.url {
+        if url.absoluteString.contains("saml2acs") || url.absoluteString.contains("finish") {
+          let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
+          let token = urlComponents?.queryItems?.first(where: {$0.name == "token"})?.value
+          
+          if let token = token {
+            TPPNetworkExecutor.shared.authenticateWithToken(token)
+          }
+          
+          /*webView.evaluateJavaScript("document.body.innerHTML", completionHandler: { (doc: Any?, error: Error?) in
+              guard let jsonString = doc as? String else { return }
+              print("doc: \(jsonString)")
+          })*/
+          
+          
+          webView.configuration.websiteDataStore.httpCookieStore.getAllCookies() { (cookies) in
+            
+            for cookie in cookies {
+              print("cookie name:\(cookie.name) value:\(cookie.value)")
+            }
+          }
+          self.closeWebView?()
+        }
       }
     }
   }

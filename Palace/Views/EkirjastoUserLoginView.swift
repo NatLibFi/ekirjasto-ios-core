@@ -16,7 +16,7 @@ struct EkirjastoUserLoginView: View {
   
   @State var passKeyLogin : PasskeyManager? = nil
   @State var _loginSuomi = false
-  @State var _passKey = false
+  @State var _passKey = 0
   @State var authDoc : OPDS2AuthenticationDocument? = nil
   
   var body: some View {
@@ -25,7 +25,7 @@ struct EkirjastoUserLoginView: View {
         _loginSuomi = false
         self.dismissView()
       }, authenticationDocument: authDoc)
-    }else if _passKey {
+    }else if _passKey != 0 {
       passkeyEmail
     }else{
       VStack{
@@ -36,11 +36,17 @@ struct EkirjastoUserLoginView: View {
           }
           
         }
-        Label("Sign in with passkey",image:"").foregroundColor(Color.white).frame(height: 40).onTouchDownUp{ down, value in
+        Label("Register with passkey",image:"").foregroundColor(Color.white).frame(height: 40).onTouchDownUp{ down, value in
           if !down {
-            showPasskey()
+            showPasskey(1)
           }
         }
+        Label("Sign in with passkey",image:"").foregroundColor(Color.white).frame(height: 40).onTouchDownUp{ down, value in
+          if !down {
+            showPasskey(2)
+          }
+        }
+        
       }.frame(maxWidth: .infinity, maxHeight: .infinity)
       .background(Color("ColorEkirjastoGreen"))
     }
@@ -49,14 +55,14 @@ struct EkirjastoUserLoginView: View {
 
   }
   
-  @State var passkeyUserEmail = ""
+  @State var passkeyUserName = ""
   
   private var passkeyEmail: some View {
     VStack{
-      TextField("Email", text: $passkeyUserEmail)
+      TextField("Username", text: $passkeyUserName)
         .textInputAutocapitalization(.never)
         .autocorrectionDisabled()
-      Button(action: loginPasskey){
+      Button(action: {if _passKey == 1 { self.registerPasskey() } else if _passKey == 2 { self.loginPasskey() }}){
         Text("Continue")
       }
     }.frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -79,14 +85,14 @@ struct EkirjastoUserLoginView: View {
   }
 
   
-  func showPasskey(){
+  func showPasskey(_ mode: Int){
     if authDoc == nil {
       fetchAuthDoc { doc in
         authDoc = doc!
-        _passKey = true
+        _passKey = mode
       }
     }else{
-      _passKey = true
+      _passKey = mode
     }
   }
   
@@ -96,14 +102,28 @@ struct EkirjastoUserLoginView: View {
     
     self.passKeyLogin = PasskeyManager(authentication!)
     
-    self.passKeyLogin!.login(passkeyUserEmail) { loginToken in
-      //let savedToken = TPPUserAccount.sharedAccount().authToken
-      if loginToken == nil, let savedToken = TPPUserAccount.sharedAccount().authToken {
-        self.passKeyLogin!.register(passkeyUserEmail,savedToken) { registerToken in
+    self.passKeyLogin!.login(passkeyUserName) { loginToken in
+      if let token = loginToken, !token.isEmpty{
+        TPPNetworkExecutor.shared.authenticateWithToken(token)
+      }
+    }
+    
+  }
+  
+  func registerPasskey(){
+    let authentication = authDoc?.authentication?.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})
+    
+    self.passKeyLogin = PasskeyManager(authentication!)
+    
+    if let savedToken = TPPUserAccount.sharedAccount().authToken {
+      self.passKeyLogin!.register(passkeyUserName,savedToken) { registerToken in
+        if let token = registerToken, !token.isEmpty{
+          TPPNetworkExecutor.shared.authenticateWithToken(token)
           
         }
       }
     }
+    
     
   }
   

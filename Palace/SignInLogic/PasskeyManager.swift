@@ -14,6 +14,11 @@ import SwiftUI
 
 class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextProviding {
  
+  struct TokenResponse: Codable {
+    let token: String
+    let exp: Int?
+  }
+  
   struct RegisterStartResponse: Codable {
     struct User : Codable {
       let id : String
@@ -262,7 +267,13 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
       print("passkey finish error: \(_error.debugDescription))")
       print("passkey finish result: \(String(bytes: _data!.bytes, encoding: .utf8))")
       
-      completion(nil)
+      if let data = _data {
+        let tokenResponse = try? JSONDecoder().decode(TokenResponse.self, from: data)
+        completion(tokenResponse?.token ?? nil)
+      }else {
+        completion(nil)
+      }
+      
     }.resume()
   }
   
@@ -273,10 +284,10 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
     var startRequest = URLRequest(url:URL(string:register)!)
     startRequest.httpMethod = "POST"
     startRequest.setValue("application/json", forHTTPHeaderField: "content-type")
-    //let authorization = "Bearer \(token)"
+    let authorization = "Bearer \(token)"
     //startRequest.addValue("application/json", forHTTPHeaderField: "Accept")
-    //startRequest.addValue(authorization, forHTTPHeaderField: "authorization")
-    //print("auth: \(authorization)")
+    startRequest.addValue(authorization, forHTTPHeaderField: "authorization")
+    print("auth: \(authorization)")
     let content = "{ \"username\" : \"\(username)\" }"
     startRequest.httpBody = Data(content.utf8)
     
@@ -306,7 +317,7 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
     var finishRequest = URLRequest(url:URL(string:finish!.href)!)
     finishRequest.httpMethod = "POST"
     finishRequest.addValue("application/json", forHTTPHeaderField: "content-type")
-    finishRequest.addValue("application/json", forHTTPHeaderField: "Accept")
+    finishRequest.addValue("application/json", forHTTPHeaderField: "accept")
     let authorization = "Bearer \(token)"
     print("register finish url:\(finish!.href)")
     finishRequest.setValue(authorization, forHTTPHeaderField: "authorization")
@@ -319,10 +330,16 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
     URLSession.shared.dataTask(with: finishRequest) { _data,_response,_error in
       
       let _resp = _response as! HTTPURLResponse
-      
+
       print("passkey register finish error: \(_error.debugDescription) \(_resp.statusCode)")
       print("passkey register finish result: \(String(bytes: _data!.bytes, encoding: .utf8))")
-      completion(nil)
+      
+      if let data = _data {
+        let tokenResponse = try? JSONDecoder().decode(TokenResponse.self, from: data)
+        completion(tokenResponse?.token ?? nil)
+      }else {
+        completion(nil)
+      }
     }.resume()
   }
  
