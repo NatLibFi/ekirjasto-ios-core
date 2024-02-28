@@ -9,6 +9,12 @@ import WebKit
 import SwiftUI
 
 struct SuomiIdentificationWebView: UIViewRepresentable {
+  
+  struct TokenResponse: Codable {
+    let token: String
+    let exp: Int?
+  }
+  
   var closeWebView : (() -> Void)?
   var authenticationDocument : OPDS2AuthenticationDocument? = nil
   
@@ -19,9 +25,17 @@ struct SuomiIdentificationWebView: UIViewRepresentable {
     let authentication = authenticationDocument?.authentication?.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})
     let link = authentication?.links?.first(where: {$0.rel == "tunnistus_start"})
     let start = link
+
     print("suomi.fi start.href: \(start?.href)")
     uiView.navigationDelegate = context.coordinator
-    uiView.load(URLRequest(url: URL(string: start!.href + "&state=app")!))
+    //uiView.configuration.websiteDataStore.removeData(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes(), for: [WKWebsiteDataRecord], completionHandler: <#T##() -> Void#>)
+    var request = URLRequest(url: URL(string: "\(start!.href)&state=app")!)
+    request.addValue("application/json", forHTTPHeaderField: "accept")
+    //request.httpBody = "state=app".data(using: .utf8)
+    //request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField:"Content-Type")
+    //request.setValue(NSLocalizedString("lang", comment: ""), forHTTPHeaderField:"Accept-Language")
+    request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
+    uiView.load(request)
     
   }
   
@@ -71,22 +85,27 @@ struct SuomiIdentificationWebView: UIViewRepresentable {
           let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
           let token = urlComponents?.queryItems?.first(where: {$0.name == "token"})?.value
           
-          if let token = token {
-            TPPNetworkExecutor.shared.authenticateWithToken(token)
-          }
-          
-          /*webView.evaluateJavaScript("document.body.innerHTML", completionHandler: { (doc: Any?, error: Error?) in
-              guard let jsonString = doc as? String else { return }
-              print("doc: \(jsonString)")
-          })*/
-          
-          
           webView.configuration.websiteDataStore.httpCookieStore.getAllCookies() { (cookies) in
             
             for cookie in cookies {
               print("cookie name:\(cookie.name) value:\(cookie.value)")
             }
           }
+          //TODO: use regex to exract json object from document.body?
+          webView.evaluateJavaScript("document.getElementsByTagName('pre')[0].innerHTML", completionHandler: { (doc: Any?, error: Error?) in
+            guard let jsonString = doc as? String else { return }
+            
+            let tokenResponse = try? JSONDecoder().decode(TokenResponse.self, from: jsonString.data(using: .utf8)!)
+            
+            if let tokenResponse = tokenResponse {
+              TPPNetworkExecutor.shared.authenticateWithToken(tokenResponse.token)
+            }
+            
+            print("doc: \(jsonString)")
+          })
+          
+
+
           self.closeWebView?()
         }
       }

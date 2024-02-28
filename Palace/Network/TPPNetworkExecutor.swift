@@ -405,7 +405,7 @@ extension TPPNetworkExecutor {
       "Bearer \(token)",
       forHTTPHeaderField: "Authorization"
     )
-    print("acess token \(token)")
+    print("access token \(token)")
     URLSession.shared.dataTask(with: request){ data, response, error in
       
       if(data != nil){
@@ -417,7 +417,7 @@ extension TPPNetworkExecutor {
           let sharedAccount = TPPUserAccount.sharedAccount()
           sharedAccount.setAuthToken(accessToken,barcode: nil, pin: nil, expirationDate: nil)
         }else{
-          print("authenticateWithToken error: \(error?.localizedDescription) data: \(String(data:data!,encoding: .utf8))")
+          print("authenticateWithToken error: \(String(describing: error?.localizedDescription)) data: \(String(describing: String(data:data!,encoding: .utf8)))")
         }
         
         
@@ -430,6 +430,14 @@ extension TPPNetworkExecutor {
       
       
     }.resume()
+    
+  }
+  
+  func userInfo(_ complete: (String?)->(Void)){
+    
+  }
+  
+  func revokeToken(_ sessionId: String? = nil){
     
   }
   
