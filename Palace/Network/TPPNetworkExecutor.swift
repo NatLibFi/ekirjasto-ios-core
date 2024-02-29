@@ -98,15 +98,29 @@ extension TPPNetworkExecutor: TPPRequestExecuting {
                 self.authenticateWithToken(TPPUserAccount.sharedAccount().authToken!) { status in
                   if status == 401 {
                     EkirjastoLoginViewController.show {
-                      self.executeRequest(updatedRequest, completion: completion)
+                      if let token = TPPUserAccount.sharedAccount().authToken {
+                        updatedRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+                        self.executeRequest(updatedRequest, completion: completion)
+                      }else{
+                        completion(result)
+                      }
+                      
                     }
                   }else if status == 200 {
-                    self.executeRequest(updatedRequest, completion: completion)
+                    
+                    if let token = TPPUserAccount.sharedAccount().authToken {
+                      updatedRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+                      self.executeRequest(updatedRequest, completion: completion)
+                    }else{
+                      completion(result)
+                    }
                   }else {
                     completion(result)
                   }
                 }
               }
+            }else{
+              completion(result)
             }
           }
           
