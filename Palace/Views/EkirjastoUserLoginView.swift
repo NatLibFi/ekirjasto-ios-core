@@ -20,6 +20,7 @@ struct EkirjastoUserLoginView: View {
   @State var authDoc : OPDS2AuthenticationDocument? = nil
   
   var body: some View {
+    
     if _loginSuomi {
       SuomiIdentificationWebView(closeWebView: {
         _loginSuomi = false
@@ -29,19 +30,22 @@ struct EkirjastoUserLoginView: View {
       passkeyEmail
     }else{
       VStack{
-
-        Label("Sign in with Suomi.fi e-identification",image:"").foregroundColor(Color.white).frame(height: 40).onTouchDownUp { down, value in
+        
+        Text("Sign in with Suomi.fi e-identification").foregroundColor(Color.white).frame(height: 40).onTouchDownUp { down, value in
           if !down {
             loginSuomi()
           }
           
         }
-        Label("Register with passkey",image:"").foregroundColor(Color.white).frame(height: 40).onTouchDownUp{ down, value in
-          if !down {
-            showPasskey(1)
+        if TPPUserAccount.sharedAccount().authToken != nil {
+          Text("Register with passkey").foregroundColor(Color.white).frame(height: 40).onTouchDownUp{ down, value in
+            if !down {
+              showPasskey(1)
+            }
           }
         }
-        Label("Sign in with passkey",image:"").foregroundColor(Color.white).frame(height: 40).onTouchDownUp{ down, value in
+        
+        Text("Sign in with passkey").foregroundColor(Color.white).frame(height: 40).onTouchDownUp{ down, value in
           if !down {
             showPasskey(2)
           }
@@ -49,6 +53,12 @@ struct EkirjastoUserLoginView: View {
         
       }.frame(maxWidth: .infinity, maxHeight: .infinity)
       .background(Color("ColorEkirjastoGreen"))
+      .toolbar{
+        ToolbarItem(placement: .automatic){
+          Text("e-library account").foregroundColor(Color.white)
+        }
+        
+      }.navigationTitle("e-library account")
     }
   
 
