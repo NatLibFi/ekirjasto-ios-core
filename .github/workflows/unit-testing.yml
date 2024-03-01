@@ -28,7 +28,7 @@ jobs:
 #        env:
 #          BUILD_CONTEXT: ci
       - name: Build non-Carthage 3rd party dependencies
-        run: ./scripts/build-3rd-party-dependencies.sh --mo-private
+        run: ./scripts/build-3rd-party-dependencies.sh --oo-private
         env:
           BUILD_CONTEXT: ci
       - name: Build Palace without DRM support
