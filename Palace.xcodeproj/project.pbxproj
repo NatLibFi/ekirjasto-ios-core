@@ -676,6 +676,12 @@
 		3688FADF2B67FEFE00A95558 /* EkirjastoLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3688FADD2B67FEFE00A95558 /* EkirjastoLoginViewController.swift */; };
 		3688FAE02B67FEFE00A95558 /* EkirjastoLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3688FADD2B67FEFE00A95558 /* EkirjastoLoginViewController.swift */; };
 		3688FAE12B67FEFE00A95558 /* EkirjastoLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3688FADD2B67FEFE00A95558 /* EkirjastoLoginViewController.swift */; };
+		36BBC78E2B920EB300E8E426 /* EkirjastoUserLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363C62092B14EEA300858AA5 /* EkirjastoUserLoginView.swift */; };
+		36BBC78F2B920EB300E8E426 /* EkirjastoArrowDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3379F81E2A5D418400E9945F /* EkirjastoArrowDownButton.swift */; };
+		36BBC7902B920EB300E8E426 /* EkirjastoFacetFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3379F8102A5D3C4B00E9945F /* EkirjastoFacetFilterView.swift */; };
+		36BBC7912B920EB300E8E426 /* EkirjastoLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3379F8212A5D792900E9945F /* EkirjastoLoginView.swift */; };
+		36BBC7922B920EB300E8E426 /* EkirjastoSuomiIdentificationWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C1160E2AE7A914007CABEB /* EkirjastoSuomiIdentificationWebView.swift */; };
+		36BBC7932B920EE100E8E426 /* PasskeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36833E4B2B5E937000D7B6B2 /* PasskeyManager.swift */; };
 		52545185217A76FF00BBC1B4 /* TPPUserNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52545184217A76FF00BBC1B4 /* TPPUserNotifications.swift */; };
 		52592BB821220A1100587288 /* TPPLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 52592BB721220A1100587288 /* TPPLocalization.m */; };
 		5A69290E1B95ACC600FB4C10 /* readium-shared-js_all.js in Resources */ = {isa = PBXBuildFile; fileRef = 5A69290D1B95ACC600FB4C10 /* readium-shared-js_all.js */; };
@@ -4807,6 +4813,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36BBC7932B920EE100E8E426 /* PasskeyManager.swift in Sources */,
+				36BBC78E2B920EB300E8E426 /* EkirjastoUserLoginView.swift in Sources */,
+				36BBC78F2B920EB300E8E426 /* EkirjastoArrowDownButton.swift in Sources */,
+				36BBC7902B920EB300E8E426 /* EkirjastoFacetFilterView.swift in Sources */,
+				36BBC7912B920EB300E8E426 /* EkirjastoLoginView.swift in Sources */,
+				36BBC7922B920EB300E8E426 /* EkirjastoSuomiIdentificationWebView.swift in Sources */,
 				73D8D26E25A68CA900DF5F69 /* LibraryService.swift in Sources */,
 				73D8D26825A68C6500DF5F69 /* TPPR2Owner.swift in Sources */,
 				73EB0A6525821DF4006BC997 /* TPPLibraryDescriptionCell.swift in Sources */,
