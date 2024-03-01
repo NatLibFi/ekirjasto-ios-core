@@ -11,7 +11,7 @@ platform :ios do
   lane :nodrm do
     build_app(
       project: "Palace.xcodeproj",
-      scheme: "Palace-noDRM",
+      scheme: "Ekirjasto",
       skip_package_ipa: true,
       skip_archive: true,
       skip_codesigning: true,
