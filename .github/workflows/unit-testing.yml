@@ -8,6 +8,10 @@ jobs:
         run: sudo xcode-select -switch /Applications/Xcode_15.0.1.app
       - name: Checkout main repo and submodules
         uses: actions/checkout@v3
+      - name: Set up repo for nonDRM build
+        run: exec ./scripts/setup-repo-nodrm.sh
+        env:
+          BUILD_CONTEXT: ci
         with:
           submodules: true
  #         token: ${{ secrets.CI_GITHUB_ACCESS_TOKEN }}
