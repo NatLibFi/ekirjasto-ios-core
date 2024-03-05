@@ -28,7 +28,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>org.thepalaceproject.palace</string>
+			<string>fi.kansalliskirjasto.e-kirjasto</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>PalaceApp</string>
