@@ -116,6 +116,9 @@ struct EkirjastoUserLoginView: View {
       if let token = loginToken, !token.isEmpty{
         TPPNetworkExecutor.shared.authenticateWithToken(token)
       }
+      DispatchQueue.main.async {
+        self.dismissView()
+      }
     }
     
   }
@@ -129,8 +132,11 @@ struct EkirjastoUserLoginView: View {
       self.passKeyLogin!.register(passkeyUserName,savedToken) { registerToken in
         if let token = registerToken, !token.isEmpty{
           TPPNetworkExecutor.shared.authenticateWithToken(token)
-          
         }
+        DispatchQueue.main.async {
+          self.dismissView()
+        }
+        
       }
     }
     

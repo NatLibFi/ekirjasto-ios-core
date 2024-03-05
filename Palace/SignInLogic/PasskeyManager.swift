@@ -192,6 +192,7 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
     var startRequest = URLRequest(url:URL(string:start!.href)!)
     startRequest.httpMethod = "POST"
     startRequest.setValue("application/json", forHTTPHeaderField: "content-type")
+    startRequest.setValue("application/json", forHTTPHeaderField: "accept")
     let content = "{ \"username\" : \"\(username)\" }"
     startRequest.httpBody = Data(content.utf8)
 
@@ -258,6 +259,7 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
     var finishRequest = URLRequest(url:URL(string:finish!.href)!)
     finishRequest.httpMethod = "POST"
     finishRequest.setValue("application/json", forHTTPHeaderField: "content-type")
+    finishRequest.setValue("application/json", forHTTPHeaderField: "accept")
     
     let dataJson = try! String(data: JSONEncoder().encode(data),encoding: .utf8)
     let content = "{ \"id\" : \"\(data.id)\" ,\"data\" : \(dataJson!) }"
