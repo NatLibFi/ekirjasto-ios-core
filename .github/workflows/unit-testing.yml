@@ -9,7 +9,7 @@ jobs:
       - name: Checkout main repo and submodules
         uses: actions/checkout@v3
       - name: Set up repo for nonDRM build
-        run: exec ./scripts/setup-repo-nodrm.sh
+        run: exec ./scripts/setup-repo-nodrm-github.sh
         env:
           BUILD_CONTEXT: ci
 #        with:
