@@ -90,6 +90,12 @@
   }
 }
 
+- (void)showAndReloadCatalogViewController
+{
+  [self.catalogNavigationController updateFeedAndRegistryOnAccountChange];
+  self.selectedViewController = self.catalogNavigationController;
+}
+
 #pragma mark - UITabBarControllerDelegate
 
 - (BOOL)tabBarController:(UITabBarController *)__unused tabBarController

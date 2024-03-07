@@ -133,13 +133,10 @@ struct MyBooksView: View {
   
   @ViewBuilder private var leadingBarButton: some View {
     Button {
-      selectNewLibrary.toggle()
+      showAndReloadCatalogTab()
     } label: {
       ImageProviders.MyBooksView.myLibraryIcon
-    }
-    .actionSheet(isPresented: $selectNewLibrary) {
-      libraryPicker
-    }
+    } .accessibilityLabel(DisplayStrings.accessibilityShowAndReloadCatalogTab)
   }
   
   @ViewBuilder private var trailingBarButton: some View {
@@ -148,6 +145,10 @@ struct MyBooksView: View {
     } label: {
       ImageProviders.MyBooksView.search
     }
+  }
+  
+  private func showAndReloadCatalogTab() {
+    TPPRootTabBarController.shared().showAndReloadCatalogViewController()
   }
   
   private var libraryPicker: ActionSheet {

@@ -8,7 +8,7 @@
 	<array>
 		<string>applinks:thepalaceproject.org</string>
 		<string>applinks:thepalaceproject.page.link</string>
-		<string>webcredentials:e-kirjasto.loikka.dev</string>
+		<string>webcredentials:e-kirjasto.loikka.dev?mode=developer</string>
 	</array>
 	<key>keychain-access-groups</key>
 	<array>

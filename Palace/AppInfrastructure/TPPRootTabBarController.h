@@ -13,6 +13,8 @@
 @property (readonly) TPPR2Owner *r2Owner;
 @property(nonatomic, readonly) TPPCatalogNavigationController *catalogNavigationController;
 
+- (void)showAndReloadCatalogViewController;
+
 /// This method will present a view controller from the receiver, or from the
 /// controller currently being presented from the receiver, or from the
 /// controller being presented by that one, and so on, such that no duplicate
