@@ -50,7 +50,7 @@ struct Strings {
     static let loginErrorTitle = NSLocalizedString("Login Failed", comment: "Title for login error alert")
     static let loginErrorDescription = NSLocalizedString("An error occurred during the authentication process",
                                                          comment: "Generic error message while handling sign-in redirection during authentication")
-    static let userDeniedLocationAccess = NSLocalizedString("User denied location access. Go to system settings to enable location access for the Palace App.", comment: "Error message shown to user when location services are denied.")
+    static let userDeniedLocationAccess = NSLocalizedString("User denied location access. Go to system settings to enable location access for E-kirjasto.", comment: "Error message shown to user when location services are denied.")
     static let uknownLocationError = NSLocalizedString("Unkown error occurred. Please try again.", comment: "Error message shown to user when an unknown location error occurs.")
     static let locationFetchFailed = NSLocalizedString("Failed to get current location. Please try again.", comment: "Error message shown to user when CoreLocation does not return the current location.")
   }
@@ -276,9 +276,9 @@ struct Strings {
   
   struct TPPAccountRegistration {
     static let doesUserHaveLibraryCard = NSLocalizedString("Don't have a library card?", comment: "Title for registration. Asking the user if they already have a library card.")
-    static let geolocationInstructions = NSLocalizedString("The Palace App requires a one-time location check in order to verify your library service area. Once you choose \"Create Card\", please select \"Allow Once\" in the popup so we can verify this information.", comment: "Body for registration. Explaining the reason for requesting the user's location and instructions for how to provide permission.")
+    static let geolocationInstructions = NSLocalizedString("E-kirjasto requires a one-time location check in order to verify your library service area. Once you choose \"Create Card\", please select \"Allow Once\" in the popup so we can verify this information.", comment: "Body for registration. Explaining the reason for requesting the user's location and instructions for how to provide permission.")
     static let createCard = NSLocalizedString("Create Card", comment: "")
-    static let deniedLocationAccessMessage = NSLocalizedString("The Palace App requires a one-time location check in order to verify your library service area. You have disabled location services for this app. To enable, please select the 'Open Settings' button below then continue with card creation.", comment: "Registration message shown to user when location access has been denied.")
+    static let deniedLocationAccessMessage = NSLocalizedString("E-kirjasto requires a one-time location check in order to verify your library service area. You have disabled location services for this app. To enable, please select the 'Open Settings' button below then continue with card creation.", comment: "Registration message shown to user when location access has been denied.")
     static let deniedLocationAccessMessageBoldText = NSLocalizedString("You have disabled location services for this app.",comment: "Registration message shown to user when location access has been denied.")
     static let openSettings = NSLocalizedString("Open Settings", comment: "")
   }
