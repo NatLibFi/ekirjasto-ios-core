@@ -4807,6 +4807,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36BBC7932B920EE100E8E426 /* PasskeyManager.swift in Sources */,
+				36BBC78E2B920EB300E8E426 /* EkirjastoUserLoginView.swift in Sources */,
+				36BBC78F2B920EB300E8E426 /* EkirjastoArrowDownButton.swift in Sources */,
+				36BBC7902B920EB300E8E426 /* EkirjastoFacetFilterView.swift in Sources */,
+				36BBC7912B920EB300E8E426 /* EkirjastoLoginView.swift in Sources */,
+				36BBC7922B920EB300E8E426 /* EkirjastoSuomiIdentificationWebView.swift in Sources */,
 				73D8D26E25A68CA900DF5F69 /* LibraryService.swift in Sources */,
 				73D8D26825A68C6500DF5F69 /* TPPR2Owner.swift in Sources */,
 				73EB0A6525821DF4006BC997 /* TPPLibraryDescriptionCell.swift in Sources */,
@@ -5858,11 +5864,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.35;
-				PRODUCT_BUNDLE_IDENTIFIER = org.thepalaceproject.palace;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
 				PRODUCT_MODULE_NAME = Palace;
 				PRODUCT_NAME = "Palace-noDRM";
 				PROVISIONING_PROFILE = "2e185b6c-271e-4b02-a05e-860b8c3831f6";
-				PROVISIONING_PROFILE_SPECIFIER = "Ad Hoc";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG SIMPLYE";
 				SWIFT_OBJC_BRIDGING_HEADER = "Palace/AppInfrastructure/Palace-Bridging-Header.h";
@@ -5916,7 +5922,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.35;
-				PRODUCT_BUNDLE_IDENTIFIER = org.thepalaceproject.palace;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
 				PRODUCT_MODULE_NAME = Palace;
 				PRODUCT_NAME = "Palace-noDRM";
 				PROVISIONING_PROFILE = "b3d9154d-70e1-48d6-a0c5-869431277a5c";
@@ -6105,7 +6111,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.35;
-				PRODUCT_BUNDLE_IDENTIFIER = org.thepalaceproject.palace;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
 				PROVISIONING_PROFILE_SPECIFIER = "Ad Hoc";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG SIMPLYE FEATURE_DRM_CONNECTOR FEATURE_CRASH_REPORTING LCP FEATURE_OVERDRIVE";
@@ -6165,7 +6171,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.35;
-				PRODUCT_BUNDLE_IDENTIFIER = org.thepalaceproject.palace;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
 				PROVISIONING_PROFILE_SPECIFIER = "App Store";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "SIMPLYE FEATURE_DRM_CONNECTOR FEATURE_CRASH_REPORTING LCP FEATURE_OVERDRIVE";

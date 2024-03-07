@@ -22,9 +22,9 @@
 typedef NS_ENUM(NSInteger, CellKind) {
   CellKindAdvancedSettings,
   CellKindAgeCheck,
-  CellKindBarcodeImage,
-  CellKindBarcode,
-  CellKindPIN,
+  //CellKindBarcodeImage,
+  //CellKindBarcode,
+  //CellKindPIN,
   CellKindLogInSignOut,
   CellKindRegistration,
   CellKindSyncButton,
@@ -353,14 +353,17 @@ Authenticating with any of those barcodes should work.
       [multipleCells addObject:idpCell];
     }
     authCells = multipleCells;
-  } else if (authenticationMethod.pinKeyboard != LoginKeyboardNone) {
+  } /*else if (authenticationMethod.pinKeyboard != LoginKeyboardNone) {
     // if authentication method has an information about pin keyboard, the login method is requires a pin
     authCells = @[@(CellKindBarcode), @(CellKindPIN), @(CellKindLogInSignOut)];
   } else {
     // if all other cases failed, it means that server expects just a barcode, with a blank pin
     self.PINTextField.text = @"";
     authCells = @[@(CellKindBarcode), @(CellKindLogInSignOut)];
-  }
+     */
+  else {
+       authCells = @[@(CellKindLogInSignOut)];
+     }
 
   return authCells;
 }
@@ -418,9 +421,9 @@ Authenticating with any of those barcodes should work.
     [workingSection addObjectsFromArray:[self cellsForAuthMethod:self.businessLogic.selectedAuthentication]];
   }
 
-  if ([self.businessLogic librarySupportsBarcodeDisplay]) {
+  /*if ([self.businessLogic librarySupportsBarcodeDisplay]) {
     [workingSection insertObject:@(CellKindBarcodeImage) atIndex:0];
-  }
+  }*/
 
   return workingSection;
 }
@@ -587,12 +590,12 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
       }
       break;
     }
-    case CellKindBarcode:
+    /*case CellKindBarcode:
       [self.usernameTextField becomeFirstResponder];
       break;
     case CellKindPIN:
       [self.PINTextField becomeFirstResponder];
-      break;
+      break;*/
     case CellKindLogInSignOut: {
       [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
       NSString *logoutString;
@@ -643,7 +646,7 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
       [self.navigationController pushViewController:vc animated:YES];
       break;
     }
-    case CellKindBarcodeImage: {
+    /*case CellKindBarcodeImage: {
       [self.tableView beginUpdates];
       // Collapse barcode by adjusting certain constraints
       if (self.barcodeImageView.bounds.size.height > sConstantZero) {
@@ -664,7 +667,7 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
       }
       [self.tableView endUpdates];
       break;
-    }
+    }*/
     case CellReportIssue: {
       if (self.selectedAccount.supportEmail) {
           [[ProblemReportEmail sharedInstance]
@@ -774,7 +777,7 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
   CellKind cellKind = (CellKind)[sectionArray[indexPath.row] intValue];
 
   switch(cellKind) {
-    case CellKindBarcode: {
+    /*case CellKindBarcode: {
       UITableViewCell *const cell = [[UITableViewCell alloc]
                                      initWithStyle:UITableViewCellStyleDefault
                                      reuseIdentifier:nil];
@@ -869,7 +872,7 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
                                        withOffset:-2.0];
       }
       return cell;
-    }
+    }*/
     case CellKindLogInSignOut: {
       if(!self.logInSignOutCell) {
         self.logInSignOutCell = [[UITableViewCell alloc]

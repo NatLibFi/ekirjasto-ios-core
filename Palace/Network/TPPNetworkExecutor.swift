@@ -98,18 +98,32 @@ extension TPPNetworkExecutor: TPPRequestExecuting {
                 self.authenticateWithToken(TPPUserAccount.sharedAccount().authToken!) { status in
                   if status == 401 {
                     EkirjastoLoginViewController.show {
-                      self.executeRequest(updatedRequest, completion: completion)
+                      if let token = TPPUserAccount.sharedAccount().authToken {
+                        updatedRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+                        self.executeRequest(updatedRequest, completion: completion)
+                      }else{
+                        completion(result)
+                      }
+
                     }
                   }else if status == 200 {
-                    self.executeRequest(updatedRequest, completion: completion)
+
+                    if let token = TPPUserAccount.sharedAccount().authToken {
+                      updatedRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+                      self.executeRequest(updatedRequest, completion: completion)
+                    }else{
+                      completion(result)
+                    }
                   }else {
                     completion(result)
                   }
                 }
               }
+            }else{
+              completion(result)
             }
           }
-          
+
         case .success(_, _):
           completion(result)
         }
@@ -120,7 +134,7 @@ extension TPPNetworkExecutor: TPPRequestExecuting {
         completion(NYPLResult.failure(error, nil))
       } else {
         resultTask = performDataTask(with: req, completion: { result in
-          
+
           if case .failure(let error, let response) = result {
             if let httpResponse = response as? HTTPURLResponse {
               if httpResponse.statusCode == 401 {
@@ -140,7 +154,7 @@ extension TPPNetworkExecutor: TPPRequestExecuting {
           }else {
             completion(result)
           }
-          
+
         })
       }
     } else {
@@ -398,7 +412,6 @@ extension TPPNetworkExecutor {
     let authentication = authenticationDocument?.authentication?.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})
     
     let link = authentication?.links?.first(where: {$0.rel == "authenticate"})
-    
     var request = URLRequest(url: URL(string:link!.href)!)
     request.httpMethod = "POST"
     print("token \(token)")
@@ -406,18 +419,21 @@ extension TPPNetworkExecutor {
       "Bearer \(token)",
       forHTTPHeaderField: "Authorization"
     )
-    print("acess token \(token)")
+    print("access token \(token)")
     URLSession.shared.dataTask(with: request){ data, response, error in
       
       if(data != nil){
         let json = try? JSONSerialization.jsonObject(with: data!)
         let jsonRoot = json as? [String: Any]
-        let accessToken = jsonRoot!["access_token"] as! String
+        let accessToken = jsonRoot?["access_token"] as? String
         
-        let sharedAccount = TPPUserAccount.sharedAccount()
-        
-        
-        sharedAccount.setAuthToken(accessToken,barcode: nil, pin: nil, expirationDate: nil)
+        if let accessToken = accessToken {
+          let sharedAccount = TPPUserAccount.sharedAccount()
+          sharedAccount.setAuthToken(accessToken,barcode: nil, pin: nil, expirationDate: nil)
+        }else{
+          print("authenticateWithToken error: \(String(describing: error?.localizedDescription)) data: \(String(describing: String(data:data!,encoding: .utf8)))")
+        }
+
         
       }
       if let httpResponse = response as? HTTPURLResponse {
@@ -425,9 +441,17 @@ extension TPPNetworkExecutor {
       }else{
         completion?(nil)
       }
-      
-      
+
+
     }.resume()
+    
+  }
+
+  func userInfo(_ complete: (String?)->(Void)){
+
+  }
+
+  func revokeToken(_ sessionId: String? = nil){
     
   }
   
