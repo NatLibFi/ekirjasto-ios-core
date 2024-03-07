@@ -16,45 +16,63 @@ struct EkirjastoUserLoginView: View {
   
   @State var passKeyLogin : PasskeyManager? = nil
   @State var _loginSuomi = false
-  @State var _passKey = false
+  @State var _passKey = 0
   @State var authDoc : OPDS2AuthenticationDocument? = nil
   
   var body: some View {
+    
     if _loginSuomi {
       SuomiIdentificationWebView(closeWebView: {
         _loginSuomi = false
         self.dismissView()
       }, authenticationDocument: authDoc)
-    }else if _passKey {
+    }else if _passKey != 0 {
       passkeyEmail
     }else{
       VStack{
-
-        Label("Sign in with Suomi.fi e-identification",image:"").foregroundColor(Color.white).frame(height: 40).onTouchDownUp { down, value in
+        
+        Text("Sign in with Suomi.fi e-identification").foregroundColor(Color.white).frame(height: 40).onTouchDownUp { down, value in
           if !down {
             loginSuomi()
           }
           
         }
-        Label("Sign in with passkey",image:"").foregroundColor(Color.white).frame(height: 40).onTouchDownUp{ down, value in
-          if !down {
-            showPasskey()
+        if TPPUserAccount.sharedAccount().authToken != nil {
+          Text("Register with passkey").foregroundColor(Color.white).frame(height: 40).onTouchDownUp{ down, value in
+            if !down {
+              showPasskey(1)
+            }
           }
         }
+        
+        Text("Sign in with passkey").foregroundColor(Color.white).frame(height: 40).onTouchDownUp{ down, value in
+          if !down {
+            showPasskey(2)
+          }
+        }
+        
       }.frame(maxWidth: .infinity, maxHeight: .infinity)
       .background(Color("ColorEkirjastoGreen"))
+      .toolbar{
+        ToolbarItem(placement: .automatic){
+          Text("e-library account").foregroundColor(Color.white)
+        }
+        
+      }.navigationTitle("e-library account")
     }
+  
+
 
   }
   
-  @State var passkeyUserEmail = ""
+  @State var passkeyUserName = ""
   
   private var passkeyEmail: some View {
     VStack{
-      TextField("Email", text: $passkeyUserEmail)
+      TextField("Username", text: $passkeyUserName)
         .textInputAutocapitalization(.never)
         .autocorrectionDisabled()
-      Button(action: loginPasskey){
+      Button(action: {if _passKey == 1 { self.registerPasskey() } else if _passKey == 2 { self.loginPasskey() }}){
         Text("Continue")
       }
     }.frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -77,14 +95,14 @@ struct EkirjastoUserLoginView: View {
   }
 
   
-  func showPasskey(){
+  func showPasskey(_ mode: Int){
     if authDoc == nil {
       fetchAuthDoc { doc in
         authDoc = doc!
-        _passKey = true
+        _passKey = mode
       }
     }else{
-      _passKey = true
+      _passKey = mode
     }
   }
   
@@ -94,13 +112,34 @@ struct EkirjastoUserLoginView: View {
     
     self.passKeyLogin = PasskeyManager(authentication!)
     
-    self.passKeyLogin!.login(passkeyUserEmail) { loginToken in
-      if loginToken == nil {
-        self.passKeyLogin!.register(passkeyUserEmail) { registerToken in
-          
-        }
+    self.passKeyLogin!.login(passkeyUserName) { loginToken in
+      if let token = loginToken, !token.isEmpty{
+        TPPNetworkExecutor.shared.authenticateWithToken(token)
+      }
+      DispatchQueue.main.async {
+        self.dismissView()
       }
     }
+    
+  }
+  
+  func registerPasskey(){
+    let authentication = authDoc?.authentication?.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})
+    
+    self.passKeyLogin = PasskeyManager(authentication!)
+    
+    if let savedToken = TPPUserAccount.sharedAccount().authToken {
+      self.passKeyLogin!.register(passkeyUserName,savedToken) { registerToken in
+        if let token = registerToken, !token.isEmpty{
+          TPPNetworkExecutor.shared.authenticateWithToken(token)
+        }
+        DispatchQueue.main.async {
+          self.dismissView()
+        }
+        
+      }
+    }
+    
     
   }
   
