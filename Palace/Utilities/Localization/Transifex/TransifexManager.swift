@@ -11,7 +11,7 @@ import Transifex
 @objc class TransifexManager: NSObject {
   @objc static func setup() {
     let locales = TXLocaleState(sourceLocale: "en",
-                                appLocales: ["en", "es", "it", "de", "fr"])
+                                appLocales: ["en", "fi", "sv"])
 
     TXNative.initialize(
       locales: locales,

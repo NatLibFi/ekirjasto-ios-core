@@ -171,7 +171,10 @@ import OverdriveProcessor
     if userAccount.hasCredentials() || !(loginRequired ?? false) {
       processDownloadWithCredentials(for: book, withState: state, andRequest: initedRequest)
     } else {
-      requestCredentialsAndStartDownload(for: book)
+      EkirjastoLoginViewController.show {
+        self.processDownloadWithCredentials(for: book, withState: state, andRequest: initedRequest)
+      }
+      //requestCredentialsAndStartDownload(for: book)
     }
   }
   

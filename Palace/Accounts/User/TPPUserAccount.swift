@@ -361,16 +361,29 @@ private enum StorageKey: String {
   }
   
   var authTokenHasExpired: Bool {
-    guard let credentials = credentials,
-            case let TPPCredentials.token(authToken: token) = credentials,
-            let expirationDate = token.expirationDate, expirationDate > Date()
-    else {
-      return true
-    }
     
-   return false
+    if let credentials = credentials {
+      if case let TPPCredentials.token(authToken: token) = credentials {
+        if let expirationDate = token.expirationDate {
+          return expirationDate > Date()
+        }else{//no expiration date, will ask user to re-login when token is no longer accepted
+          return false
+        }
+      }
+    }
+    return false
+    
   }
-
+  
+  var authTokenExpirationDate: Date?{
+    if let credentials = credentials {
+      if case let TPPCredentials.token(authToken: token) = credentials {
+        return token.expirationDate
+      }
+    }
+    return nil
+  }
+  
   var patronFullName: String? {
     if let patron = patron,
       let name = patron["name"] as? [String:String]
@@ -456,6 +469,10 @@ private enum StorageKey: String {
   @objc(setAuthToken::::)
   func setAuthToken(_ token: String, barcode: String?, pin: String?, expirationDate: Date?) {
     credentials = .token(authToken: token, barcode: barcode, pin: pin, expirationDate: expirationDate)
+  }
+  
+  func setEKirjastoToken(_ token: String){
+    
   }
 
   @objc(setCookies:)

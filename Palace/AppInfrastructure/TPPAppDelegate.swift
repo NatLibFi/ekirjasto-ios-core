@@ -9,8 +9,6 @@
 import Foundation
 import FirebaseCore
 import FirebaseDynamicLinks
-import GoogleSignIn
-
 @main
 class TPPAppDelegate: UIResponder, UIApplicationDelegate {
   
@@ -138,10 +136,6 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
       if DLNavigator.shared.isValidLink(dynamicLink) {
         DLNavigator.shared.navigate(to: dynamicLink)
       }
-      return true
-    }
-    
-    if GIDSignIn.sharedInstance.handle(url){
       return true
     }
     

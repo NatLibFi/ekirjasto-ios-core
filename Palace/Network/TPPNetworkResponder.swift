@@ -237,6 +237,7 @@ extension TPPNetworkResponder: URLSessionDataDelegate {
   }
   
   private func handleNetworkError(_ networkError: Error, for task: URLSessionTask, currentTaskInfo: TPPNetworkTaskInfo, logMetadata: [String: Any]) {
+    let response = task.response
     currentTaskInfo.completion(.failure(networkError as TPPUserFriendlyError, task.response))
     TPPErrorLogger.logNetworkError(
       networkError,

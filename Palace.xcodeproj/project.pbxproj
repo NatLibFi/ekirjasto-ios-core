@@ -660,8 +660,6 @@
 		33FCF7FC2AC45971008E3B72 /* RegistrationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BDA0242A2A7D0300C133CB /* RegistrationCell.swift */; };
 		33FCF7FE2AC45A7C008E3B72 /* FirebaseDynamicLinks in Frameworks */ = {isa = PBXBuildFile; productRef = 33FCF7FD2AC45A7C008E3B72 /* FirebaseDynamicLinks */; };
 		363C61F42B14E5B800858AA5 /* ReadiumLCP in Frameworks */ = {isa = PBXBuildFile; productRef = 363C61F32B14E5B800858AA5 /* ReadiumLCP */; };
-		363C61F92B14E70200858AA5 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 363C61F82B14E70200858AA5 /* GoogleSignIn */; };
-		363C61FB2B14E70200858AA5 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 363C61FA2B14E70200858AA5 /* GoogleSignInSwift */; };
 		363C61FC2B14E81800858AA5 /* EPUBSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57345502AD6EB600021D768 /* EPUBSearchViewModel.swift */; };
 		363C61FD2B14E82500858AA5 /* EPUBSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573454A2AD6E8410021D768 /* EPUBSearchView.swift */; };
 		363C61FE2B14E83900858AA5 /* UIHostingController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5515EC02AD8E827000BDFE9 /* UIHostingController+Extensions.swift */; };
@@ -672,6 +670,18 @@
 		363C620C2B14F08C00858AA5 /* UserProfileDocument+Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75423242AFC381E008CB7EF /* UserProfileDocument+Links.swift */; };
 		3672BB9C2B14DFE400F320E8 /* PalaceAudiobookToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F9BABE2A8E6811001697DE /* PalaceAudiobookToolkit.framework */; };
 		3672BB9D2B14DFE400F320E8 /* PalaceAudiobookToolkit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E7F9BABE2A8E6811001697DE /* PalaceAudiobookToolkit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		36833E4C2B5E937000D7B6B2 /* PasskeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36833E4B2B5E937000D7B6B2 /* PasskeyManager.swift */; };
+		36833E4D2B5EDBD500D7B6B2 /* PasskeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36833E4B2B5E937000D7B6B2 /* PasskeyManager.swift */; };
+		3688FADE2B67FEFE00A95558 /* EkirjastoLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3688FADD2B67FEFE00A95558 /* EkirjastoLoginViewController.swift */; };
+		3688FADF2B67FEFE00A95558 /* EkirjastoLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3688FADD2B67FEFE00A95558 /* EkirjastoLoginViewController.swift */; };
+		3688FAE02B67FEFE00A95558 /* EkirjastoLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3688FADD2B67FEFE00A95558 /* EkirjastoLoginViewController.swift */; };
+		3688FAE12B67FEFE00A95558 /* EkirjastoLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3688FADD2B67FEFE00A95558 /* EkirjastoLoginViewController.swift */; };
+		36BBC78E2B920EB300E8E426 /* EkirjastoUserLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363C62092B14EEA300858AA5 /* EkirjastoUserLoginView.swift */; };
+		36BBC78F2B920EB300E8E426 /* EkirjastoArrowDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3379F81E2A5D418400E9945F /* EkirjastoArrowDownButton.swift */; };
+		36BBC7902B920EB300E8E426 /* EkirjastoFacetFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3379F8102A5D3C4B00E9945F /* EkirjastoFacetFilterView.swift */; };
+		36BBC7912B920EB300E8E426 /* EkirjastoLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3379F8212A5D792900E9945F /* EkirjastoLoginView.swift */; };
+		36BBC7922B920EB300E8E426 /* EkirjastoSuomiIdentificationWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C1160E2AE7A914007CABEB /* EkirjastoSuomiIdentificationWebView.swift */; };
+		36BBC7932B920EE100E8E426 /* PasskeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36833E4B2B5E937000D7B6B2 /* PasskeyManager.swift */; };
 		52545185217A76FF00BBC1B4 /* TPPUserNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52545184217A76FF00BBC1B4 /* TPPUserNotifications.swift */; };
 		52592BB821220A1100587288 /* TPPLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 52592BB721220A1100587288 /* TPPLocalization.m */; };
 		5A69290E1B95ACC600FB4C10 /* readium-shared-js_all.js in Resources */ = {isa = PBXBuildFile; fileRef = 5A69290D1B95ACC600FB4C10 /* readium-shared-js_all.js */; };
@@ -1742,6 +1752,8 @@
 		337E63BA2A28AF3900FF7886 /* Ellibs_Catalog_Feed.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Ellibs_Catalog_Feed.json; path = Palace/EkirjastoConfig/Ellibs_Catalog_Feed.json; sourceTree = SOURCE_ROOT; };
 		33C1160E2AE7A914007CABEB /* EkirjastoSuomiIdentificationWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EkirjastoSuomiIdentificationWebView.swift; sourceTree = "<group>"; };
 		363C62092B14EEA300858AA5 /* EkirjastoUserLoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EkirjastoUserLoginView.swift; sourceTree = "<group>"; };
+		36833E4B2B5E937000D7B6B2 /* PasskeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasskeyManager.swift; sourceTree = "<group>"; };
+		3688FADD2B67FEFE00A95558 /* EkirjastoLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EkirjastoLoginViewController.swift; sourceTree = "<group>"; };
 		52545184217A76FF00BBC1B4 /* TPPUserNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPPUserNotifications.swift; sourceTree = "<group>"; };
 		52592BB721220A1100587288 /* TPPLocalization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPPLocalization.m; sourceTree = "<group>"; };
 		52592BBB21220A4F00587288 /* TPPLocalization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TPPLocalization.h; sourceTree = "<group>"; };
@@ -2189,7 +2201,6 @@
 				3312642D2A287F53006BA87D /* libicucore.tbd in Frameworks */,
 				3312642F2A287F53006BA87D /* SQLite in Frameworks */,
 				331264302A287F53006BA87D /* R2Shared in Frameworks */,
-				363C61F92B14E70200858AA5 /* GoogleSignIn in Frameworks */,
 				331264312A287F53006BA87D /* libc++.dylib in Frameworks */,
 				331264332A287F53006BA87D /* LocalAuthentication.framework in Frameworks */,
 				33372CFB2AC549040001BE2F /* FirebaseMessaging in Frameworks */,
@@ -2207,7 +2218,6 @@
 				331264402A287F53006BA87D /* libz.dylib in Frameworks */,
 				331264432A287F53006BA87D /* libxml2.dylib in Frameworks */,
 				331264442A287F53006BA87D /* Minizip.xcframework in Frameworks */,
-				363C61FB2B14E70200858AA5 /* GoogleSignInSwift in Frameworks */,
 				3672BB9C2B14DFE400F320E8 /* PalaceAudiobookToolkit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2635,6 +2645,7 @@
 				73B501C024F48D4B00FBAD7D /* TPPUserAccountFrontEndValidation.swift */,
 				734B789025659611006FB8AD /* URLResponse+TPPAuthentication.swift */,
 				E56067742A4C8858002ACE93 /* TokenRequest.swift */,
+				36833E4B2B5E937000D7B6B2 /* PasskeyManager.swift */,
 			);
 			path = SignInLogic;
 			sourceTree = "<group>";
@@ -3171,6 +3182,7 @@
 				3379F8102A5D3C4B00E9945F /* EkirjastoFacetFilterView.swift */,
 				3379F8212A5D792900E9945F /* EkirjastoLoginView.swift */,
 				33C1160E2AE7A914007CABEB /* EkirjastoSuomiIdentificationWebView.swift */,
+				3688FADD2B67FEFE00A95558 /* EkirjastoLoginViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3828,8 +3840,6 @@
 				33372CF82AC548FB0001BE2F /* FirebaseCrashlytics */,
 				33372CFA2AC549040001BE2F /* FirebaseMessaging */,
 				363C61F32B14E5B800858AA5 /* ReadiumLCP */,
-				363C61F82B14E70200858AA5 /* GoogleSignIn */,
-				363C61FA2B14E70200858AA5 /* GoogleSignInSwift */,
 			);
 			productName = Simplified;
 			productReference = 3312646E2A287F53006BA87D /* Ekirjasto.app */;
@@ -3951,7 +3961,6 @@
 				E7CA1C4C29381068009CC6FD /* XCRemoteSwiftPackageReference "SQLite.swift" */,
 				E7498A842A0E7F460037DD93 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				E795A7802A744F0A00314EC8 /* XCRemoteSwiftPackageReference "ULID.swift" */,
-				363C61F72B14E70200858AA5 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			productRefGroup = A823D80E192BABA400B55DE2 /* Products */;
 			projectDirPath = "";
@@ -4425,6 +4434,7 @@
 				17ADCF4F254BB84800D0A5FE /* TPPReaderBookmarksBusinessLogicTests.swift in Sources */,
 				735771AB2537650E00067CEA /* NYPLLibraryAccountsProviderMock.swift in Sources */,
 				1763C0D624F460FE00A4D0E2 /* TPPAnnouncementManagerTests.swift in Sources */,
+				3688FAE02B67FEFE00A95558 /* EkirjastoLoginViewController.swift in Sources */,
 				2D8790A520129AF200E2763F /* TPPOPDSAcquisitionPathTests.swift in Sources */,
 				735350B724918432006021BD /* URLRequest+NYPLTests.swift in Sources */,
 				73A794CA25492C9800C59CC1 /* TPPFake.swift in Sources */,
@@ -4440,6 +4450,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36833E4D2B5EDBD500D7B6B2 /* PasskeyManager.swift in Sources */,
 				33F69AA42A5BFDF100B0C835 /* LCPAudiobooks.swift in Sources */,
 				33FCF7F02AC45884008E3B72 /* AudiobookDataManager.swift in Sources */,
 				33F69AA32A5BFD6900B0C835 /* LicensesService.swift in Sources */,
@@ -4697,6 +4708,7 @@
 				363C61FC2B14E81800858AA5 /* EPUBSearchViewModel.swift in Sources */,
 				331263C02A287F53006BA87D /* TPPSettingsAccountsList.swift in Sources */,
 				331263C12A287F53006BA87D /* TPPBook+Additions.swift in Sources */,
+				3688FAE12B67FEFE00A95558 /* EkirjastoLoginViewController.swift in Sources */,
 				331263C22A287F53006BA87D /* Data+Base64.swift in Sources */,
 				331263C32A287F53006BA87D /* TPPPDFLocation.swift in Sources */,
 				331263C42A287F53006BA87D /* AudioBookmark.swift in Sources */,
@@ -4800,6 +4812,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36BBC7932B920EE100E8E426 /* PasskeyManager.swift in Sources */,
+				36BBC78E2B920EB300E8E426 /* EkirjastoUserLoginView.swift in Sources */,
+				36BBC78F2B920EB300E8E426 /* EkirjastoArrowDownButton.swift in Sources */,
+				36BBC7902B920EB300E8E426 /* EkirjastoFacetFilterView.swift in Sources */,
+				36BBC7912B920EB300E8E426 /* EkirjastoLoginView.swift in Sources */,
+				36BBC7922B920EB300E8E426 /* EkirjastoSuomiIdentificationWebView.swift in Sources */,
 				73D8D26E25A68CA900DF5F69 /* LibraryService.swift in Sources */,
 				73D8D26825A68C6500DF5F69 /* TPPR2Owner.swift in Sources */,
 				73EB0A6525821DF4006BC997 /* TPPLibraryDescriptionCell.swift in Sources */,
@@ -4874,6 +4892,7 @@
 				73D8D27F25A68D4300DF5F69 /* TPPBookmarkR2Location.swift in Sources */,
 				E78AE805291C1D9100884446 /* TPPBookCoverRegistry.swift in Sources */,
 				21E4179A292813DB00A78606 /* SamplePlayerError.swift in Sources */,
+				3688FADF2B67FEFE00A95558 /* EkirjastoLoginViewController.swift in Sources */,
 				21DCC3AF27BEDB5A00064B37 /* TPPReaderAppearance.swift in Sources */,
 				73EB0A8925821DF4006BC997 /* TPPProblemDocument.swift in Sources */,
 				21E4178B292810F600A78606 /* TPPPDFLocationView.swift in Sources */,
@@ -5222,6 +5241,7 @@
 				2D62568B1D412BCB0080A81F /* BundledHTMLViewController.swift in Sources */,
 				E727EFAE2A1BFB20006AB1F2 /* DLNavigator.swift in Sources */,
 				E50D684626AB235400F1042B /* TPPReaderBookmarkCell.swift in Sources */,
+				3688FADE2B67FEFE00A95558 /* EkirjastoLoginViewController.swift in Sources */,
 				E59892ED28AC909000C44A85 /* AudiobookSampleToolbar.swift in Sources */,
 				110AF8961961D94D004887C3 /* TPPBookDetailView.m in Sources */,
 				21DDE32825D2CEFC002CBCE3 /* AdobeDRMContentProtection.swift in Sources */,
@@ -5243,6 +5263,7 @@
 				E523A455299FCD4B00EF833B /* BookButtonType.swift in Sources */,
 				11396FB9193D289100E16EE8 /* NSDate+NYPLDateAdditions.m in Sources */,
 				21E7E07B24FEA7E800189224 /* DPLAAudiobooks.swift in Sources */,
+				36833E4C2B5E937000D7B6B2 /* PasskeyManager.swift in Sources */,
 				52545185217A76FF00BBC1B4 /* TPPUserNotifications.swift in Sources */,
 				E53CDA882A2FBCD800C6008A /* LocationManager.swift in Sources */,
 				1183F341194F723D00DC322F /* TPPCatalogLane.m in Sources */,
@@ -5710,7 +5731,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 161;
-				DEVELOPMENT_TEAM = EMLZHTC29P;
+				DEVELOPMENT_TEAM = QA5XMCRV5M;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5733,7 +5754,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.28;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ellibs.simplye;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
 				PRODUCT_MODULE_NAME = Palace;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -5768,7 +5789,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 161;
-				DEVELOPMENT_TEAM = EMLZHTC29P;
+				DEVELOPMENT_TEAM = QA5XMCRV5M;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5791,7 +5812,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.28;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ellibs.simplye;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
 				PRODUCT_MODULE_NAME = Palace;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -5822,12 +5843,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
 				CODE_SIGN_ENTITLEMENTS = Palace/PalaceDebug.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 219;
-				DEVELOPMENT_TEAM = 88CBA74T8K;
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88CBA74T8K;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5848,11 +5867,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.35;
-				PRODUCT_BUNDLE_IDENTIFIER = org.thepalaceproject.palace;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
 				PRODUCT_MODULE_NAME = Palace;
 				PRODUCT_NAME = "Palace-noDRM";
 				PROVISIONING_PROFILE = "2e185b6c-271e-4b02-a05e-860b8c3831f6";
-				PROVISIONING_PROFILE_SPECIFIER = "Ad Hoc";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG SIMPLYE";
 				SWIFT_OBJC_BRIDGING_HEADER = "Palace/AppInfrastructure/Palace-Bridging-Header.h";
@@ -5906,7 +5925,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.35;
-				PRODUCT_BUNDLE_IDENTIFIER = org.thepalaceproject.palace;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
 				PRODUCT_MODULE_NAME = Palace;
 				PRODUCT_NAME = "Palace-noDRM";
 				PROVISIONING_PROFILE = "b3d9154d-70e1-48d6-a0c5-869431277a5c";
@@ -6095,7 +6114,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.35;
-				PRODUCT_BUNDLE_IDENTIFIER = org.thepalaceproject.palace;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
 				PROVISIONING_PROFILE_SPECIFIER = "Ad Hoc";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG SIMPLYE FEATURE_DRM_CONNECTOR FEATURE_CRASH_REPORTING LCP FEATURE_OVERDRIVE";
@@ -6155,7 +6174,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.35;
-				PRODUCT_BUNDLE_IDENTIFIER = org.thepalaceproject.palace;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
 				PROVISIONING_PROFILE_SPECIFIER = "App Store";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "SIMPLYE FEATURE_DRM_CONNECTOR FEATURE_CRASH_REPORTING LCP FEATURE_OVERDRIVE";
@@ -6249,14 +6268,6 @@
 			requirement = {
 				kind = upToNextMinorVersion;
 				minimumVersion = 0.13.0;
-			};
-		};
-		363C61F72B14E70200858AA5 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.0.0;
 			};
 		};
 		E7498A842A0E7F460037DD93 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
@@ -6356,16 +6367,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E77D02182931337000544180 /* XCRemoteSwiftPackageReference "swift-toolkit" */;
 			productName = ReadiumLCP;
-		};
-		363C61F82B14E70200858AA5 /* GoogleSignIn */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 363C61F72B14E70200858AA5 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
-			productName = GoogleSignIn;
-		};
-		363C61FA2B14E70200858AA5 /* GoogleSignInSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 363C61F72B14E70200858AA5 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
-			productName = GoogleSignInSwift;
 		};
 		E7498A852A0E7F460037DD93 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;

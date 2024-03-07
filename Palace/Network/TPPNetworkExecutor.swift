@@ -83,12 +83,79 @@ extension TPPNetworkExecutor: TPPRequestExecuting {
     
     if let authDefinition = TPPUserAccount.sharedAccount().authDefinition, authDefinition.isSaml {
       resultTask = performDataTask(with: req, completion: completion)
+    } else if !TPPUserAccount.sharedAccount().authTokenHasExpired && req.isTokenAuthorized && TPPUserAccount.sharedAccount().authTokenExpirationDate == nil {
+
+      resultTask = performDataTask(with: req) { result in
+        switch result{
+        case .failure(let error, let response):
+          if req.hasRetried {
+            completion(result)
+          }else{
+            var updatedRequest = req
+            updatedRequest.hasRetried = true
+            if let httpResponse = response as? HTTPURLResponse {
+              if httpResponse.statusCode == 401 {
+                self.authenticateWithToken(TPPUserAccount.sharedAccount().authToken!) { status in
+                  if status == 401 {
+                    EkirjastoLoginViewController.show {
+                      if let token = TPPUserAccount.sharedAccount().authToken {
+                        updatedRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+                        self.executeRequest(updatedRequest, completion: completion)
+                      }else{
+                        completion(result)
+                      }
+                      
+                    }
+                  }else if status == 200 {
+                    
+                    if let token = TPPUserAccount.sharedAccount().authToken {
+                      updatedRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+                      self.executeRequest(updatedRequest, completion: completion)
+                    }else{
+                      completion(result)
+                    }
+                  }else {
+                    completion(result)
+                  }
+                }
+              }
+            }else{
+              completion(result)
+            }
+          }
+          
+        case .success(_, _):
+          completion(result)
+        }
+      }
     } else if !TPPUserAccount.sharedAccount().authTokenHasExpired || !req.isTokenAuthorized || req.hasRetried {
       if req.hasRetried {
         let error = NSError(domain: TPPErrorLogger.clientDomain, code: TPPErrorCode.invalidCredentials.rawValue, userInfo: [NSLocalizedDescriptionKey: "Unauthorized HTTP after token refresh attempt"])
         completion(NYPLResult.failure(error, nil))
       } else {
-        resultTask = performDataTask(with: req, completion: completion)
+        resultTask = performDataTask(with: req, completion: { result in
+          
+          if case .failure(let error, let response) = result {
+            if let httpResponse = response as? HTTPURLResponse {
+              if httpResponse.statusCode == 401 {
+                self.authenticateWithToken(TPPUserAccount.sharedAccount().authToken!) { status in
+                  if status == 401 {
+                    EkirjastoLoginViewController.show {
+                      self.executeRequest(req, completion: completion)
+                    }
+                  }else if status == 200 {
+                    self.executeRequest(req, completion: completion)
+                  }else{
+                    completion(result)
+                  }
+                }
+              }
+            }
+          }else {
+            completion(result)
+          }
+          
+        })
       }
     } else {
       handleTokenRefresh(for: req, completion: completion)
@@ -114,7 +181,6 @@ extension TPPNetworkExecutor: TPPRequestExecuting {
   }
   private func performDataTask(with request: URLRequest,
                                completion: @escaping (_: NYPLResult<Data>) -> Void) -> URLSessionDataTask {
-    print("request url: \(request.url)")
     let task = urlSession.dataTask(with: request)
     responder.addCompletion(completion, taskID: task.taskIdentifier)
     Log.info(#file, "Task \(task.taskIdentifier): starting request \(request.loggableString)")
@@ -337,13 +403,15 @@ extension TPPNetworkExecutor {
     }
   }
 
-  func authenticateWithToken(_ token: String){
-    let currentAccount = AccountsManager.shared.currentAccount
+  func authenticateWithToken(_ token: String, completion: ((Int?)->Void)? = nil){
+    var currentAccount = AccountsManager.shared.currentAccount
+    if currentAccount?.authenticationDocument == nil {
+      currentAccount = AccountsManager.shared.accounts().first
+    }
     let authenticationDocument = currentAccount?.authenticationDocument
     let authentication = authenticationDocument?.authentication?.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})
     
     let link = authentication?.links?.first(where: {$0.rel == "authenticate"})
-    
     var request = URLRequest(url: URL(string:link!.href)!)
     request.httpMethod = "POST"
     print("token \(token)")
@@ -351,29 +419,44 @@ extension TPPNetworkExecutor {
       "Bearer \(token)",
       forHTTPHeaderField: "Authorization"
     )
+    print("access token \(token)")
     URLSession.shared.dataTask(with: request){ data, response, error in
-      print("auth error: \(error.debugDescription))")
-      print("auth result: \(String(bytes: data!.bytes, encoding: .utf8))")
       
       if(data != nil){
         let json = try? JSONSerialization.jsonObject(with: data!)
         let jsonRoot = json as? [String: Any]
-        let accessToken = jsonRoot!["access_token"] as! String
+        let accessToken = jsonRoot?["access_token"] as? String
         
-        let sharedAccount = TPPUserAccount.sharedAccount()
+        if let accessToken = accessToken {
+          let sharedAccount = TPPUserAccount.sharedAccount()
+          sharedAccount.setAuthToken(accessToken,barcode: nil, pin: nil, expirationDate: nil)
+        }else{
+          print("authenticateWithToken error: \(String(describing: error?.localizedDescription)) data: \(String(describing: String(data:data!,encoding: .utf8)))")
+        }
         
-        
-        sharedAccount.setAuthToken(accessToken,barcode: nil, pin: nil, expirationDate: nil)
         
       }
+      if let httpResponse = response as? HTTPURLResponse {
+        completion?(httpResponse.statusCode)
+      }else{
+        completion?(nil)
+      }
+      
+      
     }.resume()
     
+  }
+  
+  func userInfo(_ complete: (String?)->(Void)){
     
-    //let (data, _) = try await URLSession.shared.data(for: request)
+  }
+  
+  func revokeToken(_ sessionId: String? = nil){
     
   }
   
   func executeTokenRefresh(username: String, password: String, completion: @escaping (Result<TokenResponse, Error>) -> Void) {
+    let account = TPPUserAccount.sharedAccount()
     guard let tokenURL = TPPUserAccount.sharedAccount().authDefinition?.tokenURL else {
       Log.error(#file, "Unable to refresh token, missing credentials")
       completion(.failure(NSError(domain: "Unable to refresh token, missing credentials", code: 401)))
