@@ -104,10 +104,10 @@ extension TPPNetworkExecutor: TPPRequestExecuting {
                       }else{
                         completion(result)
                       }
-                      
+
                     }
                   }else if status == 200 {
-                    
+
                     if let token = TPPUserAccount.sharedAccount().authToken {
                       updatedRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
                       self.executeRequest(updatedRequest, completion: completion)
@@ -123,7 +123,7 @@ extension TPPNetworkExecutor: TPPRequestExecuting {
               completion(result)
             }
           }
-          
+
         case .success(_, _):
           completion(result)
         }
@@ -134,7 +134,7 @@ extension TPPNetworkExecutor: TPPRequestExecuting {
         completion(NYPLResult.failure(error, nil))
       } else {
         resultTask = performDataTask(with: req, completion: { result in
-          
+
           if case .failure(let error, let response) = result {
             if let httpResponse = response as? HTTPURLResponse {
               if httpResponse.statusCode == 401 {
@@ -154,7 +154,7 @@ extension TPPNetworkExecutor: TPPRequestExecuting {
           }else {
             completion(result)
           }
-          
+
         })
       }
     } else {
@@ -433,7 +433,7 @@ extension TPPNetworkExecutor {
         }else{
           print("authenticateWithToken error: \(String(describing: error?.localizedDescription)) data: \(String(describing: String(data:data!,encoding: .utf8)))")
         }
-        
+
         
       }
       if let httpResponse = response as? HTTPURLResponse {
@@ -441,16 +441,16 @@ extension TPPNetworkExecutor {
       }else{
         completion?(nil)
       }
-      
-      
+
+
     }.resume()
     
   }
-  
+
   func userInfo(_ complete: (String?)->(Void)){
-    
+
   }
-  
+
   func revokeToken(_ sessionId: String? = nil){
     
   }

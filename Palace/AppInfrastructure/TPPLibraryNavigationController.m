@@ -25,16 +25,24 @@
 #ifdef SIMPLYE
 - (void)setNavigationLeftBarButtonForVC:(UIViewController *)vc
 {
+  // Finland: action disabled for E-kirjasto.
   vc.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
                                          initWithImage:[UIImage imageNamed:@"MyLibraryIcon"] style:(UIBarButtonItemStylePlain)
                                          target:self
-                                         action:@selector(switchLibrary)];
-  vc.navigationItem.leftBarButtonItem.accessibilityLabel = NSLocalizedString(@"AccessibilitySwitchLibrary", nil);
+                                         action:@selector(showAndReloadCatalogTab)];
+  // Finland: This is not working as a button for E-kirjasto, instead this is just an icon.
+  vc.navigationItem.leftBarButtonItem.accessibilityLabel = NSLocalizedString(@"accessibilityShowAndReloadCatalogTab", nil);
+}
+
+- (void)showAndReloadCatalogTab
+{
+  [[TPPRootTabBarController sharedController] showAndReloadCatalogViewController];
 }
 
 // for converting this to Swift, see https://bit.ly/3mM9QoH
 - (void)switchLibrary
 {
+  
   UIViewController *viewController = self.visibleViewController;
 
   UIAlertControllerStyle style;

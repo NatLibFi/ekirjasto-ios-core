@@ -13,12 +13,12 @@ import SwiftUI
 
 
 class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextProviding {
- 
+
   struct TokenResponse: Codable {
     let token: String
     let exp: Int?
   }
-  
+
   struct RegisterStartResponse: Codable {
     struct User : Codable {
       let id : String
@@ -35,13 +35,13 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
   }
   
   struct LoginStartResponse: Codable {
-    
+
     struct AllowCredential: Codable {
       let type: String
       let id: String
       let transports: [String]
     }
-    
+
     struct PublicKey: Codable {
       let challenge: String
       let timeout: Int
@@ -49,18 +49,18 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
       let allowCredentials: [AllowCredential]
       let userVerification: String
     }
-    
+
     let publicKey: PublicKey
   }
-  
-  
+
+
   struct LoginCompleteData: Codable {
     struct Response: Codable {
       let clientDataJSON: String
       let authenticatorData: String
       let signature: String
       let userHandle: String
-      
+
       init(cred: ASAuthorizationPlatformPublicKeyCredentialAssertion){
         clientDataJSON = cred.rawClientDataJSON.toBase64URL()
         authenticatorData = cred.rawAuthenticatorData.toBase64URL()
@@ -72,53 +72,53 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
     let id: String
     let rawId: String
     let response: Response
-    
+
     init(cred: ASAuthorizationPlatformPublicKeyCredentialAssertion){
       id = cred.credentialID.toBase64URL()
       rawId = cred.credentialID.toBase64URL()
       response = Response(cred: cred)
     }
-    
-    
+
+
   }
-  
-  
+
+
   struct RegisterCompleteData: Codable {
     struct Response : Codable {
       let clientDataJSON : String
       let attestationObject: String
-      
+
       init(cred: ASAuthorizationPlatformPublicKeyCredentialRegistration){
         clientDataJSON = cred.rawClientDataJSON.toBase64URL()
         attestationObject = cred.rawAttestationObject!.toBase64URL()
       }
     }
-    
+
     var type = "public-key"
     let id: String
     let rawId: String
     let response: Response
-    
+
     init(cred: ASAuthorizationPlatformPublicKeyCredentialRegistration){
       id = cred.credentialID.toBase64URL()
       rawId = cred.credentialID.toBase64URL()
       response = Response(cred: cred)
-      
+
     }
-    
+
   }
-  
+
   class RegisterAttempt : NSObject, ASAuthorizationControllerDelegate {
     let completion : (RegisterCompleteData?)->(Void)
-    
+
     public init(completion: @escaping (RegisterCompleteData?)->(Void)){
       self.completion = completion
     }
-    
+
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
       switch authorization.credential {
       case let credentialRegistration as ASAuthorizationPlatformPublicKeyCredentialRegistration:
-        
+
         completion(RegisterCompleteData(cred:credentialRegistration))
         break
       default:
@@ -130,18 +130,18 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
       completion(nil)
     }
   }
-  
+
   class LoginAttempt : NSObject, ASAuthorizationControllerDelegate {
     let completion : (LoginCompleteData?)->(Void)
-    
+
     public init(completion: @escaping (LoginCompleteData?)->(Void)){
       self.completion = completion
     }
-    
+
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
       switch authorization.credential {
       case let credentialAssertion as ASAuthorizationPlatformPublicKeyCredentialAssertion:
-        
+
         completion(LoginCompleteData(cred:credentialAssertion))
         break
       default:
@@ -153,9 +153,9 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
       completion(nil)
     }
   }
-  
+
   private var auth : OPDS2AuthenticationDocument.Authentication
-  
+
   let anchor : ASPresentationAnchor
   //have to keep the object here to keep it alive
   private var attempt : Any?
@@ -201,9 +201,9 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
       print("passkey start result: \(String(bytes: data!.bytes, encoding: .utf8))")
       
       let httpResponse = response as! HTTPURLResponse
-      
+
       let startResponse = try? JSONDecoder().decode(LoginStartResponse.self, from: data!)
-      
+
       //can we check for 200 code from response?
       if httpResponse.statusCode == 200, let startResponse = startResponse {
         self.performPassKeyLogin(username, startResponse.publicKey) { data in
@@ -220,16 +220,16 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
   
   var authController : ASAuthorizationController? = nil
   private func performPassKeyRegister(_ username: String, _ pk : RegisterStartResponse.PublicKey, completion : @escaping (RegisterCompleteData?) -> Void){
-    
+
     let publicKeyCredentialProvider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: "e-kirjasto.loikka.dev")
-    
+
     let registrationRequest = publicKeyCredentialProvider.createCredentialRegistrationRequest(challenge: try! Data.fromBase64Url(pk.challenge)!,name: username, userID: pk.user.id.data(using: .utf8)!)
     let registerAttempt = RegisterAttempt(completion: completion)
     attempt = registerAttempt
     authController = ASAuthorizationController(authorizationRequests: [ registrationRequest ] )
     authController!.delegate = registerAttempt
     authController!.presentationContextProvider = self
-    
+
     
     authController!.performRequests()
 
@@ -238,29 +238,29 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
   
   private func performPassKeyLogin(_ username: String, _ pk : LoginStartResponse.PublicKey, completion : @escaping (LoginCompleteData?) -> Void){
     let publicKeyCredentialProvider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: "e-kirjasto.loikka.dev")
-    
+
     let assertionRequest = publicKeyCredentialProvider.createCredentialAssertionRequest(challenge: try! Data.fromBase64Url(pk.challenge)!)
-    
+
     let loginAttempt = LoginAttempt(completion: completion)
     attempt = loginAttempt
     authController = ASAuthorizationController(authorizationRequests: [ assertionRequest ] )
     authController!.delegate = loginAttempt
     authController!.presentationContextProvider = self
-    
-    
+
+
     authController!.performRequests()
   }
-  
+
   private func finishLogin(_ data : LoginCompleteData, completion : @escaping (String?) -> Void){
-    
-    
+
+
     
     let finish = auth.links?.first(where: {$0.rel == "passkey_login_finish"})
     var finishRequest = URLRequest(url:URL(string:finish!.href)!)
     finishRequest.httpMethod = "POST"
     finishRequest.setValue("application/json", forHTTPHeaderField: "content-type")
     finishRequest.setValue("application/json", forHTTPHeaderField: "accept")
-    
+
     let dataJson = try! String(data: JSONEncoder().encode(data),encoding: .utf8)
     let content = "{ \"id\" : \"\(data.id)\" ,\"data\" : \(dataJson!) }"
     finishRequest.httpBody = Data(content.utf8)
@@ -275,7 +275,7 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
       }else {
         completion(nil)
       }
-      
+
     }.resume()
   }
   
@@ -294,12 +294,12 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
     startRequest.httpBody = Data(content.utf8)
     
     URLSession.shared.dataTask(with: startRequest) { data, response, _error in
-      
+
       let _resp = response as! HTTPURLResponse
-      
+
       print("passkey register start error: \(_error.debugDescription) \(_resp.statusCode)")
       print("passkey register start result: \(String(bytes: data!.bytes, encoding: .utf8))")
-      
+
       let startResponse = try? JSONDecoder().decode(RegisterStartResponse.self, from: data!)
 
       //can we check for 200 code from response?
@@ -328,14 +328,14 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
     print("content: \(content)")
     finishRequest.httpBody = Data(content.utf8)
     print("token: \(token)")
-    
+
     URLSession.shared.dataTask(with: finishRequest) { _data,_response,_error in
-      
+
       let _resp = _response as! HTTPURLResponse
 
       print("passkey register finish error: \(_error.debugDescription) \(_resp.statusCode)")
       print("passkey register finish result: \(String(bytes: _data!.bytes, encoding: .utf8))")
-      
+
       if let data = _data {
         let tokenResponse = try? JSONDecoder().decode(TokenResponse.self, from: data)
         completion(tokenResponse?.token ?? nil)
@@ -348,12 +348,12 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
   func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
     return anchor
   }
-  
+
 }
 
 //copy pasted from flutter passkey swift wrapper
 extension Data {
-  
+
   static func fromBase64(_ encoded: String) -> Data? {
       // Prefixes padding-character(s) (if needed).
       var encoded = encoded
@@ -381,7 +381,7 @@ extension Data {
 
       return base64
   }
-  
+
     func toBase64URL() -> String {
         let current = self
 
