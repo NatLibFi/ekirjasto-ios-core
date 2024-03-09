@@ -204,7 +204,15 @@ extension TPPNetworkExecutor {
       headers.forEach { urlRequest.setValue($0.value, forHTTPHeaderField: $0.key) }
     }
     
-    urlRequest.setValue("", forHTTPHeaderField: "Accept-Language")
+    var preferredLocalizations:String = Bundle.main.preferredLocalizations[0]
+    if Bundle.main.preferredLocalizations.count > 1 {
+      preferredLocalizations += ", \(Bundle.main.preferredLocalizations[1]);q=0.9"
+    }
+    if Bundle.main.preferredLocalizations.count > 2 {
+      preferredLocalizations += ", \(Bundle.main.preferredLocalizations[2]);q=0.8"
+    }
+    
+    urlRequest.setValue(preferredLocalizations, forHTTPHeaderField: "Accept-Language")
     return urlRequest
   }
 
