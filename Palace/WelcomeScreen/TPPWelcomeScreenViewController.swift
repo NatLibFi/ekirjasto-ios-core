@@ -114,7 +114,7 @@ import PureLayout
     }
     
     let pickLibrary = {
-      let listVC = TPPAccountList { account in
+      let listVC = TPPAccountList{ account in
         if account.details != nil {
           self.completion?(account)
         } else {

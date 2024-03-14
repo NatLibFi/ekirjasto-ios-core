@@ -253,6 +253,9 @@ let currentAccountIdentifierKey  = "TPPCurrentAccountIdentifier"
       switch result {
       case .success(let data, _):
         self.loadAccountSetsAndAuthDoc(fromCatalogData: data, key: hash) { success in
+          if self.accounts().count == 1 {
+            self.currentAccount = self.accounts().first
+          }
           self.callAndClearLoadingCompletionHandlers(key: hash, success)
           NotificationCenter.default.post(name: NSNotification.Name.TPPCatalogDidLoad, object: nil)
           self.cacheAccountsCatalogData(data, hash: hash)
