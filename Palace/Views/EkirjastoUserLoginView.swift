@@ -30,22 +30,46 @@ struct EkirjastoUserLoginView: View {
     }else if _passKey != 0 {
       passkeyEmail
     }else{*/
-    NavigationView {
-      VStack{
-        
-        /*Text("Sign in with Suomi.fi e-identification").foregroundColor(Color.white).frame(height: 40).onTouchDownUp { down, value in
-          if !down {
-            loginSuomi()
-          }
+    if navigationController == nil {
+      NavigationView {
+        ZStack(alignment: .top) {
           
-        }*/
-        /*if TPPUserAccount.sharedAccount().authToken != nil {
-          Text("Register with passkey").foregroundColor(Color.white).frame(height: 40).onTouchDownUp{ down, value in
-            if !down {
-              showPasskey(1)
+          VStack{
+            
+            if let authDoc = authDoc {
+              NavigationLink("Sign in with Suomi.fi e-identification", destination: {
+                SuomiIdentificationWebView(closeWebView: {
+                  _loginSuomi = false
+                  self.dismissView()
+                }, authenticationDocument: authDoc)
+              }).foregroundStyle(.white).frame(height: 40)
+              if TPPUserAccount.sharedAccount().authToken != nil {
+                NavigationLink("Register with passkey",destination: passkeyEmail(1)).foregroundStyle(.white).frame(height: 40)
+              }
+              
+              NavigationLink("Sign in with passkey",destination: passkeyEmail(2)).foregroundStyle(.white).frame(height: 40)
+            }else{
+              ProgressView()
             }
-          }
-        }*/
+            
+            
+          }.frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color("ColorEkirjastoGreen"))
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(false)
+          closeButton()
+          
+        }
+        .navigationViewStyle(.stack)
+      }
+        .onAppear{
+          fetchAuthDoc(completion: { doc in
+            authDoc = doc
+          })
+        }
+    }else{
+        VStack{
+
         if let authDoc = authDoc {
           NavigationLink("Sign in with Suomi.fi e-identification", destination: {
             SuomiIdentificationWebView(closeWebView: {
@@ -63,32 +87,37 @@ struct EkirjastoUserLoginView: View {
         }
 
         
-        /*Text("Sign in with passkey").foregroundColor(Color.white).frame(height: 40).onTouchDownUp{ down, value in
-          if !down {
-            showPasskey(2)
-          }
-        }*/
-        
       }.frame(maxWidth: .infinity, maxHeight: .infinity)
       .background(Color("ColorEkirjastoGreen"))
       .navigationBarTitleDisplayMode(.inline)
       .navigationBarBackButtonHidden(false)
-      /*.toolbar{
-        ToolbarItem(placement: .automatic){
-          Text("e-library account").foregroundColor(Color.white)
-        }
-        
-      }*/
-    }
-    .navigationViewStyle(.stack)
       .onAppear{
-        fetchAuthDoc(completion: { doc in
-          authDoc = doc
-        })
+          fetchAuthDoc(completion: { doc in
+            authDoc = doc
+          })
+        }
+
+    }
+
+
+  }
+  
+  //copied from TPPOnboardingView
+  @ViewBuilder
+  private func closeButton() -> some View {
+    HStack {
+      Spacer()
+      Button {
+        self.dismissView()
+      } label: {
+        Image(systemName: "xmark.circle.fill")
+          .font(.title)
+          .foregroundColor(.gray)
+          .padding(.top, 25)
+          .padding(.trailing,25)
       }
-
-    //}
-
+      .accessibility(label: Text(Strings.Generic.close))
+    }
   }
   
   @State var passkeyUserName = ""
@@ -104,12 +133,7 @@ struct EkirjastoUserLoginView: View {
     }.frame(maxWidth: .infinity, maxHeight: .infinity)
       .background(Color("ColorEkirjastoGreen"))
       .navigationBarBackButtonHidden(false)
-      
-      /*.navigationBarTitle("abc", displayMode: .inline)
-      .background(NavigationConfigurator{ nc in
-        nc.navigationBar.barTintColor = UIColor.red//UIColor(named: "ColorEkirjastoGreen")
-        nc.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
-      })*/
+
       
   }
 

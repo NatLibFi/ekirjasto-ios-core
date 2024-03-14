@@ -8,6 +8,13 @@
 
 import UIKit
 import SwiftUI
+import Foundation
+
+@objc class EkirjastoLoginViewControllerC : NSObject {
+  @objc static func show(navController: UINavigationController? = nil ,dismissHandler: @escaping (() -> Void)){
+    EkirjastoLoginViewController.show(navController: navController, dismissHandler: dismissHandler)
+  }
+}
 
 class EkirjastoLoginViewController : UIHostingController<EkirjastoUserLoginView>{
   
@@ -25,7 +32,17 @@ class EkirjastoLoginViewController : UIHostingController<EkirjastoUserLoginView>
     fatalError("init(coder:) has not been implemented")
   }
   
-  static func makeSwiftUIView(navController: UINavigationController? = nil ,dismissHandler: @escaping (() -> Void)) -> EkirjastoLoginViewController {
+  private func getNavController() -> UINavigationController?{
+    if let nc = navigationController {
+      return nc
+    }
+    if let nc = navController {
+      return nc
+    }
+    return nil
+  }
+  
+  private static func makeSwiftUIView(navController: UINavigationController? = nil ,dismissHandler: @escaping (() -> Void)) -> EkirjastoLoginViewController {
 
     let controller = EkirjastoLoginViewController(rootView: EkirjastoUserLoginView(dismissView: dismissHandler), navController: navController)
     controller.modalPresentationStyle = .fullScreen
@@ -33,7 +50,7 @@ class EkirjastoLoginViewController : UIHostingController<EkirjastoUserLoginView>
   }
   
   
-  static func show(navController: UINavigationController? = nil ,dismissHandler: @escaping (() -> Void)){
+  @objc static func show(navController: UINavigationController? = nil ,dismissHandler: @escaping (() -> Void)){
     let vc = TPPRootTabBarController.shared()
     var loginView : EkirjastoLoginViewController?
     
@@ -43,12 +60,11 @@ class EkirjastoLoginViewController : UIHostingController<EkirjastoUserLoginView>
         loginView?.dismiss(animated: true)
         dismissHandler()
       })
-      //let nc = UINavigationController(rootViewController: loginView!)//loginView?.navigationController
-      //if let nc = loginView?.navController {
-      //  nc.pushViewController(loginView!, animated: true)
-     // }else{
+      if let nc = loginView?.getNavController() {
+        nc.pushViewController(loginView!, animated: true)
+      }else{
         vc?.safelyPresentViewController(loginView, animated: true, completion: nil)
-      //}
+      }
       
     }else{
       DispatchSerialQueue.main.async {
@@ -56,8 +72,11 @@ class EkirjastoLoginViewController : UIHostingController<EkirjastoUserLoginView>
           loginView?.dismiss(animated: true)
           dismissHandler()
         })
-        let nc = loginView?.navigationController
-        vc?.pushViewController(loginView, animated: true)
+        if let nc = loginView?.getNavController() {
+          nc.pushViewController(loginView!, animated: true)
+        }else{
+          vc?.safelyPresentViewController(loginView, animated: true, completion: nil)
+        }
         //vc?.safelyPresentViewController(loginView, animated: true, completion: nil)
       }
     }
