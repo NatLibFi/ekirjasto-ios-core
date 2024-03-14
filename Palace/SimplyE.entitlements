@@ -14,7 +14,7 @@
 	<array>
 		<string>$(AppIdentifierPrefix)88CBA74T8K.org.thepalaceproject.palace.SharedKeychainGroup</string>
 		<string>$(AppIdentifierPrefix)fi.kansalliskirjasto.e-kirjasto</string>
-		<string>$(AppIdentifierPrefix)LSUJCHYK8B.app.loikka.e-kirjasto</string>
+		<string>$(AppIdentifierPrefix)QA5XMCRV5M.app.loikka.e-kirjasto</string>
 	</array>
 </dict>
 </plist>

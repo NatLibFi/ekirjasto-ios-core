@@ -26,6 +26,7 @@ typedef NS_ENUM(NSInteger, CellKind) {
   //CellKindBarcode,
   //CellKindPIN,
   CellKindLogInSignOut,
+  CellKindPromptLogin,
   //CellKindRegistration,
   CellKindSyncButton,
   CellKindAbout,
@@ -362,7 +363,7 @@ Authenticating with any of those barcodes should work.
     authCells = @[@(CellKindBarcode), @(CellKindLogInSignOut)];
      */
   else {
-       authCells = @[@(CellKindLogInSignOut)];
+       authCells = @[@(CellKindLogInSignOut),@(CellKindPromptLogin)];
      }
 
   return authCells;
@@ -637,6 +638,12 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
       }
       break;
     }
+    case CellKindPromptLogin: {
+      [EkirjastoLoginViewControllerC showWithNavController:nil dismissHandler:^{
+        
+      }];
+      break;
+    }
     /*case CellKindRegistration: {
       [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
       break;
@@ -885,6 +892,17 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
       }
       [self updateLoginLogoutCellAppearance];
       return self.logInSignOutCell;
+    }
+    case CellKindPromptLogin: {
+      UITableViewCell *const cell = [[UITableViewCell alloc]
+                                     initWithStyle:UITableViewCellStyleDefault
+                                     reuseIdentifier:nil];
+      
+      cell.textLabel.font = [UIFont customFontForTextStyle:UIFontTextStyleBody];
+      cell.textLabel.text = NSLocalizedString(@"Prompt login",@"Prompt login");
+      cell.textLabel.textAlignment = NSTextAlignmentCenter;
+      
+      return cell;
     }
     //case CellKindRegistration: {
       /*RegistrationCell *cell =  [RegistrationCell new];

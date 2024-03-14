@@ -207,9 +207,14 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
       //can we check for 200 code from response?
       if httpResponse.statusCode == 200, let startResponse = startResponse {
         self.performPassKeyLogin(username, startResponse.publicKey) { data in
-          self.finishLogin(data!) { token in
-            completion(token)
+          if let data = data {
+            self.finishLogin(data) { token in
+              completion(token)
+            }
+          }else{
+            completion(nil)
           }
+          
         }
       }else{
         completion(nil)
