@@ -10,6 +10,7 @@ import SwiftUI
 
 struct EkirjastoLoginView: View {
   var dismissView: () -> Void
+  var navController: UINavigationController? = nil
   
   @State var displaySuomiIdentificationWebView = false
   @State var showLoginView = false
@@ -64,7 +65,10 @@ struct EkirjastoLoginView: View {
     }
   
   func signIn(){
-    showLoginView = true
+    EkirjastoLoginViewController.show(navController: navController) {
+      self.dismissView()
+    }
+    //showLoginView = true
   }
   func signUp(){
     //workaround to skip regular login. and to get to simple login

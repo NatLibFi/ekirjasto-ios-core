@@ -676,6 +676,8 @@
 		3688FADF2B67FEFE00A95558 /* EkirjastoLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3688FADD2B67FEFE00A95558 /* EkirjastoLoginViewController.swift */; };
 		3688FAE02B67FEFE00A95558 /* EkirjastoLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3688FADD2B67FEFE00A95558 /* EkirjastoLoginViewController.swift */; };
 		3688FAE12B67FEFE00A95558 /* EkirjastoLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3688FADD2B67FEFE00A95558 /* EkirjastoLoginViewController.swift */; };
+		3689CAB82BA0B0310010B598 /* NavigationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3689CAB72BA0B0310010B598 /* NavigationConfigurator.swift */; };
+		3689CAB92BA0B0310010B598 /* NavigationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3689CAB72BA0B0310010B598 /* NavigationConfigurator.swift */; };
 		36BBC78E2B920EB300E8E426 /* EkirjastoUserLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363C62092B14EEA300858AA5 /* EkirjastoUserLoginView.swift */; };
 		36BBC78F2B920EB300E8E426 /* EkirjastoArrowDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3379F81E2A5D418400E9945F /* EkirjastoArrowDownButton.swift */; };
 		36BBC7902B920EB300E8E426 /* EkirjastoFacetFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3379F8102A5D3C4B00E9945F /* EkirjastoFacetFilterView.swift */; };
@@ -1754,6 +1756,7 @@
 		363C62092B14EEA300858AA5 /* EkirjastoUserLoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EkirjastoUserLoginView.swift; sourceTree = "<group>"; };
 		36833E4B2B5E937000D7B6B2 /* PasskeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasskeyManager.swift; sourceTree = "<group>"; };
 		3688FADD2B67FEFE00A95558 /* EkirjastoLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EkirjastoLoginViewController.swift; sourceTree = "<group>"; };
+		3689CAB72BA0B0310010B598 /* NavigationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationConfigurator.swift; sourceTree = "<group>"; };
 		52545184217A76FF00BBC1B4 /* TPPUserNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPPUserNotifications.swift; sourceTree = "<group>"; };
 		52592BB721220A1100587288 /* TPPLocalization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPPLocalization.m; sourceTree = "<group>"; };
 		52592BBB21220A4F00587288 /* TPPLocalization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TPPLocalization.h; sourceTree = "<group>"; };
@@ -3523,6 +3526,7 @@
 				E5FFB96628AED70E0042907F /* ActivityIndicator.swift */,
 				E5FFB9CA28AFE8AF0042907F /* AsyncImage.swift */,
 				E523A452299FCA5300EF833B /* AlertModel.swift */,
+				3689CAB72BA0B0310010B598 /* NavigationConfigurator.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -4752,6 +4756,7 @@
 				331263E82A287F53006BA87D /* TPPBookRegistry+Extensions.swift in Sources */,
 				331263E92A287F53006BA87D /* TPPIndeterminateProgressView.m in Sources */,
 				331263EA2A287F53006BA87D /* NSString+TPPStringAdditions.m in Sources */,
+				3689CAB92BA0B0310010B598 /* NavigationConfigurator.swift in Sources */,
 				331263EC2A287F53006BA87D /* TPPRequestExecuting.swift in Sources */,
 				331263ED2A287F53006BA87D /* TPPCookiesWebViewController.swift in Sources */,
 				331263EE2A287F53006BA87D /* TPPSamlIDPCell.swift in Sources */,
@@ -5222,6 +5227,7 @@
 				085640CE1BB99FC30088BDBF /* NSURL+NYPLURLAdditions.m in Sources */,
 				1183F35B194F847100DC322F /* TPPAsync.m in Sources */,
 				E52E3C0928C19BAD0073DC4D /* SamplePlayerError.swift in Sources */,
+				3689CAB82BA0B0310010B598 /* NavigationConfigurator.swift in Sources */,
 				11B20E6E19D9F6DD00877A23 /* TPPReloadView.m in Sources */,
 				E694040A1E4A789800E566ED /* TPPReachabilityManager.m in Sources */,
 				A4BA1D0E1B430341006F83DF /* TPPCatalogGroupedFeedViewController.m in Sources */,
