@@ -203,9 +203,9 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
       let httpResponse = response as! HTTPURLResponse
 
       let startResponse = try? JSONDecoder().decode(LoginStartResponse.self, from: data!)
-
+      let statusCode = httpResponse.statusCode
       //can we check for 200 code from response?
-      if httpResponse.statusCode == 200, let startResponse = startResponse {
+      if statusCode == 200, let startResponse = startResponse {
         self.performPassKeyLogin(username, startResponse.publicKey) { data in
           if let data = data {
             self.finishLogin(data) { token in
@@ -310,7 +310,12 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
       //can we check for 200 code from response?
       if _error == nil, let startResponse = startResponse {
         self.performPassKeyRegister(username, startResponse.publicKey) { cred in
-          self.finishRegister(username,token, cred!, completion: completion)
+          if let cred = cred {
+            self.finishRegister(username,token, cred, completion: completion)
+          }else {
+            completion(nil)
+          }
+          
         }
       }else{
         completion(nil)
