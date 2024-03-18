@@ -19,9 +19,9 @@ import Foundation
     return TPPSettings.shared
   }
 
-  static let TPPAboutPalaceURLString = "http://thepalaceproject.org/"
-  static let TPPUserAgreementURLString = "https://legal.palaceproject.io/End%20User%20License%20Agreement.html"
-  static let TPPPrivacyPolicyURLString = "https://legal.palaceproject.io/Privacy%20Policy.html"
+  static let TPPAboutPalaceURLString = "https://lib.e-kirjasto.fi/palaute"
+  static let TPPUserAgreementURLString = "https://www.kansalliskirjasto.fi/fi/e-kirjasto/e-kirjaston-saavutettavuusseloste"
+  static let TPPPrivacyPolicyURLString = "https://www.kansalliskirjasto.fi/fi/e-kirjasto/e-kirjaston-tietosuoja-ja-rekisteriseloste"
   
   static private let customMainFeedURLKey = "NYPLSettingsCustomMainFeedURL"
   static private let accountMainFeedURLKey = "NYPLSettingsAccountMainFeedURL"
