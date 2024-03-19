@@ -60,14 +60,15 @@ struct EkirjastoUserLoginView: View {
           closeButton()
           
         }
-        .navigationViewStyle(.stack)
+        
       }
-        .onAppear{
-          fetchAuthDoc(completion: { doc in
-            authDoc = doc
-          })
-        }
-    }else{
+      .navigationViewStyle(.stack)
+      .onAppear{
+        fetchAuthDoc(completion: { doc in
+          authDoc = doc
+        })
+      }
+    }else{ 
         VStack{
 
         if let authDoc = authDoc {

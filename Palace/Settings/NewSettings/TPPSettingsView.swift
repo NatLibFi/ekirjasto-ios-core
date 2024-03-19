@@ -26,9 +26,10 @@ struct TPPSettingsView: View {
       NavigationView {
         listView
           .onAppear {
-            selectedView = 1
+            //selectedView = 1
           }
-      }
+
+      }.navigationViewStyle(.stack)
     } else {
       listView
         .onAppear {
@@ -39,7 +40,16 @@ struct TPPSettingsView: View {
 
   @ViewBuilder private var listView: some View {
     List {
-      librariesSection
+      if AccountsManager.shared.accounts().count == 1 {
+        librariesSection
+        librarySettings
+       
+
+        
+
+      }else{
+        librariesSection
+      }
       infoSection
       developerSettingsSection
     }
@@ -62,6 +72,40 @@ struct TPPSettingsView: View {
 
     Section {
       row(title: DisplayStrings.libraries, index: 1, selection: self.$selectedView, destination: wrapper.anyView())
+    }
+  }
+  /*CellKindAdvancedSettings,
+  CellKindAgeCheck,
+  CellKindLogInSignOut,
+  CellKindPromptLogin,
+  CellKindSyncButton,
+  CellKindAbout,
+  CellKindPrivacyPolicy,
+  CellKindContentLicense,
+  CellReportIssue,*/
+  @State private var toggleSyncBookmarks = false
+  @ViewBuilder private var librarySettings: some View {
+    
+    Section{
+      Button(action: {
+        
+      }){
+        Text(DisplayStrings.signOut)
+      }
+      Button(action: {
+        
+      }){
+        Text(DisplayStrings.promptLogin)
+      }
+      Toggle(isOn:$toggleSyncBookmarks){
+        Text(DisplayStrings.syncBookmarks)
+      }
+      Button(action: {
+        
+      }){
+        Text(DisplayStrings.reportIssue)
+      }
+      //row(title: DisplayStrings.advancedSettings, index: Int, selection: <#T##Binding<Int?>#>, destination: <#T##AnyView#>)
     }
   }
 
