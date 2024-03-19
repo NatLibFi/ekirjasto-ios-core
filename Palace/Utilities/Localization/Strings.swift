@@ -106,6 +106,8 @@ struct Strings {
     static let libraries = NSLocalizedString("Libraries", comment: "A title for a list of libraries the user may select or add to.")
     static let addLibrary = NSLocalizedString("Add Library", comment: "Title of button to add a new library")
     static let aboutApp = NSLocalizedString("About App", comment: "")
+    static let feedback = NSLocalizedString("Feedback", comment: "")
+    static let accessibility = NSLocalizedString("Accessibility Statement", comment: "")
     static let softwareLicenses = NSLocalizedString("Software Licenses", comment: "")
     static let privacyPolicy = NSLocalizedString("Privacy Policy", comment: "")
     static let eula = NSLocalizedString("User Agreement", comment: "")
