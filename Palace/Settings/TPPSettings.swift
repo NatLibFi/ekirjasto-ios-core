@@ -19,10 +19,12 @@ import Foundation
     return TPPSettings.shared
   }
 
-  static let TPPAboutPalaceURLString = "https://lib.e-kirjasto.fi/palaute"
+  static let TPPAboutPalaceURLString = "http://thepalaceproject.org/"
   static let TPPUserAgreementURLString = "https://www.kansalliskirjasto.fi/fi/e-kirjasto/e-kirjaston-saavutettavuusseloste"
   static let TPPPrivacyPolicyURLString = "https://www.kansalliskirjasto.fi/fi/e-kirjasto/e-kirjaston-tietosuoja-ja-rekisteriseloste"
-  
+  static let TPPFeedbackURLString = "https://lib.e-kirjasto.fi/palaute"
+  static let TPPAccessibilityURLString = "https://www.kansalliskirjasto.fi/fi/e-kirjasto/e-kirjaston-saavutettavuusseloste"
+
   static private let customMainFeedURLKey = "NYPLSettingsCustomMainFeedURL"
   static private let accountMainFeedURLKey = "NYPLSettingsAccountMainFeedURL"
   static private let userPresentedAgeCheckKey = "NYPLUserPresentedAgeCheckKey"
