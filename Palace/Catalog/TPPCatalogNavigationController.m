@@ -145,7 +145,7 @@
     }];
   } else if (user.catalogRequiresAuthentication && !user.hasCredentials) {
     // we're signed out, so sign in
-    [TPPAccountSignInViewController requestCredentialsWithCompletion:^{
+    [EkirjastoLoginViewControllerC showWithNavController:nil dismissHandler:^{
       [TPPMainThreadRun asyncIfNeeded:completion];
     }];
   } else {
@@ -189,7 +189,6 @@
 {
   [super viewDidAppear:animated];
   
-  
   if (UIAccessibilityIsVoiceOverRunning()) {
     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
   }
@@ -197,12 +196,13 @@
   TPPSettings *settings = [TPPSettings sharedSettings];
   
   if (!settings.userHasSeenWelcomeScreen  || TPPConfiguration.registryChanged) {
+    printf("settings userHasSeenWelcomeScreen: %s registryChanged: %s\n",settings.userHasSeenWelcomeScreen ? "true" : "false",TPPConfiguration.registryChanged ? "true" : "false");
     Account *currentAccount = [[AccountsManager sharedInstance] currentAccount];
 
     __block NSURL *mainFeedUrl = [NSURL URLWithString:currentAccount.catalogUrl];
     void (^completion)(void) = ^() {
-    
       NSArray* accounts = [[AccountsManager sharedInstance] accounts:nil];
+      int count = [accounts count];
       [[TPPSettings sharedSettings] setAccountMainFeedURL:mainFeedUrl];
       [UIApplication sharedApplication].delegate.window.tintColor = [TPPConfiguration mainColor];
       
@@ -218,9 +218,7 @@
 
       // Present onboarding screens above the welcome screen.
       UIViewController *onboardingVC = [TPPOnboardingViewController makeSwiftUIViewWithDismissHandler:^{
-        [[self presentedViewController] dismissViewControllerAnimated:YES completion:^{
-          
-          
+        [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
           if([accounts count] == 1){
             Account* account = [accounts firstObject];
             //[account l]
@@ -237,7 +235,7 @@
             [vc safelyPresentViewController:[TPPAlertUtils expiredAdobeDRMAlert] animated:YES completion:nil];
           }
 #endif
-        }];
+
       }];
       
       // Update current registry hash if registry changed
@@ -260,7 +258,6 @@
         
         [navController setModalPresentationStyle:UIModalPresentationFullScreen];
         [navController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-        
         TPPRootTabBarController *vc = [TPPRootTabBarController sharedController];
         [vc safelyPresentViewController:navController animated:YES completion:nil];
 
@@ -274,10 +271,15 @@
                                                                        currentLibraryAccountProvider:[AccountsManager shared]
                                                                                           completion:^(BOOL isOfAge) {
         mainFeedUrl = [TPPUserAccount.sharedAccount.authDefinition coppaURLWithIsOfAge:isOfAge];
-        completion();
+        [[AccountsManager shared] onAccountsHaveLoadedWithLoaded:^{
+          completion();
+        }];
+        
       }];
     } else {
-      completion();
+      [[AccountsManager shared] onAccountsHaveLoadedWithLoaded:^{
+        completion();
+      }];
     }
   }
 }
