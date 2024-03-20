@@ -218,7 +218,13 @@
 
       // Present onboarding screens above the welcome screen.
       UIViewController *onboardingVC = [TPPOnboardingViewController makeSwiftUIViewWithDismissHandler:^{
-        [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
+        [[self presentedViewController] dismissViewControllerAnimated:YES completion:^{
+#ifdef FEATURE_DRM_CONNECTOR
+          if ([AdobeCertificate.defaultCertificate hasExpired] == YES) {
+            [vc safelyPresentViewController:[TPPAlertUtils expiredAdobeDRMAlert] animated:YES completion:nil];
+          }
+#endif
+        }];
           if([accounts count] == 1){
             Account* account = [accounts firstObject];
             //[account l]
@@ -230,11 +236,6 @@
               [self welcomeScreenCompletionHandlerForAccount:account];
             }
           }
-#ifdef FEATURE_DRM_CONNECTOR
-          if ([AdobeCertificate.defaultCertificate hasExpired] == YES) {
-            [vc safelyPresentViewController:[TPPAlertUtils expiredAdobeDRMAlert] animated:YES completion:nil];
-          }
-#endif
 
       }];
       
