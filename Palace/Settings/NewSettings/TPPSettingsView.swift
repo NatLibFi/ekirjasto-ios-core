@@ -115,9 +115,9 @@ struct TPPSettingsView: View {
   @ViewBuilder private var infoSection: some View {
     let view: AnyView = showDeveloperSettings ? EmptyView().anyView() : versionInfo.anyView()
       Section(footer: view) {
-        aboutRow
+        feedbackRow
+        accessibilityRow
         privacyRow
-        userAgreementRow
         softwareLicenseRow
       }
   }
@@ -134,6 +134,33 @@ struct TPPSettingsView: View {
 
     row(title: DisplayStrings.aboutApp, index: 2, selection: self.$selectedView, destination: wrapper.anyView())
   }
+  
+  @ViewBuilder private var feedbackRow: some View {
+    let viewController = RemoteHTMLViewController(
+      URL: URL(string: TPPSettings.TPPFeedbackURLString)!,
+      title: Strings.Settings.feedback,
+      failureMessage: Strings.Error.loadFailedError
+    )
+    
+    let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
+      .navigationBarTitle(Text(DisplayStrings.feedback))
+
+    row(title: DisplayStrings.feedback, index: 2, selection: self.$selectedView, destination: wrapper.anyView())
+  }
+  
+  @ViewBuilder private var accessibilityRow: some View {
+    let viewController = RemoteHTMLViewController(
+      URL: URL(string: TPPSettings.TPPAccessibilityURLString)!,
+      title: Strings.Settings.accessibility,
+      failureMessage: Strings.Error.loadFailedError
+    )
+    
+    let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
+      .navigationBarTitle(Text(DisplayStrings.accessibility))
+
+    row(title: DisplayStrings.accessibility, index: 2, selection: self.$selectedView, destination: wrapper.anyView())
+  }
+
 
   @ViewBuilder private var privacyRow: some View {
     let viewController = RemoteHTMLViewController(
