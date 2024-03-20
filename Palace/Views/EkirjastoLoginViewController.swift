@@ -11,7 +11,7 @@ import SwiftUI
 import Foundation
 
 @objc class EkirjastoLoginViewControllerC : NSObject {
-  @objc static func show(navController: UINavigationController? = nil ,dismissHandler: @escaping (() -> Void)){
+  @objc static func show(navController: UINavigationController? = nil ,dismissHandler: (() -> Void)?){
     EkirjastoLoginViewController.show(navController: navController, dismissHandler: dismissHandler)
   }
 }
@@ -42,7 +42,7 @@ class EkirjastoLoginViewController : UIHostingController<EkirjastoUserLoginView>
     return nil
   }
   
-  private static func makeSwiftUIView(navController: UINavigationController? = nil ,dismissHandler: @escaping (() -> Void)) -> EkirjastoLoginViewController {
+  private static func makeSwiftUIView(navController: UINavigationController? = nil ,dismissHandler: (() -> Void)?) -> EkirjastoLoginViewController {
 
     let controller = EkirjastoLoginViewController(rootView: EkirjastoUserLoginView(dismissView: dismissHandler), navController: navController)
     controller.modalPresentationStyle = .fullScreen
@@ -50,7 +50,7 @@ class EkirjastoLoginViewController : UIHostingController<EkirjastoUserLoginView>
   }
   
   
-  @objc static func show(navController: UINavigationController? = nil ,dismissHandler: @escaping (() -> Void)){
+  @objc static func show(navController: UINavigationController? = nil ,dismissHandler: (() -> Void)?){
     let vc = TPPRootTabBarController.shared()
     var loginView : EkirjastoLoginViewController?
     
@@ -58,7 +58,7 @@ class EkirjastoLoginViewController : UIHostingController<EkirjastoUserLoginView>
     if Thread.isMainThread{
       loginView = makeSwiftUIView(dismissHandler: {
         loginView?.dismiss(animated: true)
-        dismissHandler()
+        dismissHandler?()
       })
       if let nc = loginView?.getNavController() {
         nc.pushViewController(loginView!, animated: true)
@@ -70,7 +70,7 @@ class EkirjastoLoginViewController : UIHostingController<EkirjastoUserLoginView>
       DispatchSerialQueue.main.async {
         loginView = makeSwiftUIView(dismissHandler: {
           loginView?.dismiss(animated: true)
-          dismissHandler()
+          dismissHandler?()
         })
         if let nc = loginView?.getNavController() {
           nc.pushViewController(loginView!, animated: true)

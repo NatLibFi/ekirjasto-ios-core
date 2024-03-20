@@ -100,11 +100,14 @@ struct TPPSettingsView: View {
       Toggle(isOn:$toggleSyncBookmarks){
         Text(DisplayStrings.syncBookmarks)
       }
-      Button(action: {
-        
-      }){
-        Text(DisplayStrings.reportIssue)
+      Section{
+        Button(action: {
+          
+        }){
+          Text(DisplayStrings.reportIssue)
+        }
       }
+      
       //row(title: DisplayStrings.advancedSettings, index: Int, selection: <#T##Binding<Int?>#>, destination: <#T##AnyView#>)
     }
   }

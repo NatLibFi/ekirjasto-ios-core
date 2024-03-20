@@ -12,7 +12,7 @@ import AuthenticationServices
 
 struct EkirjastoUserLoginView: View {
     
-  var dismissView: () -> Void
+  var dismissView: (() -> Void)?
   var navigationController: UINavigationController?
   
   @State var passKeyLogin : PasskeyManager? = nil
@@ -40,7 +40,7 @@ struct EkirjastoUserLoginView: View {
               NavigationLink("Sign in with Suomi.fi e-identification", destination: {
                 SuomiIdentificationWebView(closeWebView: {
                   _loginSuomi = false
-                  self.dismissView()
+                  self.dismissView?()
                 }, authenticationDocument: authDoc)
               }).foregroundStyle(.white).frame(height: 40)
               if TPPUserAccount.sharedAccount().authToken != nil {
@@ -75,7 +75,7 @@ struct EkirjastoUserLoginView: View {
           NavigationLink("Sign in with Suomi.fi e-identification", destination: {
             SuomiIdentificationWebView(closeWebView: {
               _loginSuomi = false
-              self.dismissView()
+              self.dismissView?()
             }, authenticationDocument: authDoc)
           }).foregroundStyle(.white).frame(height: 40)
           if TPPUserAccount.sharedAccount().authToken != nil {
@@ -109,7 +109,7 @@ struct EkirjastoUserLoginView: View {
     HStack {
       Spacer()
       Button {
-        self.dismissView()
+        self.dismissView?()
       } label: {
         Image(systemName: "xmark.circle.fill")
           .font(.title)
@@ -185,7 +185,7 @@ struct EkirjastoUserLoginView: View {
         TPPNetworkExecutor.shared.authenticateWithToken(token)
       }
       DispatchQueue.main.async {
-        self.dismissView()
+        self.dismissView?()
       }
     }
     
@@ -202,7 +202,7 @@ struct EkirjastoUserLoginView: View {
           TPPNetworkExecutor.shared.authenticateWithToken(token)
         }
         DispatchQueue.main.async {
-          self.dismissView()
+          self.dismissView?()
         }
         
       }
