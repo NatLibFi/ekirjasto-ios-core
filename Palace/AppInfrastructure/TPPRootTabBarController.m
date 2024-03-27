@@ -8,7 +8,7 @@
 @property (nonatomic) TPPCatalogNavigationController *catalogNavigationController;
 @property (nonatomic) TPPMyBooksViewController *myBooksNavigationController;
 @property (nonatomic) TPPHoldsNavigationController *holdsNavigationController;
-@property (nonatomic) TPPSettingsViewController *settingsViewController;
+@property (nonatomic) UIViewController *settingsViewController;
 @property (readwrite) TPPR2Owner *r2Owner;
 
 @end
@@ -44,7 +44,7 @@
     [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
   }];
   self.holdsNavigationController = [[TPPHoldsNavigationController alloc] init];
-  self.settingsViewController = (TPPSettingsViewController * ) [TPPSettingsViewController makeSwiftUIViewWithDismissHandler:^{
+  self.settingsViewController =  [TPPSettingsViewController makeSwiftUIViewWithDismissHandler:^{
     [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
   }];
 
