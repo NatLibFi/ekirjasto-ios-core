@@ -21,7 +21,7 @@ struct SuomiIdentificationWebView: UIViewRepresentable {
   func updateUIView(_ uiView: WKWebView, context: Context) {
 
     context.coordinator.closeWebView = closeWebView
-      
+    context.coordinator.authenticationDocument = authenticationDocument
     let authentication = authenticationDocument?.authentication?.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})
     let link = authentication?.links?.first(where: {$0.rel == "tunnistus_start"})
     let start = link
@@ -51,6 +51,8 @@ struct SuomiIdentificationWebView: UIViewRepresentable {
   
   class Coordinator : NSObject, WKNavigationDelegate {
     var closeWebView : (() -> Void)?
+    var authenticationDocument : OPDS2AuthenticationDocument? = nil
+    
     
     /*func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
       
@@ -99,6 +101,19 @@ struct SuomiIdentificationWebView: UIViewRepresentable {
             
             if let tokenResponse = tokenResponse {
               TPPNetworkExecutor.shared.authenticateWithToken(tokenResponse.token)
+              
+              /*var request = URLRequest(url: URL(string: "https://e-kirjasto.loikka.dev/v1/auth/userinfo")!)
+              TPPNetworkExecutor.shared.addBearerAndExecute(request) { result, response, error in
+                let res = String(data: result!, encoding: .utf8)
+                try? JSONDecoder().decode(TokenResponse.self, from: jsonString.data(using: .utf8)!)
+              }*/
+              
+              /*let authentication = self.authenticationDocument?.authentication?.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})
+              let link = authentication?.links?.first(where: {$0.rel == "tunnistus_start"})
+              let start = link
+              
+              var request = URLRequest(url: URL(string: "\(start!.href)&state=\(tokenResponse.token)")!)
+              webView.load(request)*/
             }
             
             print("doc: \(jsonString)")

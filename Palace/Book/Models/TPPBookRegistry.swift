@@ -91,7 +91,7 @@ fileprivate class BoolWithDelay {
 }
 
 @objcMembers
-class TPPBookRegistry: NSObject {
+class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
   
   @objc
   enum RegistryState: Int {
@@ -228,15 +228,19 @@ class TPPBookRegistry: NSObject {
       return
     }
     if syncUrl == loansUrl {
+      print("book registry skipped sync")
       return
     }
     state = .syncing
     syncUrl = loansUrl
+    print("book registry syncUrl: \(syncUrl)")
     TPPOPDSFeed.withURL(loansUrl, shouldResetCache: true) { feed, errorDocument in
+      print("book registry withURL!")
       DispatchQueue.main.async {
         defer {
           self.state = .loaded
           self.syncUrl = nil
+          print("book registry syncUrl: \(self.syncUrl)")
         }
         if self.syncUrl != loansUrl {
           return

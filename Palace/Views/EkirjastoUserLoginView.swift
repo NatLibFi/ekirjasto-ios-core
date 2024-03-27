@@ -35,7 +35,7 @@ struct EkirjastoUserLoginView: View {
         ZStack(alignment: .top) {
           
           VStack{
-            
+
             if let authDoc = authDoc {
               NavigationLink("Sign in with Suomi.fi e-identification", destination: {
                 SuomiIdentificationWebView(closeWebView: {
@@ -70,7 +70,7 @@ struct EkirjastoUserLoginView: View {
       }
     }else{ 
         VStack{
-
+          
         if let authDoc = authDoc {
           NavigationLink("Sign in with Suomi.fi e-identification", destination: {
             SuomiIdentificationWebView(closeWebView: {
@@ -96,7 +96,7 @@ struct EkirjastoUserLoginView: View {
           fetchAuthDoc(completion: { doc in
             authDoc = doc
           })
-        }
+      }
 
     }
 
@@ -128,6 +128,7 @@ struct EkirjastoUserLoginView: View {
       TextField("Username", text: $passkeyUserName)
         .textInputAutocapitalization(.never)
         .autocorrectionDisabled()
+        .textContentType(.username)
       Button(action: {if mode == 1 { self.registerPasskey() } else if mode == 2 { self.loginPasskey() }}){
         Text("Continue")
       }

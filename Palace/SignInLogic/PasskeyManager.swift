@@ -66,6 +66,8 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
         authenticatorData = cred.rawAuthenticatorData.toBase64URL()
         signature = cred.signature.toBase64URL()
         userHandle = String(decoding: cred.userID, as: UTF8.self)
+      
+        print("cred clientDataJson: \(String(data:cred.rawClientDataJSON, encoding: .utf8))")
       }
     }
     var type = "public-key"
@@ -179,7 +181,7 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
   
   public init(_ authentication : OPDS2AuthenticationDocument.Authentication){
     auth = authentication
-    anchor = PasskeyManager.windowBy(vc: TPPRootTabBarController.shared())!
+    anchor = UIApplication.shared.delegate!.window!!//PasskeyManager.windowBy(vc: TPPRootTabBarController.shared())!
   }
   deinit {
       print("deinit!")
@@ -253,7 +255,11 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
     authController!.presentationContextProvider = self
 
 
+
     authController!.performRequests()
+      // Fallback on earlier versions
+    
+    //authController!.performRequests()
   }
 
   private func finishLogin(_ data : LoginCompleteData, completion : @escaping (String?) -> Void){
@@ -273,6 +279,10 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
     URLSession.shared.dataTask(with: finishRequest) { _data,_response,_error in
       print("passkey finish error: \(_error.debugDescription))")
       print("passkey finish result: \(String(bytes: _data!.bytes, encoding: .utf8))")
+      
+      if let httpResponse = _response as? HTTPURLResponse {
+        print("passkey status: \(httpResponse.statusCode)")
+      }
       
       if let data = _data {
         let tokenResponse = try? JSONDecoder().decode(TokenResponse.self, from: data)
