@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "e-kirjasto-logo-vihrea-FI-SVE.svg",
+      "filename" : "e-kirjasto-logo-vihrea-FI-SVE-ENG.png",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "e-kirjasto-logo-dark-mode.png",
+      "filename" : "e-kirjasto-logo-vihrea-dark-mode-FI-SVE-ENG.png",
       "idiom" : "universal"
     }
   ],
