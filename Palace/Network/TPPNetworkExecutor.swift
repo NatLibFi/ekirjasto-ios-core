@@ -465,7 +465,14 @@ extension TPPNetworkExecutor {
         
         if let accessToken = accessToken {
           let sharedAccount = TPPUserAccount.sharedAccount()
+          
           sharedAccount.setAuthToken(accessToken,barcode: nil, pin: nil, expirationDate: nil)
+          
+          //is it ok to have a direct reference to TPPSignInBusinessLogic here?
+          TPPSignInBusinessLogic.getShared { logic in
+            logic?.notifySignIn()
+          }
+          
         }else{
           print("authenticateWithToken error: \(String(describing: error?.localizedDescription)) data: \(String(describing: String(data:data!,encoding: .utf8)))")
         }
