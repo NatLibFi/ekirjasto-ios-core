@@ -22,21 +22,20 @@ extension TPPSignInBusinessLogic {
     
     AccountsManager.shared.onAccountsHaveLoaded {
       let account = AccountsManager.shared.accounts().first!
-      /*initWithLibraryAccountID:libraryUUID
-      libraryAccountsProvider:AccountsManager.shared
-      urlSettingsProvider: TPPSettings.shared
-      bookRegistry:[TPPBookRegistry shared]
-      bookDownloadsCenter:[MyBooksDownloadCenter shared]
-      userAccountProvider:[TPPUserAccount class]
-      uiDelegate:self
-      drmAuthorizer:drmAuthorizer];*/
-      shared = TPPSignInBusinessLogic(libraryAccountID: account.uuid, libraryAccountsProvider: AccountsManager.shared, urlSettingsProvider: TPPSettings.shared, bookRegistry: TPPBookRegistry.shared as! TPPBookRegistrySyncing, bookDownloadsCenter: MyBooksDownloadCenter.shared, userAccountProvider: TPPUserAccount.self, uiDelegate: nil, drmAuthorizer: nil)
+
+      shared = TPPSignInBusinessLogic(libraryAccountID: account.uuid, libraryAccountsProvider: AccountsManager.shared, urlSettingsProvider: TPPSettings.shared, bookRegistry: TPPBookRegistry.shared as TPPBookRegistrySyncing, bookDownloadsCenter: MyBooksDownloadCenter.shared, userAccountProvider: TPPUserAccount.self, uiDelegate: nil, drmAuthorizer: nil)
       completion(shared)
     }
     
 
   }
   
+  public func notifySignIn(){
+    if libraryAccountID == libraryAccountsProvider.currentAccountId {
+      bookRegistry.sync()
+    }
 
+    NotificationCenter.default.post(name: .TPPIsSigningIn, object: false)
+  }
   
 }

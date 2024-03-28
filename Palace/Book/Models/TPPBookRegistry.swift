@@ -224,6 +224,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
   /// Synchronizes local registry data and current loans data.
   /// - Parameter completion: Completion handler provides an error document for error handling and a boolean value, indicating the presence of books available for download.
   func sync(completion: ((_ errorDocument: [AnyHashable: Any]?, _ newBooks: Bool) -> Void)? = nil) {
+    
     guard let loansUrl = AccountsManager.shared.currentAccount?.loansUrl else {
       return
     }
@@ -233,14 +234,14 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
     }
     state = .syncing
     syncUrl = loansUrl
-    print("book registry syncUrl: \(syncUrl)")
+    print("book registry syncUrl 1: \(syncUrl)")
     TPPOPDSFeed.withURL(loansUrl, shouldResetCache: true) { feed, errorDocument in
       print("book registry withURL!")
       DispatchQueue.main.async {
         defer {
           self.state = .loaded
           self.syncUrl = nil
-          print("book registry syncUrl: \(self.syncUrl)")
+          print("book registry syncUrl 2: \(self.syncUrl)")
         }
         if self.syncUrl != loansUrl {
           return
