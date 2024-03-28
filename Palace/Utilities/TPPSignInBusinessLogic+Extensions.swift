@@ -31,11 +31,24 @@ extension TPPSignInBusinessLogic {
   }
   
   public func notifySignIn(){
-    if libraryAccountID == libraryAccountsProvider.currentAccountId {
-      bookRegistry.sync()
-    }
+    
+    if Thread.isMainThread {
+      if libraryAccountID == libraryAccountsProvider.currentAccountId {
+        bookRegistry.sync()
+      }
 
-    NotificationCenter.default.post(name: .TPPIsSigningIn, object: false)
+      NotificationCenter.default.post(name: .TPPIsSigningIn, object: false)
+    }else {
+      DispatchQueue.main.async {
+        if self.libraryAccountID == self.libraryAccountsProvider.currentAccountId {
+          self.bookRegistry.sync()
+        }
+
+        NotificationCenter.default.post(name: .TPPIsSigningIn, object: false)
+      }
+    }
+    
+
   }
   
 }
