@@ -30,7 +30,6 @@
                                          initWithImage:[UIImage imageNamed:@"MyLibraryIcon"] style:(UIBarButtonItemStylePlain)
                                          target:self
                                          action:@selector(showAndReloadCatalogTab)];
-  // Finland: This is not working as a button for E-kirjasto, instead this is just an icon.
   vc.navigationItem.leftBarButtonItem.accessibilityLabel = NSLocalizedString(@"accessibilityShowAndReloadCatalogTab", nil);
 }
 
