@@ -12,10 +12,28 @@ import WebKit
 class DigitalMagazineReaderViewController: UIViewController, WKNavigationDelegate {
   private let webView = WKWebView()
   
+  override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+      // Allow all orientations
+      return .all
+  }
+  
+  override var shouldAutorotate: Bool {
+      return true
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
     setupWebView()
+  }
+  
+  override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+      super.viewWillTransition(to: size, with: coordinator)
+
+      // Rotate the web view to match the new orientation
+      coordinator.animate(alongsideTransition: { _ in
+          self.webView.frame = self.view.bounds
+      })
   }
   
   private func setupWebView() {
