@@ -14,8 +14,8 @@ class EkirjastoMagazineNavigationController: TPPLibraryNavigationController {
     navigationBar.isHidden = true
     
     tabBarItem.title = NSLocalizedString("Magazines", comment: "")
-    tabBarItem.image = UIImage(named: "Holds")
-    tabBarItem.selectedImage = UIImage(named: "HoldsSelected")
+    tabBarItem.image = UIImage(named: "Magazines")
+    tabBarItem.selectedImage = UIImage(named: "MagazinesSelected")
     tabBarItem.imageInsets = UIEdgeInsets(top: 8.0, left: 0.0, bottom: -8.0, right: 0.0)
     
     NotificationCenter.default.addObserver(self, selector: #selector(currentAccountChanged), name: NSNotification.Name(rawValue: NSNotification.TPPCurrentAccountDidChange.rawValue), object: nil)
