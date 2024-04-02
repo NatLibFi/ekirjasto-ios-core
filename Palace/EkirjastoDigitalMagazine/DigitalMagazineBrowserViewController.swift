@@ -14,13 +14,13 @@ class DigitalMagazineBrowserViewController: UIViewController, UITabBarController
   private let webView = WKWebView()
   
   private let webAppBaseURL = "https://e-kirjasto-playground.epaper.fi/"
-  private let webAppLanguage = "fi"
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     setupWebView()
     
+    let webAppLanguage = Bundle.main.preferredLocalizations[0]
     let entryURL = URL(string: "\(webAppBaseURL)\(webAppLanguage)")!
     let request = URLRequest(url: entryURL)
     webView.load(request)
