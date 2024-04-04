@@ -13,15 +13,29 @@ class DigitalMagazineBrowserViewController: UIViewController, UITabBarController
   
   private let webView = WKWebView()
   
-  private let webAppBaseURL = "https://e-kirjasto-playground.epaper.fi/"
+  private var authRetryTime:DispatchTime = .now()
+  private var authRetryCount:TimeInterval = 0
+  private var authRetryBackoffFactor:TimeInterval = 2
+  private var currentAuthWorkItem: DispatchWorkItem? = nil
+  
+  func resetAuthRetryTimer() {
+    authRetryCount = 0
+    authRetryTime = .now()
+    currentAuthWorkItem?.cancel()
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     setupWebView()
     
+    guard let digitalMagazinesUrl = AccountsManager.shared.currentAccount?.digitalMagazinesUrl
+    else {
+      return
+    }
+    
     let webAppLanguage = Bundle.main.preferredLocalizations[0]
-    let entryURL = URL(string: "\(webAppBaseURL)\(webAppLanguage)")!
+    let entryURL = URL(string: "\(digitalMagazinesUrl)\(webAppLanguage)")!
     let request = URLRequest(url: entryURL)
     webView.load(request)
   }
@@ -55,6 +69,7 @@ class DigitalMagazineBrowserViewController: UIViewController, UITabBarController
   func popToRoot() {
     // Call the web app's "popToRoot" method if the user re-selects the current tab to emulate native behavior.
     webView.evaluateJavaScript("__ewl('popToRoot');", completionHandler: nil)
+    self.resetAuthRetryTimer()
   }
   
   func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
@@ -83,16 +98,56 @@ class DigitalMagazineBrowserViewController: UIViewController, UITabBarController
   }
   
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-    
     guard let path = webView.url?.path else { return }
-    
     if path.hasPrefix("/unauthorized") {
-      // TODO: Getthe actual token here.
-      webView.evaluateJavaScript("__ewl('login', {token:\"foobar\"});", completionHandler: nil)
+      self.resetAuthRetryTimer()
+      
+      fetchEkirjastoToken() { ekirjastoToken in
+        DispatchQueue.main.async {
+          self.webView.evaluateJavaScript("__ewl('login', {token:\"\(ekirjastoToken ?? "")\"});", completionHandler: nil)
+        }
+      }
+    }
+  }
+  
+  private func fetchEkirjastoToken(_ completion: @escaping (String?) -> Void) {
+    guard let authenticationDocument = AccountsManager.shared.currentAccount?.authenticationDocument,
+      let authentication = authenticationDocument.authentication?.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto" }),
+      let tokenUrlString = authentication.links?.first(where: { $0.rel == "ekirjasto_token" })?.href,
+      let tokenUrl = URL(string: tokenUrlString)
+    else {
+      return
+    }
+    
+    TPPNetworkExecutor.shared.GET(tokenUrl) { result in
+      switch result {
+      case .success(let serverData, _):
+        if let responseBody = try? JSONSerialization.jsonObject(with: serverData, options: []) as? [String:Any],
+           let ekirjastoToken = responseBody?["token"] as? String {
+          completion(ekirjastoToken)
+          return
+        }
+      case .failure(let error, _):
+        TPPErrorLogger.logError(
+          withCode: .responseFail,
+          summary: "Digital Magazine view failed to get ekirjasto token.",
+          metadata: ["loadError": error, "url": tokenUrl]
+        )
+      }
+      
+      self.authRetryCount += 1
+      self.authRetryTime = .now() + self.authRetryBackoffFactor * self.authRetryCount
+      self.currentAuthWorkItem?.cancel()
+      self.currentAuthWorkItem = DispatchWorkItem(block: {
+        self.fetchEkirjastoToken(completion)
+      })
+      
+      DispatchQueue.main.asyncAfter(deadline: self.authRetryTime, execute: self.currentAuthWorkItem!)
     }
   }
   
   deinit {
+    currentAuthWorkItem?.cancel()
     webView.removeObserver(self, forKeyPath: "URL")
   }
 }

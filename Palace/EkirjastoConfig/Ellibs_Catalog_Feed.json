@@ -25,6 +25,10 @@
           "rel": "alternate"
         },
         {
+          "href": "https://e-kirjasto-playground.epaper.fi/",
+          "rel": "digital_magazines"
+        },
+        {
             "href": "https://librarysimplified.org/licenses/",
             "type": "text/html",
             "rel": "license"
