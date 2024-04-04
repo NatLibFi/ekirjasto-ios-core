@@ -670,8 +670,10 @@
 		36833E4D2B5EDBD500D7B6B2 /* PasskeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36833E4B2B5E937000D7B6B2 /* PasskeyManager.swift */; };
 		3688FADE2B67FEFE00A95558 /* EkirjastoLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3688FADD2B67FEFE00A95558 /* EkirjastoLoginViewController.swift */; };
 		3688FADF2B67FEFE00A95558 /* EkirjastoLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3688FADD2B67FEFE00A95558 /* EkirjastoLoginViewController.swift */; };
-		3688FAE02B67FEFE00A95558 /* EkirjastoLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3688FADD2B67FEFE00A95558 /* EkirjastoLoginViewController.swift */; };
 		3688FAE12B67FEFE00A95558 /* EkirjastoLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3688FADD2B67FEFE00A95558 /* EkirjastoLoginViewController.swift */; };
+		368B2AA82BAD7B4D00A14D2E /* TPPSignInBusinessLogic+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368B2AA72BAD7B4D00A14D2E /* TPPSignInBusinessLogic+Extensions.swift */; };
+		368B2AA92BAD7B4D00A14D2E /* TPPSignInBusinessLogic+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368B2AA72BAD7B4D00A14D2E /* TPPSignInBusinessLogic+Extensions.swift */; };
+		368B2AAA2BAD7B4D00A14D2E /* TPPSignInBusinessLogic+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368B2AA72BAD7B4D00A14D2E /* TPPSignInBusinessLogic+Extensions.swift */; };
 		36BBC78E2B920EB300E8E426 /* EkirjastoUserLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363C62092B14EEA300858AA5 /* EkirjastoUserLoginView.swift */; };
 		36BBC78F2B920EB300E8E426 /* EkirjastoArrowDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3379F81E2A5D418400E9945F /* EkirjastoArrowDownButton.swift */; };
 		36BBC7902B920EB300E8E426 /* EkirjastoFacetFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3379F8102A5D3C4B00E9945F /* EkirjastoFacetFilterView.swift */; };
@@ -1340,12 +1342,12 @@
 			remoteGlobalIDString = CCAC4FAE195B3DD700D775F5;
 			remoteInfo = TenPrintCover;
 		};
-		2D2B47771D08F808007F7764 /* PBXContainerItemProxy */ = {
+		220AB4E72BB16DE100435D59 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A823D805192BABA400B55DE2 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = A823D80C192BABA400B55DE2;
-			remoteInfo = SimplyE;
+			remoteGlobalIDString = 331262D32A287F53006BA87D;
+			remoteInfo = Ekirjasto;
 		};
 		59D9CC1B25FFDE1B00C89B81 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1744,6 +1746,7 @@
 		363C62092B14EEA300858AA5 /* EkirjastoUserLoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EkirjastoUserLoginView.swift; sourceTree = "<group>"; };
 		36833E4B2B5E937000D7B6B2 /* PasskeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasskeyManager.swift; sourceTree = "<group>"; };
 		3688FADD2B67FEFE00A95558 /* EkirjastoLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EkirjastoLoginViewController.swift; sourceTree = "<group>"; };
+		368B2AA72BAD7B4D00A14D2E /* TPPSignInBusinessLogic+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TPPSignInBusinessLogic+Extensions.swift"; sourceTree = "<group>"; };
 		52545184217A76FF00BBC1B4 /* TPPUserNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPPUserNotifications.swift; sourceTree = "<group>"; };
 		52592BB721220A1100587288 /* TPPLocalization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPPLocalization.m; sourceTree = "<group>"; };
 		52592BBB21220A4F00587288 /* TPPLocalization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TPPLocalization.h; sourceTree = "<group>"; };
@@ -2577,6 +2580,7 @@
 				E551116D283C93BC0095E723 /* EmailAddress.swift */,
 				E57E798329D4D407006D0F87 /* String+Extensions.swift */,
 				E544C4F62A3C1E4A00B2DC9D /* Dictionary+Extensions.swift */,
+				368B2AA72BAD7B4D00A14D2E /* TPPSignInBusinessLogic+Extensions.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -3798,7 +3802,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				2D2B47781D08F808007F7764 /* PBXTargetDependency */,
+				220AB4E82BB16DE100435D59 /* PBXTargetDependency */,
 			);
 			name = PalaceTests;
 			productName = SimplyETests;
@@ -4414,7 +4418,6 @@
 				17ADCF4F254BB84800D0A5FE /* TPPReaderBookmarksBusinessLogicTests.swift in Sources */,
 				735771AB2537650E00067CEA /* NYPLLibraryAccountsProviderMock.swift in Sources */,
 				1763C0D624F460FE00A4D0E2 /* TPPAnnouncementManagerTests.swift in Sources */,
-				3688FAE02B67FEFE00A95558 /* EkirjastoLoginViewController.swift in Sources */,
 				2D8790A520129AF200E2763F /* TPPOPDSAcquisitionPathTests.swift in Sources */,
 				735350B724918432006021BD /* URLRequest+NYPLTests.swift in Sources */,
 				73A794CA25492C9800C59CC1 /* TPPFake.swift in Sources */,
@@ -4758,6 +4761,7 @@
 				331263FF2A287F53006BA87D /* RemoteHTMLViewController.swift in Sources */,
 				363C620B2B14F08300858AA5 /* Account+profileDocument.swift in Sources */,
 				331264002A287F53006BA87D /* TPPBookDetailsProblemDocumentViewController.swift in Sources */,
+				368B2AAA2BAD7B4D00A14D2E /* TPPSignInBusinessLogic+Extensions.swift in Sources */,
 				331264012A287F53006BA87D /* TPPCatalogGroupedFeed.m in Sources */,
 				331264022A287F53006BA87D /* TPPCatalogFacet.m in Sources */,
 				337E63B92A28A7D100FF7886 /* (null) in Sources */,
@@ -4974,6 +4978,7 @@
 				73EB0ABD25821DF4006BC997 /* TPPSignInBusinessLogic+OAuth.swift in Sources */,
 				73EB0ABE25821DF4006BC997 /* TPPOPDSAcquisitionPath.m in Sources */,
 				73EB0ABF25821DF4006BC997 /* TPPOPDSAcquisitionAvailability.m in Sources */,
+				368B2AA92BAD7B4D00A14D2E /* TPPSignInBusinessLogic+Extensions.swift in Sources */,
 				73EB0AC025821DF4006BC997 /* NSError+NYPLAdditions.swift in Sources */,
 				73EB0AC125821DF4006BC997 /* TPPReachability.m in Sources */,
 				73EB0AC325821DF4006BC997 /* TPPCatalogLaneCell.m in Sources */,
@@ -5325,6 +5330,7 @@
 				D787E8441FB6B0290016D9D5 /* TPPSettingsAdvancedViewController.swift in Sources */,
 				5D60D3542297353C001080D0 /* TPPMigrationManager.swift in Sources */,
 				7384C802242BCC4800D5F960 /* Date+NYPLAdditions.swift in Sources */,
+				368B2AA82BAD7B4D00A14D2E /* TPPSignInBusinessLogic+Extensions.swift in Sources */,
 				086C45D624AE77CA00F5108E /* TPPBasicAuth.swift in Sources */,
 				B51C1E0422861C1A003B49A5 /* OPDS2AuthenticationDocument.swift in Sources */,
 				739ECB2B25102A2B00691A70 /* TPPCatalogs+SE.swift in Sources */,
@@ -5497,10 +5503,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		2D2B47781D08F808007F7764 /* PBXTargetDependency */ = {
+		220AB4E82BB16DE100435D59 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A823D80C192BABA400B55DE2 /* Palace */;
-			targetProxy = 2D2B47771D08F808007F7764 /* PBXContainerItemProxy */;
+			target = 331262D32A287F53006BA87D /* Ekirjasto */;
+			targetProxy = 220AB4E72BB16DE100435D59 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -5560,6 +5566,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"SIMPLYE=1",
+					"LCP=1",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5581,14 +5588,14 @@
 					"@loader_path/Frameworks",
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = org.thepalaceproject.palaceTests;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjastoTests";
 				PRODUCT_NAME = PalaceTests;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PalaceTests/PalaceTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.2;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Palace.app/Palace";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ekirjasto.app/Ekirjasto";
 				WARNING_CFLAGS = (
 					"-Wall",
 					"-Wextra",
@@ -5646,13 +5653,13 @@
 					"@loader_path/Frameworks",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = org.thepalaceproject.palaceTests;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjastoTests";
 				PRODUCT_NAME = PalaceTests;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PalaceTests/PalaceTests-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.2;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Palace.app/Palace";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ekirjasto.app/Ekirjasto";
 				WARNING_CFLAGS = (
 					"-Wall",
 					"-Wextra",

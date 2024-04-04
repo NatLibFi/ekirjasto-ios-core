@@ -15,6 +15,9 @@ struct TPPSettingsView: View {
   @State private var selectedView: Int? = 0
   @State private var orientation: UIDeviceOrientation = UIDevice.current.orientation
 
+
+  //private var signInBusinessLogic = TPPSignInBusinessLogic.shared
+  
   private var sideBarEnabled: Bool {
     UIDevice.current.userInterfaceIdiom == .pad
       &&  UIDevice.current.orientation != .portrait
@@ -24,11 +27,13 @@ struct TPPSettingsView: View {
   var body: some View {
     if sideBarEnabled {
       NavigationView {
+        
         listView
           .onAppear {
-            selectedView = 1
+            //selectedView = 1
           }
-      }
+
+      }.navigationViewStyle(.stack)
     } else {
       listView
         .onAppear {
@@ -39,7 +44,16 @@ struct TPPSettingsView: View {
 
   @ViewBuilder private var listView: some View {
     List {
-      librariesSection
+      if AccountsManager.shared.accounts().count == 1 {
+        //librariesSection
+        if TPPUserAccount.sharedAccount().authToken != nil {
+          loginSection
+          syncBookmarksSection
+        }
+        reportIssueSection
+      }else{
+        librariesSection
+      }
       infoSection
       developerSettingsSection
     }
@@ -49,7 +63,8 @@ struct TPPSettingsView: View {
       self.orientation = UIDevice.current.orientation
     }
   }
-
+  
+  
   @ViewBuilder private var librariesSection: some View {
     let viewController = TPPSettingsAccountsTableViewController(accounts: TPPSettings.shared.settingsAccountsList)
     let navButton = Button(DisplayStrings.addLibrary) {
@@ -62,6 +77,102 @@ struct TPPSettingsView: View {
 
     Section {
       row(title: DisplayStrings.libraries, index: 1, selection: self.$selectedView, destination: wrapper.anyView())
+    }
+  }
+  /*CellKindAdvancedSettings,
+  CellKindAgeCheck,
+  CellKindLogInSignOut,
+  CellKindPromptLogin,
+  CellKindSyncButton,
+  CellKindAbout,
+  CellKindPrivacyPolicy,
+  CellKindContentLicense,
+  CellReportIssue,*/
+  @State private var toggleSyncBookmarks = false
+  @State private var toggleLogoutWarning = false
+  @State private var syncEnabled = AccountsManager.shared.accounts().first?.details?.syncPermissionGranted ?? false
+  @State private var logoutText = ""
+  @ViewBuilder private var syncBookmarksSection: some View {
+    Section(footer: Text(NSLocalizedString("Save your reading position and bookmarks to all your other devices.",comment: "Explain to the user they can save their bookmarks in the cloud across all their devices."))){
+      Toggle(isOn:$toggleSyncBookmarks){
+        Text(DisplayStrings.syncBookmarks)
+      }.disabled(!syncEnabled)
+        .onChange(of: toggleSyncBookmarks) { value in
+          
+          TPPSignInBusinessLogic.getShared { logic in
+            logic?.changeSyncPermission(to: value, postServerSyncCompletion: { value in
+              toggleSyncBookmarks = value
+            })
+          }
+          
+        }.onAppear{
+          TPPSignInBusinessLogic.getShared { logic in
+            logic?.checkSyncPermission(preWork: {
+              
+            }, postWork: { enableSync in
+              syncEnabled = enableSync
+            })
+          }
+        }
+    }
+  }
+  @ViewBuilder private var loginSection: some View {
+    Section{
+      Button(action: {
+        TPPSignInBusinessLogic.getShared { logic in
+          if let _logic = logic {
+            if _logic.shouldShowSyncButton() && !self.toggleSyncBookmarks{
+              self.logoutText = NSLocalizedString("If you sign out without enabling Sync, your books and any saved bookmarks will be removed.", comment: "")
+            }else{
+              self.logoutText = NSLocalizedString("If you sign out, your books and any saved bookmarks will be removed.", comment: "")
+            }
+            
+          }
+          
+          toggleLogoutWarning = true
+        }
+        
+        
+      }){
+        Text(DisplayStrings.signOut)
+      }.alert(Strings.TPPSigninBusinessLogic.signout, isPresented: $toggleLogoutWarning){
+        Button(DisplayStrings.signOut, role: .destructive) {
+          TPPSignInBusinessLogic.getShared { logic in
+            if let _logic = logic {
+              if let alert = _logic.logOutOrWarn() {
+                TPPRootTabBarController.shared().settingsViewController.present(alert, animated: true)
+              }
+              
+            }
+          }
+        }
+        
+      } message: {
+        Text(self.logoutText)
+      }
+      Button(action: {
+        EkirjastoLoginViewController.show(dismissHandler: nil)
+      }){
+        Text(DisplayStrings.promptLogin)
+      }
+    }
+  }
+  
+  @ViewBuilder private var reportIssueSection: some View {
+    
+    Section{
+      if let supportEmail = AccountsManager.shared.currentAccount?.supportEmail {
+        Button(action: {
+          ProblemReportEmail.sharedInstance.beginComposing(to: supportEmail.rawValue, presentingViewController: TPPRootTabBarController.shared().settingsViewController, book: nil)
+        }){
+          Text(DisplayStrings.reportIssue)
+        }
+      }else {
+        let viewController = BundledHTMLViewController(fileURL: AccountsManager.shared.currentAccount!.supportURL!, title: AccountsManager.shared.currentAccount!.name)
+        
+        let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
+        row(title: DisplayStrings.reportIssue, index: 1, selection: self.$selectedView, destination: wrapper.anyView())
+      }
     }
   }
 

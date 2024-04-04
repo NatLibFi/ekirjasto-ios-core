@@ -8,36 +8,76 @@
 
 import UIKit
 import SwiftUI
+import Foundation
 
-class EkirjastoLoginViewController : NSObject {
+@objc class EkirjastoLoginViewControllerC : NSObject {
+  @objc static func show(navController: UINavigationController? = nil ,dismissHandler: (() -> Void)?){
+    EkirjastoLoginViewController.show(navController: navController, dismissHandler: dismissHandler)
+  }
+}
+
+class EkirjastoLoginViewController : UIHostingController<EkirjastoUserLoginView>{
   
-  @objc static func makeSwiftUIView(dismissHandler: @escaping (() -> Void)) -> UIViewController {
-    let controller = UIHostingController(rootView: EkirjastoUserLoginView(dismissView: dismissHandler))
+  private var navController: UINavigationController?
+  
+  init(rootView: EkirjastoUserLoginView, navController: UINavigationController?) {
+    self.navController = navController
+    super.init(rootView: rootView)
+  }
+  override init(rootView: EkirjastoUserLoginView) {
+    super.init(rootView: rootView)
+  }
+  
+  @MainActor required dynamic init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  private func getNavController() -> UINavigationController?{
+    if let nc = navigationController {
+      return nc
+    }
+    if let nc = navController {
+      return nc
+    }
+    return nil
+  }
+  
+  private static func makeSwiftUIView(navController: UINavigationController? = nil ,dismissHandler: (() -> Void)?) -> EkirjastoLoginViewController {
+
+    let controller = EkirjastoLoginViewController(rootView: EkirjastoUserLoginView(dismissView: dismissHandler), navController: navController)
     controller.modalPresentationStyle = .fullScreen
     return controller
   }
   
   
-  static func show(dismissHandler: @escaping (() -> Void)){
+  @objc static func show(navController: UINavigationController? = nil ,dismissHandler: (() -> Void)?){
     let vc = TPPRootTabBarController.shared()
-    var loginView : UIViewController?
+    var loginView : EkirjastoLoginViewController?
     
     
     if Thread.isMainThread{
       loginView = makeSwiftUIView(dismissHandler: {
         loginView?.dismiss(animated: true)
-        dismissHandler()
+        dismissHandler?()
       })
+      if let nc = loginView?.getNavController() {
+        nc.pushViewController(loginView!, animated: true)
+      }else{
+        vc?.safelyPresentViewController(loginView, animated: true, completion: nil)
+      }
       
-      vc?.safelyPresentViewController(loginView, animated: true, completion: nil)
     }else{
       DispatchSerialQueue.main.async {
         loginView = makeSwiftUIView(dismissHandler: {
           loginView?.dismiss(animated: true)
-          dismissHandler()
+          dismissHandler?()
         })
-        
-        vc?.safelyPresentViewController(loginView, animated: true, completion: nil)
+        if let nc = loginView?.getNavController() {
+          nc.pushViewController(loginView!, animated: true)
+        }else{
+          vc?.safelyPresentViewController(loginView, animated: true, completion: nil)
+        }
+        //vc?.safelyPresentViewController(loginView, animated: true, completion: nil)
       }
     }
     

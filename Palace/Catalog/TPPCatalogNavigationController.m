@@ -145,7 +145,7 @@
     }];
   } else if (user.catalogRequiresAuthentication && !user.hasCredentials) {
     // we're signed out, so sign in
-    [TPPAccountSignInViewController requestCredentialsWithCompletion:^{
+    [EkirjastoLoginViewControllerC showWithNavController:nil dismissHandler:^{
       [TPPMainThreadRun asyncIfNeeded:completion];
     }];
   } else {
@@ -196,10 +196,13 @@
   TPPSettings *settings = [TPPSettings sharedSettings];
   
   if (!settings.userHasSeenWelcomeScreen  || TPPConfiguration.registryChanged) {
+    printf("settings userHasSeenWelcomeScreen: %s registryChanged: %s\n",settings.userHasSeenWelcomeScreen ? "true" : "false",TPPConfiguration.registryChanged ? "true" : "false");
     Account *currentAccount = [[AccountsManager sharedInstance] currentAccount];
 
     __block NSURL *mainFeedUrl = [NSURL URLWithString:currentAccount.catalogUrl];
     void (^completion)(void) = ^() {
+      NSArray* accounts = [[AccountsManager sharedInstance] accounts:nil];
+      int count = [accounts count];
       [[TPPSettings sharedSettings] setAccountMainFeedURL:mainFeedUrl];
       [UIApplication sharedApplication].delegate.window.tintColor = [TPPConfiguration mainColor];
       
@@ -213,41 +216,71 @@
         }
       }];
 
+      // Present onboarding screens above the welcome screen.
+      UIViewController *onboardingVC = [TPPOnboardingViewController makeSwiftUIViewWithDismissHandler:^{
+        [[self presentedViewController] dismissViewControllerAnimated:YES completion:^{
+#ifdef FEATURE_DRM_CONNECTOR
+          if ([AdobeCertificate.defaultCertificate hasExpired] == YES) {
+            [vc safelyPresentViewController:[TPPAlertUtils expiredAdobeDRMAlert] animated:YES completion:nil];
+          }
+#endif
+        }];
+          if([accounts count] == 1){
+            Account* account = [accounts firstObject];
+            //[account l]
+            if (![NSThread isMainThread]) {
+              dispatch_async(dispatch_get_main_queue(), ^{
+                [self welcomeScreenCompletionHandlerForAccount:account];
+              });
+            } else {
+              [self welcomeScreenCompletionHandlerForAccount:account];
+            }
+          }
+
+      }];
+      
       // Update current registry hash if registry changed
       if (TPPConfiguration.registryChanged) {
         [TPPConfiguration updateSavedeRegistryKey];
       }
+      
+      //UINavigationController *navController;// = [[UINavigationController alloc] initWithRootViewController:welcomeScreenVC];
+      
+      if([accounts count] == 1) {
+        //navController = [[UINavigationController alloc] initWithRootViewController:onboardingVC];
+        
+        //[navController setModalPresentationStyle:UIModalPresentationFullScreen];
+        //[navController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+        TPPRootTabBarController *vc = [TPPRootTabBarController sharedController];
+        [vc safelyPresentViewController:onboardingVC animated:YES completion:nil];
+        
+      }else{
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:welcomeScreenVC];
+        
+        [navController setModalPresentationStyle:UIModalPresentationFullScreen];
+        [navController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+        TPPRootTabBarController *vc = [TPPRootTabBarController sharedController];
+        [vc safelyPresentViewController:navController animated:YES completion:nil];
 
-      UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:welcomeScreenVC];
+        [vc safelyPresentViewController:onboardingVC animated:YES completion:nil];
+      }
+      
 
-      [navController setModalPresentationStyle:UIModalPresentationFullScreen];
-      [navController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-
-      TPPRootTabBarController *vc = [TPPRootTabBarController sharedController];
-      [vc safelyPresentViewController:navController animated:YES completion:nil];
-
-
-      // Present onboarding screens above the welcome screen.
-      UIViewController *onboardingVC = [TPPOnboardingViewController makeSwiftUIViewWithDismissHandler:^{
-         [[self presentedViewController] dismissViewControllerAnimated:YES completion:^{
-      #ifdef FEATURE_DRM_CONNECTOR
-           if ([AdobeCertificate.defaultCertificate hasExpired] == YES) {
-             [vc safelyPresentViewController:[TPPAlertUtils expiredAdobeDRMAlert] animated:YES completion:nil];
-           }
-      #endif
-         }];
-       }];
-      [vc safelyPresentViewController:onboardingVC animated:YES completion:nil];
     };
     if (TPPUserAccount.sharedAccount.authDefinition.needsAgeCheck) {
       [[[AccountsManager shared] ageCheck] verifyCurrentAccountAgeRequirementWithUserAccountProvider:[TPPUserAccount sharedAccount]
                                                                        currentLibraryAccountProvider:[AccountsManager shared]
                                                                                           completion:^(BOOL isOfAge) {
         mainFeedUrl = [TPPUserAccount.sharedAccount.authDefinition coppaURLWithIsOfAge:isOfAge];
-        completion();
+        [[AccountsManager shared] onAccountsHaveLoadedWithLoaded:^{
+          completion();
+        }];
+        
       }];
     } else {
-      completion();
+      [[AccountsManager shared] onAccountsHaveLoadedWithLoaded:^{
+        completion();
+      }];
     }
   }
 }

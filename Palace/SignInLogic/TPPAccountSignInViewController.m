@@ -549,7 +549,8 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
 
 + (void)requestCredentialsWithCompletion:(void (^)(void))completion
 {
-  [TPPAccountSignInViewController requestCredentialsForUsername:nil withCompletion:completion];
+  [EkirjastoLoginViewControllerC showWithNavController:nil dismissHandler:completion];
+  //[TPPAccountSignInViewController requestCredentialsForUsername:nil withCompletion:completion];
 }
 
 + (void)requestCredentialsForUsername:(NSString *)username withCompletion:(void (^)(void))completion

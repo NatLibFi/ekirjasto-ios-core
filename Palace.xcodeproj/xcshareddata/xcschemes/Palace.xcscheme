@@ -65,22 +65,6 @@
             testExecutionOrdering = "random">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2D2B47711D08F807007F7764"
-               BuildableName = "PalaceTests.xctest"
-               BlueprintName = "PalaceTests"
-               ReferencedContainer = "container:Palace.xcodeproj">
-            </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "AudiobookBookmarkBusinessLogicTests">
-               </Test>
-            </SkippedTests>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            testExecutionOrdering = "random">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "59D9CBF425FFDBC500C89B81"
                BuildableName = "TenPrintCoverTests.xctest"
                BlueprintName = "TenPrintCoverTests"

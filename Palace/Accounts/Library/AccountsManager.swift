@@ -52,7 +52,7 @@ let currentAccountIdentifierKey  = "TPPCurrentAccountIdentifier"
     }
     action()
   }
-
+  
   var accountsHaveLoaded: Bool {
     var accounts: [Account]?
   
@@ -77,6 +77,11 @@ let currentAccountIdentifierKey  = "TPPCurrentAccountIdentifier"
       return account(uuid)
     }
     set {
+      
+      if currentAccountId == newValue?.uuid {
+        return
+      }
+      
       Log.debug(#file, "Setting currentAccount to <\(newValue?.name ?? "[name N/A]") LibUUID=\(newValue?.uuid ?? "[UUID N/A]")>")
       currentAccountId = newValue?.uuid
       TPPErrorLogger.setUserID(TPPUserAccount.sharedAccount().barcode)
@@ -230,7 +235,30 @@ let currentAccountIdentifierKey  = "TPPCurrentAccountIdentifier"
       completion(false)
     }
   }
-
+  
+  var accountsLoadedCbs: [()->()] = []
+  public func onAccountsHaveLoaded(loaded: @escaping ()->()){
+    if accountsHaveLoaded {
+      loaded()
+    }else {
+      accountsLoadedCbs.append(loaded)
+    }
+  }
+  
+  private func callAccountsLoaded(){
+    //do {
+    DispatchQueue.main.async {
+      self.accountsLoadedCbs.forEach { cb in
+        cb()
+      }
+      self.accountsLoadedCbs = []
+    }
+      
+    //}catch{
+    //  Log.error("callAccountsLoaded", error.localizedDescription)
+   // }
+  }
+  
   /// Loads library catalogs from the network or cache if available.
   ///
   /// After loading the library accounts, the authentication document
@@ -253,9 +281,13 @@ let currentAccountIdentifierKey  = "TPPCurrentAccountIdentifier"
       switch result {
       case .success(let data, _):
         self.loadAccountSetsAndAuthDoc(fromCatalogData: data, key: hash) { success in
+          if self.accounts().count == 1 {
+            self.currentAccount = self.accounts().first
+          }
           self.callAndClearLoadingCompletionHandlers(key: hash, success)
           NotificationCenter.default.post(name: NSNotification.Name.TPPCatalogDidLoad, object: nil)
           self.cacheAccountsCatalogData(data, hash: hash)
+          self.callAccountsLoaded()
         }
       case .failure(let error, _):
         // Try file cache
@@ -275,6 +307,7 @@ let currentAccountIdentifierKey  = "TPPCurrentAccountIdentifier"
             ])
             self.callAndClearLoadingCompletionHandlers(key: hash, false)
           }
+          self.callAccountsLoaded()
         }
       }
     }
@@ -305,7 +338,7 @@ let currentAccountIdentifierKey  = "TPPCurrentAccountIdentifier"
 
     return nil
   }
-
+  
   func accounts(_ key: String? = nil) -> [Account] {
     var accounts: [Account]? = []
 

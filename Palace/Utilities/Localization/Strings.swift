@@ -112,6 +112,12 @@ struct Strings {
     static let privacyPolicy = NSLocalizedString("Privacy Policy", comment: "")
     static let eula = NSLocalizedString("User Agreement", comment: "")
     static let developerSettings = NSLocalizedString("Testing", comment: "Developer Settings")
+    static let advancedSettings = NSLocalizedString("Advanced", comment: "")
+    static let reportIssue = NSLocalizedString("Report an Issue", comment: "")
+    static let syncBookmarks = NSLocalizedString("Sync Bookmarks", comment: "")
+    static let promptLogin = NSLocalizedString("Prompt login", comment: "")
+    static let signOut = NSLocalizedString("Sign out", comment: "")
+    
   }
   
   struct TPPAccountListDataSource {

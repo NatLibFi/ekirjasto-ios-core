@@ -26,13 +26,14 @@ typedef NS_ENUM(NSInteger, CellKind) {
   //CellKindBarcode,
   //CellKindPIN,
   CellKindLogInSignOut,
-  CellKindRegistration,
+  CellKindPromptLogin,
+  //CellKindRegistration,
   CellKindSyncButton,
   CellKindAbout,
   CellKindPrivacyPolicy,
   CellKindContentLicense,
   CellReportIssue,
-  CellKindPasswordReset
+  //CellKindPasswordReset
 };
 
 @interface TPPSettingsAccountDetailViewController () <TPPSignInOutBusinessLogicUIDelegate>
@@ -362,7 +363,7 @@ Authenticating with any of those barcodes should work.
     authCells = @[@(CellKindBarcode), @(CellKindLogInSignOut)];
      */
   else {
-       authCells = @[@(CellKindLogInSignOut)];
+       authCells = @[@(CellKindLogInSignOut),@(CellKindPromptLogin)];
      }
 
   return authCells;
@@ -389,7 +390,8 @@ Authenticating with any of those barcodes should work.
       [workingSection addObject:[[TPPInfoHeaderCellType alloc] initWithInformation:libraryInfo]];
     }
 
-    if (self.businessLogic.libraryAccount.details.auths.count > 1 && !self.businessLogic.libraryAccount.details.defaultAuth.isToken) {
+    //Disabled by Ellibs
+    /*if (self.businessLogic.libraryAccount.details.auths.count > 1 && !self.businessLogic.libraryAccount.details.defaultAuth.isToken) {
       // multiple authentication methods
       for (AccountDetailsAuthentication *authenticationMethod in self.businessLogic.libraryAccount.details.auths) {
         // show all possible login methods
@@ -408,14 +410,14 @@ Authenticating with any of those barcodes should work.
       // only 1 authentication method
       // no method header needed
       [workingSection addObjectsFromArray:[self cellsForAuthMethod:self.businessLogic.selectedAuthentication]];
-    }
+    }*/
     
     //Disabled by Ellibs
     //if (self.businessLogic.canResetPassword) {
       //[workingSection addObject:@(CellKindPasswordReset)];
     //}
-    [workingSection addObject:@(CellKindPasswordReset)];
-    [workingSection addObject:@(CellKindRegistration)];
+    //[workingSection addObject:@(CellKindPasswordReset)];
+    //[workingSection addObject:@(CellKindRegistration)];
     
   } else {
     [workingSection addObjectsFromArray:[self cellsForAuthMethod:self.businessLogic.selectedAuthentication]];
@@ -445,12 +447,14 @@ Authenticating with any of those barcodes should work.
     [section2About addObject:@(CellKindAdvancedSettings)];
   }
   
-  if ([self.businessLogic registrationIsPossible])   {
+  /*if ([self.businessLogic registrationIsPossible])   {
     self.tableData = @[section0AcctInfo, @[@(CellKindRegistration)], section1Sync].mutableCopy;
   } else {
     self.tableData = @[section0AcctInfo, section1Sync].mutableCopy;
-  }
+  }*/
 
+  self.tableData = @[section0AcctInfo, section1Sync].mutableCopy;
+  
   if (self.selectedAccount.hasSupportOption) {
     [self.tableData addObject:@[@(CellReportIssue)]];
   }
@@ -634,10 +638,16 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
       }
       break;
     }
-    case CellKindRegistration: {
-      [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    case CellKindPromptLogin: {
+      [EkirjastoLoginViewControllerC showWithNavController:nil dismissHandler:^{
+        
+      }];
       break;
     }
+    /*case CellKindRegistration: {
+      [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+      break;
+    }*/
     case CellKindSyncButton: {
       break;
     }
@@ -708,10 +718,10 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
       [self.navigationController pushViewController:vc animated:YES];
       break;
     }
-    case CellKindPasswordReset:
+    /*case CellKindPasswordReset:
       [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
       [self.businessLogic resetPassword];
-      break;
+      break;*/
   }
 }
 
@@ -883,14 +893,25 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
       [self updateLoginLogoutCellAppearance];
       return self.logInSignOutCell;
     }
-    case CellKindRegistration: {
+    case CellKindPromptLogin: {
+      UITableViewCell *const cell = [[UITableViewCell alloc]
+                                     initWithStyle:UITableViewCellStyleDefault
+                                     reuseIdentifier:nil];
+      
+      cell.textLabel.font = [UIFont customFontForTextStyle:UIFontTextStyleBody];
+      cell.textLabel.text = NSLocalizedString(@"Prompt login",@"Prompt login");
+      cell.textLabel.textAlignment = NSTextAlignmentCenter;
+      
+      return cell;
+    }
+    //case CellKindRegistration: {
       /*RegistrationCell *cell =  [RegistrationCell new];
       [cell configureWithTitle:nil body:nil buttonTitle:nil buttonAction:^{
         [self didSelectRegularSignupOnCell:cell];
       }];
       return cell;*/ //Disabled by Ellibs
-      return [self createRegistrationCell]; // Added by Ellibs
-    }
+    //  return [self createRegistrationCell]; // Added by Ellibs
+    //}
     case CellKindAgeCheck: {
       self.ageCheckCell = [[UITableViewCell alloc]
                            initWithStyle:UITableViewCellStyleDefault
@@ -966,8 +987,8 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
       cell.textLabel.text = NSLocalizedString(@"Advanced", nil);
       return cell;
     }
-    case CellKindPasswordReset:
-      return [self createPasswordResetCell];
+    /*case CellKindPasswordReset:
+      return [self createPasswordResetCell];*/
   }
 }
 

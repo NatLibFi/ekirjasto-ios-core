@@ -66,6 +66,8 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
         authenticatorData = cred.rawAuthenticatorData.toBase64URL()
         signature = cred.signature.toBase64URL()
         userHandle = String(decoding: cred.userID, as: UTF8.self)
+      
+        print("cred clientDataJson: \(String(data:cred.rawClientDataJSON, encoding: .utf8))")
       }
     }
     var type = "public-key"
@@ -179,7 +181,7 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
   
   public init(_ authentication : OPDS2AuthenticationDocument.Authentication){
     auth = authentication
-    anchor = PasskeyManager.windowBy(vc: TPPRootTabBarController.shared())!
+    anchor = UIApplication.shared.delegate!.window!!//PasskeyManager.windowBy(vc: TPPRootTabBarController.shared())!
   }
   deinit {
       print("deinit!")
@@ -203,13 +205,18 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
       let httpResponse = response as! HTTPURLResponse
 
       let startResponse = try? JSONDecoder().decode(LoginStartResponse.self, from: data!)
-
+      let statusCode = httpResponse.statusCode
       //can we check for 200 code from response?
-      if httpResponse.statusCode == 200, let startResponse = startResponse {
+      if statusCode == 200, let startResponse = startResponse {
         self.performPassKeyLogin(username, startResponse.publicKey) { data in
-          self.finishLogin(data!) { token in
-            completion(token)
+          if let data = data {
+            self.finishLogin(data) { token in
+              completion(token)
+            }
+          }else{
+            completion(nil)
           }
+          
         }
       }else{
         completion(nil)
@@ -248,7 +255,11 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
     authController!.presentationContextProvider = self
 
 
+
     authController!.performRequests()
+      // Fallback on earlier versions
+    
+    //authController!.performRequests()
   }
 
   private func finishLogin(_ data : LoginCompleteData, completion : @escaping (String?) -> Void){
@@ -268,6 +279,10 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
     URLSession.shared.dataTask(with: finishRequest) { _data,_response,_error in
       print("passkey finish error: \(_error.debugDescription))")
       print("passkey finish result: \(String(bytes: _data!.bytes, encoding: .utf8))")
+      
+      if let httpResponse = _response as? HTTPURLResponse {
+        print("passkey status: \(httpResponse.statusCode)")
+      }
       
       if let data = _data {
         let tokenResponse = try? JSONDecoder().decode(TokenResponse.self, from: data)
@@ -305,7 +320,12 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
       //can we check for 200 code from response?
       if _error == nil, let startResponse = startResponse {
         self.performPassKeyRegister(username, startResponse.publicKey) { cred in
-          self.finishRegister(username,token, cred!, completion: completion)
+          if let cred = cred {
+            self.finishRegister(username,token, cred, completion: completion)
+          }else {
+            completion(nil)
+          }
+          
         }
       }else{
         completion(nil)
