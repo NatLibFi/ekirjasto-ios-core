@@ -674,6 +674,9 @@
 		368B2AA82BAD7B4D00A14D2E /* TPPSignInBusinessLogic+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368B2AA72BAD7B4D00A14D2E /* TPPSignInBusinessLogic+Extensions.swift */; };
 		368B2AA92BAD7B4D00A14D2E /* TPPSignInBusinessLogic+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368B2AA72BAD7B4D00A14D2E /* TPPSignInBusinessLogic+Extensions.swift */; };
 		368B2AAA2BAD7B4D00A14D2E /* TPPSignInBusinessLogic+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368B2AA72BAD7B4D00A14D2E /* TPPSignInBusinessLogic+Extensions.swift */; };
+		36A07DBC2BB5B49C00583E0B /* PasskeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A07DBB2BB5B49C00583E0B /* PasskeyView.swift */; };
+		36A07DBD2BB5B6FD00583E0B /* PasskeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A07DBB2BB5B49C00583E0B /* PasskeyView.swift */; };
+		36A07DBE2BB5B6FD00583E0B /* PasskeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A07DBB2BB5B49C00583E0B /* PasskeyView.swift */; };
 		36BBC78E2B920EB300E8E426 /* EkirjastoUserLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363C62092B14EEA300858AA5 /* EkirjastoUserLoginView.swift */; };
 		36BBC78F2B920EB300E8E426 /* EkirjastoArrowDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3379F81E2A5D418400E9945F /* EkirjastoArrowDownButton.swift */; };
 		36BBC7902B920EB300E8E426 /* EkirjastoFacetFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3379F8102A5D3C4B00E9945F /* EkirjastoFacetFilterView.swift */; };
@@ -1744,6 +1747,7 @@
 		36833E4B2B5E937000D7B6B2 /* PasskeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasskeyManager.swift; sourceTree = "<group>"; };
 		3688FADD2B67FEFE00A95558 /* EkirjastoLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EkirjastoLoginViewController.swift; sourceTree = "<group>"; };
 		368B2AA72BAD7B4D00A14D2E /* TPPSignInBusinessLogic+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TPPSignInBusinessLogic+Extensions.swift"; sourceTree = "<group>"; };
+		36A07DBB2BB5B49C00583E0B /* PasskeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasskeyView.swift; sourceTree = "<group>"; };
 		52545184217A76FF00BBC1B4 /* TPPUserNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPPUserNotifications.swift; sourceTree = "<group>"; };
 		52592BB721220A1100587288 /* TPPLocalization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPPLocalization.m; sourceTree = "<group>"; };
 		52592BBB21220A4F00587288 /* TPPLocalization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TPPLocalization.h; sourceTree = "<group>"; };
@@ -3168,6 +3172,7 @@
 				3379F8212A5D792900E9945F /* EkirjastoLoginView.swift */,
 				33C1160E2AE7A914007CABEB /* EkirjastoSuomiIdentificationWebView.swift */,
 				3688FADD2B67FEFE00A95558 /* EkirjastoLoginViewController.swift */,
+				36A07DBB2BB5B49C00583E0B /* PasskeyView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -4446,6 +4451,7 @@
 				331262F12A287F53006BA87D /* TPPMainThreadChecker.swift in Sources */,
 				331262F22A287F53006BA87D /* ReaderModule.swift in Sources */,
 				331262F32A287F53006BA87D /* TPPConfiguration.m in Sources */,
+				36A07DBD2BB5B6FD00583E0B /* PasskeyView.swift in Sources */,
 				331262F42A287F53006BA87D /* TPPAlertUtils.swift in Sources */,
 				331262F52A287F53006BA87D /* AudiobookSampleToolbar.swift in Sources */,
 				331262F62A287F53006BA87D /* OPDS2Publication.swift in Sources */,
@@ -4983,6 +4989,7 @@
 				2126FE3C25C059810095C45C /* ReaderError.swift in Sources */,
 				E51EB51529D5F46400022D24 /* String+Extensions.swift in Sources */,
 				73EB0AD125821DF4006BC997 /* ProblemReportEmail.swift in Sources */,
+				36A07DBE2BB5B6FD00583E0B /* PasskeyView.swift in Sources */,
 				21E41788292810F600A78606 /* TPPPDFThumbnailView.swift in Sources */,
 				E795A76E2A74074300314EC8 /* DataManager.swift in Sources */,
 				73EB0AD225821DF4006BC997 /* TPPBookCellDelegate.m in Sources */,
@@ -5159,6 +5166,7 @@
 				2146872D2559A64B007B401A /* LCPLibraryService.swift in Sources */,
 				11369D48199527C200BB11F8 /* TPPJSON.m in Sources */,
 				E795A76D2A74074300314EC8 /* DataManager.swift in Sources */,
+				36A07DBC2BB5B49C00583E0B /* PasskeyView.swift in Sources */,
 				E5824BDF2994AC2900DE76C2 /* NormalBookCell.swift in Sources */,
 				7327A89323EE017300954748 /* TPPMainThreadChecker.swift in Sources */,
 				116A5EB91947B57500491A21 /* TPPConfiguration.m in Sources */,

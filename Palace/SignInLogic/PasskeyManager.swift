@@ -183,20 +183,26 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
     auth = authentication
     anchor = UIApplication.shared.delegate!.window!!//PasskeyManager.windowBy(vc: TPPRootTabBarController.shared())!
   }
+  
+  public init(_ doc : OPDS2AuthenticationDocument){
+    auth = doc.authentication!.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})!
+    anchor = UIApplication.shared.delegate!.window!!
+  }
+  
   deinit {
       print("deinit!")
   }
   
   
-  public func login(_ username : String, completion : @escaping (String?) -> Void){
+  public func login(completion : @escaping (String?) -> Void){
     
     let start = auth.links?.first(where: {$0.rel == "passkey_login_start"})
     var startRequest = URLRequest(url:URL(string:start!.href)!)
     startRequest.httpMethod = "POST"
     startRequest.setValue("application/json", forHTTPHeaderField: "content-type")
     startRequest.setValue("application/json", forHTTPHeaderField: "accept")
-    let content = "{ \"username\" : \"\(username)\" }"
-    startRequest.httpBody = Data(content.utf8)
+    //let content = "{ \"username\" : \"\(username)\" }"
+    //startRequest.httpBody = Data(content.utf8)
 
     URLSession.shared.dataTask(with: startRequest) { data, response, error in
       print("passkey start error: \(error.debugDescription))")
@@ -208,7 +214,7 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
       let statusCode = httpResponse.statusCode
       //can we check for 200 code from response?
       if statusCode == 200, let startResponse = startResponse {
-        self.performPassKeyLogin(username, startResponse.publicKey) { data in
+        self.performPassKeyLogin(startResponse.publicKey) { data in
           if let data = data {
             self.finishLogin(data) { token in
               completion(token)
@@ -243,7 +249,7 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
     
   }
   
-  private func performPassKeyLogin(_ username: String, _ pk : LoginStartResponse.PublicKey, completion : @escaping (LoginCompleteData?) -> Void){
+  private func performPassKeyLogin(_ pk : LoginStartResponse.PublicKey, completion : @escaping (LoginCompleteData?) -> Void){
     let publicKeyCredentialProvider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: "e-kirjasto.loikka.dev")
 
     let assertionRequest = publicKeyCredentialProvider.createCredentialAssertionRequest(challenge: try! Data.fromBase64Url(pk.challenge)!)
