@@ -25,6 +25,13 @@ cd ios-core
 ```
 Open `Palace.xcodeproj` and build the `Palace-noDRM` target.
 
+At this point you may have seemingly random build errors especially if you are
+not using an intel chip but the following steps might help:
+
+`ln -s $(which carthage) /usr/local/bin/carthage`
+Remove all files under `~/Library/Developer/Xcode/DerivedData/*`
+⇧⌘K Clean Build Folder 
+
 # Building With Adobe DRM
 
 ## Building the Application from Scratch
