@@ -63,9 +63,16 @@ struct EkirjastoLoginView: View {
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .background(Color("ColorEkirjastoLightestGreen"))
       
-      NavigationLink(destination: {
-        PasskeyView(mode: .login,passKeyManager: PasskeyManager(authDoc!)){
-          self.dismissView?()
+      Button(action: {
+        
+        let passkey = PasskeyManager(authDoc!)
+        
+        passkey.login { loginToken in
+          if let token = loginToken, !token.isEmpty{
+            TPPNetworkExecutor.shared.authenticateWithToken(token)
+            self.dismissView?()
+          }
+
         }
       }, label: {
         Text(DisplayStrings.loginPasskey)
