@@ -115,8 +115,11 @@ struct Strings {
     static let advancedSettings = NSLocalizedString("Advanced", comment: "")
     static let reportIssue = NSLocalizedString("Report an Issue", comment: "")
     static let syncBookmarks = NSLocalizedString("Sync Bookmarks", comment: "")
-    static let promptLogin = NSLocalizedString("Prompt login", comment: "")
+    static let loginPasskey = NSLocalizedString("Sign in with a passkey", comment: "")
+    static let registerPasskey = NSLocalizedString("Register a passkey",comment: "")
+    static let loginSuomiFi = NSLocalizedString("Sign in with suomi.fi", comment: "")
     static let signOut = NSLocalizedString("Sign out", comment: "")
+    static let loginFooterUserAgreementText = NSLocalizedString("By signing in, you agree the End User License Agreement", comment: "")
     
   }
   

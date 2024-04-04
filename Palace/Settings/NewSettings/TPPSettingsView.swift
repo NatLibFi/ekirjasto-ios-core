@@ -25,40 +25,49 @@ struct TPPSettingsView: View {
   }
 
   var body: some View {
+
     if sideBarEnabled {
       NavigationView {
-        
         listView
-          .onAppear {
-            //selectedView = 1
-          }
-
       }.navigationViewStyle(.stack)
     } else {
       listView
-        .onAppear {
-          selectedView = 0
-        }
     }
   }
 
   @ViewBuilder private var listView: some View {
     List {
-      if AccountsManager.shared.accounts().count == 1 {
-        //librariesSection
-        if TPPUserAccount.sharedAccount().authToken != nil {
-          loginSection
-          syncBookmarksSection
+      Section {
+        
+      } header: {
+        HStack{
+          Spacer()
+          Image("LaunchImageLogo")
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 200)
+          Spacer()
         }
-        reportIssueSection
+
+      }
+      if AccountsManager.shared.accounts().count == 1 {
+        if TPPUserAccount.sharedAccount().authToken != nil {
+          logoutSection
+        }else {
+          loginSection
+        }
+        
       }else{
         librariesSection
       }
+      syncBookmarksSection
+      reportIssueSection
       infoSection
       developerSettingsSection
     }
     .navigationBarTitle(DisplayStrings.settings)
     .listStyle(GroupedListStyle())
+    
     .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
       self.orientation = UIDevice.current.orientation
     }
@@ -116,51 +125,90 @@ struct TPPSettingsView: View {
         }
     }
   }
+  
+ @ViewBuilder private var logoutSection: some View {
+   Section{
+    
+     Button{
+       TPPSignInBusinessLogic.getShared { logic in
+         if let _logic = logic {
+           if _logic.shouldShowSyncButton() && !self.toggleSyncBookmarks{
+             self.logoutText = NSLocalizedString("If you sign out without enabling Sync, your books and any saved bookmarks will be removed.", comment: "")
+           }else{
+             self.logoutText = NSLocalizedString("If you sign out, your books and any saved bookmarks will be removed.", comment: "")
+           }
+           
+         }
+         
+         toggleLogoutWarning = true
+       }
+       
+       
+     } label: {
+       HStack{
+         Text(DisplayStrings.signOut)
+         Spacer()
+         Image("ArrowRight")
+           .padding(.leading, 10)
+           .foregroundColor(Color(uiColor: .lightGray))
+       }
+     }.alert(Strings.TPPSigninBusinessLogic.signout, isPresented: $toggleLogoutWarning){
+       Button(DisplayStrings.signOut, role: .destructive) {
+         TPPSignInBusinessLogic.getShared { logic in
+           if let _logic = logic {
+             if let alert = _logic.logOutOrWarn() {
+               TPPRootTabBarController.shared().settingsViewController.present(alert, animated: true)
+             }
+             
+           }
+         }
+       }
+       
+     } message: {
+       Text(self.logoutText)
+     }
+     
+     row(title: DisplayStrings.registerPasskey, destination: PasskeyView(mode: .register, passKeyManager: PasskeyManager(AccountsManager.shared.currentAccount!.authenticationDocument!) ).anyView())
+   }
+  }
+  
   @ViewBuilder private var loginSection: some View {
     Section{
-      Button(action: {
-        TPPSignInBusinessLogic.getShared { logic in
-          if let _logic = logic {
-            if _logic.shouldShowSyncButton() && !self.toggleSyncBookmarks{
-              self.logoutText = NSLocalizedString("If you sign out without enabling Sync, your books and any saved bookmarks will be removed.", comment: "")
-            }else{
-              self.logoutText = NSLocalizedString("If you sign out, your books and any saved bookmarks will be removed.", comment: "")
-            }
-            
+      row(title: DisplayStrings.loginSuomiFi,destination:SuomiIdentificationWebView(authenticationDocument: AccountsManager.shared.currentAccount!.authenticationDocument).anyView())
+      Button{
+        let passkey = PasskeyManager(AccountsManager.shared.currentAccount!.authenticationDocument!)
+        passkey.login { loginToken in
+          if let token = loginToken, !token.isEmpty{
+            TPPNetworkExecutor.shared.authenticateWithToken(token)
           }
+        }
+      } label: {
+        HStack{
+          Text(DisplayStrings.loginPasskey)
+          Spacer()
+          Image("ArrowRight")
+            .padding(.leading, 10)
+            .foregroundColor(Color(uiColor: .lightGray))
           
-          toggleLogoutWarning = true
+          
         }
-        
-        
-      }){
-        Text(DisplayStrings.signOut)
-      }.alert(Strings.TPPSigninBusinessLogic.signout, isPresented: $toggleLogoutWarning){
-        Button(DisplayStrings.signOut, role: .destructive) {
-          TPPSignInBusinessLogic.getShared { logic in
-            if let _logic = logic {
-              if let alert = _logic.logOutOrWarn() {
-                TPPRootTabBarController.shared().settingsViewController.present(alert, animated: true)
-              }
-              
-            }
-          }
-        }
-        
-      } message: {
-        Text(self.logoutText)
+
       }
-      Button(action: {
-        EkirjastoLoginViewController.show(dismissHandler: nil)
-      }){
-        Text(DisplayStrings.promptLogin)
-      }
+    } footer: {
+      Link(destination: URL(string: TPPSettings.TPPUserAgreementURLString)!, label: {
+        Text(DisplayStrings.loginFooterUserAgreementText)
+          .underline()
+      })
+        .foregroundColor(Color.init(uiColor: UIColor.link))
+        .dynamicTypeSize(.xSmall)
+        
     }
   }
   
   @ViewBuilder private var reportIssueSection: some View {
     
     Section{
+
       if let supportEmail = AccountsManager.shared.currentAccount?.supportEmail {
         Button(action: {
           ProblemReportEmail.sharedInstance.beginComposing(to: supportEmail.rawValue, presentingViewController: TPPRootTabBarController.shared().settingsViewController, book: nil)
@@ -293,6 +341,13 @@ struct TPPSettingsView: View {
       )
       .frame(height: 40)
       .horizontallyCentered()
+  }
+  
+  private func row(title: String, destination: AnyView) -> some View {
+    NavigationLink(
+      destination: destination,
+      label: { Text(title) }
+    )
   }
   
   private func row(title: String, index: Int, selection: Binding<Int?>, destination: AnyView) -> some View {
