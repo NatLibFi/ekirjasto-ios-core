@@ -69,6 +69,9 @@
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+// Finland: interface orientation and auto rotate functionalities were moved to be 
+// handled programmatically, because the DigitalMagazineReaderViewController is allowed 
+// to rotate with all orientations even on iPhone device.
 - (BOOL)shouldAutorotate {
   if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
     return NO;
@@ -76,6 +79,9 @@
   return YES;
 }
 
+// Finland: interface orientation and auto rotate functionalities were moved to be 
+// handled programmatically, because the DigitalMagazineReaderViewController is allowed 
+// to rotate with all orientations even on iPhone device.
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
   if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
     return UIInterfaceOrientationMaskPortrait;
