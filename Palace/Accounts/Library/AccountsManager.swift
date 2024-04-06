@@ -43,6 +43,30 @@ let currentAccountIdentifierKey  = "TPPCurrentAccountIdentifier"
   
   private let accountSetsLock = NSRecursiveLock()
   
+  public static func fetchAuthDoc(completion: @escaping (_ doc: (OPDS2AuthenticationDocument?))->Void){
+    if let currentAccount = AccountsManager.shared.currentAccount {
+      if let doc = currentAccount.authenticationDocument {
+        completion(doc)
+      }else{
+        currentAccount.loadAuthenticationDocument(completion: { Bool in
+          DispatchQueue.main.async {
+            completion(currentAccount.authenticationDocument)
+          }
+        })
+      }
+    }else if let account = AccountsManager.shared.accounts().first {
+      account.loadAuthenticationDocument(completion: { Bool in
+        DispatchQueue.main.async {
+          completion(account.authenticationDocument!)
+        }
+      })
+    }else{
+      completion(nil)
+    }
+  }
+
+  
+  
   /// Performs a closure within a lock using `accountSetsLock`
   /// - Parameter action: the action inside the locked
   private func performLocked(_ action: () -> Void) {

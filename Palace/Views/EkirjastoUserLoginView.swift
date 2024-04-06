@@ -181,7 +181,7 @@ struct EkirjastoUserLoginView: View {
     
     self.passKeyLogin = PasskeyManager(authentication!)
     
-    self.passKeyLogin!.login(passkeyUserName) { loginToken in
+    self.passKeyLogin!.login { loginToken in
       if let token = loginToken, !token.isEmpty{
         TPPNetworkExecutor.shared.authenticateWithToken(token)
       }

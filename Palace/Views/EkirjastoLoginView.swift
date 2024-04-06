@@ -9,19 +9,17 @@
 import SwiftUI
 
 struct EkirjastoLoginView: View {
-  var dismissView: () -> Void
+  typealias DisplayStrings = Strings.Settings
+  
+  var dismissView: (() -> Void)?
   var navController: UINavigationController? = nil
   
-  @State var displaySuomiIdentificationWebView = false
-  @State var showLoginView = false
+
+  @State var authDoc : OPDS2AuthenticationDocument? = nil
   
     var body: some View {
-      ZStack {
-        if(showLoginView){
-          EkirjastoUserLoginView(dismissView: {
-            self.dismissView()
-          })
-        }else{
+
+        NavigationView{
           VStack {
             Image("LaunchImageLogo")
               .resizable()
@@ -33,46 +31,72 @@ struct EkirjastoLoginView: View {
               .aspectRatio(contentMode: .fit)
               .frame(width: 300)
               .padding(.vertical, 50)
-            
-            Button(action: {/*self.dismissView();*/ self.signIn()}) {
-              Text("Kirjaudu palveluun").foregroundColor(Color("ColorEkirjastoButtonTextWithBackground"))
-              Image("ArrowRight")
-                .padding(.leading, 10)
-                .foregroundColor(Color("ColorEkirjastoGreen"))
+            if authDoc != nil {
+              buttonsSection()
+            }else{
+              ProgressView()
             }
-            .frame(width: 300, height: 40)
-            .clipShape(RoundedRectangle(cornerRadius: 10))
-            .background(Color("ColorEkirjastoLightestGreen"))
             
-            Button(action: {self.signUp()}) {
-              Text("Rekisteröidy palveluun").foregroundColor(Color("ColorEkirjastoButtonTextWithBackground"))
-              Image("ArrowRight")
-                .padding(.leading, 10)
-                .foregroundColor(Color("ColorEkirjastoButtonTextWithBackground"))
-            }
-            .frame(width: 300, height: 40)
-            .clipShape(RoundedRectangle(cornerRadius: 10))
-            .background(Color("ColorEkirjastoGreen"))
+          }
+        }.navigationViewStyle(.stack)
+          .onAppear{
+            AccountsManager.fetchAuthDoc { doc in
+              authDoc = doc
           }
         }
-      }.sheet(isPresented: $displaySuomiIdentificationWebView, content: {
-        //SuomiIdentificationWebView(closeWebView: {
-          //displaySuomiIdentificationWebView = false
-          //self.dismissView()
-        //})
-      })
-        
     }
   
-  func signIn(){
-    EkirjastoLoginViewController.show(navController: navController) {
-      self.dismissView()
+  @ViewBuilder func buttonsSection() -> some View{
+
+    Section{
+      
+      NavigationLink(destination: {
+        SuomiIdentificationWebView(closeWebView: {
+          self.dismissView?()
+        }, authenticationDocument: authDoc)
+      }, label: {
+        Text(DisplayStrings.loginSuomiFi)
+        Image("ArrowRight")
+          .padding(.leading, 10)
+          .foregroundColor(Color("ColorEkirjastoGreen"))
+      }).frame(width: 300, height: 40)
+        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .background(Color("ColorEkirjastoLightestGreen"))
+      
+      Button(action: {
+        
+        let passkey = PasskeyManager(authDoc!)
+        
+        passkey.login { loginToken in
+          if let token = loginToken, !token.isEmpty{
+            TPPNetworkExecutor.shared.authenticateWithToken(token)
+            self.dismissView?()
+          }
+
+        }
+      }, label: {
+        Text(DisplayStrings.loginPasskey)
+        Image("ArrowRight")
+          .padding(.leading, 10)
+          .foregroundColor(Color("ColorEkirjastoGreen"))
+      }).frame(width: 300, height: 40)
+        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .background(Color("ColorEkirjastoLightestGreen"))
+      
+      
+      Button(action: {self.dismissView?()}) {
+        Text("Continue without signing in").foregroundColor(Color("ColorEkirjastoButtonTextWithBackground"))
+        Image("ArrowRight")
+          .padding(.leading, 10)
+          .foregroundColor(Color("ColorEkirjastoButtonTextWithBackground"))
+      }
+      .frame(width: 300, height: 40)
+      .clipShape(RoundedRectangle(cornerRadius: 10))
+      .background(Color("ColorEkirjastoYellow"))
     }
-    //showLoginView = true
+
+    
+
   }
-  func signUp(){
-    //workaround to skip regular login. and to get to simple login
-    self.dismissView()
-    //displaySuomiIdentificationWebView = true
-  }
+
 }

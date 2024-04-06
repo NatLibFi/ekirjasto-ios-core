@@ -17,10 +17,18 @@ struct SuomiIdentificationWebView: UIViewRepresentable {
   
   var closeWebView : (() -> Void)?
   var authenticationDocument : OPDS2AuthenticationDocument? = nil
+  @Environment(\.presentationMode) var presentationMode
   
   func updateUIView(_ uiView: WKWebView, context: Context) {
 
-    context.coordinator.closeWebView = closeWebView
+    if let closeWebView = closeWebView {
+      context.coordinator.closeWebView = closeWebView
+    }else{
+      context.coordinator.closeWebView = {
+        presentationMode.wrappedValue.dismiss()
+      }
+    }
+    
     context.coordinator.authenticationDocument = authenticationDocument
     let authentication = authenticationDocument?.authentication?.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})
     let link = authentication?.links?.first(where: {$0.rel == "tunnistus_start"})
@@ -28,13 +36,10 @@ struct SuomiIdentificationWebView: UIViewRepresentable {
 
     print("suomi.fi start.href: \(start?.href)")
     uiView.navigationDelegate = context.coordinator
-    //uiView.configuration.websiteDataStore.removeData(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes(), for: [WKWebsiteDataRecord], completionHandler: <#T##() -> Void#>)
     var request = URLRequest(url: URL(string: "\(start!.href)&state=app")!)
     request.addValue("application/json", forHTTPHeaderField: "accept")
-    //request.httpBody = "state=app".data(using: .utf8)
-    //request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField:"Content-Type")
-    //request.setValue(NSLocalizedString("lang", comment: ""), forHTTPHeaderField:"Accept-Language")
     request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
+    
     uiView.load(request)
     
   }
@@ -54,30 +59,6 @@ struct SuomiIdentificationWebView: UIViewRepresentable {
     var authenticationDocument : OPDS2AuthenticationDocument? = nil
     
     
-    /*func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
-      
-      print("suomi.fi response url: \(navigationResponse.response.url?.absoluteString)")
-      
-      if let url = navigationResponse.response.url {
-        if url.absoluteString.contains("saml2acs") || url.absoluteString.contains("finish") {
-          let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
-          let token = urlComponents?.queryItems?.first(where: {$0.name == "token"})?.value
-          
-          if let token = token {
-            TPPNetworkExecutor.shared.authenticateWithToken(token)
-          }
-          
-          webView.configuration.websiteDataStore.httpCookieStore.getAllCookies() { (cookies) in
-
-            for cookie in cookies {
-              print("cookie name:\(cookie.name) value:\(cookie.value)")
-            }
-          }
-          self.closeWebView?()
-        }
-        decisionHandler(.allow)
-      }
-    }*/
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
       
       print("suomi.fi response url: \(webView.url?.absoluteString)")
@@ -102,26 +83,13 @@ struct SuomiIdentificationWebView: UIViewRepresentable {
             if let tokenResponse = tokenResponse {
               TPPNetworkExecutor.shared.authenticateWithToken(tokenResponse.token)
               
-              /*var request = URLRequest(url: URL(string: "https://e-kirjasto.loikka.dev/v1/auth/userinfo")!)
-              TPPNetworkExecutor.shared.addBearerAndExecute(request) { result, response, error in
-                let res = String(data: result!, encoding: .utf8)
-                try? JSONDecoder().decode(TokenResponse.self, from: jsonString.data(using: .utf8)!)
-              }*/
-              
-              /*let authentication = self.authenticationDocument?.authentication?.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})
-              let link = authentication?.links?.first(where: {$0.rel == "tunnistus_start"})
-              let start = link
-              
-              var request = URLRequest(url: URL(string: "\(start!.href)&state=\(tokenResponse.token)")!)
-              webView.load(request)*/
             }
             
             print("doc: \(jsonString)")
+            self.closeWebView?()
           })
           
-
-
-          self.closeWebView?()
+          
         }
       }
     }

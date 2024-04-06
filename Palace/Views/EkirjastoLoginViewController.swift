@@ -16,15 +16,15 @@ import Foundation
   }
 }
 
-class EkirjastoLoginViewController : UIHostingController<EkirjastoUserLoginView>{
+class EkirjastoLoginViewController : UIHostingController<EkirjastoLoginView>{
   
   private var navController: UINavigationController?
   
-  init(rootView: EkirjastoUserLoginView, navController: UINavigationController?) {
+  init(rootView: EkirjastoLoginView, navController: UINavigationController?) {
     self.navController = navController
     super.init(rootView: rootView)
   }
-  override init(rootView: EkirjastoUserLoginView) {
+  override init(rootView: EkirjastoLoginView) {
     super.init(rootView: rootView)
   }
   
@@ -44,7 +44,7 @@ class EkirjastoLoginViewController : UIHostingController<EkirjastoUserLoginView>
   
   private static func makeSwiftUIView(navController: UINavigationController? = nil ,dismissHandler: (() -> Void)?) -> EkirjastoLoginViewController {
 
-    let controller = EkirjastoLoginViewController(rootView: EkirjastoUserLoginView(dismissView: dismissHandler), navController: navController)
+    let controller = EkirjastoLoginViewController(rootView: EkirjastoLoginView(dismissView: dismissHandler), navController: navController)
     controller.modalPresentationStyle = .fullScreen
     return controller
   }
