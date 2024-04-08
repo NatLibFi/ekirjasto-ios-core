@@ -14,8 +14,7 @@ struct TPPOnboardingView: View {
   // (relative to screen width)
   private var activationDistance: CGFloat = 0.8
   
-  private var onboardingImageNames =
-    ["Onboarding-1", "Onboarding-2", "Onboarding-3", "Onboarding-4"]
+  private var onboardingImageNames : [String]
   @GestureState private var translation: CGFloat = 0
   
   @State private var showLoginView = false
@@ -33,6 +32,21 @@ struct TPPOnboardingView: View {
   var dismissView: (() -> Void)
   
   init(dismissHandler: @escaping (() -> Void)) {
+    
+    let langCode = Bundle.main.preferredLocalizations[0]
+    
+    switch langCode {
+    case "sv":
+      onboardingImageNames = ["IntroSV1","IntroSV2","IntroSV3","IntroSV4"]
+    case "fi":
+      onboardingImageNames = ["IntroFI1","IntroFI2","IntroFI3","IntroFI4"]
+    case "en":
+      onboardingImageNames = ["IntroEN1","IntroEN2","IntroEN3","IntroEN4"]
+    default:
+      onboardingImageNames = ["IntroEN1","IntroEN2","IntroEN3","IntroEN4"]
+    }
+    
+    
     self.dismissView = dismissHandler
   }
   
