@@ -14,6 +14,7 @@ struct TPPSettingsView: View {
   @AppStorage(TPPSettings.showDeveloperSettingsKey) private var showDeveloperSettings: Bool = false
   @State private var selectedView: Int? = 0
   @State private var orientation: UIDeviceOrientation = UIDevice.current.orientation
+  @State private var authenticated: Bool = TPPUserAccount.sharedAccount().authToken != nil
 
 
   //private var signInBusinessLogic = TPPSignInBusinessLogic.shared
@@ -51,7 +52,7 @@ struct TPPSettingsView: View {
 
       }
       if AccountsManager.shared.accounts().count == 1 {
-        if TPPUserAccount.sharedAccount().authToken != nil {
+        if authenticated {
           logoutSection
         }else {
           loginSection
@@ -156,8 +157,12 @@ struct TPPSettingsView: View {
        Button(DisplayStrings.signOut, role: .destructive) {
          TPPSignInBusinessLogic.getShared { logic in
            if let _logic = logic {
-             if let alert = _logic.logOutOrWarn() {
+             if let alert = _logic.logOutOrWarn(afterLogOut: {
+               authenticated = TPPUserAccount.sharedAccount().authToken != nil
+             }) {
                TPPRootTabBarController.shared().settingsViewController.present(alert, animated: true)
+             }else{
+               authenticated = TPPUserAccount.sharedAccount().authToken != nil
              }
              
            }
@@ -179,7 +184,13 @@ struct TPPSettingsView: View {
         let passkey = PasskeyManager(AccountsManager.shared.currentAccount!.authenticationDocument!)
         passkey.login { loginToken in
           if let token = loginToken, !token.isEmpty{
-            TPPNetworkExecutor.shared.authenticateWithToken(token)
+            TPPNetworkExecutor.shared.authenticateWithToken(token) { status in
+              authenticated = TPPUserAccount.sharedAccount().authToken != nil
+              /*DispatchQueue.main.async {
+                
+              }*/
+            }
+            
           }
         }
       } label: {
