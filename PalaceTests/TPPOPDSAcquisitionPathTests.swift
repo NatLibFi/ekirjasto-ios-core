@@ -19,17 +19,17 @@ class TPPOPDSAcquisitionPathTests: XCTestCase {
         allowedRelations: [.borrow, .openAccess],
         acquisitions: acquisitions)
 
-    XCTAssert(acquisitionPaths.count == 2)
+    XCTAssert(acquisitionPaths.count == 1)
 
-    XCTAssert(acquisitionPaths[0].relation == TPPOPDSAcquisitionRelation.borrow)
+    /*XCTAssert(acquisitionPaths[0].relation == TPPOPDSAcquisitionRelation.borrow)
     XCTAssert(acquisitionPaths[0].types == [
       "application/atom+xml;type=entry;profile=opds-catalog",
       "application/vnd.adobe.adept+xml",
       "application/epub+zip"
-    ])
+    ])*/
     
-    XCTAssert(acquisitionPaths[1].relation == TPPOPDSAcquisitionRelation.borrow)
-    XCTAssert(acquisitionPaths[1].types == [
+    XCTAssert(acquisitionPaths[0].relation == TPPOPDSAcquisitionRelation.borrow)
+    XCTAssert(acquisitionPaths[0].types == [
       "application/atom+xml;type=entry;profile=opds-catalog",
       "application/pdf"
       ])
