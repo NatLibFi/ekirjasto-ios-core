@@ -6,6 +6,7 @@
 @interface TPPRootTabBarController () <UITabBarControllerDelegate>
 
 @property (nonatomic) TPPCatalogNavigationController *catalogNavigationController;
+@property (nonatomic) EkirjastoMagazineNavigationController *magazineViewController;
 @property (nonatomic) TPPMyBooksViewController *myBooksNavigationController;
 @property (nonatomic) TPPHoldsNavigationController *holdsNavigationController;
 @property (nonatomic) UIViewController *settingsViewController;
@@ -40,6 +41,10 @@
   self.delegate = self;
   
   self.catalogNavigationController = [[TPPCatalogNavigationController alloc] init];
+  self.magazineViewController = [
+    [EkirjastoMagazineNavigationController alloc] initWithRootViewController:
+      [[DigitalMagazineBrowserViewController alloc] init]
+  ];
   self.myBooksNavigationController = (TPPMyBooksViewController * ) [TPPMyBooksViewController makeSwiftUIViewWithDismissHandler:^{
     [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
   }];
@@ -64,6 +69,26 @@
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+// Finland: interface orientation and auto rotate functionalities were moved to be 
+// handled programmatically, because the DigitalMagazineReaderViewController is allowed 
+// to rotate with all orientations even on iPhone device.
+- (BOOL)shouldAutorotate {
+  if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+    return NO;
+  }
+  return YES;
+}
+
+// Finland: interface orientation and auto rotate functionalities were moved to be 
+// handled programmatically, because the DigitalMagazineReaderViewController is allowed 
+// to rotate with all orientations even on iPhone device.
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+  if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+    return UIInterfaceOrientationMaskPortrait;
+  }
+  return UIInterfaceOrientationMaskAll;
+}
+
 - (void)setTabViewControllers
 {
   [TPPMainThreadRun asyncIfNeeded:^{
@@ -76,11 +101,13 @@
   Account *const currentAccount = [AccountsManager shared].currentAccount;
   if (currentAccount.details.supportsReservations) {
     self.viewControllers = @[self.catalogNavigationController,
+                             self.magazineViewController,
                              self.myBooksNavigationController,
                              self.holdsNavigationController,
                              self.settingsViewController];
   } else {
     self.viewControllers = @[self.catalogNavigationController,
+                             self.magazineViewController,
                              self.myBooksNavigationController,
                              self.settingsViewController];
     // Change selected index if the "Reservations" or "Settings" tab is selected
@@ -102,6 +129,14 @@
 shouldSelectViewController:(nonnull UIViewController *)viewController
 {
   return YES;
+}
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+
+    // Call the web app's "popToRoot" method if the user re-selects the current tab to emulate native behavior
+    if (viewController == self.magazineViewController) {
+      [self.magazineViewController popToRoot];
+    }
 }
 
 #pragma mark -

@@ -1020,6 +1020,9 @@
 		8C835DD5234D0B900050A18D /* TPPFacetBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C835DD4234D0B900050A18D /* TPPFacetBarView.swift */; };
 		8CC26F832370C1DF0000D8E1 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC26F822370C1DF0000D8E1 /* Account.swift */; };
 		8CE9C471237F84820072E964 /* TPPBookDetailsProblemDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9C470237F84820072E964 /* TPPBookDetailsProblemDocumentViewController.swift */; };
+		9D8FE1902BA8DFBC00084363 /* EkirjastoMagazineNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8FE18F2BA8DFBC00084363 /* EkirjastoMagazineNavigationController.swift */; };
+		9D92C74F2BA243320058FB9C /* DigitalMagazineBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D92C74E2BA243320058FB9C /* DigitalMagazineBrowserViewController.swift */; };
+		9D92C7532BA253E50058FB9C /* DigitalMagazineReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D92C7512BA251810058FB9C /* DigitalMagazineReaderViewController.swift */; };
 		A4276F481B00046300CA7194 /* TPPMyBooksDownloadInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A4276F471B00046300CA7194 /* TPPMyBooksDownloadInfo.m */; };
 		A42E0DF11B3F5A490095EBAE /* TPPRemoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A42E0DF01B3F5A490095EBAE /* TPPRemoteViewController.m */; };
 		A42E0DF41B40F4E00095EBAE /* TPPCatalogFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A42E0DF31B40F4E00095EBAE /* TPPCatalogFeedViewController.m */; };
@@ -1938,6 +1941,9 @@
 		9D1E319F2B9A5A8100367F22 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9D1E31A02B9A5A8200367F22 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = sv; path = sv.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		9D1E31A12B9A5A8400367F22 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9D8FE18F2BA8DFBC00084363 /* EkirjastoMagazineNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EkirjastoMagazineNavigationController.swift; sourceTree = "<group>"; };
+		9D92C74E2BA243320058FB9C /* DigitalMagazineBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalMagazineBrowserViewController.swift; sourceTree = "<group>"; };
+		9D92C7512BA251810058FB9C /* DigitalMagazineReaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalMagazineReaderViewController.swift; sourceTree = "<group>"; };
 		A4276F461B00046300CA7194 /* TPPMyBooksDownloadInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPPMyBooksDownloadInfo.h; sourceTree = "<group>"; };
 		A4276F471B00046300CA7194 /* TPPMyBooksDownloadInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPPMyBooksDownloadInfo.m; sourceTree = "<group>"; };
 		A42E0DEF1B3F5A490095EBAE /* TPPRemoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPPRemoteViewController.h; sourceTree = "<group>"; };
@@ -3218,6 +3224,16 @@
 			path = Resources/OpenDyslexicFont;
 			sourceTree = "<group>";
 		};
+		9D92C7502BA250650058FB9C /* EkirjastoDigitalMagazine */ = {
+			isa = PBXGroup;
+			children = (
+				9D92C74E2BA243320058FB9C /* DigitalMagazineBrowserViewController.swift */,
+				9D92C7512BA251810058FB9C /* DigitalMagazineReaderViewController.swift */,
+				9D8FE18F2BA8DFBC00084363 /* EkirjastoMagazineNavigationController.swift */,
+			);
+			path = EkirjastoDigitalMagazine;
+			sourceTree = "<group>";
+		};
 		A49C25411AE05A2600D63B89 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -3356,6 +3372,7 @@
 		A823D816192BABA400B55DE2 /* Palace */ = {
 			isa = PBXGroup;
 			children = (
+				9D92C7502BA250650058FB9C /* EkirjastoDigitalMagazine */,
 				E759B2052A1BF7AA0041B075 /* PalaceDebug.entitlements */,
 				E59892DD28A9AA7400C44A85 /* Samples */,
 				73DE53292525A2AD003E2C56 /* Accounts */,
@@ -4435,6 +4452,7 @@
 				3379F8202A5D422600E9945F /* EkirjastoArrowDownButton.swift in Sources */,
 				331262E12A287F53006BA87D /* AdobeCertificate.swift in Sources */,
 				331262E22A287F53006BA87D /* TPPCirculationAnalytics.swift in Sources */,
+				9D92C74F2BA243320058FB9C /* DigitalMagazineBrowserViewController.swift in Sources */,
 				331262E32A287F53006BA87D /* TPPBookState.swift in Sources */,
 				331262E42A287F53006BA87D /* APIKeys.swift in Sources */,
 				331262E52A287F53006BA87D /* TPPAttributedString.m in Sources */,
@@ -4449,6 +4467,7 @@
 				331262EF2A287F53006BA87D /* TPPJSON.m in Sources */,
 				331262F02A287F53006BA87D /* TPPPDFPreviewThumbnail.swift in Sources */,
 				331262F12A287F53006BA87D /* TPPMainThreadChecker.swift in Sources */,
+				9D92C7532BA253E50058FB9C /* DigitalMagazineReaderViewController.swift in Sources */,
 				331262F22A287F53006BA87D /* ReaderModule.swift in Sources */,
 				331262F32A287F53006BA87D /* TPPConfiguration.m in Sources */,
 				36A07DBD2BB5B6FD00583E0B /* PasskeyView.swift in Sources */,
@@ -4725,6 +4744,7 @@
 				331263E92A287F53006BA87D /* TPPIndeterminateProgressView.m in Sources */,
 				331263EA2A287F53006BA87D /* NSString+TPPStringAdditions.m in Sources */,
 				331263EC2A287F53006BA87D /* TPPRequestExecuting.swift in Sources */,
+				9D8FE1902BA8DFBC00084363 /* EkirjastoMagazineNavigationController.swift in Sources */,
 				331263ED2A287F53006BA87D /* TPPCookiesWebViewController.swift in Sources */,
 				331263EE2A287F53006BA87D /* TPPSamlIDPCell.swift in Sources */,
 				331263EF2A287F53006BA87D /* TPPErrorLogger.swift in Sources */,
