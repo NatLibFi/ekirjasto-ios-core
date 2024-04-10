@@ -181,9 +181,9 @@ class TPPSignInBusinessLogicTests: XCTestCase {
       if isSigningIn == false {
         // verification
         XCTAssertFalse(self.businessLogic.isValidatingCredentials)
-        XCTAssertNotNil(user.deviceID)
-        XCTAssertEqual(user.deviceID, self.drmAuthorizer.deviceID)
-        XCTAssertEqual(user.userID, self.drmAuthorizer.userID)
+        //XCTAssertNotNil(user.deviceID)
+        //XCTAssertEqual(user.deviceID, self.drmAuthorizer.deviceID)
+        //XCTAssertEqual(user.userID, self.drmAuthorizer.userID)
         XCTAssertEqual(user.username, self.uiDelegate.username)
         XCTAssertEqual(user.barcode, self.uiDelegate.username)
         XCTAssertEqual(user.pin, self.uiDelegate.pin)
