@@ -14,8 +14,8 @@ struct TPPSettingsView: View {
   @AppStorage(TPPSettings.showDeveloperSettingsKey) private var showDeveloperSettings: Bool = false
   @State private var selectedView: Int? = 0
   @State private var orientation: UIDeviceOrientation = UIDevice.current.orientation
-  @State private var authenticated: Bool = TPPUserAccount.sharedAccount().authToken != nil
-
+  //@State private var authenticated: Bool = TPPUserAccount.sharedAccount().authToken != nil
+  @ObservedObject private var authHolder = TPPUserAccountAuthentication.shared
 
   //private var signInBusinessLogic = TPPSignInBusinessLogic.shared
   
@@ -52,7 +52,7 @@ struct TPPSettingsView: View {
 
       }
       if AccountsManager.shared.accounts().count == 1 {
-        if authenticated {
+        if authHolder.isAuthenticated {
           logoutSection
         }else {
           loginSection
@@ -62,7 +62,7 @@ struct TPPSettingsView: View {
         librariesSection
       }
       syncBookmarksSection
-      reportIssueSection
+      //reportIssueSection
       infoSection
       developerSettingsSection
     }
@@ -157,12 +157,8 @@ struct TPPSettingsView: View {
        Button(DisplayStrings.signOut, role: .destructive) {
          TPPSignInBusinessLogic.getShared { logic in
            if let _logic = logic {
-             if let alert = _logic.logOutOrWarn(afterLogOut: {
-               authenticated = TPPUserAccount.sharedAccount().authToken != nil
-             }) {
+             if let alert = _logic.logOutOrWarn(){
                TPPRootTabBarController.shared().settingsViewController.present(alert, animated: true)
-             }else{
-               authenticated = TPPUserAccount.sharedAccount().authToken != nil
              }
              
            }
@@ -185,7 +181,7 @@ struct TPPSettingsView: View {
         passkey.login { loginToken in
           if let token = loginToken, !token.isEmpty{
             TPPNetworkExecutor.shared.authenticateWithToken(token) { status in
-              authenticated = TPPUserAccount.sharedAccount().authToken != nil
+              //authenticated = TPPUserAccount.sharedAccount().authToken != nil
               /*DispatchQueue.main.async {
                 
               }*/

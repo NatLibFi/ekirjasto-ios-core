@@ -37,6 +37,13 @@ private enum StorageKey: String {
   static func sharedAccount(libraryUUID: String?) -> TPPUserAccount
 }
 
+class TPPUserAccountAuthentication: ObservableObject {
+  static public let shared = TPPUserAccountAuthentication()
+  
+  @Published public var isAuthenticated = TPPUserAccount.sharedAccount().authToken != nil
+  
+}
+
 @objcMembers class TPPUserAccount : NSObject, TPPUserAccountProvider {
   static private let shared = TPPUserAccount()
   private let accountInfoLock = NSRecursiveLock()
@@ -149,6 +156,15 @@ private enum StorageKey: String {
     }
     set {
       guard let newValue = newValue else {
+        
+        if Thread.isMainThread {
+          TPPUserAccountAuthentication.shared.isAuthenticated = false
+        }else {
+          DispatchQueue.main.async {
+            TPPUserAccountAuthentication.shared.isAuthenticated = false
+          }
+        }
+        
         return
       }
 
@@ -162,6 +178,14 @@ private enum StorageKey: String {
       }
 
       notifyAccountDidChange()
+      if Thread.isMainThread {
+        TPPUserAccountAuthentication.shared.isAuthenticated = true
+      }else {
+        DispatchQueue.main.async {
+          TPPUserAccountAuthentication.shared.isAuthenticated = true
+        }
+      }
+      
     }
   }
 
@@ -470,10 +494,7 @@ private enum StorageKey: String {
   func setAuthToken(_ token: String, barcode: String?, pin: String?, expirationDate: Date?) {
     credentials = .token(authToken: token, barcode: barcode, pin: pin, expirationDate: expirationDate)
   }
-  
-  func setEKirjastoToken(_ token: String){
-    
-  }
+
 
   @objc(setCookies:)
   func setCookies(_ cookies: [HTTPCookie]) {
@@ -523,6 +544,14 @@ private enum StorageKey: String {
         _authToken.write(nil)
 
         notifyAccountDidChange()
+        
+        if Thread.isMainThread {
+          TPPUserAccountAuthentication.shared.isAuthenticated = false
+        }else {
+          DispatchQueue.main.async {
+            TPPUserAccountAuthentication.shared.isAuthenticated = false
+          }
+        }
 
         NotificationCenter.default.post(name: Notification.Name.TPPDidSignOut,
                                         object: nil)
