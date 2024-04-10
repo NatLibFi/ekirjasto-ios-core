@@ -68,6 +68,38 @@ extension TPPSignInBusinessLogic {
     }
   }
 
+  
+  func logOutOrWarn(afterLogOut: @escaping ()->()?) -> UIAlertController? {
+    
+    let title = Strings.TPPSigninBusinessLogic.signout
+    let msg: String
+    if bookRegistry.isSyncing {
+      msg = Strings.TPPSigninBusinessLogic.annotationSyncMessage
+    } else if let drm = drmAuthorizer, drm.workflowsInProgress {
+      msg = Strings.TPPSigninBusinessLogic.pendingDownloadMessage
+    } else {
+      performLogOut()
+      return nil
+    }
+
+    let alert = UIAlertController(title: title,
+                                  message: msg,
+                                  preferredStyle: .alert)
+    alert.addAction(
+      UIAlertAction(title: title,
+                    style: .destructive,
+                    handler: { _ in
+                      self.performLogOut()
+                      afterLogOut()
+      }))
+    alert.addAction(
+      UIAlertAction(title: Strings.Generic.wait,
+                    style: .cancel,
+                    handler: nil))
+
+    return alert
+  }
+  
   /// Performs log out verifying that no book registry syncing
   /// or book download/return authorizations are in progress.
   /// - Returns: An alert the caller needs to present in case there's syncing

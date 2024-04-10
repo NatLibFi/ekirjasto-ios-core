@@ -68,9 +68,14 @@ struct EkirjastoLoginView: View {
         let passkey = PasskeyManager(authDoc!)
         
         passkey.login { loginToken in
+
           if let token = loginToken, !token.isEmpty{
-            TPPNetworkExecutor.shared.authenticateWithToken(token)
-            self.dismissView?()
+            TPPNetworkExecutor.shared.authenticateWithToken(token) { status in
+              DispatchQueue.main.async {
+                self.dismissView?()
+              }
+            }
+            
           }
 
         }
