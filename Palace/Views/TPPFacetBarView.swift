@@ -93,7 +93,8 @@ import Foundation
   }
   
   init(origin: CGPoint, width: CGFloat) {
-    super.init(frame: CGRect(x: origin.x, y: origin.y, width: width, height: borderHeight + toolbarHeight))
+    
+    super.init(frame: CGRect(x: origin.x, y: origin.y, width: width, height: borderHeight + toolbarHeight + 52.0))
     
     setupViews()
     NotificationCenter.default.addObserver(self, selector: #selector(updateLogo), name: NSNotification.TPPCurrentAccountDidChange, object: nil)
@@ -116,6 +117,7 @@ import Foundation
     addSubview(facetView)
     addSubview(logoView)
     addSubview(entryPointView)
+
     setupConstraints()
     updateLogo()
   }

@@ -93,7 +93,6 @@ static CGFloat const kTableViewCrossfadeDuration = 0.3;
   }
   [self.tableView addSubview:self.refreshControl];
   [self.view addSubview:self.tableView];
-
   self.facetBarView = [[TPPFacetBarView alloc] initWithOrigin:CGPointZero width:self.view.bounds.size.width];
   self.facetBarView.entryPointView.delegate = self;
   self.facetBarView.entryPointView.dataSource = self;
@@ -101,7 +100,8 @@ static CGFloat const kTableViewCrossfadeDuration = 0.3;
   
   [self.view addSubview:self.facetBarView];
   
-  [self.facetBarView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:self.facetBarView.frame.size.height + 54]; // Added by Ellibs
+  [self.facetBarView autoPinEdgeToSuperviewSafeArea:ALEdgeTop];// Added by Ellibs
+
   [self.facetBarView autoPinEdgeToSuperviewEdge:ALEdgeLeading];
   [self.facetBarView autoPinEdgeToSuperviewEdge:ALEdgeTrailing];
   
@@ -149,6 +149,7 @@ static CGFloat const kTableViewCrossfadeDuration = 0.3;
     self.tableView.contentInset = insets;
     self.tableView.scrollIndicatorInsets = insets;
     [self.tableView setContentOffset:CGPointMake(0, -top) animated:NO];
+
   }
 }
 
