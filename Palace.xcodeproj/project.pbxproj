@@ -674,6 +674,7 @@
 		368B2AA82BAD7B4D00A14D2E /* TPPSignInBusinessLogic+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368B2AA72BAD7B4D00A14D2E /* TPPSignInBusinessLogic+Extensions.swift */; };
 		368B2AA92BAD7B4D00A14D2E /* TPPSignInBusinessLogic+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368B2AA72BAD7B4D00A14D2E /* TPPSignInBusinessLogic+Extensions.swift */; };
 		368B2AAA2BAD7B4D00A14D2E /* TPPSignInBusinessLogic+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368B2AA72BAD7B4D00A14D2E /* TPPSignInBusinessLogic+Extensions.swift */; };
+		368EE7682BC5F82200663D37 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 368EE7672BC5F82200663D37 /* PrivacyInfo.xcprivacy */; };
 		36A07DBC2BB5B49C00583E0B /* PasskeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A07DBB2BB5B49C00583E0B /* PasskeyView.swift */; };
 		36A07DBD2BB5B6FD00583E0B /* PasskeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A07DBB2BB5B49C00583E0B /* PasskeyView.swift */; };
 		36A07DBE2BB5B6FD00583E0B /* PasskeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A07DBB2BB5B49C00583E0B /* PasskeyView.swift */; };
@@ -1750,6 +1751,7 @@
 		36833E4B2B5E937000D7B6B2 /* PasskeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasskeyManager.swift; sourceTree = "<group>"; };
 		3688FADD2B67FEFE00A95558 /* EkirjastoLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EkirjastoLoginViewController.swift; sourceTree = "<group>"; };
 		368B2AA72BAD7B4D00A14D2E /* TPPSignInBusinessLogic+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TPPSignInBusinessLogic+Extensions.swift"; sourceTree = "<group>"; };
+		368EE7672BC5F82200663D37 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		36A07DBB2BB5B49C00583E0B /* PasskeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasskeyView.swift; sourceTree = "<group>"; };
 		52545184217A76FF00BBC1B4 /* TPPUserNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPPUserNotifications.swift; sourceTree = "<group>"; };
 		52592BB721220A1100587288 /* TPPLocalization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPPLocalization.m; sourceTree = "<group>"; };
@@ -3245,6 +3247,7 @@
 		A823D804192BABA400B55DE2 = {
 			isa = PBXGroup;
 			children = (
+				368EE7672BC5F82200663D37 /* PrivacyInfo.xcprivacy */,
 				E553424F293FB23F004FF34A /* PalaceAudiobookToolkit.xcodeproj */,
 				E5C1F52927990929005FC6B2 /* OverdriveProcessor.xcodeproj */,
 				E585662026979AC100A5FBD5 /* NYPLAEToolkit.xcodeproj */,
@@ -4123,6 +4126,7 @@
 				331264492A287F53006BA87D /* TPPProblemReportViewController.xib in Resources */,
 				3312644A2A287F53006BA87D /* OpenSans-Regular.ttf in Resources */,
 				3312644C2A287F53006BA87D /* readium-shared-js_all.js in Resources */,
+				368EE7682BC5F82200663D37 /* PrivacyInfo.xcprivacy in Resources */,
 				3312644D2A287F53006BA87D /* ReaderClientCert.sig in Resources */,
 				337E63BC2A28AFCE00FF7886 /* Ellibs_Catalog_Feed.json in Resources */,
 				3312644E2A287F53006BA87D /* Localizable.stringsdict in Resources */,
