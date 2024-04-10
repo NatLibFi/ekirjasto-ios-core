@@ -23,6 +23,7 @@ struct PasskeyView: View {
   var passKeyManager : PasskeyManager
   var dismissView: (() -> Void)?
   @State var passkeyUserName = ""
+  @Environment(\.presentationMode) var presentationMode
   
   var body: some View {
     return VStack{
@@ -39,15 +40,7 @@ struct PasskeyView: View {
   }
   
   func loginPasskey(){
-    
-    self.passKeyManager.login{ loginToken in
-      if let token = loginToken, !token.isEmpty{
-        TPPNetworkExecutor.shared.authenticateWithToken(token)
-      }
-      DispatchQueue.main.async {
-        self.dismissView?()
-      }
-    }
+
     
   }
   
@@ -59,7 +52,11 @@ struct PasskeyView: View {
           TPPNetworkExecutor.shared.authenticateWithToken(token)
         }
         DispatchQueue.main.async {
-          self.dismissView?()
+          if let dismissView = self.dismissView {
+            dismissView()
+          }else {
+            presentationMode.wrappedValue.dismiss()
+          }
         }
         
       }
