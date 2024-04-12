@@ -20,7 +20,7 @@ import Foundation
   }
 
   static let TPPAboutPalaceURLString = "http://thepalaceproject.org/"
-  static let TPPUserAgreementURLString = "https://www.kansalliskirjasto.fi/fi/e-kirjasto/e-kirjaston-saavutettavuusseloste"
+  static let TPPUserAgreementURLString = "https://www.kansalliskirjasto.fi/fi/e-kirjasto/e-kirjaston-kayttoehdot"
   static let TPPPrivacyPolicyURLString = "https://www.kansalliskirjasto.fi/fi/e-kirjasto/e-kirjaston-tietosuoja-ja-rekisteriseloste"
   static let TPPFeedbackURLString = "https://lib.e-kirjasto.fi/palaute"
   static let TPPAccessibilityURLString = "https://www.kansalliskirjasto.fi/fi/e-kirjasto/e-kirjaston-saavutettavuusseloste"
