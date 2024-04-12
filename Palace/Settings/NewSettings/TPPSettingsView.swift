@@ -202,12 +202,31 @@ struct TPPSettingsView: View {
 
       }
     } footer: {
-      Link(destination: URL(string: TPPSettings.TPPUserAgreementURLString)!, label: {
+      let viewController = RemoteHTMLViewController(
+        URL: URL(string:  TPPSettings.TPPUserAgreementURLString)!,
+        title: DisplayStrings.loginFooterUserAgreementText,
+        failureMessage: Strings.Error.loadFailedError
+      )
+      
+      let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
+       // .navigationBarTitle(Text(DisplayStrings.loginFooterUserAgreementText))
+
+      NavigationLink(
+        destination: wrapper.anyView(),
+        label: {
+          Text(DisplayStrings.loginFooterUserAgreementText)
+            .underline()
+            .dynamicTypeSize(.xSmall)
+            .foregroundColor(Color.init(uiColor: UIColor.link))
+        }
+      )
+      //row(title: DisplayStrings.loginFooterUserAgreementText, destination: wrapper.anyView())
+      /*Link(destination: URL(string: TPPSettings.TPPUserAgreementURLString)!, label: {
         Text(DisplayStrings.loginFooterUserAgreementText)
           .underline()
       })
         .foregroundColor(Color.init(uiColor: UIColor.link))
-        .dynamicTypeSize(.xSmall)
+        .dynamicTypeSize(.xSmall)*/
         
     }
   }
@@ -264,7 +283,7 @@ struct TPPSettingsView: View {
     let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
       .navigationBarTitle(Text(DisplayStrings.feedback))
 
-    row(title: DisplayStrings.feedback, index: 2, selection: self.$selectedView, destination: wrapper.anyView())
+    row(title: DisplayStrings.feedback, index: 3, selection: self.$selectedView, destination: wrapper.anyView())
   }
   
   @ViewBuilder private var accessibilityRow: some View {
@@ -277,7 +296,7 @@ struct TPPSettingsView: View {
     let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
       .navigationBarTitle(Text(DisplayStrings.accessibility))
 
-    row(title: DisplayStrings.accessibility, index: 2, selection: self.$selectedView, destination: wrapper.anyView())
+    row(title: DisplayStrings.accessibility, index: 4, selection: self.$selectedView, destination: wrapper.anyView())
   }
 
 
@@ -291,7 +310,7 @@ struct TPPSettingsView: View {
     let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
       .navigationBarTitle(Text(DisplayStrings.privacyPolicy))
 
-    row(title: DisplayStrings.privacyPolicy, index: 3, selection: self.$selectedView, destination: wrapper.anyView())
+    row(title: DisplayStrings.privacyPolicy, index: 5, selection: self.$selectedView, destination: wrapper.anyView())
 
   }
 
@@ -305,7 +324,7 @@ struct TPPSettingsView: View {
     let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
       .navigationBarTitle(Text(DisplayStrings.eula))
 
-    row(title: DisplayStrings.eula, index: 4, selection: self.$selectedView, destination: wrapper.anyView())
+    row(title: DisplayStrings.eula, index: 6, selection: self.$selectedView, destination: wrapper.anyView())
   }
 
   @ViewBuilder private var softwareLicenseRow: some View {
@@ -317,7 +336,7 @@ struct TPPSettingsView: View {
     let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
       .navigationBarTitle(Text(DisplayStrings.softwareLicenses))
 
-    row(title: DisplayStrings.softwareLicenses, index: 5, selection: self.$selectedView, destination: wrapper.anyView())
+    row(title: DisplayStrings.softwareLicenses, index: 7, selection: self.$selectedView, destination: wrapper.anyView())
   }
 
   @ViewBuilder private var developerSettingsSection: some View {
@@ -328,7 +347,7 @@ struct TPPSettingsView: View {
         let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
           .navigationBarTitle(Text(DisplayStrings.developerSettings))
         
-        row(title: DisplayStrings.developerSettings, index: 6, selection: self.$selectedView, destination: wrapper.anyView())
+        row(title: DisplayStrings.developerSettings, index: 8, selection: self.$selectedView, destination: wrapper.anyView())
       }
     }
   }

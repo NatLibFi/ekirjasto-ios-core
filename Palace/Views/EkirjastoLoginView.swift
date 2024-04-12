@@ -55,7 +55,7 @@ struct EkirjastoLoginView: View {
           self.dismissView?()
         }, authenticationDocument: authDoc)
       }, label: {
-        Text(DisplayStrings.loginSuomiFi)
+        Text(DisplayStrings.loginSuomiFi).foregroundColor(Color("ColorEkirjastoButtonTextWithBackground"))
         Image("ArrowRight")
           .padding(.leading, 10)
           .foregroundColor(Color("ColorEkirjastoGreen"))
@@ -80,7 +80,7 @@ struct EkirjastoLoginView: View {
 
         }
       }, label: {
-        Text(DisplayStrings.loginPasskey)
+        Text(DisplayStrings.loginPasskey).foregroundColor(Color("ColorEkirjastoButtonTextWithBackground"))
         Image("ArrowRight")
           .padding(.leading, 10)
           .foregroundColor(Color("ColorEkirjastoGreen"))
@@ -90,7 +90,7 @@ struct EkirjastoLoginView: View {
       
       
       Button(action: {self.dismissView?()}) {
-        Text("Continue without signing in").foregroundColor(Color("ColorEkirjastoButtonTextWithBackground"))
+        Text(DisplayStrings.continueWithoutSigning).foregroundColor(Color("ColorEkirjastoButtonTextWithBackground"))
         Image("ArrowRight")
           .padding(.leading, 10)
           .foregroundColor(Color("ColorEkirjastoButtonTextWithBackground"))
