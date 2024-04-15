@@ -26,7 +26,6 @@
 			<key>NSPrivacyAccessedAPITypeReasons</key>
 			<array>
 				<string>35F9.1</string>
-				<string>8FFB.1: Measure time on-device, per documentation</string>
 			</array>
 		</dict>
 		<dict>
