@@ -56,8 +56,16 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
     itemAppearance.normal.badgePositionAdjustment.vertical = 1
     itemAppearance.normal.badgeBackgroundColor = UIColor(named: "ColorEkirjastoRedCircle")
     itemAppearance.normal.badgeTextAttributes = [.foregroundColor: UIColor(named: "ColorEkirjastoAlwaysBlack")!, .font: UIFont.boldPalaceFont(ofSize: 11)]
-    itemAppearance.normal.titlePositionAdjustment = UIOffset(horizontal: 5.0, vertical: 15.0)
-    itemAppearance.normal.titleTextAttributes = [.foregroundColor: TPPConfiguration.compatiblePrimaryColor(), .font: UIFont.palaceFont(ofSize: 12)]
+    itemAppearance.normal.titlePositionAdjustment = UIOffset(horizontal: 5.0, vertical: 6.0)
+    
+    let paragraphStyle = NSMutableParagraphStyle()
+    paragraphStyle.lineBreakMode = .byTruncatingTail
+    paragraphStyle.allowsDefaultTighteningForTruncation = false
+    itemAppearance.normal.titleTextAttributes = [
+      .foregroundColor: TPPConfiguration.compatiblePrimaryColor(),
+      .font: UIFont.palaceFont(ofSize: 12),
+      .paragraphStyle: paragraphStyle
+    ]
     
     let appearance = UITabBarAppearance()
     appearance.stackedLayoutAppearance = itemAppearance
