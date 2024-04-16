@@ -108,6 +108,8 @@ extension TPPNetworkExecutor: TPPRequestExecuting {
                   completion(result)
                 }
               }
+            }else {
+              completion(result)
             }
           }else{
             completion(result)
@@ -474,6 +476,9 @@ extension TPPNetworkExecutor {
           }
           
         }else{
+          TPPSignInBusinessLogic.getShared { logic in
+            logic?.performLogOut()
+          }
           print("authenticateWithToken error: \(String(describing: error?.localizedDescription)) data: \(String(describing: String(data:data!,encoding: .utf8)))")
         }
 

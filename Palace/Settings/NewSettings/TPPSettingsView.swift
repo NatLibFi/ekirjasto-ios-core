@@ -27,13 +27,13 @@ struct TPPSettingsView: View {
 
   var body: some View {
 
-    if sideBarEnabled {
+    /*if sideBarEnabled {
       NavigationView {
         listView
       }.navigationViewStyle(.stack)
-    } else {
-      listView
-    }
+    } else {*/
+      listView.navigationBarItems(leading: leadingBarButton)
+    //}
   }
 
   @ViewBuilder private var listView: some View {
@@ -89,15 +89,7 @@ struct TPPSettingsView: View {
       row(title: DisplayStrings.libraries, index: 1, selection: self.$selectedView, destination: wrapper.anyView())
     }
   }
-  /*CellKindAdvancedSettings,
-  CellKindAgeCheck,
-  CellKindLogInSignOut,
-  CellKindPromptLogin,
-  CellKindSyncButton,
-  CellKindAbout,
-  CellKindPrivacyPolicy,
-  CellKindContentLicense,
-  CellReportIssue,*/
+
   @State private var toggleSyncBookmarks = false
   @State private var toggleLogoutWarning = false
   @State private var syncEnabled = AccountsManager.shared.accounts().first?.details?.syncPermissionGranted ?? false
@@ -124,6 +116,14 @@ struct TPPSettingsView: View {
             })
           }
         }
+    }
+  }
+  
+  @ViewBuilder private var leadingBarButton: some View {
+    Button {
+      TPPRootTabBarController.shared().showAndReloadCatalogViewController()
+    } label: {
+      ImageProviders.MyBooksView.myLibraryIcon
     }
   }
   
@@ -169,7 +169,27 @@ struct TPPSettingsView: View {
        Text(self.logoutText)
      }
      
-     row(title: DisplayStrings.registerPasskey, destination: PasskeyView(mode: .register, passKeyManager: PasskeyManager(AccountsManager.shared.currentAccount!.authenticationDocument!) ).anyView())
+     //row(title: DisplayStrings.registerPasskey, destination: PasskeyView(mode: .register, passKeyManager: PasskeyManager(AccountsManager.shared.currentAccount!.authenticationDocument!) ).anyView())
+     Button{
+       let passkey = PasskeyManager(AccountsManager.shared.currentAccount!.authenticationDocument!)
+       passkey.register("", TPPUserAccount.sharedAccount().authToken!) { registerToken in
+         if let token = registerToken, !token.isEmpty{
+           TPPNetworkExecutor.shared.authenticateWithToken(token) { status in
+
+           }
+           
+         }
+       }
+     } label: {
+       HStack{
+         Text(DisplayStrings.registerPasskey)
+         Spacer()
+         Image("ArrowRight")
+           .padding(.leading, 10)
+           .foregroundColor(Color(uiColor: .lightGray))
+       }
+
+     }
    }
   }
   
@@ -181,10 +201,7 @@ struct TPPSettingsView: View {
         passkey.login { loginToken in
           if let token = loginToken, !token.isEmpty{
             TPPNetworkExecutor.shared.authenticateWithToken(token) { status in
-              //authenticated = TPPUserAccount.sharedAccount().authToken != nil
-              /*DispatchQueue.main.async {
-                
-              }*/
+
             }
             
           }

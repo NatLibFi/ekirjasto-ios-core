@@ -26,7 +26,7 @@ struct DownloadingBookCell: View {
       .frame(height: cellHeight)
       overlay
     }
-    .background(Color(TPPConfiguration.mainColor()))
+    //.background(Color(TPPConfiguration.mainColor()))
   }
 
   @ViewBuilder private var infoView: some View {
@@ -36,7 +36,7 @@ struct DownloadingBookCell: View {
       Text(model.authors)
         .font(Font(uiFont: UIFont.palaceFont(ofSize: 12)))
     }
-    .foregroundColor(Color(TPPConfiguration.backgroundColor()))
+    //.foregroundColor(Color(TPPConfiguration.backgroundColor()))
   }
   
   @ViewBuilder private var statusView: some View {
@@ -46,7 +46,7 @@ struct DownloadingBookCell: View {
         .horizontallyCentered()
         .padding(.top, 5)
         .font(Font(uiFont: UIFont.palaceFont(ofSize: 12)))
-        .foregroundColor(Color(TPPConfiguration.mainColor()))
+        //.foregroundColor(Color(TPPConfiguration.mainColor()))
     default:
       progressView
     }
@@ -56,7 +56,7 @@ struct DownloadingBookCell: View {
     HStack {
       Text(Strings.BookCell.downloading)
       ProgressView(value: progress, total: 1)
-        .progressViewStyle(LinearProgressViewStyle(tint: Color(TPPConfiguration.backgroundColor())))
+        /*.progressViewStyle(LinearProgressViewStyle(tint: Color(TPPConfiguration.backgroundColor())))*/
       Text("\(Int(progress * 100))%")
     }
     .font(Font(uiFont: UIFont.palaceFont(ofSize: 12)))
@@ -72,8 +72,8 @@ struct DownloadingBookCell: View {
       ForEach(model.buttonTypes, id: \.self) { type in
         ButtonView(
           title: type.localizedTitle.capitalized,
-          indicatorDate: model.indicatorDate(for: type),
-          backgroundFill: Color(TPPConfiguration.backgroundColor())) {
+          indicatorDate: model.indicatorDate(for: type)/*,
+          backgroundFill: Color(TPPConfiguration.backgroundColor())*/) {
           model.callDelegate(for: type)
         }
       }

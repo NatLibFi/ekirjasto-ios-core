@@ -62,29 +62,39 @@ class TPPBookCoverRegistry {
   func thumbnailImagesForBooks(_ books: Set<TPPBook>, handler: @escaping (_ bookIdentifiersToImages: [String: UIImage]) -> Void) {
     var result: [String: UIImage] = [:] {
       didSet {
-        if books.count == result.keys.count {
+        if _books.count == result.keys.count {
           DispatchQueue.main.async {
             handler(result)
           }
         }
       }
     }
-    books.forEach { book in
+    
+    var _books : [TPPBook] = []
+    
+    for var b in books {
+      if !_books.contains(where: { book in
+        book.identifier == b.identifier
+      }) {
+        _books.append(b)
+      }
+    }
+
+    
+    _books.forEach { book in
+      print("thumbnail books \(book.identifier)")
       guard let thumbnailUrl = book.imageThumbnailURL else {
         result[book.identifier] = self.generateBookCoverImage(book)
         return
       }
       urlSession.dataTask(with: URLRequest(url: thumbnailUrl)) { imageData, response, error in
         if let imageData = imageData, let image = UIImage(data: imageData) {
-          DispatchQueue.main.async {
-            result[book.identifier] = image
-          }
+          result[book.identifier] = image
         } else {
-          DispatchQueue.main.async {
-            result[book.identifier] = self.generateBookCoverImage(book)
-          }
+          result[book.identifier] = self.generateBookCoverImage(book)
         }
       }.resume()
+      
     }
   }
   
