@@ -8,10 +8,17 @@
 
 import Transifex
 
+class CustomLocaleProvider : TXCurrentLocaleProvider {
+    func currentLocale() -> String {
+      return Bundle.main.preferredLocalizations[0]
+    }
+}
+
 @objc class TransifexManager: NSObject {
   @objc static func setup() {
     let locales = TXLocaleState(sourceLocale: "en",
-                                appLocales: ["en", "fi", "sv"])
+                                appLocales: ["en", "fi", "sv"],
+                                currentLocaleProvider: CustomLocaleProvider())
 
     TXNative.initialize(
       locales: locales,
