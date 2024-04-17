@@ -227,7 +227,6 @@
         }];
           if([accounts count] == 1){
             Account* account = [accounts firstObject];
-            //[account l]
             if (![NSThread isMainThread]) {
               dispatch_async(dispatch_get_main_queue(), ^{
                 [self welcomeScreenCompletionHandlerForAccount:account];
@@ -244,13 +243,8 @@
         [TPPConfiguration updateSavedeRegistryKey];
       }
       
-      //UINavigationController *navController;// = [[UINavigationController alloc] initWithRootViewController:welcomeScreenVC];
       
       if([accounts count] == 1) {
-        //navController = [[UINavigationController alloc] initWithRootViewController:onboardingVC];
-        
-        //[navController setModalPresentationStyle:UIModalPresentationFullScreen];
-        //[navController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
         TPPRootTabBarController *vc = [TPPRootTabBarController sharedController];
         [vc safelyPresentViewController:onboardingVC animated:YES completion:nil];
         
