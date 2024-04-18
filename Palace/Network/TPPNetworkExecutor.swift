@@ -160,11 +160,11 @@ extension TPPNetworkExecutor: TPPRequestExecuting {
         completion(NYPLResult.failure(error, nil))
       } else {
         resultTask = performDataTask(with: req, completion: { result in
-
+          
           if case .failure(let error, let response) = result {
             if let httpResponse = response as? HTTPURLResponse {
-              if httpResponse.statusCode == 401 {
-                self.authenticateWithToken(TPPUserAccount.sharedAccount().authToken!) { status in
+              if httpResponse.statusCode == 401, let authToken = TPPUserAccount.sharedAccount().authToken {
+                self.authenticateWithToken(authToken) { status in
                   if status == 401 {
                     EkirjastoLoginViewController.show {
                       self.executeRequest(req, completion: completion)
@@ -175,6 +175,10 @@ extension TPPNetworkExecutor: TPPRequestExecuting {
                     completion(result)
                   }
                 }
+              } else if httpResponse.statusCode == 401 {
+                EkirjastoLoginViewController.show {}
+              } else {
+                completion(result)
               }
             }else{
               completion(result)
