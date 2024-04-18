@@ -33,4 +33,5 @@
 - (void)pushViewController:(UIViewController *const)viewController
                   animated:(BOOL const)animated;
 
+- (void)changeToPreviousIndex;
 @end
