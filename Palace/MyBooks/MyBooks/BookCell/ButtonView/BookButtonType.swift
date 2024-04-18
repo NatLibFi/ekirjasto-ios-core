@@ -22,7 +22,7 @@ enum BookButtonType: String {
   case `return`
 
   var localizedTitle: String {
-    NSLocalizedString(self.rawValue, comment: "Book Action Button title")
+    NSLocalizedString(self.rawValue.capitalized, comment: "Book Action Button title")
   }
   
   var displaysIndicator: Bool {

@@ -15,7 +15,7 @@ struct AdaptableGridLayout <Content: View>: View {
   
   var body: some View {
     if isPad {
-      LazyVGrid(columns: gridItemLayout, alignment: .leading, spacing: .zero) {
+      LazyVGrid(columns: gridItemLayout, alignment: .leading, spacing: 10) {
         content()
       }
     } else {

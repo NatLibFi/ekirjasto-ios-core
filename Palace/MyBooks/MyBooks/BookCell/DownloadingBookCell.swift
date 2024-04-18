@@ -71,7 +71,7 @@ struct DownloadingBookCell: View {
       Spacer()
       ForEach(model.buttonTypes, id: \.self) { type in
         ButtonView(
-          title: type.localizedTitle.capitalized,
+          title: type.localizedTitle,
           indicatorDate: model.indicatorDate(for: type)/*,
           backgroundFill: Color(TPPConfiguration.backgroundColor())*/) {
           model.callDelegate(for: type)

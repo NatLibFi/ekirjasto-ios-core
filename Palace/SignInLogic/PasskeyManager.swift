@@ -25,9 +25,16 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
       //var name : String
       //var displayName : String
     }
+    
+    struct RelayingPartner : Codable {
+      let id : String
+      let name : String
+    }
+    
     struct PublicKey : Codable {
       let challenge : String
       let user : User
+      let rp : RelayingPartner
     }
     
     let publicKey : PublicKey
@@ -41,7 +48,7 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
       let id: String
       let transports: [String]
     }
-
+    
     struct PublicKey: Codable {
       let challenge: String
       let timeout: Int
@@ -234,7 +241,7 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
   var authController : ASAuthorizationController? = nil
   private func performPassKeyRegister(_ username: String, _ pk : RegisterStartResponse.PublicKey, completion : @escaping (RegisterCompleteData?) -> Void){
 
-    let publicKeyCredentialProvider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: "e-kirjasto.loikka.dev")
+    let publicKeyCredentialProvider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: pk.rp.id)
 
     let registrationRequest = publicKeyCredentialProvider.createCredentialRegistrationRequest(challenge: try! Data.fromBase64Url(pk.challenge)!,name: username, userID: pk.user.id.data(using: .utf8)!)
     let registerAttempt = RegisterAttempt(completion: completion)
@@ -250,7 +257,7 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
   }
   
   private func performPassKeyLogin(_ pk : LoginStartResponse.PublicKey, completion : @escaping (LoginCompleteData?) -> Void){
-    let publicKeyCredentialProvider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: "e-kirjasto.loikka.dev")
+    let publicKeyCredentialProvider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: pk.rpId)
 
     let assertionRequest = publicKeyCredentialProvider.createCredentialAssertionRequest(challenge: try! Data.fromBase64Url(pk.challenge)!)
 

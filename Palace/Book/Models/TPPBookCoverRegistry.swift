@@ -82,16 +82,21 @@ class TPPBookCoverRegistry {
 
     
     _books.forEach { book in
-      print("thumbnail books \(book.identifier)")
       guard let thumbnailUrl = book.imageThumbnailURL else {
-        result[book.identifier] = self.generateBookCoverImage(book)
+        DispatchQueue.main.async {
+          result[book.identifier] = self.generateBookCoverImage(book)
+        }
+
         return
       }
       urlSession.dataTask(with: URLRequest(url: thumbnailUrl)) { imageData, response, error in
         if let imageData = imageData, let image = UIImage(data: imageData) {
           result[book.identifier] = image
         } else {
-          result[book.identifier] = self.generateBookCoverImage(book)
+          DispatchQueue.main.async {
+            result[book.identifier] = self.generateBookCoverImage(book)
+          }
+          
         }
       }.resume()
       

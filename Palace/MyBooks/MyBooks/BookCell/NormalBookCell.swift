@@ -12,7 +12,7 @@ import Combine
 
 struct NormalBookCell: View {
   @ObservedObject var model: BookCellModel
-  private let cellHeight: CGFloat = 125
+  private let cellHeight: CGFloat = 135
   private let imageViewWidth: CGFloat = 100
 
   var body: some View {
@@ -45,12 +45,13 @@ struct NormalBookCell: View {
       Image(uiImage: model.image)
         .resizable()
         .scaledToFit()
-        .frame(height: 125, alignment: .top)
-        .padding(.top, 10)
+        .frame(height: 125, alignment: .center)
+        //.padding(.top, 10)
       audiobookIndicator
     }
     .frame(width: imageViewWidth)
     .padding(.trailing, 2)
+    
   }
 
   @ViewBuilder private var audiobookIndicator: some View {
@@ -82,7 +83,7 @@ struct NormalBookCell: View {
     HStack {
       ForEach(model.buttonTypes, id: \.self) { type in
         ButtonView(
-          title: type.localizedTitle.capitalized,
+          title: type.localizedTitle,
           indicatorDate: model.indicatorDate(for: type),
           action: { model.callDelegate(for: type) }
         )
