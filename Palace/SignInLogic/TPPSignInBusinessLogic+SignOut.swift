@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WebKit
 
 extension TPPSignInBusinessLogic {
 
@@ -126,6 +127,13 @@ func performLogOut() {
     userAccount.removeAll()
     selectedIDP = nil
     uiDelegate?.businessLogicDidFinishDeauthorizing(self)
+    
+    // Reset all webviews on logout.
+    WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
+        records.forEach { record in
+            WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
+        }
+    }
   }
 
   #if FEATURE_DRM_CONNECTOR

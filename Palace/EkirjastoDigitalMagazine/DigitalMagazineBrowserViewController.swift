@@ -31,7 +31,10 @@ class DigitalMagazineBrowserViewController: UIViewController, UITabBarController
     super.viewDidLoad()
     
     setupWebView()
-    
+    loadBaseUrl()
+  }
+  
+  private func loadBaseUrl() {
     guard let digitalMagazinesUrl = AccountsManager.shared.currentAccount?.digitalMagazinesUrl
     else {
       return
@@ -69,10 +72,18 @@ class DigitalMagazineBrowserViewController: UIViewController, UITabBarController
     ])
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    guard let path = webView.url?.path else { return }
+    
+    if path.hasPrefix("/unauthorized") == false && TPPUserAccount.sharedAccount().authToken == nil {
+      // This can happend after logout, we should be unauthorized.
+      loadBaseUrl()
+    }
+  }
+  
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    
-    print("DigitalMagazineBrowserViewController::viewDidAppear, redirectedToLogin: \(redirectedToLogin)")
     
     if shouldChangeToPreviousIndex {
       TPPRootTabBarController.shared().changeToPreviousIndex()
