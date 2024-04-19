@@ -18,8 +18,7 @@ class DigitalMagazineBrowserViewController: UIViewController, UITabBarController
   private var authRetryBackoffFactor:TimeInterval = 2
   private var currentAuthWorkItem: DispatchWorkItem? = nil
   
-  private var redirectedToLogin: Bool = false
-  private var shouldChangeToPreviousIndex: Bool = false
+  private var wasRedirectedToLogin: Bool = false
   
   func resetAuthRetryTimer() {
     authRetryCount = 0
@@ -85,15 +84,15 @@ class DigitalMagazineBrowserViewController: UIViewController, UITabBarController
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     
-    if shouldChangeToPreviousIndex {
-      TPPRootTabBarController.shared().changeToPreviousIndex()
+    if let path = webView.url?.path, path.hasPrefix("/unauthorized") {
+      // Wait short time so that TPPUserAccount.sharedAccount().authToken is set.
+      DispatchQueue.main.asyncAfter(
+        deadline: DispatchTime.now().advanced(by: DispatchTimeInterval.milliseconds(500)),
+        execute: DispatchWorkItem(block: {
+          self.authorize()
+        })
+      )
     }
-    else if let path = webView.url?.path, path.hasPrefix("/unauthorized") && redirectedToLogin == false {
-      authorize()
-    }
-    
-    redirectedToLogin = false
-    shouldChangeToPreviousIndex = false
   }
   
   func popToRoot() {
@@ -154,17 +153,15 @@ class DigitalMagazineBrowserViewController: UIViewController, UITabBarController
     }
     
     guard let _ = TPPUserAccount.sharedAccount().authToken else {
-      // Going to show login.
-      redirectedToLogin = true
-      
-      EkirjastoLoginViewController.show {
-        if let _ = TPPUserAccount.sharedAccount().authToken {
-          // User was loggedin.
-          self.authorize()
-        }
-        else {
-          // User is still not loggedin. Get back to where they were before this view.
-          self.shouldChangeToPreviousIndex = true
+      if wasRedirectedToLogin {
+        TPPRootTabBarController.shared().changeToPreviousIndex()
+        wasRedirectedToLogin = false
+      }
+      else {
+        // Going to show login.
+        EkirjastoLoginViewController.show {
+          // User is still may not be loggedin. Get back to where they were before this view.
+          self.wasRedirectedToLogin = true
         }
       }
       return
