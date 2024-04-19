@@ -142,10 +142,11 @@ shouldSelectViewController:(nonnull UIViewController *)viewController
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
 
-    // Call the web app's "popToRoot" method if the user re-selects the current tab to emulate native behavior
-    if (viewController == self.magazineViewController) {
-      [self.magazineViewController popToRoot];
-    }
+  // Call the web app's "popToRoot" method if the user re-selects the current tab to emulate native behavior
+  NSUInteger magazineIndex = [self.viewControllers indexOfObject: self.magazineViewController];
+  if (viewController == self.magazineViewController && self.previousIndex == magazineIndex) {
+    [self.magazineViewController popToRoot];
+  }
 }
 
 #pragma mark -
