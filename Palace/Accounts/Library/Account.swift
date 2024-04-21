@@ -382,7 +382,6 @@ protocol AccountLogoDelegate: AnyObject {
   var supportEmail:EmailAddress? = nil
   var supportURL:URL? = nil
   let catalogUrl:String?
-  let digitalMagazinesUrl:String?
   var details:AccountDetails?
   var homePageUrl: String?
   lazy var hasSupportOption = { supportEmail != nil || supportURL != nil }()
@@ -410,8 +409,6 @@ protocol AccountLogoDelegate: AnyObject {
     uuid = publication.metadata.id
   
     catalogUrl = publication.links.first(where: { $0.rel == "http://opds-spec.org/catalog" })?.href
-    
-    digitalMagazinesUrl = publication.links.first(where: { $0.rel == "digital_magazines" })?.href
 
     if let link = publication.links.first(where: { $0.rel == "help" })?.href {
       if let emailAddress = EmailAddress(rawValue: link) {

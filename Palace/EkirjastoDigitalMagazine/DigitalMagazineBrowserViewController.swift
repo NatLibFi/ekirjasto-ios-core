@@ -34,7 +34,10 @@ class DigitalMagazineBrowserViewController: UIViewController, UITabBarController
   }
   
   private func loadBaseUrl() {
-    guard let digitalMagazinesUrl = AccountsManager.shared.currentAccount?.digitalMagazinesUrl
+    guard let authenticationDocument = AccountsManager.shared.currentAccount?.authenticationDocument,
+      let authentication = authenticationDocument.authentication?.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto" }),
+      let magazinesUrlString = authentication.links?.first(where: { $0.rel == "magazine_service" })?.href,
+      let digitalMagazinesUrl = URL(string: magazinesUrlString)
     else {
       return
     }
