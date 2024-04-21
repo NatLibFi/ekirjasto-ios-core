@@ -87,6 +87,9 @@ extension TPPNetworkExecutor: TPPRequestExecuting {
             if httpResponse.statusCode == 401 {
               self.authenticateWithToken(TPPUserAccount.sharedAccount().authToken!) { status in
                 if status == 401 {
+                  // User needs to login again, remove user's credentials.
+                  TPPUserAccount.sharedAccount().removeAll()
+                  
                   EkirjastoLoginViewController.show {
                     if let token = TPPUserAccount.sharedAccount().authToken {
                       updatedRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
@@ -166,6 +169,9 @@ extension TPPNetworkExecutor: TPPRequestExecuting {
               if httpResponse.statusCode == 401, let authToken = TPPUserAccount.sharedAccount().authToken {
                 self.authenticateWithToken(authToken) { status in
                   if status == 401 {
+                    // User needs to login again, remove user's credentials.
+                    TPPUserAccount.sharedAccount().removeAll()
+                    
                     EkirjastoLoginViewController.show {
                       self.executeRequest(req, completion: completion)
                     }
