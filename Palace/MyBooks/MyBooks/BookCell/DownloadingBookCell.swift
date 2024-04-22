@@ -60,7 +60,7 @@ struct DownloadingBookCell: View {
       Text("\(Int(progress * 100))%")
     }
     .font(Font(uiFont: UIFont.palaceFont(ofSize: 12)))
-    .foregroundColor(Color(TPPConfiguration.backgroundColor()))
+    //.foregroundColor(Color(TPPConfiguration.backgroundColor()))
     .onReceive(downloadPublisher) { _ in
       self.progress = MyBooksDownloadCenter.shared.downloadProgress(for: model.book.identifier)
     }
