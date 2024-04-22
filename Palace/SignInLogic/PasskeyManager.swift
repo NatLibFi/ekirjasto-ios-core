@@ -53,7 +53,7 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
       let challenge: String
       let timeout: Int
       let rpId: String
-      let allowCredentials: [AllowCredential]
+      let allowCredentials: [AllowCredential]?
       let userVerification: String
     }
 
