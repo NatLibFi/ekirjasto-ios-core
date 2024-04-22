@@ -11,6 +11,7 @@
 @property (nonatomic) TPPHoldsNavigationController *holdsNavigationController;
 @property (nonatomic) UIViewController *settingsViewController;
 @property (readwrite) TPPR2Owner *r2Owner;
+@property (nonatomic) NSUInteger previousIndex;
 
 @end
 
@@ -61,6 +62,8 @@
                                              object:nil];
   
   self.r2Owner = [[TPPR2Owner alloc] init];
+  
+  self.previousIndex = 0;
   return self;
 }
 
@@ -125,6 +128,12 @@
 
 #pragma mark - UITabBarControllerDelegate
 
+- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
+{
+  // selectedIndex is not yet changed, so we take it to the previousIndex variable.
+  self.previousIndex = self.selectedIndex;
+}
+
 - (BOOL)tabBarController:(UITabBarController *)__unused tabBarController
 shouldSelectViewController:(nonnull UIViewController *)viewController
 {
@@ -133,10 +142,11 @@ shouldSelectViewController:(nonnull UIViewController *)viewController
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
 
-    // Call the web app's "popToRoot" method if the user re-selects the current tab to emulate native behavior
-    if (viewController == self.magazineViewController) {
-      [self.magazineViewController popToRoot];
-    }
+  // Call the web app's "popToRoot" method if the user re-selects the current tab to emulate native behavior
+  NSUInteger magazineIndex = [self.viewControllers indexOfObject: self.magazineViewController];
+  if (viewController == self.magazineViewController && self.previousIndex == magazineIndex) {
+    [self.magazineViewController popToRoot];
+  }
 }
 
 #pragma mark -
@@ -152,6 +162,10 @@ shouldSelectViewController:(nonnull UIViewController *)viewController
   }
   
   [baseController presentViewController:viewController animated:animated completion:completion];
+}
+- (void)changeToPreviousIndex
+{
+  self.selectedIndex = self.previousIndex;
 }
 
 - (void)pushViewController:(UIViewController *const)viewController

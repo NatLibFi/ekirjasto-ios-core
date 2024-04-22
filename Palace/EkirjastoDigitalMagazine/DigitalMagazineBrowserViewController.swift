@@ -18,6 +18,8 @@ class DigitalMagazineBrowserViewController: UIViewController, UITabBarController
   private var authRetryBackoffFactor:TimeInterval = 2
   private var currentAuthWorkItem: DispatchWorkItem? = nil
   
+  private var wasRedirectedToLogin: Bool = false
+  
   func resetAuthRetryTimer() {
     authRetryCount = 0
     authRetryTime = .now()
@@ -28,8 +30,14 @@ class DigitalMagazineBrowserViewController: UIViewController, UITabBarController
     super.viewDidLoad()
     
     setupWebView()
-    
-    guard let digitalMagazinesUrl = AccountsManager.shared.currentAccount?.digitalMagazinesUrl
+    loadBaseUrl()
+  }
+  
+  private func loadBaseUrl() {
+    guard let authenticationDocument = AccountsManager.shared.currentAccount?.authenticationDocument,
+      let authentication = authenticationDocument.authentication?.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto" }),
+      let magazinesUrlString = authentication.links?.first(where: { $0.rel == "magazine_service" })?.href,
+      let digitalMagazinesUrl = URL(string: magazinesUrlString)
     else {
       return
     }
@@ -66,6 +74,30 @@ class DigitalMagazineBrowserViewController: UIViewController, UITabBarController
     ])
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    guard let path = webView.url?.path else { return }
+    
+    if path.hasPrefix("/unauthorized") == false && TPPUserAccount.sharedAccount().authToken == nil {
+      // This can happend after logout, we should be unauthorized.
+      loadBaseUrl()
+    }
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    
+    if let path = webView.url?.path, path.hasPrefix("/unauthorized") {
+      // Wait short time so that TPPUserAccount.sharedAccount().authToken is set.
+      DispatchQueue.main.asyncAfter(
+        deadline: DispatchTime.now().advanced(by: DispatchTimeInterval.milliseconds(500)),
+        execute: DispatchWorkItem(block: {
+          self.authorize()
+        })
+      )
+    }
+  }
+  
   func popToRoot() {
     // Call the web app's "popToRoot" method if the user re-selects the current tab to emulate native behavior.
     webView.evaluateJavaScript("__ewl('popToRoot');", completionHandler: nil)
@@ -97,16 +129,20 @@ class DigitalMagazineBrowserViewController: UIViewController, UITabBarController
     decisionHandler(.allow)
   }
   
+  fileprivate func authorize() {
+    self.resetAuthRetryTimer()
+    
+    fetchEkirjastoToken() { ekirjastoToken in
+      DispatchQueue.main.async {
+        self.webView.evaluateJavaScript("__ewl('login', {token:\"\(ekirjastoToken ?? "")\"});", completionHandler: nil)
+      }
+    }
+  }
+  
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
     guard let path = webView.url?.path else { return }
     if path.hasPrefix("/unauthorized") {
-      self.resetAuthRetryTimer()
-      
-      fetchEkirjastoToken() { ekirjastoToken in
-        DispatchQueue.main.async {
-          self.webView.evaluateJavaScript("__ewl('login', {token:\"\(ekirjastoToken ?? "")\"});", completionHandler: nil)
-        }
-      }
+      authorize()
     }
   }
   
@@ -116,6 +152,21 @@ class DigitalMagazineBrowserViewController: UIViewController, UITabBarController
       let tokenUrlString = authentication.links?.first(where: { $0.rel == "ekirjasto_token" })?.href,
       let tokenUrl = URL(string: tokenUrlString)
     else {
+      return
+    }
+    
+    guard let _ = TPPUserAccount.sharedAccount().authToken else {
+      if wasRedirectedToLogin {
+        TPPRootTabBarController.shared().changeToPreviousIndex()
+        wasRedirectedToLogin = false
+      }
+      else {
+        // Going to show login.
+        EkirjastoLoginViewController.show {
+          // User is still may not be loggedin. Get back to where they were before this view.
+          self.wasRedirectedToLogin = true
+        }
+      }
       return
     }
     

@@ -29,10 +29,6 @@ class EkirjastoMagazineNavigationController: TPPLibraryNavigationController {
     NotificationCenter.default.removeObserver(self)
   }
   
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-  }
-  
   @objc func popToRoot() {
     guard let vc = self.visibleViewController as? DigitalMagazineBrowserViewController else {
       return
