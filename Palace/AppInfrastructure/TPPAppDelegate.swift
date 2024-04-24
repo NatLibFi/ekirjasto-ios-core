@@ -51,12 +51,19 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
     window?.makeKeyAndVisible()
     window?.rootViewController = TPPRootTabBarController.shared()
     
+    let insets = window?.safeAreaInsets
+    let bottom = insets?.bottom
+    
     let itemAppearance = UITabBarItemAppearance()
     itemAppearance.normal.badgePositionAdjustment.horizontal = 3
     itemAppearance.normal.badgePositionAdjustment.vertical = 1
     itemAppearance.normal.badgeBackgroundColor = UIColor(named: "ColorEkirjastoRedCircle")
     itemAppearance.normal.badgeTextAttributes = [.foregroundColor: UIColor(named: "ColorEkirjastoAlwaysBlack")!, .font: UIFont.boldPalaceFont(ofSize: 11)]
-    itemAppearance.normal.titlePositionAdjustment = UIOffset(horizontal: 5.0, vertical: 6.0)
+    if let bottom = bottom {
+      itemAppearance.normal.titlePositionAdjustment = UIOffset(horizontal: 5.0, vertical:  CGFloat.minimum(bottom, 6.0))
+    }else {
+      itemAppearance.normal.titlePositionAdjustment = UIOffset(horizontal: 5.0, vertical:  6.0)
+    }
     
     let paragraphStyle = NSMutableParagraphStyle()
     paragraphStyle.lineBreakMode = .byTruncatingTail
@@ -73,7 +80,6 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
     appearance.compactInlineLayoutAppearance = itemAppearance
 
     UITabBar.appearance().standardAppearance = appearance
-    
     UITabBar.appearance().tintColor = TPPConfiguration.compatiblePrimaryColor() //Edited by Ebblis
     UITabBar.appearance().backgroundColor = TPPConfiguration.backgroundColor()
     UITabBarItem.appearance().setTitleTextAttributes([.font: UIFont.palaceFont(ofSize: 12)], for: .normal)

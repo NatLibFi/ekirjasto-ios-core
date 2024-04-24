@@ -196,7 +196,6 @@
   TPPSettings *settings = [TPPSettings sharedSettings];
   
   if (!settings.userHasSeenWelcomeScreen  || TPPConfiguration.registryChanged) {
-    printf("settings userHasSeenWelcomeScreen: %s registryChanged: %s\n",settings.userHasSeenWelcomeScreen ? "true" : "false",TPPConfiguration.registryChanged ? "true" : "false");
     Account *currentAccount = [[AccountsManager sharedInstance] currentAccount];
 
     __block NSURL *mainFeedUrl = [NSURL URLWithString:currentAccount.catalogUrl];
