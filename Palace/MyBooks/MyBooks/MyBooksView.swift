@@ -113,7 +113,7 @@ struct MyBooksView: View {
           //.border(width: 0.5, edges: [.bottom, .trailing], color: Color("ColorEkirjastoLightestGreen"))
       }
       .sheet(item: $showDetailForBook) { item in
-        UIViewControllerWrapper(TPPBookDetailViewController(book: item), updater: { _ in })
+        UIViewControllerWrapper(TPPBookDetailViewController(book: item), updater: { _ in }).anyView()
       }
       .anyView()
     } else {
@@ -130,6 +130,7 @@ struct MyBooksView: View {
       .anyView()
     }
   }
+  
   
   @ViewBuilder private var leadingBarButton: some View {
     Button {
