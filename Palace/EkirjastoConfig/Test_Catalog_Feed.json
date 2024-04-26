@@ -1,0 +1,59 @@
+{
+  "catalogs": [
+    {
+      "links": [
+        {
+          "href": "https://lib-beta.e-kirjasto.fi/groups/",
+          "type": "application/atom+xml;profile=opds-catalog;kind=acquisition",
+          "rel": "http://opds-spec.org/catalog"
+        },
+        {
+          "href": "https://lib-beta.e-kirjasto.fi/groups/",
+          "rel": "start"
+        },
+        {
+          "href": "https://lib-beta.e-kirjasto.fi/groups/",
+          "rel": "self"
+        },
+        {
+          "href": "https://lib-beta.e-kirjasto.fi/authentication_document",
+          "type": "application/vnd.opds.authentication.v1.0+json"
+        },
+        {
+          "href": "https://openebooks.net/",
+          "type": "text/html",
+          "rel": "alternate"
+        },
+        {
+          "href": "https://e-kirjasto-playground.epaper.fi/",
+          "rel": "digital_magazines"
+        },
+        {
+            "href": "https://librarysimplified.org/licenses/",
+            "type": "text/html",
+            "rel": "license"
+        },
+        {
+          "href": "https://lib-beta.e-kirjasto.fi/palaute",
+          "rel": "help"
+        }
+      ],
+      "metadata": {
+        "updated": "2024-04-15T07:24:51Z",
+        "description": "E-kirjaston testikokoelma",
+        "id": "urn:uuid:37015541-b542-4157-a687-3ca5ad47fdbe",
+        "title": "E-kirjaston testikokoelma"
+      }
+    }
+  ],
+  "links": [
+      {
+        "href": "http://lib-beta.e-kirjasto.fi/",
+        "type": "application/opds+json",
+        "rel": "self"
+      }
+  ],
+  "metadata": {
+    "title": "E-kirjasto Test"
+  }
+}

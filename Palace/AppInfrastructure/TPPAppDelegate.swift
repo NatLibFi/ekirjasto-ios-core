@@ -126,7 +126,17 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-    if let url = userActivity.webpageURL, DynamicLinks.dynamicLinks().handleUniversalLink(url, completion: { dynamicLink, error in
+    
+    
+    if let url = userActivity.webpageURL {
+      if url.lastPathComponent == "test-login" {
+        DLNavigator.shared.navigate(to: url.lastPathComponent,params: [:])
+        return true
+      }
+      
+    }
+    
+    /*if let url = userActivity.webpageURL, DynamicLinks.dynamicLinks().handleUniversalLink(url, completion: { dynamicLink, error in
       if let error {
         // Cannot parse the link
         return
@@ -141,7 +151,7 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
         userActivity.webpageURL?.host == TPPSettings.shared.universalLinksURL.host {
       NotificationCenter.default.post(name: .TPPAppDelegateDidReceiveCleverRedirectURL, object: userActivity.webpageURL)
       return true
-    }
+    }*/
     return false
   }
   

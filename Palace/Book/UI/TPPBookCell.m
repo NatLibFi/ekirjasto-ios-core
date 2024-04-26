@@ -153,7 +153,7 @@ TPPBookCell *TPPBookCellDequeue(UICollectionView *const collectionView,
   self = [super initWithFrame:frame];
   if(!self) return nil;
   
-  if(self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular) {
+  /*if(self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular) {
 
     // This is no longer set by default as of iOS 8.0.
     self.contentView.autoresizingMask = (UIViewAutoresizingFlexibleHeight |
@@ -192,7 +192,7 @@ TPPBookCell *TPPBookCellDequeue(UICollectionView *const collectionView,
                                           UIViewAutoresizingFlexibleWidth);
     [self.contentView addSubview:self.borderBottom];
     self.borderBottom.center = CGPointMake(self.contentView.frame.size.width / 2, CGRectGetMaxY(self.contentView.frame) + 15);
-  }
+  }*/
   
   return self;
 }

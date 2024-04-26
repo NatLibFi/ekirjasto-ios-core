@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import CloudKit
 
 struct TPPSettingsView: View {
   typealias DisplayStrings = Strings.Settings
@@ -90,9 +91,9 @@ struct TPPSettingsView: View {
     }
   }
 
-  @State private var toggleSyncBookmarks = false
+  @State private var toggleSyncBookmarks = AccountsManager.shared.accounts().first?.details?.syncPermissionGranted ?? false
   @State private var toggleLogoutWarning = false
-  @State private var syncEnabled = AccountsManager.shared.accounts().first?.details?.syncPermissionGranted ?? false
+  @State private var syncEnabled = true//AccountsManager.shared.accounts().first?.details?.syncPermissionGranted ?? false
   @State private var logoutText = ""
   @ViewBuilder private var syncBookmarksSection: some View {
     Section(footer: Text(NSLocalizedString("Save your reading position and bookmarks to all your other devices.",comment: "Explain to the user they can save their bookmarks in the cloud across all their devices."))){
@@ -110,11 +111,13 @@ struct TPPSettingsView: View {
         }.onAppear{
           TPPSignInBusinessLogic.getShared { logic in
             logic?.checkSyncPermission(preWork: {
-              
+                syncEnabled = false
             }, postWork: { enableSync in
-              syncEnabled = enableSync
+              syncEnabled = true
+              toggleSyncBookmarks = enableSync
             })
           }
+          
         }
     }
   }
@@ -169,9 +172,21 @@ struct TPPSettingsView: View {
        Text(self.logoutText)
      }
      
-     //row(title: DisplayStrings.registerPasskey, destination: PasskeyView(mode: .register, passKeyManager: PasskeyManager(AccountsManager.shared.currentAccount!.authenticationDocument!) ).anyView())
      Button{
        let passkey = PasskeyManager(AccountsManager.shared.currentAccount!.authenticationDocument!)
+       
+       /*let status = CKContainer.default().requestApplicationPermission(.userDiscoverability) { (status, error) in
+           CKContainer.default().fetchUserRecordID { (record, error) in
+               CKContainer.default().discoverUserIdentity(withUserRecordID: record!, completionHandler: { (userID, error) in
+                   print(userID?.hasiCloudAccount)
+                   print(userID?.lookupInfo?.phoneNumber)
+                   print(userID?.lookupInfo?.emailAddress)
+                   print((userID?.nameComponents?.givenName)! + " " + (userID?.nameComponents?.familyName)!)
+               })
+           }
+        }*/
+       
+       
        passkey.register("", TPPUserAccount.sharedAccount().authToken!) { registerToken in
          if let token = registerToken, !token.isEmpty{
            TPPNetworkExecutor.shared.authenticateWithToken(token) { status in
@@ -197,6 +212,16 @@ struct TPPSettingsView: View {
     Section{
       row(title: DisplayStrings.loginSuomiFi,destination:SuomiIdentificationWebView(authenticationDocument: AccountsManager.shared.currentAccount!.authenticationDocument).anyView())
       Button{
+        /*let status = CKContainer.default().requestApplicationPermission(.userDiscoverability) { (status, error) in
+            CKContainer.default().fetchUserRecordID { (record, error) in
+                CKContainer.default().discoverUserIdentity(withUserRecordID: record!, completionHandler: { (userID, error) in
+                    print(userID?.hasiCloudAccount)
+                    print(userID?.lookupInfo?.phoneNumber)
+                    print(userID?.lookupInfo?.emailAddress)
+                    print((userID?.nameComponents?.givenName)! + " " + (userID?.nameComponents?.familyName)!)
+                })
+            }
+         }*/
         let passkey = PasskeyManager(AccountsManager.shared.currentAccount!.authenticationDocument!)
         passkey.login { loginToken in
           if let token = loginToken, !token.isEmpty{
@@ -226,7 +251,6 @@ struct TPPSettingsView: View {
       )
       
       let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
-       // .navigationBarTitle(Text(DisplayStrings.loginFooterUserAgreementText))
 
       NavigationLink(
         destination: wrapper.anyView(),
@@ -237,13 +261,6 @@ struct TPPSettingsView: View {
             .foregroundColor(Color.init(uiColor: UIColor.link))
         }
       )
-      //row(title: DisplayStrings.loginFooterUserAgreementText, destination: wrapper.anyView())
-      /*Link(destination: URL(string: TPPSettings.TPPUserAgreementURLString)!, label: {
-        Text(DisplayStrings.loginFooterUserAgreementText)
-          .underline()
-      })
-        .foregroundColor(Color.init(uiColor: UIColor.link))
-        .dynamicTypeSize(.xSmall)*/
         
     }
   }

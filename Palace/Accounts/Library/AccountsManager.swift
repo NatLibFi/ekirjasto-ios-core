@@ -36,10 +36,9 @@ let currentAccountIdentifierKey  = "TPPCurrentAccountIdentifier"
   class func sharedInstance() -> AccountsManager {
     return shared
   }
-
   private var accountSet: String
 
-  private var accountSets = [String: [Account]]()
+  public var accountSets = [String: [Account]]()
   
   private let accountSetsLock = NSRecursiveLock()
   
@@ -65,7 +64,11 @@ let currentAccountIdentifierKey  = "TPPCurrentAccountIdentifier"
     }
   }
 
-  
+  public func reset(){
+    AccountsManager.shared.currentAccount = nil
+    AccountsManager.shared.accountSets = [:]
+    self.accountSet = TPPConfiguration.customUrlHash() ?? (TPPSettings.shared.useBetaLibraries ? TPPConfiguration.betaUrlHash : TPPConfiguration.useTestEnv ? TPPConfiguration.testUrlHash : TPPConfiguration.prodUrlHash)
+  }
   
   /// Performs a closure within a lock using `accountSetsLock`
   /// - Parameter action: the action inside the locked
@@ -105,7 +108,6 @@ let currentAccountIdentifierKey  = "TPPCurrentAccountIdentifier"
       if currentAccountId == newValue?.uuid {
         return
       }
-      
       Log.debug(#file, "Setting currentAccount to <\(newValue?.name ?? "[name N/A]") LibUUID=\(newValue?.uuid ?? "[UUID N/A]")>")
       currentAccountId = newValue?.uuid
       TPPErrorLogger.setUserID(TPPUserAccount.sharedAccount().barcode)
@@ -126,7 +128,7 @@ let currentAccountIdentifierKey  = "TPPCurrentAccountIdentifier"
   }
 
   private override init() {
-    self.accountSet = TPPConfiguration.customUrlHash() ?? (TPPSettings.shared.useBetaLibraries ? TPPConfiguration.betaUrlHash : TPPConfiguration.prodUrlHash)
+    self.accountSet = TPPConfiguration.customUrlHash() ?? (TPPSettings.shared.useBetaLibraries ? TPPConfiguration.betaUrlHash : TPPConfiguration.useTestEnv ? TPPConfiguration.testUrlHash : TPPConfiguration.prodUrlHash)
     self.ageCheck = TPPAgeCheck(ageCheckChoiceStorage: TPPSettings.shared)
     
     super.init()
@@ -210,7 +212,7 @@ let currentAccountIdentifierKey  = "TPPCurrentAccountIdentifier"
       let catalogsFeed = try OPDS2CatalogsFeed.fromData(data)
       let hadAccount = self.currentAccount != nil
       let accountSet = catalogsFeed.catalogs.map { Account(publication: $0) }
-
+    
       performLocked {
         accountSets[key] = accountSet
       }
@@ -292,9 +294,8 @@ let currentAccountIdentifierKey  = "TPPCurrentAccountIdentifier"
   /// No guarantees are being made about whether this is called on the main
   /// thread or not.
   func loadCatalogs(completion: ((Bool) -> ())?) {
-    Log.debug(#file, "Entering loadCatalog...")
-    let targetUrl = TPPConfiguration.customUrl() ?? (TPPSettings.shared.useBetaLibraries ? TPPConfiguration.betaUrl : TPPConfiguration.prodUrl)
-    print("customUrl: \(TPPConfiguration.customUrl()) useBetaLibraries: \(TPPSettings.shared.useBetaLibraries) betaUrl: \(TPPConfiguration.betaUrl) prodUrl: \(TPPConfiguration.prodUrl)")
+    Log.debug(#file, "Entering loadCatalog... useTestEnv \(TPPConfiguration.useTestEnv)")
+    let targetUrl = TPPConfiguration.customUrl() ?? (TPPSettings.shared.useBetaLibraries ? TPPConfiguration.betaUrl : (TPPConfiguration.useTestEnv ? TPPConfiguration.testUrl : TPPConfiguration.prodUrl))
     let hash = targetUrl.absoluteString.md5().base64EncodedStringUrlSafe()
       .trimmingCharacters(in: ["="])
 
@@ -381,7 +382,7 @@ let currentAccountIdentifierKey  = "TPPCurrentAccountIdentifier"
   func updateAccountSet(completion: ((Bool) -> ())?) {
 
     performLocked {
-      self.accountSet = TPPConfiguration.customUrlHash() ?? (TPPSettings.shared.useBetaLibraries ? TPPConfiguration.betaUrlHash : TPPConfiguration.prodUrlHash)
+      self.accountSet = TPPConfiguration.customUrlHash() ?? (TPPSettings.shared.useBetaLibraries ? TPPConfiguration.betaUrlHash : TPPConfiguration.useTestEnv ? TPPConfiguration.testUrlHash : TPPConfiguration.prodUrlHash)
     }
     
     if self.accounts().isEmpty || TPPConfiguration.customUrlHash() != nil {

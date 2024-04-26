@@ -44,6 +44,8 @@ class DLNavigator {
       if let libraryId = params["libraryid"], let barcode = params["barcode"] {
         login(libraryId: libraryId, barcode: barcode)
       }
+    case "test-login":
+      testLogin()
     default: break
     }
   }
@@ -58,6 +60,21 @@ class DLNavigator {
     var params = [String: String]()
     components.queryItems?.forEach { params[$0.name.lowercased()] = $0.value }
     return Destination(screen: screen, params: params )
+  }
+  
+  private func testLogin(){
+    TestLoginViewController.show { success in
+      TPPConfiguration.useTestEnv = success
+      
+      TPPSignInBusinessLogic.getShared { shared in
+        shared?.performLogOut()
+        AccountsManager.shared.reset()
+        AccountsManager.shared.loadCatalogs { Bool in
+          //show error if failed?
+        }
+      }
+      
+    }
   }
   
   private func login(libraryId: String, barcode: String) {

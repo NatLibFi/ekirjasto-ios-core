@@ -74,14 +74,14 @@ protocol AnnotationsManager {
         return
       } else if (!initialized && settings.userHasSeenFirstTimeSyncMessage == false) {
         Log.debug(#file, "Sync has never been initialized for the patron. Showing UIAlertController flow.")
-        let title = "Palace Sync"
-        let message = "Enable sync to save your reading position and bookmarks to your other devices.\n\nYou can change this any time in Settings."
+        let title = NSLocalizedString("E-Library Sync",comment: "")
+        let message = NSLocalizedString("Enable sync to save your reading position and bookmarks to your other devices.\n\nYou can change this any time in Settings.",comment: "")
         let alertController = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
-        let notNowAction = UIAlertAction.init(title: "Not Now", style: .default, handler: { action in
+        let notNowAction = UIAlertAction.init(title: NSLocalizedString("Not Now",comment: ""), style: .default, handler: { action in
           completion(false)
           settings.userHasSeenFirstTimeSyncMessage = true;
         })
-        let enableSyncAction = UIAlertAction.init(title: "Enable Sync", style: .default, handler: { action in
+        let enableSyncAction = UIAlertAction.init(title: NSLocalizedString("Enable Sync",comment: ""), style: .default, handler: { action in
           self.updateServerSyncSetting(toEnabled: true) { success in
             completion(success)
             settings.userHasSeenFirstTimeSyncMessage = true;

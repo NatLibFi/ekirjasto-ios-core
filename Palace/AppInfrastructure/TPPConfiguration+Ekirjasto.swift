@@ -19,13 +19,22 @@ extension TPPConfiguration {
   private static let feedFileUrl = URL(fileURLWithPath:
     Bundle.main.path(forResource: "Ellibs_Catalog_Feed",
                      ofType: "json")!)
+  
+  private static let testFeedFileUrl = URL(fileURLWithPath:
+    Bundle.main.path(forResource: "Test_Catalog_Feed",
+                     ofType: "json")!)
+  
   private static let feedFileUrlHash = feedFileUrl.absoluteString.md5().base64EncodedStringUrlSafe().trimmingCharacters(in: ["="])
+  private static let testFeedFileUrlHash = testFeedFileUrl.absoluteString.md5().base64EncodedStringUrlSafe().trimmingCharacters(in: ["="])
   static var prodUrl = feedFileUrl
-
+  static var testUrl = testFeedFileUrl
+  
+  
   static let betaUrlHash = betaUrl.absoluteString.md5().base64EncodedStringUrlSafe().trimmingCharacters(in: ["="])
   //static let prodUrlHash = prodUrl.absoluteString.md5().base64EncodedStringUrlSafe().trimmingCharacters(in: ["="])
 
   static let prodUrlHash = feedFileUrlHash
+  static let testUrlHash = testFeedFileUrlHash
   
   static func customUrl() -> URL? {
     guard let server = TPPSettings.shared.customLibraryRegistryServer else { return nil }
@@ -36,14 +45,26 @@ extension TPPConfiguration {
   /// Checks if registry changed
   @objc
   static var registryChanged: Bool {
-    (UserDefaults.standard.string(forKey: registryHashKey) ?? "") != prodUrlHash
+    (UserDefaults.standard.string(forKey: registryHashKey) ?? "") != (useTestEnv ? testUrlHash : prodUrlHash)
+  }
+  
+  @objc
+  static var useTestEnv: Bool {
+    get {
+      return UserDefaults.standard.bool(forKey: "useTestKey")
+    }
+    set {
+      UserDefaults.standard.set(newValue, forKey: "useTestKey")
+    }
   }
   
   /// Updates registry key
   @objc
   static func updateSavedeRegistryKey() {
-    UserDefaults.standard.set(prodUrlHash, forKey: registryHashKey)
+    UserDefaults.standard.set(useTestEnv ? testUrlHash : prodUrlHash, forKey: registryHashKey)
   }
+  
+  
   
   static func customUrlHash() -> String? {
     customUrl()?.absoluteString.md5().base64EncodedStringUrlSafe().trimmingCharacters(in: ["="])
