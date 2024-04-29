@@ -9,6 +9,9 @@
 		<string>applinks:thepalaceproject.org</string>
 		<string>applinks:thepalaceproject.page.link</string>
 		<string>webcredentials:e-kirjasto.loikka.dev</string>
+		<string>webcredentials:tunnistus.e-kirjasto.fi</string>
+		<string>applinks:tunnistus.e-kirjasto.fi</string>
+		<string>applinks:tunnistus.e-kirjassto.page.link</string>
 	</array>
 	<key>keychain-access-groups</key>
 	<array>

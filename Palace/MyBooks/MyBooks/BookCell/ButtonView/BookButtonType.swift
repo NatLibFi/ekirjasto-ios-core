@@ -27,7 +27,7 @@ enum BookButtonType: String {
   
   var displaysIndicator: Bool {
     switch self {
-    case .read, .remove, .get, .download, .listen:
+    case .read, /*.remove,*/ .get, .download, .listen:
       return true
     default:
       return false

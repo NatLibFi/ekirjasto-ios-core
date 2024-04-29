@@ -631,7 +631,6 @@
 		3379F8222A5D792900E9945F /* EkirjastoLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3379F8212A5D792900E9945F /* EkirjastoLoginView.swift */; };
 		337E63AC2A28A40900FF7886 /* TPPConfiguration+Ekirjasto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337E63AB2A28A40800FF7886 /* TPPConfiguration+Ekirjasto.swift */; };
 		337E63B92A28A7D100FF7886 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		337E63BC2A28AFCE00FF7886 /* Ellibs_Catalog_Feed.json in Resources */ = {isa = PBXBuildFile; fileRef = 337E63BA2A28AF3900FF7886 /* Ellibs_Catalog_Feed.json */; };
 		33C1160F2AE7A914007CABEB /* EkirjastoSuomiIdentificationWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C1160E2AE7A914007CABEB /* EkirjastoSuomiIdentificationWebView.swift */; };
 		33D320E32A5BF1C90032E6E9 /* LCPPassphraseAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5AB4E25D201BD005DFF05 /* LCPPassphraseAuthenticationService.swift */; };
 		33D320E42A5BF1EE0032E6E9 /* TPPLCPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219747F626D9218400FA25DF /* TPPLCPClient.swift */; };
@@ -666,8 +665,12 @@
 		363C620C2B14F08C00858AA5 /* UserProfileDocument+Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75423242AFC381E008CB7EF /* UserProfileDocument+Links.swift */; };
 		3672BB9C2B14DFE400F320E8 /* PalaceAudiobookToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F9BABE2A8E6811001697DE /* PalaceAudiobookToolkit.framework */; };
 		3672BB9D2B14DFE400F320E8 /* PalaceAudiobookToolkit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E7F9BABE2A8E6811001697DE /* PalaceAudiobookToolkit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		367E0EB92BD68D750072BA24 /* Ellibs_Catalog_Feed.json in Resources */ = {isa = PBXBuildFile; fileRef = 367E0EB82BD68D750072BA24 /* Ellibs_Catalog_Feed.json */; };
+		367E0EBA2BD68D750072BA24 /* Ellibs_Catalog_Feed.json in Resources */ = {isa = PBXBuildFile; fileRef = 367E0EB82BD68D750072BA24 /* Ellibs_Catalog_Feed.json */; };
+		367E0EBB2BD68D750072BA24 /* Ellibs_Catalog_Feed.json in Resources */ = {isa = PBXBuildFile; fileRef = 367E0EB82BD68D750072BA24 /* Ellibs_Catalog_Feed.json */; };
 		36833E4C2B5E937000D7B6B2 /* PasskeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36833E4B2B5E937000D7B6B2 /* PasskeyManager.swift */; };
 		36833E4D2B5EDBD500D7B6B2 /* PasskeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36833E4B2B5E937000D7B6B2 /* PasskeyManager.swift */; };
+		368576E62BCE7E8E009AA032 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 368576E52BCE7E8D009AA032 /* CloudKit.framework */; };
 		3688FADE2B67FEFE00A95558 /* EkirjastoLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3688FADD2B67FEFE00A95558 /* EkirjastoLoginViewController.swift */; };
 		3688FADF2B67FEFE00A95558 /* EkirjastoLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3688FADD2B67FEFE00A95558 /* EkirjastoLoginViewController.swift */; };
 		3688FAE12B67FEFE00A95558 /* EkirjastoLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3688FADD2B67FEFE00A95558 /* EkirjastoLoginViewController.swift */; };
@@ -678,6 +681,15 @@
 		36A07DBC2BB5B49C00583E0B /* PasskeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A07DBB2BB5B49C00583E0B /* PasskeyView.swift */; };
 		36A07DBD2BB5B6FD00583E0B /* PasskeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A07DBB2BB5B49C00583E0B /* PasskeyView.swift */; };
 		36A07DBE2BB5B6FD00583E0B /* PasskeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A07DBB2BB5B49C00583E0B /* PasskeyView.swift */; };
+		36A527DD2BDBC0EA009101F5 /* TestLoginUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A527DC2BDBC0EA009101F5 /* TestLoginUI.swift */; };
+		36A527DE2BDBC0EA009101F5 /* TestLoginUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A527DC2BDBC0EA009101F5 /* TestLoginUI.swift */; };
+		36A527DF2BDBC0EA009101F5 /* TestLoginUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A527DC2BDBC0EA009101F5 /* TestLoginUI.swift */; };
+		36A527E12BDBC4F9009101F5 /* TestLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A527E02BDBC4F9009101F5 /* TestLoginViewController.swift */; };
+		36A527E22BDBC4F9009101F5 /* TestLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A527E02BDBC4F9009101F5 /* TestLoginViewController.swift */; };
+		36A527E32BDBC4F9009101F5 /* TestLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A527E02BDBC4F9009101F5 /* TestLoginViewController.swift */; };
+		36A527E92BDBD399009101F5 /* Test_Catalog_Feed.json in Resources */ = {isa = PBXBuildFile; fileRef = 36A527E82BDBD399009101F5 /* Test_Catalog_Feed.json */; };
+		36A527EA2BDBD399009101F5 /* Test_Catalog_Feed.json in Resources */ = {isa = PBXBuildFile; fileRef = 36A527E82BDBD399009101F5 /* Test_Catalog_Feed.json */; };
+		36A527EB2BDBD399009101F5 /* Test_Catalog_Feed.json in Resources */ = {isa = PBXBuildFile; fileRef = 36A527E82BDBD399009101F5 /* Test_Catalog_Feed.json */; };
 		36BBC78E2B920EB300E8E426 /* EkirjastoUserLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363C62092B14EEA300858AA5 /* EkirjastoUserLoginView.swift */; };
 		36BBC78F2B920EB300E8E426 /* EkirjastoArrowDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3379F81E2A5D418400E9945F /* EkirjastoArrowDownButton.swift */; };
 		36BBC7902B920EB300E8E426 /* EkirjastoFacetFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3379F8102A5D3C4B00E9945F /* EkirjastoFacetFilterView.swift */; };
@@ -1745,14 +1757,18 @@
 		3379F81E2A5D418400E9945F /* EkirjastoArrowDownButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EkirjastoArrowDownButton.swift; sourceTree = "<group>"; };
 		3379F8212A5D792900E9945F /* EkirjastoLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EkirjastoLoginView.swift; sourceTree = "<group>"; };
 		337E63AB2A28A40800FF7886 /* TPPConfiguration+Ekirjasto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TPPConfiguration+Ekirjasto.swift"; sourceTree = "<group>"; };
-		337E63BA2A28AF3900FF7886 /* Ellibs_Catalog_Feed.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Ellibs_Catalog_Feed.json; path = Palace/EkirjastoConfig/Ellibs_Catalog_Feed.json; sourceTree = SOURCE_ROOT; };
 		33C1160E2AE7A914007CABEB /* EkirjastoSuomiIdentificationWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EkirjastoSuomiIdentificationWebView.swift; sourceTree = "<group>"; };
 		363C62092B14EEA300858AA5 /* EkirjastoUserLoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EkirjastoUserLoginView.swift; sourceTree = "<group>"; };
+		367E0EB82BD68D750072BA24 /* Ellibs_Catalog_Feed.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Ellibs_Catalog_Feed.json; sourceTree = "<group>"; };
 		36833E4B2B5E937000D7B6B2 /* PasskeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasskeyManager.swift; sourceTree = "<group>"; };
+		368576E52BCE7E8D009AA032 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		3688FADD2B67FEFE00A95558 /* EkirjastoLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EkirjastoLoginViewController.swift; sourceTree = "<group>"; };
 		368B2AA72BAD7B4D00A14D2E /* TPPSignInBusinessLogic+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TPPSignInBusinessLogic+Extensions.swift"; sourceTree = "<group>"; };
 		368EE7672BC5F82200663D37 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		36A07DBB2BB5B49C00583E0B /* PasskeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasskeyView.swift; sourceTree = "<group>"; };
+		36A527DC2BDBC0EA009101F5 /* TestLoginUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLoginUI.swift; sourceTree = "<group>"; };
+		36A527E02BDBC4F9009101F5 /* TestLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLoginViewController.swift; sourceTree = "<group>"; };
+		36A527E82BDBD399009101F5 /* Test_Catalog_Feed.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Test_Catalog_Feed.json; sourceTree = "<group>"; };
 		52545184217A76FF00BBC1B4 /* TPPUserNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPPUserNotifications.swift; sourceTree = "<group>"; };
 		52592BB721220A1100587288 /* TPPLocalization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPPLocalization.m; sourceTree = "<group>"; };
 		52592BBB21220A4F00587288 /* TPPLocalization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TPPLocalization.h; sourceTree = "<group>"; };
@@ -2179,6 +2195,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				368576E62BCE7E8E009AA032 /* CloudKit.framework in Frameworks */,
 				3312641F2A287F53006BA87D /* MediaPlayer.framework in Frameworks */,
 				331264212A287F53006BA87D /* PureLayout.xcframework in Frameworks */,
 				331264222A287F53006BA87D /* CoreMedia.framework in Frameworks */,
@@ -2454,8 +2471,9 @@
 		33266EFF2A404545003BC347 /* EkirjastoConfig */ = {
 			isa = PBXGroup;
 			children = (
+				36A527E82BDBD399009101F5 /* Test_Catalog_Feed.json */,
+				367E0EB82BD68D750072BA24 /* Ellibs_Catalog_Feed.json */,
 				3360FBA52A41B2DA00AC1905 /* Ekirjasto_Launch_Screen.storyboard */,
-				337E63BA2A28AF3900FF7886 /* Ellibs_Catalog_Feed.json */,
 				335223852A28BC2500CD514D /* Ekirjasto-Info.plist */,
 				33266F002A40456D003BC347 /* Images.xcassets */,
 				33266F022A40459E003BC347 /* Colors.xcassets */,
@@ -2892,6 +2910,8 @@
 				E59892EC28AC909000C44A85 /* AudiobookSampleToolbar.swift */,
 				E55E2FA729E7AFCD0093F916 /* AudiobookBookmarkBusinessLogic.swift */,
 				E5024A8C2A0E8761006BF653 /* TPPBookCellDelegate+Extensions.swift */,
+				36A527DC2BDBC0EA009101F5 /* TestLoginUI.swift */,
+				36A527E02BDBC4F9009101F5 /* TestLoginViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -3277,6 +3297,7 @@
 		A823D80F192BABA400B55DE2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				368576E52BCE7E8D009AA032 /* CloudKit.framework */,
 				E7BF790C296F5F7600137D9F /* FirebaseMessaging.xcframework */,
 				E7F287782956566800EEB1E0 /* R2LCPClient.xcframework */,
 				E708C18C27734EE300D34899 /* DifferenceKit.xcframework */,
@@ -4128,10 +4149,11 @@
 				3312644C2A287F53006BA87D /* readium-shared-js_all.js in Resources */,
 				368EE7682BC5F82200663D37 /* PrivacyInfo.xcprivacy in Resources */,
 				3312644D2A287F53006BA87D /* ReaderClientCert.sig in Resources */,
-				337E63BC2A28AFCE00FF7886 /* Ellibs_Catalog_Feed.json in Resources */,
+				367E0EBB2BD68D750072BA24 /* Ellibs_Catalog_Feed.json in Resources */,
 				3312644E2A287F53006BA87D /* Localizable.stringsdict in Resources */,
 				3312644F2A287F53006BA87D /* software-licenses.html in Resources */,
 				33266F012A40456D003BC347 /* Images.xcassets in Resources */,
+				36A527EB2BDBD399009101F5 /* Test_Catalog_Feed.json in Resources */,
 				331264512A287F53006BA87D /* Accounts.json in Resources */,
 				33266F042A40476B003BC347 /* Ekirjasto-Info.plist in Resources */,
 				331264522A287F53006BA87D /* InfoPlist.strings in Resources */,
@@ -4177,6 +4199,7 @@
 				73EB0B6625821DF4006BC997 /* sdk.css in Resources */,
 				E5BEF02A26BDAB3A00C2A50B /* OpenSans-SemiBold.ttf in Resources */,
 				73EB0B6725821DF4006BC997 /* OpenDyslexic3-Bold.ttf in Resources */,
+				367E0EBA2BD68D750072BA24 /* Ellibs_Catalog_Feed.json in Resources */,
 				73EB0B6925821DF4006BC997 /* readium-shared-js_all.js.map in Resources */,
 				3360FBA82A41B2E500AC1905 /* TPP_Launch_Screen.storyboard in Resources */,
 				73D8D27A25A68D3B00DF5F69 /* TPPReaderPositions.storyboard in Resources */,
@@ -4185,6 +4208,7 @@
 				73EB0B6B25821DF4006BC997 /* readium-shared-js_all.js.bundles.js in Resources */,
 				73EB0B6C25821DF4006BC997 /* OpenDyslexic3-Regular.ttf in Resources */,
 				73EB0B6D25821DF4006BC997 /* GoogleService-Info.plist in Resources */,
+				36A527EA2BDBD399009101F5 /* Test_Catalog_Feed.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4215,9 +4239,11 @@
 				7347F0272459E10900558D7F /* TPPReaderPositions.storyboard in Resources */,
 				11C113D219F842BE005B3F63 /* host_app_feedback.js in Resources */,
 				E5D3288A292C0D34008BFD01 /* txstrings.json in Resources */,
+				367E0EB92BD68D750072BA24 /* Ellibs_Catalog_Feed.json in Resources */,
 				5A6929241B95C8B400FB4C10 /* readium-shared-js_all.js.bundles.js in Resources */,
 				84B7A3481B84E8FE00584FB2 /* OpenDyslexic3-Regular.ttf in Resources */,
 				738EF2D02405E38800F388FB /* GoogleService-Info.plist in Resources */,
+				36A527E92BDBD399009101F5 /* Test_Catalog_Feed.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4531,6 +4557,7 @@
 				331263242A287F53006BA87D /* TPPProblemDocument.swift in Sources */,
 				33FCF7F72AC45941008E3B72 /* TokenRequest.swift in Sources */,
 				331263252A287F53006BA87D /* TPPPDFLocationView.swift in Sources */,
+				36A527DF2BDBC0EA009101F5 /* TestLoginUI.swift in Sources */,
 				331263262A287F53006BA87D /* DispatchQueue.swift in Sources */,
 				331263272A287F53006BA87D /* TPPAssociatedColors.swift in Sources */,
 				331263282A287F53006BA87D /* TPPReturnPromptHelper.swift in Sources */,
@@ -4579,6 +4606,7 @@
 				3312634F2A287F53006BA87D /* TPPRoundedButton.swift in Sources */,
 				331263502A287F53006BA87D /* TPPBookButtonsState.m in Sources */,
 				331263512A287F53006BA87D /* TPPPDFPage+serialization.swift in Sources */,
+				36A527E32BDBC4F9009101F5 /* TestLoginViewController.swift in Sources */,
 				331263522A287F53006BA87D /* DPLAAudiobooks.swift in Sources */,
 				33FCF7FB2AC45967008E3B72 /* LocationManager.swift in Sources */,
 				331263532A287F53006BA87D /* BookCell.swift in Sources */,
@@ -4810,6 +4838,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				36BBC7932B920EE100E8E426 /* PasskeyManager.swift in Sources */,
+				36A527E22BDBC4F9009101F5 /* TestLoginViewController.swift in Sources */,
 				36BBC78E2B920EB300E8E426 /* EkirjastoUserLoginView.swift in Sources */,
 				36BBC78F2B920EB300E8E426 /* EkirjastoArrowDownButton.swift in Sources */,
 				36BBC7902B920EB300E8E426 /* EkirjastoFacetFilterView.swift in Sources */,
@@ -4948,6 +4977,7 @@
 				21DCC39D27BE4AF900064B37 /* TPPReaderFont.swift in Sources */,
 				73EB0AA225821DF4006BC997 /* TPPBookNormalCell.m in Sources */,
 				73EB0AA425821DF4006BC997 /* TPPCatalogNavigationController.m in Sources */,
+				36A527DE2BDBC0EA009101F5 /* TestLoginUI.swift in Sources */,
 				E7E9A22E298C6A82006C5D9E /* Reachability.swift in Sources */,
 				73EB0AA525821DF4006BC997 /* TPPEntryPointView.swift in Sources */,
 				E78AE803291C1D8600884446 /* TPPBookRegistryRecord.swift in Sources */,
@@ -5370,6 +5400,8 @@
 				E731FF4C2864C934001DB7F2 /* TPPPDFPreviewGridCell.swift in Sources */,
 				085D31D71BE29E38007F7672 /* TPPProblemReportViewController.m in Sources */,
 				E523124D28641505007D1DB5 /* LoadingViewController.swift in Sources */,
+				36A527DD2BDBC0EA009101F5 /* TestLoginUI.swift in Sources */,
+				36A527E12BDBC4F9009101F5 /* TestLoginViewController.swift in Sources */,
 				E544C4F72A3C1E4A00B2DC9D /* Dictionary+Extensions.swift in Sources */,
 				219747FC26D9218400FA25DF /* TPPLCPClient.swift in Sources */,
 				21DDE32E25D31DB4002CBCE3 /* AdobeDRMFetcher.swift in Sources */,

@@ -277,7 +277,7 @@ didSelectFacetAtIndexPath:(NSIndexPath *const)indexPath
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
   if(self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular) {
-    return 0.0;
+    return 5.0;
   } {
     return 25.0;
   }
