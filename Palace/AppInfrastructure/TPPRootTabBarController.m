@@ -12,6 +12,7 @@
 @property (nonatomic) UIViewController *settingsViewController;
 @property (readwrite) TPPR2Owner *r2Owner;
 @property (nonatomic) NSUInteger previousIndex;
+@property (nonatomic) NSArray *viewControllerNames;
 
 @end
 
@@ -108,11 +109,20 @@
                              self.myBooksNavigationController,
                              self.holdsNavigationController,
                              self.settingsViewController];
+    self.viewControllerNames = @[@"catalogNavigationController",
+                                  @"magazineViewController",
+                                  @"myBooksNavigationController",
+                                  @"holdsNavigationController",
+                                  @"settingsViewController"];
   } else {
     self.viewControllers = @[self.catalogNavigationController,
                              self.magazineViewController,
                              self.myBooksNavigationController,
                              self.settingsViewController];
+    self.viewControllerNames = @[@"catalogNavigationController",
+                                  @"magazineViewController",
+                                  @"myBooksNavigationController",
+                                  @"settingsViewController"];
     // Change selected index if the "Reservations" or "Settings" tab is selected
     if (self.selectedIndex > 1) {
       self.selectedIndex -= 1;
@@ -124,6 +134,11 @@
 {
   [self.catalogNavigationController updateFeedAndRegistryOnAccountChange];
   self.selectedViewController = self.catalogNavigationController;
+}
+
+- (NSString*)selectedViewControllerName
+{
+  return self.viewControllerNames[self.selectedIndex];
 }
 
 #pragma mark - UITabBarControllerDelegate
