@@ -228,6 +228,11 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
     guard let loansUrl = AccountsManager.shared.currentAccount?.loansUrl else {
       return
     }
+    // dont allow empty token to sync
+    guard let _ = TPPUserAccount.sharedAccount().authToken else {
+      return
+    }
+
     if syncUrl == loansUrl {
       print("book registry skipped sync")
       return
@@ -235,6 +240,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
     state = .syncing
     syncUrl = loansUrl
     print("book registry syncUrl 1: \(syncUrl)")
+    
     TPPOPDSFeed.withURL(loansUrl, shouldResetCache: true) { feed, errorDocument in
       print("book registry withURL!")
       DispatchQueue.main.async {

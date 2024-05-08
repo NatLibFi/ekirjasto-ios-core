@@ -12,7 +12,8 @@ extension Account {
   
   func getProfileDocument(completion: @escaping (_ profileDocument: UserProfileDocument?) -> Void) {
     guard let profileHref = self.details?.userProfileUrl,
-          let profileUrl = URL(string: profileHref)
+          let profileUrl = URL(string: profileHref),
+          let _ = TPPUserAccount.sharedAccount().authToken
     else {
       // Can be a normal situation, no active user account
       completion(nil)

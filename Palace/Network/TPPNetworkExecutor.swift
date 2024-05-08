@@ -72,6 +72,51 @@ enum NYPLResult<SuccessInfo> {
 
 extension TPPNetworkExecutor: TPPRequestExecuting {
   
+  func handleUnauth( _ req: URLRequest, _ origResult: NYPLResult<Data>, completion: @escaping (_: NYPLResult<Data>) -> Void){
+    var updatedRequest = req
+    if let token = TPPUserAccount.sharedAccount().authToken {
+      self.authenticateWithToken(token) { status in
+        if status == 401 {
+          // User needs to login again, remove user's credentials.
+          TPPUserAccount.sharedAccount().removeAll()
+          
+          EkirjastoLoginViewController.show {
+            if let token = TPPUserAccount.sharedAccount().authToken {
+              updatedRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+              self.executeRequestWithToken(updatedRequest, completion: completion)
+            }else{
+              completion(origResult)
+            }
+
+          }
+        }else if status == 200 {
+
+          if let token = TPPUserAccount.sharedAccount().authToken {
+            updatedRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            self.executeRequestWithToken(updatedRequest, completion: completion)
+          }else{
+            completion(origResult)
+          }
+        }else {
+          completion(origResult)
+        }
+      }
+    }else{
+      
+      EkirjastoLoginViewController.show {
+        if let token = TPPUserAccount.sharedAccount().authToken {
+          updatedRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+          self.executeRequestWithToken(updatedRequest, completion: completion)
+        }else{
+          completion(origResult)
+        }
+
+      }
+      
+      //completion(origResult)
+    }
+
+  }
   
   @discardableResult
   func executeRequestWithToken(_ req: URLRequest, completion: @escaping (_: NYPLResult<Data>) -> Void) -> URLSessionDataTask {
@@ -85,32 +130,7 @@ extension TPPNetworkExecutor: TPPRequestExecuting {
           updatedRequest.hasRetried = true
           if let httpResponse = response as? HTTPURLResponse {
             if httpResponse.statusCode == 401 {
-              self.authenticateWithToken(TPPUserAccount.sharedAccount().authToken!) { status in
-                if status == 401 {
-                  // User needs to login again, remove user's credentials.
-                  TPPUserAccount.sharedAccount().removeAll()
-                  
-                  EkirjastoLoginViewController.show {
-                    if let token = TPPUserAccount.sharedAccount().authToken {
-                      updatedRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-                      self.executeRequestWithToken(updatedRequest, completion: completion)
-                    }else{
-                      completion(result)
-                    }
-
-                  }
-                }else if status == 200 {
-
-                  if let token = TPPUserAccount.sharedAccount().authToken {
-                    updatedRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-                    self.executeRequestWithToken(updatedRequest, completion: completion)
-                  }else{
-                    completion(result)
-                  }
-                }else {
-                  completion(result)
-                }
-              }
+              self.handleUnauth(updatedRequest, result, completion: completion)
             }else {
               completion(result)
             }
@@ -119,7 +139,20 @@ extension TPPNetworkExecutor: TPPRequestExecuting {
           }
         }
 
-      case .success(_, _):
+      case .success(_, let response):
+        
+        if let httpResponse = response as? HTTPURLResponse {
+          if httpResponse.statusCode == 401 {
+            if req.hasRetried {
+              completion(result)
+            }else{
+              var updatedRequest = req
+              updatedRequest.hasRetried = true
+              self.handleUnauth(updatedRequest, result, completion: completion)
+            }
+          }
+        }
+        
         completion(result)
       }
     }
@@ -191,12 +224,27 @@ extension TPPNetworkExecutor: TPPRequestExecuting {
             }else{
               completion(result)
             }
+          }else if case .success(_, let response) = result {
+            if let httpResponse = response as? HTTPURLResponse {
+              if httpResponse.statusCode == 401 && !req.hasRetried {
+                var updatedRequest = req
+                updatedRequest.hasRetried = true
+                print("successful unauth for: \(req.url?.absoluteString)")
+                self.handleUnauth(updatedRequest, result, completion: completion)
+              }else{
+                completion(result)
+              }
+            }else{
+              completion(result)
+            }
+            
           }else {
             completion(result)
           }
 
         })
       }
+      
     } else {
       handleTokenRefresh(for: req, completion: completion)
     }
