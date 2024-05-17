@@ -74,7 +74,7 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
         signature = cred.signature.toBase64URL()
         userHandle = String(decoding: cred.userID, as: UTF8.self)
       
-        print("cred clientDataJson: \(String(data:cred.rawClientDataJSON, encoding: .utf8))")
+        //print("cred clientDataJson: \(String(data:cred.rawClientDataJSON, encoding: .utf8))")
       }
     }
     var type = "public-key"
@@ -288,7 +288,7 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
     let dataJson = try! String(data: JSONEncoder().encode(data),encoding: .utf8)
     let content = "{ \"id\" : \"\(data.id)\" ,\"data\" : \(dataJson!) }"
     finishRequest.httpBody = Data(content.utf8)
-    print("login content: \(content)")
+    //print("login content: \(content)")
     URLSession.shared.dataTask(with: finishRequest) { _data,_response,_error in
       print("passkey finish error: \(_error.debugDescription))")
       print("passkey finish result: \(String(bytes: _data!.bytes, encoding: .utf8))")
@@ -317,16 +317,12 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
     let authorization = "Bearer \(token)"
     //startRequest.addValue("application/json", forHTTPHeaderField: "Accept")
     startRequest.addValue(authorization, forHTTPHeaderField: "authorization")
-    print("auth: \(authorization)")
     let content = "{ \"username\" : \"\(username)\" }"
     startRequest.httpBody = Data(content.utf8)
     
     URLSession.shared.dataTask(with: startRequest) { data, response, _error in
 
       let _resp = response as! HTTPURLResponse
-
-      print("passkey register start error: \(_error.debugDescription) \(_resp.statusCode)")
-      print("passkey register start result: \(String(bytes: data!.bytes, encoding: .utf8))")
 
       let startResponse = try? JSONDecoder().decode(RegisterStartResponse.self, from: data!)
 
@@ -354,20 +350,14 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
     finishRequest.addValue("application/json", forHTTPHeaderField: "content-type")
     finishRequest.addValue("application/json", forHTTPHeaderField: "accept")
     let authorization = "Bearer \(token)"
-    print("register finish url:\(finish!.href)")
     finishRequest.setValue(authorization, forHTTPHeaderField: "authorization")
     let dataJson = try! String(data: JSONEncoder().encode(data),encoding: .utf8)
     let content = "{ \"username\" : \"\(username)\" ,\"data\" : \(dataJson!) }"
-    print("content: \(content)")
     finishRequest.httpBody = Data(content.utf8)
-    print("token: \(token)")
-
+   
     URLSession.shared.dataTask(with: finishRequest) { _data,_response,_error in
 
       let _resp = _response as! HTTPURLResponse
-
-      print("passkey register finish error: \(_error.debugDescription) \(_resp.statusCode)")
-      print("passkey register finish result: \(String(bytes: _data!.bytes, encoding: .utf8))")
 
       if let data = _data {
         let tokenResponse = try? JSONDecoder().decode(TokenResponse.self, from: data)
