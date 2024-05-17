@@ -263,12 +263,21 @@ static const int kServerUpdateDelay = 15;
       AudiobookMetadata *const metadata = [[AudiobookMetadata alloc]
                                            initWithTitle:book.title
                                            authors:@[book.authors]];
+      
+      NSString *navBackTitle = NSLocalizedString(@"Back", nil);
+      NSString *selectedViewControllerName = [[TPPRootTabBarController sharedController] selectedViewControllerName];
+      if ([selectedViewControllerName  isEqual: @"catalogNavigationController"]) {
+        navBackTitle = NSLocalizedString(@"Browse Books", nil);
+      }
+      else if ([selectedViewControllerName  isEqual: @"myBooksNavigationController"]) {
+        navBackTitle = NSLocalizedString(@"My Books", nil);
+      }
+      
       id<AudiobookManager> const manager = [[DefaultAudiobookManager alloc]
                                             initWithMetadata:metadata
                                             audiobook:audiobook
+                                            navBackTitle:navBackTitle
                                             playbackTrackerDelegate:timeTracker];
-      
-      
       self.book = book;
       self.audiobookBookmarkBusinessLogic = [[AudiobookBookmarkBusinessLogic alloc] initWithBook:book];
 

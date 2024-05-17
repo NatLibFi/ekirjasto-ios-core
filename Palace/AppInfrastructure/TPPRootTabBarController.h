@@ -15,7 +15,7 @@
 @property (nonatomic, readonly) UIViewController *settingsViewController;
 
 - (void)showAndReloadCatalogViewController;
-
+- (NSString *)selectedViewControllerName;
 /// This method will present a view controller from the receiver, or from the
 /// controller currently being presented from the receiver, or from the
 /// controller being presented by that one, and so on, such that no duplicate
