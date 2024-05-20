@@ -116,7 +116,8 @@ class AudiobookBookmarkBusinessLogicTests: XCTestCase {
       reportURL: emptyUrl,
       timeTrackingURL: emptyUrl,
       contributors: [:],
-      bookDuration: nil
+      bookDuration: nil,
+      language: "eng"
     )
 
     mockRegistry = TPPBookRegistryMock()

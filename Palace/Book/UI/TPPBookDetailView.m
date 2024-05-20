@@ -60,6 +60,7 @@
 @property (nonatomic) UILabel *bookLanguageLabelKey;
 @property (nonatomic) UILabel *isbnLabelKey;
 @property (nonatomic) UILabel *translatorsLabelKey;
+@property (nonatomic) UILabel *illustratorsLabelKey;
 @property (nonatomic) UILabel *publishedLabelValue;
 @property (nonatomic) UILabel *publisherLabelValue;
 @property (nonatomic) UILabel *categoriesLabelValue;
@@ -69,7 +70,8 @@
 @property (nonatomic) UILabel *bookDurationLabelValue;
 @property (nonatomic) UILabel *bookLanguageLabelValue;
 @property (nonatomic) UILabel *isbnLabelValue;
-@property (nonatomic) UILabel *tranlatorsLabelValue;
+@property (nonatomic) UILabel *translatorsLabelValue;
+@property (nonatomic) UILabel *illustratorsLabelValue;
 
 @property (nonatomic) TPPBookDetailTableView *footerTableView;
 
@@ -112,10 +114,7 @@ static NSString *DetailHTMLTemplate = nil;
   self.scrollView.alwaysBounceVertical = YES;
   
   self.containerView = [[UIView alloc] init];
-  self.containerView.layoutMargins = UIEdgeInsetsMake(self.layoutMargins.top,
-                                                    self.layoutMargins.left+12,
-                                                    self.layoutMargins.bottom,
-                                                    self.layoutMargins.right+12);
+
   
   [self createHeaderLabels];
   [self createButtonsView];
@@ -154,7 +153,9 @@ static NSString *DetailHTMLTemplate = nil;
   //[self.containerView addSubview:self.distributorLabelKey];
   [self.containerView addSubview:self.bookFormatLabelKey];
   [self.containerView addSubview:self.isbnLabelKey];
+  [self.containerView addSubview:self.translatorsLabelKey];
   [self.containerView addSubview:self.narratorsLabelKey];
+  [self.containerView addSubview:self.illustratorsLabelKey];
 
   if (self.book.isAudiobook) {
     [self.containerView addSubview:self.bookDurationLabelKey];
@@ -167,7 +168,9 @@ static NSString *DetailHTMLTemplate = nil;
   //[self.containerView addSubview:self.distributorLabelValue];
   [self.containerView addSubview:self.bookFormatLabelValue];
   [self.containerView addSubview:self.isbnLabelValue];
+  [self.containerView addSubview:self.translatorsLabelValue];
   [self.containerView addSubview:self.narratorsLabelValue];
+  [self.containerView addSubview:self.illustratorsLabelValue];
   
   if (self.book.isAudiobook) {
     [self.containerView addSubview:self.bookDurationLabelValue];
@@ -187,6 +190,11 @@ static NSString *DetailHTMLTemplate = nil;
     [self.containerView addSubview:self.closeButton];
   }
 
+  self.containerView.layoutMargins = UIEdgeInsetsMake(self.layoutMargins.top,
+                                                    self.layoutMargins.left+12,
+                                                    self.layoutMargins.bottom,
+                                                    self.layoutMargins.right+12);
+  
   return self;
 }
 
@@ -383,13 +391,17 @@ static NSString *DetailHTMLTemplate = nil;
   NSString *const narratorsKeyString =
     self.book.narrators ? [NSString stringWithFormat:@"%@: ", NSLocalizedString(@"Narrators", nil)] : nil;
   
+  NSString *const translatorsKeyString = self.book.translators ? [NSString stringWithFormat:@"%@: ", NSLocalizedString(@"Translators", nil)] : nil;
+  
+  NSString *const illustratorsKeyString = self.book.illustrators ? [NSString stringWithFormat:@"%@: ", NSLocalizedString(@"Illustrators", nil)] : nil;
+  
   NSString *const bookDurationKeyString = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"Duration", nil)];
 
   NSString *const categoriesValueString = self.book.categories;
   NSString *const bookLanguageValueString = self.book.language;
   NSDateComponents* publishedComponents = self.book.publishedComponents;
   NSString *publishedValueString;
-
+  
   if(publishedComponents != nil && publishedComponents.day == 1 && publishedComponents.month == 1) {
     publishedValueString = [NSString stringWithFormat:@"%ld",  publishedComponents.year];
   }else{
@@ -405,6 +417,8 @@ static NSString *DetailHTMLTemplate = nil;
   }
   NSString *const isbnValueString = isbn;//self.book.identifier;
   NSString *const narratorsValueString = self.book.narrators;
+  NSString *const illustratorsValueString = self.book.illustrators;
+  NSString *const translatorsValueString = self.book.translators;
   
   if (!categoriesValueString && !publishedValueString && !publisherValueString && !self.book.distributor) {
     self.topFootnoteSeparater.hidden = YES;
@@ -419,6 +433,8 @@ static NSString *DetailHTMLTemplate = nil;
   self.bookFormatLabelKey = [self createFooterLabelWithString:bookFormatKeyString alignment:NSTextAlignmentRight];
   self.isbnLabelKey = [self createFooterLabelWithString:isbnKeyString alignment:NSTextAlignmentRight];
   self.narratorsLabelKey = [self createFooterLabelWithString:narratorsKeyString alignment:NSTextAlignmentRight];
+  self.illustratorsLabelKey = [self createFooterLabelWithString:illustratorsKeyString alignment:NSTextAlignmentRight];
+  self.translatorsLabelKey = [self createFooterLabelWithString:translatorsKeyString alignment:NSTextAlignmentRight];
   self.bookDurationLabelKey = [self createFooterLabelWithString:bookDurationKeyString alignment:NSTextAlignmentRight];
 
   self.bookLanguageLabelValue = [self createFooterLabelWithString:bookLanguageValueString alignment:NSTextAlignmentLeft];
@@ -431,6 +447,8 @@ static NSString *DetailHTMLTemplate = nil;
   self.bookFormatLabelValue = [self createFooterLabelWithString:bookFormatValueString alignment:NSTextAlignmentLeft];
   self.isbnLabelValue = [self createFooterLabelWithString:isbnValueString alignment:NSTextAlignmentLeft];
   self.narratorsLabelValue = [self createFooterLabelWithString:narratorsValueString alignment:NSTextAlignmentLeft];
+  self.translatorsLabelValue = [self createFooterLabelWithString:translatorsValueString alignment:NSTextAlignmentLeft];
+  self.illustratorsLabelValue = [self createFooterLabelWithString:illustratorsValueString alignment:NSTextAlignmentLeft];
   self.bookDurationLabelValue = [self createFooterLabelWithString:[self displayStringForDuration: self.book.bookDuration] alignment:NSTextAlignmentLeft];
 
   self.narratorsLabelValue.numberOfLines = 0;
@@ -595,17 +613,25 @@ static NSString *DetailHTMLTemplate = nil;
   [self.isbnLabelValue autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.bookFormatLabelValue];
   [self.isbnLabelValue autoPinEdge:ALEdgeLeading toEdge:ALEdgeTrailing ofView:self.isbnLabelKey withOffset:MainTextPaddingLeft];
 
+  [self.translatorsLabelValue autoPinEdgeToSuperviewMargin:ALEdgeTrailing relation:NSLayoutRelationGreaterThanOrEqual];
+  [self.translatorsLabelValue autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.isbnLabelValue];
+  [self.translatorsLabelValue autoPinEdge:ALEdgeLeading toEdge:ALEdgeTrailing ofView:self.translatorsLabelKey withOffset:MainTextPaddingLeft];
+  
   [self.narratorsLabelValue autoPinEdgeToSuperviewMargin:ALEdgeTrailing relation:NSLayoutRelationGreaterThanOrEqual];
-  [self.narratorsLabelValue autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.isbnLabelValue];
+  [self.narratorsLabelValue autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.translatorsLabelValue];
   [self.narratorsLabelValue autoPinEdge:ALEdgeLeading toEdge:ALEdgeTrailing ofView:self.narratorsLabelKey withOffset:MainTextPaddingLeft];
+  
+  [self.illustratorsLabelValue autoPinEdgeToSuperviewMargin:ALEdgeTrailing relation:NSLayoutRelationGreaterThanOrEqual];
+  [self.illustratorsLabelValue autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.narratorsLabelValue];
+  [self.illustratorsLabelValue autoPinEdge:ALEdgeLeading toEdge:ALEdgeTrailing ofView:self.illustratorsLabelKey withOffset:MainTextPaddingLeft];
 
   if (self.book.hasDuration) {
     [self.bookDurationLabelValue autoPinEdgeToSuperviewMargin:ALEdgeTrailing relation:NSLayoutRelationGreaterThanOrEqual];
-    [self.bookDurationLabelValue autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.narratorsLabelValue];
+    [self.bookDurationLabelValue autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.illustratorsLabelValue];
     [self.bookDurationLabelValue autoPinEdge:ALEdgeLeading toEdge:ALEdgeTrailing ofView:self.bookDurationLabelKey withOffset:MainTextPaddingLeft];
   }
 
-  [self.publishedLabelKey autoPinEdgeToSuperviewMargin:ALEdgeLeading];
+  //[self.publishedLabelKey autoPinEdgeToSuperviewMargin:ALEdgeLeading];
   [self.publishedLabelKey autoPinEdgeToSuperviewMargin:ALEdgeLeading];
   [self.publishedLabelKey autoPinEdge:ALEdgeTrailing toEdge:ALEdgeTrailing ofView:self.publisherLabelKey];
   [self.publishedLabelKey autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.publishedLabelValue];
@@ -641,14 +667,22 @@ static NSString *DetailHTMLTemplate = nil;
   [self.isbnLabelKey autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.isbnLabelValue];
   [self.isbnLabelKey setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
   
+  [self.translatorsLabelKey autoPinEdgeToSuperviewMargin:ALEdgeLeading];
+  [self.translatorsLabelKey autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.translatorsLabelValue];
+  [self.translatorsLabelKey setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+  
   [self.narratorsLabelKey autoPinEdgeToSuperviewMargin:ALEdgeLeading];
   [self.narratorsLabelKey autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.narratorsLabelValue];
   [self.narratorsLabelKey setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+  
+  [self.illustratorsLabelKey autoPinEdgeToSuperviewMargin:ALEdgeLeading];
+  [self.illustratorsLabelKey autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.illustratorsLabelValue];
+  [self.illustratorsLabelKey setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
 
   if (self.book.hasDuration) {
     [self.bookDurationLabelKey autoPinEdgeToSuperviewMargin:ALEdgeLeading];
     [self.bookDurationLabelKey autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.bookDurationLabelValue];
-    [self.bookDurationLabelKey autoPinEdge:ALEdgeTrailing toEdge:ALEdgeTrailing ofView:self.narratorsLabelKey];
+    [self.bookDurationLabelKey autoPinEdge:ALEdgeTrailing toEdge:ALEdgeTrailing ofView:self.illustratorsLabelKey];
     [self.bookDurationLabelKey setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
   }
   
@@ -673,11 +707,11 @@ static NSString *DetailHTMLTemplate = nil;
   if (self.book.hasDuration) {
     [self.bottomFootnoteSeparator autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.bookDurationLabelKey withOffset:VerticalPadding];
   } else {
-    [self.bottomFootnoteSeparator autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.narratorsLabelValue withOffset:VerticalPadding];
+    [self.bottomFootnoteSeparator autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.illustratorsLabelValue withOffset:VerticalPadding];
   }
   
   [self.footerTableView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(0, 10, 0, 0) excludingEdge:ALEdgeTop];
-  [self.footerTableView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.narratorsLabelValue withOffset:VerticalPadding];
+  [self.footerTableView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.illustratorsLabelValue withOffset:VerticalPadding];
 }
 
 #pragma mark NSObject
