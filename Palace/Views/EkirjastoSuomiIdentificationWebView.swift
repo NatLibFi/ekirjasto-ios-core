@@ -30,17 +30,10 @@ struct SuomiIdentificationWebView: UIViewRepresentable {
     }
     
     context.coordinator.authenticationDocument = authenticationDocument
-    let authentication = authenticationDocument?.authentication?.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})
-    let link = authentication?.links?.first(where: {$0.rel == "tunnistus_start"})
-    let start = link
+ 
 
-    print("suomi.fi start.href: \(start?.href)")
     uiView.navigationDelegate = context.coordinator
-    var request = URLRequest(url: URL(string: "\(start!.href)&state=app")!)
-    request.addValue("application/json", forHTTPHeaderField: "accept")
-    request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
-    
-    uiView.load(request)
+ 
     
   }
   
@@ -50,7 +43,14 @@ struct SuomiIdentificationWebView: UIViewRepresentable {
   func makeUIView(context: Context) -> WKWebView {
     let view = WKWebView()
     view.configuration.websiteDataStore = WKWebsiteDataStore.nonPersistent()
+    let authentication = authenticationDocument?.authentication?.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})
+    let link = authentication?.links?.first(where: {$0.rel == "tunnistus_start"})
+    let start = link
+    var request = URLRequest(url: URL(string: "\(start!.href)&state=app")!)
+    request.addValue("application/json", forHTTPHeaderField: "accept")
+    request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
     
+    view.load(request)
     return view
   }
   
@@ -61,7 +61,6 @@ struct SuomiIdentificationWebView: UIViewRepresentable {
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
       
-      print("suomi.fi response url: \(webView.url?.absoluteString)")
       
       if let url = webView.url {
         if url.absoluteString.contains("saml2acs") || url.absoluteString.contains("finish") {
@@ -85,7 +84,6 @@ struct SuomiIdentificationWebView: UIViewRepresentable {
               
             }
             
-            print("doc: \(jsonString)")
             self.closeWebView?()
           })
           

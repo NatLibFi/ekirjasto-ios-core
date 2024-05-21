@@ -65,6 +65,7 @@ let TimeTrackingURLURLKey: String = "time-tracking-url"
   @objc var contributors: [String: Any]?
   @objc var bookTokenLock: NSRecursiveLock
   @objc var bookDuration: String?
+  @objc var language: String?
 
   static let SimplifiedScheme = "http://librarysimplified.org/terms/genres/Simplified/"
   
@@ -104,7 +105,8 @@ let TimeTrackingURLURLKey: String = "time-tracking-url"
     reportURL: URL?,
     timeTrackingURL: URL?,
     contributors: [String: Any]?,
-    bookDuration: String?
+    bookDuration: String?,
+    language: String?
   ) {
     self.acquisitions = acquisitions
     self.bookAuthors = authors
@@ -132,6 +134,7 @@ let TimeTrackingURLURLKey: String = "time-tracking-url"
     self.contributors = contributors
     self.bookTokenLock = NSRecursiveLock()
     self.bookDuration = bookDuration
+    self.language = language
   }
   
   /// @brief Factory method to build a TPPBook object from an OPDS feed entry.
@@ -169,7 +172,7 @@ let TimeTrackingURLURLKey: String = "time-tracking-url"
         return
       }
     }
-
+    
     self.init(
       acquisitions: entry.acquisitions,
       authors: authors,
@@ -194,7 +197,8 @@ let TimeTrackingURLURLKey: String = "time-tracking-url"
       reportURL: report,
       timeTrackingURL: entry.timeTrackingLink?.href,
       contributors: entry.contributors,
-      bookDuration: entry.duration
+      bookDuration: entry.duration,
+      language: entry.language
     )
   }
   
@@ -383,7 +387,8 @@ let TimeTrackingURLURLKey: String = "time-tracking-url"
       reportURL: reportURL,
       timeTrackingURL: URL(string: dictionary[TimeTrackingURLURLKey] as? String ?? ""),
       contributors: nil,
-      bookDuration: nil
+      bookDuration: nil,
+      language: nil
     )
   }
 
@@ -412,7 +417,8 @@ let TimeTrackingURLURLKey: String = "time-tracking-url"
       reportURL: self.reportURL,
       timeTrackingURL: self.timeTrackingURL,
       contributors: book.contributors, 
-      bookDuration: book.bookDuration
+      bookDuration: book.bookDuration,
+      language: book.language
     )
   }
 
@@ -463,10 +469,25 @@ let TimeTrackingURLURLKey: String = "time-tracking-url"
     categoryStrings?.joined(separator: "; ")
   }
   
+  @objc var publishedComponents: DateComponents? {
+    if let published = self.published {
+      return Calendar.current.dateComponents([.day,.month,.year], from: published)
+    }
+    return nil
+  }
+  
   @objc var narrators: String? {
     (contributors?["nrt"] as? [String])?.joined(separator: "; ")
   }
 
+  @objc var translators: String? {
+    (contributors?["trl"] as? [String])?.joined(separator: "; ")
+  }
+  
+  @objc var illustrators: String? {
+    (contributors?["ill"] as? [String])?.joined(separator: "; ")
+  }
+  
   /// @discussion
   /// A compatibility method to allow the app to continue to function until the
   /// user interface and other components support handling multiple valid

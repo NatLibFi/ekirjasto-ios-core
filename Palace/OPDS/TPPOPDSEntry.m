@@ -33,6 +33,7 @@
 @property (nonatomic) NSDictionary<NSString *, NSArray<NSString *>*> *contributors;
 @property (nonatomic) TPPOPDSLink *timeTrackingLink;
 @property (nonatomic) NSString *duration;
+@property (nonatomic) NSString *language;
 
 @end
 
@@ -73,6 +74,11 @@
 
     self.authorStrings = authorStrings;
     self.authorLinks = [authorLinks copy];
+    
+    TPPXML *const languageXML = [entryXML firstChildWithName:@"language"];
+    if(languageXML){
+      self.language = languageXML.value;
+    }
   }
   
   // Contributors and their roles

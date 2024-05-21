@@ -30,6 +30,7 @@
 @property (nonatomic, readonly) NSDictionary<NSString *, NSArray<NSString *>*> *contributors;
 @property (nonatomic, readonly) TPPOPDSLink *timeTrackingLink;
 @property (nonatomic, readonly) NSString *duration;
+@property (nonatomic, readonly) NSString *language;
 
 + (id)new NS_UNAVAILABLE;
 - (id)init NS_UNAVAILABLE;
