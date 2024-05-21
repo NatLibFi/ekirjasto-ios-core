@@ -3,20 +3,20 @@
     {
       "links": [
         {
-          "href": "https://circulation-beta.ellibs.com/ellibs-test/groups/",
+          "href": "https://lib.e-kirjasto.fi/groups/",
           "type": "application/atom+xml;profile=opds-catalog;kind=acquisition",
           "rel": "http://opds-spec.org/catalog"
         },
         {
-          "href": "https://circulation-beta.ellibs.com/ellibs-test/groups/",
+          "href": "https://lib.e-kirjasto.fi/groups/",
           "rel": "start"
         },
         {
-          "href": "https://circulation-beta.ellibs.com/ellibs-test/groups/",
+          "href": "https://lib.e-kirjasto.fi/groups/",
           "rel": "self"
         },
         {
-          "href": "https://circulation-beta.ellibs.com/ellibs-test/authentication_document",
+          "href": "https://lib.e-kirjasto.fi/authentication_document",
           "type": "application/vnd.opds.authentication.v1.0+json"
         },
         {
@@ -25,32 +25,35 @@
           "rel": "alternate"
         },
         {
+          "href": "https://e-kirjasto.ewl.epress.fi/",
+          "rel": "digital_magazines"
+        },
+        {
             "href": "https://librarysimplified.org/licenses/",
             "type": "text/html",
             "rel": "license"
         },
         {
-          "href": "mailto:support@ellibs.com",
+          "href": "https://lib.e-kirjasto.fi/palaute",
           "rel": "help"
         }
       ],
       "metadata": {
-        "updated": "2023-02-27T17:51:51Z",
-        "description": "Ellibs testikokoelma",
-        "id": "urn:uuid:e1a01c16-04e7-4781-89fd-b442dd1be001",
-        "title": "Ellibs testikokoelma"
+        "updated": "2024-04-15T07:24:51Z",
+        "description": "E-kirjaston kokoelma",
+        "id": "urn:uuid:37015541-b542-4157-a687-3ca5ad47fdbe",
+        "title": "E-kirjaston kokoelma"
       }
     }
   ],
   "links": [
       {
-        "href": "http://admin.librarypilot.com/",
+        "href": "http://lib.e-kirjasto.fi/",
         "type": "application/opds+json",
         "rel": "self"
       }
   ],
   "metadata": {
-    "title": "Ellibs-Test",
-    "adobe_vendor_id": "NYPL"
+    "title": "E-kirjasto"
   }
 }

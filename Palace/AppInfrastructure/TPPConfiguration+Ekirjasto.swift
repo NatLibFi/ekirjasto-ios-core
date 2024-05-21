@@ -17,7 +17,7 @@ extension TPPConfiguration {
   
   
   private static let feedFileUrl = URL(fileURLWithPath:
-    Bundle.main.path(forResource: "Ellibs_Catalog_Feed",
+    Bundle.main.path(forResource: "Ekirjasto_Catalog_Feed",
                      ofType: "json")!)
   
   private static let testFeedFileUrl = URL(fileURLWithPath:
