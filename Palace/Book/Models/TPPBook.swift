@@ -172,6 +172,7 @@ let TimeTrackingURLURLKey: String = "time-tracking-url"
         return
       }
     }
+    
     self.init(
       acquisitions: entry.acquisitions,
       authors: authors,
@@ -479,6 +480,14 @@ let TimeTrackingURLURLKey: String = "time-tracking-url"
     (contributors?["nrt"] as? [String])?.joined(separator: "; ")
   }
 
+  @objc var translators: String? {
+    (contributors?["trl"] as? [String])?.joined(separator: "; ")
+  }
+  
+  @objc var illustrators: String? {
+    (contributors?["ill"] as? [String])?.joined(separator: "; ")
+  }
+  
   /// @discussion
   /// A compatibility method to allow the app to continue to function until the
   /// user interface and other components support handling multiple valid
