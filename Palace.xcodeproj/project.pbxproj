@@ -241,6 +241,7 @@
 		2DEF10BA201ECCEA0082843A /* TPPMyBooksSimplifiedBearerToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DEF10B9201ECCEA0082843A /* TPPMyBooksSimplifiedBearerToken.m */; };
 		2DF321831DC3B83500E1858F /* TPPAnnotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF321821DC3B83500E1858F /* TPPAnnotations.swift */; };
 		2DFAC8ED1CD8DDD1003D9EC0 /* TPPOPDSCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DFAC8EC1CD8DDD1003D9EC0 /* TPPOPDSCategory.m */; };
+		309262C42BFD57EB003CCA2F /* Ekirjasto_Catalog_Feed.json in Resources */ = {isa = PBXBuildFile; fileRef = 309262C32BFD57EB003CCA2F /* Ekirjasto_Catalog_Feed.json */; };
 		331262DD2A287F53006BA87D /* LibraryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A2299E240F3BEA006B9EAD /* LibraryService.swift */; };
 		331262DE2A287F53006BA87D /* TPPR2Owner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A2299A240F3B9B006B9EAD /* TPPR2Owner.swift */; };
 		331262DF2A287F53006BA87D /* TPPLibraryDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826CD2E24AA2801000F4030 /* TPPLibraryDescriptionCell.swift */; };
@@ -665,9 +666,6 @@
 		363C620C2B14F08C00858AA5 /* UserProfileDocument+Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75423242AFC381E008CB7EF /* UserProfileDocument+Links.swift */; };
 		3672BB9C2B14DFE400F320E8 /* PalaceAudiobookToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F9BABE2A8E6811001697DE /* PalaceAudiobookToolkit.framework */; };
 		3672BB9D2B14DFE400F320E8 /* PalaceAudiobookToolkit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E7F9BABE2A8E6811001697DE /* PalaceAudiobookToolkit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		367E0EB92BD68D750072BA24 /* Ellibs_Catalog_Feed.json in Resources */ = {isa = PBXBuildFile; fileRef = 367E0EB82BD68D750072BA24 /* Ellibs_Catalog_Feed.json */; };
-		367E0EBA2BD68D750072BA24 /* Ellibs_Catalog_Feed.json in Resources */ = {isa = PBXBuildFile; fileRef = 367E0EB82BD68D750072BA24 /* Ellibs_Catalog_Feed.json */; };
-		367E0EBB2BD68D750072BA24 /* Ellibs_Catalog_Feed.json in Resources */ = {isa = PBXBuildFile; fileRef = 367E0EB82BD68D750072BA24 /* Ellibs_Catalog_Feed.json */; };
 		36833E4C2B5E937000D7B6B2 /* PasskeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36833E4B2B5E937000D7B6B2 /* PasskeyManager.swift */; };
 		36833E4D2B5EDBD500D7B6B2 /* PasskeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36833E4B2B5E937000D7B6B2 /* PasskeyManager.swift */; };
 		368576E62BCE7E8E009AA032 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 368576E52BCE7E8D009AA032 /* CloudKit.framework */; };
@@ -1743,6 +1741,7 @@
 		2DF321821DC3B83500E1858F /* TPPAnnotations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPPAnnotations.swift; sourceTree = "<group>"; };
 		2DFAC8EB1CD8DDD1003D9EC0 /* TPPOPDSCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPPOPDSCategory.h; sourceTree = "<group>"; };
 		2DFAC8EC1CD8DDD1003D9EC0 /* TPPOPDSCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPPOPDSCategory.m; sourceTree = "<group>"; };
+		309262C32BFD57EB003CCA2F /* Ekirjasto_Catalog_Feed.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Ekirjasto_Catalog_Feed.json; sourceTree = "<group>"; };
 		3312646E2A287F53006BA87D /* Ekirjasto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ekirjasto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33266EF82A4036DC003BC347 /* UIFont+Ekirjasto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Ekirjasto.swift"; sourceTree = "<group>"; };
 		33266EFA2A4037B6003BC347 /* Asap-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Asap-Regular.ttf"; sourceTree = "<group>"; };
@@ -1759,7 +1758,6 @@
 		337E63AB2A28A40800FF7886 /* TPPConfiguration+Ekirjasto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TPPConfiguration+Ekirjasto.swift"; sourceTree = "<group>"; };
 		33C1160E2AE7A914007CABEB /* EkirjastoSuomiIdentificationWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EkirjastoSuomiIdentificationWebView.swift; sourceTree = "<group>"; };
 		363C62092B14EEA300858AA5 /* EkirjastoUserLoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EkirjastoUserLoginView.swift; sourceTree = "<group>"; };
-		367E0EB82BD68D750072BA24 /* Ellibs_Catalog_Feed.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Ellibs_Catalog_Feed.json; sourceTree = "<group>"; };
 		36833E4B2B5E937000D7B6B2 /* PasskeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasskeyManager.swift; sourceTree = "<group>"; };
 		368576E52BCE7E8D009AA032 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		3688FADD2B67FEFE00A95558 /* EkirjastoLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EkirjastoLoginViewController.swift; sourceTree = "<group>"; };
@@ -2472,8 +2470,8 @@
 			isa = PBXGroup;
 			children = (
 				36A527E82BDBD399009101F5 /* Test_Catalog_Feed.json */,
-				367E0EB82BD68D750072BA24 /* Ellibs_Catalog_Feed.json */,
 				3360FBA52A41B2DA00AC1905 /* Ekirjasto_Launch_Screen.storyboard */,
+				309262C32BFD57EB003CCA2F /* Ekirjasto_Catalog_Feed.json */,
 				335223852A28BC2500CD514D /* Ekirjasto-Info.plist */,
 				33266F002A40456D003BC347 /* Images.xcassets */,
 				33266F022A40459E003BC347 /* Colors.xcassets */,
@@ -3846,9 +3844,9 @@
 				3312641D2A287F53006BA87D /* Frameworks */,
 				331264462A287F53006BA87D /* Resources */,
 				331264652A287F53006BA87D /* Copy Frameworks (Carthage) */,
-				331264662A287F53006BA87D /* Crashlytics */,
 				331264672A287F53006BA87D /* Embed Frameworks */,
 				33FCF7E32AC457D6008E3B72 /* ShellScript */,
+				331264662A287F53006BA87D /* Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -4149,7 +4147,6 @@
 				3312644C2A287F53006BA87D /* readium-shared-js_all.js in Resources */,
 				368EE7682BC5F82200663D37 /* PrivacyInfo.xcprivacy in Resources */,
 				3312644D2A287F53006BA87D /* ReaderClientCert.sig in Resources */,
-				367E0EBB2BD68D750072BA24 /* Ellibs_Catalog_Feed.json in Resources */,
 				3312644E2A287F53006BA87D /* Localizable.stringsdict in Resources */,
 				3312644F2A287F53006BA87D /* software-licenses.html in Resources */,
 				33266F012A40456D003BC347 /* Images.xcassets in Resources */,
@@ -4171,6 +4168,7 @@
 				3312645F2A287F53006BA87D /* host_app_feedback.js in Resources */,
 				33372CFC2AC54B8A0001BE2F /* GoogleService-Info.plist in Resources */,
 				33266EFB2A4037B6003BC347 /* Asap-Regular.ttf in Resources */,
+				309262C42BFD57EB003CCA2F /* Ekirjasto_Catalog_Feed.json in Resources */,
 				331264612A287F53006BA87D /* txstrings.json in Resources */,
 				331264622A287F53006BA87D /* readium-shared-js_all.js.bundles.js in Resources */,
 				331264632A287F53006BA87D /* OpenDyslexic3-Regular.ttf in Resources */,
@@ -4199,7 +4197,6 @@
 				73EB0B6625821DF4006BC997 /* sdk.css in Resources */,
 				E5BEF02A26BDAB3A00C2A50B /* OpenSans-SemiBold.ttf in Resources */,
 				73EB0B6725821DF4006BC997 /* OpenDyslexic3-Bold.ttf in Resources */,
-				367E0EBA2BD68D750072BA24 /* Ellibs_Catalog_Feed.json in Resources */,
 				73EB0B6925821DF4006BC997 /* readium-shared-js_all.js.map in Resources */,
 				3360FBA82A41B2E500AC1905 /* TPP_Launch_Screen.storyboard in Resources */,
 				73D8D27A25A68D3B00DF5F69 /* TPPReaderPositions.storyboard in Resources */,
@@ -4239,7 +4236,6 @@
 				7347F0272459E10900558D7F /* TPPReaderPositions.storyboard in Resources */,
 				11C113D219F842BE005B3F63 /* host_app_feedback.js in Resources */,
 				E5D3288A292C0D34008BFD01 /* txstrings.json in Resources */,
-				367E0EB92BD68D750072BA24 /* Ellibs_Catalog_Feed.json in Resources */,
 				5A6929241B95C8B400FB4C10 /* readium-shared-js_all.js.bundles.js in Resources */,
 				84B7A3481B84E8FE00584FB2 /* OpenDyslexic3-Regular.ttf in Resources */,
 				738EF2D02405E38800F388FB /* GoogleService-Info.plist in Resources */,
@@ -5747,6 +5743,7 @@
 				);
 				INFOPLIST_FILE = "Palace/EkirjastoConfig/Ekirjasto-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "E-kirjasto";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5805,6 +5802,7 @@
 				);
 				INFOPLIST_FILE = "Palace/EkirjastoConfig/Ekirjasto-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "E-kirjasto";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
