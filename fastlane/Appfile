@@ -3,4 +3,6 @@
 # For more information about the Appfile, see:
 #     https://docs.fastlane.tools/advanced/#appfile
 
-team_id "LSUJCHYK8B"
+team_id "QA5XMCRV5M"
+app_identifier "fi.kansalliskirjasto.e-kirjasto"
+
