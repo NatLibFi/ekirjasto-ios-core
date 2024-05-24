@@ -19,6 +19,10 @@ import Foundation
 class EkirjastoLoginViewController : UIHostingController<EkirjastoLoginView>{
   
   private var navController: UINavigationController?
+  //put inside a mutex?
+  private static var isShowing = false
+  private static var savedHandlers: [(() -> Void)] = []
+  private static var showLock = NSLock()
   
   init(rootView: EkirjastoLoginView, navController: UINavigationController?) {
     self.navController = navController
@@ -54,11 +58,31 @@ class EkirjastoLoginViewController : UIHostingController<EkirjastoLoginView>{
     let vc = TPPRootTabBarController.shared()
     var loginView : EkirjastoLoginViewController?
     
+    showLock.lock()
+    if isShowing {
+      if let handler = dismissHandler {
+        savedHandlers.append(handler)
+      }
+      showLock.unlock()
+      return
+    }
     
+    isShowing = true
+    showLock.unlock()
     if Thread.isMainThread{
       loginView = makeSwiftUIView(dismissHandler: {
+        showLock.lock()
         loginView?.dismiss(animated: true)
+        
+        isShowing = false
         dismissHandler?()
+        if savedHandlers.count > 0 {
+          for var handler in savedHandlers {
+             handler()
+          }
+          savedHandlers.removeAll()
+        }
+        showLock.unlock()
       })
       if let nc = loginView?.getNavController() {
         nc.pushViewController(loginView!, animated: true)
@@ -69,8 +93,17 @@ class EkirjastoLoginViewController : UIHostingController<EkirjastoLoginView>{
     }else{
       DispatchSerialQueue.main.async {
         loginView = makeSwiftUIView(dismissHandler: {
+          showLock.lock()
           loginView?.dismiss(animated: true)
+          isShowing = false
           dismissHandler?()
+          if savedHandlers.count > 0 {
+            for var handler in savedHandlers {
+               handler()
+            }
+            savedHandlers.removeAll()
+          }
+          showLock.unlock()
         })
         if let nc = loginView?.getNavController() {
           nc.pushViewController(loginView!, animated: true)
