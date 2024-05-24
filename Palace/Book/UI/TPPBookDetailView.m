@@ -663,15 +663,17 @@ static NSString *DetailHTMLTemplate = nil;
   [self.bookFormatLabelKey setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
 
   [self.isbnLabelKey autoPinEdgeToSuperviewMargin:ALEdgeLeading];
-  [self.isbnLabelKey autoPinEdge:ALEdgeTrailing toEdge:ALEdgeTrailing ofView:self.narratorsLabelKey];
+  [self.isbnLabelKey autoPinEdge:ALEdgeTrailing toEdge:ALEdgeTrailing ofView:self.translatorsLabelKey];
   [self.isbnLabelKey autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.isbnLabelValue];
   [self.isbnLabelKey setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
   
   [self.translatorsLabelKey autoPinEdgeToSuperviewMargin:ALEdgeLeading];
+  [self.translatorsLabelKey autoPinEdge:ALEdgeTrailing toEdge:ALEdgeTrailing ofView:self.narratorsLabelKey];
   [self.translatorsLabelKey autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.translatorsLabelValue];
   [self.translatorsLabelKey setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
   
   [self.narratorsLabelKey autoPinEdgeToSuperviewMargin:ALEdgeLeading];
+  [self.narratorsLabelKey autoPinEdge:ALEdgeTrailing toEdge:ALEdgeTrailing ofView:self.illustratorsLabelKey];
   [self.narratorsLabelKey autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.narratorsLabelValue];
   [self.narratorsLabelKey setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
   
