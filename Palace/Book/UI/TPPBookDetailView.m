@@ -382,11 +382,11 @@ static NSString *DetailHTMLTemplate = nil;
       : NSLocalizedString(@"Categories", nil))]
   : nil;
 
-  NSString *const bookLanguageKeyString = NSLocalizedString(@"Language", "");
+  NSString *const bookLanguageKeyString = [NSString stringWithFormat:@"%@: ",NSLocalizedString(@"Language", "")];
   
-  NSString *const bookFormatKeyString = NSLocalizedString(@"Book format:", nil);
+  NSString *const bookFormatKeyString = [NSString stringWithFormat:@"%@: ",NSLocalizedString(@"Book format", nil)];
   
-  NSString *const isbnKeyString = NSLocalizedString(@"ISBN", nil);
+  NSString *const isbnKeyString = [NSString stringWithFormat:@"%@: ",NSLocalizedString(@"ISBN", nil)];
 
   NSString *const narratorsKeyString =
     self.book.narrators ? [NSString stringWithFormat:@"%@: ", NSLocalizedString(@"Narrators", nil)] : nil;
