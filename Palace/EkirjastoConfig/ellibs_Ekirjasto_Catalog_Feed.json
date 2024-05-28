@@ -3,20 +3,20 @@
     {
       "links": [
         {
-          "href": "https://lib-dev.e-kirjasto.fi/groups/",
+          "href": "https://circulation-beta.ellibs.com/groups/",
           "type": "application/atom+xml;profile=opds-catalog;kind=acquisition",
           "rel": "http://opds-spec.org/catalog"
         },
         {
-          "href": "https://lib-dev.e-kirjasto.fi/groups/",
+          "href": "https://circulation-beta.ellibs.com/groups/",
           "rel": "start"
         },
         {
-          "href": "https://lib-dev.e-kirjasto.fi/groups/",
+          "href": "https://circulation-beta.ellibs.com/groups/",
           "rel": "self"
         },
         {
-          "href": "https://lib-dev.e-kirjasto.fi/authentication_document",
+          "href": "https://circulation-beta.ellibs.com/authentication_document",
           "type": "application/vnd.opds.authentication.v1.0+json"
         },
         {
@@ -25,7 +25,7 @@
           "rel": "alternate"
         },
         {
-          "href": "https://e-kirjasto-playground.epaper.fi/",
+          "href": "https://https://e-kirjasto-playground.epaper.fi/",
           "rel": "digital_magazines"
         },
         {
@@ -34,21 +34,21 @@
             "rel": "license"
         },
         {
-          "href": "https://lib-dev.e-kirjasto.fi/palaute",
+          "href": "https://circulation-beta.ellibs.com/palaute",
           "rel": "help"
         }
       ],
       "metadata": {
         "updated": "2024-04-15T07:24:51Z",
         "description": "E-kirjaston kokoelma",
-        "id": "urn:uuid:28bed937-a16b-4d69-a9c8-4b2656333423",
+        "id": "urn:uuid:2fcb96c3-b639-4b12-ab50-4172a0410a07",
         "title": "E-kirjaston kokoelma"
       }
     }
   ],
   "links": [
       {
-        "href": "https://lib-dev.e-kirjasto.fi/",
+        "href": "https://circulation-beta.ellibs.com/",
         "type": "application/opds+json",
         "rel": "self"
       }

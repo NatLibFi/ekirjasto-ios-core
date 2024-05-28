@@ -6,9 +6,9 @@
 @interface TPPRootTabBarController () <UITabBarControllerDelegate>
 
 @property (nonatomic) TPPCatalogNavigationController *catalogNavigationController;
-@property (nonatomic) EkirjastoMagazineNavigationController *magazineViewController;
 @property (nonatomic) TPPMyBooksViewController *myBooksNavigationController;
 @property (nonatomic) TPPHoldsNavigationController *holdsNavigationController;
+@property (nonatomic) EkirjastoMagazineNavigationController *magazineViewController;
 @property (nonatomic) UIViewController *settingsViewController;
 @property (readwrite) TPPR2Owner *r2Owner;
 @property (nonatomic) NSUInteger previousIndex;
@@ -43,14 +43,14 @@
   self.delegate = self;
   
   self.catalogNavigationController = [[TPPCatalogNavigationController alloc] init];
-  self.magazineViewController = [
-    [EkirjastoMagazineNavigationController alloc] initWithRootViewController:
-      [[DigitalMagazineBrowserViewController alloc] init]
-  ];
   self.myBooksNavigationController = (TPPMyBooksViewController * ) [TPPMyBooksViewController makeSwiftUIViewWithDismissHandler:^{
     [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
   }];
   self.holdsNavigationController = [[TPPHoldsNavigationController alloc] init];
+  self.magazineViewController = [
+    [EkirjastoMagazineNavigationController alloc] initWithRootViewController:
+      [[DigitalMagazineBrowserViewController alloc] init]
+  ];
   self.settingsViewController =  [TPPSettingsViewController makeSwiftUIViewWithDismissHandler:^{
     [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
   }];
@@ -73,8 +73,8 @@
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-// Finland: interface orientation and auto rotate functionalities were moved to be 
-// handled programmatically, because the DigitalMagazineReaderViewController is allowed 
+// Finland: interface orientation and auto rotate functionalities were moved to be
+// handled programmatically, because the DigitalMagazineReaderViewController is allowed
 // to rotate with all orientations even on iPhone device.
 - (BOOL)shouldAutorotate {
   if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
@@ -83,8 +83,8 @@
   return YES;
 }
 
-// Finland: interface orientation and auto rotate functionalities were moved to be 
-// handled programmatically, because the DigitalMagazineReaderViewController is allowed 
+// Finland: interface orientation and auto rotate functionalities were moved to be
+// handled programmatically, because the DigitalMagazineReaderViewController is allowed
 // to rotate with all orientations even on iPhone device.
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
   if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
@@ -105,23 +105,23 @@
   Account *const currentAccount = [AccountsManager shared].currentAccount;
   if (currentAccount.details.supportsReservations) {
     self.viewControllers = @[self.catalogNavigationController,
-                             self.magazineViewController,
                              self.myBooksNavigationController,
                              self.holdsNavigationController,
+                             self.magazineViewController,
                              self.settingsViewController];
     self.viewControllerNames = @[@"catalogNavigationController",
-                                  @"magazineViewController",
                                   @"myBooksNavigationController",
                                   @"holdsNavigationController",
+                                  @"magazineViewController",
                                   @"settingsViewController"];
   } else {
     self.viewControllers = @[self.catalogNavigationController,
-                             self.magazineViewController,
                              self.myBooksNavigationController,
+                             self.magazineViewController,
                              self.settingsViewController];
     self.viewControllerNames = @[@"catalogNavigationController",
-                                  @"magazineViewController",
                                   @"myBooksNavigationController",
+                                  @"magazineViewController",
                                   @"settingsViewController"];
     // Change selected index if the "Reservations" or "Settings" tab is selected
     if (self.selectedIndex > 1) {

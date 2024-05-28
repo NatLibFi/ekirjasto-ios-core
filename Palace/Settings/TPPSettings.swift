@@ -37,6 +37,9 @@ import Foundation
   static private let enterLCPPassphraseManually = "TPPSettingsEnterLCPPassphraseManually"
   static let showDeveloperSettingsKey = "showDeveloperSettings"
   
+  // When the test login flow is active, the welcome screen whould not be opened on top of it
+  var testLoginFlowActive = false
+  
   // Set to nil (the default) if no custom feed should be used.
   var customMainFeedURL: URL? {
     get {

@@ -3,20 +3,20 @@
     {
       "links": [
         {
-          "href": "https://lib-dev.e-kirjasto.fi/groups/",
+          "href": "https://lib-beta.e-kirjasto.fi/groups/",
           "type": "application/atom+xml;profile=opds-catalog;kind=acquisition",
           "rel": "http://opds-spec.org/catalog"
         },
         {
-          "href": "https://lib-dev.e-kirjasto.fi/groups/",
+          "href": "https://lib-beta.e-kirjasto.fi/groups/",
           "rel": "start"
         },
         {
-          "href": "https://lib-dev.e-kirjasto.fi/groups/",
+          "href": "https://lib-beta.e-kirjasto.fi/groups/",
           "rel": "self"
         },
         {
-          "href": "https://lib-dev.e-kirjasto.fi/authentication_document",
+          "href": "https://lib-beta.e-kirjasto.fi/authentication_document",
           "type": "application/vnd.opds.authentication.v1.0+json"
         },
         {
@@ -25,7 +25,7 @@
           "rel": "alternate"
         },
         {
-          "href": "https://e-kirjasto-playground.epaper.fi/",
+          "href": "https://https://e-kirjasto.ewl.epress.fi/",
           "rel": "digital_magazines"
         },
         {
@@ -34,26 +34,26 @@
             "rel": "license"
         },
         {
-          "href": "https://lib-dev.e-kirjasto.fi/palaute",
+          "href": "https://lib-beta.e-kirjasto.fi/palaute",
           "rel": "help"
         }
       ],
       "metadata": {
         "updated": "2024-04-15T07:24:51Z",
-        "description": "E-kirjaston kokoelma",
-        "id": "urn:uuid:28bed937-a16b-4d69-a9c8-4b2656333423",
-        "title": "E-kirjaston kokoelma"
+        "description": "E-kirjaston testikokoelma",
+        "id": "urn:uuid:37015541-b542-4157-a687-3ca5ad47fdbe",
+        "title": "E-kirjaston testikokoelma"
       }
     }
   ],
   "links": [
       {
-        "href": "https://lib-dev.e-kirjasto.fi/",
+        "href": "https://lib-beta.e-kirjasto.fi/",
         "type": "application/opds+json",
         "rel": "self"
       }
   ],
   "metadata": {
-    "title": "E-kirjasto"
+    "title": "E-kirjasto Test"
   }
 }

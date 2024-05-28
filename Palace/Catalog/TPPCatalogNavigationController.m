@@ -195,6 +195,11 @@
 
   TPPSettings *settings = [TPPSettings sharedSettings];
   
+  if (settings.testLoginFlowActive) {
+    NSLog(@"Test login flow is active, not showing welcome screen");
+    return;
+  }
+  
   if (!settings.userHasSeenWelcomeScreen  || TPPConfiguration.registryChanged) {
     Account *currentAccount = [[AccountsManager sharedInstance] currentAccount];
 
