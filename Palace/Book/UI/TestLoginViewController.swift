@@ -3,7 +3,7 @@
 //  Palace
 //
 //  Created by Joni Salmela on 26.4.2024.
-//  Copyright © 2024 The Palace Project. All rights reserved.
+//  Copyright © 2024 Kansalliskirjasto. All rights reserved.
 //
 
 import UIKit

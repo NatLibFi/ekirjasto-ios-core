@@ -63,14 +63,22 @@ class DLNavigator {
   }
   
   private func testLogin(){
+    Log.debug(#function, "Test login flow is active")
+    TPPSettings.shared.testLoginFlowActive = true
     TestLoginViewController.show { success in
       TPPConfiguration.useTestEnv = success
+      Log.debug(#function, "Test login flow is no longer active; showing welcome screen again")
+      TPPSettings.shared.testLoginFlowActive = false
+      TPPSettings.shared.userHasSeenWelcomeScreen = false
       
       TPPSignInBusinessLogic.getShared { shared in
         shared?.performLogOut()
         AccountsManager.shared.reset()
-        AccountsManager.shared.loadCatalogs { Bool in
-          //show error if failed?
+        AccountsManager.shared.loadCatalogs { catalogLoadSuccess in
+          if !catalogLoadSuccess {
+            // TODO: Maybe show an error in the UI? Then again, this is just the test login, so...
+            Log.error(#function, "Error loading catalogs")
+          }
         }
       }
       
