@@ -291,6 +291,7 @@ struct TPPSettingsView: View {
         accessibilityRow
         privacyRow
         softwareLicenseRow
+        faqRow
       }
   }
 
@@ -331,6 +332,19 @@ struct TPPSettingsView: View {
       .navigationBarTitle(Text(DisplayStrings.accessibility))
 
     row(title: DisplayStrings.accessibility, index: 4, selection: self.$selectedView, destination: wrapper.anyView())
+  }
+
+  @ViewBuilder private var faqRow: some View {
+    let viewController = RemoteHTMLViewController(
+      URL: URL(string: TPPSettings.TPPFAQURLString)!,
+      title: Strings.Settings.faq,
+      failureMessage: Strings.Error.loadFailedError
+    )
+    
+    let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
+      .navigationBarTitle(Text(DisplayStrings.faq))
+
+    row(title: DisplayStrings.faq, index: 5, selection: self.$selectedView, destination: wrapper.anyView())
   }
 
 
