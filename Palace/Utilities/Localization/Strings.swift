@@ -121,6 +121,7 @@ struct Strings {
     static let continueWithoutSigning = NSLocalizedString("Continue without signing in",comment:"")
     static let signOut = NSLocalizedString("Sign out", comment: "")
     static let loginFooterUserAgreementText = NSLocalizedString("By signing in, you agree the End User License Agreement", comment: "")
+    static let faq = NSLocalizedString("FAQ", comment: "")
     
   }
   

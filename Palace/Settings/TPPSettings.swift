@@ -178,6 +178,7 @@ func feedbackURL() -> String {
   // TODO: set the feedback url language parameter
   static let TPPFeedbackURLString = feedbackURL()
   static let TPPAccessibilityURLString = "https://www.kansalliskirjasto.fi/fi/e-kirjasto/e-kirjaston-saavutettavuusseloste"
+  static let TPPFAQURLString = "https://www.kansalliskirjasto.fi/fi/e-kirjasto/e-kirjaston-usein-kysytyt-kysymykset"
 
   static private let customMainFeedURLKey = "NYPLSettingsCustomMainFeedURL"
   static private let accountMainFeedURLKey = "NYPLSettingsAccountMainFeedURL"
