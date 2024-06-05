@@ -1,1 +1,3257 @@
-{"fi":{"If you sign out without enabling Sync, your books and any saved bookmarks will be removed.":{"string":"Jos kirjaudut ulos ottamatta synkronointia käyttöön, kirjasi ja tallennetut kirjanmerkkisi poistetaan."},"day_suffix_long":{"string":"{???, plural, one {1 päivä} other {%d päivää}}"},"year_suffix_short":{"string":"{???, plural, one {1 v} other {%d v}}"},"The page could not load due to a connection error.":{"string":"Sivua ei voitu ladata yhteysvirheen vuoksi."},"Remove Reservation":{"string":"Poista varaus"},"Categories":{"string":"Luokat"},"View sample for %@":{"string":"Katso näyte kohteesta %@"},"%@ version %@ (%@)":{"string":"%1$@ versio %2$@ (%3$@)"},"You must enable camera access for this application in order to sign up for a library card.":{"string":"Sinun on sallittava kameran käyttö tässä sovelluksessa, jotta voit rekisteröityä kirjastokortin käyttäjäksi."},"%d minutes and %d seconds":{"string":"%1$d minuuttia ja %2$d sekuntia"},"Testing":{"string":"Testaus"},"Author":{"string":"Tekijä"},"Download":{"string":"Lataa"},"Would you like to return it?":{"string":"Haluatko palauttaa sen?"},"End of Chapter":{"string":"Luvun loppu"},"Salasana unohtunut?":{"string":"Salasana unohtunut?"},"ePub":{"string":"ePub"},"month_suffix_long":{"string":"{???, plural, one {1 kuukausi} other {%d kuukautta}}"},"Bookmark added":{"string":"Kirjanmerkki lisättiin"},"The page could not load due to a conection error.":{"string":"Sivua ei voitu ladata yhteysvirheen vuoksi"},"%@%":{"string":"%1$@%2$"},"Are you sure you want ot remove \"%@\" from your reservations? You will no longer be in line for this book.":{"string":"Haluatko varmasti poistaa teoksen %@ varauksistasi? Sen jälkeen et enää jonota tätä kirjaa."},"Downloading: %@%%":{"string":"Ladataan: %@%%"},"Listen":{"string":"Kuuntele"},"You have disabled location services for this app.":{"string":"Olet poistanut sijaintipalvelut käytöstä tämän sovelluksen kohdalla."},"Reserve":{"string":"Varaa"},"Thank You":{"string":"Kiitos"},"Reload":{"string":"Lataa uudelleen"},"Find Your Library":{"string":"Etsi kirjastosi"},"Unable to load PDF file":{"string":"PDF-tiedostoa ei voitu ladata"},"No email account is set for this device.":{"string":"Tälle laitteelle ei ole määritetty sähköpostitiliä."},"Download Error":{"string":"Latausvirhe"},"An error occurred during the authentication process":{"string":"Todennusprosessin aikana tapahtui virhe"},"Reached the end of the results.":{"string":"Päästiin tulosten loppuun."},"Under 13":{"string":"Alle 13"},"Reject":{"string":"Hylkää"},"Rewind %d seconds":{"string":"Kelaa taaksepäin %d sekuntia"},"Sync Listening Position":{"string":"Synkronoi kuuntelukohta"},"Please enter your birth year":{"string":"Anna syntymävuotesi"},"Your bookmarks and reading positions are in the process of being saved to the server. Would you like to stop that and continue logging out?":{"string":"Kirjanmerkkejäsi ja lukukohtiasi tallennetaan parhaillaan palvelimelle. Haluatko keskeyttää sen ja jatkaa uloskirjautumista?"},"%d hours and %d minutes":{"string":"%1$d tuntia ja %2$d minuuttia"},"%d hours and %d minute":{"string":"%1$d tuntia ja %2$d minuutti"},"My Books":{"string":"Omat kirjat"},"Signing out":{"string":"Kirjaudutaan ulos"},"Holds %@":{"string":"Pitää %@"},"Save the current location bookmark for later listening.":{"string":"Tallenna tämänhetkinen sijainti kirjanmerkiksi myöhempää kuuntelua varten."},"Sans font":{"string":"Sans-fontti"},"1.0× (Normal)":{"string":"1.0× (normaali)"},"Libraries":{"string":"Kirjastot"},"More...":{"string":"Lisää..."},"If another device is available, send the audio over Bluetooth or Airplay. Otherwise do nothing.":{"string":"Jos toinen laite on käytettävissä, lähetä ääni Bluetoothin tai Airplayn kautta. Muussa tapauksessa älä tee mitään."},"13 or Older":{"string":"13 tai vanhempi"},"Verifying":{"string":"Vahvistetaan"},"Create Card":{"string":"Luo kortti"},"%02d min remaining":{"string":"%02d min jäljellä"},"\nYou are %ld in line for %ld copies.":{"string":"\nOlet sijalla %1$ld jonossa %2$ld teoksen osalta."},"30 Minutes":{"string":"30 minuuttia"},"AccessibilitySwitchLibrary":{"string":"AccessibilitySwitchLibrary"},"Downloading":{"string":"Ladataan"},"60 Minutes":{"string":"60 minuuttia"},"Unable to load the web page at this time.":{"string":"Verkkosivua ei voida ladata tällä hetkellä."},"An unknown error occurred. Please check your connection or try again later.":{"string":"Tapahtui tuntematon virhe. Tarkista internetyhteys tai yritä myöhemmin uudelleen."},"A bookmark has already been saved at this location.":{"string":"Tähän kohtaan on jo tallennettu kirjanmerkki."},"This book is available to borrow.":{"string":"Tämän kirjan voi lainata."},"Login Failed":{"string":"Sisäänkirjautuminen epäonnistui"},"Are you sure you want to return \"%@\"?":{"string":"Haluatko varmasti palauttaa teoksen %@?"},"Opens %@ for reading":{"string":"Avaa teoksen %@ lukemista varten"},"OK":{"string":"OK"},"Error Loading Library":{"string":"Virhe kirjaston lataamisessa"},"Software Licenses":{"string":"Ohjelmistolisenssit"},"Sync Reading Position":{"string":"Synkronoi lukukohta"},"More":{"string":"Lisää"},"Hide Barcode":{"string":"Piilota viivakoodi"},"Do you want to move to the page on which you left off?":{"string":"Haluatko siirtyä sivulle, jolle jäit?"},"Add Bookmark":{"string":"Lisää kirjanmerkki"},"Audiobook":{"string":"Äänikirja"},"There was a problem contacting the server.\nPlease make sure you are connected to the internet, or try again later.":{"string":"Yhteyden muodostamisessa palvelimeen oli ongelma.\nVarmista, että internetyhteytesi toimii, tai yritä myöhemmin uudelleen."},"Resume":{"string":"Jatka"},"BrightnessSlider":{"string":"BrightnessSlider"},"Select a chapter or track from a list.":{"string":"Valitse luku tai kappale listalta."},"GCDAsyncSocketReadMaxedOutError":{"string":"Lukutoiminto saavutti asetetun enimmäispituuden"},"Are you sure you want to remove \"%@\" from your reservations? You will no longer be in line for this book.":{"string":"Haluatko varmasti poistaa teoksen %@ varauksistasi? Sen jälkeen et enää jonota tätä kirjaa."},"Remove Bookmark":{"string":"Poista kirjanmerkki"},"Privacy Policy":{"string":"Tietosuojakäytäntö"},"Rekisteröidy palveluun":{"string":"Rekisteröidy palveluun"},"%d hour and %d minutes":{"string":"%1$d tunti ja %2$d minuuttia"},"%@ through chapter":{"string":"%@ luvusta"},"DecreaseFontSize":{"string":"DecreaseFontSize"},"1.0×":{"string":"1.0×"},"It will expire in %@.":{"string":"Se vanhenee seuraavan ajan kuluttua: %@."},"%02dmin":{"string":"%02dmin"},"Please wait a moment before switching library accounts":{"string":"Odota hetki ennen kuin vaihdat kirjastotiliä"},"PIN":{"string":"PIN"},"An error was encountered while trying to open this book.":{"string":"Kirjaa avattaessa tapahtui virhe."},"week_suffix_long":{"string":"{???, plural, one {1 viikko} other {%d viikkoa}}"},"Please contact %@ to report an issue.":{"string":"Ilmoita ongelmasta ottamalla yhteyttä %@."},"One and one quarter faster than normal speed.":{"string":"Yksi ja yksi neljäsosa normaalia nopeutta nopeammin."},"Currently Playing: %@":{"string":"Toistetaan parhaillaan: %@"},"Select Year":{"string":"Valitse vuosi"},"Error extracting encrypted PDF file":{"string":"Virhe salatun PDF-tiedoston purkamisessa"},"By signing in, you agree to the End User License Agreement.":{"string":"Kirjautumalla sisään hyväksyt loppukäyttäjän lisenssisopimuksen."},"Open dyslexic font":{"string":"Open dyslexic -fontti"},"Invalid Credentials":{"string":"Virheelliset kirjautumistiedot"},"Publisher":{"string":"Kustantaja"},"Stay":{"string":"Pysy"},"day_suffix_short":{"string":"{???, plural, one {1 pv} other {%d pv}}"},"Next":{"string":"Seuraava"},"Read":{"string":"Lue"},"Deletes %@":{"string":"Poistaa %@"},"%@ played. %@ remaining.":{"string":"%1$@ toistettu. %2$@ jäljellä."},"Sleep Timer":{"string":"Uniajastin"},"Failed to get current location. Please try again.":{"string":"Tämänhetkisen sijainnin hakeminen epäonnistui. Yritä uudelleen."},"Continue":{"string":"Jatka"},"1.50×":{"string":"1.50×"},"The item you are trying to open is not currently supported.":{"string":"Kohdetta, jota yrität avata, ei tueta tällä hetkellä."},"Contents":{"string":"Sisältö"},"Sample":{"string":"Näyte"},"About":{"string":"Tietoja"},"%d hours, %d minutes and %d seconds":{"string":"%1$d tuntia, %2$d minuuttia ja %3$d sekuntia"},"Do you want to move to the time on which you left off?":{"string":"Haluatko siirtyä kohtaan, johon jäit?"},"Playback Destination":{"string":"Toiston kohde"},"Sort By:":{"string":"Lajitteluperuste:"},"sec":{"string":"s"},"Barcode or Username":{"string":"Viivakoodi tai käyttäjänimi"},"Page %d of ":{"string":"Sivu %d\/ "},"Show Barcode":{"string":"Näytä viivakoodi"},"%@ (file %@ of %d)":{"string":"%1$@ (tiedosto %2$@\/%3$d)"},"Open eBooks provides free books to the children who need them the most.\n\nThe collection includes thousands of popular and award-winning titles as well as hundreds of public domain works.":{"string":"Open eBooks tarjoaa ilmaisia kirjoja niitä eniten tarvitseville lapsille.\n\nKokoelmaan kuuluu tuhansia suosittuja ja palkittuja julkaisuja sekä satoja tekijänoikeuksista vapaita teoksia."},"<>":{"string":"<>"},"%d minutes":{"string":"%d minuuttia"},"%02d hr %02 dmin":{"string":"%1$d h %2$d min"},"There are no bookmarks for this book.":{"string":"Tässä kirjassa ei ole kirjanmerkkejä."},"User Agreement":{"string":"Käyttäjäsopimus"},"GCDAsyncSocketWriteTimeoutError":{"string":"Kirjoitustoiminto aikakatkaistiin"},"Sign In Error":{"string":"Kirjautumisvirhe"},"Report an Issue":{"string":"Ilmoita ongelmasta"},"%02d:%02d:%02d":{"string":"%1$d:%2$d:%3$d"},"The book you were trying to open is invalid.":{"string":"Kirja, jonka yritit avata, on virheellinen."},"GCDAsyncSocketConnectTimeoutError":{"string":"Yritys muodostaa yhteys isäntään aikakatkaistiin"},"%02d:%02d":{"string":"%1$d:%2$d"},"%@ %@":{"string":"%1$@ %2$@"},"Search My Books":{"string":"Hae Omista kirjoista"},"Puuttuvatko tunnukset?":{"string":"Puuttuvatko tunnukset?"},"About App":{"string":"Tietoja sovelluksesta"},"Title":{"string":"Nimi"},"Error":{"string":"Virhe"},"Settings":{"string":"Asetukset"},"month_suffix_short":{"string":"{???, plural, one {1 kk} other {%d kk}}"},"A Problem Has Occurred":{"string":"Ilmeni ongelma"},"%d second":{"string":"%d sekunti"},"If you sign out, your books and any saved bookmarks will be removed.":{"string":"Jos kirjaudut ulos, kirjasi ja tallennetut kirjanmerkkisi poistetaan."},"AVAILABLE FOR CHECKOUT":{"string":"LAINATTAVISSA"},"Authenticate to reveal your PIN.":{"string":"Tunnistaudu PIN-koodisi selvittämiseksi."},"Play Sample":{"string":"Toista näyte"},"Normal speed.":{"string":"Normaali nopeus."},"Requesting":{"string":"Pyydetään"},"Connection Failed":{"string":"Yhteyden muodostaminen epäonnistui"},"Sign out":{"string":"Kirjaudu ulos"},"Submit":{"string":"Lähetä"},"Done":{"string":"Valmis"},"More %@ books":{"string":"Lisää %@ kirjoja"},"You have already checked out this loan. You may need to refresh your My Books list to download the title.":{"string":"Olet jo lainannut tämän teoksen. Sinun on ehkä päivitettävä Omat kirjat -listasi, jotta voit ladata teoksen."},"IncreaseFontSize":{"string":"IncreaseFontSize"},"This URL cannot be found. Please close the app entirely and reload it. If the problem persists, please contact your library's Help Desk.":{"string":"Tätä URL-osoitetta ei löydy. Sulje sovellus kokonaan ja lataa se uudelleen. Jos ongelma jatkuu, ota yhteyttä kirjastosi tukipalveluun."},"There are no results":{"string":"Ei hakutuloksia"},"(dateType.rawValue)_suffix_short":{"string":"(dateType.rawValue)_suffix_short"},"Bookmarks":{"string":"Kirjanmerkit"},"All licenses of this book are currently checked out.":{"string":"Kaikki tämän kirjan lisenssit on tällä hetkellä lainattu."},"Advanced":{"string":"Edistynyt"},"Remove":{"string":"Poista"},"%02d hr, %02d min remaining":{"string":"%1$d h, %2$d min jäljellä"},"Welcome to Open eBooks":{"string":"Tervetuloa Open eBooksiin"},"Error Changing Sync Setting":{"string":"Virhe synkronointiasetuksen muuttamisessa"},"Three quarters of normal speed. Slower.":{"string":"Kolme neljäsosaa normaalista nopeudesta. Hitaampi."},"Kirjaudu palveluun":{"string":"Kirjaudu palveluun"},"A":{"string":"A"},"Less than 1 min remaining":{"string":"Alle 1 min jäljellä"},"An error was encountered while parsing the server response.":{"string":"Palvelimen vastauksen jäsennyksessä havaittiin virhe."},"Retry":{"string":"Yritä uudelleen"},"Salasano unohtunut?":{"string":"Salasana unohtunut?"},"Information":{"string":"Tiedot"},"%@ remaining":{"string":"%@ jäljellä"},"Reservations":{"string":"Varaukset"},"You need to login to access the collection.":{"string":"Sinun on kirjauduttava sisään päästäksesi kokoelmaan."},"Your book has not yet been downloaded.":{"string":"Kirjaasi ei ole vielä ladattu."},"Cancel":{"string":"Peruuta"},"One and a half times faster than normal speed.":{"string":"Puolitoista kertaa normaalia nopeutta nopeammin."},"Pause":{"string":"Keskeytä"},"Track %@":{"string":"Kappale %@"},"Ready for Download":{"string":"Valmis ladattavaksi"},"Try Again":{"string":"Yritä uudelleen"},"hour_suffix_short":{"string":"{???, plural, one {1 h} other {%d h}}"},"Try force-quitting the app and repeat the sign-in process.":{"string":"Kokeile pakottaa sovelluksen sulkeminen ja toista sisäänkirjautumisprosessi."},"Location Recovery Error":{"string":"Sijainnin palautusvirhe"},"Your report will be reviewed as soon as possible.":{"string":"Ilmoituksesi tarkistetaan mahdollisimman pian."},"%@":{"string":"%@"},"Opens audiobook %@ for listening":{"string":"Avaa äänikirjan %@ kuuntelua varten"},"Check Connection":{"string":"Tarkista yhteys"},"Delete":{"string":"Poista"},"The book license has expired.":{"string":"Kirjan lisenssi on vanhentunut."},"ABCabc":{"string":"ABCabc"},"Reader settings":{"string":"Lukijan asetukset"},"The Palace App requires a one-time location check in order to verify your library service area. You have disabled location services for this app. To enable, please select the 'Open Settings' button below then continue with card creation.":{"string":"Palace-sovellus vaatii kertaluonteisen sijainnin tarkistuksen kirjastopalvelualueesi vahvistamiseksi. Olet poistanut sijaintipalvelut käytöstä tämän sovelluksen kohdalla. Ota ne käyttöön valitsemalla alla oleva Avaa asetukset -painike. Jatka sen jälkeen kortin luomista."},"Read more":{"string":"Lue lisää"},"You are %ld in line.":{"string":"Olet jonossa sijalla %ld."},"Gets %@":{"string":"Hakee %@"},"week_suffix_short":{"string":"{???, plural, one {1 vk} other {%d vk}}"},"Check Out":{"string":"Lainaa"},"%d hour and %d minute":{"string":"%1$d tunti ja %2$d minuutti"},"If you are under 13, all content downloaded to My Books will be removed.":{"string":"Jos olet alle 13-vuotias, kaikki Omat kirjat -kohtaan ladattu sisältö poistetaan."},"The download could not be completed.\nScroll down to 'View Issues' to see details.":{"string":"Latausta ei voitu suorittaa loppuun.\nKatso tiedot selaamalla alaspäin kohtaan Näytä ongelmat."},"Book format:":{"string":"Kirjan tiedostomuoto:"},"When you reserve a book from the catalog, it will show up here. Look here from time to time to see if your book is available to download.":{"string":"Kun varaat kirjan luettelosta, se näkyy täällä. Katso täältä aika ajoin, onko kirjasi ladattavissa."},"Default book font":{"string":"Kirjan oletusfontti"},"Please try again later.":{"string":"Yritä myöhemmin uudelleen."},"Narrators":{"string":"Lukijat"},"We can’t get your library right now. Please close and reopen the app to try again.":{"string":"Emme pääse kirjastoosi tällä hetkellä. Yritä uudelleen sulkemalla sovellus ja avaamalla se uudelleen."},"Table of Contents":{"string":"Sisällysluettelo"},"Keep":{"string":"Säilytä"},"Table of contents and bookmarks":{"string":"Sisällysluettelo ja kirjanmerkit"},"Unable to contact the server because the URL for signing in is missing.":{"string":"Palvelimeen ei saada yhteyttä, koska sisäänkirjautumisen URL-osoite puuttuu."},"Internal Error, bookmark failed to save.":{"string":"Sisäinen virhe, kirjanmerkin tallennus epäonnistui."},"The download could not be completed.":{"string":"Latausta ei voitu suorittaa loppuun."},"Please check your username and password and try again.":{"string":"Tarkista käyttäjänimesi ja salasanasi, ja yritä uudelleen."},"Delete Server Data":{"string":"Poista palvelimen tiedot"},"Your book is ready to read!":{"string":"Kirjasi on valmis luettavaksi!"},"Cancels hold for %@":{"string":"Peruuttaa kohteen %@ pidon"},"hour_suffix_long":{"string":"{???, plural, one {1 tunti} other {%d tuntia}}"},"Sync Bookmarks":{"string":"Synkronoi kirjanmerkit"},"Age Verification":{"string":"Iän vahvistus"},"Next Chapter":{"string":"Seuraava luku"},"The DRM Library is taking longer than expected. Please wait and try again later.\n\nIf the problem persists, try to sign out and back in again from the Library Settings menu.":{"string":"DRM-kirjastolla kestää odotettua kauemmin. Odota ja yritä myöhemmin uudelleen.\n\nJos ongelma jatkuu, kokeile kirjautua ulos ja uudelleen sisään Kirjaston asetukset -valikosta."},"0.75×":{"string":"0.75×"},"15 Minutes":{"string":"15 minuuttia"},"%@ until playback pauses":{"string":"%@ kunnes toisto keskeytyy"},"Account":{"string":"Tili"},"Wait":{"string":"Odota"},"Play":{"string":"Toista"},"Returns %@":{"string":"Palauttaa %@"},"Corrupted Audiobook":{"string":"Vioittunut äänikirja"},"Distributed by: ":{"string":"Jakelija:"},"GCDAsyncSocketReadTimeoutError":{"string":"Lukutoiminto aikakatkaistiin"},"Authentication Required":{"string":"Todennus vaaditaan"},"We're sorry. Our sign up system is currently down. Please try again later.":{"string":"Olemme pahoillamme. Kirjautumisjärjestelmämme on tällä hetkellä poissa käytöstä. Yritä myöhemmin uudelleen."},"User denied location access. Go to system settings to enable location access for the Palace App.":{"string":"Käyttäjä kielsi sijaintitietojen käytön. Siirry järjestelmän asetuksiin ja ota sijaintitiedot käyttöön Palace-sovelluksessa."},"Unsupported Item":{"string":"Kohdetta ei tueta"},"Please wait":{"string":"Odota"},"Black on sepia text":{"string":"Musta teksti seepialla"},"The Palace App requires a one-time location check in order to verify your library service area. Once you choose \"Create Card\", please select \"Allow Once\" in the popup so we can verify this information.":{"string":"Palace-sovellus vaatii kertaluonteisen sijainnin tarkistuksen kirjastopalvelualueesi vahvistamiseksi. Kun valitset Luo kortti, valitse ponnahdusikkunassa Salli kerran, jotta voimme vahvistaa tämän tiedon."},"Book Cover":{"string":"Kirjan kansi"},"This reservation will be automatically cancelled in %@.":{"string":"Tämä varaus peruutetaan automaattisesti seuraavan ajan kuluttua: %@."},"Close":{"string":"Sulje"},"(book.title) is an Adobe PDF, which is not supported.":{"string":"(book.title) on Adobe PDF -tiedosto, jota ei tueta."},"Downloads %@":{"string":"Lataa %@"},"Visit the Catalog to\nadd books to My Books.":{"string":"Siirry luetteloon ja\nlisää kirjoja Omiin kirjoihin."},"Borrowing %@ could not be completed.":{"string":"Teoksen %@ lainausta ei voitu suorittaa loppuun."},"Serif font":{"string":"Serif-fontti"},"Camera Access Disabled":{"string":"Kameran käyttöoikeus estetty"},"You are %ld in line for %ld copies.":{"string":"Olet sijalla %1$ld jonossa %2$ld teoksen osalta."},"Borrow Failed":{"string":"Lainaus epäonnistui"},"Something went wrong with the Adobe DRM system":{"string":"Jokin meni pieleen Adoben DRM-järjestelmässä"},"Unsupported format":{"string":"Muotoa ei tueta"},"It looks like you may have a book download or return in progress. Would you like to stop that and continue logging out?":{"string":"Näyttää siltä, että sinulla saattaa olla kirjan lataus tai palautus käynnissä. Haluatko keskeyttää sen ja jatkaa uloskirjautumista?"},"Acknowledgements":{"string":"Kiitokset"},"Show":{"string":"Näytä"},"Save your reading position and bookmarks to all your other devices.":{"string":"Tallenna lukukohtasi ja kirjanmerkkisi kaikkiin muihin laitteisiisi."},"Sign in":{"string":"Kirjaudu sisään"},"Load error. Please try signing out, then log in again.":{"string":"Latausvirhe. Kokeile kirjautua ulos ja sitten uudelleen sisään."},"Cancels the download for the current book: %@":{"string":"Peruuttaa nykyisen kirjan latauksen: %@"},"Table of contents":{"string":"Sisällysluettelo"},"The book you were trying to read is in an unsupported format.":{"string":"Yritit lukea kirjaa, jonka muotoa ei tueta."},"Content Licenses":{"string":"Sisältölisenssit"},"Browse Books":{"string":"Selaa kirjoja"},"Please wait...":{"string":"Odota..."},"WAITING FOR AVAILABILITY":{"string":"ODOTETAAN SAATAVUUTTA"},"Your Audiobook Has Finished":{"string":"Äänikirjasi on päättynyt"},"Back":{"string":"Takaisin"},"The audiobook you are trying to open appears to be corrupted. Try downloading it again.":{"string":"Äänikirja, jota yrität avata, vaikuttaa olevan vioittunut. Kokeile ladata se uudelleen."},"Category":{"string":"Luokka"},"PDF":{"string":"PDF"},"The return of %@ could not be completed.":{"string":"Teoksen %@ palautusta ei voitu suorittaa loppuun."},"Search":{"string":"Haku"},"Aa":{"string":"Aa"},"Downloading:":{"string":"Ladataan:"},"Authentication Expired":{"string":"Todennus vanhentunut"},"Request New Codes":{"string":"Pyydä uusia koodeja"},"Add Library":{"string":"Lisää kirjasto"},"Off":{"string":"Pois"},"(dateType.rawValue)_suffix_long":{"string":"(dateType.rawValue)_suffix_long"},"year_suffix_long":{"string":"{???, plural, one {1 vuosi} other {%d vuotta}}"},"Chapters":{"string":"Luvut"},"View Sample":{"string":"Katso näyte"},"The title you reserved, (book.title), is available.":{"string":"Varaamasi teos (book.title) on saatavilla."},"%d minute":{"string":"%d minuutti"},"1.25×":{"string":"1.25×"},"eCard":{"string":"eCard"},"White on black text":{"string":"Valkoinen teksti mustalla"},"Announcement":{"string":"Ilmoitus"},"The download for %@ could not be completed.":{"string":"Teoksen %@ latausta ei voitu suorittaa loppuun."},"The book you were trying to read is corrupted. Please try downloading it again.":{"string":"Kirja, jota yritit lukea, on vioittunut. Yritä ladata se uudelleen."},"Don't have a library card?":{"string":"Eikö sinulla ole kirjastokorttia?"},"Loading... Please wait.":{"string":"Ladataan... Odota."},"Duration":{"string":"Kesto"},"Fast Forward %d seconds":{"string":"Kelaa eteenpäin %d sekuntia"},"DRM Error":{"string":"DRM-virhe"},"Search Reservations":{"string":"Hae varauksista"},"Move":{"string":"Siirry"},"Description":{"string":"Kuvaus"},"Get":{"string":"Hae"},"Some books will be unavailable in this version. Please try updating to the latest version of the application.":{"string":"Jotkut kirjat eivät ole saatavilla tässä versiossa. Kokeile päivittää sovelluksen uusimpaan versioon."},"Cancels the failed download for this book: %@":{"string":"Peruuttaa tämän kirjan epäonnistuneen latauksen: %@"},"We're sorry. Currently we do not support signups for new patrons via the app.":{"string":"Emme valitettavasti tällä hetkellä tue uusien asiakkaiden rekisteröitymistä sovelluksen kautta."},"%d seconds":{"string":"%d sekuntia"},"Return":{"string":"Palauta"},"Published":{"string":"Julkaistu"},"Open Settings":{"string":"Avaa asetukset"},"Unkown error occurred. Please try again.":{"string":"Tapahtui tuntematon virhe. Yritä uudelleen."},"Selecting \"Delete\" will remove all bookmarks from the server for %@.":{"string":"Jos valitset Poista, kaikki teoksen %@ kirjanmerkit poistetaan palvelimelta."},"Your authentication details have expired. Please sign in again.":{"string":"Tunnistautumistietosi ovat vanhentuneet. Kirjaudu uudelleen sisään."},"Previous Chapter":{"string":"Edellinen luku"},"2.0×":{"string":"2.0×"},"GCDAsyncSocketClosedError":{"string":"Etäkumppani sulki yhteyden"},"%@ remaining in the book.":{"string":"%@ kirjaa jäljellä."},"Are you sure you want to delete \"%@\"?":{"string":"Haluatko varmasti poistaa teoksen %@?"},"An unknown error occurred while trying to sign out.":{"string":"Tuntematon virhe tapahtui, kun yritit kirjautua ulos."},"Playback Speed":{"string":"Toistonopeus"},"No Results Found":{"string":"Ei hakutuloksia"},"Please check your connection and try again.":{"string":"Tarkista internetyhteys ja yritä uudelleen."},"Two times normal speed. Fastest.":{"string":"Kaksi kertaa normaali nopeus. Nopein."},"currently":{"string":"tällä hetkellä"},"Accept":{"string":"Hyväksy"},"Retry the failed download for this book: %@":{"string":"Yritä ladata tämä kirja uudelleen: %@"},"Available for checkout in less than %@.":{"string":"Saatavilla lainattavaksi alle %@ kuluttua."},"Forgot your password?":{"string":"Unohditko salasanasi?"},"FAQ":{"string": "UKK"}},"sv":{"Forgot your password?":{"string":""},"day_suffix_long":{"string":""},"If you sign out without enabling Sync, your books and any saved bookmarks will be removed.":{"string":""},"The page could not load due to a connection error.":{"string":""},"Remove Reservation":{"string":""},"Categories":{"string":""},"View sample for %@":{"string":""},"%@ version %@ (%@)":{"string":""},"You must enable camera access for this application in order to sign up for a library card.":{"string":""},"%d minutes and %d seconds":{"string":""},"Testing":{"string":""},"Author":{"string":""},"Download":{"string":""},"Would you like to return it?":{"string":""},"End of Chapter":{"string":""},"Salasana unohtunut?":{"string":""},"ePub":{"string":""},"month_suffix_long":{"string":""},"Bookmark added":{"string":""},"The page could not load due to a conection error.":{"string":""},"%@%":{"string":""},"Are you sure you want ot remove \"%@\" from your reservations? You will no longer be in line for this book.":{"string":""},"Listen":{"string":""},"Downloading: %@%%":{"string":""},"You have disabled location services for this app.":{"string":""},"Reserve":{"string":""},"Thank You":{"string":""},"Reload":{"string":""},"Find Your Library":{"string":""},"No email account is set for this device.":{"string":""},"Unable to load PDF file":{"string":""},"Download Error":{"string":""},"An error occurred during the authentication process":{"string":""},"Reached the end of the results.":{"string":""},"Under 13":{"string":""},"Reject":{"string":"Avvisa"},"Sync Listening Position":{"string":""},"Your bookmarks and reading positions are in the process of being saved to the server. Would you like to stop that and continue logging out?":{"string":""},"Please enter your birth year":{"string":""},"%d hours and %d minutes":{"string":""},"%d hours and %d minute":{"string":""},"Signing out":{"string":""},"My Books":{"string":"Mina böcker"},"Rewind %d seconds":{"string":""},"Holds %@":{"string":""},"Save the current location bookmark for later listening.":{"string":""},"Sans font":{"string":""},"1.0× (Normal)":{"string":"1,0× (Normal)"},"Libraries":{"string":""},"More...":{"string":""},"If another device is available, send the audio over Bluetooth or Airplay. Otherwise do nothing.":{"string":""},"13 or Older":{"string":""},"Verifying":{"string":""},"Create Card":{"string":""},"%02d min remaining":{"string":""},"\nYou are %ld in line for %ld copies.":{"string":""},"30 Minutes":{"string":"30 minuter"},"Downloading":{"string":"Laddar ner"},"AccessibilitySwitchLibrary":{"string":""},"60 Minutes":{"string":""},"Unable to load the web page at this time.":{"string":""},"An unknown error occurred. Please check your connection or try again later.":{"string":"Det har uppstått ett okänt fel. Kontrollera din anslutning eller försök på nytt senare."},"A bookmark has already been saved at this location.":{"string":""},"This book is available to borrow.":{"string":"Denna bok är tillgänglig för utlåning."},"Login Failed":{"string":""},"Are you sure you want to return \"%@\"?":{"string":""},"Opens %@ for reading":{"string":""},"OK":{"string":""},"Software Licenses":{"string":""},"Error Loading Library":{"string":""},"Sync Reading Position":{"string":""},"More":{"string":""},"Hide Barcode":{"string":"Dölj streckkod"},"Do you want to move to the page on which you left off?":{"string":""},"Add Bookmark":{"string":"Lägg till bokmärke"},"Audiobook":{"string":""},"There was a problem contacting the server.\nPlease make sure you are connected to the internet, or try again later.":{"string":""},"Resume":{"string":""},"BrightnessSlider":{"string":""},"Select a chapter or track from a list.":{"string":""},"GCDAsyncSocketReadMaxedOutError":{"string":""},"Are you sure you want to remove \"%@\" from your reservations? You will no longer be in line for this book.":{"string":"Är du säker att du vill ta bort \"%@\" från dina reservationer? Du kommer inte längre att stå i kö till denna bok."},"Remove Bookmark":{"string":""},"Privacy Policy":{"string":"Integritetspolicy"},"Rekisteröidy palveluun":{"string":""},"%d hour and %d minutes":{"string":""},"%@ through chapter":{"string":""},"DecreaseFontSize":{"string":""},"It will expire in %@.":{"string":""},"1.0×":{"string":""},"%02dmin":{"string":""},"Please wait a moment before switching library accounts":{"string":""},"PIN":{"string":""},"An error was encountered while trying to open this book.":{"string":"Det uppstod ett fel med att öppna boken."},"Error extracting encrypted PDF file":{"string":""},"Please contact %@ to report an issue.":{"string":""},"week_suffix_long":{"string":"{???, plural, one {1 vecka} other {%d veckor}}"},"One and one quarter faster than normal speed.":{"string":""},"Select Year":{"string":""},"Currently Playing: %@":{"string":""},"By signing in, you agree to the End User License Agreement.":{"string":""},"Open dyslexic font":{"string":"typsnittet OpenDyslexic"},"Invalid Credentials":{"string":""},"Publisher":{"string":""},"Stay":{"string":""},"day_suffix_short":{"string":""},"Next":{"string":""},"Read":{"string":""},"Deletes %@":{"string":""},"%@ played. %@ remaining.":{"string":""},"Sleep Timer":{"string":""},"Failed to get current location. Please try again.":{"string":""},"Continue":{"string":"Fortsätt"},"1.50×":{"string":""},"The item you are trying to open is not currently supported.":{"string":""},"Contents":{"string":""},"Sample":{"string":""},"About":{"string":""},"Do you want to move to the time on which you left off?":{"string":""},"Sort By:":{"string":""},"Playback Destination":{"string":""},"%d hours, %d minutes and %d seconds":{"string":""},"sec":{"string":""},"Barcode or Username":{"string":""},"Page %d of ":{"string":""},"%@ (file %@ of %d)":{"string":""},"%02d hr %02 dmin":{"string":"%1$d t %2$d min"},"<>":{"string":""},"Show Barcode":{"string":""},"%d minutes":{"string":""},"Open eBooks provides free books to the children who need them the most.\n\nThe collection includes thousands of popular and award-winning titles as well as hundreds of public domain works.":{"string":""},"There are no bookmarks for this book.":{"string":""},"User Agreement":{"string":""},"GCDAsyncSocketWriteTimeoutError":{"string":""},"Report an Issue":{"string":"Rapportera ett problem"},"%02d:%02d:%02d":{"string":""},"Sign In Error":{"string":""},"The book you were trying to open is invalid.":{"string":""},"GCDAsyncSocketConnectTimeoutError":{"string":""},"%02d:%02d":{"string":"%1$d:%2$d"},"%@ %@":{"string":""},"Puuttuvatko tunnukset?":{"string":""},"Search My Books":{"string":""},"About App":{"string":""},"Error":{"string":""},"AVAILABLE FOR CHECKOUT":{"string":""},"Title":{"string":""},"month_suffix_short":{"string":""},"Settings":{"string":""},"%d second":{"string":"%d sekund"},"A Problem Has Occurred":{"string":""},"If you sign out, your books and any saved bookmarks will be removed.":{"string":""},"Normal speed.":{"string":""},"Authenticate to reveal your PIN.":{"string":""},"Play Sample":{"string":""},"Requesting":{"string":""},"Connection Failed":{"string":""},"Sign out":{"string":""},"Submit":{"string":""},"Done":{"string":""},"More %@ books":{"string":""},"You have already checked out this loan. You may need to refresh your My Books list to download the title.":{"string":""},"IncreaseFontSize":{"string":""},"There are no results":{"string":""},"This URL cannot be found. Please close the app entirely and reload it. If the problem persists, please contact your library's Help Desk.":{"string":""},"(dateType.rawValue)_suffix_short":{"string":""},"Bookmarks":{"string":""},"All licenses of this book are currently checked out.":{"string":""},"Advanced":{"string":"Avancerat"},"Remove":{"string":"Ta bort"},"%02d hr, %02d min remaining":{"string":""},"Welcome to Open eBooks":{"string":""},"Error Changing Sync Setting":{"string":""},"Three quarters of normal speed. Slower.":{"string":""},"Kirjaudu palveluun":{"string":""},"A":{"string":""},"Less than 1 min remaining":{"string":""},"An error was encountered while parsing the server response.":{"string":""},"Retry":{"string":""},"Salasano unohtunut?":{"string":"Har du glömt ditt lösenord?"},"Information":{"string":"Information"},"%@ remaining":{"string":""},"Your book has not yet been downloaded.":{"string":""},"You need to login to access the collection.":{"string":""},"Cancel":{"string":""},"One and a half times faster than normal speed.":{"string":""},"Reservations":{"string":"Reservationer"},"Pause":{"string":""},"Track %@":{"string":""},"Ready for Download":{"string":""},"Your report will be reviewed as soon as possible.":{"string":""},"Try Again":{"string":""},"Try force-quitting the app and repeat the sign-in process.":{"string":""},"hour_suffix_short":{"string":""},"Location Recovery Error":{"string":""},"%@":{"string":""},"Opens audiobook %@ for listening":{"string":""},"Check Connection":{"string":""},"The book license has expired.":{"string":""},"Delete":{"string":""},"ABCabc":{"string":""},"Reader settings":{"string":""},"You are %ld in line.":{"string":""},"The Palace App requires a one-time location check in order to verify your library service area. You have disabled location services for this app. To enable, please select the 'Open Settings' button below then continue with card creation.":{"string":"Palace-appen behöver kontrollera din position en gång för att verifiera ditt område för biblioteksservice. Du har inaktiverat positionstjänsten för denna app. För att aktivera den peka på knappen Öppna inställningar nedan för att fortsätta skapa kort."},"Read more":{"string":""},"week_suffix_short":{"string":""},"Gets %@":{"string":""},"Check Out":{"string":""},"%d hour and %d minute":{"string":"%1$d timme och %2$d minut"},"Book format:":{"string":"Bokformat:"},"The download could not be completed.\nScroll down to 'View Issues' to see details.":{"string":""},"If you are under 13, all content downloaded to My Books will be removed.":{"string":"Om du är under 13 år kommer allt innehåll som laddats ner i Mina böcker att raderas."},"When you reserve a book from the catalog, it will show up here. Look here from time to time to see if your book is available to download.":{"string":""},"Default book font":{"string":""},"Please try again later.":{"string":""},"Narrators":{"string":""},"We can’t get your library right now. Please close and reopen the app to try again.":{"string":""},"Table of Contents":{"string":""},"Keep":{"string":""},"Table of contents and bookmarks":{"string":""},"Unable to contact the server because the URL for signing in is missing.":{"string":""},"Internal Error, bookmark failed to save.":{"string":""},"Please check your username and password and try again.":{"string":""},"The download could not be completed.":{"string":""},"Delete Server Data":{"string":""},"Your book is ready to read!":{"string":""},"Cancels hold for %@":{"string":""},"hour_suffix_long":{"string":""},"Sync Bookmarks":{"string":""},"Age Verification":{"string":""},"Next Chapter":{"string":""},"The DRM Library is taking longer than expected. Please wait and try again later.\n\nIf the problem persists, try to sign out and back in again from the Library Settings menu.":{"string":""},"0.75×":{"string":""},"15 Minutes":{"string":""},"%@ until playback pauses":{"string":""},"Account":{"string":""},"Wait":{"string":""},"Play":{"string":""},"Returns %@":{"string":""},"Corrupted Audiobook":{"string":""},"Distributed by: ":{"string":""},"We're sorry. Our sign up system is currently down. Please try again later.":{"string":""},"Authentication Required":{"string":""},"GCDAsyncSocketReadTimeoutError":{"string":""},"User denied location access. Go to system settings to enable location access for the Palace App.":{"string":""},"Unsupported Item":{"string":""},"Please wait":{"string":""},"Black on sepia text":{"string":"Svart text mot sepiabakgrund"},"The Palace App requires a one-time location check in order to verify your library service area. Once you choose \"Create Card\", please select \"Allow Once\" in the popup so we can verify this information.":{"string":""},"Book Cover":{"string":""},"You are %ld in line for %ld copies.":{"string":""},"This reservation will be automatically cancelled in %@.":{"string":""},"(book.title) is an Adobe PDF, which is not supported.":{"string":"(book.title) är en Adobe PDF och stöds således inte."},"Downloads %@":{"string":""},"Visit the Catalog to\nadd books to My Books.":{"string":""},"Borrow Failed":{"string":"Det gick inte att låna"},"Borrowing %@ could not be completed.":{"string":""},"Serif font":{"string":""},"Camera Access Disabled":{"string":""},"Close":{"string":"Stäng"},"Something went wrong with the Adobe DRM system":{"string":""},"Unsupported format":{"string":""},"Show":{"string":""},"Acknowledgements":{"string":""},"It looks like you may have a book download or return in progress. Would you like to stop that and continue logging out?":{"string":""},"Save your reading position and bookmarks to all your other devices.":{"string":""},"Sign in":{"string":""},"Load error. Please try signing out, then log in again.":{"string":""},"Cancels the download for the current book: %@":{"string":""},"Table of contents":{"string":""},"The book you were trying to read is in an unsupported format.":{"string":""},"Content Licenses":{"string":""},"Browse Books":{"string":""},"Please wait...":{"string":""},"Back":{"string":""},"Your Audiobook Has Finished":{"string":""},"WAITING FOR AVAILABILITY":{"string":""},"The audiobook you are trying to open appears to be corrupted. Try downloading it again.":{"string":""},"Category":{"string":"Kategori"},"PDF":{"string":""},"The return of %@ could not be completed.":{"string":""},"Search":{"string":""},"Aa":{"string":"Aa"},"Downloading:":{"string":""},"Request New Codes":{"string":""},"Authentication Expired":{"string":""},"Add Library":{"string":""},"View Sample":{"string":""},"Off":{"string":""},"(dateType.rawValue)_suffix_long":{"string":"(dateType.rawValue)_suffix_long"},"Chapters":{"string":"Kapitel"},"year_suffix_long":{"string":""},"The title you reserved, (book.title), is available.":{"string":""},"%d minute":{"string":""},"1.25×":{"string":""},"eCard":{"string":""},"White on black text":{"string":""},"Announcement":{"string":""},"The download for %@ could not be completed.":{"string":""},"The book you were trying to read is corrupted. Please try downloading it again.":{"string":""},"Don't have a library card?":{"string":""},"Loading... Please wait.":{"string":""},"Duration":{"string":""},"Fast Forward %d seconds":{"string":""},"DRM Error":{"string":""},"Search Reservations":{"string":""},"Move":{"string":""},"Get":{"string":""},"Description":{"string":"Beskrivning"},"We're sorry. Currently we do not support signups for new patrons via the app.":{"string":""},"Cancels the failed download for this book: %@":{"string":""},"Some books will be unavailable in this version. Please try updating to the latest version of the application.":{"string":""},"%d seconds":{"string":""},"Return":{"string":""},"Published":{"string":""},"Open Settings":{"string":""},"Unkown error occurred. Please try again.":{"string":"Det har uppstått ett okänt fel. Försök på nytt."},"Selecting \"Delete\" will remove all bookmarks from the server for %@.":{"string":""},"Your authentication details have expired. Please sign in again.":{"string":"Dina autentiseringsuppgifter har löpt ut. Logga in på nytt."},"Previous Chapter":{"string":"Föregående kapitel"},"GCDAsyncSocketClosedError":{"string":""},"2.0×":{"string":"2,0×"},"%@ remaining in the book.":{"string":""},"Are you sure you want to delete \"%@\"?":{"string":""},"An unknown error occurred while trying to sign out.":{"string":""},"Playback Speed":{"string":""},"No Results Found":{"string":""},"Please check your connection and try again.":{"string":"Kontrollera din anslutning och försök på nytt."},"Two times normal speed. Fastest.":{"string":""},"currently":{"string":""},"Accept":{"string":""},"Retry the failed download for this book: %@":{"string":""},"year_suffix_short":{"string":""},"Available for checkout in less than %@.":{"string":""}},"en":{"Forgot your password?":{"string":"Forgot your password?"},"day_suffix_long":{"string":"{???, plural, one {1 day} other {%d days}}"},"If you sign out without enabling Sync, your books and any saved bookmarks will be removed.":{"string":"If you sign out without enabling Sync, your books and any saved bookmarks will be removed."},"The page could not load due to a connection error.":{"string":"The page could not load due to a connection error."},"Remove Reservation":{"string":"Remove Reservation"},"Categories":{"string":"Categories"},"View sample for %@":{"string":"View sample for %@"},"%@ version %@ (%@)":{"string":"%1$@ version %2$@ (%3$@)"},"You must enable camera access for this application in order to sign up for a library card.":{"string":"You must enable camera access for this application in order to sign up for a library card."},"%d minutes and %d seconds":{"string":"%1$d minutes and %2$d seconds"},"Testing":{"string":"Testing"},"Author":{"string":"Author"},"Download":{"string":"Download"},"Would you like to return it?":{"string":"Would you like to return it?"},"End of Chapter":{"string":"End of Chapter"},"Salasana unohtunut?":{"string":"Salasana unohtunut?"},"ePub":{"string":"ePub"},"month_suffix_long":{"string":"{???, plural, one {1 month} other {%d months}}"},"Bookmark added":{"string":"Bookmark added"},"The page could not load due to a conection error.":{"string":"The page could not load due to a conection error."},"%@%":{"string":"%1$@%2$"},"Are you sure you want ot remove \"%@\" from your reservations? You will no longer be in line for this book.":{"string":"Are you sure you want ot remove \"%@\" from your reservations? You will no longer be in line for this book."},"Listen":{"string":"Listen"},"Downloading: %@%%":{"string":"Downloading: %@%%"},"You have disabled location services for this app.":{"string":"You have disabled location services for this app."},"Reserve":{"string":"Reserve"},"Thank You":{"string":"Thank You"},"Reload":{"string":"Reload"},"Find Your Library":{"string":"Find Your Library"},"No email account is set for this device.":{"string":"No email account is set for this device."},"Unable to load PDF file":{"string":"Unable to load PDF file"},"Download Error":{"string":"Download Error"},"An error occurred during the authentication process":{"string":"An error occurred during the authentication process"},"Reached the end of the results.":{"string":"Reached the end of the results."},"Under 13":{"string":"Under 13"},"Reject":{"string":"Reject"},"Rewind %d seconds":{"string":"Rewind %d seconds"},"Sync Listening Position":{"string":"Sync Listening Position"},"Please enter your birth year":{"string":"Please enter your birth year"},"Your bookmarks and reading positions are in the process of being saved to the server. Would you like to stop that and continue logging out?":{"string":"Your bookmarks and reading positions are in the process of being saved to the server. Would you like to stop that and continue logging out?"},"%d hours and %d minutes":{"string":"%1$d hours and %2$d minutes"},"%d hours and %d minute":{"string":"%1$d hours and %2$d minute"},"My Books":{"string":"My Books"},"Signing out":{"string":"Signing out"},"Holds %@":{"string":"Holds %@"},"Save the current location bookmark for later listening.":{"string":"Save the current location bookmark for later listening."},"Sans font":{"string":"Sans font"},"1.0× (Normal)":{"string":"1.0× (Normal)"},"Libraries":{"string":"Libraries"},"More...":{"string":"More..."},"If another device is available, send the audio over Bluetooth or Airplay. Otherwise do nothing.":{"string":"If another device is available, send the audio over Bluetooth or Airplay. Otherwise do nothing."},"13 or Older":{"string":"13 or Older"},"Verifying":{"string":"Verifying"},"Create Card":{"string":"Create Card"},"%02d min remaining":{"string":"%02d min remaining"},"\nYou are %ld in line for %ld copies.":{"string":"\nYou are %1$ld in line for %2$ld copies."},"30 Minutes":{"string":"30 Minutes"},"Downloading":{"string":"Downloading"},"AccessibilitySwitchLibrary":{"string":"AccessibilitySwitchLibrary"},"60 Minutes":{"string":"60 Minutes"},"Unable to load the web page at this time.":{"string":"Unable to load the web page at this time."},"An unknown error occurred. Please check your connection or try again later.":{"string":"An unknown error occurred. Please check your connection or try again later."},"A bookmark has already been saved at this location.":{"string":"A bookmark has already been saved at this location."},"This book is available to borrow.":{"string":"This book is available to borrow."},"Login Failed":{"string":"Login Failed"},"Are you sure you want to return \"%@\"?":{"string":"Are you sure you want to return \"%@\"?"},"Opens %@ for reading":{"string":"Opens %@ for reading"},"OK":{"string":"OK"},"Software Licenses":{"string":"Software Licenses"},"Error Loading Library":{"string":"Error Loading Library"},"Sync Reading Position":{"string":"Sync Reading Position"},"More":{"string":"More"},"Hide Barcode":{"string":"Hide Barcode"},"Do you want to move to the page on which you left off?":{"string":"Do you want to move to the page on which you left off?"},"Add Bookmark":{"string":"Add Bookmark"},"Audiobook":{"string":"Audiobook"},"There was a problem contacting the server.\nPlease make sure you are connected to the internet, or try again later.":{"string":"There was a problem contacting the server.\nPlease make sure you are connected to the internet, or try again later."},"Resume":{"string":"Resume"},"BrightnessSlider":{"string":"BrightnessSlider"},"Select a chapter or track from a list.":{"string":"Select a chapter or track from a list."},"GCDAsyncSocketReadMaxedOutError":{"string":"Read operation reached set maximum length"},"Are you sure you want to remove \"%@\" from your reservations? You will no longer be in line for this book.":{"string":"Are you sure you want to remove \"%@\" from your reservations? You will no longer be in line for this book."},"Remove Bookmark":{"string":"Remove Bookmark"},"Privacy Policy":{"string":"Privacy Policy"},"Rekisteröidy palveluun":{"string":"Rekisteröidy palveluun"},"%d hour and %d minutes":{"string":"%1$d hour and %2$d minutes"},"%@ through chapter":{"string":"%@ through chapter"},"DecreaseFontSize":{"string":"DecreaseFontSize"},"It will expire in %@.":{"string":"It will expire in %@."},"1.0×":{"string":"1.0×"},"%02dmin":{"string":"%02dmin"},"Please wait a moment before switching library accounts":{"string":"Please wait a moment before switching library accounts"},"PIN":{"string":"PIN"},"An error was encountered while trying to open this book.":{"string":"An error was encountered while trying to open this book."},"Error extracting encrypted PDF file":{"string":"Error extracting encrypted PDF file"},"Please contact %@ to report an issue.":{"string":"Please contact %@ to report an issue."},"week_suffix_long":{"string":"{???, plural, one {1 week} other {%d weeks}}"},"One and one quarter faster than normal speed.":{"string":"One and one quarter faster than normal speed."},"Select Year":{"string":"Select Year"},"Currently Playing: %@":{"string":"Currently Playing: %@"},"By signing in, you agree to the End User License Agreement.":{"string":"By signing in, you agree to the End User License Agreement."},"Open dyslexic font":{"string":"Open dyslexic font"},"Invalid Credentials":{"string":"Invalid Credentials"},"Publisher":{"string":"Publisher"},"Stay":{"string":"Stay"},"day_suffix_short":{"string":"{???, plural, one {1 d} other {%d d}}"},"Next":{"string":"Next"},"Read":{"string":"Read"},"Deletes %@":{"string":"Deletes %@"},"%@ played. %@ remaining.":{"string":"%1$@ played. %2$@ remaining."},"Sleep Timer":{"string":"Sleep Timer"},"Failed to get current location. Please try again.":{"string":"Failed to get current location. Please try again."},"Continue":{"string":"Continue"},"1.50×":{"string":"1.50×"},"The item you are trying to open is not currently supported.":{"string":"The item you are trying to open is not currently supported."},"Contents":{"string":"Contents"},"Sample":{"string":"Sample"},"About":{"string":"About"},"Do you want to move to the time on which you left off?":{"string":"Do you want to move to the time on which you left off?"},"Sort By:":{"string":"Sort By:"},"Playback Destination":{"string":"Playback Destination"},"%d hours, %d minutes and %d seconds":{"string":"%1$d hours, %2$d minutes and %3$d seconds"},"sec":{"string":"sec"},"Barcode or Username":{"string":"Barcode or Username"},"Page %d of ":{"string":"Page %d of "},"%@ (file %@ of %d)":{"string":"%1$@ (file %2$@ of %3$d)"},"%02d hr %02 dmin":{"string":"%1$d hr %2$d min"},"<>":{"string":"<>"},"Show Barcode":{"string":"Show Barcode"},"%d minutes":{"string":"%d minutes"},"Open eBooks provides free books to the children who need them the most.\n\nThe collection includes thousands of popular and award-winning titles as well as hundreds of public domain works.":{"string":"Open eBooks provides free books to the children who need them the most.\n\nThe collection includes thousands of popular and award-winning titles as well as hundreds of public domain works."},"There are no bookmarks for this book.":{"string":"There are no bookmarks for this book."},"User Agreement":{"string":"User Agreement"},"GCDAsyncSocketWriteTimeoutError":{"string":"Write operation timed out"},"Report an Issue":{"string":"Report an Issue"},"%02d:%02d:%02d":{"string":"%1$d:%2$d:%3$d"},"Sign In Error":{"string":"Sign In Error"},"The book you were trying to open is invalid.":{"string":"The book you were trying to open is invalid."},"GCDAsyncSocketConnectTimeoutError":{"string":"Attempt to connect to host timed out"},"%02d:%02d":{"string":"%1$d:%2$d"},"%@ %@":{"string":"%1$@ %2$@"},"Puuttuvatko tunnukset?":{"string":"Puuttuvatko tunnukset?"},"Search My Books":{"string":"Search My Books"},"About App":{"string":"About App"},"Error":{"string":"Error"},"AVAILABLE FOR CHECKOUT":{"string":"AVAILABLE FOR CHECKOUT"},"Title":{"string":"Title"},"month_suffix_short":{"string":"{???, plural, one {1 m} other {%d m}}"},"Settings":{"string":"Settings"},"%d second":{"string":"%d second"},"A Problem Has Occurred":{"string":"A Problem Has Occurred"},"If you sign out, your books and any saved bookmarks will be removed.":{"string":"If you sign out, your books and any saved bookmarks will be removed."},"Normal speed.":{"string":"Normal speed."},"Authenticate to reveal your PIN.":{"string":"Authenticate to reveal your PIN."},"Play Sample":{"string":"Play Sample"},"Requesting":{"string":"Requesting"},"Connection Failed":{"string":"Connection Failed"},"Sign out":{"string":"Sign out"},"Submit":{"string":"Submit"},"Done":{"string":"Done"},"More %@ books":{"string":"More %@ books"},"You have already checked out this loan. You may need to refresh your My Books list to download the title.":{"string":"You have already checked out this loan. You may need to refresh your My Books list to download the title."},"IncreaseFontSize":{"string":"IncreaseFontSize"},"There are no results":{"string":"There are no results"},"This URL cannot be found. Please close the app entirely and reload it. If the problem persists, please contact your library's Help Desk.":{"string":"This URL cannot be found. Please close the app entirely and reload it. If the problem persists, please contact your library's Help Desk."},"(dateType.rawValue)_suffix_short":{"string":"(dateType.rawValue)_suffix_short"},"Bookmarks":{"string":"Bookmarks"},"All licenses of this book are currently checked out.":{"string":"All licenses of this book are currently checked out."},"Advanced":{"string":"Advanced"},"Remove":{"string":"Remove"},"%02d hr, %02d min remaining":{"string":"%1$d hr, %2$d min remaining"},"Welcome to Open eBooks":{"string":"Welcome to Open eBooks"},"Error Changing Sync Setting":{"string":"Error Changing Sync Setting"},"Three quarters of normal speed. Slower.":{"string":"Three quarters of normal speed. Slower."},"Kirjaudu palveluun":{"string":"Kirjaudu palveluun"},"A":{"string":"A"},"Less than 1 min remaining":{"string":"Less than 1 min remaining"},"An error was encountered while parsing the server response.":{"string":"An error was encountered while parsing the server response."},"Retry":{"string":"Retry"},"Salasano unohtunut?":{"string":"Salasano unohtunut?"},"Information":{"string":"Information"},"%@ remaining":{"string":"%@ remaining"},"Your book has not yet been downloaded.":{"string":"Your book has not yet been downloaded."},"You need to login to access the collection.":{"string":"You need to login to access the collection."},"Cancel":{"string":"Cancel"},"One and a half times faster than normal speed.":{"string":"One and a half times faster than normal speed."},"Reservations":{"string":"Reservations"},"Pause":{"string":"Pause"},"Track %@":{"string":"Track %@"},"Ready for Download":{"string":"Ready for Download"},"Your report will be reviewed as soon as possible.":{"string":"Your report will be reviewed as soon as possible."},"Try Again":{"string":"Try Again"},"Try force-quitting the app and repeat the sign-in process.":{"string":"Try force-quitting the app and repeat the sign-in process."},"hour_suffix_short":{"string":"{???, plural, one {1 h} other {%d h}}"},"Location Recovery Error":{"string":"Location Recovery Error"},"%@":{"string":"%@"},"Opens audiobook %@ for listening":{"string":"Opens audiobook %@ for listening"},"Check Connection":{"string":"Check Connection"},"The book license has expired.":{"string":"The book license has expired."},"Delete":{"string":"Delete"},"ABCabc":{"string":"ABCabc"},"Reader settings":{"string":"Reader settings"},"You are %ld in line.":{"string":"You are %ld in line."},"The Palace App requires a one-time location check in order to verify your library service area. You have disabled location services for this app. To enable, please select the 'Open Settings' button below then continue with card creation.":{"string":"The Palace App requires a one-time location check in order to verify your library service area. You have disabled location services for this app. To enable, please select the 'Open Settings' button below then continue with card creation."},"Read more":{"string":"Read more"},"week_suffix_short":{"string":"{???, plural, one {1 w} other {%d w}}"},"Gets %@":{"string":"Gets %@"},"Check Out":{"string":"Check Out"},"%d hour and %d minute":{"string":"%1$d hour and %2$d minute"},"Book format:":{"string":"Book format:"},"The download could not be completed.\nScroll down to 'View Issues' to see details.":{"string":"The download could not be completed.\nScroll down to 'View Issues' to see details."},"If you are under 13, all content downloaded to My Books will be removed.":{"string":"If you are under 13, all content downloaded to My Books will be removed."},"When you reserve a book from the catalog, it will show up here. Look here from time to time to see if your book is available to download.":{"string":"When you reserve a book from the catalog, it will show up here. Look here from time to time to see if your book is available to download."},"Default book font":{"string":"Default book font"},"Please try again later.":{"string":"Please try again later."},"Narrators":{"string":"Narrators"},"We can’t get your library right now. Please close and reopen the app to try again.":{"string":"We can’t get your library right now. Please close and reopen the app to try again."},"Table of Contents":{"string":"Table of Contents"},"Keep":{"string":"Keep"},"Table of contents and bookmarks":{"string":"Table of contents and bookmarks"},"Unable to contact the server because the URL for signing in is missing.":{"string":"Unable to contact the server because the URL for signing in is missing."},"Internal Error, bookmark failed to save.":{"string":"Internal Error, bookmark failed to save."},"Please check your username and password and try again.":{"string":"Please check your username and password and try again."},"The download could not be completed.":{"string":"The download could not be completed."},"Delete Server Data":{"string":"Delete Server Data"},"Your book is ready to read!":{"string":"Your book is ready to read!"},"Cancels hold for %@":{"string":"Cancels hold for %@"},"hour_suffix_long":{"string":"{???, plural, one {1 hour} other {%d hours}}"},"Sync Bookmarks":{"string":"Sync Bookmarks"},"Age Verification":{"string":"Age Verification"},"Next Chapter":{"string":"Next Chapter"},"The DRM Library is taking longer than expected. Please wait and try again later.\n\nIf the problem persists, try to sign out and back in again from the Library Settings menu.":{"string":"The DRM Library is taking longer than expected. Please wait and try again later.\n\nIf the problem persists, try to sign out and back in again from the Library Settings menu."},"0.75×":{"string":"0.75×"},"15 Minutes":{"string":"15 Minutes"},"%@ until playback pauses":{"string":"%@ until playback pauses"},"Account":{"string":"Account"},"Wait":{"string":"Wait"},"Play":{"string":"Play"},"Returns %@":{"string":"Returns %@"},"Corrupted Audiobook":{"string":"Corrupted Audiobook"},"Distributed by: ":{"string":"Distributed by: "},"We're sorry. Our sign up system is currently down. Please try again later.":{"string":"We're sorry. Our sign up system is currently down. Please try again later."},"Authentication Required":{"string":"Authentication Required"},"GCDAsyncSocketReadTimeoutError":{"string":"Read operation timed out"},"User denied location access. Go to system settings to enable location access for the Palace App.":{"string":"User denied location access. Go to system settings to enable location access for the Palace App."},"Unsupported Item":{"string":"Unsupported Item"},"Please wait":{"string":"Please wait"},"Black on sepia text":{"string":"Black on sepia text"},"The Palace App requires a one-time location check in order to verify your library service area. Once you choose \"Create Card\", please select \"Allow Once\" in the popup so we can verify this information.":{"string":"The Palace App requires a one-time location check in order to verify your library service area. Once you choose \"Create Card\", please select \"Allow Once\" in the popup so we can verify this information."},"Book Cover":{"string":"Book Cover"},"You are %ld in line for %ld copies.":{"string":"You are %1$ld in line for %2$ld copies."},"This reservation will be automatically cancelled in %@.":{"string":"This reservation will be automatically cancelled in %@."},"(book.title) is an Adobe PDF, which is not supported.":{"string":"(book.title) is an Adobe PDF, which is not supported."},"Downloads %@":{"string":"Downloads %@"},"Visit the Catalog to\nadd books to My Books.":{"string":"Visit the Catalog to\nadd books to My Books."},"Borrow Failed":{"string":"Borrow Failed"},"Borrowing %@ could not be completed.":{"string":"Borrowing %@ could not be completed."},"Serif font":{"string":"Serif font"},"Camera Access Disabled":{"string":"Camera Access Disabled"},"Close":{"string":"Close"},"Something went wrong with the Adobe DRM system":{"string":"Something went wrong with the Adobe DRM system"},"Unsupported format":{"string":"Unsupported format"},"Show":{"string":"Show"},"Acknowledgements":{"string":"Acknowledgements"},"It looks like you may have a book download or return in progress. Would you like to stop that and continue logging out?":{"string":"It looks like you may have a book download or return in progress. Would you like to stop that and continue logging out?"},"Save your reading position and bookmarks to all your other devices.":{"string":"Save your reading position and bookmarks to all your other devices."},"Sign in":{"string":"Sign in"},"Load error. Please try signing out, then log in again.":{"string":"Load error. Please try signing out, then log in again."},"Cancels the download for the current book: %@":{"string":"Cancels the download for the current book: %@"},"Table of contents":{"string":"Table of contents"},"The book you were trying to read is in an unsupported format.":{"string":"The book you were trying to read is in an unsupported format."},"Content Licenses":{"string":"Content Licenses"},"Browse Books":{"string":"Browse Books"},"Please wait...":{"string":"Please wait..."},"Back":{"string":"Back"},"Your Audiobook Has Finished":{"string":"Your Audiobook Has Finished"},"WAITING FOR AVAILABILITY":{"string":"WAITING FOR AVAILABILITY"},"The audiobook you are trying to open appears to be corrupted. Try downloading it again.":{"string":"The audiobook you are trying to open appears to be corrupted. Try downloading it again."},"Category":{"string":"Category"},"PDF":{"string":"PDF"},"The return of %@ could not be completed.":{"string":"The return of %@ could not be completed."},"Search":{"string":"Search"},"Aa":{"string":"Aa"},"Downloading:":{"string":"Downloading:"},"Request New Codes":{"string":"Request New Codes"},"Authentication Expired":{"string":"Authentication Expired"},"Add Library":{"string":"Add Library"},"View Sample":{"string":"View Sample"},"Off":{"string":"Off"},"(dateType.rawValue)_suffix_long":{"string":"(dateType.rawValue)_suffix_long"},"Chapters":{"string":"Chapters"},"year_suffix_long":{"string":"{???, plural, one {1 year} other {%d years}}"},"The title you reserved, (book.title), is available.":{"string":"The title you reserved, (book.title), is available."},"%d minute":{"string":"%d minute"},"1.25×":{"string":"1.25×"},"eCard":{"string":"eCard"},"White on black text":{"string":"White on black text"},"Announcement":{"string":"Announcement"},"The download for %@ could not be completed.":{"string":"The download for %@ could not be completed."},"The book you were trying to read is corrupted. Please try downloading it again.":{"string":"The book you were trying to read is corrupted. Please try downloading it again."},"Don't have a library card?":{"string":"Don't have a library card?"},"Loading... Please wait.":{"string":"Loading... Please wait."},"Duration":{"string":"Duration"},"Fast Forward %d seconds":{"string":"Fast Forward %d seconds"},"DRM Error":{"string":"DRM Error"},"Search Reservations":{"string":"Search Reservations"},"Move":{"string":"Move"},"Get":{"string":"Get"},"Description":{"string":"Description"},"We're sorry. Currently we do not support signups for new patrons via the app.":{"string":"We're sorry. Currently we do not support signups for new patrons via the app."},"Cancels the failed download for this book: %@":{"string":"Cancels the failed download for this book: %@"},"Some books will be unavailable in this version. Please try updating to the latest version of the application.":{"string":"Some books will be unavailable in this version. Please try updating to the latest version of the application."},"%d seconds":{"string":"%d seconds"},"Return":{"string":"Return"},"Published":{"string":"Published"},"Open Settings":{"string":"Open Settings"},"Unkown error occurred. Please try again.":{"string":"Unkown error occurred. Please try again."},"Selecting \"Delete\" will remove all bookmarks from the server for %@.":{"string":"Selecting \"Delete\" will remove all bookmarks from the server for %@."},"Your authentication details have expired. Please sign in again.":{"string":"Your authentication details have expired. Please sign in again."},"Previous Chapter":{"string":"Previous Chapter"},"GCDAsyncSocketClosedError":{"string":"Socket closed by remote peer"},"2.0×":{"string":"2.0×"},"%@ remaining in the book.":{"string":"%@ remaining in the book."},"Are you sure you want to delete \"%@\"?":{"string":"Are you sure you want to delete \"%@\"?"},"An unknown error occurred while trying to sign out.":{"string":"An unknown error occurred while trying to sign out."},"Playback Speed":{"string":"Playback Speed"},"No Results Found":{"string":"No Results Found"},"Please check your connection and try again.":{"string":"Please check your connection and try again."},"Two times normal speed. Fastest.":{"string":"Two times normal speed. Fastest."},"currently":{"string":"currently"},"Accept":{"string":"Accept"},"Retry the failed download for this book: %@":{"string":"Retry the failed download for this book: %@"},"year_suffix_short":{"string":"{???, plural, one {1 y} other {%d y}}"},"Available for checkout in less than %@.":{"string":"Available for checkout in less than %@."}}}
+{
+   "en" : {
+      "\nYou are %ld in line for %ld copies." : {
+         "string" : "\nYou are %1$ld in line for %2$ld copies."
+      },
+      "%02d hr %02 dmin" : {
+         "string" : "%1$d hr %2$d min"
+      },
+      "%02d hr, %02d min remaining" : {
+         "string" : "%1$d hr, %2$d min remaining"
+      },
+      "%02d min remaining" : {
+         "string" : "%02d min remaining"
+      },
+      "%02d:%02d" : {
+         "string" : "%1$d:%2$d"
+      },
+      "%02d:%02d:%02d" : {
+         "string" : "%1$d:%2$d:%3$d"
+      },
+      "%02dmin" : {
+         "string" : "%02dmin"
+      },
+      "%@" : {
+         "string" : "%@"
+      },
+      "%@ %@" : {
+         "string" : "%1$@ %2$@"
+      },
+      "%@ (file %@ of %d)" : {
+         "string" : "%1$@ (file %2$@ of %3$d)"
+      },
+      "%@ played. %@ remaining." : {
+         "string" : "%1$@ played. %2$@ remaining."
+      },
+      "%@ remaining" : {
+         "string" : "%@ remaining"
+      },
+      "%@ remaining in the book." : {
+         "string" : "%@ remaining in the book."
+      },
+      "%@ through chapter" : {
+         "string" : "%@ through chapter"
+      },
+      "%@ until playback pauses" : {
+         "string" : "%@ until playback pauses"
+      },
+      "%@ version %@ (%@)" : {
+         "string" : "%1$@ version %2$@ (%3$@)"
+      },
+      "%@%" : {
+         "string" : "%1$@%2$"
+      },
+      "%d hour and %d minute" : {
+         "string" : "%1$d hour and %2$d minute"
+      },
+      "%d hour and %d minutes" : {
+         "string" : "%1$d hour and %2$d minutes"
+      },
+      "%d hours and %d minute" : {
+         "string" : "%1$d hours and %2$d minute"
+      },
+      "%d hours and %d minutes" : {
+         "string" : "%1$d hours and %2$d minutes"
+      },
+      "%d hours, %d minutes and %d seconds" : {
+         "string" : "%1$d hours, %2$d minutes and %3$d seconds"
+      },
+      "%d minute" : {
+         "string" : "%d minute"
+      },
+      "%d minutes" : {
+         "string" : "%d minutes"
+      },
+      "%d minutes and %d seconds" : {
+         "string" : "%1$d minutes and %2$d seconds"
+      },
+      "%d second" : {
+         "string" : "%d second"
+      },
+      "%d seconds" : {
+         "string" : "%d seconds"
+      },
+      "(book.title) is an Adobe PDF, which is not supported." : {
+         "string" : "(book.title) is an Adobe PDF, which is not supported."
+      },
+      "(dateType.rawValue)_suffix_long" : {
+         "string" : "(dateType.rawValue)_suffix_long"
+      },
+      "(dateType.rawValue)_suffix_short" : {
+         "string" : "(dateType.rawValue)_suffix_short"
+      },
+      "0.75×" : {
+         "string" : "0.75×"
+      },
+      "1.0×" : {
+         "string" : "1.0×"
+      },
+      "1.0× (Normal)" : {
+         "string" : "1.0× (Normal)"
+      },
+      "1.25×" : {
+         "string" : "1.25×"
+      },
+      "1.50×" : {
+         "string" : "1.50×"
+      },
+      "13 or Older" : {
+         "string" : "13 or Older"
+      },
+      "15 Minutes" : {
+         "string" : "15 Minutes"
+      },
+      "2.0×" : {
+         "string" : "2.0×"
+      },
+      "30 Minutes" : {
+         "string" : "30 Minutes"
+      },
+      "60 Minutes" : {
+         "string" : "60 Minutes"
+      },
+      "<>" : {
+         "string" : "<>"
+      },
+      "A" : {
+         "string" : "A"
+      },
+      "A Problem Has Occurred" : {
+         "string" : "A Problem Has Occurred"
+      },
+      "A bookmark has already been saved at this location." : {
+         "string" : "A bookmark has already been saved at this location."
+      },
+      "ABCabc" : {
+         "string" : "ABCabc"
+      },
+      "AVAILABLE FOR CHECKOUT" : {
+         "string" : "AVAILABLE FOR CHECKOUT"
+      },
+      "Aa" : {
+         "string" : "Aa"
+      },
+      "About" : {
+         "string" : "About"
+      },
+      "About App" : {
+         "string" : "About App"
+      },
+      "Accept" : {
+         "string" : "Accept"
+      },
+      "Accessibility Statement" : {
+         "string" : "Accessibility Statement"
+      },
+      "AccessibilitySwitchLibrary" : {
+         "string" : "AccessibilitySwitchLibrary"
+      },
+      "Account" : {
+         "string" : "Account"
+      },
+      "Acknowledgements" : {
+         "string" : "Acknowledgements"
+      },
+      "Add Bookmark" : {
+         "string" : "Add Bookmark"
+      },
+      "Add Library" : {
+         "string" : "Add Library"
+      },
+      "Advanced" : {
+         "string" : "Advanced"
+      },
+      "Age Verification" : {
+         "string" : "Age Verification"
+      },
+      "All licenses of this book are currently checked out." : {
+         "string" : "All licenses of this book are currently checked out."
+      },
+      "An error occurred during the authentication process" : {
+         "string" : "An error occurred during the authentication process"
+      },
+      "An error was encountered while parsing the server response." : {
+         "string" : "An error was encountered while parsing the server response."
+      },
+      "An error was encountered while trying to open this book." : {
+         "string" : "An error was encountered while trying to open this book."
+      },
+      "An unknown error occurred while trying to sign out." : {
+         "string" : "An unknown error occurred while trying to sign out."
+      },
+      "An unknown error occurred. Please check your connection or try again later." : {
+         "string" : "An unknown error occurred. Please check your connection or try again later."
+      },
+      "Announcement" : {
+         "string" : "Announcement"
+      },
+      "Are you sure you want ot remove \"%@\" from your reservations? You will no longer be in line for this book." : {
+         "string" : "Are you sure you want ot remove \"%@\" from your reservations? You will no longer be in line for this book."
+      },
+      "Are you sure you want to delete \"%@\"?" : {
+         "string" : "Are you sure you want to delete \"%@\"?"
+      },
+      "Are you sure you want to remove \"%@\" from your reservations? You will no longer be in line for this book." : {
+         "string" : "Are you sure you want to remove \"%@\" from your reservations? You will no longer be in line for this book."
+      },
+      "Are you sure you want to return \"%@\"?" : {
+         "string" : "Are you sure you want to return \"%@\"?"
+      },
+      "Audiobook" : {
+         "string" : "Audiobook"
+      },
+      "Authenticate to reveal your PIN." : {
+         "string" : "Authenticate to reveal your PIN."
+      },
+      "Authentication Expired" : {
+         "string" : "Authentication Expired"
+      },
+      "Authentication Required" : {
+         "string" : "Authentication Required"
+      },
+      "Author" : {
+         "string" : "Author"
+      },
+      "Available for checkout in less than %@." : {
+         "string" : "Available for checkout in less than %@."
+      },
+      "Back" : {
+         "string" : "Back"
+      },
+      "Barcode or Username" : {
+         "string" : "Barcode or Username"
+      },
+      "Black on sepia text" : {
+         "string" : "Black on sepia text"
+      },
+      "Book Cover" : {
+         "string" : "Book Cover"
+      },
+      "Book format" : {
+         "string" : "Book format"
+      },
+      "Book format:" : {
+         "string" : "Book format:"
+      },
+      "Bookmark added" : {
+         "string" : "Bookmark added"
+      },
+      "Bookmarks" : {
+         "string" : "Bookmarks"
+      },
+      "Borrow Failed" : {
+         "string" : "Borrow Failed"
+      },
+      "Borrowing %@ could not be completed." : {
+         "string" : "Borrowing %@ could not be completed."
+      },
+      "BrightnessSlider" : {
+         "string" : "BrightnessSlider"
+      },
+      "Browse Books" : {
+         "string" : "Browse Books"
+      },
+      "By signing in, you agree the End User License Agreement" : {
+         "string" : "By signing in, you agree the End User License Agreement"
+      },
+      "By signing in, you agree to the End User License Agreement." : {
+         "string" : "By signing in, you agree to the End User License Agreement."
+      },
+      "Camera Access Disabled" : {
+         "string" : "Camera Access Disabled"
+      },
+      "Cancel" : {
+         "string" : "Cancel"
+      },
+      "Cancels hold for %@" : {
+         "string" : "Cancels hold for %@"
+      },
+      "Cancels the download for the current book: %@" : {
+         "string" : "Cancels the download for the current book: %@"
+      },
+      "Cancels the failed download for this book: %@" : {
+         "string" : "Cancels the failed download for this book: %@"
+      },
+      "Categories" : {
+         "string" : "Categories"
+      },
+      "Category" : {
+         "string" : "Category"
+      },
+      "Chapters" : {
+         "string" : "Chapters"
+      },
+      "Check Connection" : {
+         "string" : "Check Connection"
+      },
+      "Check Out" : {
+         "string" : "Check Out"
+      },
+      "Close" : {
+         "string" : "Close"
+      },
+      "Connection Failed" : {
+         "string" : "Connection Failed"
+      },
+      "Content Licenses" : {
+         "string" : "Content Licenses"
+      },
+      "Contents" : {
+         "string" : "Contents"
+      },
+      "Continue" : {
+         "string" : "Continue"
+      },
+      "Continue without signing in" : {
+         "string" : "Continue without signing in"
+      },
+      "Corrupted Audiobook" : {
+         "string" : "Corrupted Audiobook"
+      },
+      "Create Card" : {
+         "string" : "Create Card"
+      },
+      "Currently Playing: %@" : {
+         "string" : "Currently Playing: %@"
+      },
+      "DRM Error" : {
+         "string" : "DRM Error"
+      },
+      "DecreaseFontSize" : {
+         "string" : "DecreaseFontSize"
+      },
+      "Default book font" : {
+         "string" : "Default book font"
+      },
+      "Delete" : {
+         "string" : "Delete"
+      },
+      "Delete Server Data" : {
+         "string" : "Delete Server Data"
+      },
+      "Deletes %@" : {
+         "string" : "Deletes %@"
+      },
+      "Description" : {
+         "string" : "Description"
+      },
+      "Distributed by: " : {
+         "string" : "Distributed by: "
+      },
+      "Do you want to move to the page on which you left off?" : {
+         "string" : "Do you want to move to the page on which you left off?"
+      },
+      "Do you want to move to the time on which you left off?" : {
+         "string" : "Do you want to move to the time on which you left off?"
+      },
+      "Don't have a library card?" : {
+         "string" : "Don't have a library card?"
+      },
+      "Done" : {
+         "string" : "Done"
+      },
+      "Download" : {
+         "string" : "Download"
+      },
+      "Download Error" : {
+         "string" : "Download Error"
+      },
+      "Downloading" : {
+         "string" : "Downloading"
+      },
+      "Downloading:" : {
+         "string" : "Downloading:"
+      },
+      "Downloading: %@%%" : {
+         "string" : "Downloading: %@%%"
+      },
+      "Downloads %@" : {
+         "string" : "Downloads %@"
+      },
+      "Duration" : {
+         "string" : "Duration"
+      },
+      "E-Library Sync" : {
+         "string" : "E-Library Sync"
+      },
+      "E-kirjasto requires a one-time location check in order to verify your library service area. Once you choose \"Create Card\", please select \"Allow Once\" in the popup so we can verify this information." : {
+         "string" : "E-kirjasto requires a one-time location check in order to verify your library service area. Once you choose \"Create Card\", please select \"Allow Once\" in the popup so we can verify this information."
+      },
+      "E-kirjasto requires a one-time location check in order to verify your library service area. You have disabled location services for this app. To enable, please select the 'Open Settings' button below then continue with card creation." : {
+         "string" : "E-kirjasto requires a one-time location check in order to verify your library service area. You have disabled location services for this app. To enable, please select the 'Open Settings' button below then continue with card creation."
+      },
+      "E-kirjasto test login" : {
+         "string" : "E-kirjasto test login"
+      },
+      "Enable Sync" : {
+         "string" : "Enable Sync"
+      },
+      "Enable sync to save your reading position and bookmarks to your other devices.\n\nYou can change this any time in Settings." : {
+         "string" : "Enable sync to save your reading position and bookmarks to your other devices.\n\nYou can change this any time in Settings."
+      },
+      "End of Chapter" : {
+         "string" : "End of Chapter"
+      },
+      "Error" : {
+         "string" : "Error"
+      },
+      "Error Changing Sync Setting" : {
+         "string" : "Error Changing Sync Setting"
+      },
+      "Error Loading Library" : {
+         "string" : "Error Loading Library"
+      },
+      "Error extracting encrypted PDF file" : {
+         "string" : "Error extracting encrypted PDF file"
+      },
+      "FAQ" : {
+         "string" : "FAQ"
+      },
+      "Failed to get current location. Please try again." : {
+         "string" : "Failed to get current location. Please try again."
+      },
+      "Fast Forward %d seconds" : {
+         "string" : "Fast Forward %d seconds"
+      },
+      "Feedback" : {
+         "string" : "Feedback"
+      },
+      "Find Your Library" : {
+         "string" : "Find Your Library"
+      },
+      "Forgot your password?" : {
+         "string" : "Forgot your password?"
+      },
+      "GCDAsyncSocketClosedError" : {
+         "string" : "Socket closed by remote peer"
+      },
+      "GCDAsyncSocketConnectTimeoutError" : {
+         "string" : "Attempt to connect to host timed out"
+      },
+      "GCDAsyncSocketReadMaxedOutError" : {
+         "string" : "Read operation reached set maximum length"
+      },
+      "GCDAsyncSocketReadTimeoutError" : {
+         "string" : "Read operation timed out"
+      },
+      "GCDAsyncSocketWriteTimeoutError" : {
+         "string" : "Write operation timed out"
+      },
+      "Get" : {
+         "string" : "Get"
+      },
+      "Gets %@" : {
+         "string" : "Gets %@"
+      },
+      "Hide Barcode" : {
+         "string" : "Hide Barcode"
+      },
+      "Holds %@" : {
+         "string" : "Holds %@"
+      },
+      "ISBN" : {
+         "string" : "ISBN"
+      },
+      "If another device is available, send the audio over Bluetooth or Airplay. Otherwise do nothing." : {
+         "string" : "If another device is available, send the audio over Bluetooth or Airplay. Otherwise do nothing."
+      },
+      "If you are under 13, all content downloaded to My Books will be removed." : {
+         "string" : "If you are under 13, all content downloaded to My Books will be removed."
+      },
+      "If you sign out without enabling Sync, your books and any saved bookmarks will be removed." : {
+         "string" : "If you sign out without enabling Sync, your books and any saved bookmarks will be removed."
+      },
+      "If you sign out, your books and any saved bookmarks will be removed." : {
+         "string" : "If you sign out, your books and any saved bookmarks will be removed."
+      },
+      "Illustrators" : {
+         "string" : "Illustrators"
+      },
+      "IncreaseFontSize" : {
+         "string" : "IncreaseFontSize"
+      },
+      "Information" : {
+         "string" : "Information"
+      },
+      "Internal Error, bookmark failed to save." : {
+         "string" : "Internal Error, bookmark failed to save."
+      },
+      "Invalid Credentials" : {
+         "string" : "Invalid Credentials"
+      },
+      "It looks like you may have a book download or return in progress. Would you like to stop that and continue logging out?" : {
+         "string" : "It looks like you may have a book download or return in progress. Would you like to stop that and continue logging out?"
+      },
+      "It will expire in %@." : {
+         "string" : "It will expire in %@."
+      },
+      "Keep" : {
+         "string" : "Keep"
+      },
+      "Kirjaudu palveluun" : {
+         "string" : "Kirjaudu palveluun"
+      },
+      "Language" : {
+         "string" : "Language"
+      },
+      "Less than 1 min remaining" : {
+         "string" : "Less than 1 min remaining"
+      },
+      "Libraries" : {
+         "string" : "Libraries"
+      },
+      "Listen" : {
+         "string" : "Listen"
+      },
+      "Load error. Please try signing out, then log in again." : {
+         "string" : "Load error. Please try signing out, then log in again."
+      },
+      "Loading... Please wait." : {
+         "string" : "Loading... Please wait."
+      },
+      "Location Recovery Error" : {
+         "string" : "Location Recovery Error"
+      },
+      "Login" : {
+         "string" : "Login"
+      },
+      "Login Failed" : {
+         "string" : "Login Failed"
+      },
+      "Magazines" : {
+         "string" : "Magazines"
+      },
+      "More" : {
+         "string" : "More"
+      },
+      "More %@ books" : {
+         "string" : "More %@ books"
+      },
+      "More..." : {
+         "string" : "More..."
+      },
+      "Move" : {
+         "string" : "Move"
+      },
+      "My Books" : {
+         "string" : "My Books"
+      },
+      "Narrators" : {
+         "string" : "Narrators"
+      },
+      "Next" : {
+         "string" : "Next"
+      },
+      "Next Chapter" : {
+         "string" : "Next Chapter"
+      },
+      "No Results Found" : {
+         "string" : "No Results Found"
+      },
+      "No email account is set for this device." : {
+         "string" : "No email account is set for this device."
+      },
+      "Normal speed." : {
+         "string" : "Normal speed."
+      },
+      "Not Now" : {
+         "string" : "Not Now"
+      },
+      "OK" : {
+         "string" : "OK"
+      },
+      "Off" : {
+         "string" : "Off"
+      },
+      "One and a half times faster than normal speed." : {
+         "string" : "One and a half times faster than normal speed."
+      },
+      "One and one quarter faster than normal speed." : {
+         "string" : "One and one quarter faster than normal speed."
+      },
+      "Open Settings" : {
+         "string" : "Open Settings"
+      },
+      "Open dyslexic font" : {
+         "string" : "Open dyslexic font"
+      },
+      "Open eBooks provides free books to the children who need them the most.\n\nThe collection includes thousands of popular and award-winning titles as well as hundreds of public domain works." : {
+         "string" : "Open eBooks provides free books to the children who need them the most.\n\nThe collection includes thousands of popular and award-winning titles as well as hundreds of public domain works."
+      },
+      "Opens %@ for reading" : {
+         "string" : "Opens %@ for reading"
+      },
+      "Opens audiobook %@ for listening" : {
+         "string" : "Opens audiobook %@ for listening"
+      },
+      "PDF" : {
+         "string" : "PDF"
+      },
+      "PIN" : {
+         "string" : "PIN"
+      },
+      "PIN code:" : {
+         "string" : "PIN code:"
+      },
+      "Page %d of " : {
+         "string" : "Page %d of "
+      },
+      "Pause" : {
+         "string" : "Pause"
+      },
+      "Play" : {
+         "string" : "Play"
+      },
+      "Play Sample" : {
+         "string" : "Play Sample"
+      },
+      "Playback Destination" : {
+         "string" : "Playback Destination"
+      },
+      "Playback Speed" : {
+         "string" : "Playback Speed"
+      },
+      "Please check your connection and try again." : {
+         "string" : "Please check your connection and try again."
+      },
+      "Please check your username and password and try again." : {
+         "string" : "Please check your username and password and try again."
+      },
+      "Please contact %@ to report an issue." : {
+         "string" : "Please contact %@ to report an issue."
+      },
+      "Please enter your birth year" : {
+         "string" : "Please enter your birth year"
+      },
+      "Please try again later." : {
+         "string" : "Please try again later."
+      },
+      "Please wait" : {
+         "string" : "Please wait"
+      },
+      "Please wait a moment before switching library accounts" : {
+         "string" : "Please wait a moment before switching library accounts"
+      },
+      "Please wait..." : {
+         "string" : "Please wait..."
+      },
+      "Previous Chapter" : {
+         "string" : "Previous Chapter"
+      },
+      "Privacy Policy" : {
+         "string" : "Privacy Policy"
+      },
+      "Prompt login" : {
+         "string" : "Prompt login"
+      },
+      "Published" : {
+         "string" : "Published"
+      },
+      "Publisher" : {
+         "string" : "Publisher"
+      },
+      "Puuttuvatko tunnukset?" : {
+         "string" : "Puuttuvatko tunnukset?"
+      },
+      "Reached the end of the results." : {
+         "string" : "Reached the end of the results."
+      },
+      "Read" : {
+         "string" : "Read"
+      },
+      "Read more" : {
+         "string" : "Read more"
+      },
+      "Reader settings" : {
+         "string" : "Reader settings"
+      },
+      "Ready for Download" : {
+         "string" : "Ready for Download"
+      },
+      "Register a passkey" : {
+         "string" : "Register a passkey"
+      },
+      "Reject" : {
+         "string" : "Reject"
+      },
+      "Rekisteröidy palveluun" : {
+         "string" : "Rekisteröidy palveluun"
+      },
+      "Reload" : {
+         "string" : "Reload"
+      },
+      "Remove" : {
+         "string" : "Remove"
+      },
+      "Remove Bookmark" : {
+         "string" : "Remove Bookmark"
+      },
+      "Remove Reservation" : {
+         "string" : "Remove Reservation"
+      },
+      "Report an Issue" : {
+         "string" : "Report an Issue"
+      },
+      "Request New Codes" : {
+         "string" : "Request New Codes"
+      },
+      "Requesting" : {
+         "string" : "Requesting"
+      },
+      "Reservations" : {
+         "string" : "Reservations"
+      },
+      "Reserve" : {
+         "string" : "Reserve"
+      },
+      "Resume" : {
+         "string" : "Resume"
+      },
+      "Retry" : {
+         "string" : "Retry"
+      },
+      "Retry the failed download for this book: %@" : {
+         "string" : "Retry the failed download for this book: %@"
+      },
+      "Return" : {
+         "string" : "Return"
+      },
+      "Returns %@" : {
+         "string" : "Returns %@"
+      },
+      "Rewind %d seconds" : {
+         "string" : "Rewind %d seconds"
+      },
+      "Salasana unohtunut?" : {
+         "string" : "Salasana unohtunut?"
+      },
+      "Salasano unohtunut?" : {
+         "string" : "Salasano unohtunut?"
+      },
+      "Sample" : {
+         "string" : "Sample"
+      },
+      "Sans font" : {
+         "string" : "Sans font"
+      },
+      "Save the current location bookmark for later listening." : {
+         "string" : "Save the current location bookmark for later listening."
+      },
+      "Save your reading position and bookmarks to all your other devices." : {
+         "string" : "Save your reading position and bookmarks to all your other devices."
+      },
+      "Search" : {
+         "string" : "Search"
+      },
+      "Search My Books" : {
+         "string" : "Search My Books"
+      },
+      "Search Reservations" : {
+         "string" : "Search Reservations"
+      },
+      "Select Year" : {
+         "string" : "Select Year"
+      },
+      "Select a chapter or track from a list." : {
+         "string" : "Select a chapter or track from a list."
+      },
+      "Selecting \"Delete\" will remove all bookmarks from the server for %@." : {
+         "string" : "Selecting \"Delete\" will remove all bookmarks from the server for %@."
+      },
+      "Serif font" : {
+         "string" : "Serif font"
+      },
+      "Settings" : {
+         "string" : "Settings"
+      },
+      "Show" : {
+         "string" : "Show"
+      },
+      "Show Barcode" : {
+         "string" : "Show Barcode"
+      },
+      "Sign In Error" : {
+         "string" : "Sign In Error"
+      },
+      "Sign in" : {
+         "string" : "Sign in"
+      },
+      "Sign in with a passkey" : {
+         "string" : "Sign in with a passkey"
+      },
+      "Sign in with suomi.fi" : {
+         "string" : "Sign in with suomi.fi"
+      },
+      "Sign out" : {
+         "string" : "Sign out"
+      },
+      "Signing out" : {
+         "string" : "Signing out"
+      },
+      "Sleep Timer" : {
+         "string" : "Sleep Timer"
+      },
+      "Software Licenses" : {
+         "string" : "Software Licenses"
+      },
+      "Some books will be unavailable in this version. Please try updating to the latest version of the application." : {
+         "string" : "Some books will be unavailable in this version. Please try updating to the latest version of the application."
+      },
+      "Something went wrong with the Adobe DRM system" : {
+         "string" : "Something went wrong with the Adobe DRM system"
+      },
+      "Sort By:" : {
+         "string" : "Sort By:"
+      },
+      "Stay" : {
+         "string" : "Stay"
+      },
+      "Submit" : {
+         "string" : "Submit"
+      },
+      "Sync Bookmarks" : {
+         "string" : "Sync Bookmarks"
+      },
+      "Sync Listening Position" : {
+         "string" : "Sync Listening Position"
+      },
+      "Sync Reading Position" : {
+         "string" : "Sync Reading Position"
+      },
+      "Table of Contents" : {
+         "string" : "Table of Contents"
+      },
+      "Table of contents" : {
+         "string" : "Table of contents"
+      },
+      "Table of contents and bookmarks" : {
+         "string" : "Table of contents and bookmarks"
+      },
+      "Testing" : {
+         "string" : "Testing"
+      },
+      "Thank You" : {
+         "string" : "Thank You"
+      },
+      "The DRM Library is taking longer than expected. Please wait and try again later.\n\nIf the problem persists, try to sign out and back in again from the Library Settings menu." : {
+         "string" : "The DRM Library is taking longer than expected. Please wait and try again later.\n\nIf the problem persists, try to sign out and back in again from the Library Settings menu."
+      },
+      "The Palace App requires a one-time location check in order to verify your library service area. Once you choose \"Create Card\", please select \"Allow Once\" in the popup so we can verify this information." : {
+         "string" : "The Palace App requires a one-time location check in order to verify your library service area. Once you choose \"Create Card\", please select \"Allow Once\" in the popup so we can verify this information."
+      },
+      "The Palace App requires a one-time location check in order to verify your library service area. You have disabled location services for this app. To enable, please select the 'Open Settings' button below then continue with card creation." : {
+         "string" : "The Palace App requires a one-time location check in order to verify your library service area. You have disabled location services for this app. To enable, please select the 'Open Settings' button below then continue with card creation."
+      },
+      "The audiobook you are trying to open appears to be corrupted. Try downloading it again." : {
+         "string" : "The audiobook you are trying to open appears to be corrupted. Try downloading it again."
+      },
+      "The book license has expired." : {
+         "string" : "The book license has expired."
+      },
+      "The book you were trying to open is invalid." : {
+         "string" : "The book you were trying to open is invalid."
+      },
+      "The book you were trying to read is corrupted. Please try downloading it again." : {
+         "string" : "The book you were trying to read is corrupted. Please try downloading it again."
+      },
+      "The book you were trying to read is in an unsupported format." : {
+         "string" : "The book you were trying to read is in an unsupported format."
+      },
+      "The download could not be completed." : {
+         "string" : "The download could not be completed."
+      },
+      "The download could not be completed.\nScroll down to 'View Issues' to see details." : {
+         "string" : "The download could not be completed.\nScroll down to 'View Issues' to see details."
+      },
+      "The download for %@ could not be completed." : {
+         "string" : "The download for %@ could not be completed."
+      },
+      "The item you are trying to open is not currently supported." : {
+         "string" : "The item you are trying to open is not currently supported."
+      },
+      "The page could not load due to a conection error." : {
+         "string" : "The page could not load due to a conection error."
+      },
+      "The page could not load due to a connection error." : {
+         "string" : "The page could not load due to a connection error."
+      },
+      "The return of %@ could not be completed." : {
+         "string" : "The return of %@ could not be completed."
+      },
+      "The title you reserved, (book.title), is available." : {
+         "string" : "The title you reserved, (book.title), is available."
+      },
+      "There are no bookmarks for this book." : {
+         "string" : "There are no bookmarks for this book."
+      },
+      "There are no results" : {
+         "string" : "There are no results"
+      },
+      "There was a problem contacting the server.\nPlease make sure you are connected to the internet, or try again later." : {
+         "string" : "There was a problem contacting the server.\nPlease make sure you are connected to the internet, or try again later."
+      },
+      "This URL cannot be found. Please close the app entirely and reload it. If the problem persists, please contact your library's Help Desk." : {
+         "string" : "This URL cannot be found. Please close the app entirely and reload it. If the problem persists, please contact your library's Help Desk."
+      },
+      "This book is available to borrow." : {
+         "string" : "This book is available to borrow."
+      },
+      "This reservation will be automatically cancelled in %@." : {
+         "string" : "This reservation will be automatically cancelled in %@."
+      },
+      "Three quarters of normal speed. Slower." : {
+         "string" : "Three quarters of normal speed. Slower."
+      },
+      "Title" : {
+         "string" : "Title"
+      },
+      "Track %@" : {
+         "string" : "Track %@"
+      },
+      "Translators" : {
+         "string" : "Translators"
+      },
+      "Try Again" : {
+         "string" : "Try Again"
+      },
+      "Try force-quitting the app and repeat the sign-in process." : {
+         "string" : "Try force-quitting the app and repeat the sign-in process."
+      },
+      "Two times normal speed. Fastest." : {
+         "string" : "Two times normal speed. Fastest."
+      },
+      "Unable to contact the server because the URL for signing in is missing." : {
+         "string" : "Unable to contact the server because the URL for signing in is missing."
+      },
+      "Unable to load PDF file" : {
+         "string" : "Unable to load PDF file"
+      },
+      "Unable to load the web page at this time." : {
+         "string" : "Unable to load the web page at this time."
+      },
+      "Under 13" : {
+         "string" : "Under 13"
+      },
+      "Unkown error occurred. Please try again." : {
+         "string" : "Unkown error occurred. Please try again."
+      },
+      "Unsupported Item" : {
+         "string" : "Unsupported Item"
+      },
+      "Unsupported format" : {
+         "string" : "Unsupported format"
+      },
+      "User Agreement" : {
+         "string" : "User Agreement"
+      },
+      "User denied location access. Go to system settings to enable location access for E-kirjasto." : {
+         "string" : "User denied location access. Go to system settings to enable location access for E-kirjasto."
+      },
+      "User denied location access. Go to system settings to enable location access for the Palace App." : {
+         "string" : "User denied location access. Go to system settings to enable location access for the Palace App."
+      },
+      "Username:" : {
+         "string" : "Username:"
+      },
+      "Verifying" : {
+         "string" : "Verifying"
+      },
+      "View Sample" : {
+         "string" : "View Sample"
+      },
+      "View sample for %@" : {
+         "string" : "View sample for %@"
+      },
+      "Visit the Catalog to\nadd books to My Books." : {
+         "string" : "Visit the Catalog to\nadd books to My Books."
+      },
+      "WAITING FOR AVAILABILITY" : {
+         "string" : "WAITING FOR AVAILABILITY"
+      },
+      "Wait" : {
+         "string" : "Wait"
+      },
+      "We can’t get your library right now. Please close and reopen the app to try again." : {
+         "string" : "We can’t get your library right now. Please close and reopen the app to try again."
+      },
+      "We're sorry. Currently we do not support signups for new patrons via the app." : {
+         "string" : "We're sorry. Currently we do not support signups for new patrons via the app."
+      },
+      "We're sorry. Our sign up system is currently down. Please try again later." : {
+         "string" : "We're sorry. Our sign up system is currently down. Please try again later."
+      },
+      "Welcome to Open eBooks" : {
+         "string" : "Welcome to Open eBooks"
+      },
+      "When you reserve a book from the catalog, it will show up here. Look here from time to time to see if your book is available to download." : {
+         "string" : "When you reserve a book from the catalog, it will show up here. Look here from time to time to see if your book is available to download."
+      },
+      "White on black text" : {
+         "string" : "White on black text"
+      },
+      "Would you like to return it?" : {
+         "string" : "Would you like to return it?"
+      },
+      "You are %ld in line for %ld copies." : {
+         "string" : "You are %1$ld in line for %2$ld copies."
+      },
+      "You are %ld in line." : {
+         "string" : "You are %ld in line."
+      },
+      "You have already checked out this loan. You may need to refresh your My Books list to download the title." : {
+         "string" : "You have already checked out this loan. You may need to refresh your My Books list to download the title."
+      },
+      "You have disabled location services for this app." : {
+         "string" : "You have disabled location services for this app."
+      },
+      "You must enable camera access for this application in order to sign up for a library card." : {
+         "string" : "You must enable camera access for this application in order to sign up for a library card."
+      },
+      "You need to login to access the collection." : {
+         "string" : "You need to login to access the collection."
+      },
+      "Your Audiobook Has Finished" : {
+         "string" : "Your Audiobook Has Finished"
+      },
+      "Your authentication details have expired. Please sign in again." : {
+         "string" : "Your authentication details have expired. Please sign in again."
+      },
+      "Your book has not yet been downloaded." : {
+         "string" : "Your book has not yet been downloaded."
+      },
+      "Your book is ready to read!" : {
+         "string" : "Your book is ready to read!"
+      },
+      "Your bookmarks and reading positions are in the process of being saved to the server. Would you like to stop that and continue logging out?" : {
+         "string" : "Your bookmarks and reading positions are in the process of being saved to the server. Would you like to stop that and continue logging out?"
+      },
+      "Your report will be reviewed as soon as possible." : {
+         "string" : "Your report will be reviewed as soon as possible."
+      },
+      "accessibilityShowAndReloadCatalogTab" : {
+         "string" : "accessibilityShowAndReloadCatalogTab"
+      },
+      "currently" : {
+         "string" : "currently"
+      },
+      "day_suffix_long" : {
+         "string" : "{???, plural, one {1 day} other {%d days}}"
+      },
+      "day_suffix_short" : {
+         "string" : "{???, plural, one {1 d} other {%d d}}"
+      },
+      "eCard" : {
+         "string" : "eCard"
+      },
+      "ePub" : {
+         "string" : "ePub"
+      },
+      "hour_suffix_long" : {
+         "string" : "{???, plural, one {1 hour} other {%d hours}}"
+      },
+      "hour_suffix_short" : {
+         "string" : "{???, plural, one {1 h} other {%d h}}"
+      },
+      "month_suffix_long" : {
+         "string" : "{???, plural, one {1 month} other {%d months}}"
+      },
+      "month_suffix_short" : {
+         "string" : "{???, plural, one {1 m} other {%d m}}"
+      },
+      "sec" : {
+         "string" : "sec"
+      },
+      "week_suffix_long" : {
+         "string" : "{???, plural, one {1 week} other {%d weeks}}"
+      },
+      "week_suffix_short" : {
+         "string" : "{???, plural, one {1 w} other {%d w}}"
+      },
+      "year_suffix_long" : {
+         "string" : "{???, plural, one {1 year} other {%d years}}"
+      },
+      "year_suffix_short" : {
+         "string" : "{???, plural, one {1 y} other {%d y}}"
+      }
+   },
+   "fi" : {
+      "\nYou are %ld in line for %ld copies." : {
+         "string" : "\nOlet sijalla %1$ld jonossa %2$ld teoksen osalta."
+      },
+      "%02d hr %02 dmin" : {
+         "string" : "%1$d h %2$d min"
+      },
+      "%02d hr, %02d min remaining" : {
+         "string" : "%1$d h, %2$d min jäljellä"
+      },
+      "%02d min remaining" : {
+         "string" : "%02d min jäljellä"
+      },
+      "%02d:%02d" : {
+         "string" : "%1$d:%2$d"
+      },
+      "%02d:%02d:%02d" : {
+         "string" : "%1$d:%2$d:%3$d"
+      },
+      "%02dmin" : {
+         "string" : "%02dmin"
+      },
+      "%@" : {
+         "string" : "%@"
+      },
+      "%@ %@" : {
+         "string" : "%1$@ %2$@"
+      },
+      "%@ (file %@ of %d)" : {
+         "string" : "%1$@ (tiedosto %2$@/%3$d)"
+      },
+      "%@ played. %@ remaining." : {
+         "string" : "%1$@ toistettu. %2$@ jäljellä."
+      },
+      "%@ remaining" : {
+         "string" : "%@ jäljellä"
+      },
+      "%@ remaining in the book." : {
+         "string" : "%@ jäljellä kirjassa."
+      },
+      "%@ through chapter" : {
+         "string" : "%@ luvusta"
+      },
+      "%@ until playback pauses" : {
+         "string" : "%@ kunnes toisto keskeytyy"
+      },
+      "%@ version %@ (%@)" : {
+         "string" : "%1$@ versio %2$@ (%3$@)"
+      },
+      "%@%" : {
+         "string" : "%1$@%2$"
+      },
+      "%d hour and %d minute" : {
+         "string" : "%1$d tunti ja %2$d minuutti"
+      },
+      "%d hour and %d minutes" : {
+         "string" : "%1$d tunti ja %2$d minuuttia"
+      },
+      "%d hours and %d minute" : {
+         "string" : "%1$d tuntia ja %2$d minuutti"
+      },
+      "%d hours and %d minutes" : {
+         "string" : "%1$d tuntia ja %2$d minuuttia"
+      },
+      "%d hours, %d minutes and %d seconds" : {
+         "string" : "%1$d tuntia, %2$d minuuttia ja %3$d sekuntia"
+      },
+      "%d minute" : {
+         "string" : "%d minuutti"
+      },
+      "%d minutes" : {
+         "string" : "%d minuuttia"
+      },
+      "%d minutes and %d seconds" : {
+         "string" : "%1$d minuuttia ja %2$d sekuntia"
+      },
+      "%d second" : {
+         "string" : "%d sekunti"
+      },
+      "%d seconds" : {
+         "string" : "%d sekuntia"
+      },
+      "(book.title) is an Adobe PDF, which is not supported." : {
+         "string" : "(book.title) on Adobe PDF -tiedosto, jota ei tueta."
+      },
+      "(dateType.rawValue)_suffix_long" : {
+         "string" : "(dateType.rawValue)_suffix_long"
+      },
+      "(dateType.rawValue)_suffix_short" : {
+         "string" : "(dateType.rawValue)_suffix_short"
+      },
+      "0.75×" : {
+         "string" : "0.75×"
+      },
+      "1.0×" : {
+         "string" : "1.0×"
+      },
+      "1.0× (Normal)" : {
+         "string" : "1.0× (normaali)"
+      },
+      "1.25×" : {
+         "string" : "1.25×"
+      },
+      "1.50×" : {
+         "string" : "1.50×"
+      },
+      "13 or Older" : {
+         "string" : "13 tai vanhempi"
+      },
+      "15 Minutes" : {
+         "string" : "15 minuuttia"
+      },
+      "2.0×" : {
+         "string" : "2.0×"
+      },
+      "30 Minutes" : {
+         "string" : "30 minuuttia"
+      },
+      "60 Minutes" : {
+         "string" : "60 minuuttia"
+      },
+      "<>" : {
+         "string" : "<>"
+      },
+      "A" : {
+         "string" : "A"
+      },
+      "A Problem Has Occurred" : {
+         "string" : "Ilmeni ongelma"
+      },
+      "A bookmark has already been saved at this location." : {
+         "string" : "Tähän kohtaan on jo tallennettu kirjanmerkki."
+      },
+      "ABCabc" : {
+         "string" : "ABCabc"
+      },
+      "AVAILABLE FOR CHECKOUT" : {
+         "string" : "LAINATTAVISSA"
+      },
+      "Aa" : {
+         "string" : "Aa"
+      },
+      "About" : {
+         "string" : "Tietoja"
+      },
+      "About App" : {
+         "string" : "Tietoja sovelluksesta"
+      },
+      "Accept" : {
+         "string" : "Hyväksy"
+      },
+      "Accessibility Statement" : {
+         "string" : "Saavutettavuusseloste"
+      },
+      "AccessibilitySwitchLibrary" : {
+         "string" : "AccessibilitySwitchLibrary"
+      },
+      "Account" : {
+         "string" : "Tili"
+      },
+      "Acknowledgements" : {
+         "string" : "Kiitokset"
+      },
+      "Add Bookmark" : {
+         "string" : "Lisää kirjanmerkki"
+      },
+      "Add Library" : {
+         "string" : "Lisää kirjasto"
+      },
+      "Advanced" : {
+         "string" : "Edistynyt"
+      },
+      "Age Verification" : {
+         "string" : "Iän vahvistus"
+      },
+      "All licenses of this book are currently checked out." : {
+         "string" : "Kaikki tämän kirjan lisenssit on tällä hetkellä lainattu."
+      },
+      "An error occurred during the authentication process" : {
+         "string" : "Todennusprosessin aikana tapahtui virhe"
+      },
+      "An error was encountered while parsing the server response." : {
+         "string" : "Palvelimen vastauksen jäsennyksessä havaittiin virhe."
+      },
+      "An error was encountered while trying to open this book." : {
+         "string" : "Kirjaa avattaessa tapahtui virhe."
+      },
+      "An unknown error occurred while trying to sign out." : {
+         "string" : "Tuntematon virhe tapahtui, kun yritit kirjautua ulos."
+      },
+      "An unknown error occurred. Please check your connection or try again later." : {
+         "string" : "Tapahtui tuntematon virhe. Tarkista internetyhteys tai yritä myöhemmin uudelleen."
+      },
+      "Announcement" : {
+         "string" : "Ilmoitus"
+      },
+      "Are you sure you want ot remove \"%@\" from your reservations? You will no longer be in line for this book." : {
+         "string" : "Haluatko varmasti poistaa teoksen %@ varauksistasi? Sen jälkeen et enää jonota tätä kirjaa."
+      },
+      "Are you sure you want to delete \"%@\"?" : {
+         "string" : "Haluatko varmasti poistaa teoksen %@?"
+      },
+      "Are you sure you want to remove \"%@\" from your reservations? You will no longer be in line for this book." : {
+         "string" : "Haluatko varmasti poistaa teoksen %@ varauksistasi? Sen jälkeen et enää jonota tätä kirjaa."
+      },
+      "Are you sure you want to return \"%@\"?" : {
+         "string" : "Haluatko varmasti palauttaa teoksen %@?"
+      },
+      "Audiobook" : {
+         "string" : "Äänikirja"
+      },
+      "Authenticate to reveal your PIN." : {
+         "string" : "Tunnistaudu PIN-koodisi selvittämiseksi."
+      },
+      "Authentication Expired" : {
+         "string" : "Todennus vanhentunut"
+      },
+      "Authentication Required" : {
+         "string" : "Todennus vaaditaan"
+      },
+      "Author" : {
+         "string" : "Tekijä"
+      },
+      "Available for checkout in less than %@." : {
+         "string" : "Saatavilla lainattavaksi alle %@ kuluttua."
+      },
+      "Back" : {
+         "string" : "Takaisin"
+      },
+      "Barcode or Username" : {
+         "string" : "Viivakoodi tai käyttäjänimi"
+      },
+      "Black on sepia text" : {
+         "string" : "Musta teksti seepialla"
+      },
+      "Book Cover" : {
+         "string" : "Kirjan kansi"
+      },
+      "Book format" : {
+         "string" : ""
+      },
+      "Book format:" : {
+         "string" : "Kirjan tiedostomuoto:"
+      },
+      "Bookmark added" : {
+         "string" : "Kirjanmerkki lisättiin"
+      },
+      "Bookmarks" : {
+         "string" : "Kirjanmerkit"
+      },
+      "Borrow Failed" : {
+         "string" : "Lainaus epäonnistui"
+      },
+      "Borrowing %@ could not be completed." : {
+         "string" : "Teoksen %@ lainausta ei voitu suorittaa loppuun."
+      },
+      "BrightnessSlider" : {
+         "string" : "BrightnessSlider"
+      },
+      "Browse Books" : {
+         "string" : "Selaa kirjoja"
+      },
+      "By signing in, you agree the End User License Agreement" : {
+         "string" : "Kirjautumalla sisään hyväksyt loppukäyttäjän lisenssisopimuksen"
+      },
+      "By signing in, you agree to the End User License Agreement." : {
+         "string" : "Kirjautumalla sisään hyväksyt loppukäyttäjän lisenssisopimuksen."
+      },
+      "Camera Access Disabled" : {
+         "string" : "Kameran käyttöoikeus estetty"
+      },
+      "Cancel" : {
+         "string" : "Peruuta"
+      },
+      "Cancels hold for %@" : {
+         "string" : "Peruuttaa kohteen %@ varauksen"
+      },
+      "Cancels the download for the current book: %@" : {
+         "string" : "Peruuttaa nykyisen kirjan latauksen: %@"
+      },
+      "Cancels the failed download for this book: %@" : {
+         "string" : "Peruuttaa tämän kirjan epäonnistuneen latauksen: %@"
+      },
+      "Categories" : {
+         "string" : "Luokat"
+      },
+      "Category" : {
+         "string" : "Luokka"
+      },
+      "Chapters" : {
+         "string" : "Luvut"
+      },
+      "Check Connection" : {
+         "string" : "Tarkista yhteys"
+      },
+      "Check Out" : {
+         "string" : "Lainaa"
+      },
+      "Close" : {
+         "string" : "Sulje"
+      },
+      "Connection Failed" : {
+         "string" : "Yhteyden muodostaminen epäonnistui"
+      },
+      "Content Licenses" : {
+         "string" : "Sisältölisenssit"
+      },
+      "Contents" : {
+         "string" : "Sisältö"
+      },
+      "Continue" : {
+         "string" : "Jatka"
+      },
+      "Continue without signing in" : {
+         "string" : "Jatka kirjautumatta sisään"
+      },
+      "Corrupted Audiobook" : {
+         "string" : "Vioittunut äänikirja"
+      },
+      "Create Card" : {
+         "string" : "Luo kortti"
+      },
+      "Currently Playing: %@" : {
+         "string" : "Toistetaan parhaillaan: %@"
+      },
+      "DRM Error" : {
+         "string" : "DRM-virhe"
+      },
+      "DecreaseFontSize" : {
+         "string" : "DecreaseFontSize"
+      },
+      "Default book font" : {
+         "string" : "Kirjan oletusfontti"
+      },
+      "Delete" : {
+         "string" : "Poista"
+      },
+      "Delete Server Data" : {
+         "string" : "Poista palvelimen tiedot"
+      },
+      "Deletes %@" : {
+         "string" : "Poistaa kohteen %@"
+      },
+      "Description" : {
+         "string" : "Kuvaus"
+      },
+      "Distributed by: " : {
+         "string" : "Jakelija:"
+      },
+      "Do you want to move to the page on which you left off?" : {
+         "string" : "Haluatko siirtyä sivulle, jolle jäit?"
+      },
+      "Do you want to move to the time on which you left off?" : {
+         "string" : "Haluatko siirtyä kohtaan, johon jäit?"
+      },
+      "Don't have a library card?" : {
+         "string" : "Eikö sinulla ole kirjastokorttia?"
+      },
+      "Done" : {
+         "string" : "Valmis"
+      },
+      "Download" : {
+         "string" : "Lataa"
+      },
+      "Download Error" : {
+         "string" : "Latausvirhe"
+      },
+      "Downloading" : {
+         "string" : "Ladataan"
+      },
+      "Downloading:" : {
+         "string" : "Ladataan:"
+      },
+      "Downloading: %@%%" : {
+         "string" : "Ladataan: %@%%"
+      },
+      "Downloads %@" : {
+         "string" : "Lataa kohdetta %@"
+      },
+      "Duration" : {
+         "string" : "Kesto"
+      },
+      "E-Library Sync" : {
+         "string" : ""
+      },
+      "E-kirjasto requires a one-time location check in order to verify your library service area. Once you choose \"Create Card\", please select \"Allow Once\" in the popup so we can verify this information." : {
+         "string" : "E-kirjasto vaatii kertaluonteisen sijainnin tarkistuksen, jotta kirjastopalvelualueesi voidaan vahvistaa. Valitse ensin Luo kortti ja valitse sitten ponnahdusikkunassa Salli kerran, jotta voimme vahvistaa tämän tiedon."
+      },
+      "E-kirjasto requires a one-time location check in order to verify your library service area. You have disabled location services for this app. To enable, please select the 'Open Settings' button below then continue with card creation." : {
+         "string" : "E-kirjasto vaatii kertaluonteisen sijainnin tarkistuksen, jotta kirjastopalvelualueesi voidaan vahvistaa. Olet poistanut sijaintipalvelut käytöstä tämän sovelluksen kohdalla. Ota ne käyttöön valitsemalla alla oleva Avaa asetukset -painike. Jatka sen jälkeen kortin luomista."
+      },
+      "E-kirjasto test login" : {
+         "string" : ""
+      },
+      "Enable Sync" : {
+         "string" : ""
+      },
+      "Enable sync to save your reading position and bookmarks to your other devices.\n\nYou can change this any time in Settings." : {
+         "string" : ""
+      },
+      "End of Chapter" : {
+         "string" : "Luvun loppu"
+      },
+      "Error" : {
+         "string" : "Virhe"
+      },
+      "Error Changing Sync Setting" : {
+         "string" : "Virhe synkronointiasetuksen muuttamisessa"
+      },
+      "Error Loading Library" : {
+         "string" : "Virhe kirjaston lataamisessa"
+      },
+      "Error extracting encrypted PDF file" : {
+         "string" : "Virhe salatun PDF-tiedoston purkamisessa"
+      },
+      "FAQ" : {
+         "string" : ""
+      },
+      "Failed to get current location. Please try again." : {
+         "string" : "Tämänhetkisen sijainnin hakeminen epäonnistui. Yritä uudelleen."
+      },
+      "Fast Forward %d seconds" : {
+         "string" : "Kelaa eteenpäin %d sekuntia"
+      },
+      "Feedback" : {
+         "string" : "Palaute"
+      },
+      "Find Your Library" : {
+         "string" : "Etsi kirjastosi"
+      },
+      "Forgot your password?" : {
+         "string" : "Unohditko salasanasi?"
+      },
+      "GCDAsyncSocketClosedError" : {
+         "string" : "Etäkumppani sulki yhteyden"
+      },
+      "GCDAsyncSocketConnectTimeoutError" : {
+         "string" : "Yritys muodostaa yhteys isäntäkoneeseen aikakatkaistiin"
+      },
+      "GCDAsyncSocketReadMaxedOutError" : {
+         "string" : "Lukutoiminto saavutti asetetun enimmäispituuden"
+      },
+      "GCDAsyncSocketReadTimeoutError" : {
+         "string" : "Lukutoiminto aikakatkaistiin"
+      },
+      "GCDAsyncSocketWriteTimeoutError" : {
+         "string" : "Kirjoitustoiminto aikakatkaistiin"
+      },
+      "Get" : {
+         "string" : "Lainaa"
+      },
+      "Gets %@" : {
+         "string" : "Hakee kohteen %@"
+      },
+      "Hide Barcode" : {
+         "string" : "Piilota viivakoodi"
+      },
+      "Holds %@" : {
+         "string" : "Varaa kohteen %@"
+      },
+      "ISBN" : {
+         "string" : ""
+      },
+      "If another device is available, send the audio over Bluetooth or Airplay. Otherwise do nothing." : {
+         "string" : "Jos toinen laite on käytettävissä, lähetä ääni Bluetoothin tai Airplayn kautta. Muussa tapauksessa älä tee mitään."
+      },
+      "If you are under 13, all content downloaded to My Books will be removed." : {
+         "string" : "Jos olet alle 13-vuotias, kaikki Omat kirjat -kohtaan ladattu sisältö poistetaan."
+      },
+      "If you sign out without enabling Sync, your books and any saved bookmarks will be removed." : {
+         "string" : "Jos kirjaudut ulos ottamatta synkronointia käyttöön, kirjasi ja tallennetut kirjanmerkkisi poistetaan."
+      },
+      "If you sign out, your books and any saved bookmarks will be removed." : {
+         "string" : "Jos kirjaudut ulos, kirjasi ja tallennetut kirjanmerkkisi poistetaan."
+      },
+      "Illustrators" : {
+         "string" : ""
+      },
+      "IncreaseFontSize" : {
+         "string" : "IncreaseFontSize"
+      },
+      "Information" : {
+         "string" : "Tiedot"
+      },
+      "Internal Error, bookmark failed to save." : {
+         "string" : "Sisäinen virhe, kirjanmerkin tallennus epäonnistui."
+      },
+      "Invalid Credentials" : {
+         "string" : "Virheelliset kirjautumistiedot"
+      },
+      "It looks like you may have a book download or return in progress. Would you like to stop that and continue logging out?" : {
+         "string" : "Näyttää siltä, että sinulla saattaa olla kirjan lataus tai palautus käynnissä. Haluatko keskeyttää sen ja jatkaa uloskirjautumista?"
+      },
+      "It will expire in %@." : {
+         "string" : "Se vanhenee seuraavan ajan kuluttua: %@."
+      },
+      "Keep" : {
+         "string" : "Säilytä"
+      },
+      "Kirjaudu palveluun" : {
+         "string" : "Kirjaudu palveluun"
+      },
+      "Language" : {
+         "string" : ""
+      },
+      "Less than 1 min remaining" : {
+         "string" : "Alle 1 min jäljellä"
+      },
+      "Libraries" : {
+         "string" : "Kirjastot"
+      },
+      "Listen" : {
+         "string" : "Kuuntele"
+      },
+      "Load error. Please try signing out, then log in again." : {
+         "string" : "Latausvirhe. Kokeile kirjautua ulos ja sitten uudelleen sisään."
+      },
+      "Loading... Please wait." : {
+         "string" : "Ladataan... Odota."
+      },
+      "Location Recovery Error" : {
+         "string" : "Sijainnin palautusvirhe"
+      },
+      "Login" : {
+         "string" : ""
+      },
+      "Login Failed" : {
+         "string" : "Sisäänkirjautuminen epäonnistui"
+      },
+      "Magazines" : {
+         "string" : "Aikakauslehdet"
+      },
+      "More" : {
+         "string" : "Lisää"
+      },
+      "More %@ books" : {
+         "string" : "Lisää kirjoja: %@"
+      },
+      "More..." : {
+         "string" : "Lisää..."
+      },
+      "Move" : {
+         "string" : "Siirry"
+      },
+      "My Books" : {
+         "string" : "Omat lainat"
+      },
+      "Narrators" : {
+         "string" : "Lukijat"
+      },
+      "Next" : {
+         "string" : "Seuraava"
+      },
+      "Next Chapter" : {
+         "string" : "Seuraava luku"
+      },
+      "No Results Found" : {
+         "string" : "Ei hakutuloksia"
+      },
+      "No email account is set for this device." : {
+         "string" : "Tälle laitteelle ei ole määritetty sähköpostitiliä."
+      },
+      "Normal speed." : {
+         "string" : "Normaali nopeus."
+      },
+      "Not Now" : {
+         "string" : ""
+      },
+      "OK" : {
+         "string" : "OK"
+      },
+      "Off" : {
+         "string" : "Pois"
+      },
+      "One and a half times faster than normal speed." : {
+         "string" : "Puolitoista kertaa normaalia nopeutta nopeammin."
+      },
+      "One and one quarter faster than normal speed." : {
+         "string" : "Yksi ja yksi neljäsosa normaalia nopeutta nopeammin."
+      },
+      "Open Settings" : {
+         "string" : "Avaa asetukset"
+      },
+      "Open dyslexic font" : {
+         "string" : "Open dyslexic -fontti"
+      },
+      "Open eBooks provides free books to the children who need them the most.\n\nThe collection includes thousands of popular and award-winning titles as well as hundreds of public domain works." : {
+         "string" : "Open eBooks tarjoaa ilmaisia kirjoja niitä eniten tarvitseville lapsille.\n\nKokoelmaan kuuluu tuhansia suosittuja ja palkittuja julkaisuja sekä satoja tekijänoikeuksista vapaita teoksia."
+      },
+      "Opens %@ for reading" : {
+         "string" : "Avaa teoksen %@ lukemista varten"
+      },
+      "Opens audiobook %@ for listening" : {
+         "string" : "Avaa äänikirjan %@ kuuntelua varten"
+      },
+      "PDF" : {
+         "string" : "PDF"
+      },
+      "PIN" : {
+         "string" : "PIN"
+      },
+      "PIN code:" : {
+         "string" : ""
+      },
+      "Page %d of " : {
+         "string" : "Sivu %d/ "
+      },
+      "Pause" : {
+         "string" : "Keskeytä"
+      },
+      "Play" : {
+         "string" : "Toista"
+      },
+      "Play Sample" : {
+         "string" : "Toista näyte"
+      },
+      "Playback Destination" : {
+         "string" : "Toiston kohde"
+      },
+      "Playback Speed" : {
+         "string" : "Toistonopeus"
+      },
+      "Please check your connection and try again." : {
+         "string" : "Tarkista internetyhteys ja yritä uudelleen."
+      },
+      "Please check your username and password and try again." : {
+         "string" : "Tarkista käyttäjänimesi ja salasanasi, ja yritä uudelleen."
+      },
+      "Please contact %@ to report an issue." : {
+         "string" : "Ilmoita ongelmasta ottamalla yhteyttä kohteeseen %@."
+      },
+      "Please enter your birth year" : {
+         "string" : "Anna syntymävuotesi"
+      },
+      "Please try again later." : {
+         "string" : "Yritä myöhemmin uudelleen."
+      },
+      "Please wait" : {
+         "string" : "Odota"
+      },
+      "Please wait a moment before switching library accounts" : {
+         "string" : "Odota hetki ennen kuin vaihdat kirjastotiliä"
+      },
+      "Please wait..." : {
+         "string" : "Odota..."
+      },
+      "Previous Chapter" : {
+         "string" : "Edellinen luku"
+      },
+      "Privacy Policy" : {
+         "string" : "Tietosuojakäytäntö"
+      },
+      "Prompt login" : {
+         "string" : "Sisäänkirjautuminen kehotteella"
+      },
+      "Published" : {
+         "string" : "Julkaistu"
+      },
+      "Publisher" : {
+         "string" : "Kustantaja"
+      },
+      "Puuttuvatko tunnukset?" : {
+         "string" : "Puuttuvatko tunnukset?"
+      },
+      "Reached the end of the results." : {
+         "string" : "Päästiin tulosten loppuun."
+      },
+      "Read" : {
+         "string" : "Lue"
+      },
+      "Read more" : {
+         "string" : "Lue lisää"
+      },
+      "Reader settings" : {
+         "string" : "Lukijan asetukset"
+      },
+      "Ready for Download" : {
+         "string" : "Valmis ladattavaksi"
+      },
+      "Register a passkey" : {
+         "string" : "Rekisteröi pääsyavain"
+      },
+      "Reject" : {
+         "string" : "Hylkää"
+      },
+      "Rekisteröidy palveluun" : {
+         "string" : "Rekisteröidy palveluun"
+      },
+      "Reload" : {
+         "string" : "Lataa uudelleen"
+      },
+      "Remove" : {
+         "string" : "Poista"
+      },
+      "Remove Bookmark" : {
+         "string" : "Poista kirjanmerkki"
+      },
+      "Remove Reservation" : {
+         "string" : "Poista varaus"
+      },
+      "Report an Issue" : {
+         "string" : "Ilmoita ongelmasta"
+      },
+      "Request New Codes" : {
+         "string" : "Pyydä uusia koodeja"
+      },
+      "Requesting" : {
+         "string" : "Pyydetään"
+      },
+      "Reservations" : {
+         "string" : "Varaukset"
+      },
+      "Reserve" : {
+         "string" : "Varaa"
+      },
+      "Resume" : {
+         "string" : "Jatka"
+      },
+      "Retry" : {
+         "string" : "Yritä uudelleen"
+      },
+      "Retry the failed download for this book: %@" : {
+         "string" : "Yritä ladata tämä kirja uudelleen: %@"
+      },
+      "Return" : {
+         "string" : "Palauta"
+      },
+      "Returns %@" : {
+         "string" : "Palauttaa kohteen %@"
+      },
+      "Rewind %d seconds" : {
+         "string" : "Kelaa taaksepäin %d sekuntia"
+      },
+      "Salasana unohtunut?" : {
+         "string" : "Unohditko salasanasi?"
+      },
+      "Salasano unohtunut?" : {
+         "string" : "Salasana unohtunut?"
+      },
+      "Sample" : {
+         "string" : "Näyte"
+      },
+      "Sans font" : {
+         "string" : "Sans-fontti"
+      },
+      "Save the current location bookmark for later listening." : {
+         "string" : "Tallenna tämänhetkinen sijainti kirjanmerkiksi myöhempää kuuntelua varten."
+      },
+      "Save your reading position and bookmarks to all your other devices." : {
+         "string" : "Tallenna lukukohtasi ja kirjanmerkkisi kaikkiin muihin laitteisiisi."
+      },
+      "Search" : {
+         "string" : "Haku"
+      },
+      "Search My Books" : {
+         "string" : "Hae Omat lainat -listasta."
+      },
+      "Search Reservations" : {
+         "string" : "Hae varauksista"
+      },
+      "Select Year" : {
+         "string" : "Valitse vuosi"
+      },
+      "Select a chapter or track from a list." : {
+         "string" : "Valitse luku tai kappale listalta."
+      },
+      "Selecting \"Delete\" will remove all bookmarks from the server for %@." : {
+         "string" : "Jos valitset Poista, kaikki teoksen %@ kirjanmerkit poistetaan palvelimelta."
+      },
+      "Serif font" : {
+         "string" : "Serif-fontti"
+      },
+      "Settings" : {
+         "string" : "Asetukset"
+      },
+      "Show" : {
+         "string" : "Näytä"
+      },
+      "Show Barcode" : {
+         "string" : "Näytä viivakoodi"
+      },
+      "Sign In Error" : {
+         "string" : "Kirjautumisvirhe"
+      },
+      "Sign in" : {
+         "string" : "Kirjaudu sisään"
+      },
+      "Sign in with a passkey" : {
+         "string" : "Kirjaudu sisään pääsyavaimella"
+      },
+      "Sign in with suomi.fi" : {
+         "string" : "Kirjaudu sisään suomi.fi-tunnistuksella"
+      },
+      "Sign out" : {
+         "string" : "Kirjaudu ulos"
+      },
+      "Signing out" : {
+         "string" : "Kirjaudutaan ulos"
+      },
+      "Sleep Timer" : {
+         "string" : "Uniajastin"
+      },
+      "Software Licenses" : {
+         "string" : "Ohjelmistolisenssit"
+      },
+      "Some books will be unavailable in this version. Please try updating to the latest version of the application." : {
+         "string" : "Jotkut kirjat eivät ole saatavilla tässä versiossa. Kokeile päivittää sovellus uusimpaan versioon."
+      },
+      "Something went wrong with the Adobe DRM system" : {
+         "string" : "Jokin meni pieleen Adoben DRM-järjestelmässä"
+      },
+      "Sort By:" : {
+         "string" : "Lajitteluperuste:"
+      },
+      "Stay" : {
+         "string" : "Pysy"
+      },
+      "Submit" : {
+         "string" : "Lähetä"
+      },
+      "Sync Bookmarks" : {
+         "string" : "Synkronoi kirjanmerkit"
+      },
+      "Sync Listening Position" : {
+         "string" : "Synkronoi kuuntelukohta"
+      },
+      "Sync Reading Position" : {
+         "string" : "Synkronoi lukukohta"
+      },
+      "Table of Contents" : {
+         "string" : "Sisällysluettelo"
+      },
+      "Table of contents" : {
+         "string" : "Sisällysluettelo"
+      },
+      "Table of contents and bookmarks" : {
+         "string" : "Sisällysluettelo ja kirjanmerkit"
+      },
+      "Testing" : {
+         "string" : "Testaus"
+      },
+      "Thank You" : {
+         "string" : "Kiitos"
+      },
+      "The DRM Library is taking longer than expected. Please wait and try again later.\n\nIf the problem persists, try to sign out and back in again from the Library Settings menu." : {
+         "string" : "DRM-kirjastolla kestää odotettua kauemmin. Odota ja yritä myöhemmin uudelleen.\n\nJos ongelma jatkuu, kokeile kirjautua ulos ja uudelleen sisään Kirjaston asetukset -valikosta."
+      },
+      "The Palace App requires a one-time location check in order to verify your library service area. Once you choose \"Create Card\", please select \"Allow Once\" in the popup so we can verify this information." : {
+         "string" : "Palace-sovellus vaatii kertaluonteisen sijainnin tarkistuksen, jotta kirjastopalvelualueesi voidaan vahvistaa. Valitse ensin Luo kortti ja valitse sitten ponnahdusikkunassa Salli kerran, jotta voimme vahvistaa tämän tiedon."
+      },
+      "The Palace App requires a one-time location check in order to verify your library service area. You have disabled location services for this app. To enable, please select the 'Open Settings' button below then continue with card creation." : {
+         "string" : "Palace-sovellus vaatii kertaluonteisen sijainnin tarkistuksen, jotta kirjastopalvelualueesi voidaan vahvistaa. Olet poistanut sijaintipalvelut käytöstä tämän sovelluksen kohdalla. Ota ne käyttöön valitsemalla alla oleva Avaa asetukset -painike. Jatka sen jälkeen kortin luomista."
+      },
+      "The audiobook you are trying to open appears to be corrupted. Try downloading it again." : {
+         "string" : "Äänikirja, jota yrität avata, vaikuttaa olevan vioittunut. Kokeile ladata se uudelleen."
+      },
+      "The book license has expired." : {
+         "string" : "Kirjan lisenssi on vanhentunut."
+      },
+      "The book you were trying to open is invalid." : {
+         "string" : "Kirja, jonka yritit avata, on virheellinen."
+      },
+      "The book you were trying to read is corrupted. Please try downloading it again." : {
+         "string" : "Kirja, jota yritit lukea, on vioittunut. Yritä ladata se uudelleen."
+      },
+      "The book you were trying to read is in an unsupported format." : {
+         "string" : "Yritit lukea kirjaa, jonka muotoa ei tueta."
+      },
+      "The download could not be completed." : {
+         "string" : "Latausta ei voitu suorittaa loppuun."
+      },
+      "The download could not be completed.\nScroll down to 'View Issues' to see details." : {
+         "string" : "Latausta ei voitu suorittaa loppuun.\nKatso tiedot selaamalla alaspäin kohtaan Näytä ongelmat."
+      },
+      "The download for %@ could not be completed." : {
+         "string" : "Teoksen %@ latausta ei voitu suorittaa loppuun."
+      },
+      "The item you are trying to open is not currently supported." : {
+         "string" : "Kohdetta, jota yrität avata, ei tueta tällä hetkellä."
+      },
+      "The page could not load due to a conection error." : {
+         "string" : "Sivua ei voitu ladata yhteysvirheen vuoksi."
+      },
+      "The page could not load due to a connection error." : {
+         "string" : "Sivua ei voitu ladata yhteysvirheen vuoksi."
+      },
+      "The return of %@ could not be completed." : {
+         "string" : "Teoksen %@ palautusta ei voitu suorittaa loppuun."
+      },
+      "The title you reserved, (book.title), is available." : {
+         "string" : "Varaamasi teos (book.title) on saatavilla."
+      },
+      "There are no bookmarks for this book." : {
+         "string" : "Tässä kirjassa ei ole kirjanmerkkejä."
+      },
+      "There are no results" : {
+         "string" : "Ei hakutuloksia"
+      },
+      "There was a problem contacting the server.\nPlease make sure you are connected to the internet, or try again later." : {
+         "string" : "Yhteyden muodostamisessa palvelimeen oli ongelma.\nVarmista, että internetyhteytesi toimii, tai yritä myöhemmin uudelleen."
+      },
+      "This URL cannot be found. Please close the app entirely and reload it. If the problem persists, please contact your library's Help Desk." : {
+         "string" : "Tätä URL-osoitetta ei löydy. Sulje sovellus kokonaan ja lataa se uudelleen. Jos ongelma jatkuu, ota yhteyttä kirjastosi tukipalveluun."
+      },
+      "This book is available to borrow." : {
+         "string" : "Tämän kirjan voi lainata."
+      },
+      "This reservation will be automatically cancelled in %@." : {
+         "string" : "Tämä varaus peruutetaan automaattisesti seuraavan ajan kuluttua: %@."
+      },
+      "Three quarters of normal speed. Slower." : {
+         "string" : "Kolme neljäsosaa normaalista nopeudesta. Hitaampi."
+      },
+      "Title" : {
+         "string" : "Nimi"
+      },
+      "Track %@" : {
+         "string" : "Kappale %@"
+      },
+      "Translators" : {
+         "string" : ""
+      },
+      "Try Again" : {
+         "string" : "Yritä uudelleen"
+      },
+      "Try force-quitting the app and repeat the sign-in process." : {
+         "string" : "Kokeile pakottaa sovelluksen sulkeminen ja toista sisäänkirjautumisprosessi."
+      },
+      "Two times normal speed. Fastest." : {
+         "string" : "Kaksi kertaa normaali nopeus. Nopein."
+      },
+      "Unable to contact the server because the URL for signing in is missing." : {
+         "string" : "Palvelimeen ei saada yhteyttä, koska sisäänkirjautumisen URL-osoite puuttuu."
+      },
+      "Unable to load PDF file" : {
+         "string" : "PDF-tiedostoa ei voitu ladata"
+      },
+      "Unable to load the web page at this time." : {
+         "string" : "Verkkosivua ei voida ladata tällä hetkellä."
+      },
+      "Under 13" : {
+         "string" : "Alle 13"
+      },
+      "Unkown error occurred. Please try again." : {
+         "string" : "Tapahtui tuntematon virhe. Yritä uudelleen."
+      },
+      "Unsupported Item" : {
+         "string" : "Kohdetta ei tueta"
+      },
+      "Unsupported format" : {
+         "string" : "Muotoa ei tueta"
+      },
+      "User Agreement" : {
+         "string" : "Käyttäjäsopimus"
+      },
+      "User denied location access. Go to system settings to enable location access for E-kirjasto." : {
+         "string" : "Käyttäjä kielsi sijaintitietojen käytön. Siirry järjestelmän asetuksiin ja ota sijaintitiedot käyttöön E-kirjastossa."
+      },
+      "User denied location access. Go to system settings to enable location access for the Palace App." : {
+         "string" : "Käyttäjä kielsi sijaintitietojen käytön. Siirry järjestelmän asetuksiin ja ota sijaintitiedot käyttöön Palace-sovelluksessa."
+      },
+      "Username:" : {
+         "string" : ""
+      },
+      "Verifying" : {
+         "string" : "Vahvistetaan"
+      },
+      "View Sample" : {
+         "string" : "Katso näyte"
+      },
+      "View sample for %@" : {
+         "string" : "Katso näyte kohteesta %@"
+      },
+      "Visit the Catalog to\nadd books to My Books." : {
+         "string" : "Sinulla ei ole voimassa olevia lainoja."
+      },
+      "WAITING FOR AVAILABILITY" : {
+         "string" : "ODOTETAAN SAATAVUUTTA"
+      },
+      "Wait" : {
+         "string" : "Odota"
+      },
+      "We can’t get your library right now. Please close and reopen the app to try again." : {
+         "string" : "Emme pääse kirjastoosi tällä hetkellä. Yritä uudelleen sulkemalla sovellus ja avaamalla se uudelleen."
+      },
+      "We're sorry. Currently we do not support signups for new patrons via the app." : {
+         "string" : "Emme valitettavasti tällä hetkellä tue uusien asiakkaiden rekisteröitymistä sovelluksen kautta."
+      },
+      "We're sorry. Our sign up system is currently down. Please try again later." : {
+         "string" : "Olemme pahoillamme. Kirjautumisjärjestelmämme on tällä hetkellä poissa käytöstä. Yritä myöhemmin uudelleen."
+      },
+      "Welcome to Open eBooks" : {
+         "string" : "Tervetuloa Open eBooksiin"
+      },
+      "When you reserve a book from the catalog, it will show up here. Look here from time to time to see if your book is available to download." : {
+         "string" : "Sinulla ei ole voimassa olevia varauksia."
+      },
+      "White on black text" : {
+         "string" : "Valkoinen teksti mustalla"
+      },
+      "Would you like to return it?" : {
+         "string" : "Haluatko palauttaa sen?"
+      },
+      "You are %ld in line for %ld copies." : {
+         "string" : "Olet sijalla %1$ld jonossa %2$ld teoksen osalta."
+      },
+      "You are %ld in line." : {
+         "string" : "Olet jonossa sijalla %ld."
+      },
+      "You have already checked out this loan. You may need to refresh your My Books list to download the title." : {
+         "string" : "Olet jo lainannut tämän teoksen. Sinun on ehkä päivitettävä Omat lainat -listasi, jotta voit ladata teoksen."
+      },
+      "You have disabled location services for this app." : {
+         "string" : "Olet poistanut tämän sovelluksen sijaintipalvelut käytöstä."
+      },
+      "You must enable camera access for this application in order to sign up for a library card." : {
+         "string" : "Sinun on sallittava kameran käyttö tässä sovelluksessa, jotta voit rekisteröityä kirjastokortin käyttäjäksi."
+      },
+      "You need to login to access the collection." : {
+         "string" : "Sinun on kirjauduttava sisään, jotta voit käyttää kokoelmaa."
+      },
+      "Your Audiobook Has Finished" : {
+         "string" : "Äänikirjasi on päättynyt"
+      },
+      "Your authentication details have expired. Please sign in again." : {
+         "string" : "Tunnistautumistietosi ovat vanhentuneet. Kirjaudu uudelleen sisään."
+      },
+      "Your book has not yet been downloaded." : {
+         "string" : "Kirjaasi ei ole vielä ladattu."
+      },
+      "Your book is ready to read!" : {
+         "string" : "Kirjasi on valmis luettavaksi!"
+      },
+      "Your bookmarks and reading positions are in the process of being saved to the server. Would you like to stop that and continue logging out?" : {
+         "string" : "Kirjanmerkkejäsi ja lukukohtiasi tallennetaan parhaillaan palvelimelle. Haluatko keskeyttää sen ja jatkaa uloskirjautumista?"
+      },
+      "Your report will be reviewed as soon as possible." : {
+         "string" : "Ilmoituksesi tarkistetaan mahdollisimman pian."
+      },
+      "accessibilityShowAndReloadCatalogTab" : {
+         "string" : "accessibilityShowAndReloadCatalogTab"
+      },
+      "currently" : {
+         "string" : "tällä hetkellä"
+      },
+      "day_suffix_long" : {
+         "string" : "{???, plural, one {1 päivä} other {%d päivää}}"
+      },
+      "day_suffix_short" : {
+         "string" : "{???, plural, one {1 pv} other {%d pv}}"
+      },
+      "eCard" : {
+         "string" : "eCard"
+      },
+      "ePub" : {
+         "string" : "ePub"
+      },
+      "hour_suffix_long" : {
+         "string" : "{???, plural, one {1 tunti} other {%d tuntia}}"
+      },
+      "hour_suffix_short" : {
+         "string" : "{???, plural, one {1 h} other {%d h}}"
+      },
+      "month_suffix_long" : {
+         "string" : "{???, plural, one {1 kuukausi} other {%d kuukautta}}"
+      },
+      "month_suffix_short" : {
+         "string" : "{???, plural, one {1 kk} other {%d kk}}"
+      },
+      "sec" : {
+         "string" : "s"
+      },
+      "week_suffix_long" : {
+         "string" : "{???, plural, one {1 viikko} other {%d viikkoa}}"
+      },
+      "week_suffix_short" : {
+         "string" : "{???, plural, one {1 vk} other {%d vk}}"
+      },
+      "year_suffix_long" : {
+         "string" : "{???, plural, one {1 vuosi} other {%d vuotta}}"
+      },
+      "year_suffix_short" : {
+         "string" : "{???, plural, one {1 v} other {%d v}}"
+      }
+   },
+   "sv" : {
+      "\nYou are %ld in line for %ld copies." : {
+         "string" : "\nDu är på plats %1$ld i kö för %2$ld kopior."
+      },
+      "%02d hr %02 dmin" : {
+         "string" : "%1$d h %2$d min"
+      },
+      "%02d hr, %02d min remaining" : {
+         "string" : "%1$d h, %2$d min återstår"
+      },
+      "%02d min remaining" : {
+         "string" : "%02d min återstår"
+      },
+      "%02d:%02d" : {
+         "string" : "%1$d:%2$d"
+      },
+      "%02d:%02d:%02d" : {
+         "string" : "%1$d:%2$d:%3$d"
+      },
+      "%02dmin" : {
+         "string" : "%02dmin"
+      },
+      "%@" : {
+         "string" : "%@"
+      },
+      "%@ %@" : {
+         "string" : "%1$@ %2$@"
+      },
+      "%@ (file %@ of %d)" : {
+         "string" : "%1$@ (fil %2$@ av %3$d)"
+      },
+      "%@ played. %@ remaining." : {
+         "string" : "%1$@ uppspelat. %2$@ återstår."
+      },
+      "%@ remaining" : {
+         "string" : "%@ återstår"
+      },
+      "%@ remaining in the book." : {
+         "string" : "%@ återstår av boken."
+      },
+      "%@ through chapter" : {
+         "string" : "%@ igenom kapitlet"
+      },
+      "%@ until playback pauses" : {
+         "string" : "%@ tills uppspelningen pausas"
+      },
+      "%@ version %@ (%@)" : {
+         "string" : "%1$@ version %2$@ (%3$@)"
+      },
+      "%@%" : {
+         "string" : "%1$@%2$"
+      },
+      "%d hour and %d minute" : {
+         "string" : "%1$d timme och %2$d minut"
+      },
+      "%d hour and %d minutes" : {
+         "string" : "%1$d timmar och %2$d minuter"
+      },
+      "%d hours and %d minute" : {
+         "string" : "%1$d timmar och %2$d minut"
+      },
+      "%d hours and %d minutes" : {
+         "string" : "%1$d timmar och %2$d minuter"
+      },
+      "%d hours, %d minutes and %d seconds" : {
+         "string" : "%1$d timmar, %2$d minuter och %3$d sekunder"
+      },
+      "%d minute" : {
+         "string" : "%d minut"
+      },
+      "%d minutes" : {
+         "string" : "%d minuter"
+      },
+      "%d minutes and %d seconds" : {
+         "string" : "%1$d minuter och %2$d sekunder"
+      },
+      "%d second" : {
+         "string" : "%d sekund"
+      },
+      "%d seconds" : {
+         "string" : "%d sekunder"
+      },
+      "(book.title) is an Adobe PDF, which is not supported." : {
+         "string" : "(book.title) är en Adobe PDF och stöds således inte."
+      },
+      "(dateType.rawValue)_suffix_long" : {
+         "string" : "(dateType.rawValue)_suffix_long"
+      },
+      "(dateType.rawValue)_suffix_short" : {
+         "string" : "(dateType.rawValue)_suffix_short"
+      },
+      "0.75×" : {
+         "string" : "0.75×"
+      },
+      "1.0×" : {
+         "string" : "1.0×"
+      },
+      "1.0× (Normal)" : {
+         "string" : "1,0× (Normal)"
+      },
+      "1.25×" : {
+         "string" : "1.25×"
+      },
+      "1.50×" : {
+         "string" : "1.50×"
+      },
+      "13 or Older" : {
+         "string" : "13 eller äldre"
+      },
+      "15 Minutes" : {
+         "string" : "15 minuter"
+      },
+      "2.0×" : {
+         "string" : "2,0×"
+      },
+      "30 Minutes" : {
+         "string" : "30 minuter"
+      },
+      "60 Minutes" : {
+         "string" : "60 minuter"
+      },
+      "<>" : {
+         "string" : "<>"
+      },
+      "A" : {
+         "string" : "A"
+      },
+      "A Problem Has Occurred" : {
+         "string" : "Det har inträffat ett problem"
+      },
+      "A bookmark has already been saved at this location." : {
+         "string" : "Ett bokmärke har redan sparats på denna position."
+      },
+      "ABCabc" : {
+         "string" : "ABCabc"
+      },
+      "AVAILABLE FOR CHECKOUT" : {
+         "string" : "KAN LÅNAS"
+      },
+      "Aa" : {
+         "string" : "Aa"
+      },
+      "About" : {
+         "string" : "Om"
+      },
+      "About App" : {
+         "string" : "Om appen"
+      },
+      "Accept" : {
+         "string" : "Godkänn"
+      },
+      "Accessibility Statement" : {
+         "string" : "Tillgänglighetsutlåtande"
+      },
+      "AccessibilitySwitchLibrary" : {
+         "string" : "AccessibilitySwitchLibrary"
+      },
+      "Account" : {
+         "string" : "Konto"
+      },
+      "Acknowledgements" : {
+         "string" : "Tillkännagivanden"
+      },
+      "Add Bookmark" : {
+         "string" : "Lägg till bokmärke"
+      },
+      "Add Library" : {
+         "string" : "Lägg till bibliotek"
+      },
+      "Advanced" : {
+         "string" : "Avancerat"
+      },
+      "Age Verification" : {
+         "string" : "Ålderskontroll"
+      },
+      "All licenses of this book are currently checked out." : {
+         "string" : "Alla licenser för denna bok är i användning."
+      },
+      "An error occurred during the authentication process" : {
+         "string" : "Ett fel uppstod under autentiseringsprocessen"
+      },
+      "An error was encountered while parsing the server response." : {
+         "string" : "Ett fel uppstod vid parsning av serversvaret."
+      },
+      "An error was encountered while trying to open this book." : {
+         "string" : "Det uppstod ett fel med att öppna boken."
+      },
+      "An unknown error occurred while trying to sign out." : {
+         "string" : "Ett okänt fel uppstod vid utloggning."
+      },
+      "An unknown error occurred. Please check your connection or try again later." : {
+         "string" : "Det har uppstått ett okänt fel. Kontrollera din anslutning eller försök på nytt senare."
+      },
+      "Announcement" : {
+         "string" : "Tillkännagivande"
+      },
+      "Are you sure you want ot remove \"%@\" from your reservations? You will no longer be in line for this book." : {
+         "string" : "Är du säker att du vill ta bort \"%@\" från dina reservationer? Du kommer inte längre att stå i kö till denna bok."
+      },
+      "Are you sure you want to delete \"%@\"?" : {
+         "string" : "Är du säker att du vill radera \"%@\"?"
+      },
+      "Are you sure you want to remove \"%@\" from your reservations? You will no longer be in line for this book." : {
+         "string" : "Är du säker att du vill ta bort \"%@\" från dina reservationer? Du kommer inte längre att stå i kö till denna bok."
+      },
+      "Are you sure you want to return \"%@\"?" : {
+         "string" : "Är du säker att du vill lämna tillbaka \"%@\"?"
+      },
+      "Audiobook" : {
+         "string" : "Ljudbok"
+      },
+      "Authenticate to reveal your PIN." : {
+         "string" : "Autentisera för att visa din PIN."
+      },
+      "Authentication Expired" : {
+         "string" : "Autentiseringen har förfallit"
+      },
+      "Authentication Required" : {
+         "string" : "Autentisering krävs"
+      },
+      "Author" : {
+         "string" : "Författare"
+      },
+      "Available for checkout in less than %@." : {
+         "string" : "Kan lånas om mindre än %@."
+      },
+      "Back" : {
+         "string" : "Tillbaka"
+      },
+      "Barcode or Username" : {
+         "string" : "Streckkod eller användarnamn"
+      },
+      "Black on sepia text" : {
+         "string" : "Svart text mot sepiabakgrund"
+      },
+      "Book Cover" : {
+         "string" : "Bokomslag"
+      },
+      "Book format" : {
+         "string" : ""
+      },
+      "Book format:" : {
+         "string" : "Bokformat:"
+      },
+      "Bookmark added" : {
+         "string" : "Bokmärke lades till"
+      },
+      "Bookmarks" : {
+         "string" : "Bokmärken"
+      },
+      "Borrow Failed" : {
+         "string" : "Det gick inte att låna"
+      },
+      "Borrowing %@ could not be completed." : {
+         "string" : "Det gick inte att låna %@."
+      },
+      "BrightnessSlider" : {
+         "string" : "Reglage för ljusstryka"
+      },
+      "Browse Books" : {
+         "string" : "Bläddra bland böcker"
+      },
+      "By signing in, you agree the End User License Agreement" : {
+         "string" : "Genom att logga in godkänner du slutanvändaravtalet"
+      },
+      "By signing in, you agree to the End User License Agreement." : {
+         "string" : "Genom att logga in godkänner du slutanvändaravtalet."
+      },
+      "Camera Access Disabled" : {
+         "string" : "Kameraåtkomst inaktiverad"
+      },
+      "Cancel" : {
+         "string" : "Ångra"
+      },
+      "Cancels hold for %@" : {
+         "string" : "Avbryter reservationen för %@"
+      },
+      "Cancels the download for the current book: %@" : {
+         "string" : "Avbryter nedladdningen av den valda boken: %@"
+      },
+      "Cancels the failed download for this book: %@" : {
+         "string" : "Avbryter den misslyckade nedladdningen av denna bok: %@"
+      },
+      "Categories" : {
+         "string" : "Kategorier"
+      },
+      "Category" : {
+         "string" : "Kategori"
+      },
+      "Chapters" : {
+         "string" : "Kapitel"
+      },
+      "Check Connection" : {
+         "string" : "Kontrollera anslutningen"
+      },
+      "Check Out" : {
+         "string" : "Låna"
+      },
+      "Close" : {
+         "string" : "Stäng"
+      },
+      "Connection Failed" : {
+         "string" : "Anslutning misslyckades"
+      },
+      "Content Licenses" : {
+         "string" : "Innehållslicenser"
+      },
+      "Contents" : {
+         "string" : "Innehåll"
+      },
+      "Continue" : {
+         "string" : "Fortsätt"
+      },
+      "Continue without signing in" : {
+         "string" : "Fortsätt utan att logga in"
+      },
+      "Corrupted Audiobook" : {
+         "string" : "Skadad ljudbok"
+      },
+      "Create Card" : {
+         "string" : "Skapa kort"
+      },
+      "Currently Playing: %@" : {
+         "string" : "Spelar upp: %@"
+      },
+      "DRM Error" : {
+         "string" : "DRM-fel"
+      },
+      "DecreaseFontSize" : {
+         "string" : "Minska teckenstorlek"
+      },
+      "Default book font" : {
+         "string" : "Standard typsnitt"
+      },
+      "Delete" : {
+         "string" : "Radera"
+      },
+      "Delete Server Data" : {
+         "string" : "Radera serverdata"
+      },
+      "Deletes %@" : {
+         "string" : "Raderar %@"
+      },
+      "Description" : {
+         "string" : "Beskrivning"
+      },
+      "Distributed by: " : {
+         "string" : "Distribuerad av:"
+      },
+      "Do you want to move to the page on which you left off?" : {
+         "string" : "Vill du gå till den sida där du slutade?"
+      },
+      "Do you want to move to the time on which you left off?" : {
+         "string" : "Vill du gå till den punkt där du slutade?"
+      },
+      "Don't have a library card?" : {
+         "string" : "Har du inget bibliotekskort?"
+      },
+      "Done" : {
+         "string" : "Klar"
+      },
+      "Download" : {
+         "string" : "Ladda ner"
+      },
+      "Download Error" : {
+         "string" : "Fel vid nedladdning"
+      },
+      "Downloading" : {
+         "string" : "Laddar ner"
+      },
+      "Downloading:" : {
+         "string" : "Laddar ner:"
+      },
+      "Downloading: %@%%" : {
+         "string" : "Laddar ner: %@%%"
+      },
+      "Downloads %@" : {
+         "string" : "Nedladdningar %@"
+      },
+      "Duration" : {
+         "string" : "Längd"
+      },
+      "E-Library Sync" : {
+         "string" : ""
+      },
+      "E-kirjasto requires a one-time location check in order to verify your library service area. Once you choose \"Create Card\", please select \"Allow Once\" in the popup so we can verify this information." : {
+         "string" : "E-biblioteket behöver kontrollera din position en gång för att verifiera ditt område för bibliotekstjänster. Efter att du valt \"Skapa kort\" välj \"Tillåt en gång\" i popup-fönstret så att vi kan verifiera denna information."
+      },
+      "E-kirjasto requires a one-time location check in order to verify your library service area. You have disabled location services for this app. To enable, please select the 'Open Settings' button below then continue with card creation." : {
+         "string" : "E-biblioteket behöver kontrollera din position en gång för att verifiera ditt område för bibliotekstjänster. Du har inaktiverat positionstjänsten för denna app. För att aktivera den peka på knappen Öppna inställningar nedan för att fortsätta skapa kort."
+      },
+      "E-kirjasto test login" : {
+         "string" : ""
+      },
+      "Enable Sync" : {
+         "string" : ""
+      },
+      "Enable sync to save your reading position and bookmarks to your other devices.\n\nYou can change this any time in Settings." : {
+         "string" : ""
+      },
+      "End of Chapter" : {
+         "string" : "Kapitel slut"
+      },
+      "Error" : {
+         "string" : "Fel"
+      },
+      "Error Changing Sync Setting" : {
+         "string" : "Fel vid ändring av synkroniseringsinställningar"
+      },
+      "Error Loading Library" : {
+         "string" : "Fel när biblioteket skulle laddas"
+      },
+      "Error extracting encrypted PDF file" : {
+         "string" : "Fel vid extrahering av krypterad PDF-fil"
+      },
+      "FAQ" : {
+         "string" : ""
+      },
+      "Failed to get current location. Please try again." : {
+         "string" : "Det gick inte att hämta nuvarande position. Försök på nytt."
+      },
+      "Fast Forward %d seconds" : {
+         "string" : "Spola framåt %d sekunder"
+      },
+      "Feedback" : {
+         "string" : "Respons"
+      },
+      "Find Your Library" : {
+         "string" : "Hitta ditt bibliotek"
+      },
+      "Forgot your password?" : {
+         "string" : "Glömt ditt lösenord?"
+      },
+      "GCDAsyncSocketClosedError" : {
+         "string" : "Socket stängd genom fjärransluten peer"
+      },
+      "GCDAsyncSocketConnectTimeoutError" : {
+         "string" : "Försök att ansluta till värd överskred tidsgränsen"
+      },
+      "GCDAsyncSocketReadMaxedOutError" : {
+         "string" : "Läsoperationen har nått den maximala längden"
+      },
+      "GCDAsyncSocketReadTimeoutError" : {
+         "string" : "Tidsgränsen för läsoperationen överskreds"
+      },
+      "GCDAsyncSocketWriteTimeoutError" : {
+         "string" : "Tidsgränsen för skrivoperationen överskreds"
+      },
+      "Get" : {
+         "string" : "Hämta"
+      },
+      "Gets %@" : {
+         "string" : "Hämtar %@"
+      },
+      "Hide Barcode" : {
+         "string" : "Dölj streckkod"
+      },
+      "Holds %@" : {
+         "string" : "Reservationer %@"
+      },
+      "ISBN" : {
+         "string" : ""
+      },
+      "If another device is available, send the audio over Bluetooth or Airplay. Otherwise do nothing." : {
+         "string" : "Om det finns en annan enhet tillgänglig, sänd ljudfilen med Bluetooth eller Airplay. I övriga fall behöver du inte göra något."
+      },
+      "If you are under 13, all content downloaded to My Books will be removed." : {
+         "string" : "Om du är under 13 år kommer allt innehåll som laddats ner i Mina böcker att raderas."
+      },
+      "If you sign out without enabling Sync, your books and any saved bookmarks will be removed." : {
+         "string" : "Om du loggar ut att synkronisera kommer dina böcker och sparade bokmärken att raderas."
+      },
+      "If you sign out, your books and any saved bookmarks will be removed." : {
+         "string" : "Om du loggar ut kommer dina böcker och sparade bokmärken att raderas."
+      },
+      "Illustrators" : {
+         "string" : ""
+      },
+      "IncreaseFontSize" : {
+         "string" : "Öka teckenstorlek"
+      },
+      "Information" : {
+         "string" : "Information"
+      },
+      "Internal Error, bookmark failed to save." : {
+         "string" : "Internt fel, det gick inte att spara bokmärket."
+      },
+      "Invalid Credentials" : {
+         "string" : "Ogiltiga identifieringsuppgifter"
+      },
+      "It looks like you may have a book download or return in progress. Would you like to stop that and continue logging out?" : {
+         "string" : "Det verkar som om du håller på att ladda ner eller lämna tillbaka en bok. Vill du stoppa denna process och fortsätta logga ut? "
+      },
+      "It will expire in %@." : {
+         "string" : "Den kommer att förfalla om %@."
+      },
+      "Keep" : {
+         "string" : "Behåll"
+      },
+      "Kirjaudu palveluun" : {
+         "string" : "Logga in i tjänsten"
+      },
+      "Language" : {
+         "string" : ""
+      },
+      "Less than 1 min remaining" : {
+         "string" : "Mindre än 1 min återstår"
+      },
+      "Libraries" : {
+         "string" : "Bibliotek"
+      },
+      "Listen" : {
+         "string" : "Lyssna"
+      },
+      "Load error. Please try signing out, then log in again." : {
+         "string" : "Laddningsfel. Försök logga ut och sedan in igen."
+      },
+      "Loading... Please wait." : {
+         "string" : "Laddar ner... Vänligen vänta."
+      },
+      "Location Recovery Error" : {
+         "string" : "Fel vid återställning av position"
+      },
+      "Login" : {
+         "string" : ""
+      },
+      "Login Failed" : {
+         "string" : "Inloggning misslyckades"
+      },
+      "Magazines" : {
+         "string" : "Tidningar"
+      },
+      "More" : {
+         "string" : "Mera"
+      },
+      "More %@ books" : {
+         "string" : "Flera %@ böcker"
+      },
+      "More..." : {
+         "string" : "Mera..."
+      },
+      "Move" : {
+         "string" : "Flytta"
+      },
+      "My Books" : {
+         "string" : "Mina böcker"
+      },
+      "Narrators" : {
+         "string" : "Uppläsare"
+      },
+      "Next" : {
+         "string" : "Nästa"
+      },
+      "Next Chapter" : {
+         "string" : "Nästa kapitel"
+      },
+      "No Results Found" : {
+         "string" : "Inga resultat hittades"
+      },
+      "No email account is set for this device." : {
+         "string" : "Inget e-postkonto har angetts för denna enhet."
+      },
+      "Normal speed." : {
+         "string" : "Normal hastighet."
+      },
+      "Not Now" : {
+         "string" : ""
+      },
+      "OK" : {
+         "string" : "Ok"
+      },
+      "Off" : {
+         "string" : "Av"
+      },
+      "One and a half times faster than normal speed." : {
+         "string" : "En och en halv gånger snabbare än normal hastighet."
+      },
+      "One and one quarter faster than normal speed." : {
+         "string" : "En och en fjärdedel snabbare än normal hastighet"
+      },
+      "Open Settings" : {
+         "string" : "Öppna inställningar"
+      },
+      "Open dyslexic font" : {
+         "string" : "OpenDyslexic-typsnitt"
+      },
+      "Open eBooks provides free books to the children who need them the most.\n\nThe collection includes thousands of popular and award-winning titles as well as hundreds of public domain works." : {
+         "string" : "Open eBooks tillhandahåller gratis böcker för barn som behöver det mest.\n\nSamlingen omfattar tusentals populära och prisbelönta titlar samt hundratals offentliga verk."
+      },
+      "Opens %@ for reading" : {
+         "string" : "Öppnar %@ för läsning"
+      },
+      "Opens audiobook %@ for listening" : {
+         "string" : "Öppnar ljudboken %@ för att lyssna"
+      },
+      "PDF" : {
+         "string" : "PDF"
+      },
+      "PIN" : {
+         "string" : "PIN"
+      },
+      "PIN code:" : {
+         "string" : ""
+      },
+      "Page %d of " : {
+         "string" : "Sida %d av"
+      },
+      "Pause" : {
+         "string" : "Pausa"
+      },
+      "Play" : {
+         "string" : "Spela upp"
+      },
+      "Play Sample" : {
+         "string" : "Spela upp utdrag"
+      },
+      "Playback Destination" : {
+         "string" : "Destination för uppspelning"
+      },
+      "Playback Speed" : {
+         "string" : "Uppspelningshastighet"
+      },
+      "Please check your connection and try again." : {
+         "string" : "Kontrollera din anslutning och försök på nytt."
+      },
+      "Please check your username and password and try again." : {
+         "string" : "Kontrollera ditt användarnamn och ditt lösenord och försök på nytt."
+      },
+      "Please contact %@ to report an issue." : {
+         "string" : "Kontakta %@ för att rapportera ett problem."
+      },
+      "Please enter your birth year" : {
+         "string" : "Ange ditt födelseår"
+      },
+      "Please try again later." : {
+         "string" : "Försök på nytt senare."
+      },
+      "Please wait" : {
+         "string" : "Vänligen vänta"
+      },
+      "Please wait a moment before switching library accounts" : {
+         "string" : "Vänligen vänta en stund innan du växlar bibliotekskonto"
+      },
+      "Please wait..." : {
+         "string" : "Vänligen vänta..."
+      },
+      "Previous Chapter" : {
+         "string" : "Föregående kapitel"
+      },
+      "Privacy Policy" : {
+         "string" : "Integritetspolicy"
+      },
+      "Prompt login" : {
+         "string" : "Prompt login"
+      },
+      "Published" : {
+         "string" : "Utgiven"
+      },
+      "Publisher" : {
+         "string" : "Utgivare"
+      },
+      "Puuttuvatko tunnukset?" : {
+         "string" : "Glömt lösenordet?"
+      },
+      "Reached the end of the results." : {
+         "string" : "Du har nått slutet av resultaten."
+      },
+      "Read" : {
+         "string" : "Läs"
+      },
+      "Read more" : {
+         "string" : "Läs mer"
+      },
+      "Reader settings" : {
+         "string" : "Läsarinställningar"
+      },
+      "Ready for Download" : {
+         "string" : "Redo att laddas ner"
+      },
+      "Register a passkey" : {
+         "string" : "Registrera en nyckel"
+      },
+      "Reject" : {
+         "string" : "Avvisa"
+      },
+      "Rekisteröidy palveluun" : {
+         "string" : "Registrera dig i tjänsten"
+      },
+      "Reload" : {
+         "string" : "Ladda på nytt"
+      },
+      "Remove" : {
+         "string" : "Ta bort"
+      },
+      "Remove Bookmark" : {
+         "string" : "Ta bort bokmärke"
+      },
+      "Remove Reservation" : {
+         "string" : "Ta bort reservation"
+      },
+      "Report an Issue" : {
+         "string" : "Rapportera ett problem"
+      },
+      "Request New Codes" : {
+         "string" : "Begär nya koder"
+      },
+      "Requesting" : {
+         "string" : "Begär"
+      },
+      "Reservations" : {
+         "string" : "Reservationer"
+      },
+      "Reserve" : {
+         "string" : "Reservera"
+      },
+      "Resume" : {
+         "string" : "Fortsätt"
+      },
+      "Retry" : {
+         "string" : "Försök på nytt"
+      },
+      "Retry the failed download for this book: %@" : {
+         "string" : "Försök ladda ner denna bok på nytt: %@"
+      },
+      "Return" : {
+         "string" : "Lämna tillbaka"
+      },
+      "Returns %@" : {
+         "string" : "Lämnar tillbaka %@"
+      },
+      "Rewind %d seconds" : {
+         "string" : "Spola tillbaka %d sekunder"
+      },
+      "Salasana unohtunut?" : {
+         "string" : "Glömt lösenordet?"
+      },
+      "Salasano unohtunut?" : {
+         "string" : "Har du glömt ditt lösenord?"
+      },
+      "Sample" : {
+         "string" : "Utdrag"
+      },
+      "Sans font" : {
+         "string" : "Sans-typsnitt"
+      },
+      "Save the current location bookmark for later listening." : {
+         "string" : "Lägg till bokmärke för nuvarande position för att lyssna senare."
+      },
+      "Save your reading position and bookmarks to all your other devices." : {
+         "string" : "Spara din läsposition och bokmärken till alla dina andra enheter."
+      },
+      "Search" : {
+         "string" : "Sök"
+      },
+      "Search My Books" : {
+         "string" : "Sök i Mina böcker"
+      },
+      "Search Reservations" : {
+         "string" : "Sök i reservationer"
+      },
+      "Select Year" : {
+         "string" : "Välj år"
+      },
+      "Select a chapter or track from a list." : {
+         "string" : "Välj ett kapitel eller spår från en lista."
+      },
+      "Selecting \"Delete\" will remove all bookmarks from the server for %@." : {
+         "string" : "Genom att välja \"Radera\" raderas alla bokmärken för %@ från servern."
+      },
+      "Serif font" : {
+         "string" : "Serif-typsnitt"
+      },
+      "Settings" : {
+         "string" : "Inställningar"
+      },
+      "Show" : {
+         "string" : "Visa"
+      },
+      "Show Barcode" : {
+         "string" : "Visa streckkod"
+      },
+      "Sign In Error" : {
+         "string" : "Inloggningsfel"
+      },
+      "Sign in" : {
+         "string" : "Logga in"
+      },
+      "Sign in with a passkey" : {
+         "string" : "Logga in med en nyckel"
+      },
+      "Sign in with suomi.fi" : {
+         "string" : "Logga in med Suomi.fi"
+      },
+      "Sign out" : {
+         "string" : "Logga ut"
+      },
+      "Signing out" : {
+         "string" : "Loggar ut"
+      },
+      "Sleep Timer" : {
+         "string" : "Timer för viloläge"
+      },
+      "Software Licenses" : {
+         "string" : "Mjukvarulicenser"
+      },
+      "Some books will be unavailable in this version. Please try updating to the latest version of the application." : {
+         "string" : "Vissa böcker kommer att vara otillgängliga i denna version. Försök uppdatera till den senaste versionen av appen."
+      },
+      "Something went wrong with the Adobe DRM system" : {
+         "string" : "Något gick fel med Adobe DRM-systemet"
+      },
+      "Sort By:" : {
+         "string" : "Sortera efter:"
+      },
+      "Stay" : {
+         "string" : "Stanna"
+      },
+      "Submit" : {
+         "string" : "Skicka"
+      },
+      "Sync Bookmarks" : {
+         "string" : "Synkronisera bokmärken"
+      },
+      "Sync Listening Position" : {
+         "string" : "Synkronisera läspositionen"
+      },
+      "Sync Reading Position" : {
+         "string" : "Synkronisera läspositionen"
+      },
+      "Table of Contents" : {
+         "string" : "Innehållsförteckning"
+      },
+      "Table of contents" : {
+         "string" : "Innehållsförteckning"
+      },
+      "Table of contents and bookmarks" : {
+         "string" : "Innehållsförteckning och bokmärken"
+      },
+      "Testing" : {
+         "string" : "Testar"
+      },
+      "Thank You" : {
+         "string" : "Tack"
+      },
+      "The DRM Library is taking longer than expected. Please wait and try again later.\n\nIf the problem persists, try to sign out and back in again from the Library Settings menu." : {
+         "string" : "DRM-biblioteket tar längre tid än väntat. Vänligen vänta och försök på nytt senare.\n\nOm problemet fortsätter försök logga ut och tillbaka in via menyn för bibliteksinställningar."
+      },
+      "The Palace App requires a one-time location check in order to verify your library service area. Once you choose \"Create Card\", please select \"Allow Once\" in the popup so we can verify this information." : {
+         "string" : "Palace-appen behöver kontrollera din position en gång för att verifiera ditt område för bibliotekstjänster. Efter att du valt \"Skapa kort\" välj \"Tillåt en gång\" i popup-fönstret så att vi kan verifiera denna information."
+      },
+      "The Palace App requires a one-time location check in order to verify your library service area. You have disabled location services for this app. To enable, please select the 'Open Settings' button below then continue with card creation." : {
+         "string" : "Palace-appen behöver kontrollera din position en gång för att verifiera ditt område för bibliotekstjänster. Du har inaktiverat positionstjänsten för denna app. För att aktivera den peka på knappen Öppna inställningar nedan för att fortsätta skapa kort."
+      },
+      "The audiobook you are trying to open appears to be corrupted. Try downloading it again." : {
+         "string" : "Ljudboken som du försöker öppna verkar vara skadad. Försöka ladda ner den på nytt."
+      },
+      "The book license has expired." : {
+         "string" : "Bokens licens har löpt ut."
+      },
+      "The book you were trying to open is invalid." : {
+         "string" : "Boken som du försökte öppna är ogiltig."
+      },
+      "The book you were trying to read is corrupted. Please try downloading it again." : {
+         "string" : "Boken som du försökte läsa är skadad. Försök ladda ner den på nytt."
+      },
+      "The book you were trying to read is in an unsupported format." : {
+         "string" : "Boken som du försöker läsa har ett format som inte stöds."
+      },
+      "The download could not be completed." : {
+         "string" : "Nedladdningen kunde inte slutföras."
+      },
+      "The download could not be completed.\nScroll down to 'View Issues' to see details." : {
+         "string" : "Nedladdningen kunde inte slutföras.\nScrolla ner till Visa problem för mer information."
+      },
+      "The download for %@ could not be completed." : {
+         "string" : "Nedladdningen av %@ kunde inte slutföras."
+      },
+      "The item you are trying to open is not currently supported." : {
+         "string" : "Objektet du försöker öppna stöds inte för närvarande."
+      },
+      "The page could not load due to a conection error." : {
+         "string" : "Sidan kunde inte laddas på grund av ett anslutningsfel."
+      },
+      "The page could not load due to a connection error." : {
+         "string" : "Sidan kunde inte laddas på grund av ett anslutningsfel."
+      },
+      "The return of %@ could not be completed." : {
+         "string" : "Det gick inte att returnera %@."
+      },
+      "The title you reserved, (book.title), is available." : {
+         "string" : "Titeln du reserverat, (book.title), är tillgänglig."
+      },
+      "There are no bookmarks for this book." : {
+         "string" : "Det finns inga bokmärken för denna bok."
+      },
+      "There are no results" : {
+         "string" : "Inga resutlat"
+      },
+      "There was a problem contacting the server.\nPlease make sure you are connected to the internet, or try again later." : {
+         "string" : "Det uppstod ett fel när servern anropades.\nKontrollera att du är uppkopplad till internet eller försök på nytt senare."
+      },
+      "This URL cannot be found. Please close the app entirely and reload it. If the problem persists, please contact your library's Help Desk." : {
+         "string" : "Kunde inte hitta denna URL. Stäng appen helt och starta om den. Om problemet fortsätter, kontakta ditt biblioteks supportavdelning."
+      },
+      "This book is available to borrow." : {
+         "string" : "Denna bok är tillgänglig för utlåning."
+      },
+      "This reservation will be automatically cancelled in %@." : {
+         "string" : "Denna reservation återkallas automatiskt om %@."
+      },
+      "Three quarters of normal speed. Slower." : {
+         "string" : "Tre fjärdedelar av normal hastighet. Långsammare."
+      },
+      "Title" : {
+         "string" : "Titel"
+      },
+      "Track %@" : {
+         "string" : "Spår %@"
+      },
+      "Translators" : {
+         "string" : ""
+      },
+      "Try Again" : {
+         "string" : "Försök på nytt"
+      },
+      "Try force-quitting the app and repeat the sign-in process." : {
+         "string" : "Försök tvinga avstängning av appen och upprepa inloggningsprocessen."
+      },
+      "Two times normal speed. Fastest." : {
+         "string" : "Dubbel hastighet. Snabbast."
+      },
+      "Unable to contact the server because the URL for signing in is missing." : {
+         "string" : "Det gick inte att kontakta servern på grund av att URL för inloggning saknas."
+      },
+      "Unable to load PDF file" : {
+         "string" : "Det går inte att ladda PDF-filen"
+      },
+      "Unable to load the web page at this time." : {
+         "string" : "Det går inte att ladda webbsidan just nu."
+      },
+      "Under 13" : {
+         "string" : "Under 13"
+      },
+      "Unkown error occurred. Please try again." : {
+         "string" : "Det har uppstått ett okänt fel. Försök på nytt."
+      },
+      "Unsupported Item" : {
+         "string" : "Objektet stöds inte"
+      },
+      "Unsupported format" : {
+         "string" : "Formatet stöds inte"
+      },
+      "User Agreement" : {
+         "string" : "Användaravtal"
+      },
+      "User denied location access. Go to system settings to enable location access for E-kirjasto." : {
+         "string" : "Positionsåtkomst nekad av användaren. Gå till systeminställningarna för att ge E-biblioteket positionsåtkomst."
+      },
+      "User denied location access. Go to system settings to enable location access for the Palace App." : {
+         "string" : "Positionsåtkomst nekad av användaren. Gå till systeminställningarna för att ge Palace-appen positionsåtkomst."
+      },
+      "Username:" : {
+         "string" : ""
+      },
+      "Verifying" : {
+         "string" : "Verifierar"
+      },
+      "View Sample" : {
+         "string" : "Visa utdrag"
+      },
+      "View sample for %@" : {
+         "string" : "Visa utdrag ur %@"
+      },
+      "Visit the Catalog to\nadd books to My Books." : {
+         "string" : "Besök katalogen för att\nlägga till böcker i Mina böcker."
+      },
+      "WAITING FOR AVAILABILITY" : {
+         "string" : "VÄNTAR PÅ TILLGÄNGLIGHET"
+      },
+      "Wait" : {
+         "string" : "Vänta"
+      },
+      "We can’t get your library right now. Please close and reopen the app to try again." : {
+         "string" : "Vi kan inte hämta ditt bibliotek just nu. Stäng och starta om appen för att försöka på nytt."
+      },
+      "We're sorry. Currently we do not support signups for new patrons via the app." : {
+         "string" : "Vi beklagar. För närvarande stöds inte registrering av nya kunder via appen."
+      },
+      "We're sorry. Our sign up system is currently down. Please try again later." : {
+         "string" : "Vi beklagar. Vårt registreringssystem ligger nere just nu. Försök på nytt senare."
+      },
+      "Welcome to Open eBooks" : {
+         "string" : "Välkommen till Open eBooks"
+      },
+      "When you reserve a book from the catalog, it will show up here. Look here from time to time to see if your book is available to download." : {
+         "string" : "När du reserverar en bok från katalogen kommer den att visas här. Titta in här då och då för att se om din bok kan laddas ner."
+      },
+      "White on black text" : {
+         "string" : "Vit text på svart bakgrund"
+      },
+      "Would you like to return it?" : {
+         "string" : "Vill du lämna den tillbaka?"
+      },
+      "You are %ld in line for %ld copies." : {
+         "string" : "Du är på plats %1$ld i kö för %2$ld kopior."
+      },
+      "You are %ld in line." : {
+         "string" : "Du är på plats %ld i kön."
+      },
+      "You have already checked out this loan. You may need to refresh your My Books list to download the title." : {
+         "string" : "Du har redan lånat denna bok. Det kan hända att du måste uppdatera listan i Mina böcker för att ladda ner titeln."
+      },
+      "You have disabled location services for this app." : {
+         "string" : "Du har inaktiverat positionstjänster för denna app."
+      },
+      "You must enable camera access for this application in order to sign up for a library card." : {
+         "string" : "Du måste tillåta kameraåtkomst för denna app för att registrera dig för ett bibliotekskort."
+      },
+      "You need to login to access the collection." : {
+         "string" : "Du måste logga in för att komma åt samlingen."
+      },
+      "Your Audiobook Has Finished" : {
+         "string" : "Din ljudbok har spelat till slut"
+      },
+      "Your authentication details have expired. Please sign in again." : {
+         "string" : "Dina autentiseringsuppgifter har löpt ut. Logga in på nytt."
+      },
+      "Your book has not yet been downloaded." : {
+         "string" : "Din bok har ännu inte laddats ner."
+      },
+      "Your book is ready to read!" : {
+         "string" : "Din bok är redo att läsas!"
+      },
+      "Your bookmarks and reading positions are in the process of being saved to the server. Would you like to stop that and continue logging out?" : {
+         "string" : "Dina bokmärken och läspositioner håller på att sparas på servern. Vill du stoppa processen och fortsätta med att logga ut?"
+      },
+      "Your report will be reviewed as soon as possible." : {
+         "string" : "Din rapport kommer att behandlas så snart som möjligt."
+      },
+      "accessibilityShowAndReloadCatalogTab" : {
+         "string" : "accessibilityShowAndReloadCatalogTab"
+      },
+      "currently" : {
+         "string" : "nu"
+      },
+      "day_suffix_long" : {
+         "string" : "{???, plural, one {1 dag} other {%d dagar}}"
+      },
+      "day_suffix_short" : {
+         "string" : "{???, plural, one {1 d} other {%d d}}"
+      },
+      "eCard" : {
+         "string" : "eCard"
+      },
+      "ePub" : {
+         "string" : "ePub"
+      },
+      "hour_suffix_long" : {
+         "string" : "{???, plural, one {1 timme} other {%d timmar}}"
+      },
+      "hour_suffix_short" : {
+         "string" : "{???, plural, one {1 h} other {%d h}}"
+      },
+      "month_suffix_long" : {
+         "string" : "{???, plural, one {1 månad} other {%d månader}}"
+      },
+      "month_suffix_short" : {
+         "string" : "{???, plural, one {1 m} other {%d m}}"
+      },
+      "sec" : {
+         "string" : "sek"
+      },
+      "week_suffix_long" : {
+         "string" : "{???, plural, one {1 vecka} other {%d veckor}}"
+      },
+      "week_suffix_short" : {
+         "string" : "{???, plural, one {1 v} other {%d v}}"
+      },
+      "year_suffix_long" : {
+         "string" : "{???, plural, one {1 år} other {%d år}}"
+      },
+      "year_suffix_short" : {
+         "string" : "{???, plural, one {1 år} other {%d år}}"
+      }
+   }
+}

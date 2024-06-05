@@ -6,6 +6,7 @@
 //  Copyright © 2022 The Palace Project. All rights reserved.
 //
 
+import Foundation
 import Transifex
 
 class CustomLocaleProvider : TXCurrentLocaleProvider {
@@ -16,12 +17,14 @@ class CustomLocaleProvider : TXCurrentLocaleProvider {
 
 @objc class TransifexManager: NSObject {
   @objc static func setup() {
+    let appLanguages = "en,fi,sv"
     let locales = TXLocaleState(sourceLocale: "en",
-                                appLocales: ["en", "fi", "sv"],
+                                appLocales: appLanguages.components(separatedBy: ","),
                                 currentLocaleProvider: CustomLocaleProvider())
 
     TXNative.initialize(
       locales: locales,
+      // TODO:SAMI: Move the token to a config file
       token: ""
     )
 

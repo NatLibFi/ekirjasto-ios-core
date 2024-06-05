@@ -1,76 +1,105 @@
-![Palace Build](https://github.com/ThePalaceProject/ios-core/actions/workflows/upload-on-merge.yml/badge.svg) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+# E-kirjasto iOS core
 
-# The Palace Project
+[![ios-main](https://github.com/NatLibFi/ekirjasto-ios-core/actions/workflows/ios-main.yml/badge.svg)](https://github.com/NatLibFi/ekirjasto-ios-core/actions/workflows/ios-main.yml)
 
-This repository contains the client-side code for The Palace Project [Palace](https://thepalaceproject.org) application.
+The National Library of Finland's fork of the Palace Project iOS client,
+which is itself the Lyrasis fork of the NYPL's Library Simplified iOS client.
 
-# System Requirements
 
-- Install Xcode 14.2 in `/Applications`, open it and make sure to install additional components if it asks you.
-- Install [Carthage](https://github.com/Carthage/Carthage) if you haven't already. Using `brew` is recommended.
+## System requirements
 
-If you run this project **with DRM support** on a Mac computer with Apple Silicon, make sure to check **[x]&nbsp;Open&nbsp;using&nbsp;Rosetta** in Xcode.app application info. This is required to build with Adobe DRM support. 
+- Install Xcode 15.4 in `/Applications`, open it and make sure to install additional components if it asks you.
+- Install [Carthage](https://github.com/Carthage/Carthage) if you haven't already.
+    - Using Homebrew is recommended, so run `brew install carthage`.
 
-# Building without Adobe DRM nor Private Repos
+
+## Building
 
 ```bash
-git clone git@github.com:ThePalaceProject/ios-core.git
-cd ios-core
+git clone git@github.com:NatLibFi/ekirjasto-ios-core.git
+cd ekirjasto-ios-core
 
-# one-time set-up
-./scripts/setup-repo-nodrm.sh
-
-# idempotent script to rebuild all dependencies
-./scripts/build-3rd-party-dependencies.sh --no-private
+# Idempotent bootstrap script, can be run again to rebuild dependencies
+./scripts/bootstrap.sh
 ```
-Open `Palace.xcodeproj` and build the `Palace-noDRM` target.
+
+The above bootstrap script also reveals secrets for production builds.
+For more info, see `./scripts/reveal-secrets.sh --help`.
+
+Open `Palace.xcodeproj` in Xcode and build the `Ekirjasto` target.
+
+Alternatively, you can build the app by running `./scripts/build.sh`
+(use `--help` to see build options).
 
 At this point you may have seemingly random build errors especially if you are
-not using an intel chip but the following steps might help:
+not using an Intel chip (M1/M2/M3/etc.) but running this script might help:
 
-`ln -s $(which carthage) /usr/local/bin/carthage`
-Remove all files under `~/Library/Developer/Xcode/DerivedData/*`
-⇧⌘K Clean Build Folder 
-
-# Building With Adobe DRM
-
-## Building the Application from Scratch
-
-01. Contact project lead and ensure you have access to all the required private repos.
-02. Then run:
 ```bash
-git clone git@github.com:ThePalaceProject/ios-core.git
-cd ios-core
-./scripts/bootstrap-drm.sh
+# Requires sudo, because it also cleans ~/Library/Developer/Xcode/DerivedData/
+./scripts/clean.sh
 ```
-03. Open Palace.xcodeproj and build the `Palace` target.
 
-## Building Dependencies Individually
+If you get `Missing package product '...'` errors,
+closing and reopening the Xcode project should help.
 
-Unless the DRM dependencies change (which is very seldom) you shouldn't need to run the `bootstrap-drm.sh` script more than once.
 
-Other 3rd party dependencies are managed via Carthage and a few git submodules. To rebuild them you can use the following idempotent script:
-```bash
-cd ios-core
-./scripts/build-3rd-party-dependencies.sh
-```
-The `scripts` directory contains a number of other scripts to build dependencies more granularly and also to build/archive/test the app from the command line. These scripts are the same used by our CI system. All these scripts must be run from the root of Palace `ios-core` repository, not from the `scripts` directory.
+### Build configurations
 
-## Branching and CI
+The app uses build configurations to switch the backend.
+The configurations are of the form `<BuildType>-<configuration>`,
+so for example `Debug-dev` is a debug build using the `dev` configuration/backend.
 
-`develop` is the main development branch.
+The available configurations are:
 
-Release branch names follow the convention: `release/palace/<version>`. For example, `release/palace/1.0.0`.
+| Configuration      | Build type | Backend    |
+|--------------------|------------|------------|
+| Debug              | debug      | production |
+| Debug-ellibs       | debug      | ellibs     |
+| Debug-dev          | debug      | dev        |
+| Debug-beta         | debug      | beta       |
+| Debug-production   | debug      | production |
+| Release            | release    | production |
+| Release-ellibs     | release    | ellibs     |
+| Release-dev        | release    | dev        |
+| Release-beta       | release    | beta       |
+| Release-production | release    | production |
 
-Feature branch names (for features whose development is a month or more): `feature/<feature-name>`, e.g. `feature/my-new-screen`.
+The `Debug` and `Debug-production` are essentially identical,
+and they both use the `production` backend.
+The same is true for `Release` and `Release-production`.
 
-Continuous integration is enabled on merge events on `develop` branch. Palace device builds are uploaded to [ios-binaries](https://github.com/ThePalaceProject/ios-binaries).
+The `Debug` and `Release` configurations are there only for "compatibility",
+because some tools (like Carthage) appear to not work nicely if they don't exist,
+but you shouldn't need to *use* them (just don't delete them).
 
-# Palace License
+To choose the build configuration to use in Xcode,
+`Alt-click` the "Run" button and choose which one to use for running, profiling, etc.
 
-Copyright © 2021 LYRASIS
 
-Licensed under the Apache License, Version 2.0 (the “License”); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+## Branching
 
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an “AS IS” BASIS,
+`main` is the main development branch, and is only updated through pull requests.
+
+Release branch names follow the convention: `release/<version>` (e.g. `release/1.2.3`).
+
+
+## Continuous integration (CI)
+
+The repository uses continuous integration to aid development and to automate releases.
+
+See [.github/workflows/README.md] for more information about the CI workflows.
+
+
+## Releasing
+
+Please see [RELEASING.md](RELEASING.md) for documentation on E-kirjasto's release process.
+
+
+## License
+
+Copyright © 2021 LYRASIS and The National Library of Finland (Kansalliskirjasto)
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.

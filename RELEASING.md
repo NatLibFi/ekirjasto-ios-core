@@ -1,81 +1,120 @@
 # Releasing
 
-Palace release process is automated and relies on Github workflow scripts. Workflow scripts create a new build every time a pull request is merged to the `develop` branch, make a new release on Github, and upload a new binary to Test Flight.
+Releasing of the E-kirjasto Android app is mostly automated through a CI workflow.
 
-## Development Process
 
-`develop` is the main development branch. 
+## The short version (TL;DR)
 
-Every new feature, bug fix or other task are developed on branches named following this naming convention:
+- Create a release branch, for example `release/1.2.3`
+    - Update the version by running e.g. `./scripts/release.sh --set-version 1.2.3`
+    - Fill in the changelogs at `metadata/<language>/changelog.txt`
+- In GitHub Actions, check that the build and all checks will pass
+    - If something fails, the build will not be uploaded to App Store Connect
+- Once the build is uploaded to App Store Connect
+    - Promote the build to production
+    - Send the release for app review
+    - After the app passes review, it can be published
 
-- `feature/name` for new features;
-- `fix/name` for bug fixes;
-- `task/name` for miscellaneous tasks.
 
-## Github Actions and the Release Process
+## Version numbers
 
-### Palace Build
+The script at `scripts/version.sh` should be used to manage the version number.
+See the script's `--help` option for mode information.
 
-Location:  [.github/workflows/upload-on-merge.yml](https://github.com/ThePalaceProject/ios-core/blob/main/.github/workflows/upload-on-merge.yml)
+The version number should follow the [Semantic Versioning](https://semver.org/) format.
+Basically, the version number is of the form `major.minor.patch`.
+App Store Connect doesn't allow any suffix in the version, so they can't be used.
 
-Starts on merge to `develop` branch.
+The version number should be incremented as follows:
+- the `major` component should increase for any major new functionality
+    - the `major` component should also increase for any non-backward-compatible changes
+    - if the `major` component increases, both `minor` and `patch` are "reset" to zero
+        - for example, `1.2.3` becomes `2.0.0` when increasing the `major` component
+- the `minor` component should increase for any new features
+    - if the `minor` component increases, `patch` is "reset" to zero
+        - for example, `1.2.3` becomes `1.3.0` when increasing the `minor` component
+- the patch version should increase for bugfixes and other minor changes
+- the version components should not have any leading zeroes
+- the version components can have multiple digits (e.g. 1.0.9 can increase to 1.0.10)
 
-The script performs several steps:
 
-- checks the project build version - if the version remains the same, the action stops; it helps to avoid unnecessary builds when updates are not related to the project itself, for example, changes in a CI script should not result in a new binary on Test Flight;
-- generates release notes for Test Flight "What to Test" description;
-- uploads a new build to Test Flight.
+## Build numbers
 
-### Palace Manual Build
+The script at `scripts/version.sh` should be used to manage the build number.
+See the script's `--help` option for mode information.
 
-Location: [.github/workflows/upload.yml](https://github.com/ThePalaceProject/ios-core/blob/main/.github/workflows/upload.yml)
+That said, you shouldn't have to modify the build number at all,
+since it is automatically increased on every upload to App Store Connect / Testflight.
 
-This script is similar to "Palace Build", but can be started manually. Performs the same set of steps.
+Based on the build configuration, the last digit of the build number is set to:
 
-### Palace Release
+| Configuration | Last digit in version code |
+|---------------|----------------------------|
+| production    | 1                          |
+| beta          | 2                          |
+| dev           | 3                          |
+| ellibs        | 4                          |
 
-Location:  [.github/workflows/upload-on-merge.yml](https://github.com/ThePalaceProject/ios-core/blob/main/.github/workflows/release-on-merge.yml)
+This way all different build configurations of the same build/commit can be uploaded to App Store Connect.
+But note that the different configurations should be uploaded in the above order, so that the other digits apart from the last will match for the same build/commit.
 
-Starts on merge to `main` branch.
 
-The script performs several steps:
+## Creating a new release
 
-- generates release notes for a new release on Github;
-- creates a new release on Github.
+### Building and uploading to App Store Connect
 
-### Palace Manual Release
+#### Automated CI workflow (recommended)
 
-Location:  [.github/workflows/upload-on-merge.yml](https://github.com/ThePalaceProject/ios-core/blob/main/.github/workflows/release.yml)
+To create a new release, create a branch of the form `release/<version>`.
+For example, the release branch name could be `release/1.2.3` or `release/3.20.1-suffix`.
 
-This script is similar to "Palace Release", but can be started manually. Performs the same set of steps.
+Increase the version number by running something like:
+- `./scripts/version.sh --set-version 1.2.3`
 
-### Unit Tests
+Edit these files for the changelog (will be visible to users in App Store / Testflight):
+- `metadata/<language>/changelog.txt`
 
-Location: [.github/workflows/unit-testing.yml](https://github.com/ThePalaceProject/ios-core/blob/main/.github/workflows/unit-testing.yml)
+When a release branch is created, the `ios-release` workflow:
+- performs release checks
+    - the version number must increase from the main branch
+    - there must not be any uncommitted Transifex strings
+        - these should be downloaded using `./scripts/transifex.sh`
+            - see `--help` for setting the Transifex token and secret
+- builds both debug and release builds for all flavors
+- uploads the release build to App Store Connect / Testflight
 
-Starts on pull request, can be started manually.
+If the release checks and everything else in the CI workflow goes okay,
+the release build will be uploaded to App Store Connect / Testflight.
 
-The script builds the project and runs unit tests.
 
-## Release notes
+#### Manual build and upload
 
-We use a custom script to generate release notes. The script can be found in the `mobile-certificates` repository, [Certificates/Palace/iOS/ReleaseNotes.py](https://github.com/ThePalaceProject/mobile-certificates/blob/master/Certificates/Palace/iOS/ReleaseNotes.py).
+Alternatively, the release process can be done manually.
 
-The script collects titles of pull requests that were merged between releases, links to pull requests and links to Notion tickets, mentioned in the pulls.
+In order to perform a release build, you need:
+- run `./scripts/bootstrap.sh` with the secret environment variables set
+    - run `./scripts/reveal-secrets.sh --help` for a list of the environemnt variables
+- the certificates and provisioning profiles for signing the build
+    - these are stored in the `ekirjasto-ios-keys` repository, so you need access there
+    - the keys are managed by Fastlane, and you will need the encryption password to use them
+    - to get the keys from the repo, run `fastlane match` and follow the instructions
 
-Usage:
+First, update the version number using `./scripts/version.sh --set-version x.y.z`.
 
-```python
-python3 ReleaseNotes.py [-t TAG] [-v VERBOSITY]
-```
+Then, build the release version of the production flavor:
+- either by running `./scripts/build.sh release`
+- or manually in Xcode (via `Product` > `Archive`)
 
-where:
+Once you've built the release archive, you can upload it to App Store Connect:
+- either by running `./scripts/build.sh release_upload`
+    - this also builds the release archive, so you don't have to run `build.sh release` separately
+    - this defaults to the `production` config, but you can add e.g. `configuration:beta` to the command to use another backend
+- or create a new version and upload it manually in App Store Connect
 
-- -t TAG, --tag TAG: tag to start collecting release notes from. If omitted, collects from the latest tag available.
--  -v VERBOSITY, --verbosity VERBOSITY: how much information to show: 
-    - 1 (default) - pull title only; 
-    - 2 - title and links to PR and Notion ticket, markdown
-                        format; 
-    - 3 - title and Notion ticket link, when available
 
-The `ios-core` repository contains [scripts/release-notes.sh](https://github.com/ThePalaceProject/ios-core/blob/develop/scripts/release-notes.sh) file that installs `request` module first (by default, not available on Github CI images).
+### Publishing an uploaded build
+
+Once a release build archive is uploaded to App Store Connect,
+you can promote it to a production version and send it for app review.
+
+Assuming review passes, the app can be published to production!
