@@ -234,14 +234,14 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
     }
     state = .syncing
     syncUrl = loansUrl
-    print("book registry syncUrl 1: \(syncUrl)")
+    print("book registry syncUrl 1: \(syncUrl as URL?)")
     TPPOPDSFeed.withURL(loansUrl, shouldResetCache: true) { feed, errorDocument in
       print("book registry withURL!")
       DispatchQueue.main.async {
         defer {
           self.state = .loaded
           self.syncUrl = nil
-          print("book registry syncUrl 2: \(self.syncUrl)")
+          print("book registry syncUrl 2: \(self.syncUrl as URL?)")
         }
         if self.syncUrl != loansUrl {
           return

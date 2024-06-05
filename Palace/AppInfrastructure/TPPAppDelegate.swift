@@ -21,7 +21,7 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
   // MARK: - Application Lifecycle
   
   func applicationDidFinishLaunching(_ application: UIApplication) {
-    //FirebaseApp.configure()
+    FirebaseApp.configure()
     TPPErrorLogger.configureCrashAnalytics()
 
     // Perform data migrations as early as possible before anything has a chance to access them

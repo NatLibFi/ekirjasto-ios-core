@@ -206,7 +206,7 @@
     __block NSURL *mainFeedUrl = [NSURL URLWithString:currentAccount.catalogUrl];
     void (^completion)(void) = ^() {
       NSArray* accounts = [[AccountsManager sharedInstance] accounts:nil];
-      int count = [accounts count];
+      //int count = [accounts count];
       [[TPPSettings sharedSettings] setAccountMainFeedURL:mainFeedUrl];
       [UIApplication sharedApplication].delegate.window.tintColor = [TPPConfiguration mainColor];
       

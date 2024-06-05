@@ -15,37 +15,45 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## iOS
 
+### ios print_testflight_build_number
+
+```sh
+[bundle exec] fastlane ios print_testflight_build_number
+```
+
+Print the latest build number from Testflight
+
 ### ios test
 
 ```sh
 [bundle exec] fastlane ios test
 ```
 
+Run tests
 
-
-### ios nodrm
-
-```sh
-[bundle exec] fastlane ios nodrm
-```
-
-
-
-### ios beta
+### ios build_debug
 
 ```sh
-[bundle exec] fastlane ios beta
+[bundle exec] fastlane ios build_debug
 ```
 
+Run a debug build
 
-
-### ios appstore
+### ios build_release
 
 ```sh
-[bundle exec] fastlane ios appstore
+[bundle exec] fastlane ios build_release
 ```
 
+Run a release build
 
+### ios build_release_upload
+
+```sh
+[bundle exec] fastlane ios build_release_upload
+```
+
+Run a release build and upload to TestFlight
 
 ----
 

@@ -223,6 +223,9 @@
 		21F4BF3B26BC62D4000CF592 /* AdobeCertificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F4BF3926BC62D4000CF592 /* AdobeCertificate.swift */; };
 		21F7D3CB275A9D3C0080B44B /* String+HTMLEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F7D3CA275A9D3C0080B44B /* String+HTMLEntities.swift */; };
 		21F7D3CC275A9D3C0080B44B /* String+HTMLEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F7D3CA275A9D3C0080B44B /* String+HTMLEntities.swift */; };
+		260CAD4E2C1A0F7200BD54C6 /* Ekirjasto_Catalog_Feed_ellibs.json in Resources */ = {isa = PBXBuildFile; fileRef = 260CAD4B2C1A0F7200BD54C6 /* Ekirjasto_Catalog_Feed_ellibs.json */; };
+		260CAD4F2C1A0F7200BD54C6 /* Ekirjasto_Catalog_Feed_beta.json in Resources */ = {isa = PBXBuildFile; fileRef = 260CAD4C2C1A0F7200BD54C6 /* Ekirjasto_Catalog_Feed_beta.json */; };
+		260CAD502C1A0F7200BD54C6 /* Ekirjasto_Catalog_Feed_dev.json in Resources */ = {isa = PBXBuildFile; fileRef = 260CAD4D2C1A0F7200BD54C6 /* Ekirjasto_Catalog_Feed_dev.json */; };
 		2D2B47841D08F8E2007F7764 /* UpdateCheckUpToDate.json in Resources */ = {isa = PBXBuildFile; fileRef = 2D2B47691D08F264007F7764 /* UpdateCheckUpToDate.json */; };
 		2D2B478E1D08FDF5007F7764 /* UpdateCheckNeedsUpdate.json in Resources */ = {isa = PBXBuildFile; fileRef = 2D2B478A1D08FC78007F7764 /* UpdateCheckNeedsUpdate.json */; };
 		2D2B478F1D08FDF5007F7764 /* UpdateCheckUnknown.json in Resources */ = {isa = PBXBuildFile; fileRef = 2D2B47891D08FC78007F7764 /* UpdateCheckUnknown.json */; };
@@ -241,7 +244,7 @@
 		2DEF10BA201ECCEA0082843A /* TPPMyBooksSimplifiedBearerToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DEF10B9201ECCEA0082843A /* TPPMyBooksSimplifiedBearerToken.m */; };
 		2DF321831DC3B83500E1858F /* TPPAnnotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF321821DC3B83500E1858F /* TPPAnnotations.swift */; };
 		2DFAC8ED1CD8DDD1003D9EC0 /* TPPOPDSCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DFAC8EC1CD8DDD1003D9EC0 /* TPPOPDSCategory.m */; };
-		309262C42BFD57EB003CCA2F /* Ekirjasto_Catalog_Feed.json in Resources */ = {isa = PBXBuildFile; fileRef = 309262C32BFD57EB003CCA2F /* Ekirjasto_Catalog_Feed.json */; };
+		309262C42BFD57EB003CCA2F /* Ekirjasto_Catalog_Feed_production.json in Resources */ = {isa = PBXBuildFile; fileRef = 309262C32BFD57EB003CCA2F /* Ekirjasto_Catalog_Feed_production.json */; };
 		331262DD2A287F53006BA87D /* LibraryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A2299E240F3BEA006B9EAD /* LibraryService.swift */; };
 		331262DE2A287F53006BA87D /* TPPR2Owner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A2299A240F3B9B006B9EAD /* TPPR2Owner.swift */; };
 		331262DF2A287F53006BA87D /* TPPLibraryDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826CD2E24AA2801000F4030 /* TPPLibraryDescriptionCell.swift */; };
@@ -614,7 +617,6 @@
 		33266EFB2A4037B6003BC347 /* Asap-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33266EFA2A4037B6003BC347 /* Asap-Regular.ttf */; };
 		33266F012A40456D003BC347 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33266F002A40456D003BC347 /* Images.xcassets */; };
 		33266F032A40459E003BC347 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33266F022A40459E003BC347 /* Colors.xcassets */; };
-		33266F042A40476B003BC347 /* Ekirjasto-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 335223852A28BC2500CD514D /* Ekirjasto-Info.plist */; };
 		33305E7B2AC5A428005DC75F /* TPPBookCellDelegate+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5024A8C2A0E8761006BF653 /* TPPBookCellDelegate+Extensions.swift */; };
 		33372CF72AC548EA0001BE2F /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 33372CF62AC548EA0001BE2F /* FirebaseAnalytics */; };
 		33372CF92AC548FB0001BE2F /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 33372CF82AC548FB0001BE2F /* FirebaseCrashlytics */; };
@@ -685,9 +687,9 @@
 		36A527E12BDBC4F9009101F5 /* TestLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A527E02BDBC4F9009101F5 /* TestLoginViewController.swift */; };
 		36A527E22BDBC4F9009101F5 /* TestLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A527E02BDBC4F9009101F5 /* TestLoginViewController.swift */; };
 		36A527E32BDBC4F9009101F5 /* TestLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A527E02BDBC4F9009101F5 /* TestLoginViewController.swift */; };
-		36A527E92BDBD399009101F5 /* Test_Catalog_Feed.json in Resources */ = {isa = PBXBuildFile; fileRef = 36A527E82BDBD399009101F5 /* Test_Catalog_Feed.json */; };
-		36A527EA2BDBD399009101F5 /* Test_Catalog_Feed.json in Resources */ = {isa = PBXBuildFile; fileRef = 36A527E82BDBD399009101F5 /* Test_Catalog_Feed.json */; };
-		36A527EB2BDBD399009101F5 /* Test_Catalog_Feed.json in Resources */ = {isa = PBXBuildFile; fileRef = 36A527E82BDBD399009101F5 /* Test_Catalog_Feed.json */; };
+		36A527E92BDBD399009101F5 /* TestLogin_Catalog_Feed.json in Resources */ = {isa = PBXBuildFile; fileRef = 36A527E82BDBD399009101F5 /* TestLogin_Catalog_Feed.json */; };
+		36A527EA2BDBD399009101F5 /* TestLogin_Catalog_Feed.json in Resources */ = {isa = PBXBuildFile; fileRef = 36A527E82BDBD399009101F5 /* TestLogin_Catalog_Feed.json */; };
+		36A527EB2BDBD399009101F5 /* TestLogin_Catalog_Feed.json in Resources */ = {isa = PBXBuildFile; fileRef = 36A527E82BDBD399009101F5 /* TestLogin_Catalog_Feed.json */; };
 		36BBC78E2B920EB300E8E426 /* EkirjastoUserLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363C62092B14EEA300858AA5 /* EkirjastoUserLoginView.swift */; };
 		36BBC78F2B920EB300E8E426 /* EkirjastoArrowDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3379F81E2A5D418400E9945F /* EkirjastoArrowDownButton.swift */; };
 		36BBC7902B920EB300E8E426 /* EkirjastoFacetFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3379F8102A5D3C4B00E9945F /* EkirjastoFacetFilterView.swift */; };
@@ -1712,6 +1714,9 @@
 		21F4BF3926BC62D4000CF592 /* AdobeCertificate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdobeCertificate.swift; sourceTree = "<group>"; };
 		21F634E426D828CF00C8BE87 /* ReadiumLCP.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ReadiumLCP.xcframework; path = Carthage/Build/ReadiumLCP.xcframework; sourceTree = "<group>"; };
 		21F7D3CA275A9D3C0080B44B /* String+HTMLEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+HTMLEntities.swift"; sourceTree = "<group>"; };
+		260CAD4B2C1A0F7200BD54C6 /* Ekirjasto_Catalog_Feed_ellibs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Ekirjasto_Catalog_Feed_ellibs.json; sourceTree = "<group>"; };
+		260CAD4C2C1A0F7200BD54C6 /* Ekirjasto_Catalog_Feed_beta.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Ekirjasto_Catalog_Feed_beta.json; sourceTree = "<group>"; };
+		260CAD4D2C1A0F7200BD54C6 /* Ekirjasto_Catalog_Feed_dev.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Ekirjasto_Catalog_Feed_dev.json; sourceTree = "<group>"; };
 		2D2B47621D08F1ED007F7764 /* PalaceTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PalaceTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		2D2B47691D08F264007F7764 /* UpdateCheckUpToDate.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UpdateCheckUpToDate.json; sourceTree = "<group>"; };
 		2D2B47721D08F807007F7764 /* PalaceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PalaceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1741,7 +1746,7 @@
 		2DF321821DC3B83500E1858F /* TPPAnnotations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPPAnnotations.swift; sourceTree = "<group>"; };
 		2DFAC8EB1CD8DDD1003D9EC0 /* TPPOPDSCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPPOPDSCategory.h; sourceTree = "<group>"; };
 		2DFAC8EC1CD8DDD1003D9EC0 /* TPPOPDSCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPPOPDSCategory.m; sourceTree = "<group>"; };
-		309262C32BFD57EB003CCA2F /* Ekirjasto_Catalog_Feed.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Ekirjasto_Catalog_Feed.json; sourceTree = "<group>"; };
+		309262C32BFD57EB003CCA2F /* Ekirjasto_Catalog_Feed_production.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Ekirjasto_Catalog_Feed_production.json; sourceTree = "<group>"; };
 		3312646E2A287F53006BA87D /* Ekirjasto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ekirjasto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33266EF82A4036DC003BC347 /* UIFont+Ekirjasto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Ekirjasto.swift"; sourceTree = "<group>"; };
 		33266EFA2A4037B6003BC347 /* Asap-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Asap-Regular.ttf"; sourceTree = "<group>"; };
@@ -1766,7 +1771,7 @@
 		36A07DBB2BB5B49C00583E0B /* PasskeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasskeyView.swift; sourceTree = "<group>"; };
 		36A527DC2BDBC0EA009101F5 /* TestLoginUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLoginUI.swift; sourceTree = "<group>"; };
 		36A527E02BDBC4F9009101F5 /* TestLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLoginViewController.swift; sourceTree = "<group>"; };
-		36A527E82BDBD399009101F5 /* Test_Catalog_Feed.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Test_Catalog_Feed.json; sourceTree = "<group>"; };
+		36A527E82BDBD399009101F5 /* TestLogin_Catalog_Feed.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestLogin_Catalog_Feed.json; sourceTree = "<group>"; };
 		52545184217A76FF00BBC1B4 /* TPPUserNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPPUserNotifications.swift; sourceTree = "<group>"; };
 		52592BB721220A1100587288 /* TPPLocalization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPPLocalization.m; sourceTree = "<group>"; };
 		52592BBB21220A4F00587288 /* TPPLocalization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TPPLocalization.h; sourceTree = "<group>"; };
@@ -2469,9 +2474,12 @@
 		33266EFF2A404545003BC347 /* EkirjastoConfig */ = {
 			isa = PBXGroup;
 			children = (
-				36A527E82BDBD399009101F5 /* Test_Catalog_Feed.json */,
+				36A527E82BDBD399009101F5 /* TestLogin_Catalog_Feed.json */,
 				3360FBA52A41B2DA00AC1905 /* Ekirjasto_Launch_Screen.storyboard */,
-				309262C32BFD57EB003CCA2F /* Ekirjasto_Catalog_Feed.json */,
+				309262C32BFD57EB003CCA2F /* Ekirjasto_Catalog_Feed_production.json */,
+				260CAD4C2C1A0F7200BD54C6 /* Ekirjasto_Catalog_Feed_beta.json */,
+				260CAD4D2C1A0F7200BD54C6 /* Ekirjasto_Catalog_Feed_dev.json */,
+				260CAD4B2C1A0F7200BD54C6 /* Ekirjasto_Catalog_Feed_ellibs.json */,
 				335223852A28BC2500CD514D /* Ekirjasto-Info.plist */,
 				33266F002A40456D003BC347 /* Images.xcassets */,
 				33266F022A40459E003BC347 /* Colors.xcassets */,
@@ -3944,7 +3952,7 @@
 			attributes = {
 				CLASSPREFIX = TPP;
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 1540;
 				ORGANIZATIONNAME = "The Palace Project";
 				TargetAttributes = {
 					2D2B47711D08F807007F7764 = {
@@ -4015,10 +4023,10 @@
 			);
 			projectRoot = "";
 			targets = (
+				331262D32A287F53006BA87D /* Ekirjasto */,
 				A823D80C192BABA400B55DE2 /* Palace */,
 				73EB0A6325821DF4006BC997 /* Palace-noDRM */,
 				2D2B47711D08F807007F7764 /* PalaceTests */,
-				331262D32A287F53006BA87D /* Ekirjasto */,
 			);
 		};
 /* End PBXProject section */
@@ -4150,9 +4158,10 @@
 				3312644E2A287F53006BA87D /* Localizable.stringsdict in Resources */,
 				3312644F2A287F53006BA87D /* software-licenses.html in Resources */,
 				33266F012A40456D003BC347 /* Images.xcassets in Resources */,
-				36A527EB2BDBD399009101F5 /* Test_Catalog_Feed.json in Resources */,
+				36A527EB2BDBD399009101F5 /* TestLogin_Catalog_Feed.json in Resources */,
 				331264512A287F53006BA87D /* Accounts.json in Resources */,
-				33266F042A40476B003BC347 /* Ekirjasto-Info.plist in Resources */,
+				260CAD4E2C1A0F7200BD54C6 /* Ekirjasto_Catalog_Feed_ellibs.json in Resources */,
+				260CAD4F2C1A0F7200BD54C6 /* Ekirjasto_Catalog_Feed_beta.json in Resources */,
 				331264522A287F53006BA87D /* InfoPlist.strings in Resources */,
 				331264532A287F53006BA87D /* OpenSans-Bold.ttf in Resources */,
 				331264542A287F53006BA87D /* reader.html in Resources */,
@@ -4163,12 +4172,13 @@
 				3372514A2A9F4ED30072DA02 /* Asap-Bold.ttf in Resources */,
 				3312645A2A287F53006BA87D /* OpenSans-SemiBold.ttf in Resources */,
 				3312645B2A287F53006BA87D /* OpenDyslexic3-Bold.ttf in Resources */,
+				260CAD502C1A0F7200BD54C6 /* Ekirjasto_Catalog_Feed_dev.json in Resources */,
 				3312645C2A287F53006BA87D /* readium-shared-js_all.js.map in Resources */,
 				3312645E2A287F53006BA87D /* TPPReaderPositions.storyboard in Resources */,
 				3312645F2A287F53006BA87D /* host_app_feedback.js in Resources */,
 				33372CFC2AC54B8A0001BE2F /* GoogleService-Info.plist in Resources */,
 				33266EFB2A4037B6003BC347 /* Asap-Regular.ttf in Resources */,
-				309262C42BFD57EB003CCA2F /* Ekirjasto_Catalog_Feed.json in Resources */,
+				309262C42BFD57EB003CCA2F /* Ekirjasto_Catalog_Feed_production.json in Resources */,
 				331264612A287F53006BA87D /* txstrings.json in Resources */,
 				331264622A287F53006BA87D /* readium-shared-js_all.js.bundles.js in Resources */,
 				331264632A287F53006BA87D /* OpenDyslexic3-Regular.ttf in Resources */,
@@ -4205,7 +4215,7 @@
 				73EB0B6B25821DF4006BC997 /* readium-shared-js_all.js.bundles.js in Resources */,
 				73EB0B6C25821DF4006BC997 /* OpenDyslexic3-Regular.ttf in Resources */,
 				73EB0B6D25821DF4006BC997 /* GoogleService-Info.plist in Resources */,
-				36A527EA2BDBD399009101F5 /* Test_Catalog_Feed.json in Resources */,
+				36A527EA2BDBD399009101F5 /* TestLogin_Catalog_Feed.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4239,7 +4249,7 @@
 				5A6929241B95C8B400FB4C10 /* readium-shared-js_all.js.bundles.js in Resources */,
 				84B7A3481B84E8FE00584FB2 /* OpenDyslexic3-Regular.ttf in Resources */,
 				738EF2D02405E38800F388FB /* GoogleService-Info.plist in Resources */,
-				36A527E92BDBD399009101F5 /* Test_Catalog_Feed.json in Resources */,
+				36A527E92BDBD399009101F5 /* TestLogin_Catalog_Feed.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4289,6 +4299,7 @@
 		};
 		331264652A287F53006BA87D /* Copy Frameworks (Carthage) */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -4307,6 +4318,7 @@
 		};
 		331264662A287F53006BA87D /* Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 8;
 			files = (
 			);
@@ -4328,6 +4340,7 @@
 		};
 		33FCF7E32AC457D6008E3B72 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 12;
 			files = (
 			);
@@ -5584,6 +5597,2475 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		260CAD232C1A0C7400BD54C6 /* Debug-ellibs */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CAE35BBA1B86289500BF9BC5 /* Palace.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_GCD_PERFORMANCE = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_UNDEFINED_BEHAVIOR_SANITIZER_NULLABILITY = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEFINES_MODULE = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-ld_classic",
+				);
+				PRODUCT_NAME = Palace;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug-ellibs";
+		};
+		260CAD242C1A0C7400BD54C6 /* Debug-ellibs */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
+				CODE_SIGN_ENTITLEMENTS = Palace/SimplyE.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 10000;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = QA5XMCRV5M;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Palace/AppInfrastructure/Palace-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"EKIRJASTO=1",
+					"SIMPLYE=1",
+					"LCP=1",
+					"CONF_ELLIBS=1",
+				);
+				INFOPLIST_FILE = "Palace/EkirjastoConfig/Ekirjasto-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "E-kirjasto";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.32;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
+				PRODUCT_MODULE_NAME = Palace;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AdHoc fi.kansalliskirjasto.e-kirjasto";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG EKIRJASTO SIMPLYE LCP CONF_ELLIBS";
+				SWIFT_OBJC_BRIDGING_HEADER = "Palace/AppInfrastructure/Palace-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-c11-extensions",
+					"-Wno-objc-missing-property-synthesis",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Debug-ellibs";
+		};
+		260CAD252C1A0C7400BD54C6 /* Debug-ellibs */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
+				CODE_SIGN_ENTITLEMENTS = Palace/PalaceDebug.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 10000;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88CBA74T8K;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Palace/AppInfrastructure/Palace-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SIMPLYE=1",
+					"DEBUG=1",
+					"FEATURE_DRM_CONNECTOR=1",
+					"FEATURE_CRASH_REPORTING=1",
+					"LCP=1",
+					"FEATURE_OVERDRIVE=1",
+				);
+				INFOPLIST_FILE = "PalaceConfig/Palace-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.32;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
+				PROVISIONING_PROFILE_SPECIFIER = "Ad Hoc";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG SIMPLYE FEATURE_DRM_CONNECTOR FEATURE_CRASH_REPORTING LCP FEATURE_OVERDRIVE";
+				SWIFT_OBJC_BRIDGING_HEADER = "Palace/AppInfrastructure/Palace-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-c11-extensions",
+					"-Wno-objc-missing-property-synthesis",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Debug-ellibs";
+		};
+		260CAD262C1A0C7400BD54C6 /* Debug-ellibs */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
+				CODE_SIGN_ENTITLEMENTS = Palace/PalaceDebug.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 10000;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Palace/AppInfrastructure/Palace-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"SIMPLYE=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "PalaceConfig/Palace-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.32;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
+				PRODUCT_MODULE_NAME = Palace;
+				PRODUCT_NAME = "Palace-noDRM";
+				PROVISIONING_PROFILE = "2e185b6c-271e-4b02-a05e-860b8c3831f6";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG SIMPLYE";
+				SWIFT_OBJC_BRIDGING_HEADER = "Palace/AppInfrastructure/Palace-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-c11-extensions",
+					"-Wno-objc-missing-property-synthesis",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Debug-ellibs";
+		};
+		260CAD272C1A0C7400BD54C6 /* Debug-ellibs */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 88CBA74T8K;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SIMPLYE=1",
+					"LCP=1",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SDKROOT)/usr/include/libxml2\"",
+					"\"$(SRCROOT)/readium-sdk/Platform/Apple/RDServices\"",
+					"\"$(SRCROOT)/readium-sdk/Platform/Apple/include\"",
+					"\"$(SRCROOT)/ios-tenprintcover/TenPrintCover\"",
+					"\"$(SRCROOT)/ios-audiobook-overdrive/OverdriveProcessor\"",
+					"\"$(SRCROOT)/adept-ios\"",
+					"\"$(SRCROOT)/adobe-content-filter/public\"",
+					"\"$(SRCROOT)/adobe-rmsdk/dp/public\"",
+					"\"$(SRCROOT)/adobe-rmsdk/xml/uft/public\"",
+				);
+				INFOPLIST_FILE = PalaceTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjastoTests";
+				PRODUCT_NAME = PalaceTests;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "PalaceTests/PalaceTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ekirjasto.app/Ekirjasto";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Weverything",
+					"-Wno-objc-missing-property-synthesis",
+					"-Wno-c11-extensions",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-gnu-statement-expression",
+					"-Wno-gnu-zero-variadic-macro-arguments",
+				);
+			};
+			name = "Debug-ellibs";
+		};
+		260CAD282C1A0C8500BD54C6 /* Debug-dev */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CAE35BBA1B86289500BF9BC5 /* Palace.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_GCD_PERFORMANCE = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_UNDEFINED_BEHAVIOR_SANITIZER_NULLABILITY = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEFINES_MODULE = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-ld_classic",
+				);
+				PRODUCT_NAME = Palace;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug-dev";
+		};
+		260CAD292C1A0C8500BD54C6 /* Debug-dev */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
+				CODE_SIGN_ENTITLEMENTS = Palace/SimplyE.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 10000;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = QA5XMCRV5M;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Palace/AppInfrastructure/Palace-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"EKIRJASTO=1",
+					"SIMPLYE=1",
+					"LCP=1",
+					"CONF_DEV=1",
+				);
+				INFOPLIST_FILE = "Palace/EkirjastoConfig/Ekirjasto-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "E-kirjasto";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.32;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
+				PRODUCT_MODULE_NAME = Palace;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AdHoc fi.kansalliskirjasto.e-kirjasto";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG EKIRJASTO SIMPLYE LCP CONF_DEV";
+				SWIFT_OBJC_BRIDGING_HEADER = "Palace/AppInfrastructure/Palace-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-c11-extensions",
+					"-Wno-objc-missing-property-synthesis",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Debug-dev";
+		};
+		260CAD2A2C1A0C8500BD54C6 /* Debug-dev */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
+				CODE_SIGN_ENTITLEMENTS = Palace/PalaceDebug.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 10000;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88CBA74T8K;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Palace/AppInfrastructure/Palace-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SIMPLYE=1",
+					"DEBUG=1",
+					"FEATURE_DRM_CONNECTOR=1",
+					"FEATURE_CRASH_REPORTING=1",
+					"LCP=1",
+					"FEATURE_OVERDRIVE=1",
+				);
+				INFOPLIST_FILE = "PalaceConfig/Palace-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.32;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
+				PROVISIONING_PROFILE_SPECIFIER = "Ad Hoc";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG SIMPLYE FEATURE_DRM_CONNECTOR FEATURE_CRASH_REPORTING LCP FEATURE_OVERDRIVE";
+				SWIFT_OBJC_BRIDGING_HEADER = "Palace/AppInfrastructure/Palace-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-c11-extensions",
+					"-Wno-objc-missing-property-synthesis",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Debug-dev";
+		};
+		260CAD2B2C1A0C8500BD54C6 /* Debug-dev */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
+				CODE_SIGN_ENTITLEMENTS = Palace/PalaceDebug.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 10000;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Palace/AppInfrastructure/Palace-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"SIMPLYE=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "PalaceConfig/Palace-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.32;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
+				PRODUCT_MODULE_NAME = Palace;
+				PRODUCT_NAME = "Palace-noDRM";
+				PROVISIONING_PROFILE = "2e185b6c-271e-4b02-a05e-860b8c3831f6";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG SIMPLYE";
+				SWIFT_OBJC_BRIDGING_HEADER = "Palace/AppInfrastructure/Palace-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-c11-extensions",
+					"-Wno-objc-missing-property-synthesis",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Debug-dev";
+		};
+		260CAD2C2C1A0C8500BD54C6 /* Debug-dev */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 88CBA74T8K;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SIMPLYE=1",
+					"LCP=1",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SDKROOT)/usr/include/libxml2\"",
+					"\"$(SRCROOT)/readium-sdk/Platform/Apple/RDServices\"",
+					"\"$(SRCROOT)/readium-sdk/Platform/Apple/include\"",
+					"\"$(SRCROOT)/ios-tenprintcover/TenPrintCover\"",
+					"\"$(SRCROOT)/ios-audiobook-overdrive/OverdriveProcessor\"",
+					"\"$(SRCROOT)/adept-ios\"",
+					"\"$(SRCROOT)/adobe-content-filter/public\"",
+					"\"$(SRCROOT)/adobe-rmsdk/dp/public\"",
+					"\"$(SRCROOT)/adobe-rmsdk/xml/uft/public\"",
+				);
+				INFOPLIST_FILE = PalaceTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjastoTests";
+				PRODUCT_NAME = PalaceTests;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "PalaceTests/PalaceTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ekirjasto.app/Ekirjasto";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Weverything",
+					"-Wno-objc-missing-property-synthesis",
+					"-Wno-c11-extensions",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-gnu-statement-expression",
+					"-Wno-gnu-zero-variadic-macro-arguments",
+				);
+			};
+			name = "Debug-dev";
+		};
+		260CAD2D2C1A0C9000BD54C6 /* Debug-beta */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CAE35BBA1B86289500BF9BC5 /* Palace.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_GCD_PERFORMANCE = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_UNDEFINED_BEHAVIOR_SANITIZER_NULLABILITY = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEFINES_MODULE = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-ld_classic",
+				);
+				PRODUCT_NAME = Palace;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug-beta";
+		};
+		260CAD2E2C1A0C9000BD54C6 /* Debug-beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
+				CODE_SIGN_ENTITLEMENTS = Palace/SimplyE.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 10000;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = QA5XMCRV5M;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Palace/AppInfrastructure/Palace-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"EKIRJASTO=1",
+					"SIMPLYE=1",
+					"LCP=1",
+					"CONF_BETA=1",
+				);
+				INFOPLIST_FILE = "Palace/EkirjastoConfig/Ekirjasto-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "E-kirjasto";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.32;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
+				PRODUCT_MODULE_NAME = Palace;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AdHoc fi.kansalliskirjasto.e-kirjasto";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG EKIRJASTO SIMPLYE LCP CONF_BETA";
+				SWIFT_OBJC_BRIDGING_HEADER = "Palace/AppInfrastructure/Palace-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-c11-extensions",
+					"-Wno-objc-missing-property-synthesis",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Debug-beta";
+		};
+		260CAD2F2C1A0C9000BD54C6 /* Debug-beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
+				CODE_SIGN_ENTITLEMENTS = Palace/PalaceDebug.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 10000;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88CBA74T8K;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Palace/AppInfrastructure/Palace-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SIMPLYE=1",
+					"DEBUG=1",
+					"FEATURE_DRM_CONNECTOR=1",
+					"FEATURE_CRASH_REPORTING=1",
+					"LCP=1",
+					"FEATURE_OVERDRIVE=1",
+				);
+				INFOPLIST_FILE = "PalaceConfig/Palace-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.32;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
+				PROVISIONING_PROFILE_SPECIFIER = "Ad Hoc";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG SIMPLYE FEATURE_DRM_CONNECTOR FEATURE_CRASH_REPORTING LCP FEATURE_OVERDRIVE";
+				SWIFT_OBJC_BRIDGING_HEADER = "Palace/AppInfrastructure/Palace-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-c11-extensions",
+					"-Wno-objc-missing-property-synthesis",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Debug-beta";
+		};
+		260CAD302C1A0C9000BD54C6 /* Debug-beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
+				CODE_SIGN_ENTITLEMENTS = Palace/PalaceDebug.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 10000;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Palace/AppInfrastructure/Palace-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"SIMPLYE=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "PalaceConfig/Palace-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.32;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
+				PRODUCT_MODULE_NAME = Palace;
+				PRODUCT_NAME = "Palace-noDRM";
+				PROVISIONING_PROFILE = "2e185b6c-271e-4b02-a05e-860b8c3831f6";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG SIMPLYE";
+				SWIFT_OBJC_BRIDGING_HEADER = "Palace/AppInfrastructure/Palace-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-c11-extensions",
+					"-Wno-objc-missing-property-synthesis",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Debug-beta";
+		};
+		260CAD312C1A0C9000BD54C6 /* Debug-beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 88CBA74T8K;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SIMPLYE=1",
+					"LCP=1",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SDKROOT)/usr/include/libxml2\"",
+					"\"$(SRCROOT)/readium-sdk/Platform/Apple/RDServices\"",
+					"\"$(SRCROOT)/readium-sdk/Platform/Apple/include\"",
+					"\"$(SRCROOT)/ios-tenprintcover/TenPrintCover\"",
+					"\"$(SRCROOT)/ios-audiobook-overdrive/OverdriveProcessor\"",
+					"\"$(SRCROOT)/adept-ios\"",
+					"\"$(SRCROOT)/adobe-content-filter/public\"",
+					"\"$(SRCROOT)/adobe-rmsdk/dp/public\"",
+					"\"$(SRCROOT)/adobe-rmsdk/xml/uft/public\"",
+				);
+				INFOPLIST_FILE = PalaceTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjastoTests";
+				PRODUCT_NAME = PalaceTests;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "PalaceTests/PalaceTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ekirjasto.app/Ekirjasto";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Weverything",
+					"-Wno-objc-missing-property-synthesis",
+					"-Wno-c11-extensions",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-gnu-statement-expression",
+					"-Wno-gnu-zero-variadic-macro-arguments",
+				);
+			};
+			name = "Debug-beta";
+		};
+		260CAD322C1A0C9800BD54C6 /* Debug-production */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CAE35BBA1B86289500BF9BC5 /* Palace.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_GCD_PERFORMANCE = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_UNDEFINED_BEHAVIOR_SANITIZER_NULLABILITY = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEFINES_MODULE = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-ld_classic",
+				);
+				PRODUCT_NAME = Palace;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug-production";
+		};
+		260CAD332C1A0C9800BD54C6 /* Debug-production */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
+				CODE_SIGN_ENTITLEMENTS = Palace/SimplyE.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 10000;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = QA5XMCRV5M;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Palace/AppInfrastructure/Palace-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"EKIRJASTO=1",
+					"SIMPLYE=1",
+					"LCP=1",
+					"CONF_PRODUCTION=1",
+				);
+				INFOPLIST_FILE = "Palace/EkirjastoConfig/Ekirjasto-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "E-kirjasto";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.32;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
+				PRODUCT_MODULE_NAME = Palace;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AdHoc fi.kansalliskirjasto.e-kirjasto";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG EKIRJASTO SIMPLYE LCP CONF_PRODUCTION";
+				SWIFT_OBJC_BRIDGING_HEADER = "Palace/AppInfrastructure/Palace-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-c11-extensions",
+					"-Wno-objc-missing-property-synthesis",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Debug-production";
+		};
+		260CAD342C1A0C9800BD54C6 /* Debug-production */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
+				CODE_SIGN_ENTITLEMENTS = Palace/PalaceDebug.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 10000;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88CBA74T8K;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Palace/AppInfrastructure/Palace-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SIMPLYE=1",
+					"DEBUG=1",
+					"FEATURE_DRM_CONNECTOR=1",
+					"FEATURE_CRASH_REPORTING=1",
+					"LCP=1",
+					"FEATURE_OVERDRIVE=1",
+				);
+				INFOPLIST_FILE = "PalaceConfig/Palace-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.32;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
+				PROVISIONING_PROFILE_SPECIFIER = "Ad Hoc";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG SIMPLYE FEATURE_DRM_CONNECTOR FEATURE_CRASH_REPORTING LCP FEATURE_OVERDRIVE";
+				SWIFT_OBJC_BRIDGING_HEADER = "Palace/AppInfrastructure/Palace-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-c11-extensions",
+					"-Wno-objc-missing-property-synthesis",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Debug-production";
+		};
+		260CAD352C1A0C9800BD54C6 /* Debug-production */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
+				CODE_SIGN_ENTITLEMENTS = Palace/PalaceDebug.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 10000;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Palace/AppInfrastructure/Palace-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"SIMPLYE=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "PalaceConfig/Palace-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.32;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
+				PRODUCT_MODULE_NAME = Palace;
+				PRODUCT_NAME = "Palace-noDRM";
+				PROVISIONING_PROFILE = "2e185b6c-271e-4b02-a05e-860b8c3831f6";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG SIMPLYE";
+				SWIFT_OBJC_BRIDGING_HEADER = "Palace/AppInfrastructure/Palace-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-c11-extensions",
+					"-Wno-objc-missing-property-synthesis",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Debug-production";
+		};
+		260CAD362C1A0C9800BD54C6 /* Debug-production */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 88CBA74T8K;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SIMPLYE=1",
+					"LCP=1",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SDKROOT)/usr/include/libxml2\"",
+					"\"$(SRCROOT)/readium-sdk/Platform/Apple/RDServices\"",
+					"\"$(SRCROOT)/readium-sdk/Platform/Apple/include\"",
+					"\"$(SRCROOT)/ios-tenprintcover/TenPrintCover\"",
+					"\"$(SRCROOT)/ios-audiobook-overdrive/OverdriveProcessor\"",
+					"\"$(SRCROOT)/adept-ios\"",
+					"\"$(SRCROOT)/adobe-content-filter/public\"",
+					"\"$(SRCROOT)/adobe-rmsdk/dp/public\"",
+					"\"$(SRCROOT)/adobe-rmsdk/xml/uft/public\"",
+				);
+				INFOPLIST_FILE = PalaceTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjastoTests";
+				PRODUCT_NAME = PalaceTests;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "PalaceTests/PalaceTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ekirjasto.app/Ekirjasto";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Weverything",
+					"-Wno-objc-missing-property-synthesis",
+					"-Wno-c11-extensions",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-gnu-statement-expression",
+					"-Wno-gnu-zero-variadic-macro-arguments",
+				);
+			};
+			name = "Debug-production";
+		};
+		260CAD372C1A0CB600BD54C6 /* Release-ellibs */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CAE35BBA1B86289500BF9BC5 /* Palace.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_GCD_PERFORMANCE = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_UNDEFINED_BEHAVIOR_SANITIZER_NULLABILITY = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				DEFINES_MODULE = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=0";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-ld_classic",
+				);
+				PRODUCT_NAME = Palace;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release-ellibs";
+		};
+		260CAD382C1A0CB600BD54C6 /* Release-ellibs */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
+				CODE_SIGN_ENTITLEMENTS = Palace/SimplyE.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 10000;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = QA5XMCRV5M;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Palace/AppInfrastructure/Palace-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"EKIRJASTO=1",
+					"SIMPLYE=1",
+					"LCP=1",
+					"CONF_ELLIBS=1",
+				);
+				INFOPLIST_FILE = "Palace/EkirjastoConfig/Ekirjasto-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "E-kirjasto";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.32;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
+				PRODUCT_MODULE_NAME = Palace;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AdHoc fi.kansalliskirjasto.e-kirjasto";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "EKIRJASTO SIMPLYE LCP CONF_ELLIBS";
+				SWIFT_OBJC_BRIDGING_HEADER = "Palace/AppInfrastructure/Palace-Bridging-Header.h";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-c11-extensions",
+					"-Wno-objc-missing-property-synthesis",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Release-ellibs";
+		};
+		260CAD392C1A0CB600BD54C6 /* Release-ellibs */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
+				CODE_SIGN_ENTITLEMENTS = Palace/SimplyE.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CURRENT_PROJECT_VERSION = 10000;
+				DEVELOPMENT_TEAM = 88CBA74T8K;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88CBA74T8K;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Palace/AppInfrastructure/Palace-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SIMPLYE=1",
+					"DEBUG=0",
+					"FEATURE_DRM_CONNECTOR=1",
+					"FEATURE_CRASH_REPORTING=1",
+					"LCP=1",
+					"FEATURE_OVERDRIVE=1",
+				);
+				INFOPLIST_FILE = "PalaceConfig/Palace-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.32;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
+				PROVISIONING_PROFILE_SPECIFIER = "App Store";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "SIMPLYE FEATURE_DRM_CONNECTOR FEATURE_CRASH_REPORTING LCP FEATURE_OVERDRIVE";
+				SWIFT_OBJC_BRIDGING_HEADER = "Palace/AppInfrastructure/Palace-Bridging-Header.h";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-c11-extensions",
+					"-Wno-objc-missing-property-synthesis",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Release-ellibs";
+		};
+		260CAD3A2C1A0CB600BD54C6 /* Release-ellibs */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
+				CODE_SIGN_ENTITLEMENTS = Palace/SimplyE.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 10000;
+				DEVELOPMENT_TEAM = 88CBA74T8K;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88CBA74T8K;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Palace/AppInfrastructure/Palace-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"SIMPLYE=1",
+					"DEBUG=0",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "PalaceConfig/Palace-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.32;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
+				PRODUCT_MODULE_NAME = Palace;
+				PRODUCT_NAME = "Palace-noDRM";
+				PROVISIONING_PROFILE = "b3d9154d-70e1-48d6-a0c5-869431277a5c";
+				PROVISIONING_PROFILE_SPECIFIER = "App Store";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SIMPLYE;
+				SWIFT_OBJC_BRIDGING_HEADER = "Palace/AppInfrastructure/Palace-Bridging-Header.h";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-c11-extensions",
+					"-Wno-objc-missing-property-synthesis",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Release-ellibs";
+		};
+		260CAD3B2C1A0CB600BD54C6 /* Release-ellibs */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 88CBA74T8K;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SIMPLYE=1",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SDKROOT)/usr/include/libxml2\"",
+					"\"$(SRCROOT)/readium-sdk/Platform/Apple/RDServices\"",
+					"\"$(SRCROOT)/readium-sdk/Platform/Apple/include\"",
+					"\"$(SRCROOT)/ios-tenprintcover/TenPrintCover\"",
+					"\"$(SRCROOT)/ios-audiobook-overdrive/OverdriveProcessor\"",
+					"\"$(SRCROOT)/adept-ios\"",
+					"\"$(SRCROOT)/adobe-content-filter/public\"",
+					"\"$(SRCROOT)/adobe-rmsdk/dp/public\"",
+					"\"$(SRCROOT)/adobe-rmsdk/xml/uft/public\"",
+				);
+				INFOPLIST_FILE = PalaceTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjastoTests";
+				PRODUCT_NAME = PalaceTests;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "PalaceTests/PalaceTests-Bridging-Header.h";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ekirjasto.app/Ekirjasto";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Weverything",
+					"-Wno-objc-missing-property-synthesis",
+					"-Wno-c11-extensions",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-gnu-statement-expression",
+					"-Wno-gnu-zero-variadic-macro-arguments",
+				);
+			};
+			name = "Release-ellibs";
+		};
+		260CAD3C2C1A0CD100BD54C6 /* Release-dev */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CAE35BBA1B86289500BF9BC5 /* Palace.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_GCD_PERFORMANCE = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_UNDEFINED_BEHAVIOR_SANITIZER_NULLABILITY = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				DEFINES_MODULE = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=0";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-ld_classic",
+				);
+				PRODUCT_NAME = Palace;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release-dev";
+		};
+		260CAD3D2C1A0CD100BD54C6 /* Release-dev */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
+				CODE_SIGN_ENTITLEMENTS = Palace/SimplyE.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 10000;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = QA5XMCRV5M;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Palace/AppInfrastructure/Palace-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"EKIRJASTO=1",
+					"SIMPLYE=1",
+					"LCP=1",
+					"CONF_DEV=1",
+				);
+				INFOPLIST_FILE = "Palace/EkirjastoConfig/Ekirjasto-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "E-kirjasto";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.32;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
+				PRODUCT_MODULE_NAME = Palace;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AdHoc fi.kansalliskirjasto.e-kirjasto";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "EKIRJASTO SIMPLYE LCP  CONF_DEV";
+				SWIFT_OBJC_BRIDGING_HEADER = "Palace/AppInfrastructure/Palace-Bridging-Header.h";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-c11-extensions",
+					"-Wno-objc-missing-property-synthesis",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Release-dev";
+		};
+		260CAD3E2C1A0CD100BD54C6 /* Release-dev */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
+				CODE_SIGN_ENTITLEMENTS = Palace/SimplyE.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CURRENT_PROJECT_VERSION = 10000;
+				DEVELOPMENT_TEAM = 88CBA74T8K;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88CBA74T8K;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Palace/AppInfrastructure/Palace-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SIMPLYE=1",
+					"DEBUG=0",
+					"FEATURE_DRM_CONNECTOR=1",
+					"FEATURE_CRASH_REPORTING=1",
+					"LCP=1",
+					"FEATURE_OVERDRIVE=1",
+				);
+				INFOPLIST_FILE = "PalaceConfig/Palace-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.32;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
+				PROVISIONING_PROFILE_SPECIFIER = "App Store";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "SIMPLYE FEATURE_DRM_CONNECTOR FEATURE_CRASH_REPORTING LCP FEATURE_OVERDRIVE";
+				SWIFT_OBJC_BRIDGING_HEADER = "Palace/AppInfrastructure/Palace-Bridging-Header.h";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-c11-extensions",
+					"-Wno-objc-missing-property-synthesis",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Release-dev";
+		};
+		260CAD3F2C1A0CD100BD54C6 /* Release-dev */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
+				CODE_SIGN_ENTITLEMENTS = Palace/SimplyE.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 10000;
+				DEVELOPMENT_TEAM = 88CBA74T8K;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88CBA74T8K;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Palace/AppInfrastructure/Palace-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"SIMPLYE=1",
+					"DEBUG=0",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "PalaceConfig/Palace-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.32;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
+				PRODUCT_MODULE_NAME = Palace;
+				PRODUCT_NAME = "Palace-noDRM";
+				PROVISIONING_PROFILE = "b3d9154d-70e1-48d6-a0c5-869431277a5c";
+				PROVISIONING_PROFILE_SPECIFIER = "App Store";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SIMPLYE;
+				SWIFT_OBJC_BRIDGING_HEADER = "Palace/AppInfrastructure/Palace-Bridging-Header.h";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-c11-extensions",
+					"-Wno-objc-missing-property-synthesis",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Release-dev";
+		};
+		260CAD402C1A0CD100BD54C6 /* Release-dev */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 88CBA74T8K;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SIMPLYE=1",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SDKROOT)/usr/include/libxml2\"",
+					"\"$(SRCROOT)/readium-sdk/Platform/Apple/RDServices\"",
+					"\"$(SRCROOT)/readium-sdk/Platform/Apple/include\"",
+					"\"$(SRCROOT)/ios-tenprintcover/TenPrintCover\"",
+					"\"$(SRCROOT)/ios-audiobook-overdrive/OverdriveProcessor\"",
+					"\"$(SRCROOT)/adept-ios\"",
+					"\"$(SRCROOT)/adobe-content-filter/public\"",
+					"\"$(SRCROOT)/adobe-rmsdk/dp/public\"",
+					"\"$(SRCROOT)/adobe-rmsdk/xml/uft/public\"",
+				);
+				INFOPLIST_FILE = PalaceTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjastoTests";
+				PRODUCT_NAME = PalaceTests;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "PalaceTests/PalaceTests-Bridging-Header.h";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ekirjasto.app/Ekirjasto";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Weverything",
+					"-Wno-objc-missing-property-synthesis",
+					"-Wno-c11-extensions",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-gnu-statement-expression",
+					"-Wno-gnu-zero-variadic-macro-arguments",
+				);
+			};
+			name = "Release-dev";
+		};
+		260CAD412C1A0CD800BD54C6 /* Release-beta */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CAE35BBA1B86289500BF9BC5 /* Palace.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_GCD_PERFORMANCE = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_UNDEFINED_BEHAVIOR_SANITIZER_NULLABILITY = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				DEFINES_MODULE = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=0";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-ld_classic",
+				);
+				PRODUCT_NAME = Palace;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release-beta";
+		};
+		260CAD422C1A0CD800BD54C6 /* Release-beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
+				CODE_SIGN_ENTITLEMENTS = Palace/SimplyE.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 10000;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = QA5XMCRV5M;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Palace/AppInfrastructure/Palace-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"EKIRJASTO=1",
+					"SIMPLYE=1",
+					"LCP=1",
+					"CONF_BETA=1",
+				);
+				INFOPLIST_FILE = "Palace/EkirjastoConfig/Ekirjasto-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "E-kirjasto";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.32;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
+				PRODUCT_MODULE_NAME = Palace;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AdHoc fi.kansalliskirjasto.e-kirjasto";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "EKIRJASTO SIMPLYE LCP CONF_BETA";
+				SWIFT_OBJC_BRIDGING_HEADER = "Palace/AppInfrastructure/Palace-Bridging-Header.h";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-c11-extensions",
+					"-Wno-objc-missing-property-synthesis",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Release-beta";
+		};
+		260CAD432C1A0CD800BD54C6 /* Release-beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
+				CODE_SIGN_ENTITLEMENTS = Palace/SimplyE.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CURRENT_PROJECT_VERSION = 10000;
+				DEVELOPMENT_TEAM = 88CBA74T8K;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88CBA74T8K;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Palace/AppInfrastructure/Palace-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SIMPLYE=1",
+					"DEBUG=0",
+					"FEATURE_DRM_CONNECTOR=1",
+					"FEATURE_CRASH_REPORTING=1",
+					"LCP=1",
+					"FEATURE_OVERDRIVE=1",
+				);
+				INFOPLIST_FILE = "PalaceConfig/Palace-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.32;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
+				PROVISIONING_PROFILE_SPECIFIER = "App Store";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "SIMPLYE FEATURE_DRM_CONNECTOR FEATURE_CRASH_REPORTING LCP FEATURE_OVERDRIVE";
+				SWIFT_OBJC_BRIDGING_HEADER = "Palace/AppInfrastructure/Palace-Bridging-Header.h";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-c11-extensions",
+					"-Wno-objc-missing-property-synthesis",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Release-beta";
+		};
+		260CAD442C1A0CD800BD54C6 /* Release-beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
+				CODE_SIGN_ENTITLEMENTS = Palace/SimplyE.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 10000;
+				DEVELOPMENT_TEAM = 88CBA74T8K;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88CBA74T8K;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Palace/AppInfrastructure/Palace-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"SIMPLYE=1",
+					"DEBUG=0",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "PalaceConfig/Palace-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.32;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
+				PRODUCT_MODULE_NAME = Palace;
+				PRODUCT_NAME = "Palace-noDRM";
+				PROVISIONING_PROFILE = "b3d9154d-70e1-48d6-a0c5-869431277a5c";
+				PROVISIONING_PROFILE_SPECIFIER = "App Store";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SIMPLYE;
+				SWIFT_OBJC_BRIDGING_HEADER = "Palace/AppInfrastructure/Palace-Bridging-Header.h";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-c11-extensions",
+					"-Wno-objc-missing-property-synthesis",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Release-beta";
+		};
+		260CAD452C1A0CD800BD54C6 /* Release-beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 88CBA74T8K;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SIMPLYE=1",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SDKROOT)/usr/include/libxml2\"",
+					"\"$(SRCROOT)/readium-sdk/Platform/Apple/RDServices\"",
+					"\"$(SRCROOT)/readium-sdk/Platform/Apple/include\"",
+					"\"$(SRCROOT)/ios-tenprintcover/TenPrintCover\"",
+					"\"$(SRCROOT)/ios-audiobook-overdrive/OverdriveProcessor\"",
+					"\"$(SRCROOT)/adept-ios\"",
+					"\"$(SRCROOT)/adobe-content-filter/public\"",
+					"\"$(SRCROOT)/adobe-rmsdk/dp/public\"",
+					"\"$(SRCROOT)/adobe-rmsdk/xml/uft/public\"",
+				);
+				INFOPLIST_FILE = PalaceTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjastoTests";
+				PRODUCT_NAME = PalaceTests;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "PalaceTests/PalaceTests-Bridging-Header.h";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ekirjasto.app/Ekirjasto";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Weverything",
+					"-Wno-objc-missing-property-synthesis",
+					"-Wno-c11-extensions",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-gnu-statement-expression",
+					"-Wno-gnu-zero-variadic-macro-arguments",
+				);
+			};
+			name = "Release-beta";
+		};
+		260CAD462C1A0CDF00BD54C6 /* Release-production */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CAE35BBA1B86289500BF9BC5 /* Palace.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_GCD_PERFORMANCE = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_UNDEFINED_BEHAVIOR_SANITIZER_NULLABILITY = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				DEFINES_MODULE = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=0";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-ld_classic",
+				);
+				PRODUCT_NAME = Palace;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release-production";
+		};
+		260CAD472C1A0CDF00BD54C6 /* Release-production */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
+				CODE_SIGN_ENTITLEMENTS = Palace/SimplyE.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 10000;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = QA5XMCRV5M;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Palace/AppInfrastructure/Palace-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"EKIRJASTO=1",
+					"SIMPLYE=1",
+					"LCP=1",
+					"CONF_PRODUCTION=1",
+				);
+				INFOPLIST_FILE = "Palace/EkirjastoConfig/Ekirjasto-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "E-kirjasto";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.32;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
+				PRODUCT_MODULE_NAME = Palace;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AdHoc fi.kansalliskirjasto.e-kirjasto";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "EKIRJASTO SIMPLYE LCP CONF_PRODUCTION";
+				SWIFT_OBJC_BRIDGING_HEADER = "Palace/AppInfrastructure/Palace-Bridging-Header.h";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-c11-extensions",
+					"-Wno-objc-missing-property-synthesis",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Release-production";
+		};
+		260CAD482C1A0CDF00BD54C6 /* Release-production */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
+				CODE_SIGN_ENTITLEMENTS = Palace/SimplyE.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CURRENT_PROJECT_VERSION = 10000;
+				DEVELOPMENT_TEAM = 88CBA74T8K;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88CBA74T8K;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Palace/AppInfrastructure/Palace-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SIMPLYE=1",
+					"DEBUG=0",
+					"FEATURE_DRM_CONNECTOR=1",
+					"FEATURE_CRASH_REPORTING=1",
+					"LCP=1",
+					"FEATURE_OVERDRIVE=1",
+				);
+				INFOPLIST_FILE = "PalaceConfig/Palace-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.32;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
+				PROVISIONING_PROFILE_SPECIFIER = "App Store";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "SIMPLYE FEATURE_DRM_CONNECTOR FEATURE_CRASH_REPORTING LCP FEATURE_OVERDRIVE";
+				SWIFT_OBJC_BRIDGING_HEADER = "Palace/AppInfrastructure/Palace-Bridging-Header.h";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-c11-extensions",
+					"-Wno-objc-missing-property-synthesis",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Release-production";
+		};
+		260CAD492C1A0CDF00BD54C6 /* Release-production */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
+				CODE_SIGN_ENTITLEMENTS = Palace/SimplyE.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 10000;
+				DEVELOPMENT_TEAM = 88CBA74T8K;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88CBA74T8K;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Palace/AppInfrastructure/Palace-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"SIMPLYE=1",
+					"DEBUG=0",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "PalaceConfig/Palace-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.32;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
+				PRODUCT_MODULE_NAME = Palace;
+				PRODUCT_NAME = "Palace-noDRM";
+				PROVISIONING_PROFILE = "b3d9154d-70e1-48d6-a0c5-869431277a5c";
+				PROVISIONING_PROFILE_SPECIFIER = "App Store";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SIMPLYE;
+				SWIFT_OBJC_BRIDGING_HEADER = "Palace/AppInfrastructure/Palace-Bridging-Header.h";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-c11-extensions",
+					"-Wno-objc-missing-property-synthesis",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Release-production";
+		};
+		260CAD4A2C1A0CDF00BD54C6 /* Release-production */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 88CBA74T8K;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SIMPLYE=1",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SDKROOT)/usr/include/libxml2\"",
+					"\"$(SRCROOT)/readium-sdk/Platform/Apple/RDServices\"",
+					"\"$(SRCROOT)/readium-sdk/Platform/Apple/include\"",
+					"\"$(SRCROOT)/ios-tenprintcover/TenPrintCover\"",
+					"\"$(SRCROOT)/ios-audiobook-overdrive/OverdriveProcessor\"",
+					"\"$(SRCROOT)/adept-ios\"",
+					"\"$(SRCROOT)/adobe-content-filter/public\"",
+					"\"$(SRCROOT)/adobe-rmsdk/dp/public\"",
+					"\"$(SRCROOT)/adobe-rmsdk/xml/uft/public\"",
+				);
+				INFOPLIST_FILE = PalaceTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjastoTests";
+				PRODUCT_NAME = PalaceTests;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "PalaceTests/PalaceTests-Bridging-Header.h";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ekirjasto.app/Ekirjasto";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Weverything",
+					"-Wno-objc-missing-property-synthesis",
+					"-Wno-c11-extensions",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-gnu-statement-expression",
+					"-Wno-gnu-zero-variadic-macro-arguments",
+				);
+			};
+			name = "Release-production";
+		};
 		2D2B477A1D08F808007F7764 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -5724,9 +8206,11 @@
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
 				CODE_SIGN_ENTITLEMENTS = Palace/SimplyE.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 161;
-				DEVELOPMENT_TEAM = QA5XMCRV5M;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 10000;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = QA5XMCRV5M;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5736,9 +8220,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Palace/AppInfrastructure/Palace-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"SIMPLYE=1",
-					"DEBUG=1",
 					"$(inherited)",
+					"EKIRJASTO=1",
+					"SIMPLYE=1",
 					"LCP=1",
 				);
 				INFOPLIST_FILE = "Palace/EkirjastoConfig/Ekirjasto-Info.plist";
@@ -5749,13 +8233,14 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.30;
+				MARKETING_VERSION = 1.0.32;
 				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
 				PRODUCT_MODULE_NAME = Palace;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AdHoc fi.kansalliskirjasto.e-kirjasto";
 				RUN_CLANG_STATIC_ANALYZER = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG SIMPLYE LCP";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG EKIRJASTO SIMPLYE LCP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Palace/AppInfrastructure/Palace-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
@@ -5783,9 +8268,11 @@
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
 				CODE_SIGN_ENTITLEMENTS = Palace/SimplyE.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 161;
-				DEVELOPMENT_TEAM = QA5XMCRV5M;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 10000;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = QA5XMCRV5M;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5795,9 +8282,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Palace/AppInfrastructure/Palace-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"SIMPLYE=1",
-					"DEBUG=0",
 					"$(inherited)",
+					"EKIRJASTO=1",
+					"SIMPLYE=1",
 					"LCP=1",
 				);
 				INFOPLIST_FILE = "Palace/EkirjastoConfig/Ekirjasto-Info.plist";
@@ -5808,13 +8295,14 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.30;
+				MARKETING_VERSION = 1.0.32;
 				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
 				PRODUCT_MODULE_NAME = Palace;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AdHoc fi.kansalliskirjasto.e-kirjasto";
 				RUN_CLANG_STATIC_ANALYZER = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "SIMPLYE LCP";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "EKIRJASTO SIMPLYE LCP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Palace/AppInfrastructure/Palace-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.2;
@@ -5842,7 +8330,7 @@
 				CODE_SIGN_ENTITLEMENTS = Palace/PalaceDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 219;
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5863,7 +8351,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.35;
+				MARKETING_VERSION = 1.0.32;
 				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
 				PRODUCT_MODULE_NAME = Palace;
 				PRODUCT_NAME = "Palace-noDRM";
@@ -5899,7 +8387,7 @@
 				CODE_SIGN_ENTITLEMENTS = Palace/SimplyE.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 219;
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = 88CBA74T8K;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88CBA74T8K;
 				ENABLE_BITCODE = NO;
@@ -5921,7 +8409,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.35;
+				MARKETING_VERSION = 1.0.32;
 				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
 				PRODUCT_MODULE_NAME = Palace;
 				PRODUCT_NAME = "Palace-noDRM";
@@ -6002,7 +8490,7 @@
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
-					"-ld64",
+					"-ld_classic",
 				);
 				PRODUCT_NAME = Palace;
 				SDKROOT = iphoneos;
@@ -6049,6 +8537,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=0";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -6059,7 +8548,7 @@
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
-					"-ld64",
+					"-ld_classic",
 				);
 				PRODUCT_NAME = Palace;
 				SDKROOT = iphoneos;
@@ -6083,7 +8572,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 219;
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88CBA74T8K;
 				ENABLE_BITCODE = NO;
@@ -6110,7 +8599,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.35;
+				MARKETING_VERSION = 1.0.32;
 				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
 				PROVISIONING_PROFILE_SPECIFIER = "Ad Hoc";
 				RUN_CLANG_STATIC_ANALYZER = YES;
@@ -6143,7 +8632,7 @@
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
 				CODE_SIGN_ENTITLEMENTS = Palace/SimplyE.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = 219;
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = 88CBA74T8K;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88CBA74T8K;
 				ENABLE_BITCODE = NO;
@@ -6170,7 +8659,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.35;
+				MARKETING_VERSION = 1.0.32;
 				PRODUCT_BUNDLE_IDENTIFIER = "fi.kansalliskirjasto.e-kirjasto";
 				PROVISIONING_PROFILE_SPECIFIER = "App Store";
 				RUN_CLANG_STATIC_ANALYZER = YES;
@@ -6199,7 +8688,15 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D2B477A1D08F808007F7764 /* Debug */,
+				260CAD272C1A0C7400BD54C6 /* Debug-ellibs */,
+				260CAD2C2C1A0C8500BD54C6 /* Debug-dev */,
+				260CAD312C1A0C9000BD54C6 /* Debug-beta */,
+				260CAD362C1A0C9800BD54C6 /* Debug-production */,
 				2D2B477B1D08F808007F7764 /* Release */,
+				260CAD3B2C1A0CB600BD54C6 /* Release-ellibs */,
+				260CAD402C1A0CD100BD54C6 /* Release-dev */,
+				260CAD452C1A0CD800BD54C6 /* Release-beta */,
+				260CAD4A2C1A0CDF00BD54C6 /* Release-production */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -6208,7 +8705,15 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3312646C2A287F53006BA87D /* Debug */,
+				260CAD242C1A0C7400BD54C6 /* Debug-ellibs */,
+				260CAD292C1A0C8500BD54C6 /* Debug-dev */,
+				260CAD2E2C1A0C9000BD54C6 /* Debug-beta */,
+				260CAD332C1A0C9800BD54C6 /* Debug-production */,
 				3312646D2A287F53006BA87D /* Release */,
+				260CAD382C1A0CB600BD54C6 /* Release-ellibs */,
+				260CAD3D2C1A0CD100BD54C6 /* Release-dev */,
+				260CAD422C1A0CD800BD54C6 /* Release-beta */,
+				260CAD472C1A0CDF00BD54C6 /* Release-production */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -6217,7 +8722,15 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				73EB0B7325821DF4006BC997 /* Debug */,
+				260CAD262C1A0C7400BD54C6 /* Debug-ellibs */,
+				260CAD2B2C1A0C8500BD54C6 /* Debug-dev */,
+				260CAD302C1A0C9000BD54C6 /* Debug-beta */,
+				260CAD352C1A0C9800BD54C6 /* Debug-production */,
 				73EB0B7425821DF4006BC997 /* Release */,
+				260CAD3A2C1A0CB600BD54C6 /* Release-ellibs */,
+				260CAD3F2C1A0CD100BD54C6 /* Release-dev */,
+				260CAD442C1A0CD800BD54C6 /* Release-beta */,
+				260CAD492C1A0CDF00BD54C6 /* Release-production */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -6226,7 +8739,15 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A823D837192BABA400B55DE2 /* Debug */,
+				260CAD232C1A0C7400BD54C6 /* Debug-ellibs */,
+				260CAD282C1A0C8500BD54C6 /* Debug-dev */,
+				260CAD2D2C1A0C9000BD54C6 /* Debug-beta */,
+				260CAD322C1A0C9800BD54C6 /* Debug-production */,
 				A823D838192BABA400B55DE2 /* Release */,
+				260CAD372C1A0CB600BD54C6 /* Release-ellibs */,
+				260CAD3C2C1A0CD100BD54C6 /* Release-dev */,
+				260CAD412C1A0CD800BD54C6 /* Release-beta */,
+				260CAD462C1A0CDF00BD54C6 /* Release-production */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -6235,7 +8756,15 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A823D83A192BABA400B55DE2 /* Debug */,
+				260CAD252C1A0C7400BD54C6 /* Debug-ellibs */,
+				260CAD2A2C1A0C8500BD54C6 /* Debug-dev */,
+				260CAD2F2C1A0C9000BD54C6 /* Debug-beta */,
+				260CAD342C1A0C9800BD54C6 /* Debug-production */,
 				A823D83B192BABA400B55DE2 /* Release */,
+				260CAD392C1A0CB600BD54C6 /* Release-ellibs */,
+				260CAD3E2C1A0CD100BD54C6 /* Release-dev */,
+				260CAD432C1A0CD800BD54C6 /* Release-beta */,
+				260CAD482C1A0CDF00BD54C6 /* Release-production */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

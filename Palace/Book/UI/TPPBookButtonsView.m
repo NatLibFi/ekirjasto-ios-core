@@ -92,6 +92,7 @@
                              object:nil
                              queue:[NSOperationQueue mainQueue]
                              usingBlock:^(NSNotification * _Nonnull note) {
+    #pragma unused(note)
     [self updateButtons];
   }]];
   

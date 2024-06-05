@@ -72,7 +72,7 @@ class TPPBookCoverRegistry {
     
     var _books : [TPPBook] = []
     
-    for var b in books {
+    for b in books {
       if !_books.contains(where: { book in
         book.identifier == b.identifier
       }) {
