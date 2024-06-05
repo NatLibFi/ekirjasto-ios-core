@@ -1,45 +1,62 @@
 #!/bin/bash
 
-# SUMMARY
-#   This script integrates secrets, regenerates Readium headers, wipes
-#   the Carthage folder, and finally checks out and rebuilds all Carthage
-#   dependencies.
 #
-# USAGE
-#   Run this script from the root of ios-core repo:
+# Build 3rd party dependecies for E-kirjasto.
 #
-#     ./scripts/build-3rd-party-dependencies.sh [--no-private]
+# Version 1.0.0
 #
-# PARAMETERS
-#   --no-private: skips integrating private secrets.
-#
-# NOTE
-#   This script is idempotent so it can be run safely over and over.
 
-set -eo pipefail
+trap 'trap - INT; exit $((128 + $(kill -l INT)))' INT
 
-fatal()
-{
-  echo "$0 error: $1" 1>&2
-  exit 1
+# cd into the project root directory (or fail)
+cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")/.." || exit 64
+
+# Show command usage
+show_usage() {
+  echo "Usage: $(basename "$0") [-h|--help]"
+  echo
+  # Wrap after 80 characters --> #######################################################
+  echo "Options:"
+  echo "-h   --help           Show this help page."
+  # Wrap after 80 characters --> #######################################################
+  echo
+  echo "This script builds 3rd party dependencies for E-kirjasto."
+  echo
 }
 
-if [ "$BUILD_CONTEXT" == "" ]; then
-  echo "Building 3rd party dependencies..."
-else
-  echo "Building 3rd party dependencies for [$BUILD_CONTEXT]..."
-fi
+fatal() {
+  echo "$(basename "$0"): FATAL: $1" 1>&2
+  exit "${2:-1}"
+}
 
-case $1 in
-  --no-private )
+warn() {
+  echo "$(basename "$0"): WARNING: $1" 1>&2
+}
+
+info() {
+  echo "$(basename "$0"): INFO: $1" 1>&2
+}
+
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -h|--help)
+      show_usage
+      exit 0
     ;;
-  *)
-    # update dependencies from Certificates repo
-    ./scripts/update-certificates.sh
+    # Error on unrecognized parameters
+    *)
+      show_usage
+      fatal "Unrecognized parameter: $1" 65
     ;;
-esac
+  esac
+done
 
-(cd readium-sdk; sh MakeHeaders.sh Apple) || fatal "Error making Readium headers"
 
-# rebuild all Carthage dependencies from scratch
-./scripts/build-carthage.sh $1
+basename "$0"
+
+info "Building 3rd party dependencies..."
+
+(cd readium-sdk; bash MakeHeaders.sh Apple) || fatal "Error making Readium headers" $?
+
+# Rebuild Carthage dependencies
+./scripts/build-carthage.sh || fatal "Carthage build failed" $?

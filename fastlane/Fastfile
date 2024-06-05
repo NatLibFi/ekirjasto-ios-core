@@ -1,17 +1,84 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#     https://docs.fastlane.tools/actions/build_app/
+
+#
+# Get changelog text (for a given language).
+#
+def get_changelog(language = "en-US")
+  filepath = "../metadata/#{language}/changelog.txt"
+  contents = File.read(filepath)
+  contents.strip!
+  return contents
+end
+
+#
+# Check if a build configuration is valid.
+#
+def is_build_configuration_valid(configuration)
+  return ["ellibs", "dev", "beta", "production"].include?(configuration)
+end
+
+#
+# Get build configuration from options.
+#
+def options_configuration(options)
+  configuration = (options[:config] ? options[:config] : "production")
+  unless is_build_configuration_valid(configuration)
+    UI.user_error!("ERROR: Invalid build configuration name: #{configuration}")
+  end
+  return configuration
+end
+
+
+# Uncomment the line if you want fastlane to automatically update itself
+#update_fastlane
+
 default_platform(:ios)
 
 platform :ios do
+  desc "Print the latest build number from Testflight"
+  lane :print_testflight_build_number do |options|
+    build_number_max = latest_testflight_build_number(
+      api_key_path: "fastlane/app-store-connect-api-key.json",
+      # Set initial build number to 10000, like in the project
+      initial_build_number: 10000
+    )
+    puts "\n\nTESTFLIGHT_BUILD_NUMBER_MAX=#{build_number_max.to_i()}\n"
+  end
+  
+  desc "Run tests"
   lane :test do
     run_tests(
       project: "Palace.xcodeproj",
-      devices: ["iPhone 12 Pro"],
+      devices: ["iPhone 12 Pro"], # TODO:SAMI: Change to iPhone 15 Pro?
       scheme: "Ekirjasto"
     )
   end
-  lane :nodrm do |options|
+  
+  desc "Run a debug build"
+  lane :build_debug do |options|
+    configuration = options_configuration(options)
+    puts "Build configuration: #{configuration}"
+
+    setup_ci#(force: true)
+    match(
+      type: "adhoc",
+      readonly: true,
+      app_identifier: "fi.kansalliskirjasto.e-kirjasto"
+    )
     build_app(
       project: "Palace.xcodeproj",
       scheme: "Ekirjasto",
+      configuration: "Debug-#{configuration}",
       skip_package_ipa: true,
       skip_archive: true,
       skip_codesigning: true,
@@ -24,40 +91,77 @@ platform :ios do
         }
     )
   end
-  lane :beta do |options|
+  
+  desc "Run a release build"
+  lane :build_release do |options|
+    configuration = options_configuration(options)
+    puts "Build configuration: #{configuration}"
+
+    #setup_ci#(force: true)
+    match(
+      type: "adhoc",
+      readonly: true,
+      app_identifier: "fi.kansalliskirjasto.e-kirjasto"
+    )
     build_app(
       project: "Palace.xcodeproj",
       scheme: "Ekirjasto",
+      configuration: "Release-#{configuration}",
       include_symbols: true,
       include_bitcode: false,
       silent: true,
-      output_name: options[:output_name],
-      output_directory: options[:export_path],
-      export_options: {
-        method: "ad-hoc",
-        provisioningProfiles: { 
-          "fi.kansalliskirjasto.e-kirjasto" => "Ad Hoc"
-        }
-      }
+      #output_name: options[:output_name],
+      #output_directory: options[:export_path],
+      #export_options: {
+      #  method: "ad-hoc",
+      #  provisioningProfiles: {
+      #    "fi.kansalliskirjasto.e-kirjasto" => "Ad Hoc"
+      #  }
+      #}
     )
   end
-  lane :appstore do |options|
+  
+  desc "Run a release build and upload to TestFlight"
+  lane :build_release_upload do |options|
+    configuration = options_configuration(options)
+    puts "Build configuration: #{configuration}"
+    changelog = get_changelog()
+    puts "Changelog:\n#{default_changelog}"
+
+    setup_ci#(force: true)
+    match(
+      type: "appstore",
+      readonly: true,
+      app_identifier: "fi.kansalliskirjasto.e-kirjasto"
+    )
     build_app(
       project: "Palace.xcodeproj",
       scheme: "Ekirjasto",
+      configuration: "Release-#{configuration}",
       include_symbols: true,
       include_bitcode: false,
-      export_options: {
-        method: "app-store",
-        provisioningProfiles: {
-          "fi.kansalliskirjasto.e-kirjasto" => "App Store"
-        }
-      }
+      #export_options: {
+      #  method: "app-store",
+      #  provisioningProfiles: {
+      #    "fi.kansalliskirjasto.e-kirjasto" => "App Store"
+      #  }
+      #}
     )
-    pilot(
-      api_key_path: "fastlane/fastlane.json",
+
+    upload_to_testflight(
+      api_key_path: "fastlane/app-store-connect-api-key.json",
       skip_submission: true,
-      changelog: options[:changelog]
+      skip_waiting_for_build_processing: true,
+      changelog: changelog,
+      localized_build_info: {
+        # Finnish is the default
+        "default": { whats_new: get_changelog("fi-FI") },
+        # App Store Connect requires the country for English,
+        # but Finnish and Swedish must be without it...
+        "en-US":   { whats_new: default_changelog },
+        #"fi":   { whats_new: get_changelog("fi-FI") },
+        "sv":   { whats_new: get_changelog("sv-SE") }
+      }
     )
   end
 end

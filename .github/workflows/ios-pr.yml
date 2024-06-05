@@ -1,0 +1,78 @@
+name: ios-pr
+
+#
+# This workflow is run on all PRs (before they're merged).
+#
+
+on:
+  pull_request:
+    branches: [ main ]
+
+env:
+  COMMIT_SHA: ${{ github.sha }}
+  BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+  TARGET_BRANCH_NAME: ${{ github.base_ref || github.ref_name }}
+  # Join all secrets, so that they're "used", and will be masked in logs
+  MASKED_SECRETS: ${{ join(secrets, '\n') }}
+
+jobs:
+  build:
+    runs-on: macOS-13
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Checkout submodules
+        run: git submodule update --init --recursive
+      - name: Show build info
+        env:
+          TEST_SECRET: ${{ secrets.MASK_TEST }}
+        run: scripts/show-ci-info.sh
+
+      - name: SSH setup (for cloning ekirjasto-ios-keys through Fastlane match)
+        uses: MrSquaare/ssh-setup-action@v3.1.0
+        with:
+          private-key-name: ekirjasto-ci-ed25519
+          private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          host: github.com
+      - name: Force Xcode 15
+        run: sudo xcode-select -switch /Applications/Xcode_15.0.1.app
+
+      - name: Bootstrap (and reveal secrets)
+        env:
+          EKIRJASTO_FASTLANE_APP_STORE_CONNECT_API_KEY_JSON_BASE64: ${{ secrets.FASTLANE_APP_STORE_CONNECT_API_KEY_JSON }}
+          EKIRJASTO_IOS_TRANSIFEX_TOKEN: ${{ secrets.TRANSIFEX_TOKEN }}
+          EKIRJASTO_LIBLCP_DEPENDENCY_SECRET: ${{ secrets.LIBLCP_DEPENDENCY_SECRET }}
+          # Carthage gets rate-limited in GitHub Actions if unauthenticated
+          # (they're all public repositories, so auth isn't otherwise necessary)
+          GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: scripts/bootstrap.sh --overwrite-secrets
+
+      - name: App version and build number consistency check
+        run: scripts/version.sh --check
+
+      - name: Build debug build
+        env:
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+        run: scripts/build.sh debug
+      - name: Build release build
+        env:
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+        run: scripts/build.sh release
+
+      # TODO:SAMI: Remove these steps from the PR workflow, only here for testing
+      - name: Build release build and upload to Testflight (config=production)
+        env:
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+        run: scripts/build.sh release_upload config:production
+      - name: Build release build and upload to Testflight (config=beta)
+        env:
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+        run: scripts/build.sh release_upload config:beta
+      - name: Build release build and upload to Testflight (config=dev)
+        env:
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+        run: scripts/build.sh release_upload config:dev
+
+      - name: Run tests
+        if: ${{ !cancelled() }}
+        run: scripts/run-tests.sh

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-# Builds Carthage dependencies for E-kirjasto.
+# Clean the E-kirjasto iOS app build.
 #
 # Version 1.0.0
 #
@@ -17,10 +17,10 @@ show_usage() {
   echo
   # Wrap after 80 characters --> #######################################################
   echo "Options:"
-  echo "-h   --help           Show this help page."
+  echo "-h   --help     Show this help page."
   # Wrap after 80 characters --> #######################################################
   echo
-  echo "This script builds Carthage dependencies for E-kirjasto."
+  echo "This script (agressively) cleans the E-kirjasto iOS app build."
   echo
 }
 
@@ -54,10 +54,15 @@ done
 
 basename "$0"
 
-if ! command -v carthage > /dev/null 2>&1; then
-    fatal "Carthage not found, have you installed it (brew install carthage)?" 66
-fi
+info "Cleaning..."
 
-info "Building Carthage..."
-carthage bootstrap --use-xcframeworks --platform ios \
-  || fatal "Carthage build failed" $?
+# xcodebuild's clean fails way too easily, which isn't great for a "clean" command
+#xcodebuild -project Palace.xcodeproj clean || exit $?
+
+rm -fr Carthage 2> /dev/null
+sudo rm -fr "$HOME/Library/Developer/Xcode/DerivedData/"* || exit $?
+
+echo
+info "Remember to bootstrap again:"
+echo "    ./scripts/bootstrap.sh"
+echo

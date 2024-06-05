@@ -22,10 +22,12 @@ static const void *dataPointer(void *info) {
 }
 
 static void releaseData(void *info, const void *pointer) {
+  #pragma unused(info)
   free(pointer);
 }
 
 static size_t bytesAtPosition(void *info, void *buffer, off_t pos, size_t n) {
+  #pragma unused(info)
   NSUInteger start = pos;
   NSUInteger end = pos + n;
   NSData *data = _decryptor(_encryptedData, start, end);

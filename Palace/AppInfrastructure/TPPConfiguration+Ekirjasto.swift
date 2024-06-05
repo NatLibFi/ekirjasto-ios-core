@@ -12,16 +12,25 @@ extension TPPConfiguration {
   
   static let registryHashKey = "registryHashKey"
   
-  static let betaUrl = URL(string: "https://registry.palaceproject.io/libraries/qa")!
+  //static let betaUrl = URL(string: "https://registry.palaceproject.io/libraries/qa")!
   //static let prodUrl = URL(string: "https://registry.palaceproject.io/libraries")!
   
+  #if CONF_ELLIBS
+  private static let feedFileUrlBase = "Ekirjasto_Catalog_Feed_ellibs"
+  #elseif CONF_DEV
+  private static let feedFileUrlBase = "Ekirjasto_Catalog_Feed_dev"
+  #elseif CONF_BETA
+  private static let feedFileUrlBase = "Ekirjasto_Catalog_Feed_beta"
+  #else
+  private static let feedFileUrlBase = "Ekirjasto_Catalog_Feed_production"
+  #endif
   
   private static let feedFileUrl = URL(fileURLWithPath:
-    Bundle.main.path(forResource: "Ekirjasto_Catalog_Feed",
+    Bundle.main.path(forResource: feedFileUrlBase,
                      ofType: "json")!)
   
   private static let testFeedFileUrl = URL(fileURLWithPath:
-    Bundle.main.path(forResource: "Test_Catalog_Feed",
+    Bundle.main.path(forResource: "TestLogin_Catalog_Feed",
                      ofType: "json")!)
   
   private static let feedFileUrlHash = feedFileUrl.absoluteString.md5().base64EncodedStringUrlSafe().trimmingCharacters(in: ["="])
@@ -30,7 +39,7 @@ extension TPPConfiguration {
   static var testUrl = testFeedFileUrl
   
   
-  static let betaUrlHash = betaUrl.absoluteString.md5().base64EncodedStringUrlSafe().trimmingCharacters(in: ["="])
+  //static let betaUrlHash = betaUrl.absoluteString.md5().base64EncodedStringUrlSafe().trimmingCharacters(in: ["="])
   //static let prodUrlHash = prodUrl.absoluteString.md5().base64EncodedStringUrlSafe().trimmingCharacters(in: ["="])
 
   static let prodUrlHash = feedFileUrlHash

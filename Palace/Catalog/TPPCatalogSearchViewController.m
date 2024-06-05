@@ -211,6 +211,7 @@ didSelectItemAtIndexPath:(NSIndexPath *const)indexPath
   // Debounce timer reduces content flickering on each reload
   if (!self.debounceTimer) {
     self.debounceTimer = [NSTimer scheduledTimerWithTimeInterval:1 repeats:NO block:^(NSTimer * _Nonnull timer) {
+      #pragma unused(timer)
       [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
       self.debounceTimer = nil;
     }];

@@ -67,7 +67,12 @@ let currentAccountIdentifierKey  = "TPPCurrentAccountIdentifier"
   public func reset(){
     AccountsManager.shared.currentAccount = nil
     AccountsManager.shared.accountSets = [:]
-    self.accountSet = TPPConfiguration.customUrlHash() ?? (TPPSettings.shared.useBetaLibraries ? TPPConfiguration.betaUrlHash : TPPConfiguration.useTestEnv ? TPPConfiguration.testUrlHash : TPPConfiguration.prodUrlHash)
+    self.accountSet = TPPConfiguration.customUrlHash()
+      ?? (
+        TPPConfiguration.useTestEnv
+        ? TPPConfiguration.testUrlHash
+        : TPPConfiguration.prodUrlHash
+      )
   }
   
   /// Performs a closure within a lock using `accountSetsLock`
@@ -128,7 +133,7 @@ let currentAccountIdentifierKey  = "TPPCurrentAccountIdentifier"
   }
 
   private override init() {
-    self.accountSet = TPPConfiguration.customUrlHash() ?? (TPPSettings.shared.useBetaLibraries ? TPPConfiguration.betaUrlHash : TPPConfiguration.useTestEnv ? TPPConfiguration.testUrlHash : TPPConfiguration.prodUrlHash)
+    self.accountSet = TPPConfiguration.customUrlHash() ?? (TPPConfiguration.useTestEnv ? TPPConfiguration.testUrlHash : TPPConfiguration.prodUrlHash)
     self.ageCheck = TPPAgeCheck(ageCheckChoiceStorage: TPPSettings.shared)
     
     super.init()
@@ -295,7 +300,7 @@ let currentAccountIdentifierKey  = "TPPCurrentAccountIdentifier"
   /// thread or not.
   func loadCatalogs(completion: ((Bool) -> ())?) {
     Log.debug(#file, "Entering loadCatalog... useTestEnv \(TPPConfiguration.useTestEnv)")
-    let targetUrl = TPPConfiguration.customUrl() ?? (TPPSettings.shared.useBetaLibraries ? TPPConfiguration.betaUrl : (TPPConfiguration.useTestEnv ? TPPConfiguration.testUrl : TPPConfiguration.prodUrl))
+    let targetUrl = TPPConfiguration.customUrl() ?? (TPPConfiguration.useTestEnv ? TPPConfiguration.testUrl : TPPConfiguration.prodUrl)
     let hash = targetUrl.absoluteString.md5().base64EncodedStringUrlSafe()
       .trimmingCharacters(in: ["="])
 
@@ -382,12 +387,12 @@ let currentAccountIdentifierKey  = "TPPCurrentAccountIdentifier"
   func updateAccountSet(completion: ((Bool) -> ())?) {
 
     performLocked {
-      self.accountSet = TPPConfiguration.customUrlHash() ?? (TPPSettings.shared.useBetaLibraries ? TPPConfiguration.betaUrlHash : TPPConfiguration.useTestEnv ? TPPConfiguration.testUrlHash : TPPConfiguration.prodUrlHash)
+      self.accountSet = TPPConfiguration.customUrlHash() ?? (TPPConfiguration.useTestEnv ? TPPConfiguration.testUrlHash : TPPConfiguration.prodUrlHash)
     }
     
     if self.accounts().isEmpty || TPPConfiguration.customUrlHash() != nil {
       loadCatalogs(completion: completion)
-    } 
+    }
   }
 
   func clearCache() {
