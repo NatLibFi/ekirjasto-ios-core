@@ -65,6 +65,13 @@ struct TPPSettingsView: View {
       syncBookmarksSection
       //reportIssueSection
       infoSection
+      // This shows the Finnish/Swedish version of the logo if that is the
+      // current locale and the English version otherwise
+      if ["fi", "sv"].contains(Locale.current.languageCode) {
+        natLibFiLogo
+      } else {
+        natLibFiLogoEn
+      }
       developerSettingsSection
     }
     .navigationBarTitle(DisplayStrings.settings)
@@ -402,7 +409,42 @@ struct TPPSettingsView: View {
       .frame(height: 40)
       .horizontallyCentered()
   }
-  
+
+
+  /*
+   This returns the Finnish/Swedish version of the logo
+
+   Note the unfortunate duplication with natLibFiLogo,
+   because apparently passing parameters isn't exactly possible here
+   */
+  @ViewBuilder private var natLibFiLogo: some View {
+    HStack{
+      Spacer()
+      Image("NatLibFiLogo")
+        .resizable()
+        .aspectRatio(contentMode: .fit)
+        .frame(width: 200)
+      Spacer()
+    }
+  }
+
+  /*
+   This returns the English version of the logo
+
+   Note the unfortunate duplication with natLibFiLogoEn,
+   because apparently passing parameters isn't exactly possible here
+   */
+  @ViewBuilder private var natLibFiLogoEn: some View {
+    HStack{
+      Spacer()
+      Image("NatLibFiLogoEn")
+        .resizable()
+        .aspectRatio(contentMode: .fit)
+        .frame(width: 200)
+      Spacer()
+    }
+  }
+
   private func row(title: String, destination: AnyView) -> some View {
     NavigationLink(
       destination: destination,
