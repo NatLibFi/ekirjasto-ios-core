@@ -20,7 +20,6 @@ class EkirjastoLoginViewController : UIHostingController<EkirjastoLoginView>{
   
   private var navController: UINavigationController?
   //put inside a mutex?
-  private static var isShowing = false
   private static var savedHandlers: [(() -> Void)] = []
   private static var showLock = NSLock()
   
@@ -58,23 +57,18 @@ class EkirjastoLoginViewController : UIHostingController<EkirjastoLoginView>{
     let vc = TPPRootTabBarController.shared()
     var loginView : EkirjastoLoginViewController?
     
-    showLock.lock()
-    if isShowing {
-      if let handler = dismissHandler {
-        savedHandlers.append(handler)
-      }
-      showLock.unlock()
-      return
-    }
-    
-    isShowing = true
-    showLock.unlock()
     if Thread.isMainThread{
+
+      if EkirjastoLoginView.active || TPPOnboardingView.active {
+        if let handler = dismissHandler {
+          savedHandlers.append(handler)
+        }
+        return
+      }
+      
       loginView = makeSwiftUIView(dismissHandler: {
-        showLock.lock()
         loginView?.dismiss(animated: true)
         
-        isShowing = false
         dismissHandler?()
         if savedHandlers.count > 0 {
           for var handler in savedHandlers {
@@ -82,7 +76,6 @@ class EkirjastoLoginViewController : UIHostingController<EkirjastoLoginView>{
           }
           savedHandlers.removeAll()
         }
-        showLock.unlock()
       })
       if let nc = loginView?.getNavController() {
         nc.pushViewController(loginView!, animated: true)
@@ -92,10 +85,16 @@ class EkirjastoLoginViewController : UIHostingController<EkirjastoLoginView>{
       
     }else{
       DispatchSerialQueue.main.async {
+
+        if EkirjastoLoginView.active || TPPOnboardingView.active {
+          if let handler = dismissHandler {
+            savedHandlers.append(handler)
+          }
+          return
+        }
+        
         loginView = makeSwiftUIView(dismissHandler: {
-          showLock.lock()
           loginView?.dismiss(animated: true)
-          isShowing = false
           dismissHandler?()
           if savedHandlers.count > 0 {
             for var handler in savedHandlers {
@@ -103,14 +102,12 @@ class EkirjastoLoginViewController : UIHostingController<EkirjastoLoginView>{
             }
             savedHandlers.removeAll()
           }
-          showLock.unlock()
         })
         if let nc = loginView?.getNavController() {
           nc.pushViewController(loginView!, animated: true)
         }else{
           vc?.safelyPresentViewController(loginView, animated: true, completion: nil)
         }
-        //vc?.safelyPresentViewController(loginView, animated: true, completion: nil)
       }
     }
     

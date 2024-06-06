@@ -28,6 +28,8 @@ struct TPPOnboardingView: View {
     }
   }
   
+  static var active = false
+  
   // dismiss handler
   var dismissView: (() -> Void)
   
@@ -53,7 +55,7 @@ struct TPPOnboardingView: View {
   var body: some View {
     ZStack(alignment: .top) {
       if(showLoginView) {
-        EkirjastoLoginView(dismissView: self.dismissView)
+        EkirjastoLoginView(dismissView: self.onDismiss)
       } else {
         onboardingSlides()
         pagerDots()
@@ -62,7 +64,16 @@ struct TPPOnboardingView: View {
     }
     .edgesIgnoringSafeArea(.all)
     .statusBar(hidden: true)
+    .onAppear{
+      TPPOnboardingView.active = true
+    }
   }
+  
+  private func onDismiss(){
+    TPPOnboardingView.active = false
+    dismissView()
+  }
+  
   
   @ViewBuilder
   private func onboardingSlides() -> some View {
