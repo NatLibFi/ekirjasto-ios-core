@@ -68,7 +68,7 @@ struct TPPSettingsView: View {
       // This shows the Finnish/Swedish version of the logo if that is the
       // current locale and the English version otherwise
       if ["fi", "sv"].contains(Locale.current.languageCode) {
-        natLibFiLogo
+        natLibFiLogoFiSv
       } else {
         natLibFiLogoEn
       }
@@ -428,13 +428,13 @@ struct TPPSettingsView: View {
   /*
    This returns the Finnish/Swedish version of the logo
 
-   Note the unfortunate duplication with natLibFiLogo,
+   Note the unfortunate duplication with natLibFiLogoEn,
    because apparently passing parameters isn't exactly possible here
    */
-  @ViewBuilder private var natLibFiLogo: some View {
+  @ViewBuilder private var natLibFiLogoFiSv: some View {
     HStack{
       Spacer()
-      Image("NatLibFiLogo")
+      Image("NatLibFiLogoFiSv")
         .resizable()
         .aspectRatio(contentMode: .fit)
         .frame(width: 200)
@@ -445,7 +445,7 @@ struct TPPSettingsView: View {
   /*
    This returns the English version of the logo
 
-   Note the unfortunate duplication with natLibFiLogoEn,
+   Note the unfortunate duplication with natLibFiLogoFiSv,
    because apparently passing parameters isn't exactly possible here
    */
   @ViewBuilder private var natLibFiLogoEn: some View {
