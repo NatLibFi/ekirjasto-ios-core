@@ -13,6 +13,7 @@ struct EkirjastoLoginView: View {
   
   var dismissView: (() -> Void)?
   var navController: UINavigationController? = nil
+  static var active = false
   
 
   @State var authDoc : OPDS2AuthenticationDocument? = nil
@@ -40,10 +41,11 @@ struct EkirjastoLoginView: View {
           }
         }.navigationViewStyle(.stack)
           .onAppear{
+            EkirjastoLoginView.active = true
             AccountsManager.fetchAuthDoc { doc in
               authDoc = doc
+            }
           }
-        }
     }
   
   @ViewBuilder func buttonsSection() -> some View{
@@ -52,6 +54,7 @@ struct EkirjastoLoginView: View {
       
       NavigationLink(destination: {
         SuomiIdentificationWebView(closeWebView: {
+          EkirjastoLoginView.active = false
           self.dismissView?()
         }, authenticationDocument: authDoc)
       }, label: {
@@ -72,6 +75,7 @@ struct EkirjastoLoginView: View {
           if let token = loginToken, !token.isEmpty{
             TPPNetworkExecutor.shared.authenticateWithToken(token) { status in
               DispatchQueue.main.async {
+                EkirjastoLoginView.active = false
                 self.dismissView?()
               }
             }
@@ -89,7 +93,10 @@ struct EkirjastoLoginView: View {
         .background(Color("ColorEkirjastoLightestGreen"))
       
       
-      Button(action: {self.dismissView?()}) {
+      Button(action: {
+        EkirjastoLoginView.active = false
+        self.dismissView?()
+      }) {
         Text(DisplayStrings.continueWithoutSigning).foregroundColor(Color("ColorEkirjastoButtonTextWithBackground"))
         Image("ArrowRight")
           .padding(.leading, 10)

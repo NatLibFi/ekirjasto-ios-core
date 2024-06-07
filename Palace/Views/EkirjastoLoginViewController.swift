@@ -19,6 +19,9 @@ import Foundation
 class EkirjastoLoginViewController : UIHostingController<EkirjastoLoginView>{
   
   private var navController: UINavigationController?
+  //put inside a mutex?
+  private static var savedHandlers: [(() -> Void)] = []
+  private static var showLock = NSLock()
   
   init(rootView: EkirjastoLoginView, navController: UINavigationController?) {
     self.navController = navController
@@ -54,11 +57,25 @@ class EkirjastoLoginViewController : UIHostingController<EkirjastoLoginView>{
     let vc = TPPRootTabBarController.shared()
     var loginView : EkirjastoLoginViewController?
     
-    
     if Thread.isMainThread{
+
+      if EkirjastoLoginView.active || TPPOnboardingView.active {
+        if let handler = dismissHandler {
+          savedHandlers.append(handler)
+        }
+        return
+      }
+      
       loginView = makeSwiftUIView(dismissHandler: {
         loginView?.dismiss(animated: true)
+        
         dismissHandler?()
+        if savedHandlers.count > 0 {
+          for var handler in savedHandlers {
+             handler()
+          }
+          savedHandlers.removeAll()
+        }
       })
       if let nc = loginView?.getNavController() {
         nc.pushViewController(loginView!, animated: true)
@@ -68,16 +85,29 @@ class EkirjastoLoginViewController : UIHostingController<EkirjastoLoginView>{
       
     }else{
       DispatchSerialQueue.main.async {
+
+        if EkirjastoLoginView.active || TPPOnboardingView.active {
+          if let handler = dismissHandler {
+            savedHandlers.append(handler)
+          }
+          return
+        }
+        
         loginView = makeSwiftUIView(dismissHandler: {
           loginView?.dismiss(animated: true)
           dismissHandler?()
+          if savedHandlers.count > 0 {
+            for var handler in savedHandlers {
+               handler()
+            }
+            savedHandlers.removeAll()
+          }
         })
         if let nc = loginView?.getNavController() {
           nc.pushViewController(loginView!, animated: true)
         }else{
           vc?.safelyPresentViewController(loginView, animated: true, completion: nil)
         }
-        //vc?.safelyPresentViewController(loginView, animated: true, completion: nil)
       }
     }
     
