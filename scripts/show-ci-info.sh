@@ -25,6 +25,3 @@ if [ -z "$TEST_SECRET" ]; then
 else
     echo "Secrets are available!"
 fi
-
-# TODO:SAMI: Remove this
-echo "::error file=Palace/Utilities/Localization/Transifex/txstrings.json::Test error"

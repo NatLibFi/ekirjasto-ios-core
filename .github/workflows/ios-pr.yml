@@ -73,7 +73,6 @@ jobs:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
         run: scripts/build.sh release_upload config:dev
 
-      # TODO:SAMI: Re-enable this (disabled to save time when testing CI workflows)
-      #- name: Run tests
-      #  if: ${{ !cancelled() }}
-      #  run: scripts/run-tests.sh
+      - name: Run tests
+        if: ${{ !cancelled() }}
+        run: scripts/run-tests.sh
