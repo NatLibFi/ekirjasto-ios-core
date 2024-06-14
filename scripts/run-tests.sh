@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-# Builds Carthage dependencies for E-kirjasto.
+# Run E-kirjasto iOS tests.
 #
 # Version 1.0.0
 #
@@ -20,7 +20,7 @@ show_usage() {
   echo "-h   --help           Show this help page."
   # Wrap after 80 characters --> #######################################################
   echo
-  echo "This script builds Carthage dependencies for E-kirjasto."
+  echo "This script runs E-kirjasto unit tests."
   echo
 }
 
@@ -54,10 +54,6 @@ done
 
 basename "$0"
 
-if ! command -v carthage > /dev/null 2>&1; then
-    fatal "Carthage not found, have you installed it (brew install carthage)?" 66
-fi
+info "Running tests"
 
-info "Building Carthage..."
-carthage bootstrap --use-xcframeworks --platform ios \
-  || fatal "Carthage build failed" $?
+./scripts/fastlane.sh ios test
