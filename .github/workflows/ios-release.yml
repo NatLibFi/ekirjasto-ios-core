@@ -1,4 +1,4 @@
-name: ios-main
+name: ios-release
 
 #
 # This workflow is run for all commits in release/* branches.
@@ -6,7 +6,7 @@ name: ios-main
 
 on:
   push:
-    branches: [ main ]
+    branches: [ release/* ]
 
 env:
   COMMIT_SHA: ${{ github.sha }}
@@ -82,3 +82,4 @@ jobs:
         env:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
         run: scripts/build.sh release_upload config:dev
+
