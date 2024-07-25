@@ -20,8 +20,6 @@ struct TPPSettingsView: View {
 
   //private var signInBusinessLogic = TPPSignInBusinessLogic.shared
 
-  @ObservedObject var fontSizeManager = FontSizeManager.shared
-
   private var sideBarEnabled: Bool {
     UIDevice.current.userInterfaceIdiom == .pad
       &&  UIDevice.current.orientation != .portrait
@@ -67,7 +65,6 @@ struct TPPSettingsView: View {
       syncBookmarksSection
       //reportIssueSection
       infoSection
-      fontSizeSection
       // This shows the Finnish/Swedish version of the logo if that is the
       // current locale and the English version otherwise
       if ["fi", "sv"].contains(Locale.current.languageCode) {
@@ -425,20 +422,6 @@ struct TPPSettingsView: View {
       )
       .frame(height: 40)
       .horizontallyCentered()
-  }
-
-@ViewBuilder private var fontSizeSection: some View {
-    Section{
-      VStack {
-        Text("Body")
-          .font(.system(size: fontSizeManager.fontSize(for: .body)))
-        Text("Title")
-          .font(.system(size: fontSizeManager.fontSize(for: .title1)))
-        Text("Headline")
-          .font(.system(size: fontSizeManager.fontSize(for: .headline)))
-      }
-      FontSizeAdjustView()
-    }
   }
 
   /*
