@@ -72,7 +72,6 @@ struct TPPSettingsView: View {
       } else {
         natLibFiLogoEn
       }
-      developerSettingsSection
     }
     .navigationBarTitle(DisplayStrings.settings)
     .listStyle(GroupedListStyle())
@@ -394,19 +393,6 @@ struct TPPSettingsView: View {
     row(title: DisplayStrings.softwareLicenses, index: 7, selection: self.$selectedView, destination: wrapper.anyView())
   }
 
-  @ViewBuilder private var developerSettingsSection: some View {
-    if (TPPSettings.shared.customMainFeedURL == nil && showDeveloperSettings) {
-      Section(footer: versionInfo) {
-        let viewController = TPPDeveloperSettingsTableViewController()
-          
-        let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
-          .navigationBarTitle(Text(DisplayStrings.developerSettings))
-        
-        row(title: DisplayStrings.developerSettings, index: 8, selection: self.$selectedView, destination: wrapper.anyView())
-      }
-    }
-  }
-
   @ViewBuilder private var versionInfo: some View {
     let productName = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as! String
     let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
@@ -414,12 +400,6 @@ struct TPPSettingsView: View {
     
     Text("\(productName) version \(version) (\(build))")
       .font(Font(uiFont: UIFont.palaceFont(ofSize: 12)))
-      .gesture(
-        LongPressGesture(minimumDuration: 5.0)
-          .onEnded { _ in
-            self.showDeveloperSettings.toggle()
-          }
-      )
       .frame(height: 40)
       .horizontallyCentered()
   }
