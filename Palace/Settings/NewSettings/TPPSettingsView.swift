@@ -300,19 +300,6 @@ struct TPPSettingsView: View {
         faqRow
       }
   }
-
-  @ViewBuilder private var aboutRow: some View {
-    let viewController = RemoteHTMLViewController(
-      URL: URL(string: TPPSettings.TPPAboutPalaceURLString)!,
-      title: Strings.Settings.aboutApp,
-      failureMessage: Strings.Error.loadFailedError
-    )
-    
-    let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
-      .navigationBarTitle(Text(DisplayStrings.aboutApp))
-
-    row(title: DisplayStrings.aboutApp, index: 2, selection: self.$selectedView, destination: wrapper.anyView())
-  }
   
   @ViewBuilder private var feedbackRow: some View {
     let viewController = RemoteHTMLViewController(
