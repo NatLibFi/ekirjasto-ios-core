@@ -63,7 +63,6 @@ struct TPPSettingsView: View {
         librariesSection
       }
       syncBookmarksSection
-      //reportIssueSection
       infoSection
       // This shows the Finnish/Swedish version of the logo if that is the
       // current locale and the English version otherwise
@@ -268,25 +267,6 @@ struct TPPSettingsView: View {
         }
       )
         
-    }
-  }
-  
-  @ViewBuilder private var reportIssueSection: some View {
-    
-    Section{
-
-      if let supportEmail = AccountsManager.shared.currentAccount?.supportEmail {
-        Button(action: {
-          ProblemReportEmail.sharedInstance.beginComposing(to: supportEmail.rawValue, presentingViewController: TPPRootTabBarController.shared().settingsViewController, book: nil)
-        }){
-          Text(DisplayStrings.reportIssue)
-        }
-      }else {
-        let viewController = BundledHTMLViewController(fileURL: AccountsManager.shared.currentAccount!.supportURL!, title: AccountsManager.shared.currentAccount!.name)
-        
-        let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
-        row(title: DisplayStrings.reportIssue, index: 1, selection: self.$selectedView, destination: wrapper.anyView())
-      }
     }
   }
 
