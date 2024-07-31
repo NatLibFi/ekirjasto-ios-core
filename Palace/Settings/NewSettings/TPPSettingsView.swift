@@ -213,7 +213,6 @@ struct TPPSettingsView: View {
       }
       
       //button to open dependents view
-      //TODO: Text to a localized string
       NavigationLink(
         destination:
           DependentsView()){
