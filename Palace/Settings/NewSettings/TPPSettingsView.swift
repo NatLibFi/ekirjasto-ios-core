@@ -297,6 +297,7 @@ struct TPPSettingsView: View {
         accessibilityRow
         privacyRow
         softwareLicenseRow
+        userAgreementRow
         faqRow
       }
   }
@@ -311,7 +312,7 @@ struct TPPSettingsView: View {
     let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
       .navigationBarTitle(Text(DisplayStrings.feedback))
 
-    row(title: DisplayStrings.feedback, index: 3, selection: self.$selectedView, destination: wrapper.anyView())
+    row(title: DisplayStrings.feedback, index: 1, selection: self.$selectedView, destination: wrapper.anyView())
   }
   
   @ViewBuilder private var accessibilityRow: some View {
@@ -324,22 +325,8 @@ struct TPPSettingsView: View {
     let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
       .navigationBarTitle(Text(DisplayStrings.accessibility))
 
-    row(title: DisplayStrings.accessibility, index: 4, selection: self.$selectedView, destination: wrapper.anyView())
+    row(title: DisplayStrings.accessibility, index: 2, selection: self.$selectedView, destination: wrapper.anyView())
   }
-
-  @ViewBuilder private var faqRow: some View {
-    let viewController = RemoteHTMLViewController(
-      URL: URL(string: TPPSettings.TPPFAQURLString)!,
-      title: Strings.Settings.faq,
-      failureMessage: Strings.Error.loadFailedError
-    )
-    
-    let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
-      .navigationBarTitle(Text(DisplayStrings.faq))
-
-    row(title: DisplayStrings.faq, index: 5, selection: self.$selectedView, destination: wrapper.anyView())
-  }
-
 
   @ViewBuilder private var privacyRow: some View {
     let viewController = RemoteHTMLViewController(
@@ -351,8 +338,19 @@ struct TPPSettingsView: View {
     let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
       .navigationBarTitle(Text(DisplayStrings.privacyPolicy))
 
-    row(title: DisplayStrings.privacyPolicy, index: 5, selection: self.$selectedView, destination: wrapper.anyView())
+    row(title: DisplayStrings.privacyPolicy, index: 3, selection: self.$selectedView, destination: wrapper.anyView())
+  }
 
+  @ViewBuilder private var softwareLicenseRow: some View {
+    let viewController = BundledHTMLViewController(
+      fileURL: Bundle.main.url(forResource: "software-licenses", withExtension: "html")!,
+      title: Strings.Settings.softwareLicenses
+    )
+    
+    let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
+      .navigationBarTitle(Text(DisplayStrings.softwareLicenses))
+
+    row(title: DisplayStrings.softwareLicenses, index: 4, selection: self.$selectedView, destination: wrapper.anyView())
   }
 
   @ViewBuilder private var userAgreementRow: some View {
@@ -365,19 +363,20 @@ struct TPPSettingsView: View {
     let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
       .navigationBarTitle(Text(DisplayStrings.eula))
 
-    row(title: DisplayStrings.eula, index: 6, selection: self.$selectedView, destination: wrapper.anyView())
+    row(title: DisplayStrings.eula, index: 5, selection: self.$selectedView, destination: wrapper.anyView())
   }
 
-  @ViewBuilder private var softwareLicenseRow: some View {
-    let viewController = BundledHTMLViewController(
-      fileURL: Bundle.main.url(forResource: "software-licenses", withExtension: "html")!,
-      title: Strings.Settings.softwareLicenses
+  @ViewBuilder private var faqRow: some View {
+    let viewController = RemoteHTMLViewController(
+      URL: URL(string: TPPSettings.TPPFAQURLString)!,
+      title: Strings.Settings.faq,
+      failureMessage: Strings.Error.loadFailedError
     )
     
     let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
-      .navigationBarTitle(Text(DisplayStrings.softwareLicenses))
+      .navigationBarTitle(Text(DisplayStrings.faq))
 
-    row(title: DisplayStrings.softwareLicenses, index: 7, selection: self.$selectedView, destination: wrapper.anyView())
+    row(title: DisplayStrings.faq, index: 6, selection: self.$selectedView, destination: wrapper.anyView())
   }
 
   @ViewBuilder private var versionInfo: some View {
