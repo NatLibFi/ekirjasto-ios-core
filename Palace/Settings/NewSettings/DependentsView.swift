@@ -84,12 +84,6 @@ func getDependents(){
     //TODO: fetch account id
   
     //finally return
-  let defaults = UserDefaults.standard
-  let acid = defaults.string(forKey: "currentAccount")
-  print(acid)
-  var c1 = acid?.components(separatedBy: ":")
-  var c2 = print(c1?.removeLast())
-  print(c2)
 }
 
 func validate(_ username: String) -> Bool {
