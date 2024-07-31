@@ -248,25 +248,6 @@ struct TPPSettingsView: View {
         }
 
       }
-    } footer: {
-      let viewController = RemoteHTMLViewController(
-        URL: URL(string:  TPPSettings.TPPUserAgreementURLString)!,
-        title: DisplayStrings.loginFooterUserAgreementText,
-        failureMessage: Strings.Error.loadFailedError
-      )
-      
-      let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
-
-      NavigationLink(
-        destination: wrapper.anyView(),
-        label: {
-          Text(DisplayStrings.loginFooterUserAgreementText)
-            .underline()
-            .dynamicTypeSize(.xSmall)
-            .foregroundColor(Color.init(uiColor: UIColor.link))
-        }
-      )
-        
     }
   }
 
