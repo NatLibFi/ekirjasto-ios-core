@@ -137,82 +137,88 @@ struct TPPSettingsView: View {
     }
   }
   
- @ViewBuilder private var logoutSection: some View {
-   Section{
-    
-     Button{
-       TPPSignInBusinessLogic.getShared { logic in
-         if let _logic = logic {
-           if _logic.shouldShowSyncButton() && !self.toggleSyncBookmarks{
-             self.logoutText = NSLocalizedString("If you sign out without enabling Sync, your books and any saved bookmarks will be removed.", comment: "")
-           }else{
-             self.logoutText = NSLocalizedString("If you sign out, your books and any saved bookmarks will be removed.", comment: "")
-           }
-           
+  @ViewBuilder private var logoutSection: some View {
+    Section{
+      
+      Button{
+        TPPSignInBusinessLogic.getShared { logic in
+          if let _logic = logic {
+            if _logic.shouldShowSyncButton() && !self.toggleSyncBookmarks{
+              self.logoutText = NSLocalizedString("If you sign out without enabling Sync, your books and any saved bookmarks will be removed.", comment: "")
+            }else{
+              self.logoutText = NSLocalizedString("If you sign out, your books and any saved bookmarks will be removed.", comment: "")
+            }
+            
+          }
+          
+          toggleLogoutWarning = true
+        }
+        
+        
+      } label: {
+        HStack{
+          Text(DisplayStrings.signOut)
+          Spacer()
+          Image("ArrowRight")
+            .padding(.leading, 10)
+            .foregroundColor(Color(uiColor: .lightGray))
+        }
+      }.alert(Strings.TPPSigninBusinessLogic.signout, isPresented: $toggleLogoutWarning){
+        Button(DisplayStrings.signOut, role: .destructive) {
+          TPPSignInBusinessLogic.getShared { logic in
+            if let _logic = logic {
+              if let alert = _logic.logOutOrWarn(){
+                TPPRootTabBarController.shared().settingsViewController.present(alert, animated: true)
+              }
+              
+            }
+          }
+        }
+        
+      } message: {
+        Text(self.logoutText)
+      }
+      Button{
+        let passkey = PasskeyManager(AccountsManager.shared.currentAccount!.authenticationDocument!)
+        
+        /*let status = CKContainer.default().requestApplicationPermission(.userDiscoverability) { (status, error) in
+         CKContainer.default().fetchUserRecordID { (record, error) in
+         CKContainer.default().discoverUserIdentity(withUserRecordID: record!, completionHandler: { (userID, error) in
+         print(userID?.hasiCloudAccount)
+         print(userID?.lookupInfo?.phoneNumber)
+         print(userID?.lookupInfo?.emailAddress)
+         print((userID?.nameComponents?.givenName)! + " " + (userID?.nameComponents?.familyName)!)
+         })
          }
-         
-         toggleLogoutWarning = true
-       }
-       
-       
-     } label: {
-       HStack{
-         Text(DisplayStrings.signOut)
-         Spacer()
-         Image("ArrowRight")
-           .padding(.leading, 10)
-           .foregroundColor(Color(uiColor: .lightGray))
-       }
-     }.alert(Strings.TPPSigninBusinessLogic.signout, isPresented: $toggleLogoutWarning){
-       Button(DisplayStrings.signOut, role: .destructive) {
-         TPPSignInBusinessLogic.getShared { logic in
-           if let _logic = logic {
-             if let alert = _logic.logOutOrWarn(){
-               TPPRootTabBarController.shared().settingsViewController.present(alert, animated: true)
-             }
-             
-           }
-         }
-       }
-       
-     } message: {
-       Text(self.logoutText)
-     }
-     
-     Button{
-       let passkey = PasskeyManager(AccountsManager.shared.currentAccount!.authenticationDocument!)
-       
-       /*let status = CKContainer.default().requestApplicationPermission(.userDiscoverability) { (status, error) in
-           CKContainer.default().fetchUserRecordID { (record, error) in
-               CKContainer.default().discoverUserIdentity(withUserRecordID: record!, completionHandler: { (userID, error) in
-                   print(userID?.hasiCloudAccount)
-                   print(userID?.lookupInfo?.phoneNumber)
-                   print(userID?.lookupInfo?.emailAddress)
-                   print((userID?.nameComponents?.givenName)! + " " + (userID?.nameComponents?.familyName)!)
-               })
-           }
-        }*/
-       
-       
-       passkey.register("", TPPUserAccount.sharedAccount().authToken!) { registerToken in
-         if let token = registerToken, !token.isEmpty{
-           TPPNetworkExecutor.shared.authenticateWithToken(token) { status in
-
-           }
-           
-         }
-       }
-     } label: {
-       HStack{
-         Text(DisplayStrings.registerPasskey)
-         Spacer()
-         Image("ArrowRight")
-           .padding(.leading, 10)
-           .foregroundColor(Color(uiColor: .lightGray))
-       }
-
-     }
-   }
+         }*/
+        
+        
+        passkey.register("", TPPUserAccount.sharedAccount().authToken!) { registerToken in
+          if let token = registerToken, !token.isEmpty{
+            TPPNetworkExecutor.shared.authenticateWithToken(token) { status in
+              
+            }
+            
+          }
+        }
+      } label: {
+        HStack{
+          Text(DisplayStrings.registerPasskey)
+          Spacer()
+          Image("ArrowRight")
+            .padding(.leading, 10)
+            .foregroundColor(Color(uiColor: .lightGray))
+        }
+        
+      }
+      
+      //button to open dependents view
+      NavigationLink(
+        destination:
+          DependentsView()){
+            Text(DisplayStrings.dependentsButton)
+          }
+    }
   }
   
   @ViewBuilder private var loginSection: some View {
