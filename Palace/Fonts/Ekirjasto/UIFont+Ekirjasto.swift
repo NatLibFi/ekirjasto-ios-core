@@ -9,15 +9,53 @@
 import Foundation
 
 extension UIFont {
+
+    /**
+     The below three functions return a dynamically scaled custom font for the specified text style and weight.
+
+     - Parameters:
+       - textStyle: The text style to use for the font (e.g., `.body`, `.headline`).
+       - weight: The weight of the font. Defaults to `.regular`.
+     - Returns: A dynamically scaled custom font.
+     */
+
+  @objc class func palaceFont(for textStyle: UIFont.TextStyle, weight: UIFont.Weight = .regular) -> UIFont {
+      let font = UIFont(name: TPPConfiguration.ekirjastoFontName(), size: UIFont.preferredFont(forTextStyle: textStyle).pointSize) ?? UIFont.systemFont(ofSize: UIFont.preferredFont(forTextStyle: textStyle).pointSize, weight: weight)
+      return UIFontMetrics(forTextStyle: textStyle).scaledFont(for: font)
+  }
+
+  @objc class func semiBoldPalaceFont(for textStyle: UIFont.TextStyle, weight: UIFont.Weight = .regular) -> UIFont {
+      let font = UIFont(name: TPPConfiguration.ekirjastoFontName(), size: UIFont.preferredFont(forTextStyle: textStyle).pointSize) ?? UIFont.systemFont(ofSize: UIFont.preferredFont(forTextStyle: textStyle).pointSize, weight: weight)
+      return UIFontMetrics(forTextStyle: textStyle).scaledFont(for: font)
+  }
+
+  @objc class func boldPalaceFont(for textStyle: UIFont.TextStyle, weight: UIFont.Weight = .regular) -> UIFont {
+      let font = UIFont(name: TPPConfiguration.ekirjastoFontName(), size: UIFont.preferredFont(forTextStyle: textStyle).pointSize) ?? UIFont.systemFont(ofSize: UIFont.preferredFont(forTextStyle: textStyle).pointSize, weight: weight)
+      return UIFontMetrics(forTextStyle: textStyle).scaledFont(for: font)
+  }
+
+    /**
+     These three functions below return a dynamically scaled custom font for the specified size.
+
+     - Parameters:
+       - fontSize: The size of the font.
+     - Returns: A dynamically scaled custom font.
+     */
+
   @objc class func palaceFont(ofSize fontSize: CGFloat) -> UIFont {
-    UIFont(name: TPPConfiguration.ekirjastoFontName(), size: fontSize)!
+      let font = UIFont(name: TPPConfiguration.ekirjastoFontName(), size: fontSize) ?? UIFont.systemFont(ofSize: fontSize)
+      return UIFontMetrics.default.scaledFont(for: font)
   }
-  
+
+
   @objc class func semiBoldPalaceFont(ofSize fontSize: CGFloat) -> UIFont {
-    UIFont(name: TPPConfiguration.ekirjastoFontName(), size: fontSize)!
+      let font = UIFont(name: TPPConfiguration.ekirjastoFontName(), size: fontSize) ?? UIFont.systemFont(ofSize: fontSize)
+      return UIFontMetrics.default.scaledFont(for: font)
   }
-  
+
+
   @objc class func boldPalaceFont(ofSize fontSize: CGFloat) -> UIFont {
-    UIFont(name: TPPConfiguration.ekirjastoFontNameBold(), size: fontSize)!
+      let font = UIFont(name: TPPConfiguration.ekirjastoFontName(), size: fontSize) ?? UIFont.systemFont(ofSize: fontSize)
+      return UIFontMetrics.default.scaledFont(for: font)
   }
 }

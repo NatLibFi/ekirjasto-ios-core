@@ -19,7 +19,7 @@ struct TPPSettingsView: View {
   @ObservedObject private var authHolder = TPPUserAccountAuthentication.shared
 
   //private var signInBusinessLogic = TPPSignInBusinessLogic.shared
-  
+
   private var sideBarEnabled: Bool {
     UIDevice.current.userInterfaceIdiom == .pad
       &&  UIDevice.current.orientation != .portrait
@@ -63,7 +63,6 @@ struct TPPSettingsView: View {
         librariesSection
       }
       syncBookmarksSection
-      //reportIssueSection
       infoSection
       // This shows the Finnish/Swedish version of the logo if that is the
       // current locale and the English version otherwise
@@ -72,7 +71,6 @@ struct TPPSettingsView: View {
       } else {
         natLibFiLogoEn
       }
-      developerSettingsSection
     }
     .navigationBarTitle(DisplayStrings.settings)
     .listStyle(GroupedListStyle())
@@ -256,44 +254,6 @@ struct TPPSettingsView: View {
         }
 
       }
-    } footer: {
-      let viewController = RemoteHTMLViewController(
-        URL: URL(string:  TPPSettings.TPPUserAgreementURLString)!,
-        title: DisplayStrings.loginFooterUserAgreementText,
-        failureMessage: Strings.Error.loadFailedError
-      )
-      
-      let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
-
-      NavigationLink(
-        destination: wrapper.anyView(),
-        label: {
-          Text(DisplayStrings.loginFooterUserAgreementText)
-            .underline()
-            .dynamicTypeSize(.xSmall)
-            .foregroundColor(Color.init(uiColor: UIColor.link))
-        }
-      )
-        
-    }
-  }
-  
-  @ViewBuilder private var reportIssueSection: some View {
-    
-    Section{
-
-      if let supportEmail = AccountsManager.shared.currentAccount?.supportEmail {
-        Button(action: {
-          ProblemReportEmail.sharedInstance.beginComposing(to: supportEmail.rawValue, presentingViewController: TPPRootTabBarController.shared().settingsViewController, book: nil)
-        }){
-          Text(DisplayStrings.reportIssue)
-        }
-      }else {
-        let viewController = BundledHTMLViewController(fileURL: AccountsManager.shared.currentAccount!.supportURL!, title: AccountsManager.shared.currentAccount!.name)
-        
-        let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
-        row(title: DisplayStrings.reportIssue, index: 1, selection: self.$selectedView, destination: wrapper.anyView())
-      }
     }
   }
 
@@ -304,21 +264,9 @@ struct TPPSettingsView: View {
         accessibilityRow
         privacyRow
         softwareLicenseRow
+        userAgreementRow
         faqRow
       }
-  }
-
-  @ViewBuilder private var aboutRow: some View {
-    let viewController = RemoteHTMLViewController(
-      URL: URL(string: TPPSettings.TPPAboutPalaceURLString)!,
-      title: Strings.Settings.aboutApp,
-      failureMessage: Strings.Error.loadFailedError
-    )
-    
-    let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
-      .navigationBarTitle(Text(DisplayStrings.aboutApp))
-
-    row(title: DisplayStrings.aboutApp, index: 2, selection: self.$selectedView, destination: wrapper.anyView())
   }
   
   @ViewBuilder private var feedbackRow: some View {
@@ -331,7 +279,7 @@ struct TPPSettingsView: View {
     let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
       .navigationBarTitle(Text(DisplayStrings.feedback))
 
-    row(title: DisplayStrings.feedback, index: 3, selection: self.$selectedView, destination: wrapper.anyView())
+    row(title: DisplayStrings.feedback, index: 1, selection: self.$selectedView, destination: wrapper.anyView())
   }
   
   @ViewBuilder private var accessibilityRow: some View {
@@ -344,22 +292,8 @@ struct TPPSettingsView: View {
     let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
       .navigationBarTitle(Text(DisplayStrings.accessibility))
 
-    row(title: DisplayStrings.accessibility, index: 4, selection: self.$selectedView, destination: wrapper.anyView())
+    row(title: DisplayStrings.accessibility, index: 2, selection: self.$selectedView, destination: wrapper.anyView())
   }
-
-  @ViewBuilder private var faqRow: some View {
-    let viewController = RemoteHTMLViewController(
-      URL: URL(string: TPPSettings.TPPFAQURLString)!,
-      title: Strings.Settings.faq,
-      failureMessage: Strings.Error.loadFailedError
-    )
-    
-    let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
-      .navigationBarTitle(Text(DisplayStrings.faq))
-
-    row(title: DisplayStrings.faq, index: 5, selection: self.$selectedView, destination: wrapper.anyView())
-  }
-
 
   @ViewBuilder private var privacyRow: some View {
     let viewController = RemoteHTMLViewController(
@@ -371,8 +305,19 @@ struct TPPSettingsView: View {
     let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
       .navigationBarTitle(Text(DisplayStrings.privacyPolicy))
 
-    row(title: DisplayStrings.privacyPolicy, index: 5, selection: self.$selectedView, destination: wrapper.anyView())
+    row(title: DisplayStrings.privacyPolicy, index: 3, selection: self.$selectedView, destination: wrapper.anyView())
+  }
 
+  @ViewBuilder private var softwareLicenseRow: some View {
+    let viewController = BundledHTMLViewController(
+      fileURL: Bundle.main.url(forResource: "software-licenses", withExtension: "html")!,
+      title: Strings.Settings.softwareLicenses
+    )
+    
+    let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
+      .navigationBarTitle(Text(DisplayStrings.softwareLicenses))
+
+    row(title: DisplayStrings.softwareLicenses, index: 4, selection: self.$selectedView, destination: wrapper.anyView())
   }
 
   @ViewBuilder private var userAgreementRow: some View {
@@ -385,32 +330,20 @@ struct TPPSettingsView: View {
     let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
       .navigationBarTitle(Text(DisplayStrings.eula))
 
-    row(title: DisplayStrings.eula, index: 6, selection: self.$selectedView, destination: wrapper.anyView())
+    row(title: DisplayStrings.eula, index: 5, selection: self.$selectedView, destination: wrapper.anyView())
   }
 
-  @ViewBuilder private var softwareLicenseRow: some View {
-    let viewController = BundledHTMLViewController(
-      fileURL: Bundle.main.url(forResource: "software-licenses", withExtension: "html")!,
-      title: Strings.Settings.softwareLicenses
+  @ViewBuilder private var faqRow: some View {
+    let viewController = RemoteHTMLViewController(
+      URL: URL(string: TPPSettings.TPPFAQURLString)!,
+      title: Strings.Settings.faq,
+      failureMessage: Strings.Error.loadFailedError
     )
     
     let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
-      .navigationBarTitle(Text(DisplayStrings.softwareLicenses))
+      .navigationBarTitle(Text(DisplayStrings.faq))
 
-    row(title: DisplayStrings.softwareLicenses, index: 7, selection: self.$selectedView, destination: wrapper.anyView())
-  }
-
-  @ViewBuilder private var developerSettingsSection: some View {
-    if (TPPSettings.shared.customMainFeedURL == nil && showDeveloperSettings) {
-      Section(footer: versionInfo) {
-        let viewController = TPPDeveloperSettingsTableViewController()
-          
-        let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
-          .navigationBarTitle(Text(DisplayStrings.developerSettings))
-        
-        row(title: DisplayStrings.developerSettings, index: 8, selection: self.$selectedView, destination: wrapper.anyView())
-      }
-    }
+    row(title: DisplayStrings.faq, index: 6, selection: self.$selectedView, destination: wrapper.anyView())
   }
 
   @ViewBuilder private var versionInfo: some View {
@@ -420,16 +353,9 @@ struct TPPSettingsView: View {
     
     Text("\(productName) version \(version) (\(build))")
       .font(Font(uiFont: UIFont.palaceFont(ofSize: 12)))
-      .gesture(
-        LongPressGesture(minimumDuration: 5.0)
-          .onEnded { _ in
-            self.showDeveloperSettings.toggle()
-          }
-      )
       .frame(height: 40)
       .horizontallyCentered()
   }
-
 
   /*
    This returns the Finnish/Swedish version of the logo

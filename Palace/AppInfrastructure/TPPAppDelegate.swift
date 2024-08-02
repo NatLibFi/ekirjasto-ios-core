@@ -58,7 +58,7 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
     itemAppearance.normal.badgePositionAdjustment.horizontal = 3
     itemAppearance.normal.badgePositionAdjustment.vertical = 1
     itemAppearance.normal.badgeBackgroundColor = UIColor(named: "ColorEkirjastoRedCircle")
-    itemAppearance.normal.badgeTextAttributes = [.foregroundColor: UIColor(named: "ColorEkirjastoAlwaysBlack")!, .font: UIFont.boldPalaceFont(ofSize: 11)]
+    itemAppearance.normal.badgeTextAttributes = [.foregroundColor: UIColor(named: "ColorEkirjastoAlwaysBlack")!, .font: UIFont.boldPalaceFont(for: .caption2)]
     if let bottom = bottom {
       itemAppearance.normal.titlePositionAdjustment = UIOffset(horizontal: 5.0, vertical:  CGFloat.minimum(bottom, 6.0))
     }else {
@@ -70,7 +70,7 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
     paragraphStyle.allowsDefaultTighteningForTruncation = false
     itemAppearance.normal.titleTextAttributes = [
       .foregroundColor: TPPConfiguration.compatiblePrimaryColor(),
-      .font: UIFont.palaceFont(ofSize: 12),
+      .font: UIFont.palaceFont(for: .caption1),
       .paragraphStyle: paragraphStyle
     ]
     
@@ -82,7 +82,7 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
     UITabBar.appearance().standardAppearance = appearance
     UITabBar.appearance().tintColor = TPPConfiguration.compatiblePrimaryColor() //Edited by Ebblis
     UITabBar.appearance().backgroundColor = TPPConfiguration.backgroundColor()
-    UITabBarItem.appearance().setTitleTextAttributes([.font: UIFont.palaceFont(ofSize: 12)], for: .normal)
+    UITabBarItem.appearance().setTitleTextAttributes([.font: UIFont.palaceFont(for: .caption1)], for: .normal)
     
     UINavigationBar.appearance().tintColor = TPPConfiguration.iconColor()
     UINavigationBar.appearance().standardAppearance = TPPConfiguration.defaultAppearance()
