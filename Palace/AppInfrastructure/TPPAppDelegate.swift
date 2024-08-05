@@ -17,13 +17,41 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
   var reachabilityManager: TPPReachability!
   var notificationsManager: TPPUserNotifications!
   var isSigningIn = false
+  public var toggleState = false
+  public var setFontSize = 18
+  public var selectSize = "100%"
+  public var selectLang = "Finnish"
+  public var langPreference = "fi"
+
 
   // MARK: - Application Lifecycle
   
   func applicationDidFinishLaunching(_ application: UIApplication) {
     FirebaseApp.configure()
     TPPErrorLogger.configureCrashAnalytics()
+    
+    // Load UserDefaults
+    toggleState = UserDefaults.standard.bool(forKey: "enablePreferences")
+    setFontSize = UserDefaults.standard.integer(forKey: "fontPreferences")
+    if let savedlangPreference = UserDefaults.standard.string(forKey: "langPreference"){
+      langPreference = savedlangPreference
+    }else{
+      langPreference = "Finnish"
+      UserDefaults.standard.set(langPreference, forKey: "langPreference")
+    }
 
+    // Check and set selectSize based on setFontSize
+    if let savedselectSize = UserDefaults.standard.string(forKey: "selectSize") {
+        selectSize = savedselectSize
+    } else {
+      selectSize = "100%"
+    }
+
+    // Retrieve and set selectLang
+    if let appleLanguage = UserDefaults.standard.string(forKey: "AppleLanguage") {
+        selectLang = appleLanguage
+    }
+    
     // Perform data migrations as early as possible before anything has a chance to access them
     TPPKeychainManager.validateKeychain()
     TPPMigrationManager.migrate()

@@ -122,18 +122,35 @@ struct Strings {
     static let signOut = NSLocalizedString("Sign out", comment: "")
     static let loginFooterUserAgreementText = NSLocalizedString("By signing in, you agree the End User License Agreement", comment: "")
     static let faq = NSLocalizedString("FAQ", comment: "")
-    
-    //dependents
-    static let dependentsButton = NSLocalizedString("Invite a Dependent", comment: "")
-    static let dependents = NSLocalizedString("Dependents", comment: "")
-    static let getD = NSLocalizedString("Get Dependents", comment: "")
-    static let choose = NSLocalizedString("Choose", comment: "")
-    static let selected = NSLocalizedString("Selected Dependent is: ", comment: "")
-    static let enterEmail = NSLocalizedString("Enter email of a Dependent: ", comment: "")
-    static let incorrectEmail = NSLocalizedString("Incorrect email", comment: "")
-    static let sendButton = NSLocalizedString("Send invite", comment: "")
-    
   }
+    //dependents
+    struct Dependents {
+      static let dependentsButton = NSLocalizedString("Invite a Dependent", comment: "")
+      static let dependents = NSLocalizedString("Dependents", comment: "")
+      static let getD = NSLocalizedString("Get Dependents", comment: "")
+      static let choose = NSLocalizedString("Choose", comment: "")
+      static let selected = NSLocalizedString("Selected Dependent is: ", comment: "")
+      static let enterEmail = NSLocalizedString("Enter email of a Dependent: ", comment: "")
+      static let incorrectEmail = NSLocalizedString("Incorrect email", comment: "")
+      static let sendButton = NSLocalizedString("Send invite", comment: "")
+    }
+    struct Preferences {
+      static let preferencesButton = NSLocalizedString("Preferences", comment: "")
+      static let langButton = NSLocalizedString("Language preferences", comment: "")
+      static let fontSizeButton = NSLocalizedString("Font size", comment: "")
+      static let togglePref = NSLocalizedString("Enable preferences", comment: "")
+      static let en = NSLocalizedString("English", comment: "")
+      static let fi = NSLocalizedString("Finnish", comment: "")
+      static let sv = NSLocalizedString("Swedish", comment: "")
+      static let fontNormal = NSLocalizedString("100%", comment: "")
+      static let fontMedium = NSLocalizedString("150%", comment: "")
+      static let fontLarge = NSLocalizedString("200%", comment: "")
+      static let selectL = NSLocalizedString("Select language", comment: "")
+      static let selectS = NSLocalizedString("Select font size", comment: "")
+      static let selectEnable = NSLocalizedString("Enable preferences", comment: "")
+      static let restartTitle = NSLocalizedString("Ekirjasto needs to restart", comment: "")
+      static let restartText = NSLocalizedString("Preferred language saved. It will be available the next time you open the app.", comment: "")
+    }
   
   struct TPPAccountListDataSource {
     static let addLibrary = NSLocalizedString("Add Library", comment: "Title that also informs the user that they should choose a library from the list.")

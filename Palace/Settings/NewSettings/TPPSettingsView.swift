@@ -211,11 +211,11 @@ struct TPPSettingsView: View {
       }
       
       //button to open dependents view
-      NavigationLink(
-        destination:
-          DependentsView()){
-            Text(DisplayStrings.dependentsButton)
-          }
+      //NavigationLink(
+        //destination:
+          //DependentsView()){
+            //Text(DisplayStrings.Dependents.dependentsButton)
+          //}
     }
   }
   
@@ -344,6 +344,13 @@ struct TPPSettingsView: View {
       .navigationBarTitle(Text(DisplayStrings.faq))
 
     row(title: DisplayStrings.faq, index: 6, selection: self.$selectedView, destination: wrapper.anyView())
+    
+    //button to open preferences view
+    NavigationLink(
+      destination:
+        PreferencesView()){
+          Text(Strings.Preferences.preferencesButton)
+        }
   }
 
   @ViewBuilder private var versionInfo: some View {
