@@ -51,9 +51,8 @@ class DigitalMagazineBrowserViewController: UIViewController, UITabBarController
   private func setupWebView() {
     webView.navigationDelegate = self
     webView.isOpaque = false
-    webView.backgroundColor = .clear
+    webView.backgroundColor = TPPConfiguration.backgroundColor()
     webView.addObserver(self, forKeyPath: "URL", options: .new, context: nil)
-    webView.navigationDelegate = self
     
 #if DEBUG
     if #available(iOS 16.4, *) {
@@ -65,13 +64,22 @@ class DigitalMagazineBrowserViewController: UIViewController, UITabBarController
     
     // use auto-layout
     webView.translatesAutoresizingMaskIntoConstraints = false
-    let lauoutGuide = view.safeAreaLayoutGuide
+    let layoutGuide = view.safeAreaLayoutGuide
     NSLayoutConstraint.activate([
-      webView.topAnchor.constraint(equalTo: lauoutGuide.topAnchor, constant: 0.0),
-      webView.leadingAnchor.constraint(equalTo: lauoutGuide.leadingAnchor, constant: 0.0),
-      webView.trailingAnchor.constraint(equalTo: lauoutGuide.trailingAnchor, constant: 0.0),
-      webView.bottomAnchor.constraint(equalTo: lauoutGuide.bottomAnchor, constant: 0.0),
+      webView.topAnchor.constraint(equalTo: layoutGuide.topAnchor, constant: 0.0),
+      webView.leadingAnchor.constraint(equalTo: layoutGuide.leadingAnchor, constant: 0.0),
+      webView.trailingAnchor.constraint(equalTo: layoutGuide.trailingAnchor, constant: 0.0),
+      webView.bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor, constant: 0.0),
     ])
+    
+    // draw statusbar, as it gets black
+    guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+          let statusBarFrame = windowScene.statusBarManager?.statusBarFrame else {
+      return
+    }
+    let statusBarView = UIView(frame: statusBarFrame)
+    statusBarView.backgroundColor = TPPConfiguration.backgroundColor() // this
+    view.addSubview(statusBarView)
   }
   
   override func viewWillAppear(_ animated: Bool) {
