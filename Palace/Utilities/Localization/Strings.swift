@@ -125,6 +125,24 @@ struct Strings {
     
   }
   
+  struct Preferences {
+        static let preferencesButton = NSLocalizedString("Preferences", comment: "")
+        static let langButton = NSLocalizedString("Language preferences", comment: "")
+        static let fontSizeButton = NSLocalizedString("Font size", comment: "")
+        static let togglePref = NSLocalizedString("Enable preferences", comment: "")
+        static let en = NSLocalizedString("English", comment: "")
+        static let fi = NSLocalizedString("Finnish", comment: "")
+        static let sv = NSLocalizedString("Swedish", comment: "")
+        static let fontNormal = NSLocalizedString("100%", comment: "")
+        static let fontMedium = NSLocalizedString("150%", comment: "")
+        static let fontLarge = NSLocalizedString("200%", comment: "")
+        static let selectL = NSLocalizedString("Select language", comment: "")
+        static let selectS = NSLocalizedString("Select font size", comment: "")
+        static let selectEnable = NSLocalizedString("Enable preferences", comment: "")
+        static let restartTitle = NSLocalizedString("Ekirjasto needs to restart", comment: "")
+        static let restartText = NSLocalizedString("Preferred language saved. It will be available the next time you open the app.", comment: "")
+      }
+  
   struct TPPAccountListDataSource {
     static let addLibrary = NSLocalizedString("Add Library", comment: "Title that also informs the user that they should choose a library from the list.")
   }
