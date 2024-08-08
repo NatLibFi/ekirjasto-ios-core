@@ -338,8 +338,16 @@ struct TPPSettingsView: View {
       .navigationBarTitle(Text(DisplayStrings.faq))
 
     row(title: DisplayStrings.faq, index: 6, selection: self.$selectedView, destination: wrapper.anyView())
-  }
+  
 
+    //button to open preferences view
+    NavigationLink(
+      destination:
+        PreferencesView()){
+          Text(Strings.Preferences.preferencesButton)
+        }
+  }
+  
   @ViewBuilder private var versionInfo: some View {
     let productName = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as! String
     let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
