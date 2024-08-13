@@ -49,37 +49,32 @@ class DigitalMagazineBrowserViewController: UIViewController, UITabBarController
   }
   
   private func setupWebView() {
+    // Configure view
+    view.backgroundColor = TPPConfiguration.backgroundColor()
+    view.addSubview(webView)
+    
+    // Configure WebView
     webView.navigationDelegate = self
     webView.isOpaque = false
     webView.backgroundColor = TPPConfiguration.backgroundColor()
     webView.addObserver(self, forKeyPath: "URL", options: .new, context: nil)
+    
+    // Use auto-layout
+    webView.translatesAutoresizingMaskIntoConstraints = false
+    
+    // Activate constraints
+    NSLayoutConstraint.activate([
+      webView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+      webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      webView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+    ])
     
 #if DEBUG
     if #available(iOS 16.4, *) {
       webView.isInspectable = true
     }
 #endif
-    
-    view.addSubview(webView)
-    
-    // use auto-layout
-    webView.translatesAutoresizingMaskIntoConstraints = false
-    let layoutGuide = view.safeAreaLayoutGuide
-    NSLayoutConstraint.activate([
-      webView.topAnchor.constraint(equalTo: layoutGuide.topAnchor, constant: 0.0),
-      webView.leadingAnchor.constraint(equalTo: layoutGuide.leadingAnchor, constant: 0.0),
-      webView.trailingAnchor.constraint(equalTo: layoutGuide.trailingAnchor, constant: 0.0),
-      webView.bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor, constant: 0.0),
-    ])
-    
-    // draw statusbar, as it gets black
-    guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-          let statusBarFrame = windowScene.statusBarManager?.statusBarFrame else {
-      return
-    }
-    let statusBarView = UIView(frame: statusBarFrame)
-    statusBarView.backgroundColor = TPPConfiguration.backgroundColor() // this
-    view.addSubview(statusBarView)
   }
   
   override func viewWillAppear(_ animated: Bool) {
