@@ -1,2 +1,2 @@
 - Bugikorjauksia
-
+- UI-korjauksia
