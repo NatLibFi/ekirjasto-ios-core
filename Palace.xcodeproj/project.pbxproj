@@ -1198,6 +1198,8 @@
 		E6207B652118973800864143 /* TPPAppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6207B642118973800864143 /* TPPAppTheme.swift */; };
 		E63F2C6C1EAA81B3002B6373 /* ExtendedNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63F2C6B1EAA81B3002B6373 /* ExtendedNavBarView.swift */; };
 		E65977C51F82AC91003CD6BC /* TPP_Launch_Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E65977C41F82AC91003CD6BC /* TPP_Launch_Screen.storyboard */; };
+		E6602BC52C64DCB200B1212D /* DependentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6602BC42C64DCB200B1212D /* DependentsView.swift */; };
+		E6602BC62C64DCB200B1212D /* DependentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6602BC42C64DCB200B1212D /* DependentsView.swift */; };
 		E66A6C441EAFB63300AA282D /* TPPBookButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = E66A6C431EAFB63300AA282D /* TPPBookButtonsView.m */; };
 		E671FF7D1E3A7068002AB13F /* TPPNetworkQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E671FF7C1E3A7068002AB13F /* TPPNetworkQueue.swift */; };
 		E683953B217663B100371072 /* TPPFacetViewDefaultDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E683953A217663B100371072 /* TPPFacetViewDefaultDataSource.swift */; };
@@ -2101,6 +2103,7 @@
 		E6207B642118973800864143 /* TPPAppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPPAppTheme.swift; sourceTree = "<group>"; };
 		E63F2C6B1EAA81B3002B6373 /* ExtendedNavBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtendedNavBarView.swift; sourceTree = "<group>"; };
 		E65977C41F82AC91003CD6BC /* TPP_Launch_Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TPP_Launch_Screen.storyboard; sourceTree = "<group>"; };
+		E6602BC42C64DCB200B1212D /* DependentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependentsView.swift; sourceTree = "<group>"; };
 		E66A6C421EAFB63300AA282D /* TPPBookButtonsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPPBookButtonsView.h; sourceTree = "<group>"; };
 		E66A6C431EAFB63300AA282D /* TPPBookButtonsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPPBookButtonsView.m; sourceTree = "<group>"; };
 		E66AE32F1DC0FCFC00124AE2 /* TPPCirculationAnalytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPPCirculationAnalytics.swift; sourceTree = "<group>"; };
@@ -3645,6 +3648,7 @@
 				E5B2B8D9275952EC00150ED4 /* TPPSettingsView.swift */,
 				E5B2B8DC2759552F00150ED4 /* TPPSettingsViewController.swift */,
 				E69E21B62C638C0D007B26EC /* PreferencesView.swift */,
+				E6602BC42C64DCB200B1212D /* DependentsView.swift */,
 			);
 			path = NewSettings;
 			sourceTree = "<group>";
@@ -4837,6 +4841,7 @@
 				331264152A287F53006BA87D /* TPPSettingsView.swift in Sources */,
 				3375701E2A2F685500547CE1 /* TPPSecrets.swift in Sources */,
 				331264162A287F53006BA87D /* TPPOPDSFeed.m in Sources */,
+				E6602BC52C64DCB200B1212D /* DependentsView.swift in Sources */,
 				331264172A287F53006BA87D /* TPPOPDSLink.m in Sources */,
 				33FCF7F92AC4595E008E3B72 /* URL+Extensions.swift in Sources */,
 				331264182A287F53006BA87D /* TPPSettingsViewController.swift in Sources */,
@@ -5395,6 +5400,7 @@
 				5DD5674522B303DF001F0C83 /* TPPDeveloperSettingsTableViewController.swift in Sources */,
 				E5AD65E12684FDA300C62951 /* TPPAccountListDataSource.swift in Sources */,
 				E5EFDE7C298C4F8000258CA3 /* BookCellModel.swift in Sources */,
+				E6602BC62C64DCB200B1212D /* DependentsView.swift in Sources */,
 				2D754BC22002F1B10061D34F /* TPPOPDSIndirectAcquisition.m in Sources */,
 				21E35FC3268CC8AC00066F9D /* AdobeContentProtectionService.swift in Sources */,
 				21C7B87E25AE1DBA000E8BF3 /* LibraryServiceError.swift in Sources */,
