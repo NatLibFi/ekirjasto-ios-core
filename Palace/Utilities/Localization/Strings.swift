@@ -123,6 +123,16 @@ struct Strings {
     static let loginFooterUserAgreementText = NSLocalizedString("By signing in, you agree the End User License Agreement", comment: "")
     static let faq = NSLocalizedString("FAQ", comment: "")
     
+    //dependents
+    static let dependentsButton = NSLocalizedString("Invite a Dependent", comment: "")
+    static let dependents = NSLocalizedString("Dependents", comment: "")
+    static let getDependents = NSLocalizedString("Get Dependents", comment: "")
+    static let select = NSLocalizedString("Select", comment: "")
+    static let selected = NSLocalizedString("Selected Dependent is: ", comment: "")
+    static let enterEmail = NSLocalizedString("Enter email of a Dependent: ", comment: "")
+    static let incorrectEmail = NSLocalizedString("Incorrect email", comment: "")
+    static let sendButton = NSLocalizedString("Send invite", comment: "")
+    
   }
   
   struct Preferences {
