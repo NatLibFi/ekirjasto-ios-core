@@ -9,12 +9,16 @@ import SwiftUI
 
 struct DependentsView: View {
   typealias tsx = Strings.Settings
-  @State private var username: String = ""
+  @State private var inputEmail: String = ""
+  @State private var isEmailValid: Bool = false
   var dependents = ["Select a Dependent", "No Dependents Found"]
-  @State private var selectedDependents = "Select a Dependent"
+  @State private var selectedDependent = ""
   @State private var circulationToken: String = ""
   @State var authDoc : OPDS2AuthenticationDocument? = nil
   @State private var LoikkaDependents: [String] = []
+
+
+  @State private var isDependentsFetched: Bool = false
 
   var body: some View {
     List{
@@ -40,40 +44,66 @@ struct DependentsView: View {
         }
       }
       //TODO: picker here
-      VStack{
-        Spacer()
-        Picker(tsx.select, selection: $selectedDependents){
-          ForEach(LoikkaDependents, id: \.self){ dependent in
-            Text(dependent)
+      if isDependentsFetched { // Once the request to Loikka has been made, this section becomes visible
+        VStack{
+          Spacer()
+          if LoikkaDependents.isEmpty {
+            Text(tsx.noDependents).tag(tsx.noDependents)
+            
+          } else {
+            Picker(tsx.select, selection: $selectedDependent) {
+              Text(tsx.selectADependent)
+                ForEach(LoikkaDependents, id: \.self) { dependent in
+                  Text(dependent).tag(dependent)
+                  }
+            }
           }
         }
-      }
-      Text(tsx.selected + "\n\n\n\(selectedDependents)")
-      TextField(
-        tsx.enterEmail,
-        text: $username
         
-      )
-      Button{
-        let valid = validate(username)
-        print("Result of validating " + username + "is: ")
-        if valid {
-          //stuff
-          print("Yes, valid")
+        if !selectedDependent.isEmpty {
+          VStack {
+            TextField(
+              tsx.enterEmail,
+              text: $inputEmail
+            )
+            .keyboardType(.emailAddress)
+            .autocapitalization(.none)
+            .onChange(of: inputEmail) { newValue in isEmailValid = validate(newValue)}
+            
+            Button {
+              print("button pressed")
+            } label: {
+              HStack {
+                Text(tsx.sendButton)
+                  .foregroundColor(isEmailValid ? .black : .gray)
+                
+                Image("ArrowRight")
+                  .padding(.leading, 10)
+                  .foregroundColor(Color(uiColor: .lightGray))
+              }
+              .disabled(!isEmailValid)
+            }
+          }
+            
+//            Button {
+//            } label: {
+//                if validate(inputEmail) {
+//                    HStack {
+//                        Text(tsx.sendButton)
+//                        Spacer()
+//                        Image("ArrowRight")
+//                            .padding(.leading, 10)
+//                            .foregroundColor(Color(uiColor: .lightGray))
+//                    }
+//                } else {
+//                  Text("Not a valid email")
+//                }
+//            } // ends label
+//          }
         }
-        else{
-          //some other stuff, genious right?
-          print("No, not valid")
-          username = tsx.incorrectEmail
-        }
-      } label: {
-        HStack{
-          Text(tsx.sendButton)
-          Spacer()
-          Image("ArrowRight")
-            .padding(.leading, 10)
-            .foregroundColor(Color(uiColor: .lightGray))
-        }
+
+        
+        
       }
     }
   }
@@ -225,6 +255,7 @@ struct DependentsView: View {
                 case .success(let dependents):
                     print("Dependents: \(dependents)")
                   self.LoikkaDependents = dependents
+                  self.isDependentsFetched = true
                 case .failure(let error):
                   print("error: \(error)")
                 }
@@ -243,9 +274,9 @@ struct DependentsView: View {
     //finally return
   }
   
-  func validate(_ username: String) -> Bool {
+  func validate(_ inputEmail: String) -> Bool {
     //TODO: validate email adress here
-    var email = username
+    var email = inputEmail
     print("Validating email given: " + email)
     let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
     let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)

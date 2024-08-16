@@ -132,7 +132,9 @@ struct Strings {
     static let enterEmail = NSLocalizedString("Enter email of a Dependent: ", comment: "")
     static let incorrectEmail = NSLocalizedString("Incorrect email", comment: "")
     static let sendButton = NSLocalizedString("Send invite", comment: "")
-    
+    static let selectADependent = NSLocalizedString("Select a dependent", comment: "")
+    static let noDependents = NSLocalizedString("No dependents found", comment: "")
+
   }
   
   struct Preferences {
