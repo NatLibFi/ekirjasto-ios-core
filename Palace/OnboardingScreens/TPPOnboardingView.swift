@@ -94,10 +94,8 @@ struct TPPOnboardingView: View {
           }
       )
     }
-    // Use system appereance setting for bg color.
-    // .background(
-    //  Color(UIColor(named: "OnboardingBackground") ?? .systemBackground)
-    .background(Color(TPPConfiguration.backgroundColor())
+    .background(
+      Color(UIColor(named: "OnboardingBackground") ?? .systemBackground)
     )
   }
   
