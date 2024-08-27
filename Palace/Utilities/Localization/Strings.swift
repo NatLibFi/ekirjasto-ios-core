@@ -136,7 +136,7 @@ struct Strings {
     static let noDependents = NSLocalizedString("No dependents or children found.", comment: "")
     static let errorFromServer = NSLocalizedString("Something went wrong. Try signing out and back in, and try again.", comment: "")
     static let errorInCreation = NSLocalizedString("Could not finish request. Check your internet connection and try again.", comment: "")
-    static let thanks = NSLocalizedString("Thank you! Your dependent should receive the invitation shortly if the email was entered correctly.", comment: "")
+    static let thanks = NSLocalizedString("Your dependent should receive the invitation soon.\n\nAdvise them to open the link in the email on their device and create a passkey. This will make logging in easier.", comment: "")
     static let guideText = NSLocalizedString("Fill in an email where the invitation should be sent. Make sure to type it correctly before sending.", comment: "")
     static let successButton = NSLocalizedString("Invite sent!", comment: "")
 
