@@ -37,7 +37,7 @@ struct Dependent: Codable, Identifiable, Hashable {
   
   func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(id, forKey: .govId) // The API expects govId so we encode it back to "id"
+    try container.encode(id, forKey: .govId) // The API expects govId so we encode it back to that
     try container.encode(firstName, forKey: .firstName)
     try container.encode(lastName, forKey: .lastName)
   }
@@ -151,6 +151,9 @@ struct DependentsView: View {
               .padding()
               .border(Color(uiColor: .lightGray), width: 1)
               .cornerRadius(3)
+              .disableAutocorrection(true)
+              .autocapitalization(.none)
+              .keyboardType(.emailAddress)
             Spacer()
             
             // Tapping this button will send out the invite
