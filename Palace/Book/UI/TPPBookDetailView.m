@@ -202,11 +202,11 @@ static NSString *DetailHTMLTemplate = nil;
 {
   self.titleLabel.font = [UIFont palaceFontOfSize:20]; //Edited by Ellibs
   self.subtitleLabel.font = [UIFont palaceFontOfSize:18]; //Edited by Ellibs
-  self.audiobookLabel.font = [UIFont customFontForTextStyle:UIFontTextStyleCaption2];
+  self.audiobookLabel.font = [UIFont palaceFontOfSize:16];
   self.authorsLabel.font = [UIFont palaceFontOfSize:18]; //Edited by Ellibs
-  self.readMoreLabel.titleLabel.font = [UIFont palaceFontOfSize:14];
-  self.summarySectionLabel.font = [UIFont palaceFontOfSize:14]; //Edited by Ellibs
-  self.infoSectionLabel.font = [UIFont palaceFontOfSize:14]; //Edited by Ellibs
+  self.readMoreLabel.titleLabel.font = [UIFont palaceFontOfSize:18];
+  self.summarySectionLabel.font = [UIFont palaceFontOfSize:18]; //Edited by Ellibs
+  self.infoSectionLabel.font = [UIFont palaceFontOfSize:18]; //Edited by Ellibs
   [self.footerTableView reloadData];
 }
 
@@ -260,6 +260,7 @@ static NSString *DetailHTMLTemplate = nil;
     attrString = [[NSAttributedString alloc] initWithString:@""];
   }
   self.summaryTextView.attributedText = attrString;
+  self.summaryTextView.font = [UIFont palaceFontOfSize:18]; 
   [[NSOperationQueue mainQueue] addOperationWithBlock:^{
     // this needs to happen asynchronously because the HTML text may overwrite
     // our color
