@@ -101,9 +101,10 @@ struct TPPSettingsView: View {
   @State private var syncEnabled = true//AccountsManager.shared.accounts().first?.details?.syncPermissionGranted ?? false
   @State private var logoutText = ""
   @ViewBuilder private var syncBookmarksSection: some View {
-    Section(footer: Text(NSLocalizedString("Save your reading position and bookmarks to all your other devices.",comment: "Explain to the user they can save their bookmarks in the cloud across all their devices."))){
+    Section(footer: Text(NSLocalizedString("Save your reading position and bookmarks to all your other devices.",comment: "Explain to the user they can save their bookmarks in the cloud across all their devices."))) {
       Toggle(isOn:$toggleSyncBookmarks){
         Text(DisplayStrings.syncBookmarks)
+          .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
       }.disabled(!syncEnabled)
         .onChange(of: toggleSyncBookmarks) { value in
           
@@ -125,6 +126,8 @@ struct TPPSettingsView: View {
           
         }
     }
+    .font(Font(uiFont: UIFont.palaceFont(ofSize: 12)))
+
   }
   
   @ViewBuilder private var leadingBarButton: some View {
@@ -156,6 +159,7 @@ struct TPPSettingsView: View {
      } label: {
        HStack{
          Text(DisplayStrings.signOut)
+           .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
          Spacer()
          Image("ArrowRight")
            .padding(.leading, 10)
@@ -203,6 +207,7 @@ struct TPPSettingsView: View {
      } label: {
        HStack{
          Text(DisplayStrings.registerPasskey)
+           .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
          Spacer()
          Image("ArrowRight")
            .padding(.leading, 10)
@@ -239,15 +244,16 @@ struct TPPSettingsView: View {
       } label: {
         HStack{
           Text(DisplayStrings.loginPasskey)
+            .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
           Spacer()
           Image("ArrowRight")
             .padding(.leading, 10)
             .foregroundColor(Color(uiColor: .lightGray))
-          
-          
         }
-
+        
       }
+      .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
+
     }
   }
 
@@ -345,6 +351,7 @@ struct TPPSettingsView: View {
       destination:
         PreferencesView()){
           Text(Strings.Preferences.preferencesButton)
+            .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
         }
   }
   
@@ -398,6 +405,7 @@ struct TPPSettingsView: View {
       destination: destination,
       label: { Text(title) }
     )
+    .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
   }
   
   private func row(title: String, index: Int, selection: Binding<Int?>, destination: AnyView) -> some View {
@@ -407,5 +415,6 @@ struct TPPSettingsView: View {
       selection: selection,
       label: { Text(title) }
     )
+    .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
   }
 }
