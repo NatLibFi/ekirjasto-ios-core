@@ -471,33 +471,43 @@ extension TPPNetworkExecutor {
     URLSession.shared.dataTask(with: request){ data, response, error in
       
       if(data != nil){
-        let json = try? JSONSerialization.jsonObject(with: data!)
-        let jsonRoot = json as? [String: Any]
-        let accessToken = jsonRoot?["access_token"] as? String
-        
-        if let accessToken = accessToken {
-          let sharedAccount = TPPUserAccount.sharedAccount()
-          
-          sharedAccount.setAuthToken(accessToken,barcode: nil, pin: nil, expirationDate: nil)
-          
-          //is it ok to have a direct reference to TPPSignInBusinessLogic here?
-          TPPSignInBusinessLogic.getShared { logic in
-            logic?.notifySignIn()
-          }
-          
-        }else{
-          TPPSignInBusinessLogic.getShared { logic in
-
-            DispatchQueue.main.async {
-              logic?.performLogOut()
-            }
+        do {
+          if let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
+            let sharedAccount = TPPUserAccount.sharedAccount()
             
-          }
-          print("authenticateWithToken error: \(String(describing: error?.localizedDescription)) data: \(String(describing: String(data:data!,encoding: .utf8)))")
+                if let accessToken = json["access_token"] as? String {
+                    print("ACCESS TOKEN \(accessToken)")
+                    sharedAccount.setAuthToken(accessToken,barcode: nil, pin: nil, expirationDate: nil)
+
+                }
+                if let patronInfo = json["patron_info"] as? String {
+                    if let patronData = patronInfo.data(using: .utf8) {
+                        if let patronObject = try JSONSerialization.jsonObject(with: patronData, options: []) as? [String: Any] {
+                            if let patronPermanentId = patronObject["permanent_id"] as? String {
+                              sharedAccount.setPatronPermanentId(patronPermanentId)
+                              print("PERMANENT ID \(patronPermanentId)")
+                            }
+                        }
+                    }
+                }
+            TPPSignInBusinessLogic.getShared { logic in
+                      logic?.notifySignIn()
+              }
+            }
+          
+        } catch {
+            print("Virhe JSONin käsittelyssä: \(error.localizedDescription)")
         }
 
-        
+      } else {
+        TPPSignInBusinessLogic.getShared { logic in
+          DispatchQueue.main.async {
+          logic?.performLogOut()
+          }
+        }
+        print("authenticateWithToken error: \(String(describing: error?.localizedDescription)) data: \(String(describing: String(data:data!,encoding: .utf8)))")
       }
+      
       if let httpResponse = response as? HTTPURLResponse {
         completion?(httpResponse.statusCode)
       }else{

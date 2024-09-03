@@ -123,6 +123,23 @@ struct Strings {
     static let loginFooterUserAgreementText = NSLocalizedString("By signing in, you agree the End User License Agreement", comment: "")
     static let faq = NSLocalizedString("FAQ", comment: "")
     
+    //dependents
+    static let dependentsButton = NSLocalizedString("Invite a Dependent", comment: "")
+    static let dependents = NSLocalizedString("Dependents", comment: "")
+    static let getDependents = NSLocalizedString("Get Dependents", comment: "")
+    static let select = NSLocalizedString("Select:", comment: "")
+    static let selected = NSLocalizedString("Selected Dependent is: ", comment: "")
+    static let enterEmail = NSLocalizedString("Enter email: ", comment: "")
+    static let incorrectEmail = NSLocalizedString("Incorrect email", comment: "")
+    static let sendButton = NSLocalizedString("Send invite", comment: "")
+    static let selectADependent = NSLocalizedString("Select a dependent", comment: "")
+    static let noDependents = NSLocalizedString("No dependents or children found.", comment: "")
+    static let errorFromServer = NSLocalizedString("Something went wrong. Try signing out and back in, and try again.", comment: "")
+    static let errorInCreation = NSLocalizedString("Could not finish request. Check your internet connection and try again.", comment: "")
+    static let thanks = NSLocalizedString("Your dependent should receive the invitation soon.\n\nAdvise them to open the link in the email on their device and create a passkey. This will make logging in easier.", comment: "")
+    static let guideText = NSLocalizedString("Fill in an email where the invitation should be sent. Make sure to type it correctly before sending.", comment: "")
+    static let successButton = NSLocalizedString("Invite sent!", comment: "")
+
   }
   
   struct Preferences {

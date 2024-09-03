@@ -172,7 +172,7 @@ struct TPPSettingsView: View {
            }
          }
        }
-       
+    
      } message: {
        Text(self.logoutText)
      }
@@ -210,6 +210,12 @@ struct TPPSettingsView: View {
        }
 
      }
+     
+     NavigationLink(
+       destination:
+         DependentsView()){
+           Text(DisplayStrings.dependentsButton)
+         }
    }
   }
   

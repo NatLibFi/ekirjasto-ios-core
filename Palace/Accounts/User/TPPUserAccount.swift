@@ -17,6 +17,7 @@ private enum StorageKey: String {
   case credentials = "TPPAccountCredentialsKey"
   case authDefinition = "TPPAccountAuthDefinitionKey"
   case cookies = "TPPAccountAuthCookiesKey"
+  case patronPermanentId = "TPPPatronPermanentId"
 
   func keyForLibrary(uuid libraryUUID: String?) -> String {
     guard
@@ -65,6 +66,7 @@ class TPPUserAccountAuthentication: ObservableObject {
         StorageKey.credentials: _credentials,
         StorageKey.authDefinition: _authDefinition,
         StorageKey.cookies: _cookies,
+        StorageKey.patronPermanentId: _patronPermanentId,
 
         // legacy
         StorageKey.barcode: _barcode,
@@ -149,6 +151,7 @@ class TPPUserAccountAuthentication: ObservableObject {
             _credentials.write(credentials)
             _authToken.write(nil)
           }
+        
         }
       }
 
@@ -253,6 +256,9 @@ class TPPUserAccountAuthentication: ObservableObject {
     .keyForLibrary(uuid: libraryUUID)
     .asKeychainCodableVariable(with: accountInfoLock)
   private lazy var _cookies: TPPKeychainVariable<[HTTPCookie]> = StorageKey.cookies
+    .keyForLibrary(uuid: libraryUUID)
+    .asKeychainVariable(with: accountInfoLock)
+  private lazy var _patronPermanentId: TPPKeychainVariable<String> = StorageKey.patronPermanentId
     .keyForLibrary(uuid: libraryUUID)
     .asKeychainVariable(with: accountInfoLock)
 
@@ -408,6 +414,9 @@ class TPPUserAccountAuthentication: ObservableObject {
     return nil
   }
   
+  var patronPermantId: String? { _patronPermanentId.read() }
+
+  
   var patronFullName: String? {
     if let patron = patron,
       let name = patron["name"] as? [String:String]
@@ -520,6 +529,12 @@ class TPPUserAccountAuthentication: ObservableObject {
     _deviceID.write(id)
     notifyAccountDidChange()
   }
+  
+  @objc(setPatronPermanentId:)
+  func setPatronPermanentId(_ identifier: String) {
+    _patronPermanentId.write(identifier)
+    print("TPPUserAccount patronPermanentId has been set")
+  }
     
   // MARK: - Remove
 
@@ -542,6 +557,7 @@ class TPPUserAccountAuthentication: ObservableObject {
         _barcode.write(nil)
         _pin.write(nil)
         _authToken.write(nil)
+        _patronPermanentId.write(nil)
 
         notifyAccountDidChange()
         
