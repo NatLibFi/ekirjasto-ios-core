@@ -1,2 +1,4 @@
-- Olika buggfixar
-- UI-fixar
+- Inställningar: Alternativ för språk och teckenstorlek
+- Funktionalitet för att bjuda in anhöriga
+– Förbättrad tillgänglighet
+- Bugfixar

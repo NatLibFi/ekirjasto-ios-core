@@ -1,2 +1,4 @@
+- Preferences: Font size options
+- Functionality to invite dependents
+- Improved accessibility
 - Bug fixes
-- UI fixes

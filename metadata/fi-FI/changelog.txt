@@ -1,2 +1,4 @@
+- Sovellusasetukset: Fonttikokovalinnat
+- Huollettavien kutsuminen sovelluksesta
+- Paranneltu saavutettavuus
 - Bugikorjauksia
-- UI-korjauksia
