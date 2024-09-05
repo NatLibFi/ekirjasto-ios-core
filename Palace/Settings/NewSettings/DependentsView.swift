@@ -83,6 +83,7 @@ struct DependentsView: View {
         } header: {
           HStack{
             Text(tsx.dependents)
+              .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
             Spacer()
               .aspectRatio(contentMode: .fit)
               .frame(width: 200)
@@ -98,6 +99,7 @@ struct DependentsView: View {
             } label: {
               HStack{
                 Text(tsx.getDependents)
+                  .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
                 Spacer()
                 Image("ArrowRight")
                   .padding(.leading, 10)
@@ -116,6 +118,7 @@ struct DependentsView: View {
                   // If the user doesn't have any dependents, inform them
                   if fetchedDependents.isEmpty {
                     Text(tsx.noDependents).tag(tsx.noDependents)
+                      .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
                       .padding()
                     
                     // If a list of dependents is returned, show them in a picker
@@ -135,6 +138,7 @@ struct DependentsView: View {
               .alert(isPresented: $showAlert) {
                 Alert(title: Text(tsxgeneric.error), message: Text(alertMessage), dismissButton: .default(Text(tsxgeneric.ok)))
               }
+              .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
             }
           }
         }
@@ -144,10 +148,11 @@ struct DependentsView: View {
           VStack {
             Text(tsx.guideText)
               .foregroundStyle(Color(uiColor: .lightGray))
-              .font(.subheadline)
+              .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
               .padding()
               .frame(maxWidth: .infinity, alignment: .leading)
             TextField(tsx.enterEmail, text: $inputEmail)
+              .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
               .padding()
               .border(Color(uiColor: .lightGray), width: 1)
               .cornerRadius(3)
@@ -162,6 +167,7 @@ struct DependentsView: View {
             } label: {
               HStack {
                 Text(tsx.sendButton)
+                  .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
                 Image("ArrowRight")
                   .padding(.leading, 10)
                   .foregroundColor(Color(uiColor: .lightGray))
