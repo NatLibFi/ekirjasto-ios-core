@@ -107,7 +107,7 @@ platform :ios do
       project: "Palace.xcodeproj",
       scheme: "Ekirjasto",
       configuration: "Release-#{configuration}",
-      include_symbols: true,
+      include_symbols: false,
       include_bitcode: false,
       silent: true,
       #output_name: options[:output_name],
@@ -138,7 +138,7 @@ platform :ios do
       project: "Palace.xcodeproj",
       scheme: "Ekirjasto",
       configuration: "Release-#{configuration}",
-      include_symbols: true,
+      include_symbols: false,
       include_bitcode: false,
       #export_options: {
       #  method: "app-store",
