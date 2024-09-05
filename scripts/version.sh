@@ -170,7 +170,7 @@ get_version() {
 
 set_version() {
   versionToSet="$1"
-  sed -i '' 's/MARKETING_VERSION = .*;/MARKETING_VERSION = "'"$versionToSet"'";/g' "$projectFile"
+  sed -i '' 's/MARKETING_VERSION = .*;/MARKETING_VERSION = '$versionToSet';/g' "$projectFile"
 }
 
 
