@@ -105,14 +105,29 @@
       "1.50×" : {
          "string" : "1.50×"
       },
+      "100%" : {
+         "string" : "100%"
+      },
+      "125%" : {
+         "string" : "125%"
+      },
       "13 or Older" : {
          "string" : "13 or Older"
       },
       "15 Minutes" : {
          "string" : "15 Minutes"
       },
+      "150%" : {
+         "string" : "150%"
+      },
+      "175%" : {
+         "string" : "175%"
+      },
       "2.0×" : {
          "string" : "2.0×"
+      },
+      "200%" : {
+         "string" : "200%"
       },
       "30 Minutes" : {
          "string" : "30 Minutes"
@@ -318,6 +333,9 @@
       "Corrupted Audiobook" : {
          "string" : "Corrupted Audiobook"
       },
+      "Could not finish request. Check your internet connection and try again." : {
+         "string" : "Could not finish request. Check your internet connection and try again."
+      },
       "Create Card" : {
          "string" : "Create Card"
       },
@@ -341,6 +359,9 @@
       },
       "Deletes %@" : {
          "string" : "Deletes %@"
+      },
+      "Dependents" : {
+         "string" : "Dependents"
       },
       "Description" : {
          "string" : "Description"
@@ -393,14 +414,26 @@
       "E-kirjasto test login" : {
          "string" : "E-kirjasto test login"
       },
+      "Ekirjasto needs to restart" : {
+         "string" : "Ekirjasto needs to restart"
+      },
       "Enable Sync" : {
          "string" : "Enable Sync"
+      },
+      "Enable preferences" : {
+         "string" : "Enable preferences"
       },
       "Enable sync to save your reading position and bookmarks to your other devices.\n\nYou can change this any time in Settings." : {
          "string" : "Enable sync to save your reading position and bookmarks to your other devices.\n\nYou can change this any time in Settings."
       },
       "End of Chapter" : {
          "string" : "End of Chapter"
+      },
+      "English" : {
+         "string" : "English"
+      },
+      "Enter email: " : {
+         "string" : "Enter email: "
       },
       "Error" : {
          "string" : "Error"
@@ -426,8 +459,17 @@
       "Feedback" : {
          "string" : "Feedback"
       },
+      "Fill in an email where the invitation should be sent. Make sure to type it correctly before sending." : {
+         "string" : "Fill in an email where the invitation should be sent. Make sure to type it correctly before sending."
+      },
       "Find Your Library" : {
          "string" : "Find Your Library"
+      },
+      "Finnish" : {
+         "string" : "Finnish"
+      },
+      "Font size" : {
+         "string" : "Font size"
       },
       "Forgot your password?" : {
          "string" : "Forgot your password?"
@@ -449,6 +491,9 @@
       },
       "Get" : {
          "string" : "Get"
+      },
+      "Get Dependents" : {
+         "string" : "Get Dependents"
       },
       "Gets %@" : {
          "string" : "Gets %@"
@@ -477,6 +522,9 @@
       "Illustrators" : {
          "string" : "Illustrators"
       },
+      "Incorrect email" : {
+         "string" : "Incorrect email"
+      },
       "IncreaseFontSize" : {
          "string" : "IncreaseFontSize"
       },
@@ -488,6 +536,12 @@
       },
       "Invalid Credentials" : {
          "string" : "Invalid Credentials"
+      },
+      "Invite a Dependent" : {
+         "string" : "Invite a Dependent"
+      },
+      "Invite sent!" : {
+         "string" : "Invite sent!"
       },
       "It looks like you may have a book download or return in progress. Would you like to stop that and continue logging out?" : {
          "string" : "It looks like you may have a book download or return in progress. Would you like to stop that and continue logging out?"
@@ -503,6 +557,9 @@
       },
       "Language" : {
          "string" : "Language"
+      },
+      "Language preferences" : {
+         "string" : "Language preferences"
       },
       "Less than 1 min remaining" : {
          "string" : "Less than 1 min remaining"
@@ -557,6 +614,9 @@
       },
       "No Results Found" : {
          "string" : "No Results Found"
+      },
+      "No dependents or children found." : {
+         "string" : "No dependents or children found."
       },
       "No email account is set for this device." : {
          "string" : "No email account is set for this device."
@@ -644,6 +704,12 @@
       },
       "Please wait..." : {
          "string" : "Please wait..."
+      },
+      "Preferences" : {
+         "string" : "Preferences"
+      },
+      "Preferred language saved. It will be available the next time you open the app." : {
+         "string" : "Preferred language saved. It will be available the next time you open the app."
       },
       "Previous Chapter" : {
          "string" : "Previous Chapter"
@@ -765,8 +831,29 @@
       "Select a chapter or track from a list." : {
          "string" : "Select a chapter or track from a list."
       },
+      "Select a dependent" : {
+         "string" : "Select a dependent"
+      },
+      "Select font size" : {
+         "string" : "Select font size"
+      },
+      "Select language" : {
+         "string" : "Select language"
+      },
+      "Select text size" : {
+         "string" : "Select text size"
+      },
+      "Select:" : {
+         "string" : "Select:"
+      },
+      "Selected Dependent is: " : {
+         "string" : "Selected Dependent is: "
+      },
       "Selecting \"Delete\" will remove all bookmarks from the server for %@." : {
          "string" : "Selecting \"Delete\" will remove all bookmarks from the server for %@."
+      },
+      "Send invite" : {
+         "string" : "Send invite"
       },
       "Serif font" : {
          "string" : "Serif font"
@@ -810,6 +897,9 @@
       "Something went wrong with the Adobe DRM system" : {
          "string" : "Something went wrong with the Adobe DRM system"
       },
+      "Something went wrong. Try signing out and back in, and try again." : {
+         "string" : "Something went wrong. Try signing out and back in, and try again."
+      },
       "Sort By:" : {
          "string" : "Sort By:"
       },
@@ -818,6 +908,9 @@
       },
       "Submit" : {
          "string" : "Submit"
+      },
+      "Swedish" : {
+         "string" : "Swedish"
       },
       "Sync Bookmarks" : {
          "string" : "Sync Bookmarks"
@@ -839,6 +932,9 @@
       },
       "Testing" : {
          "string" : "Testing"
+      },
+      "Text size" : {
+         "string" : "Text size"
       },
       "Thank You" : {
          "string" : "Thank You"
@@ -1035,6 +1131,9 @@
       "Your bookmarks and reading positions are in the process of being saved to the server. Would you like to stop that and continue logging out?" : {
          "string" : "Your bookmarks and reading positions are in the process of being saved to the server. Would you like to stop that and continue logging out?"
       },
+      "Your dependent should receive the invitation soon.\n\nAdvise them to open the link in the email on their device and create a passkey. This will make logging in easier." : {
+         "string" : "Your dependent should receive the invitation soon.\n\nAdvise them to open the link in the email on their device and create a passkey. This will make logging in easier."
+      },
       "Your report will be reviewed as soon as possible." : {
          "string" : "Your report will be reviewed as soon as possible."
       },
@@ -1190,14 +1289,29 @@
       "1.50×" : {
          "string" : "1.50×"
       },
+      "100%" : {
+         "string" : "100 %"
+      },
+      "125%" : {
+         "string" : "125 %"
+      },
       "13 or Older" : {
          "string" : "13 tai vanhempi"
       },
       "15 Minutes" : {
          "string" : "15 minuuttia"
       },
+      "150%" : {
+         "string" : "150 %"
+      },
+      "175%" : {
+         "string" : "175 %"
+      },
       "2.0×" : {
          "string" : "2.0×"
+      },
+      "200%" : {
+         "string" : "200 %"
       },
       "30 Minutes" : {
          "string" : "30 minuuttia"
@@ -1284,7 +1398,7 @@
          "string" : "Haluatko varmasti poistaa teoksen %@ varauksistasi? Sen jälkeen et enää jonota tätä kirjaa."
       },
       "Are you sure you want to delete \"%@\"?" : {
-         "string" : "Haluatko varmasti poistaa teoksen %@?"
+         "string" : "Haluatko varmasti palauttaa teoksen %@?"
       },
       "Are you sure you want to remove \"%@\" from your reservations? You will no longer be in line for this book." : {
          "string" : "Haluatko varmasti poistaa teoksen %@ varauksistasi? Sen jälkeen et enää jonota tätä kirjaa."
@@ -1323,7 +1437,7 @@
          "string" : "Kirjan kansi"
       },
       "Book format" : {
-         "string" : ""
+         "string" : "Tiedostomuoto"
       },
       "Book format:" : {
          "string" : "Kirjan tiedostomuoto:"
@@ -1344,7 +1458,7 @@
          "string" : "BrightnessSlider"
       },
       "Browse Books" : {
-         "string" : "Selaa kirjoja"
+         "string" : "Selaa"
       },
       "By signing in, you agree the End User License Agreement" : {
          "string" : "Kirjautumalla sisään hyväksyt loppukäyttäjän lisenssisopimuksen"
@@ -1403,6 +1517,9 @@
       "Corrupted Audiobook" : {
          "string" : "Vioittunut äänikirja"
       },
+      "Could not finish request. Check your internet connection and try again." : {
+         "string" : "Pyyntöä ei voitu suorittaa loppuun. Tarkista verkkoyhteytesi ja yritä uudelleen."
+      },
       "Create Card" : {
          "string" : "Luo kortti"
       },
@@ -1419,13 +1536,16 @@
          "string" : "Kirjan oletusfontti"
       },
       "Delete" : {
-         "string" : "Poista"
+         "string" : "Palauta"
       },
       "Delete Server Data" : {
          "string" : "Poista palvelimen tiedot"
       },
       "Deletes %@" : {
          "string" : "Poistaa kohteen %@"
+      },
+      "Dependents" : {
+         "string" : "Huollettavat"
       },
       "Description" : {
          "string" : "Kuvaus"
@@ -1467,7 +1587,7 @@
          "string" : "Kesto"
       },
       "E-Library Sync" : {
-         "string" : ""
+         "string" : "E-kirjasto synkronointi"
       },
       "E-kirjasto requires a one-time location check in order to verify your library service area. Once you choose \"Create Card\", please select \"Allow Once\" in the popup so we can verify this information." : {
          "string" : "E-kirjasto vaatii kertaluonteisen sijainnin tarkistuksen, jotta kirjastopalvelualueesi voidaan vahvistaa. Valitse ensin Luo kortti ja valitse sitten ponnahdusikkunassa Salli kerran, jotta voimme vahvistaa tämän tiedon."
@@ -1476,16 +1596,28 @@
          "string" : "E-kirjasto vaatii kertaluonteisen sijainnin tarkistuksen, jotta kirjastopalvelualueesi voidaan vahvistaa. Olet poistanut sijaintipalvelut käytöstä tämän sovelluksen kohdalla. Ota ne käyttöön valitsemalla alla oleva Avaa asetukset -painike. Jatka sen jälkeen kortin luomista."
       },
       "E-kirjasto test login" : {
-         "string" : ""
+         "string" : "E-kirjaston testikirjautuminen"
+      },
+      "Ekirjasto needs to restart" : {
+         "string" : "Sovellus pitää käynnistää uudelleen."
       },
       "Enable Sync" : {
-         "string" : ""
+         "string" : "Ota synkronointi käyttöön"
+      },
+      "Enable preferences" : {
+         "string" : "Ota sovellusasetukset käyttöön."
       },
       "Enable sync to save your reading position and bookmarks to your other devices.\n\nYou can change this any time in Settings." : {
-         "string" : ""
+         "string" : "Ota synkronointi käyttöön tallentaaksesi kirjanmerkkisi toisille laitteille. Voit muuttaa tätä milloin tahansa asetuksista."
       },
       "End of Chapter" : {
          "string" : "Luvun loppu"
+      },
+      "English" : {
+         "string" : "englanti"
+      },
+      "Enter email: " : {
+         "string" : "Syötä sähköpostiosoite:"
       },
       "Error" : {
          "string" : "Virhe"
@@ -1500,7 +1632,7 @@
          "string" : "Virhe salatun PDF-tiedoston purkamisessa"
       },
       "FAQ" : {
-         "string" : ""
+         "string" : "UKK"
       },
       "Failed to get current location. Please try again." : {
          "string" : "Tämänhetkisen sijainnin hakeminen epäonnistui. Yritä uudelleen."
@@ -1511,8 +1643,17 @@
       "Feedback" : {
          "string" : "Palaute"
       },
+      "Fill in an email where the invitation should be sent. Make sure to type it correctly before sending." : {
+         "string" : "Syötä sähköpostiosoite, johon kutsu lähetetään. Varmista ennen lähettämistä, että olet kirjoittanut sen oikein."
+      },
       "Find Your Library" : {
          "string" : "Etsi kirjastosi"
+      },
+      "Finnish" : {
+         "string" : "suomi"
+      },
+      "Font size" : {
+         "string" : "Fonttikoko"
       },
       "Forgot your password?" : {
          "string" : "Unohditko salasanasi?"
@@ -1535,6 +1676,9 @@
       "Get" : {
          "string" : "Lainaa"
       },
+      "Get Dependents" : {
+         "string" : "Hae huollettavat"
+      },
       "Gets %@" : {
          "string" : "Hakee kohteen %@"
       },
@@ -1545,7 +1689,7 @@
          "string" : "Varaa kohteen %@"
       },
       "ISBN" : {
-         "string" : ""
+         "string" : "ISBN"
       },
       "If another device is available, send the audio over Bluetooth or Airplay. Otherwise do nothing." : {
          "string" : "Jos toinen laite on käytettävissä, lähetä ääni Bluetoothin tai Airplayn kautta. Muussa tapauksessa älä tee mitään."
@@ -1560,10 +1704,13 @@
          "string" : "Jos kirjaudut ulos, kirjasi ja tallennetut kirjanmerkkisi poistetaan."
       },
       "Illustrators" : {
-         "string" : ""
+         "string" : "Kuvittajat"
+      },
+      "Incorrect email" : {
+         "string" : "Sähköpostiosoite ei kelpaa."
       },
       "IncreaseFontSize" : {
-         "string" : "IncreaseFontSize"
+         "string" : "Suurenna fontin kokoa"
       },
       "Information" : {
          "string" : "Tiedot"
@@ -1574,11 +1721,17 @@
       "Invalid Credentials" : {
          "string" : "Virheelliset kirjautumistiedot"
       },
+      "Invite a Dependent" : {
+         "string" : "Kutsu huollettava"
+      },
+      "Invite sent!" : {
+         "string" : "Kutsu lähetetty!"
+      },
       "It looks like you may have a book download or return in progress. Would you like to stop that and continue logging out?" : {
          "string" : "Näyttää siltä, että sinulla saattaa olla kirjan lataus tai palautus käynnissä. Haluatko keskeyttää sen ja jatkaa uloskirjautumista?"
       },
       "It will expire in %@." : {
-         "string" : "Se vanhenee seuraavan ajan kuluttua: %@."
+         "string" : "Sinulla on tämä kirja lainassa %@."
       },
       "Keep" : {
          "string" : "Säilytä"
@@ -1587,7 +1740,10 @@
          "string" : "Kirjaudu palveluun"
       },
       "Language" : {
-         "string" : ""
+         "string" : "Kieli"
+      },
+      "Language preferences" : {
+         "string" : "Kieliasetukset"
       },
       "Less than 1 min remaining" : {
          "string" : "Alle 1 min jäljellä"
@@ -1608,7 +1764,7 @@
          "string" : "Sijainnin palautusvirhe"
       },
       "Login" : {
-         "string" : ""
+         "string" : "Kirjaudu sisään"
       },
       "Login Failed" : {
          "string" : "Sisäänkirjautuminen epäonnistui"
@@ -1629,7 +1785,7 @@
          "string" : "Siirry"
       },
       "My Books" : {
-         "string" : "Omat lainat"
+         "string" : "Lainat"
       },
       "Narrators" : {
          "string" : "Lukijat"
@@ -1643,6 +1799,9 @@
       "No Results Found" : {
          "string" : "Ei hakutuloksia"
       },
+      "No dependents or children found." : {
+         "string" : "Lapsia tai muita huollettavia ei löytynyt."
+      },
       "No email account is set for this device." : {
          "string" : "Tälle laitteelle ei ole määritetty sähköpostitiliä."
       },
@@ -1650,7 +1809,7 @@
          "string" : "Normaali nopeus."
       },
       "Not Now" : {
-         "string" : ""
+         "string" : "Ei nyt"
       },
       "OK" : {
          "string" : "OK"
@@ -1686,7 +1845,7 @@
          "string" : "PIN"
       },
       "PIN code:" : {
-         "string" : ""
+         "string" : "PIN koodi:"
       },
       "Page %d of " : {
          "string" : "Sivu %d/ "
@@ -1729,6 +1888,12 @@
       },
       "Please wait..." : {
          "string" : "Odota..."
+      },
+      "Preferences" : {
+         "string" : "Sovellusasetukset"
+      },
+      "Preferred language saved. It will be available the next time you open the app." : {
+         "string" : "Kieliasetus tallennettu. Asetus astuu voimaan seuraavalla kerralla, kun sovellus käynnistetään."
       },
       "Previous Chapter" : {
          "string" : "Edellinen luku"
@@ -1850,8 +2015,29 @@
       "Select a chapter or track from a list." : {
          "string" : "Valitse luku tai kappale listalta."
       },
+      "Select a dependent" : {
+         "string" : "Valitse huollettava"
+      },
+      "Select font size" : {
+         "string" : "Valitse fonttikoko"
+      },
+      "Select language" : {
+         "string" : "Valitse kieli"
+      },
+      "Select text size" : {
+         "string" : "Valitse tekstin koko"
+      },
+      "Select:" : {
+         "string" : "Valitse:"
+      },
+      "Selected Dependent is: " : {
+         "string" : "Valittu huollettava on: "
+      },
       "Selecting \"Delete\" will remove all bookmarks from the server for %@." : {
          "string" : "Jos valitset Poista, kaikki teoksen %@ kirjanmerkit poistetaan palvelimelta."
+      },
+      "Send invite" : {
+         "string" : "Lähetä kutsu"
       },
       "Serif font" : {
          "string" : "Serif-fontti"
@@ -1895,6 +2081,9 @@
       "Something went wrong with the Adobe DRM system" : {
          "string" : "Jokin meni pieleen Adoben DRM-järjestelmässä"
       },
+      "Something went wrong. Try signing out and back in, and try again." : {
+         "string" : "Jotain meni vikaan. Kirjaudu ulos ja takaisin sisään yrittääksesi uudelleen."
+      },
       "Sort By:" : {
          "string" : "Lajitteluperuste:"
       },
@@ -1903,6 +2092,9 @@
       },
       "Submit" : {
          "string" : "Lähetä"
+      },
+      "Swedish" : {
+         "string" : "ruotsi"
       },
       "Sync Bookmarks" : {
          "string" : "Synkronoi kirjanmerkit"
@@ -1924,6 +2116,9 @@
       },
       "Testing" : {
          "string" : "Testaus"
+      },
+      "Text size" : {
+         "string" : "Tekstin koko"
       },
       "Thank You" : {
          "string" : "Kiitos"
@@ -2004,7 +2199,7 @@
          "string" : "Kappale %@"
       },
       "Translators" : {
-         "string" : ""
+         "string" : "Kääntäjät"
       },
       "Try Again" : {
          "string" : "Yritä uudelleen"
@@ -2046,7 +2241,7 @@
          "string" : "Käyttäjä kielsi sijaintitietojen käytön. Siirry järjestelmän asetuksiin ja ota sijaintitiedot käyttöön Palace-sovelluksessa."
       },
       "Username:" : {
-         "string" : ""
+         "string" : "Käyttäjänimi"
       },
       "Verifying" : {
          "string" : "Vahvistetaan"
@@ -2120,11 +2315,14 @@
       "Your bookmarks and reading positions are in the process of being saved to the server. Would you like to stop that and continue logging out?" : {
          "string" : "Kirjanmerkkejäsi ja lukukohtiasi tallennetaan parhaillaan palvelimelle. Haluatko keskeyttää sen ja jatkaa uloskirjautumista?"
       },
+      "Your dependent should receive the invitation soon.\n\nAdvise them to open the link in the email on their device and create a passkey. This will make logging in easier." : {
+         "string" : "Huollettavan pitäisi saada kutsu pian.\n\nOhjeista häntä avaamaan sähköpostiin tuleva linkki omalla mobiililaitteellaan ja luomaan pääsyavain. Pääsyavain tarvitaan, kun hän kirjautuu E-kirjasto-sovellukseen."
+      },
       "Your report will be reviewed as soon as possible." : {
          "string" : "Ilmoituksesi tarkistetaan mahdollisimman pian."
       },
       "accessibilityShowAndReloadCatalogTab" : {
-         "string" : "accessibilityShowAndReloadCatalogTab"
+         "string" : "Näytä ja lataa uudelleen Selaa kirjoja välilehti"
       },
       "currently" : {
          "string" : "tällä hetkellä"
@@ -2275,14 +2473,29 @@
       "1.50×" : {
          "string" : "1.50×"
       },
+      "100%" : {
+         "string" : ""
+      },
+      "125%" : {
+         "string" : ""
+      },
       "13 or Older" : {
          "string" : "13 eller äldre"
       },
       "15 Minutes" : {
          "string" : "15 minuter"
       },
+      "150%" : {
+         "string" : ""
+      },
+      "175%" : {
+         "string" : ""
+      },
       "2.0×" : {
          "string" : "2,0×"
+      },
+      "200%" : {
+         "string" : ""
       },
       "30 Minutes" : {
          "string" : "30 minuter"
@@ -2354,7 +2567,7 @@
          "string" : "Ett fel uppstod vid parsning av serversvaret."
       },
       "An error was encountered while trying to open this book." : {
-         "string" : "Det uppstod ett fel med att öppna boken."
+         "string" : "Det uppstod ett fel då boken skulle öppnas."
       },
       "An unknown error occurred while trying to sign out." : {
          "string" : "Ett okänt fel uppstod vid utloggning."
@@ -2408,7 +2621,7 @@
          "string" : "Bokomslag"
       },
       "Book format" : {
-         "string" : ""
+         "string" : "Bokformat"
       },
       "Book format:" : {
          "string" : "Bokformat:"
@@ -2488,6 +2701,9 @@
       "Corrupted Audiobook" : {
          "string" : "Skadad ljudbok"
       },
+      "Could not finish request. Check your internet connection and try again." : {
+         "string" : ""
+      },
       "Create Card" : {
          "string" : "Skapa kort"
       },
@@ -2511,6 +2727,9 @@
       },
       "Deletes %@" : {
          "string" : "Raderar %@"
+      },
+      "Dependents" : {
+         "string" : ""
       },
       "Description" : {
          "string" : "Beskrivning"
@@ -2558,12 +2777,18 @@
          "string" : "E-biblioteket behöver kontrollera din position en gång för att verifiera ditt område för bibliotekstjänster. Efter att du valt \"Skapa kort\" välj \"Tillåt en gång\" i popup-fönstret så att vi kan verifiera denna information."
       },
       "E-kirjasto requires a one-time location check in order to verify your library service area. You have disabled location services for this app. To enable, please select the 'Open Settings' button below then continue with card creation." : {
-         "string" : "E-biblioteket behöver kontrollera din position en gång för att verifiera ditt område för bibliotekstjänster. Du har inaktiverat positionstjänsten för denna app. För att aktivera den peka på knappen Öppna inställningar nedan för att fortsätta skapa kort."
+         "string" : "E-biblioteket behöver kontrollera din position en gång för att verifiera ditt område för bibliotekstjänster. Du har inaktiverat positionstjänsten för denna app. För att aktivera den välj knappen Öppna inställningar nedan för att fortsätta skapa kort."
       },
       "E-kirjasto test login" : {
          "string" : ""
       },
+      "Ekirjasto needs to restart" : {
+         "string" : ""
+      },
       "Enable Sync" : {
+         "string" : ""
+      },
+      "Enable preferences" : {
          "string" : ""
       },
       "Enable sync to save your reading position and bookmarks to your other devices.\n\nYou can change this any time in Settings." : {
@@ -2572,6 +2797,12 @@
       "End of Chapter" : {
          "string" : "Kapitel slut"
       },
+      "English" : {
+         "string" : ""
+      },
+      "Enter email: " : {
+         "string" : ""
+      },
       "Error" : {
          "string" : "Fel"
       },
@@ -2579,7 +2810,7 @@
          "string" : "Fel vid ändring av synkroniseringsinställningar"
       },
       "Error Loading Library" : {
-         "string" : "Fel när biblioteket skulle laddas"
+         "string" : "Fel när biblioteket skulle laddas ner"
       },
       "Error extracting encrypted PDF file" : {
          "string" : "Fel vid extrahering av krypterad PDF-fil"
@@ -2596,8 +2827,17 @@
       "Feedback" : {
          "string" : "Respons"
       },
+      "Fill in an email where the invitation should be sent. Make sure to type it correctly before sending." : {
+         "string" : ""
+      },
       "Find Your Library" : {
          "string" : "Hitta ditt bibliotek"
+      },
+      "Finnish" : {
+         "string" : ""
+      },
+      "Font size" : {
+         "string" : ""
       },
       "Forgot your password?" : {
          "string" : "Glömt ditt lösenord?"
@@ -2620,6 +2860,9 @@
       "Get" : {
          "string" : "Hämta"
       },
+      "Get Dependents" : {
+         "string" : ""
+      },
       "Gets %@" : {
          "string" : "Hämtar %@"
       },
@@ -2639,12 +2882,15 @@
          "string" : "Om du är under 13 år kommer allt innehåll som laddats ner i Mina böcker att raderas."
       },
       "If you sign out without enabling Sync, your books and any saved bookmarks will be removed." : {
-         "string" : "Om du loggar ut att synkronisera kommer dina böcker och sparade bokmärken att raderas."
+         "string" : "Om du loggar ut utan att synkronisera kommer dina böcker och sparade bokmärken att raderas."
       },
       "If you sign out, your books and any saved bookmarks will be removed." : {
          "string" : "Om du loggar ut kommer dina böcker och sparade bokmärken att raderas."
       },
       "Illustrators" : {
+         "string" : ""
+      },
+      "Incorrect email" : {
          "string" : ""
       },
       "IncreaseFontSize" : {
@@ -2659,6 +2905,12 @@
       "Invalid Credentials" : {
          "string" : "Ogiltiga identifieringsuppgifter"
       },
+      "Invite a Dependent" : {
+         "string" : ""
+      },
+      "Invite sent!" : {
+         "string" : ""
+      },
       "It looks like you may have a book download or return in progress. Would you like to stop that and continue logging out?" : {
          "string" : "Det verkar som om du håller på att ladda ner eller lämna tillbaka en bok. Vill du stoppa denna process och fortsätta logga ut? "
       },
@@ -2672,6 +2924,9 @@
          "string" : "Logga in i tjänsten"
       },
       "Language" : {
+         "string" : "språk"
+      },
+      "Language preferences" : {
          "string" : ""
       },
       "Less than 1 min remaining" : {
@@ -2727,6 +2982,9 @@
       },
       "No Results Found" : {
          "string" : "Inga resultat hittades"
+      },
+      "No dependents or children found." : {
+         "string" : ""
       },
       "No email account is set for this device." : {
          "string" : "Inget e-postkonto har angetts för denna enhet."
@@ -2814,6 +3072,12 @@
       },
       "Please wait..." : {
          "string" : "Vänligen vänta..."
+      },
+      "Preferences" : {
+         "string" : ""
+      },
+      "Preferred language saved. It will be available the next time you open the app." : {
+         "string" : ""
       },
       "Previous Chapter" : {
          "string" : "Föregående kapitel"
@@ -2918,7 +3182,7 @@
          "string" : "Lägg till bokmärke för nuvarande position för att lyssna senare."
       },
       "Save your reading position and bookmarks to all your other devices." : {
-         "string" : "Spara din läsposition och bokmärken till alla dina andra enheter."
+         "string" : "Spara din läsposition och bokmärken för alla dina andra enheter."
       },
       "Search" : {
          "string" : "Sök"
@@ -2935,8 +3199,29 @@
       "Select a chapter or track from a list." : {
          "string" : "Välj ett kapitel eller spår från en lista."
       },
+      "Select a dependent" : {
+         "string" : ""
+      },
+      "Select font size" : {
+         "string" : ""
+      },
+      "Select language" : {
+         "string" : ""
+      },
+      "Select text size" : {
+         "string" : ""
+      },
+      "Select:" : {
+         "string" : ""
+      },
+      "Selected Dependent is: " : {
+         "string" : ""
+      },
       "Selecting \"Delete\" will remove all bookmarks from the server for %@." : {
          "string" : "Genom att välja \"Radera\" raderas alla bokmärken för %@ från servern."
+      },
+      "Send invite" : {
+         "string" : ""
       },
       "Serif font" : {
          "string" : "Serif-typsnitt"
@@ -2980,6 +3265,9 @@
       "Something went wrong with the Adobe DRM system" : {
          "string" : "Något gick fel med Adobe DRM-systemet"
       },
+      "Something went wrong. Try signing out and back in, and try again." : {
+         "string" : ""
+      },
       "Sort By:" : {
          "string" : "Sortera efter:"
       },
@@ -2988,6 +3276,9 @@
       },
       "Submit" : {
          "string" : "Skicka"
+      },
+      "Swedish" : {
+         "string" : ""
       },
       "Sync Bookmarks" : {
          "string" : "Synkronisera bokmärken"
@@ -3010,17 +3301,20 @@
       "Testing" : {
          "string" : "Testar"
       },
+      "Text size" : {
+         "string" : ""
+      },
       "Thank You" : {
          "string" : "Tack"
       },
       "The DRM Library is taking longer than expected. Please wait and try again later.\n\nIf the problem persists, try to sign out and back in again from the Library Settings menu." : {
-         "string" : "DRM-biblioteket tar längre tid än väntat. Vänligen vänta och försök på nytt senare.\n\nOm problemet fortsätter försök logga ut och tillbaka in via menyn för bibliteksinställningar."
+         "string" : "DRM-biblioteket tar längre tid än väntat. Vänligen vänta och försök på nytt senare.\n\nOm problemet fortsätter försök logga ut och sedan in igen via menyn för biblioteksinställningar."
       },
       "The Palace App requires a one-time location check in order to verify your library service area. Once you choose \"Create Card\", please select \"Allow Once\" in the popup so we can verify this information." : {
-         "string" : "Palace-appen behöver kontrollera din position en gång för att verifiera ditt område för bibliotekstjänster. Efter att du valt \"Skapa kort\" välj \"Tillåt en gång\" i popup-fönstret så att vi kan verifiera denna information."
+         "string" : "E-biblioteksappen behöver kontrollera din position en gång för att verifiera ditt område för bibliotekstjänster. Efter att du valt \"Skapa kort\" välj \"Tillåt en gång\" i popup-fönstret så att vi kan verifiera denna information."
       },
       "The Palace App requires a one-time location check in order to verify your library service area. You have disabled location services for this app. To enable, please select the 'Open Settings' button below then continue with card creation." : {
-         "string" : "Palace-appen behöver kontrollera din position en gång för att verifiera ditt område för bibliotekstjänster. Du har inaktiverat positionstjänsten för denna app. För att aktivera den peka på knappen Öppna inställningar nedan för att fortsätta skapa kort."
+         "string" : "E-biblioteksappen behöver kontrollera din position en gång för att verifiera ditt område för bibliotekstjänster. Du har inaktiverat positionstjänsten för denna app. För att aktivera den välj knappen Öppna inställningar nedan för att fortsätta skapa kort."
       },
       "The audiobook you are trying to open appears to be corrupted. Try downloading it again." : {
          "string" : "Ljudboken som du försöker öppna verkar vara skadad. Försöka ladda ner den på nytt."
@@ -3041,7 +3335,7 @@
          "string" : "Nedladdningen kunde inte slutföras."
       },
       "The download could not be completed.\nScroll down to 'View Issues' to see details." : {
-         "string" : "Nedladdningen kunde inte slutföras.\nScrolla ner till Visa problem för mer information."
+         "string" : "Nedladdningen kunde inte slutföras.\nRulla ner till Visa problem för mer information."
       },
       "The download for %@ could not be completed." : {
          "string" : "Nedladdningen av %@ kunde inte slutföras."
@@ -3065,7 +3359,7 @@
          "string" : "Det finns inga bokmärken för denna bok."
       },
       "There are no results" : {
-         "string" : "Inga resutlat"
+         "string" : "Inga resultat"
       },
       "There was a problem contacting the server.\nPlease make sure you are connected to the internet, or try again later." : {
          "string" : "Det uppstod ett fel när servern anropades.\nKontrollera att du är uppkopplad till internet eller försök på nytt senare."
@@ -3089,7 +3383,7 @@
          "string" : "Spår %@"
       },
       "Translators" : {
-         "string" : ""
+         "string" : "Översättare"
       },
       "Try Again" : {
          "string" : "Försök på nytt"
@@ -3128,7 +3422,7 @@
          "string" : "Positionsåtkomst nekad av användaren. Gå till systeminställningarna för att ge E-biblioteket positionsåtkomst."
       },
       "User denied location access. Go to system settings to enable location access for the Palace App." : {
-         "string" : "Positionsåtkomst nekad av användaren. Gå till systeminställningarna för att ge Palace-appen positionsåtkomst."
+         "string" : "Positionsåtkomst nekad av användaren. Gå till systeminställningarna för att ge E-biblioteksappen positionsåtkomst."
       },
       "Username:" : {
          "string" : ""
@@ -3205,6 +3499,9 @@
       "Your bookmarks and reading positions are in the process of being saved to the server. Would you like to stop that and continue logging out?" : {
          "string" : "Dina bokmärken och läspositioner håller på att sparas på servern. Vill du stoppa processen och fortsätta med att logga ut?"
       },
+      "Your dependent should receive the invitation soon.\n\nAdvise them to open the link in the email on their device and create a passkey. This will make logging in easier." : {
+         "string" : ""
+      },
       "Your report will be reviewed as soon as possible." : {
          "string" : "Din rapport kommer att behandlas så snart som möjligt."
       },
@@ -3221,7 +3518,7 @@
          "string" : "{???, plural, one {1 d} other {%d d}}"
       },
       "eCard" : {
-         "string" : "eCard"
+         "string" : "e-kort"
       },
       "ePub" : {
          "string" : "ePub"
