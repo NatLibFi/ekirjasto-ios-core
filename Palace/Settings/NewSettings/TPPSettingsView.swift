@@ -221,6 +221,7 @@ struct TPPSettingsView: View {
          DependentsView()){
            Text(DisplayStrings.dependentsButton)
          }
+         .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
    }
   }
   
