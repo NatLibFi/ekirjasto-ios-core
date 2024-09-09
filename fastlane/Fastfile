@@ -79,6 +79,7 @@ platform :ios do
       project: "Palace.xcodeproj",
       scheme: "Ekirjasto",
       configuration: "Debug-#{configuration}",
+      include_symbols: true,
       skip_package_ipa: true,
       skip_archive: true,
       skip_codesigning: true,
