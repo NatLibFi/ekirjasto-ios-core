@@ -85,12 +85,9 @@ struct DependentsView: View {
             Text(tsx.dependents)
               .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
             Spacer()
-              .aspectRatio(contentMode: .fit)
-              .frame(width: 200)
           }
         }
         
-        Section {
           VStack {
             // This is where it starts, the user taps the button to get their children/dependents
             Button{
@@ -110,7 +107,6 @@ struct DependentsView: View {
               ProgressView()
             }
             
-            Section {
               VStack {
                 // Once the request to Loikka has been made, this section becomes visible
                 if showPicker {
@@ -139,9 +135,7 @@ struct DependentsView: View {
                 Alert(title: Text(tsxgeneric.error), message: Text(alertMessage), dismissButton: .default(Text(tsxgeneric.ok)))
               }
               .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
-            }
           }
-        }
         
         // If the user has selected a dependent, we show them an email text field
         if id != "" {
@@ -154,13 +148,13 @@ struct DependentsView: View {
             TextField(tsx.enterEmail, text: $inputEmail)
               .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
               .padding()
-              .border(Color(uiColor: .lightGray), width: 1)
-              .cornerRadius(3)
+              .textFieldStyle(RoundedBorderTextFieldStyle())
               .disableAutocorrection(true)
               .autocapitalization(.none)
               .keyboardType(.emailAddress)
             Spacer()
-            
+          }
+          VStack {
             // Tapping this button will send out the invite
             Button {
               sendInviteToDependent(dependentId: id)
@@ -173,6 +167,8 @@ struct DependentsView: View {
                   .foregroundColor(Color(uiColor: .lightGray))
               }
               .padding(10)
+              .frame(maxWidth: .infinity, alignment: .center)
+
             }
             
           }
