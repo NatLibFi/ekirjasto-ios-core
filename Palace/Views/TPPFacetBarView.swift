@@ -73,7 +73,6 @@ import Foundation
   @available(*, unavailable)
   private override init(frame: CGRect) {
     super.init(frame: frame)
-    NotificationCenter.default.addObserver(self, selector: #selector(updateLogo), name: NSNotification.TPPCurrentAccountDidChange, object: nil)
   }
   
   @available(*, unavailable)
@@ -86,7 +85,6 @@ import Foundation
     super.init(frame: CGRect(x: origin.x, y: origin.y, width: width, height: borderHeight + toolbarHeight + 52.0))
     
     setupViews()
-    NotificationCenter.default.addObserver(self, selector: #selector(updateLogo), name: NSNotification.TPPCurrentAccountDidChange, object: nil)
   }
   
   deinit {
@@ -107,7 +105,6 @@ import Foundation
     addSubview(entryPointView)
 
     setupConstraints()
-    updateLogo()
   }
   
   private func setupConstraints() {
@@ -120,10 +117,6 @@ import Foundation
     logoView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 10.0)
     logoView.autoAlignAxis(.vertical, toSameAxisOf: self, withOffset: -15)
     logoView.autoConstrainAttribute(.width, to: .width, of: self, withMultiplier: 0.8, relation: .lessThanOrEqual)
-  }
-
-  @objc func updateLogo() {
-    imageView.image = UIImage(named: "LaunchImageLogo")
   }
   
   @objc func removeLogo() {
