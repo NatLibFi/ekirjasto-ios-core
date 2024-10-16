@@ -109,7 +109,6 @@ static const CGFloat kCollectionViewCrossfadeDuration = 0.3;
   self.facetBarView.facetView.delegate = self;
   self.facetBarView.facetView.dataSource = self.facetViewDataSource;
   
-  [self.facetBarView removeLogo]; //Added by Ellibs
   [self.view addSubview:self.facetBarView];
   [self.facetBarView autoPinEdgeToSuperviewEdge:ALEdgeLeading];
   [self.facetBarView autoPinEdgeToSuperviewEdge:ALEdgeTrailing];

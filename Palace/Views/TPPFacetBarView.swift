@@ -119,12 +119,6 @@ import Foundation
     logoView.autoConstrainAttribute(.width, to: .width, of: self, withMultiplier: 0.8, relation: .lessThanOrEqual)
   }
   
-  @objc func removeLogo() {
-    self.logoView.removeFromSuperview()
-    facetView.autoPinEdge(.top, to: .bottom, of: facetView, withOffset: 10.0)   //Added by Ellibs
-    facetView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 10.0)          
-  }
-  
   @objc private func showAccountPage() {
     guard let homePageUrl = AccountsManager.shared.currentAccount?.homePageUrl, let url = URL(string: homePageUrl) else { return }
     let webController = BundledHTMLViewController(fileURL: url, title: AccountsManager.shared.currentAccount?.name.capitalized ?? "")
