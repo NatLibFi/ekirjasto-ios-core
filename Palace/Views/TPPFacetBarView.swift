@@ -49,18 +49,7 @@ import Foundation
         
     container.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0))
     imageHolder.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 10.0, left: 0.0, bottom: 0.0, right: 0.0), excludingEdge: .trailing)
-    
-    //let titleContainer = UIView()
-    //titleContainer.addSubview(titleLabel)
-    //titleLabel.autoPinEdgesToSuperviewEdges()
-    
-    //container.addSubview(titleContainer)
-    //titleContainer.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0), excludingEdge: .leading)
-    //titleContainer.autoPinEdge(.leading, to: .trailing, of: imageView, withOffset: 10.0)
-    
-    //logoView.addSubview(accountSiteButton)
-    //accountSiteButton.autoPinEdgesToSuperviewEdges()
-    //accountSiteButton.addTarget(self, action: #selector(showAccountPage), for: .touchUpInside)
+
     return logoView
   }()
   
@@ -106,7 +95,6 @@ import Foundation
 
   override func draw(_ rect: CGRect) {
     super.draw(rect)
-    //logoView.layer.cornerRadius = logoView.frame.height/2
   }
 
   private func setupViews() {
@@ -136,7 +124,6 @@ import Foundation
 
   @objc func updateLogo() {
     imageView.image = UIImage(named: "LaunchImageLogo")
-    //titleLabel.text = AccountsManager.shared.currentAccount?.name
   }
   
   @objc func removeLogo() {
