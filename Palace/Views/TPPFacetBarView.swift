@@ -32,27 +32,6 @@ import Foundation
     return view
   }()
   
-  private lazy var logoView: UIView = {
-    let logoView = UIView()
-    logoView.backgroundColor = TPPConfiguration.readerBackgroundColor()
-    
-    let imageHolder = UIView()
-    imageHolder.autoSetDimension(.height, toSize: 40.0)
-    imageHolder.autoSetDimension(.width, toSize: 40.0)
-    imageHolder.addSubview(imageView)
-    
-    imageView.autoPinEdgesToSuperviewEdges()
-    
-    let container = UIView()
-    logoView.addSubview(container)
-    container.addSubview(imageHolder)
-        
-    container.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0))
-    imageHolder.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 10.0, left: 0.0, bottom: 0.0, right: 0.0), excludingEdge: .trailing)
-
-    return logoView
-  }()
-  
   private lazy var titleLabel: UILabel = {
     let label = UILabel()
     label.lineBreakMode = .byWordWrapping
@@ -62,12 +41,6 @@ import Foundation
     label.textColor = .gray
     label.font = UIFont.boldSystemFont(ofSize: 18.0)
     return label
-  }()
-  
-  private lazy var imageView: UIImageView = {
-    let view = UIImageView(image: UIImage(named: "LaunchImageLogo"))
-    view.contentMode = .scaleAspectFill
-    return view
   }()
   
   @available(*, unavailable)
@@ -101,7 +74,6 @@ import Foundation
     facetView.isHidden = true;
 
     addSubview(facetView)
-    addSubview(logoView)
     addSubview(entryPointView)
 
     setupConstraints()
@@ -113,10 +85,6 @@ import Foundation
     facetView.autoPinEdge(toSuperviewEdge: .trailing)
     
     entryPointView.autoPinEdge(.bottom, to: .top, of: facetView)
-    logoView.autoPinEdge(.top, to: .bottom, of: facetView, withOffset: 10.0)
-    logoView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 10.0)
-    logoView.autoAlignAxis(.vertical, toSameAxisOf: self, withOffset: -15)
-    logoView.autoConstrainAttribute(.width, to: .width, of: self, withMultiplier: 0.8, relation: .lessThanOrEqual)
   }
   
   @objc private func showAccountPage() {
