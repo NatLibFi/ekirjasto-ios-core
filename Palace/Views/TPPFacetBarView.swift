@@ -81,8 +81,11 @@ import Foundation
   
   private func setupConstraints() {
     entryPointView.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.zero, excludingEdge: .bottom)
+    
     facetView.autoPinEdge(toSuperviewEdge: .leading)
     facetView.autoPinEdge(toSuperviewEdge: .trailing)
+    facetView.autoPinEdge(.top, to: .bottom, of: facetView, withOffset: 10.0)
+    facetView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 10.0)
     
     entryPointView.autoPinEdge(.bottom, to: .top, of: facetView)
   }
