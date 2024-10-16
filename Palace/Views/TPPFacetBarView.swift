@@ -32,17 +32,6 @@ import Foundation
     return view
   }()
   
-  private lazy var titleLabel: UILabel = {
-    let label = UILabel()
-    label.lineBreakMode = .byWordWrapping
-    label.numberOfLines = 0
-    label.textAlignment = .center
-    label.text = AccountsManager.shared.currentAccount?.name
-    label.textColor = .gray
-    label.font = UIFont.boldSystemFont(ofSize: 18.0)
-    return label
-  }()
-  
   @available(*, unavailable)
   private override init(frame: CGRect) {
     super.init(frame: frame)
