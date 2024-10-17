@@ -1,10 +1,33 @@
+//
+//  TTPFacetBarView.swift
+//
+//  Last edited by E-KIRJASTO October 2024
+//
+
 import Foundation
 
 @objc protocol TPPFacetBarViewDelegate {
   func present(_ viewController: UIViewController)
 }
 
+/*
+ TPPFacetBarView is a UIView that has two subviews:
+  - facetView
+  - entryPointView
+
+ In original Palace project the current library account's logo and name were displayed in a third subview called logoView
+  - E-kirjasto app does not display the logo or name separately in app's basic views (Browse books, My books, Reservations) and the logoView subview was removed from TPPFacetBarView.
+  - Also the functionality to show library details (the account page) when user taps said library logo or name, was removed from E-kirjasto app.
+ */
 @objcMembers class TPPFacetBarView: UIView {
+  
+  /*
+   entryPointView
+    - class TPPEntryPointView
+    - is visible
+    - contains the segmented buttons for filtering the books catalogue in app's Browse books view
+    - see more details of this view in file TPPEntryPointView.swift
+   */
   var entryPointView: TPPEntryPointView = .init()
   
   private let borderHeight = 1.0 / UIScreen.main.scale
@@ -12,6 +35,13 @@ import Foundation
   
   weak var delegate: TPPFacetBarViewDelegate?
   
+  /*
+  facetView
+   - class TPPFacetView
+   - hidden view
+   - the bottom line of the facetView marks the point where the catalogue's book lane title "freezes" for a while, until it's replaced with another lane title
+   - in other words, the facetView prevents the catalogue book lanes from visually sliding under the catalogue filter buttons when user scrolls the catalogue view up or down
+   */
   lazy var facetView: TPPFacetView = {
     let view = TPPFacetView()
     
