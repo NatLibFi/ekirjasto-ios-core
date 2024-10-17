@@ -7,7 +7,6 @@ import Foundation
 @objcMembers class TPPFacetBarView : UIView {
   var entryPointView: TPPEntryPointView = TPPEntryPointView()
  
-  private let accountSiteButton = UIButton()
   private let borderHeight = 1.0 / UIScreen.main.scale;
   private let toolbarHeight = CGFloat(40.0);
 
@@ -79,10 +78,4 @@ import Foundation
     entryPointView.autoPinEdge(.bottom, to: .top, of: facetView)
   }
   
-  @objc private func showAccountPage() {
-    guard let homePageUrl = AccountsManager.shared.currentAccount?.homePageUrl, let url = URL(string: homePageUrl) else { return }
-    let webController = BundledHTMLViewController(fileURL: url, title: AccountsManager.shared.currentAccount?.name.capitalized ?? "")
-    webController.hidesBottomBarWhenPushed = true
-    delegate?.present(webController)
-  }
 }
