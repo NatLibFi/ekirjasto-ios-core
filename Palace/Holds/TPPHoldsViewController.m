@@ -113,7 +113,6 @@
 
   self.facetBarView = [[TPPFacetBarView alloc] initWithOrigin:CGPointZero width:self.view.bounds.size.width];
   self.facetBarView.delegate = self;
-  [self.facetBarView removeLogo]; //Added by Ellibs
   
   [self.view addSubview:self.facetBarView];
   
