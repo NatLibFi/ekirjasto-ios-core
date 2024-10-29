@@ -54,13 +54,6 @@ struct PreferencesView: View {
         .font(.system(size: CGFloat(setFontSize)))
         .accessibilityLabel(tsx.selectEnable)
         
-        /*
-        //construct alert message
-        .alert(isPresented: $showAlert) {
-          Alert(title: Text(tsx.restartTitle), message: Text(tsx.restartText), dismissButton: .default(Text("OK")))
-                }
-         */
-        
         //before view appears, get saved values
         .onAppear {
           toggleState = enablepreferences
@@ -79,47 +72,6 @@ struct PreferencesView: View {
           
         }
 
-//          VStack{
-//            //Picker for language
-//            Picker(tsx.langButton, selection: $selectLang) {
-//              ForEach(language, id: \.self) {
-//                Text($0)
-//                  .font(.system(size: setFontSize))
-//              }
-//            }
-//            .font(.system(size: CGFloat(setFontSize)))
-//            .pickerStyle(.inline)
-//            .onChange(of: selectLang) { newValue in
-//              
-//              UserDefaults.standard.set(selectLang, forKey: "langPreference")
-//              
-//              //save lang preference when value changes
-//              switch selectLang {
-//              case tsx.fi:
-//                UserDefaults.standard.set(["fi"], forKey: "AppleLanguages")
-//                print("selected: ", selectLang)
-//                //Bundle.main.load()
-//              case tsx.sv:
-//                UserDefaults.standard.set(["sv"], forKey: "AppleLanguages")
-//                print("selected: ", selectLang)
-//              case tsx.en:
-//                UserDefaults.standard.set(["en"], forKey: "AppleLanguages")
-//                
-//                print("selected: ", selectLang)
-//              default:
-//                print("Language set to default")
-//                print("selected: ", selectLang)
-//                UserDefaults.standard.set(["fi"], forKey: "AppleLanguages")
-//              }
-//              //just to make sure value is saved
-//              UserDefaults.standard.synchronize()
-//              print(newValue)
-//              
-//            }
-//            .font(.system(size: CGFloat(setFontSize)))
-//            .accessibilityLabel(tsx.selectL)
-//          }
-//          .disabled(toggleState == false)
       }
 
     }
