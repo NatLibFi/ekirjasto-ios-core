@@ -11,10 +11,7 @@ import Combine
 
 struct PreferencesView: View {
   typealias tsx = Strings.Preferences
-  var language = [tsx.en, tsx.fi, tsx.sv]
   var fontSizeList = [tsx.hundred, tsx.oneTwentyFive, tsx.oneFifty, tsx.oneSeventyFive, tsx.twoHundred]
-  @State private var selectLang = "English"
-  @State private var langPreference = "fi"
   @State private var toggleState = false
   @State private var setFontSize: Double = 18.0
   @State private var showAlert = false
@@ -58,18 +55,10 @@ struct PreferencesView: View {
         .onAppear {
           toggleState = enablepreferences
           
-          if let savedLangPreference = UserDefaults.standard.string(forKey: "langPreference") {
-                  selectLang = savedLangPreference
-              } else {
-                  selectLang = "Finnish"
-              }
-          
           print("toggle state: \(toggleState)")
           print("setFontSize: \(setFontSize)")
           print("multiplier: \(fontMultiplier)")
           print("percent: \(selectPercent)")
-          print(selectLang)
-          
         }
 
       }
