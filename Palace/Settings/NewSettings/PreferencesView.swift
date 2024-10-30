@@ -60,10 +60,27 @@ struct PreferencesView: View {
           print("multiplier: \(fontMultiplier)")
           print("percent: \(selectPercent)")
         }
-
+        
       }
-
+      
+      Section {
+        Button {
+          UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+        } label: {
+          HStack {
+            Text(tsx.langButton)
+              .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
+            Spacer()
+            Image("ArrowRight")
+              .padding(.leading, 10)
+              .foregroundColor(Color(uiColor: .lightGray))
+          }
+        }
+      }
+      .accessibilityLabel(tsx.selectL)
+      .disabled(toggleState == false)
     }
+    
     Text(tsx.fontSizeButton)
       .font(.system(size: CGFloat(setFontSize)))
         .padding(.leading, 30)
