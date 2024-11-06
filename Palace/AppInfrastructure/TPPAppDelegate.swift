@@ -82,7 +82,8 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
     UITabBar.appearance().standardAppearance = appearance
     UITabBar.appearance().tintColor = TPPConfiguration.compatiblePrimaryColor() //Edited by Ebblis
     UITabBar.appearance().backgroundColor = TPPConfiguration.backgroundColor()
-    UITabBarItem.appearance().setTitleTextAttributes([.font: UIFont.palaceFont(ofSize: 12)], for: .normal)
+    
+    adjustTabBarItemTitles()
     
     UINavigationBar.appearance().tintColor = TPPConfiguration.iconColor()
     UINavigationBar.appearance().standardAppearance = TPPConfiguration.defaultAppearance()
@@ -185,4 +186,29 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
     }
   }
   
+  /**
+   Adjusts the titles of the tab bar items in UITabBarController based on their calculated sizes.
+   
+   If the calculated height of the title exceeds a defined threshold, the title is removed to prevent overlap,
+   especially on smaller screens. Otherwise, the function sets the title's font size to the scaled size.
+   */
+  func adjustTabBarItemTitles() {
+    if let tabBarController = window?.rootViewController as? UITabBarController {
+      let fontSize: CGFloat = 12
+      let thresholdFontSize: CGFloat = 18 // In smaller screens like SE, anything >18 starts to overlap
+      let font = UIFont.palaceFont(ofSize: fontSize)
+      
+      for item in tabBarController.tabBar.items ?? [] {
+        if let title = item.title {
+          // Remove title text when the threshold is exceeded
+          if font.pointSize >= thresholdFontSize {
+            item.title = ""
+          } else {
+            // Set the title size according to the scaled size
+            item.setTitleTextAttributes([.font: UIFont.palaceFont(ofSize: fontSize)], for: .normal)
+          }
+        }
+      }
+    }
+  }
 }
