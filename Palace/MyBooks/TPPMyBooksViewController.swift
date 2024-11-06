@@ -15,7 +15,7 @@ class TPPMyBooksViewController: NSObject {
     controller.title = Strings.MyBooksView.navTitle
     controller.tabBarItem.image = UIImage(named: "MyBooks")
     controller.tabBarItem.selectedImage = UIImage(named: "MyBooksSelected")
-    controller.tabBarItem.imageInsets = UIEdgeInsets(top: 8.0, left: 0.0, bottom: -8.0, right: 0.0);
+    controller.tabBarItem.imageInsets = UIEdgeInsets(top: 4.0, left: 0.0, bottom: -4.0, right: 0.0);
     controller.navigationItem.backButtonTitle = NSLocalizedString("Back", comment: "Back button")
     controller.navigationItem.titleView?.tintColor = UIColor(named: "ColorEkirjastoBlack")
     return UINavigationController(rootViewController: controller)
