@@ -143,7 +143,7 @@ func versionCode() -> String {
  but no obvious method for doing so was found.
  - Returns: feedback URL with parameters as a String
  */
-func feedbackURL() -> String {
+func feedbackURL(appLanguage: String!) -> String {
   var components = URLComponents()
   components.scheme = "https"
   components.host = "lib.e-kirjasto.fi"
@@ -151,7 +151,7 @@ func feedbackURL() -> String {
 
   // Set the query parameters here because we want them in the final URL
   components.queryItems = [
-    URLQueryItem(name: "lang", value: "fi"),
+    URLQueryItem(name: "lang", value: appLanguage),
     URLQueryItem(name: "version_name", value: versionName()),
     URLQueryItem(name: "version_code", value: versionCode()),
     URLQueryItem(name: "device_manufacturer", value: "Apple"),
@@ -171,14 +171,24 @@ func feedbackURL() -> String {
   @objc class func sharedSettings() -> TPPSettings {
     return TPPSettings.shared
   }
+  
+  // The language the user has chosen for the application (not device language)
+  //    - returns the short alphabetical language code as a string
+  //    - current possible E-kirjasto app language codes: fi, sv, en
+  static let appLanguage = Locale.current.languageCode
+  
+  // The URL origin shared with remote NatLibFi HTML pages accessed through application
+  //    - the application language code is part of the URL string ('fi' is set as default)
+  //    - with the application language code the user is directed to the corresponding language version of the web page
+  //    - example URL origin: 'https://www.kansalliskirjasto.fi/sv/e-kirjasto'
+  static let ekirjastoURLOrigin = "https://www.kansalliskirjasto.fi/\(appLanguage ?? "fi")/e-kirjasto"
 
   static let TPPAboutPalaceURLString = "http://thepalaceproject.org/"
-  static let TPPUserAgreementURLString = "https://www.kansalliskirjasto.fi/fi/e-kirjasto/e-kirjaston-kayttoehdot"
-  static let TPPPrivacyPolicyURLString = "https://www.kansalliskirjasto.fi/fi/e-kirjasto/e-kirjaston-tietosuoja-ja-rekisteriseloste"
-  // TODO: set the feedback url language parameter
-  static let TPPFeedbackURLString = feedbackURL()
-  static let TPPAccessibilityURLString = "https://www.kansalliskirjasto.fi/fi/e-kirjasto/e-kirjaston-saavutettavuusseloste"
-  static let TPPFAQURLString = "https://www.kansalliskirjasto.fi/fi/e-kirjasto/e-kirjaston-usein-kysytyt-kysymykset"
+  static let TPPUserAgreementURLString = "\(ekirjastoURLOrigin)/e-kirjaston-kayttoehdot"
+  static let TPPPrivacyPolicyURLString = "\(ekirjastoURLOrigin)/e-kirjaston-tietosuoja-ja-rekisteriseloste"
+  static let TPPFeedbackURLString = feedbackURL(appLanguage: appLanguage)
+  static let TPPAccessibilityURLString = "\(ekirjastoURLOrigin)/e-kirjaston-saavutettavuusseloste"
+  static let TPPFAQURLString = "\(ekirjastoURLOrigin)/e-kirjaston-usein-kysytyt-kysymykset"
 
   static private let customMainFeedURLKey = "NYPLSettingsCustomMainFeedURL"
   static private let accountMainFeedURLKey = "NYPLSettingsAccountMainFeedURL"

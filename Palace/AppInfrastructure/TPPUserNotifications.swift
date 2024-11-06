@@ -82,16 +82,16 @@ let DefaultActionIdentifier = "UNNotificationDefaultActionIdentifier"
     return TPPBookRegistry.shared.heldBooks.count > 0
   }
 
+  // Notification banner informing the user that a previously reserved book is now available for download
   private class func createNotificationForReadyCheckout(book: TPPBook)
   {
     let unCenter = UNUserNotificationCenter.current()
     unCenter.getNotificationSettings { (settings) in
       guard settings.authorizationStatus == .authorized else { return }
 
-      let title = DisplayStrings.downloadReady
       let content = UNMutableNotificationContent()
-      content.body = NSLocalizedString("The title you reserved, \(book.title), is available.", comment: "")
-      content.title = title
+      content.body = String.localizedStringWithFormat(DisplayStrings.readyForDownloadBody, book.title)
+      content.title = DisplayStrings.readyForDownloadTitle
       content.sound = UNNotificationSound.default
       content.categoryIdentifier = HoldNotificationCategoryIdentifier
       content.userInfo = ["bookID" : book.identifier]

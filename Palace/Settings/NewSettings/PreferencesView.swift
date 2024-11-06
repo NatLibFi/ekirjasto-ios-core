@@ -6,141 +6,142 @@
 //  Copyright © 2024 The Palace Project. All rights reserved.
 //
 
-import SwiftUI
 import Combine
+import SwiftUI
 
+// View for the user to set application prefences for the E-kirjasto app
 struct PreferencesView: View {
   typealias tsx = Strings.Preferences
-  var language = [tsx.en, tsx.fi, tsx.sv]
-  var fontSizeList = [tsx.hundred, tsx.oneTwentyFive, tsx.oneFifty, tsx.oneSeventyFive, tsx.twoHundred]
-  @State private var selectLang = "English"
-  @State private var langPreference = "fi"
+  
   @State private var toggleState = false
-  @State private var setFontSize: Double = 18.0
-  @State private var showAlert = false
+  @State private var setFontSize: Double = 16.0
   
   // The values saved to userDefaults
   @AppStorage("fontMultiplier") private var fontMultiplier: Double = 1.0
   @AppStorage("fontPercent") private var selectPercent: String = "100%"
-  @AppStorage("enablePreferences") private var enablepreferences: Bool = false
+  @AppStorage("enablePreferences") private var enablePreferences: Bool = false
   
+  // View that lists all available application preferences for the user
+  // and the setting for the user to enable the use of these preferences in the application
   var body: some View {
     List {
-      Section {
-        Toggle(isOn: $toggleState) {
-          Text(tsx.togglePref)
-            .font(.system(size: CGFloat(setFontSize)))
-          // Store the new value of the toggle and save it to userDefaults
-            .onChange(of: toggleState) { newValue in
-              print("toggle state: \(toggleState) and newValue: \(newValue)")
-              enablepreferences = newValue
-              print(enablepreferences)
-              print(setFontSize)
-              print(fontMultiplier)
-              print(selectPercent)
-              
-              // Set default values to userDefaults if disabled
-              if toggleState == false {
-                selectPercent = "100%"
-                fontMultiplier = 1.0
-                print("setting to defaults")
-              }
-            }
-        }
-        .padding(.vertical, 5)
-        
-        //TODO: remove preferences if toggle is set to false
-        
-        .font(.system(size: CGFloat(setFontSize)))
-        .accessibilityLabel(tsx.selectEnable)
-        
-        /*
-        //construct alert message
-        .alert(isPresented: $showAlert) {
-          Alert(title: Text(tsx.restartTitle), message: Text(tsx.restartText), dismissButton: .default(Text("OK")))
-                }
-         */
-        
-        //before view appears, get saved values
-        .onAppear {
-          toggleState = enablepreferences
-          
-          if let savedLangPreference = UserDefaults.standard.string(forKey: "langPreference") {
-                  selectLang = savedLangPreference
-              } else {
-                  selectLang = "Finnish"
-              }
-          
-          print("toggle state: \(toggleState)")
-          print("setFontSize: \(setFontSize)")
-          print("multiplier: \(fontMultiplier)")
-          print("percent: \(selectPercent)")
-          print(selectLang)
-          
-        }
-
-//          VStack{
-//            //Picker for language
-//            Picker(tsx.langButton, selection: $selectLang) {
-//              ForEach(language, id: \.self) {
-//                Text($0)
-//                  .font(.system(size: setFontSize))
-//              }
-//            }
-//            .font(.system(size: CGFloat(setFontSize)))
-//            .pickerStyle(.inline)
-//            .onChange(of: selectLang) { newValue in
-//              
-//              UserDefaults.standard.set(selectLang, forKey: "langPreference")
-//              
-//              //save lang preference when value changes
-//              switch selectLang {
-//              case tsx.fi:
-//                UserDefaults.standard.set(["fi"], forKey: "AppleLanguages")
-//                print("selected: ", selectLang)
-//                //Bundle.main.load()
-//              case tsx.sv:
-//                UserDefaults.standard.set(["sv"], forKey: "AppleLanguages")
-//                print("selected: ", selectLang)
-//              case tsx.en:
-//                UserDefaults.standard.set(["en"], forKey: "AppleLanguages")
-//                
-//                print("selected: ", selectLang)
-//              default:
-//                print("Language set to default")
-//                print("selected: ", selectLang)
-//                UserDefaults.standard.set(["fi"], forKey: "AppleLanguages")
-//              }
-//              //just to make sure value is saved
-//              UserDefaults.standard.synchronize()
-//              print(newValue)
-//              
-//            }
-//            .font(.system(size: CGFloat(setFontSize)))
-//            .accessibilityLabel(tsx.selectL)
-//          }
-//          .disabled(toggleState == false)
-      }
-
+      // The toggle button to enable or disable app preferences
+      enablePreferencesSection
+      
+      // If user has disabled the app preferences
+      // the language preferences cannot be accessed straight from app.
+      // However, the app specific language can be changed from device system settings
+      languagePreferencesSection
+        .disabled(toggleState == false)
     }
-    Text(tsx.fontSizeButton)
-      .font(.system(size: CGFloat(setFontSize)))
-        .padding(.leading, 30)
-        .padding(.vertical, 20)
-        .frame(maxWidth: .infinity, alignment: .leading)
+    
+    // If user has disabled the app preferences
+    // the text size preferences cannot be accessed straight from app.
+    // However, the app specific text size can be changed from device control center
+    textSizePreferencesSection
+      .disabled(toggleState == false)
+  }
   
-    // Forcing the slider to the bottom of the screen so that when texts are bigger, it stays where it is
+  // User can enable the application prefences for the device.
+  // App prefences are disabled by default.
+  // The user's setting for using preferences (or not) is stored in the AppStorage (UserDefaults)
+  // and it will be remembered the next time the application is used.
+  @ViewBuilder private var enablePreferencesSection: some View {
+    Section {
+      Toggle(isOn: $toggleState) {
+        Text(tsx.togglePref)
+          .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
+      }
+      .onChange(of: toggleState) { newValue in
+        // User has now toggled the "Enable prefences" button
+        
+        print("[PreferencesView] Current toggle state is \(toggleState) and the new value of toggle is \(newValue)")
+        
+        // Store the new value of the toggle
+        // and save it to AppStorage
+        enablePreferences = newValue
+        
+        print(
+          enablePreferences
+            ? "[PreferencesView] App preferences enabled"
+            : "[PreferencesView] App prefences disabled"
+        )
+        
+        printCurrentTextSizePrefences()
+        
+        // If user disables using app preferences
+        // reset userDefaults to app defaults
+        if toggleState == false {
+          resetAppPrefences()
+        }
+      }
+      .padding(.vertical, 5)
+      .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
+      .accessibilityLabel(tsx.selectEnable)
+      .onAppear {
+        // The moment the toggle button and the rest of the preferencess view appears
+        
+        // Get the stored value for using (or not using) app prefences from AppStorage
+        // and restore the toggle state
+        toggleState = enablePreferences
+        
+        print("[PreferencesView] Restoring this toggle state for view: \(toggleState)")
+      }
+    }
+  }
+  
+  // Shortcut button for the user to navigate to device system settings
+  // User can select different language for the app than the device language
+  // Changing language starts the app from main screen
+  @ViewBuilder private var languagePreferencesSection: some View {
+    // This is the link to E-kirjasto settings in iOS system settings
+    // You can also navigate to Settings -> Apps -> E-kirjasto
+    let appSystemSettingsURL = URL(string: UIApplication.openSettingsURLString)!
+    
+    Section {
+      Button {
+        UIApplication.shared.open(appSystemSettingsURL)
+      } label: {
+        HStack {
+          Text(tsx.langButton)
+            .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
+          Spacer()
+          Image("ArrowRight")
+            .padding(.leading, 10)
+            .foregroundColor(Color(uiColor: .lightGray))
+        }
+      }
+      .accessibilityLabel(tsx.selectL)
+    }
+  }
+  
+  // Slider for user to select the text size for the app
+  // User can only make text bigger than default, not smaller
+  @ViewBuilder private var textSizePreferencesSection: some View {
+    Text(tsx.fontSizeButton)
+      .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
+      .padding(.leading, 30)
+      .padding(.vertical, 20)
+      .frame(maxWidth: .infinity, alignment: .leading)
+      
+    // Forcing the slider to the bottom of the screen
+    // so that when texts are bigger, it stays where it is
     ZStack(alignment: .bottom) {
       VStack {
         HStack {
           Text("A")
             .font(.system(size: CGFloat(20)))
-          Slider(value: $fontMultiplier, in: 1.0...2.0, step: 0.25) // The multiplier is saved directly to userDefaults when the value changes
+          
+          // The multiplier is saved directly to userDefaults when the value changes
+          Slider(value: $fontMultiplier, in: 1.0 ... 2.0, step: 0.25)
+          
           Text("A")
             .font(.system(size: CGFloat(40)))
         }
         .onChange(of: fontMultiplier) { newValue in
-          print("new value: \(newValue)")
+          // User has changed the position of the slider
+          print("[PreferencesView] New value of text size slider: \(newValue)")
+          
           if newValue == 1.25 {
             selectPercent = tsx.oneTwentyFive
           }
@@ -157,19 +158,44 @@ struct PreferencesView: View {
             selectPercent = tsx.hundred
           }
           setFontSize = 16.0 * newValue
-          print(setFontSize)
-          print(selectPercent)
+          printCurrentTextSizePrefences()
         }
         Text(selectPercent)
-          .font(.system(size: CGFloat(16)))
+          .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
       }
       .accessibilityLabel(tsx.selectS)
     }
-    .disabled(toggleState == false)
     .padding(.bottom, 50)
     .padding(.horizontal, 40)
   }
+  
+  func resetAppPrefences() {
+    print("[PreferencesView] Resetting app preferences to defaults")
+    resetLanguageToDefault()
+    resetTextSizeToDefault()
+  }
+  
+  func resetLanguageToDefault() {
+    // Currently we do not reset language
+  }
+  
+  func resetTextSizeToDefault() {
+    print("[PreferencesView] Set text size to default")
+    selectPercent = "100%"
+    fontMultiplier = 1.0
+  }
+  
+  func printCurrentTextSizePrefences() {
+    print(
+      """
+      [PreferencesView] Current setFontSize: \(setFontSize)
+      [PreferencesView] Current fontMultiplier: \(fontMultiplier)
+      [PreferencesView] Current selectPercent: \(selectPercent)
+      """
+    )
+  }
 }
-//#Preview {
+
+// #Preview {
 //    PreferencesView()
-//}
+// }

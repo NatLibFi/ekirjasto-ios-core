@@ -291,8 +291,9 @@ struct Strings {
   }
   
   struct UserNotifications {
-    static let downloadReady = NSLocalizedString("Ready for Download", comment: "")
     static let checkoutTitle = NSLocalizedString("Check Out", comment: "")
+    static let readyForDownloadTitle = NSLocalizedString("Ready for Download", comment: "The title for a notification banner informing the user that a reserved book is now available for download")
+    static let readyForDownloadBody = NSLocalizedString("The title you reserved %@ is available.", comment: "The body text for a notification banner informing the user that a reserved book is now available for download")
   }
   
   struct MyBooksView {

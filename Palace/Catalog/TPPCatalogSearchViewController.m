@@ -76,7 +76,7 @@
   
   self.searchBar = [[UISearchBar alloc] init];
   self.searchBar.delegate = self;
-  self.searchBar.placeholder = self.searchDescription.humanReadableDescription;
+  self.searchBar.placeholder = NSLocalizedString(@"Search", nil);
   self.searchBar.searchTextField.leftView.tintColor = [UIColor colorNamed:@"ColorEkirjastoSearchBarText"];
   self.searchBar.searchTextField.textColor = [UIColor colorNamed:@"ColorEkirjastoAlwaysBlack"];
   self.searchBar.searchTextField.tintColor = [UIColor colorNamed:@"ColorEkirjastoSearchBarText"];
