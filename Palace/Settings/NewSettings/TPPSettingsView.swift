@@ -30,6 +30,7 @@ struct TPPSettingsView: View {
     List {
       eLibraryLogoSection
       accountSection
+      syncBookmarksSection
     }
       .listStyle(GroupedListStyle())
   }
@@ -61,6 +62,36 @@ struct TPPSettingsView: View {
         }
       }
     }
+  }
+  
+  @ViewBuilder private var syncBookmarksSection: some View {
+    Section(
+      footer: Text(NSLocalizedString("Save your reading position and bookmarks to all your other devices.", comment: "Explain to the user they can save their bookmarks in the cloud across all their devices."))
+    ) {
+      Toggle(isOn: $toggleSyncBookmarks) {
+        Text(Strings.Settings.syncBookmarks)
+          .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
+      }
+      .disabled(!syncEnabled)
+      .onChange(of: toggleSyncBookmarks) { value in
+        TPPSignInBusinessLogic.getShared { logic in
+          logic?.changeSyncPermission(to: value, postServerSyncCompletion: { value in
+            toggleSyncBookmarks = value
+          })
+        }
+      }
+      .onAppear {
+        TPPSignInBusinessLogic.getShared { logic in
+          logic?.checkSyncPermission(preWork: {
+            syncEnabled = false
+          }, postWork: { enableSync in
+            syncEnabled = true
+            toggleSyncBookmarks = enableSync
+          })
+        }
+      }
+    }
+    .font(Font(uiFont: UIFont.palaceFont(ofSize: 12)))
   }
   
   @ViewBuilder private var logoutRow: some View {
@@ -147,7 +178,6 @@ struct TPPSettingsView: View {
   
   @ViewBuilder private var listView: some View {
     List {
-      syncBookmarksSection
       infoSection
       // This shows the Finnish/Swedish version of the logo if that is the
       // current locale and the English version otherwise
@@ -160,33 +190,6 @@ struct TPPSettingsView: View {
   }
   
 
-  @ViewBuilder private var syncBookmarksSection: some View {
-    Section(footer: Text(NSLocalizedString("Save your reading position and bookmarks to all your other devices.", comment: "Explain to the user they can save their bookmarks in the cloud across all their devices."))) {
-      Toggle(isOn: $toggleSyncBookmarks) {
-        Text(Strings.Settings.syncBookmarks)
-          .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
-      }.disabled(!syncEnabled)
-        .onChange(of: toggleSyncBookmarks) { value in
-          
-          TPPSignInBusinessLogic.getShared { logic in
-            logic?.changeSyncPermission(to: value, postServerSyncCompletion: { value in
-              toggleSyncBookmarks = value
-            })
-          }
-          
-        }.onAppear {
-          TPPSignInBusinessLogic.getShared { logic in
-            logic?.checkSyncPermission(preWork: {
-              syncEnabled = false
-            }, postWork: { enableSync in
-              syncEnabled = true
-              toggleSyncBookmarks = enableSync
-            })
-          }
-        }
-    }
-    .font(Font(uiFont: UIFont.palaceFont(ofSize: 12)))
-  }
   
   @ViewBuilder private var leadingBarButton: some View {
     Button {
