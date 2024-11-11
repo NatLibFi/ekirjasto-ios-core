@@ -27,13 +27,15 @@ struct TPPSettingsView: View {
   }
   
   @ViewBuilder private var settingsListView: some View {
-    List {}
+    List {
+      eLibraryLogoSection
+    }
       .listStyle(GroupedListStyle())
   }
-
-  @ViewBuilder private var listView: some View {
-    List {
-      Section {} header: {
+  
+  @ViewBuilder private var eLibraryLogoSection: some View {
+    Section {}
+      header: {
         HStack {
           Spacer()
           Image("LaunchImageLogo")
@@ -43,6 +45,10 @@ struct TPPSettingsView: View {
           Spacer()
         }
       }
+  }
+
+  @ViewBuilder private var listView: some View {
+    List {
       if AccountsManager.shared.accounts().count == 1 {
         if authHolder.isAuthenticated {
           logoutSection
