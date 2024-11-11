@@ -6,11 +6,18 @@ import SwiftUI
 import CloudKit
 
 struct TPPSettingsView: View {
-
+  
   @AppStorage(TPPSettings.showDeveloperSettingsKey) private var showDeveloperSettings: Bool = false
-  @State private var selectedView: Int? = 0
-  @State private var orientation: UIDeviceOrientation = UIDevice.current.orientation
+
   @ObservedObject private var authHolder = TPPUserAccountAuthentication.shared
+  
+  @State private var logoutText = ""
+  @State private var orientation: UIDeviceOrientation = UIDevice.current.orientation
+  @State private var selectedView: Int? = 0
+  @State private var syncEnabled = true
+  @State private var toggleLogoutWarning = false
+  @State private var toggleSyncBookmarks = AccountsManager.shared.accounts().first?.details?.syncPermissionGranted ?? false
+  
 
   var body: some View {
       listView.navigationBarItems(leading: leadingBarButton)
@@ -75,10 +82,7 @@ struct TPPSettingsView: View {
     }
   }
 
-  @State private var toggleSyncBookmarks = AccountsManager.shared.accounts().first?.details?.syncPermissionGranted ?? false
-  @State private var toggleLogoutWarning = false
-  @State private var syncEnabled = true//AccountsManager.shared.accounts().first?.details?.syncPermissionGranted ?? false
-  @State private var logoutText = ""
+
   @ViewBuilder private var syncBookmarksSection: some View {
     Section(footer: Text(NSLocalizedString("Save your reading position and bookmarks to all your other devices.",comment: "Explain to the user they can save their bookmarks in the cloud across all their devices."))) {
       Toggle(isOn:$toggleSyncBookmarks){
