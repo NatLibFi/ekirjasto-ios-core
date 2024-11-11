@@ -1,5 +1,6 @@
 //
-//  TPPSettingsView.swift
+// TPPSettingsView.swift
+// E-kirjasto app view for Settings tab
 //
 
 import CloudKit
@@ -34,7 +35,7 @@ struct TPPSettingsView: View {
       infoSection
       natLibFiLogoSection
     }
-      .listStyle(GroupedListStyle())
+    .listStyle(GroupedListStyle())
   }
   
   @ViewBuilder private var eLibraryLogoSection: some View {
@@ -125,6 +126,14 @@ struct TPPSettingsView: View {
     }
   }
   
+  @ViewBuilder private var leadingBarButton: some View {
+    Button {
+      TPPRootTabBarController.shared().showAndReloadCatalogViewController()
+    } label: {
+      ImageProviders.MyBooksView.myLibraryIcon
+    }
+  }
+  
   @ViewBuilder private var logoutRow: some View {
     Button {
       TPPSignInBusinessLogic.getShared { logic in
@@ -138,7 +147,7 @@ struct TPPSettingsView: View {
         toggleLogoutWarning = true
       }
     } label: {
-      labelForRowButton(
+      buttonLabelHStackRow(
         title: Strings.Settings.signOut
       )
     }.alert(Strings.TPPSigninBusinessLogic.signout, isPresented: $toggleLogoutWarning) {
@@ -167,14 +176,14 @@ struct TPPSettingsView: View {
         }
       }
     } label: {
-      labelForRowButton(
+      buttonLabelHStackRow(
         title: Strings.Settings.registerPasskey
       )
     }
   }
   
   @ViewBuilder private var dependentsRow: some View {
-    row(
+    navigationLinkRow(
       title: Strings.Settings.dependentsButton,
       destination: DependentsView().anyView()
     )
@@ -183,7 +192,7 @@ struct TPPSettingsView: View {
   @ViewBuilder private var loginWithSuomiFiRow: some View {
     let authenticationDocument = AccountsManager.shared.currentAccount!.authenticationDocument
     
-    row(
+    navigationLinkRow(
       title: Strings.Settings.loginSuomiFi,
       destination: SuomiIdentificationWebView(authenticationDocument: authenticationDocument).anyView()
     )
@@ -200,25 +209,11 @@ struct TPPSettingsView: View {
         }
       }
     } label: {
-      labelForRowButton(
+      buttonLabelHStackRow(
         title: Strings.Settings.loginPasskey
       )
     }
     .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
-  }
-  
-  @ViewBuilder private var listView: some View {
-    List {}
-  }
-  
-
-  
-  @ViewBuilder private var leadingBarButton: some View {
-    Button {
-      TPPRootTabBarController.shared().showAndReloadCatalogViewController()
-    } label: {
-      ImageProviders.MyBooksView.myLibraryIcon
-    }
   }
   
   @ViewBuilder private var versionInfo: some View {
@@ -233,9 +228,10 @@ struct TPPSettingsView: View {
   }
   
   @ViewBuilder private var feedbackRow: some View {
-    row(
+    navigationLinkRow(
       title: Strings.Settings.feedback,
-      index: 1, selection: $selectedView,
+      index: 1,
+      selection: $selectedView,
       destination: remoteHTMLView(
         url: TPPSettings.TPPFeedbackURLString,
         title: Strings.Settings.feedback
@@ -244,9 +240,10 @@ struct TPPSettingsView: View {
   }
   
   @ViewBuilder private var accessibilityRow: some View {
-    row(
+    navigationLinkRow(
       title: Strings.Settings.accessibility,
-      index: 2, selection: $selectedView,
+      index: 2,
+      selection: $selectedView,
       destination: remoteHTMLView(
         url: TPPSettings.TPPAccessibilityURLString,
         title: Strings.Settings.accessibility
@@ -255,9 +252,10 @@ struct TPPSettingsView: View {
   }
   
   @ViewBuilder private var privacyRow: some View {
-    row(
+    navigationLinkRow(
       title: Strings.Settings.privacyPolicy,
-      index: 3, selection: $selectedView,
+      index: 3,
+      selection: $selectedView,
       destination: remoteHTMLView(
         url: TPPSettings.TPPPrivacyPolicyURLString,
         title: Strings.Settings.privacyPolicy
@@ -266,7 +264,7 @@ struct TPPSettingsView: View {
   }
   
   @ViewBuilder private var softwareLicensesRow: some View {
-    row(
+    navigationLinkRow(
       title: Strings.Settings.softwareLicenses,
       index: 4,
       selection: $selectedView,
@@ -278,7 +276,7 @@ struct TPPSettingsView: View {
   }
   
   @ViewBuilder private var userAgreementRow: some View {
-    row(
+    navigationLinkRow(
       title: Strings.Settings.eula,
       index: 5,
       selection: $selectedView,
@@ -290,7 +288,7 @@ struct TPPSettingsView: View {
   }
   
   @ViewBuilder private var faqRow: some View {
-    row(
+    navigationLinkRow(
       title: Strings.Settings.faq,
       index: 6,
       selection: $selectedView,
@@ -302,13 +300,13 @@ struct TPPSettingsView: View {
   }
   
   @ViewBuilder private var preferencesRow: some View {
-    row(
+    navigationLinkRow(
       title: Strings.Preferences.preferencesButton,
       destination: PreferencesView().anyView()
     )
-  }  
+  }
 
-  private func row(title: String, destination: AnyView) -> some View {
+  private func navigationLinkRow(title: String, destination: AnyView) -> some View {
     NavigationLink(
       destination: destination,
       label: { Text(title) }
@@ -316,7 +314,7 @@ struct TPPSettingsView: View {
     .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
   }
   
-  private func row(title: String, index: Int, selection: Binding<Int?>, destination: AnyView) -> some View {
+  private func navigationLinkRow(title: String, index: Int, selection: Binding<Int?>, destination: AnyView) -> some View {
     NavigationLink(
       destination: destination,
       tag: index,
@@ -326,7 +324,7 @@ struct TPPSettingsView: View {
     .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
   }
   
-  @ViewBuilder private func labelForRowButton(title: String) -> some View {
+  private func buttonLabelHStackRow(title: String) -> some View {
     HStack {
       Text(title)
         .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
@@ -357,5 +355,4 @@ struct TPPSettingsView: View {
     UIViewControllerWrapper(controller, updater: { _ in })
       .navigationBarTitle(Text(title))
   }
-  
 }
