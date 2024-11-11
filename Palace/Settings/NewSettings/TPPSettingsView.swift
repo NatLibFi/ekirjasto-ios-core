@@ -6,7 +6,6 @@ import SwiftUI
 import CloudKit
 
 struct TPPSettingsView: View {
-  typealias DisplayStrings = Strings.Settings
 
   @AppStorage(TPPSettings.showDeveloperSettingsKey) private var showDeveloperSettings: Bool = false
   @State private var selectedView: Int? = 0
@@ -59,7 +58,7 @@ struct TPPSettingsView: View {
         natLibFiLogoEn
       }
     }
-    .navigationBarTitle(DisplayStrings.settings)
+    .navigationBarTitle(Strings.Settings.settings)
     .listStyle(GroupedListStyle())
     
     .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
@@ -70,16 +69,16 @@ struct TPPSettingsView: View {
   
   @ViewBuilder private var librariesSection: some View {
     let viewController = TPPSettingsAccountsTableViewController(accounts: TPPSettings.shared.settingsAccountsList)
-    let navButton = Button(DisplayStrings.addLibrary) {
+    let navButton = Button(Strings.Settings.addLibrary) {
       viewController.addAccount()
     }
 
     let wrapper = UIViewControllerWrapper(viewController) { _ in }
-      .navigationBarTitle(Text(DisplayStrings.libraries))
+      .navigationBarTitle(Text(Strings.Settings.libraries))
       .navigationBarItems(trailing: navButton)
 
     Section {
-      row(title: DisplayStrings.libraries, index: 1, selection: self.$selectedView, destination: wrapper.anyView())
+      row(title: Strings.Settings.libraries, index: 1, selection: self.$selectedView, destination: wrapper.anyView())
     }
   }
 
@@ -90,7 +89,7 @@ struct TPPSettingsView: View {
   @ViewBuilder private var syncBookmarksSection: some View {
     Section(footer: Text(NSLocalizedString("Save your reading position and bookmarks to all your other devices.",comment: "Explain to the user they can save their bookmarks in the cloud across all their devices."))) {
       Toggle(isOn:$toggleSyncBookmarks){
-        Text(DisplayStrings.syncBookmarks)
+        Text(Strings.Settings.syncBookmarks)
           .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
       }.disabled(!syncEnabled)
         .onChange(of: toggleSyncBookmarks) { value in
@@ -145,7 +144,7 @@ struct TPPSettingsView: View {
        
      } label: {
        HStack{
-         Text(DisplayStrings.signOut)
+         Text(Strings.Settings.signOut)
            .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
          Spacer()
          Image("ArrowRight")
@@ -153,7 +152,7 @@ struct TPPSettingsView: View {
            .foregroundColor(Color(uiColor: .lightGray))
        }
      }.alert(Strings.TPPSigninBusinessLogic.signout, isPresented: $toggleLogoutWarning){
-       Button(DisplayStrings.signOut, role: .destructive) {
+       Button(Strings.Settings.signOut, role: .destructive) {
          TPPSignInBusinessLogic.getShared { logic in
            if let _logic = logic {
              if let alert = _logic.logOutOrWarn(){
@@ -181,7 +180,7 @@ struct TPPSettingsView: View {
        }
      } label: {
        HStack{
-         Text(DisplayStrings.registerPasskey)
+         Text(Strings.Settings.registerPasskey)
            .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
          Spacer()
          Image("ArrowRight")
@@ -194,7 +193,7 @@ struct TPPSettingsView: View {
      NavigationLink(
        destination:
          DependentsView()){
-           Text(DisplayStrings.dependentsButton)
+           Text(Strings.Settings.dependentsButton)
          }
          .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
    }
@@ -202,7 +201,7 @@ struct TPPSettingsView: View {
   
   @ViewBuilder private var loginSection: some View {
     Section{
-      row(title: DisplayStrings.loginSuomiFi,destination:SuomiIdentificationWebView(authenticationDocument: AccountsManager.shared.currentAccount!.authenticationDocument).anyView())
+      row(title: Strings.Settings.loginSuomiFi,destination:SuomiIdentificationWebView(authenticationDocument: AccountsManager.shared.currentAccount!.authenticationDocument).anyView())
       Button{
         
         let passkey = PasskeyManager(AccountsManager.shared.currentAccount!.authenticationDocument!)
@@ -216,7 +215,7 @@ struct TPPSettingsView: View {
         }
       } label: {
         HStack{
-          Text(DisplayStrings.loginPasskey)
+          Text(Strings.Settings.loginPasskey)
             .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
           Spacer()
           Image("ArrowRight")
@@ -250,9 +249,9 @@ struct TPPSettingsView: View {
     )
     
     let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
-      .navigationBarTitle(Text(DisplayStrings.feedback))
+      .navigationBarTitle(Text(Strings.Settings.feedback))
 
-    row(title: DisplayStrings.feedback, index: 1, selection: self.$selectedView, destination: wrapper.anyView())
+    row(title: Strings.Settings.feedback, index: 1, selection: self.$selectedView, destination: wrapper.anyView())
   }
   
   @ViewBuilder private var accessibilityRow: some View {
@@ -263,9 +262,9 @@ struct TPPSettingsView: View {
     )
     
     let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
-      .navigationBarTitle(Text(DisplayStrings.accessibility))
+      .navigationBarTitle(Text(Strings.Settings.accessibility))
 
-    row(title: DisplayStrings.accessibility, index: 2, selection: self.$selectedView, destination: wrapper.anyView())
+    row(title: Strings.Settings.accessibility, index: 2, selection: self.$selectedView, destination: wrapper.anyView())
   }
 
   @ViewBuilder private var privacyRow: some View {
@@ -276,9 +275,9 @@ struct TPPSettingsView: View {
     )
 
     let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
-      .navigationBarTitle(Text(DisplayStrings.privacyPolicy))
+      .navigationBarTitle(Text(Strings.Settings.privacyPolicy))
 
-    row(title: DisplayStrings.privacyPolicy, index: 3, selection: self.$selectedView, destination: wrapper.anyView())
+    row(title: Strings.Settings.privacyPolicy, index: 3, selection: self.$selectedView, destination: wrapper.anyView())
   }
 
   @ViewBuilder private var softwareLicenseRow: some View {
@@ -288,9 +287,9 @@ struct TPPSettingsView: View {
     )
     
     let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
-      .navigationBarTitle(Text(DisplayStrings.softwareLicenses))
+      .navigationBarTitle(Text(Strings.Settings.softwareLicenses))
 
-    row(title: DisplayStrings.softwareLicenses, index: 4, selection: self.$selectedView, destination: wrapper.anyView())
+    row(title: Strings.Settings.softwareLicenses, index: 4, selection: self.$selectedView, destination: wrapper.anyView())
   }
 
   @ViewBuilder private var userAgreementRow: some View {
@@ -301,9 +300,9 @@ struct TPPSettingsView: View {
     )
     
     let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
-      .navigationBarTitle(Text(DisplayStrings.eula))
+      .navigationBarTitle(Text(Strings.Settings.eula))
 
-    row(title: DisplayStrings.eula, index: 5, selection: self.$selectedView, destination: wrapper.anyView())
+    row(title: Strings.Settings.eula, index: 5, selection: self.$selectedView, destination: wrapper.anyView())
   }
 
   @ViewBuilder private var faqRow: some View {
@@ -314,9 +313,9 @@ struct TPPSettingsView: View {
     )
     
     let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
-      .navigationBarTitle(Text(DisplayStrings.faq))
+      .navigationBarTitle(Text(Strings.Settings.faq))
 
-    row(title: DisplayStrings.faq, index: 6, selection: self.$selectedView, destination: wrapper.anyView())
+    row(title: Strings.Settings.faq, index: 6, selection: self.$selectedView, destination: wrapper.anyView())
   
 
     //button to open preferences view
