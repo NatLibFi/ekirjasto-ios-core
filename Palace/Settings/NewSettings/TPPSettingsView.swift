@@ -29,6 +29,7 @@ struct TPPSettingsView: View {
   @ViewBuilder private var settingsListView: some View {
     List {
       eLibraryLogoSection
+      accountSection
     }
       .listStyle(GroupedListStyle())
   }
@@ -47,18 +48,105 @@ struct TPPSettingsView: View {
       }
   }
 
+  @ViewBuilder private var accountSection: some View {
+    if AccountsManager.shared.accounts().count == 1 {
+      Section {
+        if authHolder.isAuthenticated {
+          logoutRow
+          registerPasskeyRow
+          dependentsRow
+        } else {
+          loginWithSuomiFiRow
+          loginWithPasskeyRow
+        }
+      }
+    }
+  }
+  
+  @ViewBuilder private var logoutRow: some View {
+    Button {
+      TPPSignInBusinessLogic.getShared { logic in
+        if let _logic = logic {
+          if _logic.shouldShowSyncButton() && !self.toggleSyncBookmarks {
+            self.logoutText = NSLocalizedString("If you sign out without enabling Sync, your books and any saved bookmarks will be removed.", comment: "")
+          } else {
+            self.logoutText = NSLocalizedString("If you sign out, your books and any saved bookmarks will be removed.", comment: "")
+          }
+        }
+        toggleLogoutWarning = true
+      }
+    } label: {
+      labelForRowButton(
+        title: Strings.Settings.signOut
+      )
+    }.alert(Strings.TPPSigninBusinessLogic.signout, isPresented: $toggleLogoutWarning) {
+      Button(Strings.Settings.signOut, role: .destructive) {
+        TPPSignInBusinessLogic.getShared { logic in
+          if let _logic = logic {
+            if let alert = _logic.logOutOrWarn() {
+              TPPRootTabBarController.shared().settingsViewController.present(alert, animated: true)
+            }
+          }
+        }
+      }
+    } message: {
+      Text(self.logoutText)
+    }
+  }
+  
+  @ViewBuilder private var registerPasskeyRow: some View {
+    Button {
+      let passkey = PasskeyManager(AccountsManager.shared.currentAccount!.authenticationDocument!)
+      
+      passkey.register("", TPPUserAccount.sharedAccount().authToken!) { registerToken in
+        if let token = registerToken, !token.isEmpty {
+          TPPNetworkExecutor.shared.authenticateWithToken(token) { _ in
+          }
+        }
+      }
+    } label: {
+      labelForRowButton(
+        title: Strings.Settings.registerPasskey
+      )
+    }
+  }
+  
+  @ViewBuilder private var dependentsRow: some View {
+    row(
+      title: Strings.Settings.dependentsButton,
+      destination: DependentsView().anyView()
+    )
+  }
+  
+  @ViewBuilder private var loginWithSuomiFiRow: some View {
+    let authenticationDocument = AccountsManager.shared.currentAccount!.authenticationDocument
+    
+    row(
+      title: Strings.Settings.loginSuomiFi,
+      destination: SuomiIdentificationWebView(authenticationDocument: authenticationDocument).anyView()
+    )
+  }
+  
+  @ViewBuilder private var loginWithPasskeyRow: some View {
+    Button {
+      let passkey = PasskeyManager(AccountsManager.shared.currentAccount!.authenticationDocument!)
+      
+      passkey.login { loginToken in
+        if let token = loginToken, !token.isEmpty {
+          TPPNetworkExecutor.shared.authenticateWithToken(token) { _ in
+          }
+        }
+      }
+    } label: {
+      labelForRowButton(
+        title: Strings.Settings.loginPasskey
+      )
+    }
+    .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
+  }
+  
   @ViewBuilder private var listView: some View {
     List {
-      if AccountsManager.shared.accounts().count == 1 {
-        if authHolder.isAuthenticated {
-          logoutSection
-        } else {
-          loginSection
-        }
-        
-      } else {
-        librariesSection
-      }
       syncBookmarksSection
       infoSection
       // This shows the Finnish/Swedish version of the logo if that is the
@@ -71,20 +159,6 @@ struct TPPSettingsView: View {
     }
   }
   
-  @ViewBuilder private var librariesSection: some View {
-    let viewController = TPPSettingsAccountsTableViewController(accounts: TPPSettings.shared.settingsAccountsList)
-    let navButton = Button(Strings.Settings.addLibrary) {
-      viewController.addAccount()
-    }
-
-    let wrapper = UIViewControllerWrapper(viewController) { _ in }
-      .navigationBarTitle(Text(Strings.Settings.libraries))
-      .navigationBarItems(trailing: navButton)
-
-    Section {
-      row(title: Strings.Settings.libraries, index: 1, selection: self.$selectedView, destination: wrapper.anyView())
-    }
-  }
 
   @ViewBuilder private var syncBookmarksSection: some View {
     Section(footer: Text(NSLocalizedString("Save your reading position and bookmarks to all your other devices.", comment: "Explain to the user they can save their bookmarks in the cloud across all their devices."))) {
@@ -122,99 +196,6 @@ struct TPPSettingsView: View {
     }
   }
   
-  @ViewBuilder private var logoutSection: some View {
-    Section {
-      Button {
-        TPPSignInBusinessLogic.getShared { logic in
-          if let _logic = logic {
-            if _logic.shouldShowSyncButton() && !self.toggleSyncBookmarks {
-              self.logoutText = NSLocalizedString("If you sign out without enabling Sync, your books and any saved bookmarks will be removed.", comment: "")
-            } else {
-              self.logoutText = NSLocalizedString("If you sign out, your books and any saved bookmarks will be removed.", comment: "")
-            }
-          }
-         
-          toggleLogoutWarning = true
-        }
-       
-      } label: {
-        HStack {
-          Text(Strings.Settings.signOut)
-            .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
-          Spacer()
-          Image("ArrowRight")
-            .padding(.leading, 10)
-            .foregroundColor(Color(uiColor: .lightGray))
-        }
-      }.alert(Strings.TPPSigninBusinessLogic.signout, isPresented: $toggleLogoutWarning) {
-        Button(Strings.Settings.signOut, role: .destructive) {
-          TPPSignInBusinessLogic.getShared { logic in
-            if let _logic = logic {
-              if let alert = _logic.logOutOrWarn() {
-                TPPRootTabBarController.shared().settingsViewController.present(alert, animated: true)
-              }
-            }
-          }
-        }
-    
-      } message: {
-        Text(self.logoutText)
-      }
-     
-      Button {
-        let passkey = PasskeyManager(AccountsManager.shared.currentAccount!.authenticationDocument!)
- 
-        passkey.register("", TPPUserAccount.sharedAccount().authToken!) { registerToken in
-          if let token = registerToken, !token.isEmpty {
-            TPPNetworkExecutor.shared.authenticateWithToken(token) { _ in
-            }
-          }
-        }
-      } label: {
-        HStack {
-          Text(Strings.Settings.registerPasskey)
-            .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
-          Spacer()
-          Image("ArrowRight")
-            .padding(.leading, 10)
-            .foregroundColor(Color(uiColor: .lightGray))
-        }
-      }
-     
-      NavigationLink(
-        destination:
-        DependentsView())
-      {
-        Text(Strings.Settings.dependentsButton)
-      }
-      .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
-    }
-  }
-  
-  @ViewBuilder private var loginSection: some View {
-    Section {
-      row(title: Strings.Settings.loginSuomiFi, destination: SuomiIdentificationWebView(authenticationDocument: AccountsManager.shared.currentAccount!.authenticationDocument).anyView())
-      Button {
-        let passkey = PasskeyManager(AccountsManager.shared.currentAccount!.authenticationDocument!)
-        passkey.login { loginToken in
-          if let token = loginToken, !token.isEmpty {
-            TPPNetworkExecutor.shared.authenticateWithToken(token) { _ in
-            }
-          }
-        }
-      } label: {
-        HStack {
-          Text(Strings.Settings.loginPasskey)
-            .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
-          Spacer()
-          Image("ArrowRight")
-            .padding(.leading, 10)
-            .foregroundColor(Color(uiColor: .lightGray))
-        }
-      }
-      .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
-    }
-  }
 
   @ViewBuilder private var infoSection: some View {
     let view: AnyView = showDeveloperSettings ? EmptyView().anyView() : versionInfo.anyView()
@@ -375,5 +356,16 @@ struct TPPSettingsView: View {
       label: { Text(title) }
     )
     .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
+  }
+  
+  @ViewBuilder private func labelForRowButton(title: String) -> some View {
+    HStack {
+      Text(title)
+        .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
+      Spacer()
+      Image("ArrowRight")
+        .padding(.leading, 10)
+        .foregroundColor(Color(uiColor: .lightGray))
+    }
   }
 }
