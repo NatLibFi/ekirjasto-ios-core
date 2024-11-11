@@ -307,6 +307,10 @@ viewForHeaderInSection:(NSInteger const)section
     }
     button.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     button.tag = section;
+    TPPCatalogLane *const lane = self.feed.lanes[button.tag];
+    button.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"More %@ books", nil), lane.title];
+    button.accessibilityTraits = UIAccessibilityTraitHeader;
+    button.accessibilityHint = NSLocalizedString(@"Tap to view more books in this category", "Descriptive label for screen readers");
     [button addTarget:self
                action:@selector(didSelectCategory:)
      forControlEvents:UIControlEventTouchUpInside];
@@ -334,6 +338,7 @@ viewForHeaderInSection:(NSInteger const)section
     button.tag = section;
     TPPCatalogLane *const lane = self.feed.lanes[button.tag];
     button.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"More %@ books", nil), lane.title];
+    button.accessibilityHint = NSLocalizedString(@"Tap to view more books in this category", "Descriptive label for screen readers");
     button.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
     [button addTarget:self
                action:@selector(didSelectCategory:)
@@ -486,6 +491,7 @@ viewForHeaderInSection:(NSInteger const)section
   label.textAlignment = NSTextAlignmentCenter;
   label.font = [UIFont semiBoldPalaceFontOfSize: 16];
   label.text = lane.title;
+  label.accessibilityTraits = UIAccessibilityTraitHeader;
   viewController.navigationItem.titleView = label;
 
   [self.navigationController pushViewController:viewController animated:YES];
