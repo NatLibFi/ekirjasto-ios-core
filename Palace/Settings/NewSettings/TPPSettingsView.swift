@@ -1,9 +1,5 @@
 //
 //  TPPSettingsView.swift
-//  Palace
-//
-//  Created by Maurice Carrier on 12/2/21.
-//  Copyright © 2021 The Palace Project. All rights reserved.
 //
 
 import SwiftUI
@@ -15,10 +11,8 @@ struct TPPSettingsView: View {
   @AppStorage(TPPSettings.showDeveloperSettingsKey) private var showDeveloperSettings: Bool = false
   @State private var selectedView: Int? = 0
   @State private var orientation: UIDeviceOrientation = UIDevice.current.orientation
-  //@State private var authenticated: Bool = TPPUserAccount.sharedAccount().authToken != nil
   @ObservedObject private var authHolder = TPPUserAccountAuthentication.shared
 
-  //private var signInBusinessLogic = TPPSignInBusinessLogic.shared
 
   private var sideBarEnabled: Bool {
     UIDevice.current.userInterfaceIdiom == .pad
@@ -27,14 +21,7 @@ struct TPPSettingsView: View {
   }
 
   var body: some View {
-
-    /*if sideBarEnabled {
-      NavigationView {
-        listView
-      }.navigationViewStyle(.stack)
-    } else {*/
       listView.navigationBarItems(leading: leadingBarButton)
-    //}
   }
 
   @ViewBuilder private var listView: some View {
@@ -183,19 +170,7 @@ struct TPPSettingsView: View {
      
      Button{
        let passkey = PasskeyManager(AccountsManager.shared.currentAccount!.authenticationDocument!)
-       
-       /*let status = CKContainer.default().requestApplicationPermission(.userDiscoverability) { (status, error) in
-           CKContainer.default().fetchUserRecordID { (record, error) in
-               CKContainer.default().discoverUserIdentity(withUserRecordID: record!, completionHandler: { (userID, error) in
-                   print(userID?.hasiCloudAccount)
-                   print(userID?.lookupInfo?.phoneNumber)
-                   print(userID?.lookupInfo?.emailAddress)
-                   print((userID?.nameComponents?.givenName)! + " " + (userID?.nameComponents?.familyName)!)
-               })
-           }
-        }*/
-       
-       
+ 
        passkey.register("", TPPUserAccount.sharedAccount().authToken!) { registerToken in
          if let token = registerToken, !token.isEmpty{
            TPPNetworkExecutor.shared.authenticateWithToken(token) { status in
@@ -229,16 +204,7 @@ struct TPPSettingsView: View {
     Section{
       row(title: DisplayStrings.loginSuomiFi,destination:SuomiIdentificationWebView(authenticationDocument: AccountsManager.shared.currentAccount!.authenticationDocument).anyView())
       Button{
-        /*let status = CKContainer.default().requestApplicationPermission(.userDiscoverability) { (status, error) in
-            CKContainer.default().fetchUserRecordID { (record, error) in
-                CKContainer.default().discoverUserIdentity(withUserRecordID: record!, completionHandler: { (userID, error) in
-                    print(userID?.hasiCloudAccount)
-                    print(userID?.lookupInfo?.phoneNumber)
-                    print(userID?.lookupInfo?.emailAddress)
-                    print((userID?.nameComponents?.givenName)! + " " + (userID?.nameComponents?.familyName)!)
-                })
-            }
-         }*/
+        
         let passkey = PasskeyManager(AccountsManager.shared.currentAccount!.authenticationDocument!)
         passkey.login { loginToken in
           if let token = loginToken, !token.isEmpty{
