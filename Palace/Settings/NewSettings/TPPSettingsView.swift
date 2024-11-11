@@ -31,6 +31,7 @@ struct TPPSettingsView: View {
       eLibraryLogoSection
       accountSection
       syncBookmarksSection
+      infoSection
     }
       .listStyle(GroupedListStyle())
   }
@@ -92,6 +93,20 @@ struct TPPSettingsView: View {
       }
     }
     .font(Font(uiFont: UIFont.palaceFont(ofSize: 12)))
+  }
+  
+  @ViewBuilder private var infoSection: some View {
+    Section(
+      footer: versionInfo
+    ) {
+      feedbackRow
+      accessibilityRow
+      privacyRow
+      softwareLicensesRow
+      userAgreementRow
+      faqRow
+      preferencesRow
+    }
   }
   
   @ViewBuilder private var logoutRow: some View {
@@ -178,7 +193,6 @@ struct TPPSettingsView: View {
   
   @ViewBuilder private var listView: some View {
     List {
-      infoSection
       // This shows the Finnish/Swedish version of the logo if that is the
       // current locale and the English version otherwise
       if ["fi", "sv"].contains(Locale.current.languageCode) {
@@ -199,105 +213,6 @@ struct TPPSettingsView: View {
     }
   }
   
-
-  @ViewBuilder private var infoSection: some View {
-    let view: AnyView = showDeveloperSettings ? EmptyView().anyView() : versionInfo.anyView()
-    Section(footer: view) {
-      feedbackRow
-      accessibilityRow
-      privacyRow
-      softwareLicenseRow
-      userAgreementRow
-      faqRow
-    }
-  }
-  
-  @ViewBuilder private var feedbackRow: some View {
-    let viewController = RemoteHTMLViewController(
-      URL: URL(string: TPPSettings.TPPFeedbackURLString)!,
-      title: Strings.Settings.feedback,
-      failureMessage: Strings.Error.loadFailedError
-    )
-    
-    let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
-      .navigationBarTitle(Text(Strings.Settings.feedback))
-
-    row(title: Strings.Settings.feedback, index: 1, selection: $selectedView, destination: wrapper.anyView())
-  }
-  
-  @ViewBuilder private var accessibilityRow: some View {
-    let viewController = RemoteHTMLViewController(
-      URL: URL(string: TPPSettings.TPPAccessibilityURLString)!,
-      title: Strings.Settings.accessibility,
-      failureMessage: Strings.Error.loadFailedError
-    )
-    
-    let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
-      .navigationBarTitle(Text(Strings.Settings.accessibility))
-
-    row(title: Strings.Settings.accessibility, index: 2, selection: $selectedView, destination: wrapper.anyView())
-  }
-
-  @ViewBuilder private var privacyRow: some View {
-    let viewController = RemoteHTMLViewController(
-      URL: URL(string: TPPSettings.TPPPrivacyPolicyURLString)!,
-      title: Strings.Settings.privacyPolicy,
-      failureMessage: Strings.Error.loadFailedError
-    )
-
-    let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
-      .navigationBarTitle(Text(Strings.Settings.privacyPolicy))
-
-    row(title: Strings.Settings.privacyPolicy, index: 3, selection: $selectedView, destination: wrapper.anyView())
-  }
-
-  @ViewBuilder private var softwareLicenseRow: some View {
-    let viewController = BundledHTMLViewController(
-      fileURL: Bundle.main.url(forResource: "software-licenses", withExtension: "html")!,
-      title: Strings.Settings.softwareLicenses
-    )
-    
-    let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
-      .navigationBarTitle(Text(Strings.Settings.softwareLicenses))
-
-    row(title: Strings.Settings.softwareLicenses, index: 4, selection: $selectedView, destination: wrapper.anyView())
-  }
-
-  @ViewBuilder private var userAgreementRow: some View {
-    let viewController = RemoteHTMLViewController(
-      URL: URL(string: TPPSettings.TPPUserAgreementURLString)!,
-      title: Strings.Settings.eula,
-      failureMessage: Strings.Error.loadFailedError
-    )
-    
-    let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
-      .navigationBarTitle(Text(Strings.Settings.eula))
-
-    row(title: Strings.Settings.eula, index: 5, selection: $selectedView, destination: wrapper.anyView())
-  }
-
-  @ViewBuilder private var faqRow: some View {
-    let viewController = RemoteHTMLViewController(
-      URL: URL(string: TPPSettings.TPPFAQURLString)!,
-      title: Strings.Settings.faq,
-      failureMessage: Strings.Error.loadFailedError
-    )
-    
-    let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
-      .navigationBarTitle(Text(Strings.Settings.faq))
-
-    row(title: Strings.Settings.faq, index: 6, selection: $selectedView, destination: wrapper.anyView())
-  
-    // button to open preferences view
-    NavigationLink(
-      destination:
-      PreferencesView())
-    {
-      Text(Strings.Preferences.preferencesButton)
-        .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
-    }
-  }
-  
   @ViewBuilder private var versionInfo: some View {
     let productName = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as! String
     let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
@@ -308,6 +223,84 @@ struct TPPSettingsView: View {
       .frame(height: 40)
       .horizontallyCentered()
   }
+  
+  @ViewBuilder private var feedbackRow: some View {
+    row(
+      title: Strings.Settings.feedback,
+      index: 1, selection: $selectedView,
+      destination: remoteHTMLView(
+        url: TPPSettings.TPPFeedbackURLString,
+        title: Strings.Settings.feedback
+      ).anyView()
+    )
+  }
+  
+  @ViewBuilder private var accessibilityRow: some View {
+    row(
+      title: Strings.Settings.accessibility,
+      index: 2, selection: $selectedView,
+      destination: remoteHTMLView(
+        url: TPPSettings.TPPAccessibilityURLString,
+        title: Strings.Settings.accessibility
+      ).anyView()
+    )
+  }
+  
+  @ViewBuilder private var privacyRow: some View {
+    row(
+      title: Strings.Settings.privacyPolicy,
+      index: 3, selection: $selectedView,
+      destination: remoteHTMLView(
+        url: TPPSettings.TPPPrivacyPolicyURLString,
+        title: Strings.Settings.privacyPolicy
+      ).anyView()
+    )
+  }
+  
+  @ViewBuilder private var softwareLicensesRow: some View {
+    row(
+      title: Strings.Settings.softwareLicenses,
+      index: 4,
+      selection: $selectedView,
+      destination: bundledHTMLView(
+        resource: "software-licenses",
+        title: Strings.Settings.privacyPolicy
+      ).anyView()
+    )
+  }
+  
+  @ViewBuilder private var userAgreementRow: some View {
+    row(
+      title: Strings.Settings.eula,
+      index: 5,
+      selection: $selectedView,
+      destination: remoteHTMLView(
+        url: TPPSettings.TPPUserAgreementURLString,
+        title: Strings.Settings.eula
+      ).anyView()
+    )
+  }
+  
+  @ViewBuilder private var faqRow: some View {
+    row(
+      title: Strings.Settings.faq,
+      index: 6,
+      selection: $selectedView,
+      destination: remoteHTMLView(
+        url: TPPSettings.TPPFAQURLString,
+        title: Strings.Settings.faq
+      ).anyView()
+    )
+  }
+  
+  @ViewBuilder private var preferencesRow: some View {
+    row(
+      title: Strings.Preferences.preferencesButton,
+      destination: PreferencesView().anyView()
+    )
+  }
+  
+
 
   /*
    This returns the Finnish/Swedish version of the logo
@@ -371,4 +364,26 @@ struct TPPSettingsView: View {
         .foregroundColor(Color(uiColor: .lightGray))
     }
   }
+  
+  @ViewBuilder private func remoteHTMLView(url: String, title: String) -> some View {
+    let controller = RemoteHTMLViewController(
+      URL: URL(string: url)!,
+      title: title,
+      failureMessage: Strings.Error.loadFailedError
+    )
+    
+    UIViewControllerWrapper(controller, updater: { _ in })
+      .navigationBarTitle(Text(title))
+  }
+  
+  @ViewBuilder private func bundledHTMLView(resource: String, title: String) -> some View {
+    let controller = BundledHTMLViewController(
+      fileURL: Bundle.main.url(forResource: resource, withExtension: "html")!,
+      title: title
+    )
+    
+    UIViewControllerWrapper(controller, updater: { _ in })
+      .navigationBarTitle(Text(title))
+  }
+  
 }
