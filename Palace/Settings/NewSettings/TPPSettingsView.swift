@@ -32,6 +32,7 @@ struct TPPSettingsView: View {
       accountSection
       syncBookmarksSection
       infoSection
+      natLibFiLogoSection
     }
       .listStyle(GroupedListStyle())
   }
@@ -106,6 +107,21 @@ struct TPPSettingsView: View {
       userAgreementRow
       faqRow
       preferencesRow
+    }
+  }
+  
+  @ViewBuilder private var natLibFiLogoSection: some View {
+    let natLibFiLogo = ["fi", "sv"].contains(Locale.current.languageCode)
+      ? "NatLibFiLogoFiSv"
+      : "NatLibFiLogoEn"
+    
+    HStack {
+      Spacer()
+      Image(natLibFiLogo)
+        .resizable()
+        .aspectRatio(contentMode: .fit)
+        .frame(width: 200)
+      Spacer()
     }
   }
   
@@ -192,15 +208,7 @@ struct TPPSettingsView: View {
   }
   
   @ViewBuilder private var listView: some View {
-    List {
-      // This shows the Finnish/Swedish version of the logo if that is the
-      // current locale and the English version otherwise
-      if ["fi", "sv"].contains(Locale.current.languageCode) {
-        natLibFiLogoFiSv
-      } else {
-        natLibFiLogoEn
-      }
-    }
+    List {}
   }
   
 
@@ -298,43 +306,7 @@ struct TPPSettingsView: View {
       title: Strings.Preferences.preferencesButton,
       destination: PreferencesView().anyView()
     )
-  }
-  
-
-
-  /*
-   This returns the Finnish/Swedish version of the logo
-
-   Note the unfortunate duplication with natLibFiLogoEn,
-   because apparently passing parameters isn't exactly possible here
-   */
-  @ViewBuilder private var natLibFiLogoFiSv: some View {
-    HStack {
-      Spacer()
-      Image("NatLibFiLogoFiSv")
-        .resizable()
-        .aspectRatio(contentMode: .fit)
-        .frame(width: 200)
-      Spacer()
-    }
-  }
-
-  /*
-   This returns the English version of the logo
-
-   Note the unfortunate duplication with natLibFiLogoFiSv,
-   because apparently passing parameters isn't exactly possible here
-   */
-  @ViewBuilder private var natLibFiLogoEn: some View {
-    HStack {
-      Spacer()
-      Image("NatLibFiLogoEn")
-        .resizable()
-        .aspectRatio(contentMode: .fit)
-        .frame(width: 200)
-      Spacer()
-    }
-  }
+  }  
 
   private func row(title: String, destination: AnyView) -> some View {
     NavigationLink(
