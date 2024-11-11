@@ -12,13 +12,6 @@ struct TPPSettingsView: View {
   @State private var orientation: UIDeviceOrientation = UIDevice.current.orientation
   @ObservedObject private var authHolder = TPPUserAccountAuthentication.shared
 
-
-  private var sideBarEnabled: Bool {
-    UIDevice.current.userInterfaceIdiom == .pad
-      &&  UIDevice.current.orientation != .portrait
-      &&  UIDevice.current.orientation != .portraitUpsideDown
-  }
-
   var body: some View {
       listView.navigationBarItems(leading: leadingBarButton)
   }
