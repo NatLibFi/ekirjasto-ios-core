@@ -54,12 +54,17 @@ struct TPPSettingsView: View {
 
   @ViewBuilder private var accountSection: some View {
     if AccountsManager.shared.accounts().count == 1 {
-      Section {
-        if authHolder.isAuthenticated {
+      if authHolder.isAuthenticated {
+        Section {
           logoutRow
           registerPasskeyRow
           dependentsRow
-        } else {
+        }
+      } else {
+        Section(
+          footer: Text(Strings.Settings.loginFooterUserAgreementText)
+            .font(Font(uiFont: UIFont.palaceFont(ofSize: 12)))
+        ) {
           loginWithSuomiFiRow
           loginWithPasskeyRow
         }
