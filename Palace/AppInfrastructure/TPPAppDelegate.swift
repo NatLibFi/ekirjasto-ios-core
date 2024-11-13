@@ -68,9 +68,14 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
     let paragraphStyle = NSMutableParagraphStyle()
     paragraphStyle.lineBreakMode = .byTruncatingTail
     paragraphStyle.allowsDefaultTighteningForTruncation = false
+
+    // iPads have more space so set the font to be larger than in iPhones
+    let fontSize = UIDevice.current.userInterfaceIdiom == .pad ? 18.0 : 12.0
+    let font = UIFontMetrics.default.scaledFont(for: UIFont(name: TPPConfiguration.ekirjastoFontName(), size: fontSize) ?? UIFont.systemFont(ofSize: fontSize))
+    let foregroundColor = TPPConfiguration.compatiblePrimaryColor()
     itemAppearance.normal.titleTextAttributes = [
-      .foregroundColor: TPPConfiguration.compatiblePrimaryColor(),
-      .font: UIFont.palaceFont(ofSize: 12),
+      .foregroundColor: foregroundColor,
+      .font: font,
       .paragraphStyle: paragraphStyle
     ]
     
@@ -82,8 +87,6 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
     UITabBar.appearance().standardAppearance = appearance
     UITabBar.appearance().tintColor = TPPConfiguration.compatiblePrimaryColor() //Edited by Ebblis
     UITabBar.appearance().backgroundColor = TPPConfiguration.backgroundColor()
-    
-    adjustTabBarItemTitles()
     
     UINavigationBar.appearance().tintColor = TPPConfiguration.iconColor()
     UINavigationBar.appearance().standardAppearance = TPPConfiguration.defaultAppearance()
@@ -183,32 +186,6 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
   func signingIn(_ notification: Notification) {
     if let boolValue = notification.object as? Bool {
       self.isSigningIn = boolValue
-    }
-  }
-  
-  /**
-   Adjusts the titles of the tab bar items in UITabBarController based on their calculated sizes.
-   
-   If the calculated height of the title exceeds a defined threshold, the title is removed to prevent overlap,
-   especially on smaller screens. Otherwise, the function sets the title's font size to the scaled size.
-   */
-  func adjustTabBarItemTitles() {
-    if let tabBarController = window?.rootViewController as? UITabBarController {
-      let fontSize: CGFloat = 12
-      let thresholdFontSize: CGFloat = 18 // In smaller screens like SE, anything >18 starts to overlap
-      let font = UIFont.palaceFont(ofSize: fontSize)
-      
-      for item in tabBarController.tabBar.items ?? [] {
-        if let title = item.title {
-          // Remove title text when the threshold is exceeded
-          if font.pointSize >= thresholdFontSize {
-            item.title = ""
-          } else {
-            // Set the title size according to the scaled size
-            item.setTitleTextAttributes([.font: UIFont.palaceFont(ofSize: fontSize)], for: .normal)
-          }
-        }
-      }
     }
   }
 }
