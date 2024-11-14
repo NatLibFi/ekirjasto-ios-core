@@ -1,48 +1,47 @@
 //
-//  TPPSettingsView.swift
-//  Palace
-//
-//  Created by Maurice Carrier on 12/2/21.
-//  Copyright © 2021 The Palace Project. All rights reserved.
+// TPPSettingsView.swift
+// E-kirjasto app view for Settings tab
 //
 
-import SwiftUI
 import CloudKit
+import SwiftUI
 
 struct TPPSettingsView: View {
-  typealias DisplayStrings = Strings.Settings
-
   @AppStorage(TPPSettings.showDeveloperSettingsKey) private var showDeveloperSettings: Bool = false
-  @State private var selectedView: Int? = 0
-  @State private var orientation: UIDeviceOrientation = UIDevice.current.orientation
-  //@State private var authenticated: Bool = TPPUserAccount.sharedAccount().authToken != nil
+
   @ObservedObject private var authHolder = TPPUserAccountAuthentication.shared
-
-  //private var signInBusinessLogic = TPPSignInBusinessLogic.shared
-
-  private var sideBarEnabled: Bool {
-    UIDevice.current.userInterfaceIdiom == .pad
-      &&  UIDevice.current.orientation != .portrait
-      &&  UIDevice.current.orientation != .portraitUpsideDown
-  }
-
+  
+  @State private var logoutText = ""
+  @State private var orientation: UIDeviceOrientation = UIDevice.current.orientation
+  @State private var selectedView: Int? = 0
+  @State private var syncEnabled = true
+  @State private var toggleLogoutWarning = false
+  @State private var toggleSyncBookmarks = AccountsManager.shared.accounts().first?.details?.syncPermissionGranted ?? false
+  
   var body: some View {
-
-    /*if sideBarEnabled {
-      NavigationView {
-        listView
-      }.navigationViewStyle(.stack)
-    } else {*/
-      listView.navigationBarItems(leading: leadingBarButton)
-    //}
+    settingsListView
+      .navigationBarItems(leading: leadingBarButton)
+      .navigationBarTitle(Strings.Settings.settings)
+      .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+        self.orientation = UIDevice.current.orientation
+      }
   }
-
-  @ViewBuilder private var listView: some View {
+  
+  @ViewBuilder private var settingsListView: some View {
     List {
-      Section {
-        
-      } header: {
-        HStack{
+      eLibraryLogoSection
+      accountSection
+      syncBookmarksSection
+      infoSection
+      natLibFiLogoSection
+    }
+    .listStyle(GroupedListStyle())
+  }
+  
+  @ViewBuilder private var eLibraryLogoSection: some View {
+    Section {}
+      header: {
+        HStack {
           Spacer()
           Image("LaunchImageLogo")
             .resizable()
@@ -50,84 +49,86 @@ struct TPPSettingsView: View {
             .frame(width: 200)
           Spacer()
         }
+      }
+  }
 
-      }
-      if AccountsManager.shared.accounts().count == 1 {
-        if authHolder.isAuthenticated {
-          logoutSection
-        }else {
-          loginSection
+  @ViewBuilder private var accountSection: some View {
+    if AccountsManager.shared.accounts().count == 1 {
+      if authHolder.isAuthenticated {
+        Section {
+          logoutRow
+          registerPasskeyRow
+          dependentsRow
         }
-        
-      }else{
-        librariesSection
-      }
-      syncBookmarksSection
-      infoSection
-      // This shows the Finnish/Swedish version of the logo if that is the
-      // current locale and the English version otherwise
-      if ["fi", "sv"].contains(Locale.current.languageCode) {
-        natLibFiLogoFiSv
       } else {
-        natLibFiLogoEn
+        Section(
+          footer: Text(Strings.Settings.loginFooterUserAgreementText)
+            .font(Font(uiFont: UIFont.palaceFont(ofSize: 12)))
+        ) {
+          loginWithSuomiFiRow
+          loginWithPasskeyRow
+        }
       }
     }
-    .navigationBarTitle(DisplayStrings.settings)
-    .listStyle(GroupedListStyle())
-    
-    .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
-      self.orientation = UIDevice.current.orientation
-    }
   }
   
-  
-  @ViewBuilder private var librariesSection: some View {
-    let viewController = TPPSettingsAccountsTableViewController(accounts: TPPSettings.shared.settingsAccountsList)
-    let navButton = Button(DisplayStrings.addLibrary) {
-      viewController.addAccount()
-    }
-
-    let wrapper = UIViewControllerWrapper(viewController) { _ in }
-      .navigationBarTitle(Text(DisplayStrings.libraries))
-      .navigationBarItems(trailing: navButton)
-
-    Section {
-      row(title: DisplayStrings.libraries, index: 1, selection: self.$selectedView, destination: wrapper.anyView())
-    }
-  }
-
-  @State private var toggleSyncBookmarks = AccountsManager.shared.accounts().first?.details?.syncPermissionGranted ?? false
-  @State private var toggleLogoutWarning = false
-  @State private var syncEnabled = true//AccountsManager.shared.accounts().first?.details?.syncPermissionGranted ?? false
-  @State private var logoutText = ""
   @ViewBuilder private var syncBookmarksSection: some View {
-    Section(footer: Text(NSLocalizedString("Save your reading position and bookmarks to all your other devices.",comment: "Explain to the user they can save their bookmarks in the cloud across all their devices."))) {
-      Toggle(isOn:$toggleSyncBookmarks){
-        Text(DisplayStrings.syncBookmarks)
+    Section(
+      footer: Text(NSLocalizedString("Save your reading position and bookmarks to all your other devices.", comment: "Explain to the user they can save their bookmarks in the cloud across all their devices."))
+    ) {
+      Toggle(isOn: $toggleSyncBookmarks) {
+        Text(Strings.Settings.syncBookmarks)
           .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
-      }.disabled(!syncEnabled)
-        .onChange(of: toggleSyncBookmarks) { value in
-          
-          TPPSignInBusinessLogic.getShared { logic in
-            logic?.changeSyncPermission(to: value, postServerSyncCompletion: { value in
-              toggleSyncBookmarks = value
-            })
-          }
-          
-        }.onAppear{
-          TPPSignInBusinessLogic.getShared { logic in
-            logic?.checkSyncPermission(preWork: {
-                syncEnabled = false
-            }, postWork: { enableSync in
-              syncEnabled = true
-              toggleSyncBookmarks = enableSync
-            })
-          }
-          
+      }
+      .disabled(!syncEnabled)
+      .onChange(of: toggleSyncBookmarks) { value in
+        TPPSignInBusinessLogic.getShared { logic in
+          logic?.changeSyncPermission(to: value, postServerSyncCompletion: { value in
+            toggleSyncBookmarks = value
+          })
         }
+      }
+      .onAppear {
+        TPPSignInBusinessLogic.getShared { logic in
+          logic?.checkSyncPermission(preWork: {
+            syncEnabled = false
+          }, postWork: { enableSync in
+            syncEnabled = true
+            toggleSyncBookmarks = enableSync
+          })
+        }
+      }
     }
     .font(Font(uiFont: UIFont.palaceFont(ofSize: 12)))
-
+  }
+  
+  @ViewBuilder private var infoSection: some View {
+    Section(
+      footer: versionInfo
+    ) {
+      feedbackRow
+      accessibilityRow
+      privacyRow
+      softwareLicensesRow
+      userAgreementRow
+      faqRow
+      preferencesRow
+    }
+  }
+  
+  @ViewBuilder private var natLibFiLogoSection: some View {
+    let natLibFiLogo = ["fi", "sv"].contains(Locale.current.languageCode)
+      ? "NatLibFiLogoFiSv"
+      : "NatLibFiLogoEn"
+    
+    HStack {
+      Spacer()
+      Image(natLibFiLogo)
+        .resizable()
+        .aspectRatio(contentMode: .fit)
+        .frame(width: 200)
+      Spacer()
+    }
   }
   
   @ViewBuilder private var leadingBarButton: some View {
@@ -138,276 +139,179 @@ struct TPPSettingsView: View {
     }
   }
   
- @ViewBuilder private var logoutSection: some View {
-   Section{
-    
-     Button{
-       TPPSignInBusinessLogic.getShared { logic in
-         if let _logic = logic {
-           if _logic.shouldShowSyncButton() && !self.toggleSyncBookmarks{
-             self.logoutText = NSLocalizedString("If you sign out without enabling Sync, your books and any saved bookmarks will be removed.", comment: "")
-           }else{
-             self.logoutText = NSLocalizedString("If you sign out, your books and any saved bookmarks will be removed.", comment: "")
-           }
-           
-         }
-         
-         toggleLogoutWarning = true
-       }
-       
-       
-     } label: {
-       HStack{
-         Text(DisplayStrings.signOut)
-           .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
-         Spacer()
-         Image("ArrowRight")
-           .padding(.leading, 10)
-           .foregroundColor(Color(uiColor: .lightGray))
-       }
-     }.alert(Strings.TPPSigninBusinessLogic.signout, isPresented: $toggleLogoutWarning){
-       Button(DisplayStrings.signOut, role: .destructive) {
-         TPPSignInBusinessLogic.getShared { logic in
-           if let _logic = logic {
-             if let alert = _logic.logOutOrWarn(){
-               TPPRootTabBarController.shared().settingsViewController.present(alert, animated: true)
-             }
-             
-           }
-         }
-       }
-    
-     } message: {
-       Text(self.logoutText)
-     }
-     
-     Button{
-       let passkey = PasskeyManager(AccountsManager.shared.currentAccount!.authenticationDocument!)
-       
-       /*let status = CKContainer.default().requestApplicationPermission(.userDiscoverability) { (status, error) in
-           CKContainer.default().fetchUserRecordID { (record, error) in
-               CKContainer.default().discoverUserIdentity(withUserRecordID: record!, completionHandler: { (userID, error) in
-                   print(userID?.hasiCloudAccount)
-                   print(userID?.lookupInfo?.phoneNumber)
-                   print(userID?.lookupInfo?.emailAddress)
-                   print((userID?.nameComponents?.givenName)! + " " + (userID?.nameComponents?.familyName)!)
-               })
-           }
-        }*/
-       
-       
-       passkey.register("", TPPUserAccount.sharedAccount().authToken!) { registerToken in
-         if let token = registerToken, !token.isEmpty{
-           TPPNetworkExecutor.shared.authenticateWithToken(token) { status in
-
-           }
-           
-         }
-       }
-     } label: {
-       HStack{
-         Text(DisplayStrings.registerPasskey)
-           .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
-         Spacer()
-         Image("ArrowRight")
-           .padding(.leading, 10)
-           .foregroundColor(Color(uiColor: .lightGray))
-       }
-
-     }
-     
-     NavigationLink(
-       destination:
-         DependentsView()){
-           Text(DisplayStrings.dependentsButton)
-         }
-         .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
-   }
-  }
-  
-  @ViewBuilder private var loginSection: some View {
-    Section{
-      row(title: DisplayStrings.loginSuomiFi,destination:SuomiIdentificationWebView(authenticationDocument: AccountsManager.shared.currentAccount!.authenticationDocument).anyView())
-      Button{
-        /*let status = CKContainer.default().requestApplicationPermission(.userDiscoverability) { (status, error) in
-            CKContainer.default().fetchUserRecordID { (record, error) in
-                CKContainer.default().discoverUserIdentity(withUserRecordID: record!, completionHandler: { (userID, error) in
-                    print(userID?.hasiCloudAccount)
-                    print(userID?.lookupInfo?.phoneNumber)
-                    print(userID?.lookupInfo?.emailAddress)
-                    print((userID?.nameComponents?.givenName)! + " " + (userID?.nameComponents?.familyName)!)
-                })
-            }
-         }*/
-        let passkey = PasskeyManager(AccountsManager.shared.currentAccount!.authenticationDocument!)
-        passkey.login { loginToken in
-          if let token = loginToken, !token.isEmpty{
-            TPPNetworkExecutor.shared.authenticateWithToken(token) { status in
-
-            }
-            
+  @ViewBuilder private var logoutRow: some View {
+    Button {
+      TPPSignInBusinessLogic.getShared { logic in
+        if let _logic = logic {
+          if _logic.shouldShowSyncButton() && !self.toggleSyncBookmarks {
+            self.logoutText = NSLocalizedString("If you sign out without enabling Sync, your books and any saved bookmarks will be removed.", comment: "")
+          } else {
+            self.logoutText = NSLocalizedString("If you sign out, your books and any saved bookmarks will be removed.", comment: "")
           }
         }
-      } label: {
-        HStack{
-          Text(DisplayStrings.loginPasskey)
-            .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
-          Spacer()
-          Image("ArrowRight")
-            .padding(.leading, 10)
-            .foregroundColor(Color(uiColor: .lightGray))
-        }
-        
+        toggleLogoutWarning = true
       }
-      .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
-
+    } label: {
+      buttonLabelHStackRow(
+        title: Strings.Settings.signOut
+      )
+    }.alert(Strings.TPPSigninBusinessLogic.signout, isPresented: $toggleLogoutWarning) {
+      Button(Strings.Settings.signOut, role: .destructive) {
+        TPPSignInBusinessLogic.getShared { logic in
+          if let _logic = logic {
+            if let alert = _logic.logOutOrWarn() {
+              TPPRootTabBarController.shared().settingsViewController.present(alert, animated: true)
+            }
+          }
+        }
+      }
+    } message: {
+      Text(self.logoutText)
     }
   }
-
-  @ViewBuilder private var infoSection: some View {
-    let view: AnyView = showDeveloperSettings ? EmptyView().anyView() : versionInfo.anyView()
-      Section(footer: view) {
-        feedbackRow
-        accessibilityRow
-        privacyRow
-        softwareLicenseRow
-        userAgreementRow
-        faqRow
-      }
-  }
   
-  @ViewBuilder private var feedbackRow: some View {
-    let viewController = RemoteHTMLViewController(
-      URL: URL(string: TPPSettings.TPPFeedbackURLString)!,
-      title: Strings.Settings.feedback,
-      failureMessage: Strings.Error.loadFailedError
-    )
-    
-    let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
-      .navigationBarTitle(Text(DisplayStrings.feedback))
-
-    row(title: DisplayStrings.feedback, index: 1, selection: self.$selectedView, destination: wrapper.anyView())
-  }
-  
-  @ViewBuilder private var accessibilityRow: some View {
-    let viewController = RemoteHTMLViewController(
-      URL: URL(string: TPPSettings.TPPAccessibilityURLString)!,
-      title: Strings.Settings.accessibility,
-      failureMessage: Strings.Error.loadFailedError
-    )
-    
-    let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
-      .navigationBarTitle(Text(DisplayStrings.accessibility))
-
-    row(title: DisplayStrings.accessibility, index: 2, selection: self.$selectedView, destination: wrapper.anyView())
-  }
-
-  @ViewBuilder private var privacyRow: some View {
-    let viewController = RemoteHTMLViewController(
-      URL: URL(string: TPPSettings.TPPPrivacyPolicyURLString)!,
-      title: Strings.Settings.privacyPolicy,
-      failureMessage: Strings.Error.loadFailedError
-    )
-
-    let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
-      .navigationBarTitle(Text(DisplayStrings.privacyPolicy))
-
-    row(title: DisplayStrings.privacyPolicy, index: 3, selection: self.$selectedView, destination: wrapper.anyView())
-  }
-
-  @ViewBuilder private var softwareLicenseRow: some View {
-    let viewController = BundledHTMLViewController(
-      fileURL: Bundle.main.url(forResource: "software-licenses", withExtension: "html")!,
-      title: Strings.Settings.softwareLicenses
-    )
-    
-    let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
-      .navigationBarTitle(Text(DisplayStrings.softwareLicenses))
-
-    row(title: DisplayStrings.softwareLicenses, index: 4, selection: self.$selectedView, destination: wrapper.anyView())
-  }
-
-  @ViewBuilder private var userAgreementRow: some View {
-    let viewController = RemoteHTMLViewController(
-      URL: URL(string: TPPSettings.TPPUserAgreementURLString)!,
-      title: Strings.Settings.eula,
-      failureMessage: Strings.Error.loadFailedError
-    )
-    
-    let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
-      .navigationBarTitle(Text(DisplayStrings.eula))
-
-    row(title: DisplayStrings.eula, index: 5, selection: self.$selectedView, destination: wrapper.anyView())
-  }
-
-  @ViewBuilder private var faqRow: some View {
-    let viewController = RemoteHTMLViewController(
-      URL: URL(string: TPPSettings.TPPFAQURLString)!,
-      title: Strings.Settings.faq,
-      failureMessage: Strings.Error.loadFailedError
-    )
-    
-    let wrapper = UIViewControllerWrapper(viewController, updater: { _ in })
-      .navigationBarTitle(Text(DisplayStrings.faq))
-
-    row(title: DisplayStrings.faq, index: 6, selection: self.$selectedView, destination: wrapper.anyView())
-  
-
-    //button to open preferences view
-    NavigationLink(
-      destination:
-        PreferencesView()){
-          Text(Strings.Preferences.preferencesButton)
-            .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
+  @ViewBuilder private var registerPasskeyRow: some View {
+    Button {
+      let passkey = PasskeyManager(AccountsManager.shared.currentAccount!.authenticationDocument!)
+      
+      passkey.register("", TPPUserAccount.sharedAccount().authToken!) { registerToken in
+        if let token = registerToken, !token.isEmpty {
+          TPPNetworkExecutor.shared.authenticateWithToken(token) { _ in
+          }
         }
+      }
+    } label: {
+      buttonLabelHStackRow(
+        title: Strings.Settings.registerPasskey
+      )
+    }
+  }
+  
+  @ViewBuilder private var dependentsRow: some View {
+    navigationLinkRow(
+      title: Strings.Settings.dependentsButton,
+      destination: DependentsView().anyView()
+    )
+  }
+  
+  @ViewBuilder private var loginWithSuomiFiRow: some View {
+    let authenticationDocument = AccountsManager.shared.currentAccount!.authenticationDocument
+    
+    navigationLinkRow(
+      title: Strings.Settings.loginSuomiFi,
+      destination: SuomiIdentificationWebView(authenticationDocument: authenticationDocument).anyView()
+    )
+  }
+  
+  @ViewBuilder private var loginWithPasskeyRow: some View {
+    Button {
+      let passkey = PasskeyManager(AccountsManager.shared.currentAccount!.authenticationDocument!)
+      
+      passkey.login { loginToken in
+        if let token = loginToken, !token.isEmpty {
+          TPPNetworkExecutor.shared.authenticateWithToken(token) { _ in
+          }
+        }
+      }
+    } label: {
+      buttonLabelHStackRow(
+        title: Strings.Settings.loginPasskey
+      )
+    }
+    .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
   }
   
   @ViewBuilder private var versionInfo: some View {
     let productName = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as! String
     let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
-    let build = Bundle.main.object(forInfoDictionaryKey: (kCFBundleVersionKey as String)) as! String
+    let build = Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as! String
     
     Text("\(productName) version \(version) (\(build))")
       .font(Font(uiFont: UIFont.palaceFont(ofSize: 12)))
       .frame(height: 40)
       .horizontallyCentered()
   }
-
-  /*
-   This returns the Finnish/Swedish version of the logo
-
-   Note the unfortunate duplication with natLibFiLogoEn,
-   because apparently passing parameters isn't exactly possible here
-   */
-  @ViewBuilder private var natLibFiLogoFiSv: some View {
-    HStack{
-      Spacer()
-      Image("NatLibFiLogoFiSv")
-        .resizable()
-        .aspectRatio(contentMode: .fit)
-        .frame(width: 200)
-      Spacer()
-    }
+  
+  @ViewBuilder private var feedbackRow: some View {
+    navigationLinkRow(
+      title: Strings.Settings.feedback,
+      index: 1,
+      selection: $selectedView,
+      destination: remoteHTMLView(
+        url: TPPSettings.TPPFeedbackURLString,
+        title: Strings.Settings.feedback
+      ).anyView()
+    )
+  }
+  
+  @ViewBuilder private var accessibilityRow: some View {
+    navigationLinkRow(
+      title: Strings.Settings.accessibility,
+      index: 2,
+      selection: $selectedView,
+      destination: remoteHTMLView(
+        url: TPPSettings.TPPAccessibilityURLString,
+        title: Strings.Settings.accessibility
+      ).anyView()
+    )
+  }
+  
+  @ViewBuilder private var privacyRow: some View {
+    navigationLinkRow(
+      title: Strings.Settings.privacyPolicy,
+      index: 3,
+      selection: $selectedView,
+      destination: remoteHTMLView(
+        url: TPPSettings.TPPPrivacyPolicyURLString,
+        title: Strings.Settings.privacyPolicy
+      ).anyView()
+    )
+  }
+  
+  @ViewBuilder private var softwareLicensesRow: some View {
+    navigationLinkRow(
+      title: Strings.Settings.softwareLicenses,
+      index: 4,
+      selection: $selectedView,
+      destination: bundledHTMLView(
+        resource: "software-licenses",
+        title: Strings.Settings.privacyPolicy
+      ).anyView()
+    )
+  }
+  
+  @ViewBuilder private var userAgreementRow: some View {
+    navigationLinkRow(
+      title: Strings.Settings.eula,
+      index: 5,
+      selection: $selectedView,
+      destination: remoteHTMLView(
+        url: TPPSettings.TPPUserAgreementURLString,
+        title: Strings.Settings.eula
+      ).anyView()
+    )
+  }
+  
+  @ViewBuilder private var faqRow: some View {
+    navigationLinkRow(
+      title: Strings.Settings.faq,
+      index: 6,
+      selection: $selectedView,
+      destination: remoteHTMLView(
+        url: TPPSettings.TPPFAQURLString,
+        title: Strings.Settings.faq
+      ).anyView()
+    )
+  }
+  
+  @ViewBuilder private var preferencesRow: some View {
+    navigationLinkRow(
+      title: Strings.Preferences.preferencesButton,
+      destination: PreferencesView().anyView()
+    )
   }
 
-  /*
-   This returns the English version of the logo
-
-   Note the unfortunate duplication with natLibFiLogoFiSv,
-   because apparently passing parameters isn't exactly possible here
-   */
-  @ViewBuilder private var natLibFiLogoEn: some View {
-    HStack{
-      Spacer()
-      Image("NatLibFiLogoEn")
-        .resizable()
-        .aspectRatio(contentMode: .fit)
-        .frame(width: 200)
-      Spacer()
-    }
-  }
-
-  private func row(title: String, destination: AnyView) -> some View {
+  private func navigationLinkRow(title: String, destination: AnyView) -> some View {
     NavigationLink(
       destination: destination,
       label: { Text(title) }
@@ -415,7 +319,7 @@ struct TPPSettingsView: View {
     .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
   }
   
-  private func row(title: String, index: Int, selection: Binding<Int?>, destination: AnyView) -> some View {
+  private func navigationLinkRow(title: String, index: Int, selection: Binding<Int?>, destination: AnyView) -> some View {
     NavigationLink(
       destination: destination,
       tag: index,
@@ -423,5 +327,37 @@ struct TPPSettingsView: View {
       label: { Text(title) }
     )
     .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
+  }
+  
+  private func buttonLabelHStackRow(title: String) -> some View {
+    HStack {
+      Text(title)
+        .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
+      Spacer()
+      Image("ArrowRight")
+        .padding(.leading, 10)
+        .foregroundColor(Color(uiColor: .lightGray))
+    }
+  }
+  
+  @ViewBuilder private func remoteHTMLView(url: String, title: String) -> some View {
+    let controller = RemoteHTMLViewController(
+      URL: URL(string: url)!,
+      title: title,
+      failureMessage: Strings.Error.loadFailedError
+    )
+    
+    UIViewControllerWrapper(controller, updater: { _ in })
+      .navigationBarTitle(Text(title))
+  }
+  
+  @ViewBuilder private func bundledHTMLView(resource: String, title: String) -> some View {
+    let controller = BundledHTMLViewController(
+      fileURL: Bundle.main.url(forResource: resource, withExtension: "html")!,
+      title: title
+    )
+    
+    UIViewControllerWrapper(controller, updater: { _ in })
+      .navigationBarTitle(Text(title))
   }
 }
