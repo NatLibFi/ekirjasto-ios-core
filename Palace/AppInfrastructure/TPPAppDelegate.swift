@@ -65,12 +65,19 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
       itemAppearance.normal.titlePositionAdjustment = UIOffset(horizontal: 5.0, vertical:  6.0)
     }
     
+    
     let paragraphStyle = NSMutableParagraphStyle()
     paragraphStyle.lineBreakMode = .byTruncatingTail
     paragraphStyle.allowsDefaultTighteningForTruncation = false
+    
+    // iPads have more space so set the font to be larger than in iPhones
+    let fontSize = UIDevice.current.userInterfaceIdiom == .pad ? 18.0 : 12.0
+    let font = UIFontMetrics.default.scaledFont(for: UIFont(name: TPPConfiguration.ekirjastoFontName(), size: fontSize) ?? UIFont.systemFont(ofSize: fontSize))
+    let foregroundColor = TPPConfiguration.compatiblePrimaryColor()
+    
     itemAppearance.normal.titleTextAttributes = [
-      .foregroundColor: TPPConfiguration.compatiblePrimaryColor(),
-      .font: UIFont.palaceFont(ofSize: 12),
+      .foregroundColor: foregroundColor,
+      .font: font,
       .paragraphStyle: paragraphStyle
     ]
     
@@ -82,7 +89,6 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
     UITabBar.appearance().standardAppearance = appearance
     UITabBar.appearance().tintColor = TPPConfiguration.compatiblePrimaryColor() //Edited by Ebblis
     UITabBar.appearance().backgroundColor = TPPConfiguration.backgroundColor()
-    UITabBarItem.appearance().setTitleTextAttributes([.font: UIFont.palaceFont(ofSize: 12)], for: .normal)
     
     UINavigationBar.appearance().tintColor = TPPConfiguration.iconColor()
     UINavigationBar.appearance().standardAppearance = TPPConfiguration.defaultAppearance()

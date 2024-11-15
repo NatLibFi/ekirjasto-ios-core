@@ -102,8 +102,7 @@
 
 - (void)setTabViewControllersInternal
 {
-  Account *const currentAccount = [AccountsManager shared].currentAccount;
-  if (currentAccount.details.supportsReservations) {
+    // E-kirjasto supports reservations (==holds) so it's check has been removed.
     self.viewControllers = @[self.catalogNavigationController,
                              self.myBooksNavigationController,
                              self.holdsNavigationController,
@@ -114,20 +113,6 @@
                                   @"holdsNavigationController",
                                   @"magazineViewController",
                                   @"settingsViewController"];
-  } else {
-    self.viewControllers = @[self.catalogNavigationController,
-                             self.myBooksNavigationController,
-                             self.magazineViewController,
-                             self.settingsViewController];
-    self.viewControllerNames = @[@"catalogNavigationController",
-                                  @"myBooksNavigationController",
-                                  @"magazineViewController",
-                                  @"settingsViewController"];
-    // Change selected index if the "Reservations" or "Settings" tab is selected
-    if (self.selectedIndex > 1) {
-      self.selectedIndex -= 1;
-    }
-  }
 }
 
 - (void)showAndReloadCatalogViewController
