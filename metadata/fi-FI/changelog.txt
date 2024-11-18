@@ -1,2 +1,4 @@
+1.1.3
+- Sovellusasetukset: kielivalinta
+- Paranneltu saavutettavuus
 - Bugikorjauksia
-- UI-korjauksia
