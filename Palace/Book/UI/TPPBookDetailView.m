@@ -212,7 +212,7 @@ static NSString *DetailHTMLTemplate = nil;
 
 - (void)createButtonsView
 {
-  self.buttonsView = [[TPPBookButtonsView alloc] initWithSamplesEnabled: YES];
+  self.buttonsView = [[TPPBookButtonsView alloc] initWithSamplesEnabled: NO];
   [self.buttonsView configureForBookDetailsContext];
   self.buttonsView.translatesAutoresizingMaskIntoConstraints = NO;
   self.buttonsView.showReturnButtonIfApplicable = YES;
