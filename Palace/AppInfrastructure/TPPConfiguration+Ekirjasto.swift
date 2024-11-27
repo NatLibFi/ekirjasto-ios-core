@@ -174,4 +174,21 @@ extension TPPConfiguration {
       return .lightGray
     }
   }
+  
+  @objc static func normalTabBarItemTitleColor() -> UIColor {
+    if #available(iOS 13, *) {
+      return UIColor(named: "ColorEkirjastoGrey")!
+    } else {
+      return .lightGray
+    }
+  }
+  
+  @objc static func selectedTabBarItemTitleColor() -> UIColor {
+    if #available(iOS 13, *) {
+      return UIColor(named: "ColorEkirjastoLabel")!
+    } else {
+      return .lightGray
+    }
+  }
+  
 }
