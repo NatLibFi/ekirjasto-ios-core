@@ -88,7 +88,6 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
     //    horizontal = positive value moves title to the right, we have set this always to be 5.0
     //    vertical   = positive value moves title downwards, we base this on how much not-used space in bottom we have.
     //    For example in smaller iPhones there is no extra space at bottom (bottomInset is 0.0)
-    // iPads have more space so we can set the title font to be even larger than in iPhones.
     let horizontalOffset: CGFloat = 5.0
     
     let verticalOffset: CGFloat
@@ -104,13 +103,13 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
     )
     
     // Set title text style
+    // iPads have more space so we can set the title font to be even larger than in iPhones.
+    // We also set different title text color for the selected (active) tab bar item (to match the icon color).
     let titleFontSize = UIDevice.current.userInterfaceIdiom == .pad ? 18.0 : 12.0
     let ekirjastoFont = UIFont(name: TPPConfiguration.ekirjastoFontName(), size: titleFontSize)
     let systemFont = UIFont.systemFont(ofSize: titleFontSize)
 
     let titleFont = UIFontMetrics.default.scaledFont(for: ekirjastoFont ?? systemFont)
-    
-    let titleForegroundColor = TPPConfiguration.compatiblePrimaryColor()
     
     let titleParagraphStyle = NSMutableParagraphStyle()
     titleParagraphStyle.lineBreakMode = .byTruncatingTail
@@ -118,8 +117,12 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
     
     tabBarItemAppearance.normal.titleTextAttributes = [
       .font: titleFont,
-      .foregroundColor: titleForegroundColor,
+      .foregroundColor: TPPConfiguration.normalTabBarItemTitleColor(),
       .paragraphStyle: titleParagraphStyle
+    ]
+    
+    tabBarItemAppearance.selected.titleTextAttributes = [
+      .foregroundColor: TPPConfiguration.selectedTabBarItemTitleColor()
     ]
     
     
