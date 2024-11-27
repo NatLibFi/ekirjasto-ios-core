@@ -15,6 +15,7 @@
       "scale" : "1x"
     },
     {
+      "filename" : "ekirjasto-icon-magazines-grey-042-@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
@@ -25,11 +26,12 @@
           "value" : "dark"
         }
       ],
+      "filename" : "ekirjasto-icon-magazines-grey-054-@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "newspaper-any.png",
+      "filename" : "ekirjasto-icon-magazines-grey-042-@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     },
@@ -40,7 +42,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "newspaper-dark.png",
+      "filename" : "ekirjasto-icon-magazines-grey-054-@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
