@@ -45,6 +45,14 @@ final class TPPEntryPointView: UIView {
     }
 
     let segmentedControl = UISegmentedControl(items: titles)
+    
+    // Set style for the filter button group in top of the book catalog in "Browse books" view.
+    // Segmented control button can be in two states
+    //   - selected: button is currently selected
+    //   - normal: button is not selected
+    // Use special darker background color for the buttons that are in normal state to add more contrast.
+    segmentedControl.backgroundColor = TPPConfiguration.catalogSegmentedControlBackgroundColorNormal()
+    
     setupSubviews(segmentedControl)
     isHidden = false;
   }
