@@ -174,4 +174,13 @@ extension TPPConfiguration {
       return .lightGray
     }
   }
+  
+  @objc static func catalogSegmentedControlBackgroundColorNormal() -> UIColor {
+    if #available(iOS 13, *) {
+      return UIColor(named: "ColorEkirjastoFilterButtonBackgroundNormal")!
+    } else {
+      return .lightGray
+    }
+  }
+    
 }
