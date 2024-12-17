@@ -22,7 +22,8 @@ enum HTTPMethodType: String {
  will retry any queued requests and purge them if necessary.
  */
 final class NetworkQueue: NSObject {
-
+  typealias Expression = SQLite.Expression
+  
   static let sharedInstance = NetworkQueue()
 
   // For Objective-C classes
