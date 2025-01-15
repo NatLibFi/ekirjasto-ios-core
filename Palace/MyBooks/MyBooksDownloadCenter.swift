@@ -429,7 +429,9 @@ import OverdriveProcessor
 extension MyBooksDownloadCenter {
   func deleteLocalContent(for identifier: String, account: String? = nil) {
     guard let book = bookRegistry.book(forIdentifier: identifier),
-          let bookURL = fileUrl(for: identifier, account: account) else {
+          // Use currentAccountId, which represents the UUID of the library in circulation managed, to determine the book path.
+          let currentAccountId = AccountsManager.shared.currentAccountId,
+          let bookURL = fileUrl(for: identifier, account: currentAccountId) else {
       NSLog("WARNING: Could not find book to delete local content.")
       return
     }
