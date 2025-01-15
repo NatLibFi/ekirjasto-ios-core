@@ -1,4 +1,4 @@
-1.1.3
-- Sovellusasetukset: kielivalinta
+1.2.0
+- LCP-päivitys
 - Paranneltu saavutettavuus
 - Bugikorjauksia

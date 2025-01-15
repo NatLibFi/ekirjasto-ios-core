@@ -1,4 +1,4 @@
-1.1.3
-- Inställningar: alternativ för språk
+1.2.0
+- LCP-uppdatering
 – Förbättrad tillgänglighet
 - Bugfixar
