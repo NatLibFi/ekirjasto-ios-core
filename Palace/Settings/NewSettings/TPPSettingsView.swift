@@ -111,7 +111,6 @@ struct TPPSettingsView: View {
       privacyRow
       softwareLicensesRow
       userAgreementRow
-      faqRow
       preferencesRow
     }
   }
@@ -288,18 +287,6 @@ struct TPPSettingsView: View {
       destination: remoteHTMLView(
         url: TPPSettings.TPPUserAgreementURLString,
         title: Strings.Settings.eula
-      ).anyView()
-    )
-  }
-  
-  @ViewBuilder private var faqRow: some View {
-    navigationLinkRow(
-      title: Strings.Settings.faq,
-      index: 6,
-      selection: $selectedView,
-      destination: remoteHTMLView(
-        url: TPPSettings.TPPFAQURLString,
-        title: Strings.Settings.faq
       ).anyView()
     )
   }

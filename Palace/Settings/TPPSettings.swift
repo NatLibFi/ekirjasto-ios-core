@@ -188,7 +188,6 @@ func feedbackURL(appLanguage: String!) -> String {
   static let TPPPrivacyPolicyURLString = "\(ekirjastoURLOrigin)/e-kirjaston-tietosuoja-ja-rekisteriseloste"
   static let TPPFeedbackURLString = feedbackURL(appLanguage: appLanguage)
   static let TPPAccessibilityURLString = "\(ekirjastoURLOrigin)/e-kirjaston-saavutettavuusseloste"
-  static let TPPFAQURLString = "\(ekirjastoURLOrigin)/e-kirjaston-usein-kysytyt-kysymykset"
 
   static private let customMainFeedURLKey = "NYPLSettingsCustomMainFeedURL"
   static private let accountMainFeedURLKey = "NYPLSettingsAccountMainFeedURL"
