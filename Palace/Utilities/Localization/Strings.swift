@@ -122,6 +122,7 @@ struct Strings {
     static let signOut = NSLocalizedString("Sign out", comment: "")
     static let loginFooterUserAgreementText = NSLocalizedString("By signing in, you agree the End User License Agreement", comment: "")
     static let faq = NSLocalizedString("FAQ", comment: "")
+    static let instructions = NSLocalizedString("Instructions", comment: "Title of a button that links to a HTML resource containing E-library instructions")
     
     //dependents
     static let dependentsButton = NSLocalizedString("Invite a Dependent", comment: "")
@@ -139,7 +140,6 @@ struct Strings {
     static let thanks = NSLocalizedString("Your dependent should receive the invitation soon.\n\nAdvise them to open the link in the email on their device and create a passkey. This will make logging in easier.", comment: "")
     static let guideText = NSLocalizedString("Fill in an email where the invitation should be sent. Make sure to type it correctly before sending.", comment: "")
     static let successButton = NSLocalizedString("Invite sent!", comment: "")
-
   }
   
   struct Preferences {
