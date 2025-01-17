@@ -429,7 +429,9 @@ import OverdriveProcessor
 extension MyBooksDownloadCenter {
   func deleteLocalContent(for identifier: String, account: String? = nil) {
     guard let book = bookRegistry.book(forIdentifier: identifier),
-          let bookURL = fileUrl(for: identifier, account: account) else {
+          // Use currentAccountId, which represents the UUID of the library in circulation managed, to determine the book path.
+          let currentAccountId = AccountsManager.shared.currentAccountId,
+          let bookURL = fileUrl(for: identifier, account: currentAccountId) else {
       NSLog("WARNING: Could not find book to delete local content.")
       return
     }
@@ -497,6 +499,27 @@ extension MyBooksDownloadCenter {
 #else
     AudiobookFactory.audiobook(dict)?.deleteLocalContent()
 #endif
+    
+    // Clean up any decypted files that may be present.
+    let cacheDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
+    let fileManager = FileManager.default
+    
+    do {
+      let contents = try fileManager.contentsOfDirectory(at: cacheDirectory, includingPropertiesForKeys: nil)
+      
+      for fileURL in contents {
+        if fileURL.pathExtension.lowercased() == "mp3" {
+          do {
+            try fileManager.removeItem(at: fileURL)
+            print("Deleted MP3 file: \(fileURL.lastPathComponent)")
+          } catch {
+            print("Error deleting MP3 file: \(fileURL.lastPathComponent), error: \(error)")
+          }
+        }
+      }
+    } catch {
+      print("Error accessing cache directory, error: \(error)")
+    }
   }
   
   @objc func returnBook(withIdentifier identifier: String, completion: (() -> Void)? = nil) {
