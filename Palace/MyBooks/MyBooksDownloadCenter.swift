@@ -429,7 +429,9 @@ import OverdriveProcessor
 extension MyBooksDownloadCenter {
   func deleteLocalContent(for identifier: String, account: String? = nil) {
     guard let book = bookRegistry.book(forIdentifier: identifier),
-          let bookURL = fileUrl(for: identifier, account: account) else {
+          // Use currentAccountId, which represents the UUID of the library in circulation managed, to determine the book path.
+          let currentAccountId = AccountsManager.shared.currentAccountId,
+          let bookURL = fileUrl(for: identifier, account: currentAccountId) else {
       NSLog("WARNING: Could not find book to delete local content.")
       return
     }
@@ -497,6 +499,53 @@ extension MyBooksDownloadCenter {
 #else
     AudiobookFactory.audiobook(dict)?.deleteLocalContent()
 #endif
+    cleanAllDecryptedFiles()
+  }
+  
+  /// - Parameter url: URL to check
+  /// - Returns: Whether the URL corresponds to a decrypted file of this task
+  /// Cleans all decrypted files from the cache directory, even when audiobook is not available
+  func cleanAllDecryptedFiles() {
+    guard let cacheDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first else {
+      ATLog(.error, "Could not find caches directory.")
+      return
+    }
+    
+    do {
+      let fileManager = FileManager.default
+      let cachedFiles = try fileManager.contentsOfDirectory(at: cacheDirectory,
+                                                            includingPropertiesForKeys: nil)
+      
+      var filesRemoved = 0
+      
+      for file in cachedFiles {
+        let fileName = file.lastPathComponent
+        let fileExtension = file.pathExtension.lowercased()
+        let nameWithoutExtension = file.deletingPathExtension().lastPathComponent
+        
+        // Check if the file name is a SHA-256 hash (64 characters hex)
+        let isHashedFile = nameWithoutExtension.count == 64 &&
+        nameWithoutExtension.range(of: "^[A-Fa-f0-9]{64}$",
+                                   options: .regularExpression) != nil
+        // Check if it's an audio file
+        let isAudioFile = ["mp3", "m4a", "m4b"].contains(fileExtension)
+        
+        if isHashedFile && isAudioFile {
+          do {
+            try fileManager.removeItem(at: file)
+            filesRemoved += 1
+            ATLog(.debug, "Removed cached file: \(fileName)")
+          } catch {
+            ATLog(.warn, "Could not delete cached file: \(fileName)", error: error)
+          }
+        }
+      }
+      
+      ATLog(.debug, "Cache cleanup completed. Removed \(filesRemoved) files.")
+      
+    } catch {
+      ATLog(.error, "Error accessing cache directory", error: error)
+    }
   }
   
   @objc func returnBook(withIdentifier identifier: String, completion: (() -> Void)? = nil) {
@@ -644,7 +693,7 @@ extension MyBooksDownloadCenter: URLSessionDownloadDelegate {
         downloadInfo(forBookIdentifier: book.identifier)?
           .withDownloadProgress(Double(totalBytesWritten) / Double(totalBytesExpectedToWrite))
         broadcastUpdate()
-      } 
+      }
     }
   }
 
