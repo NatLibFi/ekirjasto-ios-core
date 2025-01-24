@@ -111,7 +111,7 @@ struct TPPSettingsView: View {
       privacyRow
       softwareLicensesRow
       userAgreementRow
-      faqRow
+      instructionsRow
       preferencesRow
     }
   }
@@ -292,18 +292,18 @@ struct TPPSettingsView: View {
     )
   }
   
-  @ViewBuilder private var faqRow: some View {
+  @ViewBuilder private var instructionsRow: some View {
     navigationLinkRow(
-      title: Strings.Settings.faq,
+      title: Strings.Settings.instructions,
       index: 6,
       selection: $selectedView,
       destination: remoteHTMLView(
-        url: TPPSettings.TPPFAQURLString,
-        title: Strings.Settings.faq
+        url: TPPSettings.TPPInstructionsURLString,
+        title: Strings.Settings.instructions
       ).anyView()
     )
   }
-  
+
   @ViewBuilder private var preferencesRow: some View {
     navigationLinkRow(
       title: Strings.Preferences.preferencesButton,

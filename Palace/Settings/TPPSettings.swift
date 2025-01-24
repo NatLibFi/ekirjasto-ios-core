@@ -1,6 +1,6 @@
+import Darwin
 import Foundation
 import UIKit
-import Darwin
 
 @objc protocol NYPLUniversalLinksSettings: NSObjectProtocol {
   /// The URL that will be used to redirect an external authentication flow
@@ -171,60 +171,97 @@ func feedbackURL(appLanguage: String!) -> String {
   @objc class func sharedSettings() -> TPPSettings {
     return TPPSettings.shared
   }
-  
+
   // The language the user has chosen for the application (not device language)
   //    - returns the short alphabetical language code as a string
   //    - current possible E-kirjasto app language codes: fi, sv, en
-  static let appLanguage = Locale.current.languageCode
-  
+  static let appLanguage = Locale.current.languageCode ?? "fi"
+
   // The URL origin shared with remote NatLibFi HTML pages accessed through application
-  //    - the application language code is part of the URL string ('fi' is set as default)
   //    - with the application language code the user is directed to the corresponding language version of the web page
-  //    - example URL origin: 'https://www.kansalliskirjasto.fi/sv/e-kirjasto'
-  static let ekirjastoURLOrigin = "https://www.kansalliskirjasto.fi/\(appLanguage ?? "fi")/e-kirjasto"
+  //    - example URL origin: 'https://www.kansalliskirjasto.fi/sv/e-biblioteket'
 
-  static let TPPAboutPalaceURLString = "http://thepalaceproject.org/"
-  static let TPPUserAgreementURLString = "\(ekirjastoURLOrigin)/e-kirjaston-kayttoehdot"
-  static let TPPPrivacyPolicyURLString = "\(ekirjastoURLOrigin)/e-kirjaston-tietosuoja-ja-rekisteriseloste"
+  // The URL base is same for all NatLibFi HTML pages
+  static let natlibfiOrigin = "https://www.kansalliskirjasto.fi"
+
+  // E-library HTML pages use different path for each language version
+  // Finnish language version is used as default
+  static let elibraryPath = switch appLanguage {
+  case "fi": "fi/e-kirjasto"
+  case "sv": "sv/e-biblioteket"
+  case "en": "en/e-library"
+  default: "fi/e-kirjasto"
+  }
+
+  static let accessibilityResource = switch appLanguage {
+  case "fi": "e-kirjaston-saavutettavuusseloste"
+  case "sv": "e-bibliotekets-tillganglighetsutlatande"
+  case "en": "e-library-accessibility-statement"
+  default: "e-kirjaston-saavutettavuusseloste"
+  }
+
+  static let instructionsResource = switch appLanguage {
+  case "fi": "e-kirjasto-sovelluksen-kayttoohje"
+  case "sv": "anvisningar-e-biblioteket"
+  case "en": "e-library-instructions"
+  default: "e-kirjasto-sovelluksen-kayttoohje"
+  }
+
+  static let privacyPolicyResource = switch appLanguage {
+  case "fi": "e-kirjaston-tietosuoja-ja-rekisteriseloste"
+  case "sv": "dataskydds-och-registerbeskrivning"
+  case "en": "privacy-policy-data-protection-statement-and-description-data-file"
+  default: "e-kirjaston-tietosuoja-ja-rekisteriseloste"
+  }
+
+  static let userAgreementResource = switch appLanguage {
+  case "fi": "e-kirjaston-kayttoehdot"
+  case "sv": "e-bibliotekets-anvandarvillkor"
+  case "en": "e-library-terms-use"
+  default: "e-kirjaston-kayttoehdot"
+  }
+
+  static let TPPAccessibilityURLString = "\(natlibfiOrigin)/\(elibraryPath)/\(accessibilityResource)"
   static let TPPFeedbackURLString = feedbackURL(appLanguage: appLanguage)
-  static let TPPAccessibilityURLString = "\(ekirjastoURLOrigin)/e-kirjaston-saavutettavuusseloste"
-  static let TPPFAQURLString = "\(ekirjastoURLOrigin)/e-kirjaston-usein-kysytyt-kysymykset"
+  static let TPPInstructionsURLString = "\(natlibfiOrigin)/\(elibraryPath)/\(instructionsResource)"
+  static let TPPPrivacyPolicyURLString = "\(natlibfiOrigin)/\(elibraryPath)/\(privacyPolicyResource)"
+  static let TPPUserAgreementURLString = "\(natlibfiOrigin)/\(elibraryPath)/\(userAgreementResource)"
 
-  static private let customMainFeedURLKey = "NYPLSettingsCustomMainFeedURL"
-  static private let accountMainFeedURLKey = "NYPLSettingsAccountMainFeedURL"
-  static private let userPresentedAgeCheckKey = "NYPLUserPresentedAgeCheckKey"
+  private static let customMainFeedURLKey = "NYPLSettingsCustomMainFeedURL"
+  private static let accountMainFeedURLKey = "NYPLSettingsAccountMainFeedURL"
+  private static let userPresentedAgeCheckKey = "NYPLUserPresentedAgeCheckKey"
   static let userHasAcceptedEULAKey = "NYPLSettingsUserAcceptedEULA"
-  static private let userSeenFirstTimeSyncMessageKey = "userSeenFirstTimeSyncMessageKey"
-  static private let useBetaLibrariesKey = "NYPLUseBetaLibrariesKey"
+  private static let userSeenFirstTimeSyncMessageKey = "userSeenFirstTimeSyncMessageKey"
+  private static let useBetaLibrariesKey = "NYPLUseBetaLibrariesKey"
   static let settingsLibraryAccountsKey = "NYPLSettingsLibraryAccountsKey"
-  static private let versionKey = "NYPLSettingsVersionKey"
-  static private let customLibraryRegistryKey = "TPPSettingsCustomLibraryRegistryKey"
-  static private let enterLCPPassphraseManually = "TPPSettingsEnterLCPPassphraseManually"
+  private static let versionKey = "NYPLSettingsVersionKey"
+  private static let customLibraryRegistryKey = "TPPSettingsCustomLibraryRegistryKey"
+  private static let enterLCPPassphraseManually = "TPPSettingsEnterLCPPassphraseManually"
   static let showDeveloperSettingsKey = "showDeveloperSettings"
-  
+
   // When the test login flow is active, the welcome screen whould not be opened on top of it
   var testLoginFlowActive = false
-  
+
   // Set to nil (the default) if no custom feed should be used.
   var customMainFeedURL: URL? {
     get {
       return UserDefaults.standard.url(forKey: TPPSettings.customMainFeedURLKey)
     }
     set(customUrl) {
-      if (customUrl == self.customMainFeedURL) {
+      if customUrl == self.customMainFeedURL {
         return
       }
       UserDefaults.standard.set(customUrl, forKey: TPPSettings.customMainFeedURLKey)
       NotificationCenter.default.post(name: Notification.Name.TPPSettingsDidChange, object: self)
     }
   }
-  
+
   var accountMainFeedURL: URL? {
     get {
       return UserDefaults.standard.url(forKey: TPPSettings.accountMainFeedURLKey)
     }
     set(mainFeedUrl) {
-      if (mainFeedUrl == self.accountMainFeedURL) {
+      if mainFeedUrl == self.accountMainFeedURL {
         return
       }
       UserDefaults.standard.set(mainFeedUrl, forKey: TPPSettings.accountMainFeedURLKey)
@@ -241,7 +278,7 @@ func feedbackURL(appLanguage: String!) -> String {
       UserDefaults.standard.set(newValue, forKey: TPPSettings.userHasSeenWelcomeScreenKey)
     }
   }
-  
+
   var userPresentedAgeCheck: Bool {
     get {
       UserDefaults.standard.bool(forKey: TPPSettings.userPresentedAgeCheckKey)
@@ -250,7 +287,7 @@ func feedbackURL(appLanguage: String!) -> String {
       UserDefaults.standard.set(newValue, forKey: TPPSettings.userPresentedAgeCheckKey)
     }
   }
-  
+
   var userHasAcceptedEULA: Bool {
     get {
       UserDefaults.standard.bool(forKey: TPPSettings.userHasAcceptedEULAKey)
@@ -268,7 +305,7 @@ func feedbackURL(appLanguage: String!) -> String {
       UserDefaults.standard.set(b, forKey: TPPSettings.userSeenFirstTimeSyncMessageKey)
     }
   }
-  
+
   var useBetaLibraries: Bool {
     get {
       UserDefaults.standard.bool(forKey: TPPSettings.useBetaLibrariesKey)
@@ -288,7 +325,7 @@ func feedbackURL(appLanguage: String!) -> String {
       UserDefaults.standard.set(versionString, forKey: TPPSettings.versionKey)
     }
   }
-  
+
   var customLibraryRegistryServer: String? {
     get {
       UserDefaults.standard.string(forKey: TPPSettings.customLibraryRegistryKey)
@@ -306,5 +343,4 @@ func feedbackURL(appLanguage: String!) -> String {
       UserDefaults.standard.set(newValue, forKey: TPPSettings.enterLCPPassphraseManually)
     }
   }
-  
 }
