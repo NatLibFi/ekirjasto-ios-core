@@ -23,6 +23,8 @@ enum HTTPMethodType: String {
  */
 final class NetworkQueue: NSObject {
 
+  typealias Expression = SQLite.Expression
+
   static let sharedInstance = NetworkQueue()
 
   // For Objective-C classes
