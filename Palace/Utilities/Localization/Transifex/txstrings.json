@@ -198,6 +198,9 @@
       "account_faq" : {
          "string" : "Frequently Asked Questions"
       },
+      "account_instructions" : {
+         "string" : "User instructions"
+      },
       "account_leave_feedback" : {
          "string" : "Leave feedback"
       },
@@ -637,7 +640,7 @@
          "string" : "30"
       },
       "bookReachedLoanLimitDialogButton" : {
-         "string" : "OK"
+         "string" : "Confirm"
       },
       "bookReachedLoanLimitDialogMessage" : {
          "string" : "You have reached your loan limit. You cannot borrow anything further until you return something."
@@ -647,6 +650,15 @@
       },
       "bookReturned" : {
          "string" : "The book '%1$s' has been successfully returned"
+      },
+      "bookSessionExpiredButton" : {
+         "string" : "Confirm"
+      },
+      "bookSessionExpiredMessage" : {
+         "string" : "Your session has expired, please log in again."
+      },
+      "bookSessionExpiredTitle" : {
+         "string" : "Session expired!"
       },
       "bookmarkEnd" : {
          "string" : "At the end of the chapter."
@@ -1259,6 +1271,15 @@
       },
       "magazinesHeader" : {
          "string" : "Magazines"
+      },
+      "magazinesSessionExpiredButton" : {
+         "string" : "Confirm"
+      },
+      "magazinesSessionExpiredMessage" : {
+         "string" : "Your session has expired, please log in again."
+      },
+      "magazinesSessionExpiredTitle" : {
+         "string" : "Session expired!"
       },
       "magazinesSignInRequiredSubtitle" : {
          "string" : "Visit the settings to sign in"
@@ -2168,6 +2189,9 @@
       "account_faq" : {
          "string" : "Usein kysytyt kysymykset"
       },
+      "account_instructions" : {
+         "string" : ""
+      },
       "account_leave_feedback" : {
          "string" : "Anna palautetta"
       },
@@ -2607,7 +2631,7 @@
          "string" : "30"
       },
       "bookReachedLoanLimitDialogButton" : {
-         "string" : "OK"
+         "string" : "Vahvista"
       },
       "bookReachedLoanLimitDialogMessage" : {
          "string" : "Olet saavuttanut lainarajasi. Et voi lainata enää mitään ennen kuin palautat jotain."
@@ -2617,6 +2641,15 @@
       },
       "bookReturned" : {
          "string" : "Kirja %1$s on palautettu onnistuneesti"
+      },
+      "bookSessionExpiredButton" : {
+         "string" : "Vahvista"
+      },
+      "bookSessionExpiredMessage" : {
+         "string" : "Istunto on vanhentunut, kirjaudu uudelleen sisään."
+      },
+      "bookSessionExpiredTitle" : {
+         "string" : "Istunto on vanhentunut!"
       },
       "bookmarkEnd" : {
          "string" : "Luvun lopussa."
@@ -3229,6 +3262,15 @@
       },
       "magazinesHeader" : {
          "string" : "Lehdet"
+      },
+      "magazinesSessionExpiredButton" : {
+         "string" : "Vahvista"
+      },
+      "magazinesSessionExpiredMessage" : {
+         "string" : "Istunto on vanhentunut, kirjaudu uudelleen sisään."
+      },
+      "magazinesSessionExpiredTitle" : {
+         "string" : "Istunto on vanhentunut!"
       },
       "magazinesSignInRequiredSubtitle" : {
          "string" : "Kirjaudu sisään siirtymällä asetuksiin"
@@ -4138,6 +4180,9 @@
       "account_faq" : {
          "string" : "Vanliga frågor"
       },
+      "account_instructions" : {
+         "string" : ""
+      },
       "account_leave_feedback" : {
          "string" : "Ge respons"
       },
@@ -4587,6 +4632,15 @@
       },
       "bookReturned" : {
          "string" : "Boken '%1$s' har returnerats"
+      },
+      "bookSessionExpiredButton" : {
+         "string" : ""
+      },
+      "bookSessionExpiredMessage" : {
+         "string" : ""
+      },
+      "bookSessionExpiredTitle" : {
+         "string" : ""
       },
       "bookmarkEnd" : {
          "string" : "I slutet av kapitlet."
@@ -5199,6 +5253,15 @@
       },
       "magazinesHeader" : {
          "string" : "Tidskrifter"
+      },
+      "magazinesSessionExpiredButton" : {
+         "string" : ""
+      },
+      "magazinesSessionExpiredMessage" : {
+         "string" : ""
+      },
+      "magazinesSessionExpiredTitle" : {
+         "string" : ""
       },
       "magazinesSignInRequiredSubtitle" : {
          "string" : "Gå till inställningar för att logga in"
