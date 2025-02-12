@@ -1,4 +1,4 @@
-1.2.0
-- LCP-uppdatering
-– Förbättrad tillgänglighet
-- Bugfixar
+1.2.2
+- Uppdatering av ljudboksverktyg 
+- Fix för att radera nedladdade bokfiler från enheten
+- Lade till länk till appanvändarinstruktioner

@@ -1,4 +1,4 @@
-1.2.0
-- LCP update
-- Improved accessibility
-- Bug fixes
+1.2.2
+- Update for audiobook tool
+- Fix to remove downloaded book files from device
+- Added a link to app user instructions
