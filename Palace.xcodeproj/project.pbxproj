@@ -389,7 +389,7 @@
 		3312636D2A287F53006BA87D /* UIColor+TPPColorAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A14DF31A1BF94F00D6C510 /* UIColor+TPPColorAdditions.m */; };
 		3312636E2A287F53006BA87D /* TPPBookmarkSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732F474A260B224A00E2CB64 /* TPPBookmarkSpec.swift */; };
 		3312636F2A287F53006BA87D /* TPPSignInBusinessLogic+DRM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737F4A6A254A137900A3C34B /* TPPSignInBusinessLogic+DRM.swift */; };
-		331263702A287F53006BA87D /* TPPMyBooksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53573DB2965E606008BDCA4 /* TPPMyBooksViewController.swift */; };
+		331263702A287F53006BA87D /* MyBooksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53573DB2965E606008BDCA4 /* MyBooksViewController.swift */; };
 		331263712A287F53006BA87D /* URLRequest+Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CDA120243EDAD8009CC6A6 /* URLRequest+Logging.swift */; };
 		331263722A287F53006BA87D /* TPPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A0F62478337D00C7984E /* TPPCredentials.swift */; };
 		331263732A287F53006BA87D /* TPPCatalogFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A42E0DF31B40F4E00095EBAE /* TPPCatalogFeedViewController.m */; };
@@ -1105,8 +1105,8 @@
 		E53573D729653076008BDCA4 /* FacetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53573D529653076008BDCA4 /* FacetView.swift */; };
 		E53573D929653095008BDCA4 /* FacetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53573D829653095008BDCA4 /* FacetViewModel.swift */; };
 		E53573DA29653095008BDCA4 /* FacetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53573D829653095008BDCA4 /* FacetViewModel.swift */; };
-		E53573DC2965E606008BDCA4 /* TPPMyBooksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53573DB2965E606008BDCA4 /* TPPMyBooksViewController.swift */; };
-		E53573DD2965E606008BDCA4 /* TPPMyBooksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53573DB2965E606008BDCA4 /* TPPMyBooksViewController.swift */; };
+		E53573DC2965E606008BDCA4 /* MyBooksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53573DB2965E606008BDCA4 /* MyBooksViewController.swift */; };
+		E53573DD2965E606008BDCA4 /* MyBooksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53573DB2965E606008BDCA4 /* MyBooksViewController.swift */; };
 		E53CDA882A2FBCD800C6008A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53CDA872A2FBCD800C6008A /* LocationManager.swift */; };
 		E53CDABC2A2FD4D300C6008A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53CDA872A2FBCD800C6008A /* LocationManager.swift */; };
 		E544C4E92A395BE000B2DC9D /* MyBooksDownloadCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E544C4E82A395BE000B2DC9D /* MyBooksDownloadCenter.swift */; };
@@ -2037,7 +2037,7 @@
 		E53573D1295613FF008BDCA4 /* MyBooksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBooksViewModel.swift; sourceTree = "<group>"; };
 		E53573D529653076008BDCA4 /* FacetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacetView.swift; sourceTree = "<group>"; };
 		E53573D829653095008BDCA4 /* FacetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacetViewModel.swift; sourceTree = "<group>"; };
-		E53573DB2965E606008BDCA4 /* TPPMyBooksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPPMyBooksViewController.swift; sourceTree = "<group>"; };
+		E53573DB2965E606008BDCA4 /* MyBooksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBooksViewController.swift; sourceTree = "<group>"; };
 		E53CDA872A2FBCD800C6008A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		E544C4E82A395BE000B2DC9D /* MyBooksDownloadCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBooksDownloadCenter.swift; sourceTree = "<group>"; };
 		E544C4EB2A395DDE00B2DC9D /* MyBooksDownloadInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBooksDownloadInfo.swift; sourceTree = "<group>"; };
@@ -2768,16 +2768,10 @@
 		7384C751252D1F720012C2DD /* MyBooks */ = {
 			isa = PBXGroup;
 			children = (
-				7384C756252D20AA0012C2DD /* TPPBook+DistributorChecks.swift */,
-				A4276F461B00046300CA7194 /* TPPMyBooksDownloadInfo.h */,
-				A4276F471B00046300CA7194 /* TPPMyBooksDownloadInfo.m */,
-				2DEF10B8201ECCEA0082843A /* TPPMyBooksSimplifiedBearerToken.h */,
-				2DEF10B9201ECCEA0082843A /* TPPMyBooksSimplifiedBearerToken.m */,
-				E53573DB2965E606008BDCA4 /* TPPMyBooksViewController.swift */,
-				E53573D42965306A008BDCA4 /* MyBooks */,
-				E544C4E82A395BE000B2DC9D /* MyBooksDownloadCenter.swift */,
-				E544C4EB2A395DDE00B2DC9D /* MyBooksDownloadInfo.swift */,
-				E544C4EE2A395E8C00B2DC9D /* MyBooksSimplifiedBearerToken.swift */,
+				75E833BE2D73742200D2B840 /* Downloading */,
+				73B5DFFD2605648F00225C12 /* Holds */,
+				E53573D42965306A008BDCA4 /* Loans */,
+				75E833BF2D7374AB00D2B840 /* UI */,
 			);
 			path = MyBooks;
 			sourceTree = "<group>";
@@ -3247,6 +3241,49 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		75E833BD2D7373CE00D2B840 /* Facet */ = {
+			isa = PBXGroup;
+			children = (
+				E53573D529653076008BDCA4 /* FacetView.swift */,
+				E53573D829653095008BDCA4 /* FacetViewModel.swift */,
+			);
+			path = Facet;
+			sourceTree = "<group>";
+		};
+		75E833BE2D73742200D2B840 /* Downloading */ = {
+			isa = PBXGroup;
+			children = (
+				E544C4E82A395BE000B2DC9D /* MyBooksDownloadCenter.swift */,
+				E544C4EB2A395DDE00B2DC9D /* MyBooksDownloadInfo.swift */,
+				E544C4EE2A395E8C00B2DC9D /* MyBooksSimplifiedBearerToken.swift */,
+				7384C756252D20AA0012C2DD /* TPPBook+DistributorChecks.swift */,
+				A4276F461B00046300CA7194 /* TPPMyBooksDownloadInfo.h */,
+				A4276F471B00046300CA7194 /* TPPMyBooksDownloadInfo.m */,
+				2DEF10B8201ECCEA0082843A /* TPPMyBooksSimplifiedBearerToken.h */,
+				2DEF10B9201ECCEA0082843A /* TPPMyBooksSimplifiedBearerToken.m */,
+			);
+			path = Downloading;
+			sourceTree = "<group>";
+		};
+		75E833BF2D7374AB00D2B840 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				E5EFDE7A298C4F7100258CA3 /* BookCell */,
+				E5824BE4299591DB00DE76C2 /* ButtonView */,
+				75E833BD2D7373CE00D2B840 /* Facet */,
+				75E833C02D73755200D2B840 /* List */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		75E833C02D73755200D2B840 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				E5180AB929A91D42002A18F8 /* AdaptableGridLayout.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
 		84B7A3421B84E8FE00584FB2 /* OpenDyslexicFont */ = {
 			isa = PBXGroup;
 			children = (
@@ -3418,7 +3455,6 @@
 				73B5DFD72605296300225C12 /* Book */,
 				739ECB2725101F1600691A70 /* Catalog */,
 				73DE53322525A588003E2C56 /* ErrorHandling */,
-				73B5DFFD2605648F00225C12 /* Holds */,
 				732940BD251D04970065E362 /* Keychain */,
 				73B5DFF926055E2A00225C12 /* Logging */,
 				73085E3325030CFC008F6244 /* Migrations */,
@@ -3530,17 +3566,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		E53573D42965306A008BDCA4 /* MyBooks */ = {
+		E53573D42965306A008BDCA4 /* Loans */ = {
 			isa = PBXGroup;
 			children = (
-				E53573D1295613FF008BDCA4 /* MyBooksViewModel.swift */,
 				E53573CE295612BA008BDCA4 /* MyBooksView.swift */,
-				E53573D829653095008BDCA4 /* FacetViewModel.swift */,
-				E53573D529653076008BDCA4 /* FacetView.swift */,
-				E5EFDE7A298C4F7100258CA3 /* BookCell */,
-				E5180AB929A91D42002A18F8 /* AdaptableGridLayout.swift */,
+				E53573DB2965E606008BDCA4 /* MyBooksViewController.swift */,
+				E53573D1295613FF008BDCA4 /* MyBooksViewModel.swift */,
 			);
-			path = MyBooks;
+			path = Loans;
 			sourceTree = "<group>";
 		};
 		E53CDA862A2FBCCA00C6008A /* System */ = {
@@ -3579,8 +3612,8 @@
 			isa = PBXGroup;
 			children = (
 				E5EFDE77298C43D300258CA3 /* BookButtonState.swift */,
-				E5824BE22994B29700DE76C2 /* ButtonView.swift */,
 				E523A454299FCD4B00EF833B /* BookButtonType.swift */,
+				E5824BE22994B29700DE76C2 /* ButtonView.swift */,
 			);
 			path = ButtonView;
 			sourceTree = "<group>";
@@ -3697,11 +3730,10 @@
 		E5EFDE7A298C4F7100258CA3 /* BookCell */ = {
 			isa = PBXGroup;
 			children = (
-				E5824BE4299591DB00DE76C2 /* ButtonView */,
 				E567C72B296743990079C28C /* BookCell.swift */,
 				E5EFDE7B298C4F8000258CA3 /* BookCellModel.swift */,
-				E5824BDE2994AC2900DE76C2 /* NormalBookCell.swift */,
 				E5824BE02994AF4800DE76C2 /* DownloadingBookCell.swift */,
+				E5824BDE2994AC2900DE76C2 /* NormalBookCell.swift */,
 			);
 			path = BookCell;
 			sourceTree = "<group>";
@@ -4656,7 +4688,7 @@
 				3312636D2A287F53006BA87D /* UIColor+TPPColorAdditions.m in Sources */,
 				3312636E2A287F53006BA87D /* TPPBookmarkSpec.swift in Sources */,
 				3312636F2A287F53006BA87D /* TPPSignInBusinessLogic+DRM.swift in Sources */,
-				331263702A287F53006BA87D /* TPPMyBooksViewController.swift in Sources */,
+				331263702A287F53006BA87D /* MyBooksViewController.swift in Sources */,
 				331263712A287F53006BA87D /* URLRequest+Logging.swift in Sources */,
 				331263722A287F53006BA87D /* TPPCredentials.swift in Sources */,
 				33FCF7F42AC458D7008E3B72 /* ChapterLocation+Extensions.swift in Sources */,
@@ -5022,7 +5054,7 @@
 				73EB0AB525821DF4006BC997 /* UIColor+TPPColorAdditions.m in Sources */,
 				732F474E260B224A00E2CB64 /* TPPBookmarkSpec.swift in Sources */,
 				73EB0AB625821DF4006BC997 /* TPPSignInBusinessLogic+DRM.swift in Sources */,
-				E53573DD2965E606008BDCA4 /* TPPMyBooksViewController.swift in Sources */,
+				E53573DD2965E606008BDCA4 /* MyBooksViewController.swift in Sources */,
 				73EB0AB725821DF4006BC997 /* URLRequest+Logging.swift in Sources */,
 				73EB0AB825821DF4006BC997 /* TPPCredentials.swift in Sources */,
 				73EB0AB925821DF4006BC997 /* TPPCatalogFeedViewController.m in Sources */,
@@ -5558,7 +5590,7 @@
 				E7048072285A72A600019B31 /* TPPPDFNavigation.swift in Sources */,
 				E7C4BD6129BA70710079F729 /* TPPTextToSpeech.swift in Sources */,
 				E73549DE28A53982001B0D0A /* TPPPDFPageBookmark.swift in Sources */,
-				E53573DC2965E606008BDCA4 /* TPPMyBooksViewController.swift in Sources */,
+				E53573DC2965E606008BDCA4 /* MyBooksViewController.swift in Sources */,
 				73B501C524F48D4C00FBAD7D /* TPPUserAccountFrontEndValidation.swift in Sources */,
 				E501710F27A3948C004B3392 /* TPPBookmarkFactory.swift in Sources */,
 				E5180ABA29A91D42002A18F8 /* AdaptableGridLayout.swift in Sources */,
