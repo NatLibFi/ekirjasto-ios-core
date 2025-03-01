@@ -6,6 +6,7 @@
 @interface TPPRootTabBarController () <UITabBarControllerDelegate>
 
 @property (nonatomic) TPPCatalogNavigationController *catalogNavigationController;
+@property (nonatomic) LoansAndHoldsViewController *loansAndHoldsNavigationController;
 @property (nonatomic) LoansViewController *loansNavigationController;
 @property (nonatomic) TPPHoldsNavigationController *holdsNavigationController;
 @property (nonatomic) EkirjastoMagazineNavigationController *magazineViewController;
@@ -43,6 +44,9 @@
   self.delegate = self;
   
   self.catalogNavigationController = [[TPPCatalogNavigationController alloc] init];
+  self.loansAndHoldsNavigationController = (LoansAndHoldsViewController * ) [LoansAndHoldsViewController makeSwiftUIViewWithDismissHandler:^{
+    [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
+  }];
   self.loansNavigationController = (LoansViewController * ) [LoansViewController makeSwiftUIViewWithDismissHandler:^{
     [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
   }];
@@ -104,11 +108,13 @@
 {
     // E-kirjasto supports reservations (==holds) so it's check has been removed.
     self.viewControllers = @[self.catalogNavigationController,
+                             self.loansAndHoldsNavigationController,
                              self.loansNavigationController,
                              self.holdsNavigationController,
                              self.magazineViewController,
                              self.settingsViewController];
     self.viewControllerNames = @[@"catalogNavigationController",
+                                  @"loansAndHoldsNavigationController",
                                   @"loansNavigationController",
                                   @"holdsNavigationController",
                                   @"magazineViewController",

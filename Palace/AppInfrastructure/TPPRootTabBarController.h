@@ -12,6 +12,7 @@
 
 @property (readonly) TPPR2Owner *r2Owner;
 @property(nonatomic, readonly) TPPCatalogNavigationController *catalogNavigationController;
+@property (nonatomic, readonly) UIViewController *loansAndHoldsViewController;
 @property (nonatomic, readonly) UIViewController *settingsViewController;
 
 - (void)showAndReloadCatalogViewController;
