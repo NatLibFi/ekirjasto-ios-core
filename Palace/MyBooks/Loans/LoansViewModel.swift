@@ -1,5 +1,5 @@
 //
-//  MyBooksViewModel.swift
+//  LoansViewModel.swift
 //  Palace
 //
 //  Created by Maurice Carrier on 12/23/22.
@@ -14,7 +14,7 @@ enum Group: Int {
 }
 
 @MainActor
-class MyBooksViewModel: ObservableObject {
+class LoansViewModel: ObservableObject {
   typealias DisplayStrings = Strings.MyBooksView
 
   @Published var books = [TPPBook]()
@@ -58,8 +58,8 @@ class MyBooksViewModel: ObservableObject {
   func loadData() {
     DispatchQueue.main.async {
       self.books =  Reachability.shared.isConnectedToNetwork() ?
-      TPPBookRegistry.shared.myBooks :
-      TPPBookRegistry.shared.myBooks.filter { !$0.isExpired }
+      TPPBookRegistry.shared.loans :
+      TPPBookRegistry.shared.loans.filter { !$0.isExpired }
       self.sortData()
     }
   }
