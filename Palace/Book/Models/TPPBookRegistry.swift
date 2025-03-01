@@ -342,8 +342,8 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
       .map { $0.book }
   }
   
-  /// Returns all books not on hold (borrowed or kept).
-  var myBooks: [TPPBook] {
+  /// Returns all books on loan (books not on hold).
+  var loans: [TPPBook] {
     let matchingStates: [TPPBookState] = [
       .DownloadNeeded, .Downloading, .SAMLStarted, .DownloadFailed, .DownloadSuccessful, .Used
     ]

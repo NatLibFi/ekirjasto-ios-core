@@ -32,7 +32,7 @@ class LCPPassphraseAuthenticationService: LCPAuthenticating {
       return
     }
     let logError = makeLogger(code: .lcpPassphraseRetrievalFail, urlKey: "loansUrl", urlValue: loansUrl)
-    guard let books = registry.myBooks as? [TPPBook],
+    guard let books = registry.loans as? [TPPBook],
           let book = books.filter({ registry.fulfillmentId(forIdentifier: $0.identifier) == licenseId }).first else {
             logError("LCP passphrase retrieval error: no book with fulfillment id found", "licenseId", licenseId)
             completion(nil)

@@ -1,5 +1,5 @@
 //
-//  MyBooksView.swift
+//  LoansView.swift
 //  Palace
 //
 //  Created by Maurice Carrier on 12/23/22.
@@ -9,9 +9,9 @@
 import SwiftUI
 import Combine
 
-struct MyBooksView: View {
+struct LoansView: View {
   typealias DisplayStrings = Strings.MyBooksView
-  @ObservedObject var model: MyBooksViewModel
+  @ObservedObject var model: LoansViewModel
   @State var selectNewLibrary = false
   @State var showLibraryAccountView = false
   @State var showDetailForBook: TPPBook?

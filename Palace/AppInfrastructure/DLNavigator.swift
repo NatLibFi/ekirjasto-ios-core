@@ -100,7 +100,7 @@ class DLNavigator {
         self?.login(libraryId: libraryId, barcode: barcode)
       }
       DispatchQueue.main.async {
-        MyBooksViewModel().authenticateAndLoad(newAccount)
+        LoansViewModel().authenticateAndLoad(newAccount)
       }
       return
     }

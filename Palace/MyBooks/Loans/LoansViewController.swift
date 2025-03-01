@@ -1,5 +1,5 @@
 //
-//  TPPMyBooksViewController.swift
+//  LoansViewController.swift
 //  Palace
 //
 //  Created by Maurice Carrier on 1/4/23.
@@ -9,9 +9,9 @@
 import Foundation
 import SwiftUI
 
-class TPPMyBooksViewController: NSObject {
+class LoansViewController: NSObject {
   @MainActor @objc static func makeSwiftUIView(dismissHandler: @escaping (() -> Void)) -> UIViewController {
-    let controller = UIHostingController(rootView: MyBooksView(model: MyBooksViewModel()))
+    let controller = UIHostingController(rootView: LoansView(model: LoansViewModel()))
     controller.title = Strings.MyBooksView.navTitle
     controller.tabBarItem.image = UIImage(named: "MyBooks")
     controller.tabBarItem.selectedImage = UIImage(named: "MyBooksSelected")

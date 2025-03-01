@@ -269,8 +269,8 @@ static const int kServerUpdateDelay = 15;
       if ([selectedViewControllerName  isEqual: @"catalogNavigationController"]) {
         navBackTitle = NSLocalizedString(@"Browse Books", nil);
       }
-      else if ([selectedViewControllerName  isEqual: @"myBooksNavigationController"]) {
-        navBackTitle = NSLocalizedString(@"My Books", nil);
+      else if ([selectedViewControllerName  isEqual: @"loansNavigationController"]) {
+        navBackTitle = NSLocalizedString(@"Loans", nil);
       }
       
       id<AudiobookManager> const manager = [[DefaultAudiobookManager alloc]
