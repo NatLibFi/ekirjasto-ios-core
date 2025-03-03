@@ -7,8 +7,6 @@
 
 @property (nonatomic) TPPCatalogNavigationController *catalogNavigationController;
 @property (nonatomic) LoansAndHoldsViewController *loansAndHoldsNavigationController;
-@property (nonatomic) LoansViewController *loansNavigationController;
-@property (nonatomic) TPPHoldsNavigationController *holdsNavigationController;
 @property (nonatomic) EkirjastoMagazineNavigationController *magazineViewController;
 @property (nonatomic) UIViewController *settingsViewController;
 @property (readwrite) TPPR2Owner *r2Owner;
@@ -43,21 +41,26 @@
   
   self.delegate = self;
   
-  self.catalogNavigationController = [[TPPCatalogNavigationController alloc] init];
-  self.loansAndHoldsNavigationController = (LoansAndHoldsViewController * ) [LoansAndHoldsViewController makeSwiftUIViewWithDismissHandler:^{
-    [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
-  }];
-  self.loansNavigationController = (LoansViewController * ) [LoansViewController makeSwiftUIViewWithDismissHandler:^{
-    [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
-  }];
-  self.holdsNavigationController = [[TPPHoldsNavigationController alloc] init];
+  self.catalogNavigationController = [
+    [TPPCatalogNavigationController alloc] init
+  ];
+  
+  self.loansAndHoldsNavigationController = [
+    LoansAndHoldsViewController makeSwiftUIViewWithDismissHandler:^{
+      [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
+    }
+  ];
+  
   self.magazineViewController = [
     [EkirjastoMagazineNavigationController alloc] initWithRootViewController:
       [[DigitalMagazineBrowserViewController alloc] init]
   ];
-  self.settingsViewController =  [TPPSettingsViewController makeSwiftUIViewWithDismissHandler:^{
-    [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
-  }];
+  
+  self.settingsViewController =  [
+    TPPSettingsViewController makeSwiftUIViewWithDismissHandler:^{
+      [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
+    }
+  ];
 
   [self setTabViewControllers];
 
@@ -107,18 +110,21 @@
 - (void)setTabViewControllersInternal
 {
     // E-kirjasto supports reservations (==holds) so it's check has been removed.
-    self.viewControllers = @[self.catalogNavigationController,
-                             self.loansAndHoldsNavigationController,
-                             self.loansNavigationController,
-                             self.holdsNavigationController,
-                             self.magazineViewController,
-                             self.settingsViewController];
-    self.viewControllerNames = @[@"catalogNavigationController",
-                                  @"loansAndHoldsNavigationController",
-                                  @"loansNavigationController",
-                                  @"holdsNavigationController",
-                                  @"magazineViewController",
-                                  @"settingsViewController"];
+    
+  self.viewControllers = @[
+    self.catalogNavigationController,
+    self.loansAndHoldsNavigationController,
+    self.magazineViewController,
+    self.settingsViewController
+  ];
+    
+  self.viewControllerNames = @[
+      @"catalogNavigationController",
+      @"loansAndHoldsNavigationController",
+      @"magazineViewController",
+      @"settingsViewController"
+    ];
+  
 }
 
 - (void)showAndReloadCatalogViewController
