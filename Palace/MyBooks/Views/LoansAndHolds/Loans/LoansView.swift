@@ -11,21 +11,21 @@ import Combine
 
 struct LoansView: View {
   typealias DisplayStrings = Strings.MyBooksView
-  @ObservedObject var model: LoansViewModel
+  @ObservedObject var loansViewModel: LoansViewModel
   @State var selectNewLibrary = false
   @State var showLibraryAccountView = false
   @State var showDetailForBook: TPPBook?
 
   var body: some View {
-    NavigationLink(destination: accountScreen, isActive: $model.showAccountScreen) {}
-    NavigationLink(destination: searchView, isActive: $model.showSearchSheet) {}
+    NavigationLink(destination: accountScreen, isActive: $loansViewModel.showAccountScreen) {}
+    NavigationLink(destination: searchView, isActive: $loansViewModel.showSearchSheet) {}
     NavigationLink(destination: accountPickerList, isActive: $showLibraryAccountView) {}
 
     //TODO: This is a workaround for an apparent bug in iOS14 that prevents us from wrapping
     // the body in a NavigationView. Once iOS14 support is dropped, this can be removed/replaced
     // with a NavigationView
     EmptyView()
-      .alert(item: $model.alert) { alert in
+      .alert(item: $loansViewModel.alert) { alert in
         Alert(
           title: Text(alert.title),
           message: Text(alert.message),
@@ -46,11 +46,11 @@ struct LoansView: View {
   }
   
   @ViewBuilder private var facetView: some View {
-    FacetView(model: model.facetViewModel)
+    FacetView(model: loansViewModel.facetViewModel)
   }
   
   @ViewBuilder private var loadingView: some View {
-    if model.isLoading {
+    if loansViewModel.isLoading {
       ProgressView()
         .scaleEffect(x: 2, y: 2, anchor: .center)
         .horizontallyCentered()
@@ -67,18 +67,18 @@ struct LoansView: View {
   
   @ViewBuilder private var content: some View {
     GeometryReader { geometry in
-      if model.showInstructionsLabel {
+      if loansViewModel.showInstructionsLabel {
         VStack {
           emptyView
         }
         .frame(minHeight: geometry.size.height)
         .refreshable {
-          model.reloadData()
+          loansViewModel.reloadData()
         }
       } else {
         listView
           .refreshable {
-            model.reloadData()
+            loansViewModel.reloadData()
           }
       }
     }
@@ -86,26 +86,26 @@ struct LoansView: View {
     
   @ViewBuilder private var listView: some View {
     AdaptableGridLayout {
-      ForEach(0..<model.books.count, id: \.self) { i in
+      ForEach(0..<loansViewModel.books.count, id: \.self) { i in
         ZStack(alignment: .leading) {
-            cell(for: model.books[i])
+            cell(for: loansViewModel.books[i])
         }
-        .opacity(model.isLoading ? 0.5 : 1.0)
-        .disabled(model.isLoading)
+        .opacity(loansViewModel.isLoading ? 0.5 : 1.0)
+        .disabled(loansViewModel.isLoading)
       }
     }
     .padding(.bottom, 20)
-    .onAppear { model.loadData() }
+    .onAppear { loansViewModel.loadData() }
   }
     
   private func cell(for book: TPPBook) -> some View {
     let model = BookCellModel(book: book)
 
     model
-      .statePublisher.assign(to: \.isLoading, on: self.model)
-      .store(in: &self.model.observers)
+      .statePublisher.assign(to: \.isLoading, on: self.loansViewModel)
+      .store(in: &self.loansViewModel.observers)
 
-    if self.model.isPad {
+    if self.loansViewModel.isPad {
       return Button {
         showDetailForBook = book
       } label: {
@@ -142,7 +142,7 @@ struct LoansView: View {
   
   @ViewBuilder private var trailingBarButton: some View {
     Button {
-      model.showSearchSheet.toggle()
+      loansViewModel.showSearchSheet.toggle()
     } label: {
       ImageProviders.MyBooksView.search
     }
@@ -162,7 +162,7 @@ struct LoansView: View {
   private func existingLibraryButtons() -> [ActionSheet.Button] {
     TPPSettings.shared.settingsAccountsList.map { account in
         .default(Text(account.name)) {
-          model.loadAccount(account)
+          loansViewModel.loadAccount(account)
           showLibraryAccountView = false
           selectNewLibrary = false
         }
@@ -177,7 +177,7 @@ struct LoansView: View {
   
   private var accountPickerList: some View {
     let accountList = TPPAccountList { account in
-      model.authenticateAndLoad(account)
+      loansViewModel.authenticateAndLoad(account)
       showLibraryAccountView = false
       selectNewLibrary = false
     }
@@ -186,13 +186,13 @@ struct LoansView: View {
   }
   
   private var searchView: some View {
-    let searchDescription = TPPOpenSearchDescription(title: DisplayStrings.searchBooks, books: model.books)
+    let searchDescription = TPPOpenSearchDescription(title: DisplayStrings.searchBooks, books: loansViewModel.books)
     let navController = UINavigationController(rootViewController: TPPCatalogSearchViewController(openSearchDescription: searchDescription))
     return UIViewControllerWrapper(navController, updater: { _ in })
   }
   
   private var accountScreen: some View {
-    guard let url = model.accountURL else {
+    guard let url = loansViewModel.accountURL else {
       return EmptyView().anyView()
     }
     
@@ -200,50 +200,4 @@ struct LoansView: View {
     webController.hidesBottomBarWhenPushed = true
     return  UIViewControllerWrapper(webController, updater: { _ in } ).anyView()
   }
-}
-
-extension View {
-    func border(width: CGFloat, edges: [Edge], color: Color) -> some View {
-        overlay(EdgeBorder(width: width, edges: edges).foregroundColor(color))
-    }
-}
-
-struct EdgeBorder: Shape {
-    var width: CGFloat
-    var edges: [Edge]
-
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        for edge in edges {
-            var x: CGFloat {
-                switch edge {
-                case .top, .bottom, .leading: return rect.minX
-                case .trailing: return rect.maxX - width
-                }
-            }
-
-            var y: CGFloat {
-                switch edge {
-                case .top, .leading, .trailing: return rect.minY
-                case .bottom: return rect.maxY - width
-                }
-            }
-
-            var w: CGFloat {
-                switch edge {
-                case .top, .bottom: return rect.width
-                case .leading, .trailing: return width
-                }
-            }
-
-            var h: CGFloat {
-                switch edge {
-                case .top, .bottom: return width
-                case .leading, .trailing: return rect.height
-                }
-            }
-            path.addRect(CGRect(x: x, y: y, width: w, height: h))
-        }
-        return path
-    }
 }
