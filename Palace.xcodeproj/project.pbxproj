@@ -389,7 +389,6 @@
 		3312636D2A287F53006BA87D /* UIColor+TPPColorAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A14DF31A1BF94F00D6C510 /* UIColor+TPPColorAdditions.m */; };
 		3312636E2A287F53006BA87D /* TPPBookmarkSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732F474A260B224A00E2CB64 /* TPPBookmarkSpec.swift */; };
 		3312636F2A287F53006BA87D /* TPPSignInBusinessLogic+DRM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737F4A6A254A137900A3C34B /* TPPSignInBusinessLogic+DRM.swift */; };
-		331263702A287F53006BA87D /* LoansViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53573DB2965E606008BDCA4 /* LoansViewController.swift */; };
 		331263712A287F53006BA87D /* URLRequest+Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CDA120243EDAD8009CC6A6 /* URLRequest+Logging.swift */; };
 		331263722A287F53006BA87D /* TPPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A0F62478337D00C7984E /* TPPCredentials.swift */; };
 		331263732A287F53006BA87D /* TPPCatalogFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A42E0DF31B40F4E00095EBAE /* TPPCatalogFeedViewController.m */; };
@@ -1114,8 +1113,6 @@
 		E53573D729653076008BDCA4 /* FacetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53573D529653076008BDCA4 /* FacetView.swift */; };
 		E53573D929653095008BDCA4 /* FacetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53573D829653095008BDCA4 /* FacetViewModel.swift */; };
 		E53573DA29653095008BDCA4 /* FacetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53573D829653095008BDCA4 /* FacetViewModel.swift */; };
-		E53573DC2965E606008BDCA4 /* LoansViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53573DB2965E606008BDCA4 /* LoansViewController.swift */; };
-		E53573DD2965E606008BDCA4 /* LoansViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53573DB2965E606008BDCA4 /* LoansViewController.swift */; };
 		E53CDA882A2FBCD800C6008A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53CDA872A2FBCD800C6008A /* LocationManager.swift */; };
 		E53CDABC2A2FD4D300C6008A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53CDA872A2FBCD800C6008A /* LocationManager.swift */; };
 		E544C4E92A395BE000B2DC9D /* MyBooksDownloadCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E544C4E82A395BE000B2DC9D /* MyBooksDownloadCenter.swift */; };
@@ -2049,7 +2046,6 @@
 		E53573D1295613FF008BDCA4 /* LoansViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoansViewModel.swift; sourceTree = "<group>"; };
 		E53573D529653076008BDCA4 /* FacetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacetView.swift; sourceTree = "<group>"; };
 		E53573D829653095008BDCA4 /* FacetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacetViewModel.swift; sourceTree = "<group>"; };
-		E53573DB2965E606008BDCA4 /* LoansViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoansViewController.swift; sourceTree = "<group>"; };
 		E53CDA872A2FBCD800C6008A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		E544C4E82A395BE000B2DC9D /* MyBooksDownloadCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBooksDownloadCenter.swift; sourceTree = "<group>"; };
 		E544C4EB2A395DDE00B2DC9D /* MyBooksDownloadInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBooksDownloadInfo.swift; sourceTree = "<group>"; };
@@ -3601,7 +3597,6 @@
 			isa = PBXGroup;
 			children = (
 				E53573CE295612BA008BDCA4 /* LoansView.swift */,
-				E53573DB2965E606008BDCA4 /* LoansViewController.swift */,
 				E53573D1295613FF008BDCA4 /* LoansViewModel.swift */,
 			);
 			path = Loans;
@@ -4719,7 +4714,6 @@
 				3312636D2A287F53006BA87D /* UIColor+TPPColorAdditions.m in Sources */,
 				3312636E2A287F53006BA87D /* TPPBookmarkSpec.swift in Sources */,
 				3312636F2A287F53006BA87D /* TPPSignInBusinessLogic+DRM.swift in Sources */,
-				331263702A287F53006BA87D /* LoansViewController.swift in Sources */,
 				331263712A287F53006BA87D /* URLRequest+Logging.swift in Sources */,
 				331263722A287F53006BA87D /* TPPCredentials.swift in Sources */,
 				33FCF7F42AC458D7008E3B72 /* ChapterLocation+Extensions.swift in Sources */,
@@ -5090,7 +5084,6 @@
 				73EB0AB525821DF4006BC997 /* UIColor+TPPColorAdditions.m in Sources */,
 				732F474E260B224A00E2CB64 /* TPPBookmarkSpec.swift in Sources */,
 				73EB0AB625821DF4006BC997 /* TPPSignInBusinessLogic+DRM.swift in Sources */,
-				E53573DD2965E606008BDCA4 /* LoansViewController.swift in Sources */,
 				73EB0AB725821DF4006BC997 /* URLRequest+Logging.swift in Sources */,
 				73EB0AB825821DF4006BC997 /* TPPCredentials.swift in Sources */,
 				73EB0AB925821DF4006BC997 /* TPPCatalogFeedViewController.m in Sources */,
@@ -5630,7 +5623,6 @@
 				E7048072285A72A600019B31 /* TPPPDFNavigation.swift in Sources */,
 				E7C4BD6129BA70710079F729 /* TPPTextToSpeech.swift in Sources */,
 				E73549DE28A53982001B0D0A /* TPPPDFPageBookmark.swift in Sources */,
-				E53573DC2965E606008BDCA4 /* LoansViewController.swift in Sources */,
 				73B501C524F48D4C00FBAD7D /* TPPUserAccountFrontEndValidation.swift in Sources */,
 				E501710F27A3948C004B3392 /* TPPBookmarkFactory.swift in Sources */,
 				E5180ABA29A91D42002A18F8 /* AdaptableGridLayout.swift in Sources */,

@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 
 struct FacetView: View {
-  @ObservedObject var model: FacetViewModel
+  @ObservedObject var facetViewModel: FacetViewModel
   @State private var showAlert = false
 
   var body: some View {
@@ -30,14 +30,14 @@ struct FacetView: View {
   }
 
   private var titleLabel: some View {
-    Text(model.groupName)
+    Text(facetViewModel.groupName)
   }
 
   private var sortView: some View {
     Button(action: {
       showAlert = true
     }) {
-      Text(model.activeSort.localizedString)
+      Text(facetViewModel.activeSort.localizedString)
         .font(Font(uiFont: UIFont.boldPalaceFont(ofSize: 13)))
       Image("ArrowDown")
         .resizable()
@@ -61,13 +61,13 @@ struct FacetView: View {
   private var alert: ActionSheet {
     var buttons = [ActionSheet.Button]()
 
-    if let secondaryFacet = model.facets.first(where: { $0 != model.activeSort }) {
+    if let secondaryFacet = facetViewModel.facets.first(where: { $0 != facetViewModel.activeSort }) {
       buttons.append(ActionSheet.Button.default(Text(secondaryFacet.localizedString)) {
-        self.model.activeSort = secondaryFacet
+        self.facetViewModel.activeSort = secondaryFacet
       })
 
-      buttons.append(Alert.Button.default(Text(model.activeSort.localizedString)) {
-        self.model.activeSort = model.activeSort
+      buttons.append(Alert.Button.default(Text(facetViewModel.activeSort.localizedString)) {
+        self.facetViewModel.activeSort = facetViewModel.activeSort
       })
     } else {
       buttons.append(ActionSheet.Button.cancel(Text(Strings.Generic.cancel)))
@@ -77,12 +77,12 @@ struct FacetView: View {
   }
   
   @ViewBuilder private var accountLogoView: some View {
-    if let account = model.currentAccount {
+    if let account = facetViewModel.currentAccount {
       Button {
-        model.showAccountScreen = true
+        facetViewModel.showAccountScreen = true
       } label: {
           HStack {
-            Image(uiImage: model.logo ?? UIImage())
+            Image(uiImage: facetViewModel.logo ?? UIImage())
               .resizable()
               .aspectRatio(contentMode: .fit)
               .square(length: 50)

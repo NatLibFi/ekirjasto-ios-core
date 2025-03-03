@@ -45,7 +45,7 @@
     [TPPCatalogNavigationController alloc] init
   ];
   
-  self.loansAndHoldsNavigationController = [
+  self.loansAndHoldsNavigationController = (LoansAndHoldsViewController *) [
     LoansAndHoldsViewController makeSwiftUIViewWithDismissHandler:^{
       [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
     }
