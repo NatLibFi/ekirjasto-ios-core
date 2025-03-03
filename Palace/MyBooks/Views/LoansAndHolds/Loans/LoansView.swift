@@ -1,25 +1,28 @@
 //
 //  LoansView.swift
-//  Palace
-//
-//  Created by Maurice Carrier on 12/23/22.
-//  Copyright © 2022 The Palace Project. All rights reserved.
 //
 
-import SwiftUI
 import Combine
+import SwiftUI
 
 struct LoansView: View {
-  typealias DisplayStrings = Strings.MyBooksView
+  
   @ObservedObject var loansViewModel: LoansViewModel
-  @State var selectNewLibrary = false
-  @State var showLibraryAccountView = false
   @State var showDetailForBook: TPPBook?
+  let backgroundColor: Color = Color(TPPConfiguration.backgroundColor())
+  
 
   var body: some View {
-    NavigationLink(destination: accountScreen, isActive: $loansViewModel.showAccountScreen) {}
-    NavigationLink(destination: searchView, isActive: $loansViewModel.showSearchSheet) {}
-    NavigationLink(destination: accountPickerList, isActive: $showLibraryAccountView) {}
+    
+    NavigationLink(
+      destination: accountScreen,
+      isActive: $loansViewModel.showAccountScreen
+    ) {}
+    
+    NavigationLink(
+      destination: searchView,
+      isActive: $loansViewModel.showSearchSheet
+    ) {}
 
     //TODO: This is a workaround for an apparent bug in iOS14 that prevents us from wrapping
     // the body in a NavigationView. Once iOS14 support is dropped, this can be removed/replaced
@@ -32,41 +35,56 @@ struct LoansView: View {
           dismissButton: .cancel()
         )
       }
-    
+
     ZStack {
       VStack(alignment: .leading) {
         facetView
         content
       }
-      .background(Color(TPPConfiguration.backgroundColor()))
-      .navigationBarItems(leading: leadingBarButton, trailing: trailingBarButton)
+      .background(backgroundColor)
+      .navigationBarItems(trailing: searchButton)
       loadingView
     }
-    .background(Color(TPPConfiguration.backgroundColor()))
+    .background(backgroundColor)
+    
   }
+
   
   @ViewBuilder private var facetView: some View {
-    FacetView(model: loansViewModel.facetViewModel)
+    
+    FacetView(
+      facetViewModel: loansViewModel.facetViewModel
+    )
+    
   }
+
   
   @ViewBuilder private var loadingView: some View {
+    
     if loansViewModel.isLoading {
       ProgressView()
         .scaleEffect(x: 2, y: 2, anchor: .center)
         .horizontallyCentered()
     }
+    
   }
+
   
   @ViewBuilder private var emptyView: some View {
-    Text(DisplayStrings.emptyViewMessage)
+    
+    Text(Strings.MyBooksView.emptyViewMessage)
       .multilineTextAlignment(.center)
       .foregroundColor(.gray)
       .horizontallyCentered()
       .verticallyCentered()
+    
   }
+
   
   @ViewBuilder private var content: some View {
+    
     GeometryReader { geometry in
+      
       if loansViewModel.showInstructionsLabel {
         VStack {
           emptyView
@@ -75,129 +93,118 @@ struct LoansView: View {
         .refreshable {
           loansViewModel.reloadData()
         }
+        
       } else {
         listView
           .refreshable {
             loansViewModel.reloadData()
           }
+        
       }
     }
   }
-    
+
+  
   @ViewBuilder private var listView: some View {
+    
     AdaptableGridLayout {
+      
       ForEach(0..<loansViewModel.books.count, id: \.self) { i in
         ZStack(alignment: .leading) {
-            cell(for: loansViewModel.books[i])
+          bookCell(for: loansViewModel.books[i])
         }
         .opacity(loansViewModel.isLoading ? 0.5 : 1.0)
         .disabled(loansViewModel.isLoading)
       }
+      
     }
     .padding(.bottom, 20)
     .onAppear { loansViewModel.loadData() }
-  }
     
-  private func cell(for book: TPPBook) -> some View {
-    let model = BookCellModel(book: book)
+  }
 
-    model
+  
+  private func bookCell(for book: TPPBook) -> some View {
+  
+    let bookCellModel = BookCellModel(book: book)
+
+    bookCellModel
       .statePublisher.assign(to: \.isLoading, on: self.loansViewModel)
       .store(in: &self.loansViewModel.observers)
 
     if self.loansViewModel.isPad {
+      
       return Button {
         showDetailForBook = book
       } label: {
-        BookCell(model: model)
-          //.border(width: 0.5, edges: [.bottom, .trailing], color: Color("ColorEkirjastoLightestGreen"))
+        BookCell(model: bookCellModel)
       }
       .sheet(item: $showDetailForBook) { item in
-        UIViewControllerWrapper(TPPBookDetailViewController(book: item), updater: { _ in }).anyView()
+        UIViewControllerWrapper(
+          TPPBookDetailViewController(book: item), updater: { _ in }
+        ).anyView()
       }
       .anyView()
+      
     } else {
-      return NavigationLink(destination: UIViewControllerWrapper(TPPBookDetailViewController(book: book), updater: { _ in })) {
-        BookCell(model: model)
+      
+      return NavigationLink(
+        destination: UIViewControllerWrapper(
+          TPPBookDetailViewController(book: book), updater: { _ in })
+      ) {
+        BookCell(model: bookCellModel)
           .padding(.leading, -25)
           .padding(.vertical, 15)
-          //.border(width: 0.5, edges: [.bottom ], color: Color("ColorEkirjastoLightestGreen"))
           .padding(.top, -25)
           .padding(.bottom, 10)
           .padding(.leading, 20)
           .padding(.trailing, 20)
       }
       .anyView()
+      
     }
+    
   }
-  
-  
-  @ViewBuilder private var leadingBarButton: some View {
-    Button {
-      showAndReloadCatalogTab()
-    } label: {
-      ImageProviders.MyBooksView.myLibraryIcon
-    } .accessibilityLabel(DisplayStrings.accessibilityShowAndReloadCatalogTab)
-  }
-  
-  @ViewBuilder private var trailingBarButton: some View {
+
+
+  @ViewBuilder private var searchButton: some View {
+    
     Button {
       loansViewModel.showSearchSheet.toggle()
     } label: {
       ImageProviders.MyBooksView.search
     }
-  }
-  
-  private func showAndReloadCatalogTab() {
-    TPPRootTabBarController.shared().showAndReloadCatalogViewController()
-  }
-  
-  private var libraryPicker: ActionSheet {
-    ActionSheet(
-      title: Text(DisplayStrings.findYourLibrary),
-      buttons: existingLibraryButtons() + [addLibraryButton, .cancel()]
-    )
-  }
-  
-  private func existingLibraryButtons() -> [ActionSheet.Button] {
-    TPPSettings.shared.settingsAccountsList.map { account in
-        .default(Text(account.name)) {
-          loansViewModel.loadAccount(account)
-          showLibraryAccountView = false
-          selectNewLibrary = false
-        }
-    }
-  }
-  
-  private var addLibraryButton: Alert.Button {
-    .default(Text(DisplayStrings.addLibrary)) {
-      showLibraryAccountView = true
-    }
-  }
-  
-  private var accountPickerList: some View {
-    let accountList = TPPAccountList { account in
-      loansViewModel.authenticateAndLoad(account)
-      showLibraryAccountView = false
-      selectNewLibrary = false
-    }
     
-    return UIViewControllerWrapper(accountList, updater: {_ in })
   }
-  
+
+
+
   private var searchView: some View {
-    let searchDescription = TPPOpenSearchDescription(title: DisplayStrings.searchBooks, books: loansViewModel.books)
-    let navController = UINavigationController(rootViewController: TPPCatalogSearchViewController(openSearchDescription: searchDescription))
+    
+    let searchDescription = TPPOpenSearchDescription(
+      title: Strings.MyBooksView.searchBooks,
+      books: loansViewModel.books
+    )
+    
+    let navController = UINavigationController(
+      rootViewController: TPPCatalogSearchViewController(
+        openSearchDescription: searchDescription
+      )
+    )
+    
     return UIViewControllerWrapper(navController, updater: { _ in })
   }
+
   
   private var accountScreen: some View {
+    
     guard let url = loansViewModel.accountURL else {
       return EmptyView().anyView()
     }
-    
+
     let webController = BundledHTMLViewController(fileURL: url, title: "TEST")
     webController.hidesBottomBarWhenPushed = true
-    return  UIViewControllerWrapper(webController, updater: { _ in } ).anyView()
+    
+    return UIViewControllerWrapper(webController, updater: { _ in }).anyView()
   }
 }
