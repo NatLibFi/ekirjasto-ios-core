@@ -45,14 +45,13 @@ struct LoansAndHoldsView: View {
   
   @ViewBuilder private var EKirjastoButton: some View {
     Button {
-      TPPRootTabBarController
-        .shared()
-        .showAndReloadCatalogViewController()
+      TPPRootTabBarController.shared().showAndReloadCatalogViewController()
     } label: {
       ImageProviders.MyBooksView.myLibraryIcon
+        .accessibilityLabel(Strings.MyBooksView.accessibilityShowAndReloadCatalogTab)
     }
   }
-
+  
   
   @ViewBuilder private var SegmentedPicker: some View {
     VStack {
