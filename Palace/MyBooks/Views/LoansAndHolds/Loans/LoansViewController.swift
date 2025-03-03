@@ -11,7 +11,7 @@ import SwiftUI
 
 class LoansViewController: NSObject {
   @MainActor @objc static func makeSwiftUIView(dismissHandler: @escaping (() -> Void)) -> UIViewController {
-    let controller = UIHostingController(rootView: LoansView(model: LoansViewModel()))
+    let controller = UIHostingController(rootView: LoansView(loansViewModel: LoansViewModel()))
     controller.title = Strings.MyBooksView.navTitle
     controller.tabBarItem.image = UIImage(named: "MyBooks")
     controller.tabBarItem.selectedImage = UIImage(named: "MyBooksSelected")

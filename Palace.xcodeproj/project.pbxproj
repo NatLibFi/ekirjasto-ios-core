@@ -1027,12 +1027,12 @@
 		75E833DA2D73B49400D2B840 /* LoansAndHoldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E833D92D73B48D00D2B840 /* LoansAndHoldsView.swift */; };
 		75E833DB2D73B49400D2B840 /* LoansAndHoldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E833D92D73B48D00D2B840 /* LoansAndHoldsView.swift */; };
 		75E833DC2D73B49400D2B840 /* LoansAndHoldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E833D92D73B48D00D2B840 /* LoansAndHoldsView.swift */; };
-		75E833DE2D73B4AD00D2B840 /* LoansAndHoldsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E833DD2D73B4A700D2B840 /* LoansAndHoldsViewModel.swift */; };
-		75E833DF2D73B4AD00D2B840 /* LoansAndHoldsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E833DD2D73B4A700D2B840 /* LoansAndHoldsViewModel.swift */; };
-		75E833E02D73B4AD00D2B840 /* LoansAndHoldsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E833DD2D73B4A700D2B840 /* LoansAndHoldsViewModel.swift */; };
 		75E833E22D73B4C100D2B840 /* LoansAndHoldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E833E12D73B4B900D2B840 /* LoansAndHoldsViewController.swift */; };
 		75E833E32D73B4C100D2B840 /* LoansAndHoldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E833E12D73B4B900D2B840 /* LoansAndHoldsViewController.swift */; };
 		75E833E42D73B4C100D2B840 /* LoansAndHoldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E833E12D73B4B900D2B840 /* LoansAndHoldsViewController.swift */; };
+		75E834102D75E07900D2B840 /* HoldsControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8340F2D75E07000D2B840 /* HoldsControllerRepresentable.swift */; };
+		75E834112D75E07900D2B840 /* HoldsControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8340F2D75E07000D2B840 /* HoldsControllerRepresentable.swift */; };
+		75E834122D75E07900D2B840 /* HoldsControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8340F2D75E07000D2B840 /* HoldsControllerRepresentable.swift */; };
 		841B55431B740F2700FAC1AF /* TPPSettingsEULAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 841B55421B740F2700FAC1AF /* TPPSettingsEULAViewController.m */; };
 		84B7A3461B84E8FE00584FB2 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84B7A3431B84E8FE00584FB2 /* OFL.txt */; };
 		84B7A3471B84E8FE00584FB2 /* OpenDyslexic3-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84B7A3441B84E8FE00584FB2 /* OpenDyslexic3-Bold.ttf */; };
@@ -1960,8 +1960,8 @@
 		73F713672417240100C63B81 /* UIViewController+TPP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+TPP.swift"; path = "Palace/Reader2/UI/UIViewController+TPP.swift"; sourceTree = SOURCE_ROOT; };
 		73FB0AC824EB403D0072E430 /* TPPBookContentTypeConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPPBookContentTypeConverter.swift; sourceTree = "<group>"; };
 		75E833D92D73B48D00D2B840 /* LoansAndHoldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoansAndHoldsView.swift; sourceTree = "<group>"; };
-		75E833DD2D73B4A700D2B840 /* LoansAndHoldsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoansAndHoldsViewModel.swift; sourceTree = "<group>"; };
 		75E833E12D73B4B900D2B840 /* LoansAndHoldsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoansAndHoldsViewController.swift; sourceTree = "<group>"; };
+		75E8340F2D75E07000D2B840 /* HoldsControllerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldsControllerRepresentable.swift; sourceTree = "<group>"; };
 		841B55411B740F2700FAC1AF /* TPPSettingsEULAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPPSettingsEULAViewController.h; sourceTree = "<group>"; };
 		841B55421B740F2700FAC1AF /* TPPSettingsEULAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPPSettingsEULAViewController.m; sourceTree = "<group>"; };
 		84B7A3431B84E8FE00584FB2 /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
@@ -3039,6 +3039,7 @@
 				11C5DCF11976D1E0005A9945 /* TPPHoldsNavigationController.m */,
 				11C5DCF31976D22F005A9945 /* TPPHoldsViewController.h */,
 				11C5DCF41976D22F005A9945 /* TPPHoldsViewController.m */,
+				75E8340F2D75E07000D2B840 /* HoldsControllerRepresentable.swift */,
 			);
 			path = Holds;
 			sourceTree = "<group>";
@@ -3310,7 +3311,6 @@
 				E53573D42965306A008BDCA4 /* Loans */,
 				75E833D92D73B48D00D2B840 /* LoansAndHoldsView.swift */,
 				75E833E12D73B4B900D2B840 /* LoansAndHoldsViewController.swift */,
-				75E833DD2D73B4A700D2B840 /* LoansAndHoldsViewModel.swift */,
 			);
 			path = LoansAndHolds;
 			sourceTree = "<group>";
@@ -4758,6 +4758,7 @@
 				3312638F2A287F53006BA87D /* TPPPresentationUtils.swift in Sources */,
 				331263902A287F53006BA87D /* TPPMyBooksDownloadInfo.m in Sources */,
 				331263912A287F53006BA87D /* BookCellModel.swift in Sources */,
+				75E834122D75E07900D2B840 /* HoldsControllerRepresentable.swift in Sources */,
 				331263922A287F53006BA87D /* TPPFacetView.m in Sources */,
 				331263932A287F53006BA87D /* ReaderError.swift in Sources */,
 				33FCF7F12AC45897008E3B72 /* AudiobookTimeEntry.swift in Sources */,
@@ -4846,7 +4847,6 @@
 				331263DC2A287F53006BA87D /* AudiobookSamplePlayer.swift in Sources */,
 				331263DD2A287F53006BA87D /* URLResponse+TPPAuthentication.swift in Sources */,
 				331263DE2A287F53006BA87D /* TPPCatalogSearchViewController.m in Sources */,
-				75E833DE2D73B4AD00D2B840 /* LoansAndHoldsViewModel.swift in Sources */,
 				331263DF2A287F53006BA87D /* TPPLastReadPositionPoster.swift in Sources */,
 				331263E02A287F53006BA87D /* AdobeDRMAlerts.swift in Sources */,
 				331263E12A287F53006BA87D /* TPPAccountList.swift in Sources */,
@@ -5081,6 +5081,7 @@
 				E795A7682A74074300314EC8 /* AudiobookTimeEntry.swift in Sources */,
 				73EB0AB025821DF4006BC997 /* JWKResponse.swift in Sources */,
 				E544C4ED2A395DDE00B2DC9D /* MyBooksDownloadInfo.swift in Sources */,
+				75E834112D75E07900D2B840 /* HoldsControllerRepresentable.swift in Sources */,
 				73EB0AB125821DF4006BC997 /* UIFont+TPPSystemFontOverride.m in Sources */,
 				73EB0AB225821DF4006BC997 /* TPPReadiumBookmark.swift in Sources */,
 				73EB0AB325821DF4006BC997 /* TPPFacetViewDefaultDataSource.swift in Sources */,
@@ -5238,7 +5239,6 @@
 				E5180ABB29A91D42002A18F8 /* AdaptableGridLayout.swift in Sources */,
 				E7048073285A72A600019B31 /* TPPPDFNavigation.swift in Sources */,
 				E5AA6F4229A6BA4500601B02 /* RefreshableView.swift in Sources */,
-				75E833DF2D73B4AD00D2B840 /* LoansAndHoldsViewModel.swift in Sources */,
 				73EB0B1625821DF4006BC997 /* AudioBookVendors+Extensions.swift in Sources */,
 				E78AE804291C1D8A00884446 /* TPPBookRegistry.swift in Sources */,
 				73EB0B1725821DF4006BC997 /* TPPLibraryNavigationController.m in Sources */,
@@ -5346,7 +5346,6 @@
 				732F929323ECB51F0099244C /* TPPBackgroundExecutor.swift in Sources */,
 				5D1B141522CBE3570006C964 /* TPPProblemDocument.swift in Sources */,
 				E706F6092863831F000B7431 /* TPPPDFPage+serialization.swift in Sources */,
-				75E833E02D73B4AD00D2B840 /* LoansAndHoldsViewModel.swift in Sources */,
 				A92FB0F921CDCE3D004740F4 /* TPPReturnPromptHelper.swift in Sources */,
 				17E81F08261522B3001003C2 /* TPPRoundedButton.swift in Sources */,
 				7380E702254B3E77004613B1 /* TPPBookContentMetadataFilesHelper.swift in Sources */,
@@ -5469,6 +5468,7 @@
 				E7E89399284A1EB800C7A4F3 /* TPPPDFPreviewBar.swift in Sources */,
 				5DD5674522B303DF001F0C83 /* TPPDeveloperSettingsTableViewController.swift in Sources */,
 				E5AD65E12684FDA300C62951 /* TPPAccountListDataSource.swift in Sources */,
+				75E834102D75E07900D2B840 /* HoldsControllerRepresentable.swift in Sources */,
 				E5EFDE7C298C4F8000258CA3 /* BookCellModel.swift in Sources */,
 				E6602BC62C64DCB200B1212D /* DependentsView.swift in Sources */,
 				2D754BC22002F1B10061D34F /* TPPOPDSIndirectAcquisition.m in Sources */,
