@@ -6,20 +6,20 @@
 //  Copyright © 2023 The Palace Project. All rights reserved.
 //
 
-import Foundation
 import Combine
+import Foundation
 import SwiftUI
 
 enum BookCellState {
   case normal(BookButtonState)
   case downloading(BookButtonState)
   case downloadFailed(BookButtonState)
-  
+
   var buttonState: BookButtonState {
     switch self {
     case .normal(let state),
-        .downloading(let state),
-        .downloadFailed(let state):
+      .downloading(let state),
+      .downloadFailed(let state):
       return state
     }
   }
@@ -61,36 +61,45 @@ class BookCellModel: ObservableObject {
       return false
     }
   }
-  
+
   var buttonTypes: [BookButtonType] {
     state.buttonState.buttonTypes(book: book)
   }
-  
+
   private weak var buttonDelegate = TPPBookCellDelegate.shared()
-  private weak var sampleDelegate: TPPBookButtonsSampleDelegate?
   private weak var downloadDelegate: TPPBookDownloadCancellationDelegate?
 
   init(book: TPPBook) {
     self.book = book
-
     self.state = BookCellState(BookButtonState(book) ?? .unsupported)
-    self.isLoading = TPPBookRegistry.shared.processing(forIdentifier: book.identifier)
+    self.isLoading = TPPBookRegistry.shared.processing(
+      forIdentifier: book.identifier)
+
     registerForNotifications()
     loadBookCoverImage()
   }
-  
+
   private func registerForNotifications() {
-    NotificationCenter.default.addObserver(self, selector: #selector(updateButtons),
-                                           name: .TPPReachabilityChanged,
-                                           object: nil)
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(updateButtons),
+      name: .TPPReachabilityChanged,
+      object: nil
+    )
   }
-  
+
   private func loadBookCoverImage() {
-    guard let cachedImage = TPPBookRegistry.shared.cachedThumbnailImage(for: book) else {
+    guard
+      let cachedImage = TPPBookRegistry.shared.cachedThumbnailImage(for: book)
+    else {
       TPPBookRegistry.shared.thumbnailImage(for: book) { image in
-        guard let image = image else { return }
+        guard let image = image else {
+          return
+        }
+
         self.image = image
       }
+
       return
     }
 
@@ -105,16 +114,20 @@ class BookCellModel: ObservableObject {
     var date: Date?
 
     book.defaultAcquisition?.availability.matchUnavailable(
-        nil,
-        limited: { limited in
-          if let until = limited.until, until.timeIntervalSinceNow > 0 { date = until }
-        },
-        unlimited: nil,
-        reserved: nil,
-        ready: { ready in
-          if let until = ready.until, until.timeIntervalSinceNow > 0 { date = until }
+      nil,
+      limited: { limited in
+        if let until = limited.until, until.timeIntervalSinceNow > 0 {
+          date = until
         }
-      )
+      },
+      unlimited: nil,
+      reserved: nil,
+      ready: { ready in
+        if let until = ready.until, until.timeIntervalSinceNow > 0 {
+          date = until
+        }
+      }
+    )
 
     return date
   }
@@ -133,8 +146,6 @@ extension BookCellModel {
       didSelectReturn()
     case .cancel:
       didSelectCancel()
-    case .sample, .audiobookSample:
-      didSelectSample()
     case .read, .listen:
       didSelectRead()
     }
@@ -150,24 +161,42 @@ extension BookCellModel {
     var title = ""
     var message = ""
     var confirmButtonTitle = ""
-    let deleteAvailable = (book.defaultAcquisitionIfOpenAccess != nil) || !(TPPUserAccount.sharedAccount().authDefinition?.needsAuth ?? true)
+    let deleteAvailable =
+      (book.defaultAcquisitionIfOpenAccess != nil)
+      || !(TPPUserAccount.sharedAccount().authDefinition?.needsAuth ?? true)
 
     switch TPPBookRegistry.shared.state(for: book.identifier) {
     case .Used,
-        .SAMLStarted,
-        .Downloading,
-        .Unregistered,
-        .DownloadFailed,
-        .DownloadNeeded,
-        .DownloadSuccessful:
-      title = deleteAvailable ? DisplayStrings.delete : DisplayStrings.return
-      message = deleteAvailable ? String.localizedStringWithFormat(DisplayStrings.deleteMessage, book.title) :
-      String.localizedStringWithFormat(DisplayStrings.returnMessage, book.title)
-      confirmButtonTitle = deleteAvailable ? DisplayStrings.delete : DisplayStrings.return
+      .SAMLStarted,
+      .Downloading,
+      .Unregistered,
+      .DownloadFailed,
+      .DownloadNeeded,
+      .DownloadSuccessful:
+
+      title =
+        deleteAvailable
+        ? DisplayStrings.delete
+        : DisplayStrings.return
+
+      message =
+        deleteAvailable
+        ? String.localizedStringWithFormat(
+          DisplayStrings.deleteMessage, book.title)
+        : String.localizedStringWithFormat(
+          DisplayStrings.returnMessage, book.title)
+
+      confirmButtonTitle =
+        deleteAvailable
+        ? DisplayStrings.delete
+        : DisplayStrings.return
+
     case .Holding:
       title = DisplayStrings.removeReservation
-      message = DisplayStrings.returnMessage
+      message = String.localizedStringWithFormat(
+        DisplayStrings.removeReservationMessage, book.title)
       confirmButtonTitle = DisplayStrings.remove
+
     case .Unsupported:
       return
     }
@@ -194,12 +223,6 @@ extension BookCellModel {
     }
 
     buttonDelegate?.didSelectDownload(for: book)
-  }
-
-  func didSelectSample() {
-    isLoading = true
-
-    self.sampleDelegate?.didSelectPlaySample(book)
   }
 
   func didSelectCancel() {

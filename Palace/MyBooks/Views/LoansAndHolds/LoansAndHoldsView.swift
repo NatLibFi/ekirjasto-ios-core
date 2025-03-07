@@ -8,6 +8,7 @@ struct LoansAndHoldsView: View {
 
   @State private var orientation: UIDeviceOrientation = UIDevice.current.orientation
   @ObservedObject var loansViewModel: LoansViewModel
+  @ObservedObject var holdsViewModel: HoldsViewModel
 
   var subviews = ["Loans", "Holds"]
   @State private var selectedSubview = "Loans"
@@ -74,7 +75,7 @@ struct LoansAndHoldsView: View {
 
   
   @ViewBuilder private var HoldsSubview: some View {
-    HoldsControllerRepresentable()
+    HoldsView(holdsViewModel: holdsViewModel)
   }
 
   

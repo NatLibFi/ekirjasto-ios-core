@@ -101,6 +101,7 @@ class DLNavigator {
       }
       DispatchQueue.main.async {
         LoansViewModel().authenticateAndLoad(newAccount)
+        HoldsViewModel().authenticateAndLoad(newAccount)
       }
       return
     }
