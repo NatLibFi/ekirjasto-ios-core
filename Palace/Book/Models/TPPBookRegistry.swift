@@ -286,9 +286,18 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
             readyBooks += 1
           })
         }
+
         if UIApplication.shared.applicationIconBadgeNumber != readyBooks {
           UIApplication.shared.applicationIconBadgeNumber = readyBooks
+
+          let loansAndHoldsTab = TPPRootTabBarController.shared().tabBar.items?[1]
+          let newTabBadgeValue = readyBooks > 0
+          ? "\(readyBooks)"
+          : nil
+
+          loansAndHoldsTab?.badgeValue = newTabBadgeValue
         }
+
         completion?(nil, readyBooks > 0)
       }
     }

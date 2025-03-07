@@ -144,11 +144,11 @@ extension TPPUserNotifications: UNUserNotificationCenterDelegate
       }
 
       if currentAccount.details?.supportsReservations == true {
-        if let holdsTab = TPPRootTabBarController.shared()?.viewControllers?[2],
-        holdsTab.isKind(of: TPPHoldsNavigationController.self) {
-          TPPRootTabBarController.shared()?.selectedIndex = 2
+        if let loansAndHoldsTab = TPPRootTabBarController.shared()?.viewControllers?[1],
+           loansAndHoldsTab.isKind(of: LoansAndHoldsViewController.self) {
+          TPPRootTabBarController.shared()?.selectedIndex = 1
         } else {
-          Log.error(#file, "Error moving to Holds tab from notification.")
+          Log.error(#file, "Error moving to Loans+Holds tab from notification.")
         }
       }
       completionHandler()

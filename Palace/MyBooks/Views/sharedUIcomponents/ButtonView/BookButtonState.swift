@@ -24,19 +24,20 @@ enum BookButtonState {
 extension BookButtonState {
   func buttonTypes(book: TPPBook) -> [BookButtonType] {
     var buttons = [BookButtonType]()
-  
+
     switch self {
     case .canBorrow:
-      buttons = [.get, book.isAudiobook ? .audiobookSample : .sample]
+      buttons = [.get]
     case .canHold:
-      buttons = [.reserve, book.isAudiobook ? .audiobookSample : .sample]
+      buttons = [.reserve]
     case .holding:
-      buttons = [.remove, book.isAudiobook ? .audiobookSample : .sample]
+      buttons = [.remove]
     case .holdingFrontOfQueue:
       buttons = [.get, .remove]
     case .downloadNeeded:
       if let authDef = TPPUserAccount.sharedAccount().authDefinition,
-         authDef.needsAuth || book.defaultAcquisitionIfOpenAccess != nil {
+        authDef.needsAuth || book.defaultAcquisitionIfOpenAccess != nil
+      {
         buttons = [.download, .return]
       } else {
         buttons = [.download, .remove]
@@ -52,8 +53,8 @@ extension BookButtonState {
       }
 
       if let authDef = TPPUserAccount.sharedAccount().authDefinition,
-         authDef.needsAuth ||
-          book.defaultAcquisitionIfOpenAccess != nil {
+        authDef.needsAuth || book.defaultAcquisitionIfOpenAccess != nil
+      {
         buttons.append(.return)
       } else {
         buttons.append(.remove)
@@ -78,12 +79,25 @@ extension BookButtonState {
 
 extension BookButtonState {
 
+  // initializer to solve the button state
+  // using the book's state that is stored in the book registry
   init?(_ book: TPPBook) {
+
     let bookState = TPPBookRegistry.shared.state(for: book.identifier)
+
     switch bookState {
     case .Unregistered, .Holding:
-      guard let buttonState = Self.init(book.defaultAcquisition?.availability) else {
-        TPPErrorLogger.logError(withCode: .noURL, summary: "Unable to determine BookButtonsViewState because no Availability was provided")
+      // special case: if book is held or unregistered,
+      // button state can be one of several.
+      // Use this helper initializer to solve the button state further
+      // using the book's availability data
+      guard let buttonState = Self.init(book.defaultAcquisition?.availability)
+      else {
+        TPPErrorLogger.logError(
+          withCode: .noURL,
+          summary:
+            "Unable to determine BookButtonsViewState because no Availability was provided"
+        )
         return nil
       }
 
@@ -106,23 +120,31 @@ extension BookButtonState {
   }
 
   init?(_ availability: TPPOPDSAcquisitionAvailability?) {
+
     guard let availability = availability else {
       return nil
     }
 
     var state: BookButtonState = .unsupported
-    availability.matchUnavailable { _ in
+
+    availability.matchUnavailable {
+      _ in
+
       state = .canHold
+
     } limited: { _ in
       state = .canBorrow
     } unlimited: { _ in
       state = .canBorrow
     } reserved: { _ in
+      state = .holding
+    } ready: { _ in
       state = .holdingFrontOfQueue
     }
 
     self = state
   }
+
 }
 
 extension TPPBook {
@@ -131,11 +153,16 @@ extension TPPBook {
     #if FEATURE_DRM_CONNECTOR
       fullfillmentRequired = state == .holding && self.revokeURL != nil
     #endif
-    
-    let hasFullfillmentId = TPPBookRegistry.shared.fulfillmentId(forIdentifier: self.identifier) != nil
-    let isFullfiliable = !(hasFullfillmentId && fullfillmentRequired) && self.revokeURL != nil
-    let needsAuthentication = self.defaultAcquisitionIfOpenAccess == nil && TPPUserAccount.sharedAccount().authDefinition?.needsAuth ?? false
-    
+
+    let hasFullfillmentId =
+      TPPBookRegistry.shared.fulfillmentId(forIdentifier: self.identifier)
+      != nil
+    let isFullfiliable =
+      !(hasFullfillmentId && fullfillmentRequired) && self.revokeURL != nil
+    let needsAuthentication =
+      self.defaultAcquisitionIfOpenAccess == nil
+      && TPPUserAccount.sharedAccount().authDefinition?.needsAuth ?? false
+
     return isFullfiliable && !needsAuthentication
   }
 }
