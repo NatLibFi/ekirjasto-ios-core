@@ -16,15 +16,14 @@ enum BookButtonType: String {
   case listen
   case retry
   case cancel
-  case sample
-  case audiobookSample
   case remove
   case `return`
 
   var localizedTitle: String {
-    NSLocalizedString(self.rawValue.capitalized, comment: "Book Action Button title")
+    NSLocalizedString(
+      self.rawValue.capitalized, comment: "Book Action Button title")
   }
-  
+
   var displaysIndicator: Bool {
     switch self {
     case .read, /*.remove,*/ .get, .download, .listen:
@@ -33,7 +32,7 @@ enum BookButtonType: String {
       return false
     }
   }
-  
+
   var isDisabled: Bool {
     switch self {
     case .read, .listen, .remove:

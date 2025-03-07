@@ -1,5 +1,4 @@
 #import "TPPCatalogNavigationController.h"
-#import "TPPHoldsNavigationController.h"
 #import "TPPRootTabBarController.h"
 #import "Palace-Swift.h"
 
