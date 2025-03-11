@@ -14,11 +14,6 @@ struct HoldsView: View {
   var body: some View {
 
     NavigationLink(
-      destination: accountScreen,
-      isActive: $holdsViewModel.showAccountScreen
-    ) {}
-
-    NavigationLink(
       destination: searchView,
       isActive: $holdsViewModel.showSearchSheet
     ) {}
@@ -185,15 +180,4 @@ struct HoldsView: View {
     return UIViewControllerWrapper(navController, updater: { _ in })
   }
 
-  private var accountScreen: some View {
-
-    guard let url = holdsViewModel.accountURL else {
-      return EmptyView().anyView()
-    }
-
-    let webController = BundledHTMLViewController(fileURL: url, title: "TEST")
-    webController.hidesBottomBarWhenPushed = true
-
-    return UIViewControllerWrapper(webController, updater: { _ in }).anyView()
-  }
 }

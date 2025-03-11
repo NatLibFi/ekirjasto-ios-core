@@ -16,19 +16,12 @@ enum Group: Int {
 @MainActor
 class LoansViewModel: ObservableObject {
 
-  @Published var accountURL: URL?
   @Published var alert: AlertModel?
   @Published var books = [TPPBook]()
   @Published var isLoading = false
   @Published var showInstructionsLabel = false
   @Published var showSearchSheet = false
-  
-  @Published var showAccountScreen = false {
-    didSet {
-      accountURL = facetViewModel.accountScreenURL
-    }
-  }
-  
+
   var isPad: Bool { UIDevice.current.userInterfaceIdiom == .pad }
 
   var activeFacetSort: Facet {
@@ -66,7 +59,7 @@ class LoansViewModel: ObservableObject {
   }
 
   private func sortData() {
-    
+
     switch activeFacetSort {
     case .author:
       books.sort {
@@ -81,7 +74,7 @@ class LoansViewModel: ObservableObject {
         return aString < bString
       }
     }
-    
+
   }
 
   private func registerForPublishers() {
@@ -89,9 +82,6 @@ class LoansViewModel: ObservableObject {
       .assign(to: \.activeFacetSort, on: self)
       .store(in: &observers)
 
-    facetViewModel.$showAccountScreen
-      .assign(to: \.showAccountScreen, on: self)
-      .store(in: &observers)
   }
 
   private func registerForNotifications() {
@@ -208,5 +198,5 @@ class LoansViewModel: ObservableObject {
   @objc func dismissSearchSheet() {
     showSearchSheet.toggle()
   }
-  
+
 }
