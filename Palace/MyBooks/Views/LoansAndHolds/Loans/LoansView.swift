@@ -6,19 +6,13 @@ import Combine
 import SwiftUI
 
 struct LoansView: View {
-  
+
   @ObservedObject var loansViewModel: LoansViewModel
   @State var showDetailForBook: TPPBook?
   let backgroundColor: Color = Color(TPPConfiguration.backgroundColor())
-  
 
   var body: some View {
-    
-    NavigationLink(
-      destination: accountScreen,
-      isActive: $loansViewModel.showAccountScreen
-    ) {}
-    
+
     NavigationLink(
       destination: searchView,
       isActive: $loansViewModel.showSearchSheet
@@ -46,45 +40,35 @@ struct LoansView: View {
       loadingView
     }
     .background(backgroundColor)
-    
+
   }
 
-  
   @ViewBuilder private var facetView: some View {
-    
     FacetView(
       facetViewModel: loansViewModel.facetViewModel
     )
-    
   }
 
-  
   @ViewBuilder private var loadingView: some View {
-    
     if loansViewModel.isLoading {
       ProgressView()
         .scaleEffect(x: 2, y: 2, anchor: .center)
         .horizontallyCentered()
     }
-    
   }
 
-  
   @ViewBuilder private var emptyView: some View {
-    
     Text(Strings.MyBooksView.emptyViewMessage)
       .multilineTextAlignment(.center)
       .foregroundColor(.gray)
       .horizontallyCentered()
       .verticallyCentered()
-    
   }
 
-  
   @ViewBuilder private var content: some View {
-    
+
     GeometryReader { geometry in
-      
+
       if loansViewModel.showInstructionsLabel {
         VStack {
           emptyView
@@ -93,22 +77,21 @@ struct LoansView: View {
         .refreshable {
           loansViewModel.reloadData()
         }
-        
+
       } else {
         listView
           .refreshable {
             loansViewModel.reloadData()
           }
-        
+
       }
     }
   }
 
-  
   @ViewBuilder private var listView: some View {
-    
+
     AdaptableGridLayout {
-      
+
       ForEach(0..<loansViewModel.books.count, id: \.self) { i in
         ZStack(alignment: .leading) {
           bookCell(for: loansViewModel.books[i])
@@ -116,16 +99,15 @@ struct LoansView: View {
         .opacity(loansViewModel.isLoading ? 0.5 : 1.0)
         .disabled(loansViewModel.isLoading)
       }
-      
+
     }
     .padding(.bottom, 20)
     .onAppear { loansViewModel.loadData() }
-    
+
   }
 
-  
   private func bookCell(for book: TPPBook) -> some View {
-  
+
     let bookCellModel = BookCellModel(book: book)
 
     bookCellModel
@@ -133,7 +115,7 @@ struct LoansView: View {
       .store(in: &self.loansViewModel.observers)
 
     if self.loansViewModel.isPad {
-      
+
       return Button {
         showDetailForBook = book
       } label: {
@@ -145,9 +127,9 @@ struct LoansView: View {
         ).anyView()
       }
       .anyView()
-      
+
     } else {
-      
+
       return NavigationLink(
         destination: UIViewControllerWrapper(
           TPPBookDetailViewController(book: book), updater: { _ in })
@@ -161,50 +143,35 @@ struct LoansView: View {
           .padding(.trailing, 20)
       }
       .anyView()
-      
+
     }
-    
+
   }
 
-
   @ViewBuilder private var searchButton: some View {
-    
+
     Button {
       loansViewModel.showSearchSheet.toggle()
     } label: {
       ImageProviders.MyBooksView.search
     }
-    
+
   }
 
-
-
   private var searchView: some View {
-    
+
     let searchDescription = TPPOpenSearchDescription(
       title: Strings.MyBooksView.searchBooks,
       books: loansViewModel.books
     )
-    
+
     let navController = UINavigationController(
       rootViewController: TPPCatalogSearchViewController(
         openSearchDescription: searchDescription
       )
     )
-    
+
     return UIViewControllerWrapper(navController, updater: { _ in })
   }
 
-  
-  private var accountScreen: some View {
-    
-    guard let url = loansViewModel.accountURL else {
-      return EmptyView().anyView()
-    }
-
-    let webController = BundledHTMLViewController(fileURL: url, title: "TEST")
-    webController.hidesBottomBarWhenPushed = true
-    
-    return UIViewControllerWrapper(webController, updater: { _ in }).anyView()
-  }
 }

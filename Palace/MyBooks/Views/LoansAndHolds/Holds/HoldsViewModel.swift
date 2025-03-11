@@ -12,18 +12,11 @@ import Foundation
 @MainActor
 class HoldsViewModel: ObservableObject {
 
-  @Published var accountURL: URL?
   @Published var alert: AlertModel?
   @Published var books = [TPPBook]()
   @Published var isLoading = false
   @Published var showInstructionsLabel = false
   @Published var showSearchSheet = false
-
-  @Published var showAccountScreen = false {
-    didSet {
-      accountURL = facetViewModel.accountScreenURL
-    }
-  }
 
   var isPad: Bool { UIDevice.current.userInterfaceIdiom == .pad }
 
@@ -85,9 +78,6 @@ class HoldsViewModel: ObservableObject {
       .assign(to: \.activeFacetSort, on: self)
       .store(in: &observers)
 
-    facetViewModel.$showAccountScreen
-      .assign(to: \.showAccountScreen, on: self)
-      .store(in: &observers)
   }
 
   private func registerForNotifications() {

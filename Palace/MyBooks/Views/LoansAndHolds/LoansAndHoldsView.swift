@@ -6,12 +6,15 @@ import SwiftUI
 
 struct LoansAndHoldsView: View {
 
-  @State private var orientation: UIDeviceOrientation = UIDevice.current.orientation
+  @State private var orientation: UIDeviceOrientation = UIDevice.current
+    .orientation
   @ObservedObject var loansViewModel: LoansViewModel
   @ObservedObject var holdsViewModel: HoldsViewModel
 
   var subviews = ["Loans", "Holds"]
   @State private var selectedSubview = "Loans"
+
+  let backgroundColor: Color = Color(TPPConfiguration.backgroundColor())
 
   var body: some View {
 
@@ -26,11 +29,12 @@ struct LoansAndHoldsView: View {
       }
 
   }
-  
 
   @ViewBuilder private var ContentView: some View {
 
     SegmentedPicker
+    // If high contrast needs to be forced to all users:
+    //.background(Color("ColorEkirjastoFilterButtonBackgroundNormal"))
 
     switch selectedSubview {
     case "Loans":
@@ -43,17 +47,16 @@ struct LoansAndHoldsView: View {
 
   }
 
-  
   @ViewBuilder private var EKirjastoButton: some View {
     Button {
       TPPRootTabBarController.shared().showAndReloadCatalogViewController()
     } label: {
       ImageProviders.MyBooksView.myLibraryIcon
-        .accessibilityLabel(Strings.MyBooksView.accessibilityShowAndReloadCatalogTab)
+        .accessibilityLabel(
+          Strings.MyBooksView.accessibilityShowAndReloadCatalogTab)
     }
   }
-  
-  
+
   @ViewBuilder private var SegmentedPicker: some View {
     VStack {
       Picker(
@@ -65,22 +68,20 @@ struct LoansAndHoldsView: View {
         }
       }
       .pickerStyle(.segmented)
+      .padding(15)
     }
+    .background(backgroundColor)
   }
 
-  
   @ViewBuilder private var LoansSubview: some View {
     LoansView(loansViewModel: loansViewModel)
   }
 
-  
   @ViewBuilder private var HoldsSubview: some View {
     HoldsView(holdsViewModel: holdsViewModel)
   }
 
-  
 }
-
 
 extension View {
   func border(width: CGFloat, edges: [Edge], color: Color) -> some View {
@@ -124,8 +125,8 @@ struct EdgeBorder: Shape {
       }
       path.addRect(CGRect(x: x, y: y, width: w, height: h))
     }
-    
+
     return path
   }
-  
+
 }
