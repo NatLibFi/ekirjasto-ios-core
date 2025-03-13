@@ -272,7 +272,8 @@ struct Strings {
   }
   
   struct MyBooksView {
-    static let navTitle = NSLocalizedString("My Books", comment: "")
+    static let loansAndHoldsNavTitle = NSLocalizedString("My Books", comment: "Tab title for loans and holds view")
+    static let favoritesAndReadNavTitle = NSLocalizedString("Favorites", comment: "Tab title for favorites and read books view")
     static let sortBy = NSLocalizedString("Sort By:", comment: "")
     static let searchBooks = NSLocalizedString("Search My Books", comment: "")
     static let emptyViewMessage = NSLocalizedString("Visit the Catalog to\nadd books to My Books.", comment: "")
@@ -281,6 +282,9 @@ struct Strings {
     static let accountSyncingAlertTitle = NSLocalizedString("Please wait", comment: "")
     static let accountSyncingAlertMessage = NSLocalizedString("Please wait a moment before switching library accounts", comment: "")
     static let accessibilityShowAndReloadCatalogTab = NSLocalizedString("accessibilityShowAndReloadCatalogTab", comment: "")
+    static let loansEmptyViewMessage = NSLocalizedString("Visit the Catalog to add books to My Books.\n Number of loans is limited to 5.\n Ensure good internet connection when downloading a book and make sure there is enough space on your device.", comment: "Text shown for logged in user when they have no books on loan")
+    static let holdsEmptyViewMessage = NSLocalizedString("When you reserve a book from the catalog, it will show up here.\n Look here from time to time to see if your book is available to download.\n Number of reservations is limited to 5.", comment: "Text shown for logged in user when they have no books on hold")
+    static let favoritesEmptyViewMessage = NSLocalizedString("Visit the Catalog to add books to your Favorites.", comment: "Text shown for logged in user when they have no favorite books")
   }
   
   struct FacetView {

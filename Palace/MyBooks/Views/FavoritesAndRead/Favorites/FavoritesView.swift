@@ -1,13 +1,13 @@
 //
-//  HoldsView.swift
+//  FavoritesView.swift
 //
 
 import Combine
 import SwiftUI
 
-struct HoldsView: View {
+struct FavoritesView: View {
 
-  @ObservedObject var holdsViewModel: HoldsViewModel
+  @ObservedObject var favoritesViewModel: FavoritesViewModel
   @State var showDetailForBook: TPPBook?
   let backgroundColor: Color = Color(TPPConfiguration.backgroundColor())
 
@@ -15,14 +15,14 @@ struct HoldsView: View {
 
     NavigationLink(
       destination: searchView,
-      isActive: $holdsViewModel.showSearchSheet
+      isActive: $favoritesViewModel.showSearchSheet
     ) {}
 
     //TODO: This is a workaround for an apparent bug in iOS14 that prevents us from wrapping
     // the body in a NavigationView. Once iOS14 support is dropped, this can be removed/replaced
     // with a NavigationView
     EmptyView()
-      .alert(item: $holdsViewModel.alert) { alert in
+      .alert(item: $favoritesViewModel.alert) { alert in
         Alert(
           title: Text(alert.title),
           message: Text(alert.message),
@@ -46,14 +46,15 @@ struct HoldsView: View {
   @ViewBuilder private var facetView: some View {
 
     FacetView(
-      facetViewModel: holdsViewModel.facetViewModel
+      facetViewModel: favoritesViewModel.facetViewModel
     )
+    .padding(.top, 15)
 
   }
 
   @ViewBuilder private var loadingView: some View {
 
-    if holdsViewModel.isLoading {
+    if favoritesViewModel.isLoading {
       ProgressView()
         .scaleEffect(x: 2, y: 2, anchor: .center)
         .horizontallyCentered()
@@ -63,7 +64,7 @@ struct HoldsView: View {
 
   @ViewBuilder private var emptyView: some View {
 
-    Text(Strings.MyBooksView.holdsEmptyViewMessage)
+    Text(Strings.MyBooksView.favoritesEmptyViewMessage)
       .multilineTextAlignment(.center)
       .foregroundColor(.gray)
       .horizontallyCentered()
@@ -75,19 +76,19 @@ struct HoldsView: View {
 
     GeometryReader { geometry in
 
-      if holdsViewModel.showInstructionsLabel {
+      if favoritesViewModel.showInstructionsLabel {
         VStack {
           emptyView
         }
         .frame(minHeight: geometry.size.height)
         .refreshable {
-          holdsViewModel.reloadData()
+          favoritesViewModel.reloadData()
         }
 
       } else {
         listView
           .refreshable {
-            holdsViewModel.reloadData()
+            favoritesViewModel.reloadData()
           }
 
       }
@@ -98,17 +99,17 @@ struct HoldsView: View {
 
     AdaptableGridLayout {
 
-      ForEach(0..<holdsViewModel.books.count, id: \.self) { i in
+      ForEach(0..<favoritesViewModel.books.count, id: \.self) { i in
         ZStack(alignment: .leading) {
-          bookCell(for: holdsViewModel.books[i])
+          bookCell(for: favoritesViewModel.books[i])
         }
-        .opacity(holdsViewModel.isLoading ? 0.5 : 1.0)
-        .disabled(holdsViewModel.isLoading)
+        .opacity(favoritesViewModel.isLoading ? 0.5 : 1.0)
+        .disabled(favoritesViewModel.isLoading)
       }
 
     }
     .padding(.bottom, 20)
-    .onAppear { holdsViewModel.loadData() }
+    .onAppear { favoritesViewModel.loadData() }
 
   }
 
@@ -117,10 +118,10 @@ struct HoldsView: View {
     let bookCellModel = BookCellModel(book: book)
 
     bookCellModel
-      .statePublisher.assign(to: \.isLoading, on: self.holdsViewModel)
-      .store(in: &self.holdsViewModel.observers)
+      .statePublisher.assign(to: \.isLoading, on: self.favoritesViewModel)
+      .store(in: &self.favoritesViewModel.observers)
 
-    if self.holdsViewModel.isPad {
+    if self.favoritesViewModel.isPad {
 
       return Button {
         showDetailForBook = book
@@ -157,7 +158,7 @@ struct HoldsView: View {
   @ViewBuilder private var searchButton: some View {
 
     Button {
-      holdsViewModel.showSearchSheet.toggle()
+      favoritesViewModel.showSearchSheet.toggle()
     } label: {
       ImageProviders.MyBooksView.search
     }
@@ -168,7 +169,7 @@ struct HoldsView: View {
 
     let searchDescription = TPPOpenSearchDescription(
       title: Strings.MyBooksView.searchBooks,
-      books: holdsViewModel.books
+      books: favoritesViewModel.books
     )
 
     let navController = UINavigationController(
