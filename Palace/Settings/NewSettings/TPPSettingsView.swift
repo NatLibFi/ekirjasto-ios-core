@@ -29,11 +29,12 @@ struct TPPSettingsView: View {
   
   @ViewBuilder private var settingsListView: some View {
     List {
+      //logo at the top of the view
       eLibraryLogoSection
+      //Login, logout, dependents buttons
       accountSection
-      syncBookmarksSection
+      //Info buttons and footer with NatLibFi logo and version
       infoSection
-      natLibFiLogoSection
     }
     .listStyle(GroupedListStyle())
   }
@@ -72,39 +73,9 @@ struct TPPSettingsView: View {
     }
   }
   
-  @ViewBuilder private var syncBookmarksSection: some View {
-    Section(
-      footer: Text(NSLocalizedString("Save your reading position and bookmarks to all your other devices.", comment: "Explain to the user they can save their bookmarks in the cloud across all their devices."))
-    ) {
-      Toggle(isOn: $toggleSyncBookmarks) {
-        Text(Strings.Settings.syncBookmarks)
-          .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
-      }
-      .disabled(!syncEnabled)
-      .onChange(of: toggleSyncBookmarks) { value in
-        TPPSignInBusinessLogic.getShared { logic in
-          logic?.changeSyncPermission(to: value, postServerSyncCompletion: { value in
-            toggleSyncBookmarks = value
-          })
-        }
-      }
-      .onAppear {
-        TPPSignInBusinessLogic.getShared { logic in
-          logic?.checkSyncPermission(preWork: {
-            syncEnabled = false
-          }, postWork: { enableSync in
-            syncEnabled = true
-            toggleSyncBookmarks = enableSync
-          })
-        }
-      }
-    }
-    .font(Font(uiFont: UIFont.palaceFont(ofSize: 12)))
-  }
-  
   @ViewBuilder private var infoSection: some View {
     Section(
-      footer: versionInfo
+      footer: footer
     ) {
       feedbackRow
       accessibilityRow
@@ -113,21 +84,6 @@ struct TPPSettingsView: View {
       userAgreementRow
       instructionsRow
       preferencesRow
-    }
-  }
-  
-  @ViewBuilder private var natLibFiLogoSection: some View {
-    let natLibFiLogo = ["fi", "sv"].contains(Locale.current.languageCode)
-      ? "NatLibFiLogoFiSv"
-      : "NatLibFiLogoEn"
-    
-    HStack {
-      Spacer()
-      Image(natLibFiLogo)
-        .resizable()
-        .aspectRatio(contentMode: .fit)
-        .frame(width: 200)
-      Spacer()
     }
   }
   
@@ -219,6 +175,28 @@ struct TPPSettingsView: View {
       )
     }
     .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
+  }
+  
+  @ViewBuilder private var footer: some View {
+  //Footer with the NatLibFi logo and version info
+    VStack{
+      Spacer(minLength: 10)
+      natLibFiLogoSection
+      versionInfo
+    }
+  }
+  
+  @ViewBuilder private var natLibFiLogoSection: some View {
+    let natLibFiLogo = ["fi", "sv"].contains(Locale.current.languageCode)
+      ? "NatLibFiLogoFiSv"
+      : "NatLibFiLogoEn"
+    
+    HStack {
+      Image(natLibFiLogo)
+        .resizable()
+        .aspectRatio(contentMode: .fit)
+        .frame(width: 200)
+    }
   }
   
   @ViewBuilder private var versionInfo: some View {
