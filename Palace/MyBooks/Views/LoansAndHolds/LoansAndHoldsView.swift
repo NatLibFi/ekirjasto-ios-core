@@ -20,7 +20,7 @@ struct LoansAndHoldsView: View {
 
     ContentView
       .navigationBarItems(leading: EKirjastoButton)
-      .navigationBarTitle(Strings.MyBooksView.navTitle)
+      .navigationBarTitle(Strings.MyBooksView.loansAndHoldsNavTitle)
       .onReceive(
         NotificationCenter.default.publisher(
           for: UIDevice.orientationDidChangeNotification)

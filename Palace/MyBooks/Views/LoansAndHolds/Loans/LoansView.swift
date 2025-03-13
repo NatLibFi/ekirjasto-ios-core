@@ -58,7 +58,7 @@ struct LoansView: View {
   }
 
   @ViewBuilder private var emptyView: some View {
-    Text(Strings.MyBooksView.emptyViewMessage)
+    Text(Strings.MyBooksView.loansEmptyViewMessage)
       .multilineTextAlignment(.center)
       .foregroundColor(.gray)
       .horizontallyCentered()
