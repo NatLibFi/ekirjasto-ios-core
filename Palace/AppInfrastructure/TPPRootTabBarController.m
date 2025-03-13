@@ -6,7 +6,7 @@
 
 @property (nonatomic) TPPCatalogNavigationController *catalogNavigationController;
 @property (nonatomic) LoansAndHoldsViewController *loansAndHoldsNavigationController;
-@property (nonatomic) FavoritesAndReadViewController *favoritesAndReadNavigationController;
+@property (nonatomic) FavoritesMainViewController *favoritesMainNavigationController;
 @property (nonatomic) EkirjastoMagazineNavigationController *magazineViewController;
 @property (nonatomic) UIViewController *settingsViewController;
 @property (readwrite) TPPR2Owner *r2Owner;
@@ -51,8 +51,8 @@
     }
   ];
   
-  self.favoritesAndReadNavigationController = (FavoritesAndReadViewController *) [
-    FavoritesAndReadViewController makeSwiftUIViewWithDismissHandler:^{
+  self.favoritesMainNavigationController = (FavoritesMainViewController *) [
+    FavoritesMainViewController makeSwiftUIViewWithDismissHandler:^{
       [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
     }
   ];
@@ -120,7 +120,7 @@
   self.viewControllers = @[
     self.catalogNavigationController,
     self.loansAndHoldsNavigationController,
-    self.favoritesAndReadNavigationController,
+    self.favoritesMainNavigationController,
     self.magazineViewController,
     self.settingsViewController
   ];

@@ -1,22 +1,19 @@
 //
-//  FavoritesAndReadViewController.swift
+//  FavoritesMainViewController.swift
 //
 
 import Foundation
 import SwiftUI
 
-class FavoritesAndReadViewController: NSObject {
+class FavoritesMainViewController: NSObject {
   
   @MainActor @objc static func makeSwiftUIView(
     dismissHandler: @escaping (() -> Void)
   ) -> UIViewController {
     
     let hostingController = UIHostingController(
-      rootView: FavoritesAndReadView(
+      rootView: FavoritesMainView(
         favoritesViewModel: FavoritesViewModel()
-        /* Code for future feature: read books
-         readViewModel: ReadViewModel()
-         */
       )
     )
     
