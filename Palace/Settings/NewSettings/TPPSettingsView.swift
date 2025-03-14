@@ -180,7 +180,7 @@ struct TPPSettingsView: View {
   @ViewBuilder private var footer: some View {
   //Footer with the NatLibFi logo and version info
     VStack{
-      Spacer(minLength: 10)
+      Spacer()
       natLibFiLogoSection
       versionInfo
     }
