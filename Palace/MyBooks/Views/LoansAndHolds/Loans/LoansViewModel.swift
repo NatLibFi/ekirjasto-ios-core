@@ -19,7 +19,8 @@ class LoansViewModel: ObservableObject {
   @Published var alert: AlertModel?
   @Published var books = [TPPBook]()
   @Published var isLoading = false
-  @Published var showInstructionsLabel = false
+  @Published var userHasBooksOnLoan = false
+  @Published var userIsLoggedIn = false
   @Published var showSearchSheet = false
 
   var isPad: Bool { UIDevice.current.userInterfaceIdiom == .pad }
@@ -116,8 +117,10 @@ class LoansViewModel: ObservableObject {
   @objc private func bookRegistryDidChange() {
     self.loadData()
     DispatchQueue.main.async {
-      self.showInstructionsLabel =
-        self.books.count == 0 || TPPBookRegistry.shared.state == .unloaded
+      self.userIsLoggedIn =
+        !TPPUserAccount.sharedAccount().needsAuth
+        && TPPUserAccount.sharedAccount().hasCredentials()
+      self.userHasBooksOnLoan = self.books.count > 0
     }
   }
 

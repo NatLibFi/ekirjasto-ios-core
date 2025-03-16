@@ -57,38 +57,45 @@ struct LoansView: View {
     }
   }
 
-  @ViewBuilder private var emptyView: some View {
-    Text(Strings.MyBooksView.loansEmptyViewMessage)
-      .multilineTextAlignment(.center)
-      .foregroundColor(.gray)
-      .horizontallyCentered()
-      .verticallyCentered()
-  }
-
   @ViewBuilder private var content: some View {
 
     GeometryReader { geometry in
 
-      if loansViewModel.showInstructionsLabel {
+      if loansViewModel.userIsLoggedIn {
+        if loansViewModel.userHasBooksOnLoan {
+          // user is logged in and has books on loan
+          // show list of lent books
+          BookListView
+            .refreshable {
+              loansViewModel.reloadData()
+            }
+        } else {
+          VStack {
+            // user is logged in and has no books on loan
+            // show instructions how to borrow books
+            EmptyHoldsView
+          }
+          .frame(minHeight: geometry.size.height)
+          .refreshable {
+            loansViewModel.reloadData()
+          }
+        }
+      } else {
         VStack {
-          emptyView
+          // user has not logged in
+          // remind user to log in to see the books on loan
+          LogInInstructionsView
         }
         .frame(minHeight: geometry.size.height)
         .refreshable {
           loansViewModel.reloadData()
         }
 
-      } else {
-        listView
-          .refreshable {
-            loansViewModel.reloadData()
-          }
-
       }
     }
   }
 
-  @ViewBuilder private var listView: some View {
+  @ViewBuilder private var BookListView: some View {
 
     AdaptableGridLayout {
 
@@ -104,6 +111,22 @@ struct LoansView: View {
     .padding(.bottom, 20)
     .onAppear { loansViewModel.loadData() }
 
+  }
+
+  @ViewBuilder private var EmptyHoldsView: some View {
+    Text(Strings.MyBooksView.loansEmptyViewMessage)
+      .multilineTextAlignment(.center)
+      .foregroundColor(.gray)
+      .horizontallyCentered()
+      .verticallyCentered()
+  }
+
+  @ViewBuilder private var LogInInstructionsView: some View {
+    Text(Strings.MyBooksView.loansNotLoggedInViewMessage)
+      .multilineTextAlignment(.center)
+      .foregroundColor(.gray)
+      .horizontallyCentered()
+      .verticallyCentered()
   }
 
   private func bookCell(for book: TPPBook) -> some View {

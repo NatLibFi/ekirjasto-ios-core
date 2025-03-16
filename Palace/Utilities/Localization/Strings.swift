@@ -283,8 +283,11 @@ struct Strings {
     static let accountSyncingAlertMessage = NSLocalizedString("Please wait a moment before switching library accounts", comment: "")
     static let accessibilityShowAndReloadCatalogTab = NSLocalizedString("accessibilityShowAndReloadCatalogTab", comment: "")
     static let loansEmptyViewMessage = NSLocalizedString("Visit the Catalog to add books to My Books.\n Number of loans is limited to 5.\n Ensure good internet connection when downloading a book and make sure there is enough space on your device.", comment: "Text shown for logged in user when they have no books on loan")
+    static let loansNotLoggedInViewMessage = NSLocalizedString("Sign in to see your books.", comment: "Text shown for non-logged in user in loans view")
     static let holdsEmptyViewMessage = NSLocalizedString("When you reserve a book from the catalog, it will show up here.\n Look here from time to time to see if your book is available to download.\n Number of reservations is limited to 5.", comment: "Text shown for logged in user when they have no books on hold")
+    static let holdsNotLoggedInViewMessage = NSLocalizedString("Sign in to see your reservations.", comment: "Text shown for non-logged in user in holds view")
     static let favoritesEmptyViewMessage = NSLocalizedString("Visit the Catalog to add books to your Favorites.", comment: "Text shown for logged in user when they have no favorite books")
+    static let favoritesNotLoggedInViewMessage = NSLocalizedString("Sign in to see your favorites.", comment: "Text shown for non-logged in user in favorites view")
   }
   
   struct FacetView {
