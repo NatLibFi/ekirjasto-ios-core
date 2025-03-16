@@ -15,7 +15,8 @@ class HoldsViewModel: ObservableObject {
   @Published var alert: AlertModel?
   @Published var books = [TPPBook]()
   @Published var isLoading = false
-  @Published var showInstructionsLabel = false
+  @Published var userHasBooksOnHold = false
+  @Published var userIsLoggedIn = false
   @Published var showSearchSheet = false
 
   var isPad: Bool { UIDevice.current.userInterfaceIdiom == .pad }
@@ -112,8 +113,10 @@ class HoldsViewModel: ObservableObject {
   @objc private func bookRegistryDidChange() {
     self.loadData()
     DispatchQueue.main.async {
-      self.showInstructionsLabel =
-        self.books.count == 0 || TPPBookRegistry.shared.state == .unloaded
+      self.userIsLoggedIn =
+        !TPPUserAccount.sharedAccount().needsAuth
+        && TPPUserAccount.sharedAccount().hasCredentials()
+      self.userHasBooksOnHold = self.books.count > 0
     }
   }
 
