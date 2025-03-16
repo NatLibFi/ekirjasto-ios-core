@@ -61,40 +61,45 @@ struct HoldsView: View {
 
   }
 
-  @ViewBuilder private var emptyView: some View {
-
-    Text(Strings.MyBooksView.holdsEmptyViewMessage)
-      .multilineTextAlignment(.center)
-      .foregroundColor(.gray)
-      .horizontallyCentered()
-      .verticallyCentered()
-
-  }
-
   @ViewBuilder private var content: some View {
 
     GeometryReader { geometry in
 
-      if holdsViewModel.showInstructionsLabel {
+      if holdsViewModel.userIsLoggedIn {
+        if holdsViewModel.userHasBooksOnHold {
+          // user is logged in and has books on hold
+          // show list of held books
+          BookListView
+            .refreshable {
+              holdsViewModel.reloadData()
+            }
+        } else {
+          VStack {
+            // user is logged in and has no books on hold
+            // show instructions how to reserve books
+            EmptyHoldsView
+          }
+          .frame(minHeight: geometry.size.height)
+          .refreshable {
+            holdsViewModel.reloadData()
+          }
+        }
+      } else {
         VStack {
-          emptyView
+          // user has not logged in
+          // remind user to log in to see the held books
+          LogInInstructionsView
         }
         .frame(minHeight: geometry.size.height)
         .refreshable {
           holdsViewModel.reloadData()
         }
 
-      } else {
-        listView
-          .refreshable {
-            holdsViewModel.reloadData()
-          }
-
       }
     }
   }
 
-  @ViewBuilder private var listView: some View {
+  @ViewBuilder private var BookListView: some View {
 
     AdaptableGridLayout {
 
@@ -110,6 +115,22 @@ struct HoldsView: View {
     .padding(.bottom, 20)
     .onAppear { holdsViewModel.loadData() }
 
+  }
+
+  @ViewBuilder private var EmptyHoldsView: some View {
+    Text(Strings.MyBooksView.holdsEmptyViewMessage)
+      .multilineTextAlignment(.center)
+      .foregroundColor(.gray)
+      .horizontallyCentered()
+      .verticallyCentered()
+  }
+
+  @ViewBuilder private var LogInInstructionsView: some View {
+    Text(Strings.MyBooksView.holdsNotLoggedInViewMessage)
+      .multilineTextAlignment(.center)
+      .foregroundColor(.gray)
+      .horizontallyCentered()
+      .verticallyCentered()
   }
 
   private func bookCell(for book: TPPBook) -> some View {

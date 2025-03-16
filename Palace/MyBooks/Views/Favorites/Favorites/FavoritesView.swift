@@ -62,40 +62,45 @@ struct FavoritesView: View {
 
   }
 
-  @ViewBuilder private var emptyView: some View {
-
-    Text(Strings.MyBooksView.favoritesEmptyViewMessage)
-      .multilineTextAlignment(.center)
-      .foregroundColor(.gray)
-      .horizontallyCentered()
-      .verticallyCentered()
-
-  }
-
   @ViewBuilder private var content: some View {
 
     GeometryReader { geometry in
 
-      if favoritesViewModel.showInstructionsLabel {
+      if favoritesViewModel.userIsLoggedIn {
+        if favoritesViewModel.userHasFavoriteBooks {
+          // user is logged in and has favorite books
+          // show list of favorite books
+          BookListView
+            .refreshable {
+              favoritesViewModel.reloadData()
+            }
+        } else {
+          VStack {
+            // user is logged in and has no favorite books
+            // show instructions how to add a book to favorites
+            EmptyHoldsView
+          }
+          .frame(minHeight: geometry.size.height)
+          .refreshable {
+            favoritesViewModel.reloadData()
+          }
+        }
+      } else {
         VStack {
-          emptyView
+          // user has not logged in
+          // remind user to log in to see the favorite books
+          LogInInstructionsView
         }
         .frame(minHeight: geometry.size.height)
         .refreshable {
           favoritesViewModel.reloadData()
         }
 
-      } else {
-        listView
-          .refreshable {
-            favoritesViewModel.reloadData()
-          }
-
       }
     }
   }
 
-  @ViewBuilder private var listView: some View {
+  @ViewBuilder private var BookListView: some View {
 
     AdaptableGridLayout {
 
@@ -111,6 +116,22 @@ struct FavoritesView: View {
     .padding(.bottom, 20)
     .onAppear { favoritesViewModel.loadData() }
 
+  }
+
+  @ViewBuilder private var EmptyHoldsView: some View {
+    Text(Strings.MyBooksView.favoritesEmptyViewMessage)
+      .multilineTextAlignment(.center)
+      .foregroundColor(.gray)
+      .horizontallyCentered()
+      .verticallyCentered()
+  }
+
+  @ViewBuilder private var LogInInstructionsView: some View {
+    Text(Strings.MyBooksView.favoritesNotLoggedInViewMessage)
+      .multilineTextAlignment(.center)
+      .foregroundColor(.gray)
+      .horizontallyCentered()
+      .verticallyCentered()
   }
 
   private func bookCell(for book: TPPBook) -> some View {
