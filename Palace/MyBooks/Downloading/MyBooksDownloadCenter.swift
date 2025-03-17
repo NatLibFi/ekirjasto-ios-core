@@ -72,6 +72,7 @@ import OverdriveProcessor
           borrowedBook,
           location: location,
           state: .DownloadNeeded,
+          selectionState: .Selected, // just placeholder code
           fulfillmentId: nil,
           readiumBookmarks: nil,
           genericBookmarks: nil
@@ -180,7 +181,15 @@ import OverdriveProcessor
   
   private func processUnregisteredState(for book: TPPBook, location: TPPBookLocation?, loginRequired: Bool?) -> TPPBookState {
     if book.defaultAcquisitionIfBorrow == nil && (book.defaultAcquisitionIfOpenAccess != nil || !(loginRequired ?? false)) {
-      bookRegistry.addBook(book, location: location, state: .DownloadNeeded, fulfillmentId: nil, readiumBookmarks: nil, genericBookmarks: nil)
+      bookRegistry.addBook(
+        book,
+        location: location,
+        state: .DownloadNeeded,
+        selectionState: .Selected, //just placeholder code
+        fulfillmentId: nil,
+        readiumBookmarks: nil,
+        genericBookmarks: nil
+      )
       return .DownloadNeeded
     }
     return .Unregistered
@@ -919,6 +928,7 @@ extension MyBooksDownloadCenter: URLSessionTaskDelegate {
     bookRegistry.addBook(book,
                          location: bookRegistry.location(forIdentifier: book.identifier),
                          state: .Downloading,
+                         selectionState: .Selected, // just placeholder codd
                          fulfillmentId: nil,
                          readiumBookmarks: nil,
                          genericBookmarks: nil)
@@ -1014,6 +1024,7 @@ extension MyBooksDownloadCenter {
     bookRegistry.addBook(book,
                                    location: location,
                                    state: .DownloadFailed,
+                                   selectionState: .Selected, // just placeholder code
                                    fulfillmentId: nil,
                                    readiumBookmarks: nil,
                                    genericBookmarks: nil)

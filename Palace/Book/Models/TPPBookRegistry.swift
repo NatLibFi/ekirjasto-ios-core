@@ -12,6 +12,7 @@ import UIKit
 protocol TPPBookRegistryProvider {
   func setProcessing(_ processing: Bool, for bookIdentifier: String)
   func state(for bookIdentifier: String) -> TPPBookState
+  func selectionState(for bookIdentifier: String) -> BookSelectionState
   func readiumBookmarks(forIdentifier identifier: String) -> [TPPReadiumBookmark]
   func setLocation(_ location: TPPBookLocation?, forIdentifier identifier: String)
   func location(forIdentifier identifier: String) -> TPPBookLocation?
@@ -23,10 +24,12 @@ protocol TPPBookRegistryProvider {
   func addGenericBookmark(_ location: TPPBookLocation, forIdentifier bookIdentifier: String)
   func deleteGenericBookmark(_ location: TPPBookLocation, forIdentifier bookIdentifier: String)
   func replaceGenericBookmark(_ oldLocation: TPPBookLocation, with newLocation: TPPBookLocation, forIdentifier: String)
-  func addBook(_ book: TPPBook, location: TPPBookLocation?, state: TPPBookState, fulfillmentId: String?, readiumBookmarks: [TPPReadiumBookmark]?, genericBookmarks: [TPPBookLocation]?)
+  func addBook(_ book: TPPBook, location: TPPBookLocation?, state: TPPBookState, selectionState: BookSelectionState, fulfillmentId: String?, readiumBookmarks: [TPPReadiumBookmark]?, genericBookmarks: [TPPBookLocation]?)
   func removeBook(forIdentifier bookIdentifier: String)
+  func updateBook(_ book: TPPBook, selectionState: BookSelectionState)
   func updateAndRemoveBook(_ book: TPPBook)
   func setState(_ state: TPPBookState, for bookIdentifier: String)
+  func setSelectionState(_ selectionState: BookSelectionState, for bookIdentifier: String)
   func book(forIdentifier bookIdentifier: String) -> TPPBook?
   func fulfillmentId(forIdentifier bookIdentifier: String) -> String?
   func setFulfillmentId(_ fulfillmentId: String, for bookIdentifier: String)
@@ -55,6 +58,7 @@ enum TPPBookRegistryKey: String {
 
   case book = "metadata"
   case state = "state"
+  case selectionState = "selectionState"
   case fulfillmentId = "fulfillmentId"
   case location = "location"
   case readiumBookmarks = "bookmarks"
@@ -265,10 +269,21 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
             continue
           }
           recordsToDelete.remove(book.identifier)
+
+          // check if the book can be found in the book registry
           if self.registry[book.identifier] != nil {
-            self.updateBook(book)
+            // book was found -> update the book in registry
+            self.updateBook(
+              book,
+              selectionState: .Selected // just placeholder code
+            )
           } else {
-            self.addBook(book)
+            // otherwise -> add the book as new to registry
+            self.addBook(
+              book,
+              state: .DownloadNeeded,
+              selectionState: .Selected // just placeholder code
+            )
           }
         }
         recordsToDelete.forEach {
@@ -361,25 +376,23 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
       .filter { matchingStates.contains($0.state) }
       .map { $0.book }
   }
-  
+
   /// Returns all books that are selected (books that are favorites).
   var selectedBooks: [TPPBook] {
-    let matchingStates: [TPPBookState] = [
-      //.Selected
-    ]
     return registry
       .map { $0.value }
-      .filter { matchingStates.contains($0.state) }
+      .filter { $0.selectionState == .Selected }
       .map { $0.book }
   }
-  
+
   /// Adds a book to the book registry until it is manually removed. It allows the application to
   /// present information about obtained books when offline. Attempting to add a book already present
   /// will overwrite the existing book as if `updateBook` were called. The location may be nil. The
   /// state provided must be one of `TPPBookState` and must not be `TPPBookState.Unregistered`.
-  func addBook(_ book: TPPBook, location: TPPBookLocation? = nil, state: TPPBookState = .DownloadNeeded, fulfillmentId: String? = nil, readiumBookmarks: [TPPReadiumBookmark]? = nil, genericBookmarks: [TPPBookLocation]? = nil) {
+  func addBook(_ book: TPPBook, location: TPPBookLocation? = nil, state: TPPBookState = .DownloadNeeded, selectionState: BookSelectionState, fulfillmentId: String? = nil, readiumBookmarks: [TPPReadiumBookmark]? = nil, genericBookmarks: [TPPBookLocation]? = nil) {
     coverRegistry.pinThumbnailImageForBook(book)
-    registry[book.identifier] = TPPBookRegistryRecord(book: book, location: location, state: state, fulfillmentId: fulfillmentId, readiumBookmarks: readiumBookmarks, genericBookmarks: genericBookmarks)
+    print("[TPPBookRegistry.swift: addBook] Adding book \(book.title) with state: \(TPPBookStateHelper.stringValue(from: state)) and selectionState: \(BookSelectionStateHelper.stringValue(from: selectionState))")
+    registry[book.identifier] = TPPBookRegistryRecord(book: book, location: location, state: state, selectionState: selectionState, fulfillmentId: fulfillmentId, readiumBookmarks: readiumBookmarks, genericBookmarks: genericBookmarks)
     save()
   }
   
@@ -408,7 +421,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
   /// accessing the application off-line or when viewing books outside of the catalog. Attempts to
   /// update a book not already stored in the registry will simply be ignored, so it's reasonable to
   /// call this method whenever new information is obtained regardless of a given book's state.
-  func updateBook(_ book: TPPBook) {
+  func updateBook(_ book: TPPBook, selectionState: BookSelectionState) {
     guard let record = registry[book.identifier] else {
       return
     }
@@ -418,6 +431,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
       book: book,
       location: record.location,
       state: record.state,
+      selectionState: selectionState,
       fulfillmentId: record.fulfillmentId,
       readiumBookmarks: record.readiumBookmarks,
       genericBookmarks: record.genericBookmarks
@@ -439,13 +453,24 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
   func state(for bookIdentifier: String) -> TPPBookState {
     return registry[bookIdentifier]?.state ?? .Unregistered
   }
-  
+
+  /// Returns the selection state of a book given its identifier.
+  func selectionState(for bookIdentifier: String) -> BookSelectionState {
+    return registry[bookIdentifier]?.selectionState ?? .SelectionUnregistered
+  }
+
   /// Sets the state for a book previously registered given its identifier.
   func setState(_ state: TPPBookState, for bookIdentifier: String) {
     registry[bookIdentifier]?.state = state
     save()
   }
-  
+
+  /// Sets the selection state for a book previously registered given its identifier.
+  func setSelectionState(_ selectionState: BookSelectionState, for bookIdentifier: String) {
+    registry[bookIdentifier]?.selectionState = selectionState
+    save()
+  }
+
   /// Returns the book for a given identifier if it is registered, else nil.
   func book(forIdentifier bookIdentifier: String) -> TPPBook? {
     registry[bookIdentifier]?.book
