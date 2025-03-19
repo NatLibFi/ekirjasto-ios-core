@@ -298,109 +298,425 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
     }
   }
 
-  /// Synchronizes local registry data and current loans data.
-  /// - Parameter completion:
-  ///     * Completion handler provides an error document for error handling and a boolean value,
-  ///       indicating the presence of books available for download.
-  func sync(
-    completion: (
-      (_ errorDocument: [AnyHashable: Any]?, _ newBooks: Bool) -> Void
-    )? = nil
-  ) {
+  /// Helper for completion handler parameter type
+  /// - Parameter errorDocument: error document for error handling
+  /// - Parameter newBooks: boolean value indicating the presence of books available for download.
+  typealias completionType = (
+     _ errorDocument: [AnyHashable: Any]?,
+     _ newBooks: Bool
+    ) -> Void
 
+  /// Synchronizes local registry data and current loans+holds data and selected books data.
+  /// Function first syncs loans+holds data, and after that syncs selected books data.
+  /// - Parameter completion: compeltion handler
+  func sync(completion: completionType? = nil) {
+
+    // Syncing loans+holds and selected needs some group work
+    let dispatchGroup = DispatchGroup()
+
+    var syncError: [AnyHashable: Any]? = nil
+    var newBooksAvailable: Bool = false
+
+    // First asyncronous task starts
+    // We are entering the group!
+    dispatchGroup.enter()
+
+    // Let's first do a sync for book registry with loans+holds data
+    syncLoansAndHolds { errorDocument, newReadyBooks in
+
+      // If error document is produced in function syncLoans...
+      if let errorDocument = errorDocument {
+        // ...set it as syncError.
+        syncError = errorDocument
+      }
+
+      // Keeping tabs if we have new reserved books, ready for user to be borrow and download
+      // True, if there are new books
+      // False, otherwise
+      newBooksAvailable = newReadyBooks
+
+      // First asyncronous task has ended
+      // We are leaving the group!
+      dispatchGroup.leave()
+    }
+
+    // We send a notification to the group,
+    // that tells us we have now completed the first task.
+    // We are ready to move on!
+    dispatchGroup.notify(queue: .main) {
+
+      // If syncError was set in first task...
+      guard syncError == nil else {
+        // ...call completion handler...
+        completion?(syncError, newBooksAvailable)
+        // ...and do not proceed further.
+        return
+      }
+
+      // Second asyncronous task starts
+      // We are entering the group again!
+      dispatchGroup.enter()
+
+      // Second sync for book registry with favorites data
+      self.syncSelected { errorDocument, newBooks in
+
+        if let errorDocument = errorDocument {
+          syncError = errorDocument
+        }
+
+        newBooksAvailable = newBooks
+
+        // Second asyncronous task has ended
+        // We are leaving the group (again!)
+        dispatchGroup.leave()
+      }
+
+      // We notify the group that the second task has ended...
+      dispatchGroup.notify(queue: .main) {
+
+        // ... and then finally call completionHandler
+        completion?(syncError, newBooksAvailable)
+      }
+
+    }
+
+  }
+
+  /// Synchronizes local registry data and current loans+holds data.
+  /// This function
+  ///   - adds, updates and removes books in book registry
+  ///   - updates app icon badge and loans+holds tab badge with number of new books
+  /// - Parameters:
+  ///   - completion: a completion handler
+  func syncLoansAndHolds(
+    completion: completionType? = nil
+  ) {
+    ATLog(
+      .info,
+      "Book registry starting loans+holds sync..."
+    )
+
+    // if loansURL is not found, return
     guard let loansUrl = AccountsManager.shared.currentAccount?.loansUrl else {
+      ATLog(
+        .info,
+        "Book registry aborting loans+holds sync, no URL for loans+holds feed"
+      )
       return
     }
+
+    // if already synced with this URL, return
     if syncUrl == loansUrl {
-      print("book registry skipped sync")
+      ATLog(
+        .info,
+        "Book registry skipping loans+holds sync, already synced"
+      )
       return
     }
+
+    // setting state and syncUrl for book registry syncing
     state = .syncing
     syncUrl = loansUrl
-    print("book registry syncUrl 1: \(syncUrl as URL?)")
+    ATLog(
+      .info,
+      "[LOANS+HOLDS SYNC START] book registry state: \(self.state) and syncURL: \(syncUrl as URL?)"
+    )
+
     TPPOPDSFeed.withURL(loansUrl, shouldResetCache: true) {
       feed, errorDocument in
-      print("book registry withURL!")
+
+      // Async: schedules a work item for immediate execution and returns immediately.
       DispatchQueue.main.async {
+
+        // The stuff inside defer is done just before the end of this scope
         defer {
           self.state = .loaded
           self.syncUrl = nil
-          print("book registry syncUrl 2: \(self.syncUrl as URL?)")
+          ATLog(
+            .info,
+            "[LOANS+HOLDS SYNC END] book registry state: \(self.state) and syncURL: \(self.syncUrl as URL?)"
+          )
         }
+
+        // return as it is not the right time to do sync
         if self.syncUrl != loansUrl {
+          ATLog(
+            .info,
+            "Book registry aborting loans+holds sync, syncURL mismatch"
+          )
           return
         }
+
+        // If fetching resulted in error,
+        // call completion with
+        // - the error document
+        // - and no number of ready books (false)
+        // and return
         if let errorDocument = errorDocument {
+          ATLog(
+            .info,
+            "Book registry aborting loans+holds sync, errorDocument created"
+          )
           completion?(errorDocument, false)
           return
         }
+
+        // If no feed,
+        // call completion with
+        // - no error document (nil)
+        // - and no number of ready books (false)
+        // and return.
         guard let feed = feed else {
+          ATLog(
+            .info,
+            "Book registry aborting loans+holds sync, no feed"
+          )
           completion?(nil, false)
           return
         }
+
+        // Check and set licensor
         if let licensor = feed.licensor as? [String: Any] {
           TPPUserAccount.sharedAccount().setLicensor(licensor)
         }
+
+        // Find records currently in book registry that should be removed
+
+        // First get all current books in registry...
         var recordsToDelete = Set<String>(
           self.registry.keys.map { $0 as String })
+
+        // ...then go trough all the entries in feed...
         for entry in feed.entries {
+          // ..and create a book object for the entry in feed
           guard let opdsEntry = entry as? TPPOPDSEntry,
-            let book = TPPBook(entry: opdsEntry)
+                let book = TPPBook(entry: opdsEntry)
           else {
             continue
           }
+
+          ATLog(
+            .info,
+            "Book in loans+holds feed: \(book.title)"
+          )
+
+          // This book is still in feed so it is still valid.
+          // We take the book off from the books to be deleted
           recordsToDelete.remove(book.identifier)
 
-          // check if the book can be found in the book registry
+          // Then continue to handle this book that is valid.
+
+          // If the book can be found in registry already...
           if self.registry[book.identifier] != nil {
-            // book was found -> update the book in registry
+            // ...then just update the book record with book details.
+            // As this is book in loans+holds feed,
+            // the selection state is safe to set as .Unselected at this point.
             self.updateBook(
               book,
-              selectionState: .Selected  // just placeholder code
+              selectionState: .Unselected
             )
           } else {
-            // otherwise -> add the book as new to registry
+            // ...otherwise add the book as new book record.
+            // As this is a book in loans+holds feed,
+            // the selection state is safe to set as .Unselected at this point.
             self.addBook(
               book,
               state: .DownloadNeeded,
-              selectionState: .Selected  // just placeholder code
+              selectionState: .Unselected
             )
           }
         }
+
+        // Now the list of books to be removed from our registry is up to date.
+        // Let's go through every book record to be deleted...
         recordsToDelete.forEach {
+          // ...if book record can be found from registry and it has a state,
+          // and if the state is DownloadSuccessful or Used...
           if let state = self.registry[$0]?.state,
-            state == .DownloadSuccessful || state == .Used
+             state == .DownloadSuccessful || state == .Used
           {
+            // ...then clear the downloaded book data from the device...
             MyBooksDownloadCenter.shared.deleteLocalContent(for: $0)
           }
+
+          // ...and make it nil in book registry
           self.registry[$0] = nil
         }
+
+        // Then save the registry.
         self.save()
 
-        // Count new books
+        // Find out how many new books there are in registry,
+        // so we can check if any previously reserved book is ready to be loaned,
+        // and then we can also update the badge
+        // and return info for user that some books are ready to borrow.
         var readyBooks = 0
-        self.heldBooks.forEach { book in
+
+        // First get the books from registry that the user has on hold
+        for book in self.heldBooks {
+          ATLog(
+            .info,
+            "Book on hold: \(book.title)"
+          )
+
           book.defaultAcquisition?.availability.matchUnavailable(
-            nil, limited: nil, unlimited: nil, reserved: nil,
+            nil,
+            limited: nil,
+            unlimited: nil,
+            reserved: nil,
             ready: { _ in
               readyBooks += 1
-            })
+            }
+          )
         }
 
+        // If we have more ready books then previously,
+        // then the numbers do not match.
+        // We need to update the notification badge to let the user know,
+        // that his/her reservation is ready to be borrowed
         if UIApplication.shared.applicationIconBadgeNumber != readyBooks {
+          ATLog(
+            .info,
+            "Number of new books ready to be borrowed: \(readyBooks)"
+          )
+
           UIApplication.shared.applicationIconBadgeNumber = readyBooks
 
           let loansAndHoldsTab = TPPRootTabBarController.shared().tabBar.items?[1]
-          
+
           let newTabBadgeValue =
             readyBooks > 0
-            ? "\(readyBooks)"
-            : nil
+              ? "\(readyBooks)"
+              : nil
 
           loansAndHoldsTab?.badgeValue = newTabBadgeValue
         }
 
+        // And we are done with the loans+holds sync!
+        // We call completion with
+        // - no error document (nil) and
+        // - true if there are books ready to be loaned
         completion?(nil, readyBooks > 0)
+
+        // And finally we go to defer and do the stuff in there
+      }
+    }
+  }
+
+  /// Synchronizes local registry data and current selected (favorites) data.
+  /// This selected books sync only adds or updates selected books in book registry.
+  /// syncSelected is otherwise quite similar to syncLoansAndHolds
+  /// - Parameter completion: a completion handler
+  func syncSelected(
+    completion: completionType? = nil
+  ) {
+    ATLog(
+      .info,
+      "Starting selected sync..."
+    )
+
+    guard let selectionUrl = AccountsManager.shared.currentAccount?.selectionUrl
+    else {
+      ATLog(
+        .info,
+        "Book registry aborting selected sync, no URL for selection feed"
+      )
+      return
+    }
+
+    if syncUrl == selectionUrl {
+      ATLog(
+        .info,
+        "Book registry skipping selected sync, already synced"
+      )
+      return
+    }
+
+    state = .syncing
+    syncUrl = selectionUrl
+
+    ATLog(
+      .info,
+      "[SELECTED SYNC START] book registry state: \(self.state) and syncURL: \(syncUrl as URL?)"
+    )
+
+    TPPOPDSFeed.withURL(selectionUrl, shouldResetCache: true) {
+      feed, errorDocument in
+
+      DispatchQueue.main.async {
+        defer {
+          self.state = .loaded
+          self.syncUrl = nil
+
+          ATLog(
+            .info,
+            "[SELECTED SYNC END] book registry state: \(self.state) and syncURL: \(self.syncUrl as URL?)"
+          )
+        }
+
+        if self.syncUrl != selectionUrl {
+          ATLog(
+            .info,
+            "Book registry aborting selected sync, syncURL mismatch"
+          )
+          return
+        }
+
+        if let errorDocument = errorDocument {
+          ATLog(
+            .info,
+            "Book registry aborting loans+holds sync, errorDocument created"
+          )
+          completion?(errorDocument, false)
+          return
+        }
+
+        guard let feed = feed else {
+          ATLog(
+            .info,
+            "Book registry aborting selected sync, no feed"
+          )
+          completion?(nil, false)
+          return
+        }
+
+        for entry in feed.entries {
+          guard let opdsEntry = entry as? TPPOPDSEntry,
+                let book = TPPBook(entry: opdsEntry)
+          else {
+            continue
+          }
+
+          ATLog(
+            .info,
+            "Book in selected feed: \(book.title)"
+          )
+
+          if self.registry[book.identifier] != nil {
+            // The selected book already exists in the book registry,
+            // and the book is in selected feed,
+            // lets just update the selection state as .Selected.
+            // and not do other changes to book record.
+            self.updateBook(
+              self.registry[book.identifier]!.book,
+              selectionState: .Selected
+            )
+          } else {
+            // Book is a new book to book regisry,
+            // which means that it was not introduced in loans+holds feed,
+            // so let's add a book record as an unregistered book
+            // that has selection state .Selected.
+            self.addBook(
+              book,
+              state: .Unregistered,
+              selectionState: .Selected
+            )
+          }
+        }
+
+        self.save()
+
+        completion?(nil, false)
       }
     }
   }
@@ -474,7 +790,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
       .map { $0.book }
   }
 
-  /// Returns all registerd books that are selected (= books that are favorites).
+  /// Returns all registered books that are selected (= books that are favorites).
   var selectedBooks: [TPPBook] {
     return
       registry
@@ -486,7 +802,8 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
   /// Adds a book to the book registry until it is manually removed. It allows the application to
   /// present information about obtained books when offline. Attempting to add a book already present
   /// will overwrite the existing book as if `updateBook` were called. The location may be nil. The
-  /// state provided must be one of `TPPBookState` and must not be `TPPBookState.Unregistered`.
+  /// state provided must be one of `TPPBookState` and must not be `TPPBookState.Unregistered`,
+  /// unless the book is added from the selected feed.
   func addBook(
     _ book: TPPBook,
     location: TPPBookLocation? = nil,
@@ -496,11 +813,16 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
     readiumBookmarks: [TPPReadiumBookmark]? = nil,
     genericBookmarks: [TPPBookLocation]? = nil
   ) {
+
     coverRegistry.pinThumbnailImageForBook(book)
 
-    print("[TPPBookRegistry.swift: addBook] Adding book \(book.title) to book registry")
-    print("[TPPBookRegistry.swift: addBook] Adding book with state: \(TPPBookStateHelper.stringValue(from: state))")
-    print("[TPPBookRegistry.swift: addBook] Adding book with selectionState: \(BookSelectionStateHelper.stringValue(from: selectionState))")
+    ATLog(
+      .info,
+      "Adding book to book registry "
+        + "with title: '\(book.title)' and "
+        + "with state: \(TPPBookStateHelper.stringValue(from: state)) and "
+        + "with selectionState: \(BookSelectionStateHelper.stringValue(from: selectionState))"
+    )
 
     registry[book.identifier] = TPPBookRegistryRecord(
       book: book,
@@ -509,17 +831,19 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
       selectionState: selectionState,
       fulfillmentId: fulfillmentId,
       readiumBookmarks: readiumBookmarks,
-      genericBookmarks: genericBookmarks)
+      genericBookmarks: genericBookmarks
+    )
+
     save()
   }
-  
+
   /// Given an identifier, this method removes a book from the registry.
   func removeBook(forIdentifier bookIdentifier: String) {
     coverRegistry.removePinnedThumbnailImageForBookIdentifier(bookIdentifier)
     registry.removeValue(forKey: bookIdentifier)
     save()
   }
-  
+
   /// This method should be called whenever new book information is retrieved from a server. Doing so
   /// ensures that once the user has seen the new information, they will continue to do so when
   /// accessing the application off-line or when viewing books outside of the catalog. Attempts to
@@ -539,6 +863,14 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
       andNewBook: book
     )
 
+    ATLog(
+      .info,
+      "Updating book in book registry "
+        + "with title: '\(book.title)' and "
+        + "with state: \(TPPBookStateHelper.stringValue(from: record.state)) and "
+        + "with selectionState: \(BookSelectionStateHelper.stringValue(from: selectionState))"
+    )
+
     // TPPBookRegistryRecord.init() contains logics for correct record updates
     registry[book.identifier] = TPPBookRegistryRecord(
       book: book,
@@ -549,6 +881,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
       readiumBookmarks: record.readiumBookmarks,
       genericBookmarks: record.genericBookmarks
     )
+
   }
 
   /// Updates book metadata (e.g., from OPDS feed) in the registry and returns the updated book.
@@ -561,7 +894,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
     save()
     return updatedBook
   }
-  
+
   /// This will update the book like updateBook does, but will also set its state to unregistered, then
   /// broadcast the change, then remove the book from the registry. This gives any views using the book
   /// a chance to update their copy with the new one, without having to keep it in the registry after.
@@ -574,19 +907,17 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
     registry[book.identifier]?.state = .Unregistered
     save()
   }
-  
-  
-  
+
   /// Returns the book for a given identifier if it is registered, else nil.
   func book(forIdentifier bookIdentifier: String) -> TPPBook? {
     registry[bookIdentifier]?.book
   }
-  
+
   /// Returns the fulfillmentId of a book given its identifier.
   func fulfillmentId(forIdentifier bookIdentifier: String) -> String? {
     registry[bookIdentifier]?.fulfillmentId
   }
-  
+
   /// Returns whether a book is processing something, given its identifier.
   func processing(forIdentifier bookIdentifier: String) -> Bool {
     processingIdentifiers.contains(bookIdentifier)
@@ -596,12 +927,12 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
   func selectionState(for bookIdentifier: String) -> BookSelectionState {
     return registry[bookIdentifier]?.selectionState ?? .SelectionUnregistered
   }
-  
+
   /// Returns the state of a book given its identifier.
   func state(for bookIdentifier: String) -> TPPBookState {
     return registry[bookIdentifier]?.state ?? .Unregistered
   }
-  
+
   /// Sets the fulfillmentId for a book previously registered given its identifier.
   func setFulfillmentId(
     _ fulfillmentId: String,
@@ -610,7 +941,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
     registry[bookIdentifier]?.fulfillmentId = fulfillmentId
     save()
   }
-  
+
   /// Sets the processing flag for a book previously registered given its identifier.
   func setProcessing(_ processing: Bool, for bookIdentifier: String) {
     if processing {
@@ -652,7 +983,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
   func cachedThumbnailImage(for book: TPPBook) -> UIImage? {
     return coverRegistry.cachedThumbnailImageForBook(book)
   }
-  
+
   /// Returns cover image if it exists, or falls back to thumbnail image load.
   func coverImage(
     for book: TPPBook,
@@ -679,7 +1010,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
   ) {
     coverRegistry.thumbnailImagesForBooks(books, handler: handler)
   }
-  
+
 }
 
 // MARK: - TPPBookRegistry extension
@@ -690,7 +1021,7 @@ extension TPPBookRegistry: TPPBookRegistryProvider {
   func location(forIdentifier bookIdentifier: String) -> TPPBookLocation? {
     registry[bookIdentifier]?.location
   }
-  
+
   /// Sets the location for a book previously registered given its identifier.
   func setLocation(
     _ location: TPPBookLocation?,
@@ -701,7 +1032,7 @@ extension TPPBookRegistry: TPPBookRegistryProvider {
   }
 
   // MARK: - Readium Bookmarks
-  
+
   /// Returns the bookmarks for a book given its identifier.
   func readiumBookmarks(forIdentifier bookIdentifier: String)
     -> [TPPReadiumBookmark]
@@ -753,7 +1084,7 @@ extension TPPBookRegistry: TPPBookRegistryProvider {
   {
     registry[bookIdentifier]?.genericBookmarks ?? []
   }
-  
+
   /// Adds a generic bookmark (book location) for a book given its identifier
   func addGenericBookmark(
     _ location: TPPBookLocation,
@@ -762,7 +1093,7 @@ extension TPPBookRegistry: TPPBookRegistryProvider {
     guard registry[bookIdentifier] != nil else {
       return
     }
-    
+
     if registry[bookIdentifier]?.genericBookmarks == nil {
       registry[bookIdentifier]?.genericBookmarks = [TPPBookLocation]()
     }
