@@ -39,6 +39,7 @@ class TPPBookRegistryRecord: NSObject {
     super.init()
 
     var actuallyOnHold = false
+    let isSelectedBook = selectionState == .Selected
 
     if let defaultAcquisition = book.defaultAcquisition {
       defaultAcquisition.availability.matchUnavailable { _ in
@@ -66,7 +67,7 @@ class TPPBookRegistryRecord: NSObject {
       self.state = .Unsupported
     }
 
-    if !actuallyOnHold {
+    if !actuallyOnHold && !isSelectedBook {
       if self.state == .Holding || self.state == .Unsupported {
         // Since we're not in some download-related state and we're not unregistered,
         // we must need to be downloaded.
