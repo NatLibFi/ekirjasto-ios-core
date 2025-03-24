@@ -131,7 +131,7 @@ struct TPPSettingsView: View {
     Button {
       TPPSignInBusinessLogic.getShared { logic in
         if let _logic = logic {
-          if _logic.shouldShowSyncButton(){
+          if _logic.shouldShowSyncButton() && !self.toggleSyncBookmarks {
             self.logoutText = Strings.Settings.signOutConfirmationBookSync
           } else {
             self.logoutText = Strings.Settings.signOutConfirmationNoBookSync
