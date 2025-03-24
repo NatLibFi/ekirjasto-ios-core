@@ -29,12 +29,14 @@ struct TPPSettingsView: View {
   
   @ViewBuilder private var settingsListView: some View {
     List {
-      //logo at the top of the view
+      //E-library logo header
       eLibraryLogoSection
       //Login, logout, dependents buttons
       accountSection
-      //Info buttons and footer with NatLibFi logo and version
+      //Info buttons
       infoSection
+      //Footer with NatLibFiLogo and version code
+      natLibFiLogoAndVersionSection
     }
     .listStyle(GroupedListStyle())
   }
@@ -74,9 +76,7 @@ struct TPPSettingsView: View {
   }
   
   @ViewBuilder private var infoSection: some View {
-    Section(
-      footer: footer
-    ) {
+    Section {
       feedbackRow
       accessibilityRow
       privacyRow
@@ -177,16 +177,18 @@ struct TPPSettingsView: View {
     .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
   }
   
-  @ViewBuilder private var footer: some View {
+  @ViewBuilder private var natLibFiLogoAndVersionSection: some View {
   //Footer with the NatLibFi logo and version info
-    VStack{
-      Spacer()
-      natLibFiLogoSection
-      versionInfo
+    Section{}
+    footer:{
+      VStack{
+        natLibFiLogo
+        versionInfo
+      }
     }
   }
   
-  @ViewBuilder private var natLibFiLogoSection: some View {
+  @ViewBuilder private var natLibFiLogo: some View {
     let natLibFiLogo = ["fi", "sv"].contains(Locale.current.languageCode)
       ? "NatLibFiLogoFiSv"
       : "NatLibFiLogoEn"
