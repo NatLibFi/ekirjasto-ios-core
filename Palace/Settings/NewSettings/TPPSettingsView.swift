@@ -14,7 +14,6 @@ struct TPPSettingsView: View {
   @State private var logoutText = ""
   @State private var orientation: UIDeviceOrientation = UIDevice.current.orientation
   @State private var selectedView: Int? = 0
-  @State private var syncEnabled = true
   @State private var toggleLogoutWarning = false
   @State private var toggleSyncBookmarks = AccountsManager.shared.accounts().first?.details?.syncPermissionGranted ?? false
   
@@ -75,6 +74,39 @@ struct TPPSettingsView: View {
     }
   }
   
+  /* syncBookmarks button, not in use currently.
+   Can be implemented again when sync is available
+  @ViewBuilder private var syncBookmarksSection: some View {
+       Section(
+         footer: Text(NSLocalizedString("Save your reading position and bookmarks to all your other devices.", comment: "Explain to the user they can save their bookmarks in the cloud across all their devices."))
+       ) {
+         Toggle(isOn: $toggleSyncBookmarks) {
+           Text(Strings.Settings.syncBookmarks)
+             .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
+         }
+         .disabled(!syncEnabled)
+         .onChange(of: toggleSyncBookmarks) { value in
+           TPPSignInBusinessLogic.getShared { logic in
+             logic?.changeSyncPermission(to: value, postServerSyncCompletion: { value in
+               toggleSyncBookmarks = value
+             })
+           }
+         }
+         .onAppear {
+           TPPSignInBusinessLogic.getShared { logic in
+             logic?.checkSyncPermission(preWork: {
+               syncEnabled = false
+             }, postWork: { enableSync in
+               syncEnabled = true
+               toggleSyncBookmarks = enableSync
+             })
+           }
+         }
+       }
+       .font(Font(uiFont: UIFont.palaceFont(ofSize: 12)))
+     }
+  */
+  
   @ViewBuilder private var infoSection: some View {
     Section {
       feedbackRow
@@ -99,7 +131,7 @@ struct TPPSettingsView: View {
     Button {
       TPPSignInBusinessLogic.getShared { logic in
         if let _logic = logic {
-          if _logic.shouldShowSyncButton() && !self.toggleSyncBookmarks {
+          if _logic.shouldShowSyncButton(){
             self.logoutText = NSLocalizedString("If you sign out without enabling Sync, your books and any saved bookmarks will be removed.", comment: "")
           } else {
             self.logoutText = NSLocalizedString("If you sign out, your books and any saved bookmarks will be removed.", comment: "")
