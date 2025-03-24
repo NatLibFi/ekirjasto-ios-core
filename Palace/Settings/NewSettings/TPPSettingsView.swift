@@ -132,11 +132,13 @@ struct TPPSettingsView: View {
       TPPSignInBusinessLogic.getShared { logic in
         if let _logic = logic {
           if _logic.shouldShowSyncButton(){
-            self.logoutText = NSLocalizedString("If you sign out without enabling Sync, your books and any saved bookmarks will be removed.", comment: "")
+            self.logoutText = Strings.Settings.signOutConfirmationBookSync
           } else {
-            self.logoutText = NSLocalizedString("If you sign out, your books and any saved bookmarks will be removed.", comment: "")
+            self.logoutText = Strings.Settings.signOutConfirmationNoBookSync
           }
         }
+        //Override the logout text so enabling Sync is not mentioned anymore
+        self.logoutText = Strings.Settings.signOutConfirmationNoBookSync
         toggleLogoutWarning = true
       }
     } label: {
