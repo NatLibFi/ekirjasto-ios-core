@@ -111,6 +111,8 @@ struct Strings {
     static let loginSuomiFi = NSLocalizedString("Sign in with suomi.fi", comment: "")
     static let continueWithoutSigning = NSLocalizedString("Continue without signing in", comment: "")
     static let signOut = NSLocalizedString("Sign out", comment: "")
+    static let signOutConfirmationBookSync = NSLocalizedString("If you sign out without enabling Sync, your books and any saved bookmarks will be removed.", comment: "Message that is shown to user on logout when bookmark sync is available")
+    static let signOutConfirmationNoBookSync = NSLocalizedString("If you sign out, your books and any saved bookmarks will be removed.", comment: "Message that is shown to user on logout when bookmark sync is not available")
     static let loginFooterUserAgreementText = NSLocalizedString("By signing in, you agree the End User License Agreement", comment: "")
     static let faq = NSLocalizedString("FAQ", comment: "")
     static let instructions = NSLocalizedString("User instructions", comment: "Title of a button that links to a HTML resource containing E-library user instructions")
