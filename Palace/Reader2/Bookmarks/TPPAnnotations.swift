@@ -90,7 +90,7 @@ protocol AnnotationsManager {
         alertController.addAction(notNowAction)
         alertController.addAction(enableSyncAction)
         alertController.preferredAction = enableSyncAction
-        /* Don't show allert that mentions bookmark sync
+        /* Don't show alert that mentions bookmark sync
          TPPAlertUtils.presentFromViewControllerOrNil(alertController: alertController, viewController: nil, animated: true, completion: nil)
          */
       } else {
