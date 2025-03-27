@@ -59,7 +59,7 @@ platform :ios do
   lane :test do
     run_tests(
       project: "Palace.xcodeproj",
-      devices: ["iPhone SE (3rd generation)"],
+      device: "iPhone SE (3rd generation)",
       scheme: "Ekirjasto"
     )
   end

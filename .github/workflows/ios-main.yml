@@ -17,7 +17,7 @@ env:
 
 jobs:
   build:
-    runs-on: macos-15
+    runs-on: macos-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -37,8 +37,8 @@ jobs:
           private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           host: github.com
 
-      - name: Force Xcode 16.2
-        run: sudo xcode-select -switch /Applications/Xcode_16.2.app
+      - name: Use default Xcode
+        run: sudo xcode-select -switch /Applications/Xcode.app
 
       - name: Bootstrap (and reveal secrets)
         env:
