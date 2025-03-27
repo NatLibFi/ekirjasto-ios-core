@@ -57,11 +57,10 @@ platform :ios do
   
   desc "Run tests"
   lane :test do
-    ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "500"
 
     run_tests(
       project: "Palace.xcodeproj",
-      device: "iPhone SE (3rd generation)",
+      devices: ["iPhone 16 Pro (18.2)"],
       scheme: "Ekirjasto"
     )
   end
