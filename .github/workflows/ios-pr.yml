@@ -6,7 +6,7 @@ name: ios-pr
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 env:
   COMMIT_SHA: ${{ github.sha }}
@@ -21,8 +21,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Checkout submodules
         run: git submodule update --init --recursive
+
       - name: Show build info
         env:
           TEST_SECRET: ${{ secrets.MASK_TEST }}
@@ -34,6 +36,7 @@ jobs:
           private-key-name: ekirjasto-ci-ed25519
           private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           host: github.com
+
       - name: Force Xcode 16.2
         run: sudo xcode-select -switch /Applications/Xcode_16.2.app
 
@@ -54,6 +57,7 @@ jobs:
         env:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
         run: scripts/build.sh debug
+
       - name: Build release build
         env:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
