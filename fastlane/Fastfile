@@ -59,7 +59,7 @@ platform :ios do
   lane :test do
     run_tests(
       project: "Palace.xcodeproj",
-      devices: ["iPhone 12 Pro"], # TODO:SAMI: Change to iPhone 15 Pro?
+      devices: ["iPhone 16 Pro (18.0)"],
       scheme: "Ekirjasto"
     )
   end
