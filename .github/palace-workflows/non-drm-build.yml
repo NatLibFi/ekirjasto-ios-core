@@ -1,0 +1,20 @@
+name: NonDRM Build
+on: workflow_dispatch
+jobs:
+  build:
+    runs-on: macOS-13
+    steps:
+      - name: Force Xcode 15
+        run: sudo xcode-select -switch /Applications/Xcode_15.0.1.app
+      - name: Checkout main repo
+        uses: actions/checkout@v3
+      - name: Set up repo for nonDRM build
+        run: exec ./scripts/setup-repo-nodrm.sh
+        env:
+          BUILD_CONTEXT: ci
+      - name: Build 3rd party dependencies
+        run: ./scripts/build-3rd-party-dependencies.sh --no-private
+        env:
+          BUILD_CONTEXT: ci
+      - name: Build Palace without DRM support
+        run: ./scripts/xcode-build-nodrm.sh
