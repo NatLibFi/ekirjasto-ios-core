@@ -487,7 +487,7 @@
          "string" : "Playback rate"
       },
       "audiobook_player_menu_sleep_title" : {
-         "string" : "Set your sleep timer"
+         "string" : "Sleep timer"
       },
       "audiobook_player_menu_toc_title" : {
          "string" : "Table of contents"
@@ -1220,6 +1220,18 @@
       },
       "logoutClearingBookDatabaseFailed" : {
          "string" : "Clearing the book database failed!"
+      },
+      "logoutConfirmCancel" : {
+         "string" : "Cancel"
+      },
+      "logoutConfirmConfirm" : {
+         "string" : "Sign out"
+      },
+      "logoutConfirmMessage" : {
+         "string" : "If you sign out, your downloads and any saved bookmarks will be removed."
+      },
+      "logoutConfirmTitle" : {
+         "string" : "Sign out"
       },
       "logoutDeactivatingDeviceAdobe" : {
          "string" : "Deactivating device…"
@@ -2190,7 +2202,7 @@
          "string" : "Usein kysytyt kysymykset"
       },
       "account_instructions" : {
-         "string" : ""
+         "string" : "Käyttöohjeet"
       },
       "account_leave_feedback" : {
          "string" : "Anna palautetta"
@@ -2478,7 +2490,7 @@
          "string" : "Toistonopeus"
       },
       "audiobook_player_menu_sleep_title" : {
-         "string" : "Aseta uniajastin"
+         "string" : "Uniajastin"
       },
       "audiobook_player_menu_toc_title" : {
          "string" : "Sisällysluettelo"
@@ -3211,6 +3223,18 @@
       },
       "logoutClearingBookDatabaseFailed" : {
          "string" : "Kirjatietokannan tyhjentäminen epäonnistui!"
+      },
+      "logoutConfirmCancel" : {
+         "string" : ""
+      },
+      "logoutConfirmConfirm" : {
+         "string" : ""
+      },
+      "logoutConfirmMessage" : {
+         "string" : ""
+      },
+      "logoutConfirmTitle" : {
+         "string" : ""
       },
       "logoutDeactivatingDeviceAdobe" : {
          "string" : "Deaktivoidaan laitetta..."
@@ -4181,7 +4205,7 @@
          "string" : "Vanliga frågor"
       },
       "account_instructions" : {
-         "string" : ""
+         "string" : "Anvisningar"
       },
       "account_leave_feedback" : {
          "string" : "Ge respons"
@@ -4469,7 +4493,7 @@
          "string" : "Uppspelningshastighet"
       },
       "audiobook_player_menu_sleep_title" : {
-         "string" : "Ställ in din vilotimer"
+         "string" : "Vilotimer"
       },
       "audiobook_player_menu_toc_title" : {
          "string" : "Innehållsförteckning"
@@ -4634,13 +4658,13 @@
          "string" : "Boken '%1$s' har returnerats"
       },
       "bookSessionExpiredButton" : {
-         "string" : ""
+         "string" : "Beräfta"
       },
       "bookSessionExpiredMessage" : {
-         "string" : ""
+         "string" : "Din session har gått ut, vänligen logga in igen."
       },
       "bookSessionExpiredTitle" : {
-         "string" : ""
+         "string" : "Din session har gått ut!"
       },
       "bookmarkEnd" : {
          "string" : "I slutet av kapitlet."
@@ -5203,6 +5227,18 @@
       "logoutClearingBookDatabaseFailed" : {
          "string" : "Det gick inte att rensa bokdatabasen!"
       },
+      "logoutConfirmCancel" : {
+         "string" : ""
+      },
+      "logoutConfirmConfirm" : {
+         "string" : ""
+      },
+      "logoutConfirmMessage" : {
+         "string" : ""
+      },
+      "logoutConfirmTitle" : {
+         "string" : ""
+      },
       "logoutDeactivatingDeviceAdobe" : {
          "string" : "Avaktiverar enhet..."
       },
@@ -5255,13 +5291,13 @@
          "string" : "Tidskrifter"
       },
       "magazinesSessionExpiredButton" : {
-         "string" : ""
+         "string" : "Bekräfta"
       },
       "magazinesSessionExpiredMessage" : {
-         "string" : ""
+         "string" : "Din session har gått ut, vänligen logga in igen."
       },
       "magazinesSessionExpiredTitle" : {
-         "string" : ""
+         "string" : "Din session har gått ut!"
       },
       "magazinesSignInRequiredSubtitle" : {
          "string" : "Gå till inställningar för att logga in"
