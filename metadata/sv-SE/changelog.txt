@@ -1,4 +1,2 @@
-1.2.2
-- Uppdatering av ljudboksverktyg 
-- Fix för att radera nedladdade bokfiler från enheten
-- Lade till länk till appanvändarinstruktioner
+1.2.4
+- Användargränssnitt fixar
