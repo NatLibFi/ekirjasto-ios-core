@@ -1,4 +1,2 @@
-1.2.2
-- Päivitys äänikirjatyökaluun
-- Korjaus ladattujen kirjatiedostojen poistamiseen laitteesta
-- Lisätty linkki sovelluksen käyttöohjeisiin
+1.2.4
+- Käyttöliittymäkorjauksia

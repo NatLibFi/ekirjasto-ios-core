@@ -1,4 +1,2 @@
-1.2.2
-- Update for audiobook tool
-- Fix to remove downloaded book files from device
-- Added a link to app user instructions
+1.2.4
+- User interface fixes
