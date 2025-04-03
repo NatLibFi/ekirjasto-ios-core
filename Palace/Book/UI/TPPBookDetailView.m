@@ -549,12 +549,10 @@ static NSString *DetailHTMLTemplate = nil;
   } else {
     [self.authorsLabel autoConstrainAttribute:ALAttributeTop toAttribute:ALAttributeBaseline ofView:self.titleLabel withOffset:AuthorBaselineOffset];
   }
-
-  [self.buttonsView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.authorsLabel withOffset:VerticalPadding relation:NSLayoutRelationGreaterThanOrEqual];
-  [NSLayoutConstraint autoSetPriority:UILayoutPriorityDefaultLow forConstraints:^{
-    [self.buttonsView autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self.coverImageView];
-  }];
-  [self.buttonsView autoPinEdge:ALEdgeLeading toEdge:ALEdgeTrailing ofView:self.coverImageView withOffset:MainTextPaddingLeft];
+  
+  [self.buttonsView autoPinEdgeToSuperviewMargin:ALEdgeLeft];
+  [self.buttonsView autoPinEdgeToSuperviewMargin:ALEdgeRight];
+  [self.buttonsView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.coverImageView withOffset:VerticalPadding relation:NSLayoutRelationGreaterThanOrEqual];
   
   [self.normalView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.buttonsView withOffset:VerticalPadding];
   [self.normalView autoPinEdgeToSuperviewEdge:ALEdgeRight];
