@@ -124,22 +124,55 @@
   }
   
   [self.constraints removeAllObjects];
-  int count = 0;
-  TPPRoundedButton *lastButton = nil;
+
+  int buttonsViewWidth = self.bounds.size.width;
+  int numberOfButtons = (int)self.visibleButtons.count;
+  double buttonOffset = 6.0;
+  TPPRoundedButton *previousButton = nil;
+
   for (TPPRoundedButton *button in self.visibleButtons) {
+    BOOL isFirstButton = !previousButton;
+
     [self.constraints addObject:[button autoPinEdgeToSuperviewEdge:ALEdgeTop]];
     [self.constraints addObject:[button autoPinEdgeToSuperviewEdge:ALEdgeBottom]];
-    if (!lastButton) {
-      [self.constraints addObject:[button autoPinEdgeToSuperviewEdge:ALEdgeLeading]];
+
+    if (buttonsViewWidth > 0) {
+      
+      if (numberOfButtons == 3) {
+        [self.constraints addObject:[button
+                                     autoSetDimension:ALDimensionWidth
+                                     toSize:(buttonsViewWidth/3 - buttonOffset)
+                                     relation:NSLayoutRelationLessThanOrEqual
+                                    ]];
+      }
+      
+      if (numberOfButtons == 1 || numberOfButtons == 2) {
+        [self.constraints addObject:[button
+                                     autoSetDimension:ALDimensionWidth
+                                     toSize:(buttonsViewWidth/2 - buttonOffset)
+                                     relation:NSLayoutRelationGreaterThanOrEqual
+                                    ]];
+      }
+    
+    
+    }
+
+    if (isFirstButton) {
+      [self.constraints addObject:[button
+                                   autoPinEdgeToSuperviewEdge:ALEdgeLeading
+                                  ]];
     } else {
-      [self.constraints addObject:[button autoPinEdge:ALEdgeLeading toEdge:ALEdgeTrailing ofView:lastButton withOffset:6.0]];
+      [self.constraints addObject:[button
+                                   autoPinEdge:ALEdgeLeading
+                                   toEdge:ALEdgeTrailing
+                                   ofView:previousButton
+                                   withOffset:6.0
+                                  ]];
     }
-    if (count == (int)self.visibleButtons.count - 1) {
-      [self.constraints addObject:[button autoPinEdgeToSuperviewEdge:ALEdgeTrailing]];
-    }
-    lastButton = button;
-    count++;
+
+    previousButton = button;
   }
+
 }
 
 - (void)updateProcessingState:(BOOL)isCurrentlyProcessing
