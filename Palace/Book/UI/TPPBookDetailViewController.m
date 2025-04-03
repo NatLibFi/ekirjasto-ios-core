@@ -88,6 +88,7 @@
   [super viewDidLoad];
   [self.view addSubview:self.bookDetailView];
   [self.bookDetailView autoPinEdgesToSuperviewEdges];
+  [self.bookDetailView layoutIfNeeded];
 }
 
 - (void)viewWillAppear:(BOOL)animated
