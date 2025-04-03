@@ -82,20 +82,23 @@ struct NormalBookCell: View {
   }
   
   @ViewBuilder private var primaryButtonsView: some View {
-    HStack {
-      ForEach(model.buttonTypes, id: \.self) { type in
-        ButtonView(
-          title: type.localizedTitle,
-          indicatorDate: model.indicatorDate(for: type),
-          action: { model.callDelegate(for: type) }
-        )
-        .frame(minWidth: 0, maxWidth: .infinity)
-        .disabled(type.isDisabled)
-        .opacity(type.isDisabled ? 0.5 : 1.0)
+    GeometryReader { geometry in
+      HStack {
+        ForEach(model.buttonTypes, id: \.self) { type in
+          ButtonView(
+            title: type.localizedTitle,
+            indicatorDate: model.indicatorDate(for: type),
+            action: { model.callDelegate(for: type) }
+          )
+          .frame(minWidth: 0, maxWidth: geometry.size.width/2)
+          .disabled(type.isDisabled)
+          .opacity(type.isDisabled ? 0.5 : 1.0)
+        }
       }
+      .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+      .padding(.leading, 10)
+      .padding(.top, 10)
     }
-    .frame(minWidth: 0, maxWidth: .infinity)
-    .padding(.leading, 10)
   }
   
   @ViewBuilder private var unreadImageView: some View {
