@@ -160,6 +160,7 @@ struct LoansView: View {
         BookCell(model: bookCellModel)
           .padding(.leading, -25)
           .padding(.vertical, 15)
+          .border(width: 1, edges: [.bottom ], color: Color("ColorEkirjastoLightestGreen"))
           .padding(.top, -25)
           .padding(.bottom, 10)
           .padding(.leading, 20)
