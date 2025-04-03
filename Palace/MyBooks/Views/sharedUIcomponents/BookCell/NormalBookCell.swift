@@ -12,26 +12,29 @@ import Combine
 
 struct NormalBookCell: View {
   @ObservedObject var model: BookCellModel
-  private let cellHeight: CGFloat = 135
+  private let cellHeight: CGFloat = 200
   private let imageViewWidth: CGFloat = 100
 
   var body: some View {
-    HStack(alignment: .center) {
-      unreadImageView
-      titleCoverImageView
-      VStack(alignment: .leading) {
-        infoView
-        Spacer()
-        buttons
-      }.padding(.leading, 8)
-      .alert(item: $model.showAlert) { alert in
-        Alert(
-          title: Text(alert.title),
-          message: Text(alert.message),
-          primaryButton: .default(Text(alert.buttonTitle ?? ""), action: alert.primaryAction),
-          secondaryButton: .cancel(alert.secondaryAction)
-        )
+    VStack(alignment: .leading) {
+      HStack(alignment: .top) {
+        unreadImageView
+        titleCoverImageView
+        VStack(alignment: .leading) {
+          infoView
+          Spacer()
+        }
+        .padding(.leading, 8)
+        .alert(item: $model.showAlert) { alert in
+          Alert(
+            title: Text(alert.title),
+            message: Text(alert.message),
+            primaryButton: .default(Text(alert.buttonTitle ?? ""), action: alert.primaryAction),
+            secondaryButton: .cancel(alert.secondaryAction)
+          )
+        }
       }
+      primaryButtonsView
       Spacer()
     }
     .multilineTextAlignment(.leading)
@@ -45,8 +48,7 @@ struct NormalBookCell: View {
       Image(uiImage: model.image)
         .resizable()
         .scaledToFit()
-        .frame(height: 125, alignment: .center)
-        //.padding(.top, 10)
+        .frame(height: 125, alignment: .top)
       audiobookIndicator
     }
     .frame(width: imageViewWidth)
@@ -79,7 +81,7 @@ struct NormalBookCell: View {
     }.padding(.leading, 10)
   }
   
-  @ViewBuilder private var buttons: some View {
+  @ViewBuilder private var primaryButtonsView: some View {
     HStack {
       ForEach(model.buttonTypes, id: \.self) { type in
         ButtonView(
@@ -87,10 +89,13 @@ struct NormalBookCell: View {
           indicatorDate: model.indicatorDate(for: type),
           action: { model.callDelegate(for: type) }
         )
+        .frame(minWidth: 0, maxWidth: .infinity)
         .disabled(type.isDisabled)
         .opacity(type.isDisabled ? 0.5 : 1.0)
       }
-    }.padding(.leading, 10)
+    }
+    .frame(minWidth: 0, maxWidth: .infinity)
+    .padding(.leading, 10)
   }
   
   @ViewBuilder private var unreadImageView: some View {

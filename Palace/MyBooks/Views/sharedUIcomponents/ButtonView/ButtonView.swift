@@ -30,9 +30,9 @@ struct ButtonView: View {
         Text(title)
       }
       .padding(8)
+      .frame(minWidth: 0, maxWidth: .infinity)
     }
     .font(Font(uiFont: UIFont.palaceFont(ofSize: 14)))
-    .fixedSize()
     .foregroundColor(indicatorDate != nil ? Color("ColorEkirjastoButtonTextWithBackground") : Color("ColorEkirjastoLabel"))
     .buttonStyle(AnimatedButton(backgroundColor: indicatorDate != nil ? Color("ColorEkirjastoLightestGreen") : backgroundFill))
     .accessibilityLabel(accessiblityString)
