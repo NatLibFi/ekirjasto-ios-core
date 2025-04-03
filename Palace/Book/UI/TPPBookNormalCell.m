@@ -24,10 +24,12 @@
 - (void)layoutSubviews
 {
   [super layoutSubviews];
-  self.cover.frame = CGRectMake((20 / UIScreen.mainScreen.scale),               //Edited by Ellibs
-                                (20 / UIScreen.mainScreen.scale),               //Edited by Ellibs
-                                (CGRectGetHeight([self contentFrame]) - 10) * (10 / 12.0),
-                                CGRectGetHeight([self contentFrame]) - 10);
+  
+  self.cover.frame = CGRectMake((20 / UIScreen.mainScreen.scale),
+                                (20 / UIScreen.mainScreen.scale),
+                                (CGRectGetHeight([self contentFrame]) - 60) * (10 / 12.0),
+                                (CGRectGetHeight([self contentFrame]) - 60)
+                                );
   
   // The extra five height pixels account for a bug in |sizeThatFits:| that does not properly take
   // into account |lineHeightMultiple|.
@@ -49,10 +51,11 @@
   
   [self.buttonsView sizeToFit];
   CGRect frame = self.buttonsView.frame;
-  frame.origin = CGPointMake(145,                                               //Edited by Ellibs
-                             (CGRectGetHeight([self contentFrame]) -
-                              CGRectGetHeight(frame) - 5));
+  frame.origin = CGPointMake(185,
+                             (CGRectGetHeight([self contentFrame]) - CGRectGetHeight(frame) - 5)
+                             );
   self.buttonsView.frame = frame;
+
   CGRect unreadImageViewFrame = self.unreadImageView.frame;
   unreadImageViewFrame.origin.x = (CGRectGetMinX(self.cover.frame) -
                                    CGRectGetWidth(unreadImageViewFrame) - 5);
@@ -95,8 +98,11 @@
     self.buttonsView.showReturnButtonIfApplicable = YES;
     [self.contentView addSubview:self.buttonsView];
     self.buttonsView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.buttonsView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.title];
-    [self.buttonsView autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self.cover];
+   
+    [self.buttonsView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.cover];
+    [self.buttonsView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.cover withOffset:15];
+    [self.buttonsView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.contentView withOffset:-15];
+    [self.buttonsView layoutIfNeeded];
   }
   self.buttonsView.book = book;
   
