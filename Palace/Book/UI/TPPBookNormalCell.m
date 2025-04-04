@@ -13,6 +13,7 @@
 @property (nonatomic) TPPBookButtonsView *buttonsView;
 @property (nonatomic) UILabel *title;
 @property (nonatomic) UILabel *bookFormatLabel;
+@property (nonatomic) UILabel *bookStateInfoLabel;
 @property (nonatomic) UIImageView *unreadImageView;
 @property (nonatomic) UIImageView *contentBadge;
 
@@ -49,6 +50,15 @@
   bookFormatLabelFrame.origin = CGPointMake(145, CGRectGetMaxY(self.title.frame) + 8);
   bookFormatLabelFrame.size.width = CGRectGetWidth([self contentFrame]) - 155;
   self.bookFormatLabel.frame = bookFormatLabelFrame;
+  
+  [self.bookStateInfoLabel sizeToFit];
+  CGSize bookStateInfoLabelSize = [self.bookStateInfoLabel sizeThatFits:CGSizeMake(titleWidth, CGFLOAT_MAX)];
+  CGRect bookStateInfoLabelRect = CGRectMake(0, 0, bookStateInfoLabelSize.width, bookStateInfoLabelSize.height);
+  self.bookStateInfoLabel.frame = bookStateInfoLabelRect;
+  CGRect bookStateInfoLabelFrame = self.bookStateInfoLabel.frame;
+  bookStateInfoLabelFrame.origin = CGPointMake(145, CGRectGetMaxY(self.title.frame) + 70);
+  bookStateInfoLabelFrame.size.width = CGRectGetWidth([self contentFrame]) - 155;
+  self.bookStateInfoLabel.frame = bookStateInfoLabelFrame;
   
   [self.authors sizeToFit];
   CGSize authorsSize = [self.authors sizeThatFits:CGSizeMake(titleWidth, CGFLOAT_MAX)];
@@ -110,6 +120,15 @@
     [self.contentView addSubview:self.bookFormatLabel];
     [self.contentView setNeedsLayout];
   }
+  
+  if(!self.bookStateInfoLabel) {
+    self.bookStateInfoLabel = [[UILabel alloc] init];
+    self.bookStateInfoLabel.numberOfLines = 2;
+    self.bookStateInfoLabel.backgroundColor = [TPPConfiguration ekirjastoYellow];
+    self.bookStateInfoLabel.font = [UIFont palaceFontOfSize:14];
+    [self.contentView addSubview:self.bookStateInfoLabel];
+    [self.contentView setNeedsLayout];
+  }
 
   if(!self.buttonsView) {
     self.buttonsView = [[TPPBookButtonsView alloc] init];
@@ -136,7 +155,8 @@
   self.authors.attributedText = TPPAttributedStringForAuthorsFromString(book.authors);
   self.cover.image = nil;
   self.title.attributedText = TPPAttributedStringForTitleFromString(book.title);
-  self.bookFormatLabel.text = book.generalBookFormat;
+  self.bookFormatLabel.text = self.book.generalBookFormat;
+  self.bookStateInfoLabel.text = [self bookStateInfoText];
   
   if (!self.contentBadge) {
     self.contentBadge = [[TPPContentBadgeImageView alloc] initWithBadgeImage:TPPBadgeImageAudiobook];
@@ -175,6 +195,41 @@
   }
   
   [self setNeedsLayout];
+}
+
+-(NSString *)bookStateInfoText
+{
+  __block NSDate *dateUntilLoanExpires = nil;
+  __block NSUInteger holdPosition = 0;
+  __block NSDate *dateUntilHoldExpires = nil;
+  
+  [self.book.defaultAcquisition.availability
+   matchUnavailable:nil
+   limited:^(TPPOPDSAcquisitionAvailabilityLimited *const _Nonnull limited) {
+    dateUntilLoanExpires = limited.until;
+  }
+   unlimited:nil
+   reserved:^(TPPOPDSAcquisitionAvailabilityReserved *const _Nonnull reserved) {
+      holdPosition = reserved.holdPosition;
+    }
+   ready:^(TPPOPDSAcquisitionAvailabilityReady *const _Nonnull ready) {
+      dateUntilHoldExpires = ready.until;
+    }
+  ];
+  
+  if (dateUntilLoanExpires) {
+    return [NSString stringWithFormat:NSLocalizedString(@"You have this book on loan for %@.", nil), dateUntilLoanExpires.longTimeUntilString];
+  }
+  
+  if (holdPosition > 0) {
+    return [NSString stringWithFormat:NSLocalizedString(@"You are at position %ld in the queue for this book.", nil), (long)holdPosition];
+  }
+  
+  if (dateUntilHoldExpires) {
+    return [NSString stringWithFormat:NSLocalizedString(@"This reservation will be automatically cancelled in %@.", nil), dateUntilHoldExpires.longTimeUntilString];
+  }
+    
+  return @"";
 }
 
 - (void)setDelegate:(id<TPPBookButtonsDelegate>)delegate
