@@ -105,6 +105,12 @@ class BookCellModel: ObservableObject {
 
     self.image = cachedImage
   }
+  
+  // This function is used in NormalBookCell views
+  // when we need to know if the book is for example already in loan for user
+  func bookCellBookButtonState(book: TPPBook) -> BookButtonState {
+    return BookButtonState(book) ?? .unsupported
+  }
 
   func indicatorDate(for buttonType: BookButtonType) -> Date? {
     guard buttonType.displaysIndicator else {
