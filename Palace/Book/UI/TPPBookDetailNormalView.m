@@ -72,7 +72,7 @@ typedef NS_ENUM (NSInteger, NYPLProblemReportButtonState) {
   CGPathCloseSubpath(visiblePath);
   
   UIColor *aColor = [TPPConfiguration ekirjastoYellow]; //Edited by Ellibs
-  if((_state != TPPBookButtonsStateCanBorrow ) && (_state != TPPBookButtonsStateDownloadNeeded) && (_state != TPPBookButtonsStateDownloadSuccessful) && (_state != TPPBookButtonsStateUsed)) {
+  if((_state != TPPBookButtonsStateCanBorrow ) && (_state != TPPBookButtonsStateDownloadNeeded) && (_state != TPPBookButtonsStateHoldingFOQ) && (_state != TPPBookButtonsStateDownloadSuccessful) && (_state != TPPBookButtonsStateUsed)) {
     aColor =  [TPPConfiguration ekirjastoLightGrey];
   } //Added by Ellibs
   [aColor setFill];
@@ -112,13 +112,13 @@ typedef NS_ENUM (NSInteger, NYPLProblemReportButtonState) {
   NSString *newMessageString = @"";
   switch(state) {
     case TPPBookButtonsStateCanBorrow:
-      newMessageString = NSLocalizedString(@"This book is available to borrow.", nil);
+      newMessageString = [self messageStringForStateCanBorrow];
       break;
     case TPPBookButtonsStateCanHold:
-      newMessageString = NSLocalizedString(@"All licenses of this book are currently checked out.", nil);
+      newMessageString = [self messageStringForStateCanHold];
       break;
     case TPPBookButtonsStateDownloadNeeded:
-      newMessageString = NSLocalizedString(@"Your book has not yet been downloaded.", nil);
+      newMessageString = [self messageStringForStateDownloadNeeded];
       break;
     case TPPBookButtonsStateDownloadSuccessful:
       newMessageString = [self messageStringForNYPLBookButtonStateSuccessful];
@@ -127,11 +127,10 @@ typedef NS_ENUM (NSInteger, NYPLProblemReportButtonState) {
       newMessageString = [self messageStringForNYPLBookButtonsStateHolding];
       break;
     case TPPBookButtonsStateHoldingFOQ:
-      newMessageString = [NSString stringWithFormat:NSLocalizedString(@"This reservation will be automatically cancelled in %@.", nil),
-                                [self.book.defaultAcquisition.availability.until longTimeUntilString]];
+      newMessageString = [self messageStringForStateHoldingFOQ];
       break;
     case TPPBookButtonsStateUsed:
-      newMessageString = NSLocalizedString(@"Your book is ready to read!", nil);
+      newMessageString = [self messageStringForStateUsed];
       break;
     case TPPBookButtonsStateDownloadInProgress:
       break;
@@ -157,40 +156,28 @@ typedef NS_ENUM (NSInteger, NYPLProblemReportButtonState) {
   }
 }
 
--(NSString *)messageStringForNYPLBookButtonsStateHolding
+-(NSString *)messageStringForStateCanBorrow
 {
-  
-  __block NSUInteger holdPosition = 0;
-  __block TPPOPDSAcquisitionAvailabilityCopies copiesTotal = 0;
+  NSString *message = NSLocalizedString(@"This book is available to borrow.", nil);
+  return message;
+}
 
-  [self.book.defaultAcquisition.availability
-   matchUnavailable:nil
-   limited:nil
-   unlimited:nil
-   reserved:^(TPPOPDSAcquisitionAvailabilityReserved *const _Nonnull reserved) {
-     holdPosition = reserved.holdPosition;
-     copiesTotal = reserved.copiesTotal;
-   }
-   ready:nil];
-  
-  NSString *timeUntilString = [self.book.defaultAcquisition.availability.until longTimeUntilString];
+-(NSString *)messageStringForStateCanHold
+{
+  NSString *message = NSLocalizedString(@"All licenses of this book are currently checked out.", nil);
+  return message;
+}
 
-  NSString *newMessageString;
-  if (timeUntilString != nil) {
-    newMessageString = [NSString stringWithFormat:NSLocalizedString(@"Available for checkout in less than %@.", nil), timeUntilString];
+-(NSString *)messageStringForStateDownloadNeeded
+{
+  NSString *message = NSLocalizedString(@"Your book has not yet been downloaded.", nil);
 
-    if (holdPosition > 0 && copiesTotal > 0) {
-      NSString *positionString = [NSString stringWithFormat:NSLocalizedString(@"\nYou are %ld in line for %ld copies.", @"Describe the line that a person is waiting in for a total number of books that are available for everyone to check out, to help tell them how long they will be waiting."), (unsigned long)holdPosition, (unsigned long)copiesTotal];
-      return [newMessageString stringByAppendingString:positionString];
-    }
-
-    return newMessageString;
+  if (self.book.defaultAcquisition.availability.until) {
+    NSString *timeUntilString = [self.book.defaultAcquisition.availability.until longTimeUntilString];
+    NSString *timeEstimateMessage = [NSString stringWithFormat:NSLocalizedString(@"It will expire in %@.", @"Tell the user how much time they have left for the book they have borrowed."),timeUntilString];
+    return [NSString stringWithFormat:@"%@\n%@",message,timeEstimateMessage];
   } else {
-    if (copiesTotal > 0) {
-      return [NSString stringWithFormat:NSLocalizedString(@"You are %ld in line for %ld copies.", nil), (long)holdPosition, (long)copiesTotal];
-    } else {
-      return [NSString stringWithFormat:NSLocalizedString(@"You are %ld in line.", nil), (long)holdPosition];
-    }
+    return message;
   }
 }
 
@@ -204,6 +191,54 @@ typedef NS_ENUM (NSInteger, NYPLProblemReportButtonState) {
   } else {
     return message;
   }
+}
+
+-(NSString *)messageStringForNYPLBookButtonsStateHolding
+{
+  __block NSUInteger holdPosition = 0;
+  __block TPPOPDSAcquisitionAvailabilityCopies copiesTotal = 0;
+
+  [self.book.defaultAcquisition.availability
+   matchUnavailable:nil
+   limited:nil
+   unlimited:nil
+   reserved:^(TPPOPDSAcquisitionAvailabilityReserved *const _Nonnull reserved) {
+     holdPosition = reserved.holdPosition;
+     copiesTotal = reserved.copiesTotal;
+   }
+   ready:nil];
+  
+  NSString *message = NSLocalizedString(@"You have this book on hold.", nil);
+
+  if (holdPosition > 0) {
+    if (copiesTotal > 0) {
+      NSString *positionAndCopiesString = [NSString stringWithFormat:NSLocalizedString(@"\nYou are %ld in line for %ld copies.", @"Describe the line that a person is waiting in for a total number of books that are available for everyone to check out, to help tell them how long they will be waiting."), (unsigned long)holdPosition, (unsigned long)copiesTotal];
+      return [message stringByAppendingString:positionAndCopiesString];
+    }
+    NSString *positionString = [NSString stringWithFormat:NSLocalizedString(@"You are %ld in line.", nil), (long)holdPosition];
+    return [message stringByAppendingString:positionString];
+  } else {
+    return message;
+  }
+}
+
+-(NSString *)messageStringForStateHoldingFOQ
+{
+  NSString *message = NSLocalizedString(@"This book is available to borrow.", nil);
+
+  if (self.book.defaultAcquisition.availability.until) {
+    NSString *timeUntilString = [self.book.defaultAcquisition.availability.until longTimeUntilString];
+    NSString *timeEstimateMessage = [NSString stringWithFormat:NSLocalizedString(@"This reservation will be automatically cancelled in %@.", nil),timeUntilString];
+    return [NSString stringWithFormat:@"%@\n%@",message,timeEstimateMessage];
+  } else {
+    return message;
+  }
+}
+
+-(NSString *)messageStringForStateUsed
+{
+  NSString *message = NSLocalizedString(@"Your book is ready to read!", nil);
+  return message;
 }
 
 @end
