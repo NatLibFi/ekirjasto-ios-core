@@ -28,8 +28,8 @@
   
   self.cover.frame = CGRectMake((20 / UIScreen.mainScreen.scale),
                                 (20 / UIScreen.mainScreen.scale),
-                                (CGRectGetHeight([self contentFrame]) - 60) * (10 / 12.0),
-                                (CGRectGetHeight([self contentFrame]) - 60)
+                                (CGRectGetHeight([self contentFrame]) - 70) * (10 / 12.0),
+                                (CGRectGetHeight([self contentFrame]) - 70)
                                 );
   
   // The extra five height pixels account for a bug in |sizeThatFits:| that does not properly take

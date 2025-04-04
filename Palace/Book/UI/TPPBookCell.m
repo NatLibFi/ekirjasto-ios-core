@@ -17,7 +17,7 @@ NSInteger TPPBookCellColumnCountForCollectionViewWidth(CGFloat const collectionV
 
 CGSize TPPBookCellSize(NSIndexPath *const indexPath, CGFloat const collectionViewWidth)
 {
-  static CGFloat const height = 200;
+  static CGFloat const height = 210;
   
   NSInteger const cellsPerRow = collectionViewWidth / 320;
   CGFloat const averageCellWidth = collectionViewWidth / (CGFloat)cellsPerRow;
@@ -153,12 +153,13 @@ TPPBookCell *TPPBookCellDequeue(UICollectionView *const collectionView,
   self = [super initWithFrame:frame];
   if(!self) return nil;
   
-  /*if(self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular) {
+  if(self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular) {
 
     // This is no longer set by default as of iOS 8.0.
     self.contentView.autoresizingMask = (UIViewAutoresizingFlexibleHeight |
                                          UIViewAutoresizingFlexibleWidth);
     
+    /*
     {
       CGRect const frame = CGRectMake(CGRectGetMaxX(self.contentView.frame) - 1,
                                       0,
@@ -169,11 +170,11 @@ TPPBookCell *TPPBookCellDequeue(UICollectionView *const collectionView,
       self.borderRight.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin |
                                            UIViewAutoresizingFlexibleHeight);
       [self.contentView addSubview:self.borderRight];
-    }
-    {
-      CGRect const frame = CGRectMake(0,
+    }*/
+    { //iPad:
+      CGRect const frame = CGRectMake(10,
                                       CGRectGetMaxY(self.contentView.frame) - 1,
-                                      CGRectGetWidth(self.contentView.frame),
+                                      CGRectGetWidth(self.contentView.frame) - 25,
                                       1);
       self.borderBottom = [[UIView alloc] initWithFrame:frame];
       self.borderBottom.backgroundColor = [UIColor colorNamed:@"ColorEkirjastoLightestGreen"];
@@ -181,7 +182,7 @@ TPPBookCell *TPPBookCellDequeue(UICollectionView *const collectionView,
                                             UIViewAutoresizingFlexibleWidth);
       [self.contentView addSubview:self.borderBottom];
     }
-  } else {
+  } else { //iPhone:
     CGRect const frame = CGRectMake(0,
                                     CGRectGetMaxY(self.contentView.frame) + 15,
                                     CGRectGetWidth(self.contentView.frame) - 30,
@@ -192,7 +193,7 @@ TPPBookCell *TPPBookCellDequeue(UICollectionView *const collectionView,
                                           UIViewAutoresizingFlexibleWidth);
     [self.contentView addSubview:self.borderBottom];
     self.borderBottom.center = CGPointMake(self.contentView.frame.size.width / 2, CGRectGetMaxY(self.contentView.frame) + 15);
-  }*/
+  }
   
   return self;
 }
