@@ -179,6 +179,8 @@ struct Strings {
     static let pdfContentType = NSLocalizedString("PDF", comment: "PDF")
     static let audiobookContentType = NSLocalizedString("Audiobook", comment: "Audiobook")
     static let unsupportedContentType = NSLocalizedString("Unsupported format", comment: "Unsupported format")
+    static let bookFormatForAudiobooks = NSLocalizedString("Audiobook", comment: "Common book format name for all audiobooks.")
+    static let bookFormatForEBooks = NSLocalizedString("eBook", comment: "Common book format name for all eBooks.")
   }
   
   struct TPPPDFNavigation {
