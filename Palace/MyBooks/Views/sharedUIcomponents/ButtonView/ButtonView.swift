@@ -26,7 +26,7 @@ struct ButtonView: View {
   var body: some View {
     Button (action: action) {
       HStack(alignment: .center, spacing: 5) {
-        indicatorView
+        //indicatorView
         Text(title)
       }
       .padding(8)
@@ -38,6 +38,11 @@ struct ButtonView: View {
     .accessibilityLabel(accessiblityString)
   }
   
+  /*
+   This view is not currently used in My books views,
+   as loan time is shown separately and
+   not as a small clock indicator inside "Read" or "Download" button
+   */
   @ViewBuilder private var indicatorView: some View {
     if let endDate = indicatorDate?.timeUntilString(suffixType: .short) {
       VStack(spacing: 2) {
