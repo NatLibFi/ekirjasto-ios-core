@@ -305,6 +305,12 @@ struct Strings {
     static let removeReservationMessage = NSLocalizedString("Are you sure you want to remove \"%@\" from your reservations? You will no longer be in line for this book.", comment: "Message shown in an alert to the user prior to returning a reserved title.")
     static let downloading = NSLocalizedString("Downloading", comment: "")
     static let downloadFailedMessage = NSLocalizedString("The download could not be completed.", comment: "")
+    static let loanTimeNotAvailable = NSLocalizedString("Remaining loan time is not available.", comment: "Text informing the user that the remaining loan time could not be determined.")
+    static let loanTimeRemaining = NSLocalizedString("You have this book on loan for %@.", comment: "Text that tells the user how much time they have left to read the book.")
+    static let bookIsOnHoldForUser = NSLocalizedString("You have this book on hold", comment: "Text that informs the user that the book is held for the user.")
+    static let bookHoldPosition = NSLocalizedString("You are at position %@ in the queue for this book.", comment: "Text that informs the user of their position on the hold list.")
+    static let bookIsAvailableToBorrow = NSLocalizedString("This book is available to borrow.", comment: "Text that informs that the book the user queued for is now ready to borrow."
+    )
   }
   
   struct TPPAccountRegistration {
