@@ -73,18 +73,26 @@ struct NormalBookCell: View {
 
   }
 
+  // Note! No subtitle visible in My books view, only title, format and authors
   @ViewBuilder private var bookInfoView: some View {
     VStack(alignment: .leading) {
       Text(model.title)
-        .lineLimit(2)
-        .font(Font(uiFont: UIFont.palaceFont(ofSize: 17)))
+        .lineLimit(3)
+        .font(Font(uiFont: UIFont.palaceFont(ofSize: 18)))
         .fixedSize(horizontal: false, vertical: true)
         .accessibilityLabel(
           model.book.defaultBookContentType == .audiobook
             ? "\(model.book.title). Audiobook."
-            : model.book.title)
+            : model.book.title
+        )
+        .padding(.bottom, 2)
+      Text(model.book.generalBookFormat)
+        .lineLimit(1)
+        .font(Font(uiFont: UIFont.palaceFont(ofSize: 14)))
+        .padding(.bottom, 2)
       Text(model.authors)
-        .font(Font(uiFont: UIFont.palaceFont(ofSize: 12)))
+        .lineLimit(2)
+        .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
     }.padding(.leading, 10)
   }
 
