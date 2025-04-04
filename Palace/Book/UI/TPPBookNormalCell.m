@@ -12,6 +12,7 @@
 @property (nonatomic) UILabel *authors;
 @property (nonatomic) TPPBookButtonsView *buttonsView;
 @property (nonatomic) UILabel *title;
+@property (nonatomic) UILabel *bookFormatLabel;
 @property (nonatomic) UIImageView *unreadImageView;
 @property (nonatomic) UIImageView *contentBadge;
 
@@ -40,13 +41,22 @@
                                 [self.title sizeThatFits:
                                  CGSizeMake(titleWidth, CGFLOAT_MAX)].height + 5);
   
+  [self.bookFormatLabel sizeToFit];
+  CGSize bookFormatLabelSize = [self.bookFormatLabel sizeThatFits:CGSizeMake(titleWidth, CGFLOAT_MAX)];
+  CGRect bookFormatLabelRect = CGRectMake(0, 0, bookFormatLabelSize.width, bookFormatLabelSize.height);
+  self.bookFormatLabel.frame = bookFormatLabelRect;
+  CGRect bookFormatLabelFrame = self.bookFormatLabel.frame;
+  bookFormatLabelFrame.origin = CGPointMake(145, CGRectGetMaxY(self.title.frame) + 8);
+  bookFormatLabelFrame.size.width = CGRectGetWidth([self contentFrame]) - 155;
+  self.bookFormatLabel.frame = bookFormatLabelFrame;
+  
   [self.authors sizeToFit];
   CGSize authorsSize = [self.authors sizeThatFits:CGSizeMake(titleWidth, CGFLOAT_MAX)];
   CGRect authorsRect = CGRectMake(0, 0, authorsSize.width, authorsSize.height);
   self.authors.frame = authorsRect;
   CGRect authorFrame = self.authors.frame;
-  authorFrame.origin = CGPointMake(145, CGRectGetMaxY(self.title.frame) + 10);  //Edited by Ellibs
-  authorFrame.size.width = CGRectGetWidth([self contentFrame]) - 155;           //Edited by Ellibs
+  authorFrame.origin = CGPointMake(145, CGRectGetMaxY(self.title.frame) + 33);
+  authorFrame.size.width = CGRectGetWidth([self contentFrame]) - 155;
   self.authors.frame = authorFrame;
   
   [self.buttonsView sizeToFit];
@@ -72,7 +82,8 @@
   
   if(!self.authors) {
     self.authors = [[UILabel alloc] init];
-    self.authors.font = [UIFont palaceFontOfSize:12];
+    self.authors.numberOfLines = 2;
+    self.authors.font = [UIFont palaceFontOfSize:16];
     [self.contentView addSubview:self.authors];
   }
   
@@ -87,8 +98,16 @@
   if(!self.title) {
     self.title = [[UILabel alloc] init];
     self.title.numberOfLines = 2;
-    self.title.font = [UIFont palaceFontOfSize:17];
+    self.title.font = [UIFont palaceFontOfSize:20];
     [self.contentView addSubview:self.title];
+    [self.contentView setNeedsLayout];
+  }
+  
+  if(!self.bookFormatLabel) {
+    self.bookFormatLabel = [[UILabel alloc] init];
+    self.bookFormatLabel.numberOfLines = 1;
+    self.bookFormatLabel.font = [UIFont palaceFontOfSize:14];
+    [self.contentView addSubview:self.bookFormatLabel];
     [self.contentView setNeedsLayout];
   }
 
@@ -117,6 +136,7 @@
   self.authors.attributedText = TPPAttributedStringForAuthorsFromString(book.authors);
   self.cover.image = nil;
   self.title.attributedText = TPPAttributedStringForTitleFromString(book.title);
+  self.bookFormatLabel.text = book.generalBookFormat;
   
   if (!self.contentBadge) {
     self.contentBadge = [[TPPContentBadgeImageView alloc] initWithBadgeImage:TPPBadgeImageAudiobook];
