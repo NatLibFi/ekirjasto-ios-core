@@ -36,6 +36,17 @@ import Foundation
     case .unsupported: return DisplayStrings.unsupportedContentType
     }
   }
+  
+  var generalBookFormat: String {
+    switch defaultBookContentType {
+      case .epub, .pdf:
+        return DisplayStrings.bookFormatForEBooks
+      case .audiobook:
+        return DisplayStrings.bookFormatForAudiobooks
+      case .unsupported:
+        return ""
+    }
+  }
 
   var hasSample: Bool { sample != nil }
   var hasAudiobookSample: Bool { hasSample && defaultBookContentType == .audiobook }

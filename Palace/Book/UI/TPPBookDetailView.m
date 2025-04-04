@@ -32,7 +32,7 @@
 
 @property (nonatomic) UILabel *titleLabel;
 @property (nonatomic) UILabel *subtitleLabel;
-@property (nonatomic) UILabel *audiobookLabel;
+@property (nonatomic) UILabel *bookFormatLabel;
 @property (nonatomic) UILabel *authorsLabel;
 @property (nonatomic) UIImageView *coverImageView;
 @property (nonatomic) UIImageView *blurCoverImageView;
@@ -137,7 +137,7 @@ static NSString *DetailHTMLTemplate = nil;
   [self.containerView addSubview:self.contentTypeBadge];
   [self.containerView addSubview:self.titleLabel];
   [self.containerView addSubview:self.subtitleLabel];
-  [self.containerView addSubview:self.audiobookLabel];
+  [self.containerView addSubview:self.bookFormatLabel];
   [self.containerView addSubview:self.authorsLabel];
   [self.containerView addSubview:self.buttonsView];
   [self.containerView addSubview:self.summarySectionLabel];
@@ -202,7 +202,7 @@ static NSString *DetailHTMLTemplate = nil;
 {
   self.titleLabel.font = [UIFont palaceFontOfSize:20]; //Edited by Ellibs
   self.subtitleLabel.font = [UIFont palaceFontOfSize:18]; //Edited by Ellibs
-  self.audiobookLabel.font = [UIFont palaceFontOfSize:16];
+  self.bookFormatLabel.font = [UIFont palaceFontOfSize:16];
   self.authorsLabel.font = [UIFont palaceFontOfSize:18]; //Edited by Ellibs
   self.readMoreLabel.titleLabel.font = [UIFont palaceFontOfSize:18];
   self.summarySectionLabel.font = [UIFont palaceFontOfSize:18]; //Edited by Ellibs
@@ -307,16 +307,16 @@ static NSString *DetailHTMLTemplate = nil;
     self.blurCoverImageView.image = image;
   }];
 
-  self.audiobookLabel = [[UILabel alloc] init];
-  self.audiobookLabel.hidden = YES;
+  
   self.contentTypeBadge = [[TPPContentBadgeImageView alloc] initWithBadgeImage:TPPBadgeImageAudiobook];
   self.contentTypeBadge.hidden = YES;
 
   if ([self.book defaultBookContentType] == TPPBookContentTypeAudiobook) {
     self.contentTypeBadge.hidden = NO;
-    self.audiobookLabel.attributedText = TPPAttributedStringForTitleFromString(NSLocalizedString(@"Audiobook", nil));
-    self.audiobookLabel.hidden = NO;
   }
+  
+  self.bookFormatLabel = [[UILabel alloc] init];
+  self.bookFormatLabel.text = self.book.generalBookFormat;
 
   self.titleLabel = [[UILabel alloc] init];
   self.titleLabel.numberOfLines = 0;
@@ -532,18 +532,18 @@ static NSString *DetailHTMLTemplate = nil;
   [self.subtitleLabel autoPinEdge:ALEdgeTrailing toEdge:ALEdgeTrailing ofView:self.titleLabel withOffset:10]; //Edited by Ellibs
   [self.subtitleLabel autoConstrainAttribute:ALAttributeTop toAttribute:ALAttributeBaseline ofView:self.titleLabel withOffset:SubtitleBaselineOffset];
 
-  [self.audiobookLabel autoPinEdge:ALEdgeLeading toEdge:ALEdgeTrailing ofView:self.coverImageView withOffset:MainTextPaddingLeft];
-  [self.audiobookLabel autoPinEdge:ALEdgeTrailing toEdge:ALEdgeTrailing ofView:self.titleLabel];
+  [self.bookFormatLabel autoPinEdge:ALEdgeLeading toEdge:ALEdgeTrailing ofView:self.coverImageView withOffset:MainTextPaddingLeft];
+  [self.bookFormatLabel autoPinEdge:ALEdgeTrailing toEdge:ALEdgeTrailing ofView:self.titleLabel];
   if (self.subtitleLabel.text) {
-    [self.audiobookLabel autoConstrainAttribute:ALAttributeTop toAttribute:ALAttributeBaseline ofView:self.subtitleLabel withOffset:AuthorBaselineOffset];
+    [self.bookFormatLabel autoConstrainAttribute:ALAttributeTop toAttribute:ALAttributeBaseline ofView:self.subtitleLabel withOffset:AuthorBaselineOffset];
   } else {
-    [self.audiobookLabel autoConstrainAttribute:ALAttributeTop toAttribute:ALAttributeBaseline ofView:self.titleLabel withOffset:AuthorBaselineOffset];
+    [self.bookFormatLabel autoConstrainAttribute:ALAttributeTop toAttribute:ALAttributeBaseline ofView:self.titleLabel withOffset:AuthorBaselineOffset];
   }
 
   [self.authorsLabel autoPinEdge:ALEdgeLeading toEdge:ALEdgeTrailing ofView:self.coverImageView withOffset:MainTextPaddingLeft];
   [self.authorsLabel autoPinEdge:ALEdgeTrailing toEdge:ALEdgeTrailing ofView:self.titleLabel];
-  if (self.audiobookLabel.text) {
-    [self.authorsLabel autoConstrainAttribute:ALAttributeTop toAttribute:ALAttributeBaseline ofView:self.audiobookLabel withOffset:AuthorBaselineOffset];
+  if (self.bookFormatLabel.text) {
+    [self.authorsLabel autoConstrainAttribute:ALAttributeTop toAttribute:ALAttributeBaseline ofView:self.bookFormatLabel withOffset:AuthorBaselineOffset];
   } else if (self.subtitleLabel.text) {
     [self.authorsLabel autoConstrainAttribute:ALAttributeTop toAttribute:ALAttributeBaseline ofView:self.subtitleLabel withOffset:AuthorBaselineOffset];
   } else {
