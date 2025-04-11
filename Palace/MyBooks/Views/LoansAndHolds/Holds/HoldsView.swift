@@ -168,7 +168,7 @@ struct HoldsView: View {
           .padding(.top, -25)
           .padding(.bottom, 10)
           .padding(.leading, 20)
-          .padding(.trailing, 20)
+          .padding(.trailing, 10)
       }
       .anyView()
 
