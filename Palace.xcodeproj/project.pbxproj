@@ -1044,6 +1044,9 @@
 		75E834182D7608CA00D2B840 /* HoldsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E834172D7608C400D2B840 /* HoldsViewModel.swift */; };
 		75E834192D7608CA00D2B840 /* HoldsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E834172D7608C400D2B840 /* HoldsViewModel.swift */; };
 		75E8341A2D7608CA00D2B840 /* HoldsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E834172D7608C400D2B840 /* HoldsViewModel.swift */; };
+		75EA32182DA97D6600FD3AC2 /* EdgeBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EA32172DA97D6100FD3AC2 /* EdgeBorder.swift */; };
+		75EA32192DA97D6600FD3AC2 /* EdgeBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EA32172DA97D6100FD3AC2 /* EdgeBorder.swift */; };
+		75EA321A2DA97D6600FD3AC2 /* EdgeBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EA32172DA97D6100FD3AC2 /* EdgeBorder.swift */; };
 		841B55431B740F2700FAC1AF /* TPPSettingsEULAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 841B55421B740F2700FAC1AF /* TPPSettingsEULAViewController.m */; };
 		84B7A3461B84E8FE00584FB2 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84B7A3431B84E8FE00584FB2 /* OFL.txt */; };
 		84B7A3471B84E8FE00584FB2 /* OpenDyslexic3-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84B7A3441B84E8FE00584FB2 /* OpenDyslexic3-Bold.ttf */; };
@@ -1973,6 +1976,7 @@
 		75E833E12D73B4B900D2B840 /* LoansAndHoldsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoansAndHoldsViewController.swift; sourceTree = "<group>"; };
 		75E834132D76088600D2B840 /* HoldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldsView.swift; sourceTree = "<group>"; };
 		75E834172D7608C400D2B840 /* HoldsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldsViewModel.swift; sourceTree = "<group>"; };
+		75EA32172DA97D6100FD3AC2 /* EdgeBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeBorder.swift; sourceTree = "<group>"; };
 		841B55411B740F2700FAC1AF /* TPPSettingsEULAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPPSettingsEULAViewController.h; sourceTree = "<group>"; };
 		841B55421B740F2700FAC1AF /* TPPSettingsEULAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPPSettingsEULAViewController.m; sourceTree = "<group>"; };
 		84B7A3431B84E8FE00584FB2 /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
@@ -3303,15 +3307,16 @@
 			path = Downloading;
 			sourceTree = "<group>";
 		};
-		75E833BF2D7374AB00D2B840 /* SharedUIcomponents */ = {
+		75E833BF2D7374AB00D2B840 /* SharedUIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				75EA32162DA97D3F00FD3AC2 /* Border */,
 				E5EFDE7A298C4F7100258CA3 /* BookCell */,
 				E5824BE4299591DB00DE76C2 /* ButtonView */,
 				75E833BD2D7373CE00D2B840 /* Facet */,
 				75E833C02D73755200D2B840 /* List */,
 			);
-			path = SharedUIcomponents;
+			path = SharedUIComponents;
 			sourceTree = "<group>";
 		};
 		75E833C02D73755200D2B840 /* List */ = {
@@ -3327,7 +3332,7 @@
 			children = (
 				7530C8BD2D80C7780024E184 /* Favorites */,
 				75E833F62D75A30100D2B840 /* LoansAndHolds */,
-				75E833BF2D7374AB00D2B840 /* SharedUIcomponents */,
+				75E833BF2D7374AB00D2B840 /* SharedUIComponents */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3341,6 +3346,14 @@
 				75E833E12D73B4B900D2B840 /* LoansAndHoldsViewController.swift */,
 			);
 			path = LoansAndHolds;
+			sourceTree = "<group>";
+		};
+		75EA32162DA97D3F00FD3AC2 /* Border */ = {
+			isa = PBXGroup;
+			children = (
+				75EA32172DA97D6100FD3AC2 /* EdgeBorder.swift */,
+			);
+			path = Border;
 			sourceTree = "<group>";
 		};
 		84B7A3421B84E8FE00584FB2 /* OpenDyslexicFont */ = {
@@ -4889,6 +4902,7 @@
 				331263E92A287F53006BA87D /* TPPIndeterminateProgressView.m in Sources */,
 				331263EA2A287F53006BA87D /* NSString+TPPStringAdditions.m in Sources */,
 				331263EC2A287F53006BA87D /* TPPRequestExecuting.swift in Sources */,
+				75EA32182DA97D6600FD3AC2 /* EdgeBorder.swift in Sources */,
 				9D8FE1902BA8DFBC00084363 /* EkirjastoMagazineNavigationController.swift in Sources */,
 				331263ED2A287F53006BA87D /* TPPCookiesWebViewController.swift in Sources */,
 				331263EE2A287F53006BA87D /* TPPSamlIDPCell.swift in Sources */,
@@ -5260,6 +5274,7 @@
 				73DE897D260BEA13003D9135 /* TPPRequestExecuting.swift in Sources */,
 				73EB0B0C25821DF4006BC997 /* TPPCookiesWebViewController.swift in Sources */,
 				73EB0B0D25821DF4006BC997 /* TPPSamlIDPCell.swift in Sources */,
+				75EA321A2DA97D6600FD3AC2 /* EdgeBorder.swift in Sources */,
 				73EB0B0E25821DF4006BC997 /* TPPErrorLogger.swift in Sources */,
 				73EB0B0F25821DF4006BC997 /* NSString+JSONParse.swift in Sources */,
 				73EB0B1025821DF4006BC997 /* TPPOPDSEntryGroupAttributes.m in Sources */,
@@ -5558,6 +5573,7 @@
 				085D31DF1BE3CD3C007F7672 /* NSURLRequest+NYPLURLRequestAdditions.m in Sources */,
 				E731FF4A2864C716001DB7F2 /* TPPPDFPreviewGridDelegate.swift in Sources */,
 				E731FF452864C2A4001DB7F2 /* Binding+onChange.swift in Sources */,
+				75EA32192DA97D6600FD3AC2 /* EdgeBorder.swift in Sources */,
 				11548C0B1939136C009DBF2E /* TPPRootTabBarController.m in Sources */,
 				E63F2C6C1EAA81B3002B6373 /* ExtendedNavBarView.swift in Sources */,
 				E5FC12AE2A24EB1C000BFED5 /* ChapterLocation+Extensions.swift in Sources */,
