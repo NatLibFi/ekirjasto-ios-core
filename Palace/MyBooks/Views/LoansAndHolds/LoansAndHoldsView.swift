@@ -33,8 +33,6 @@ struct LoansAndHoldsView: View {
   @ViewBuilder private var ContentView: some View {
 
     SegmentedPicker
-    // If high contrast needs to be forced to all users:
-    //.background(Color("ColorEkirjastoFilterButtonBackgroundNormal"))
 
     switch selectedSubview {
     case "Loans":
@@ -68,6 +66,7 @@ struct LoansAndHoldsView: View {
         }
       }
       .pickerStyle(.segmented)
+      .background(SwiftUI.Color("ColorEkirjastoFilterButtonBackgroundNormal").cornerRadius(10.0))
       .padding(15)
     }
     .background(backgroundColor)
