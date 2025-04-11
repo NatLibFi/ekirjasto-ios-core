@@ -11,14 +11,15 @@ import SwiftUI
 
 struct NormalBookCell: View {
   @ObservedObject var model: BookCellModel
-  private let cellHeightWithInfoText: CGFloat = 240
-  private let cellHeightWithoutInfoText: CGFloat = 210
+  private let largerCellHeightForPhone: CGFloat = 250
+  private let normalCellHeightForPhone: CGFloat = 200
+  private let normalCellHeightForPad: CGFloat = 250
   private let imageViewWidth: CGFloat = 100
 
   var body: some View {
     VStack(alignment: .leading) {
       HStack(alignment: .top) {
-        unreadImageView
+        //unreadImageView
         titleCoverImageView
         VStack(alignment: .leading) {
           bookInfoView
@@ -35,20 +36,22 @@ struct NormalBookCell: View {
           )
         }
       }
+      .padding(.top, 10)
       primaryButtonsView
+      Spacer()
       bookStateInfoView
       Spacer()
     }
     .multilineTextAlignment(.leading)
     .padding(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5))
     .frame(
-      height: bookHasInfoText()
-        ? cellHeightWithInfoText
-        : cellHeightWithoutInfoText
+      height: bookCellHeight()
     )
     .onDisappear { model.isLoading = false }
   }
 
+  // This unread indicator view (=small blue badge besides book cover image)
+  // is not currently used in app
   @ViewBuilder private var unreadImageView: some View {
     VStack {
       ImageProviders.MyBooksView.unreadBadge
@@ -57,8 +60,9 @@ struct NormalBookCell: View {
         .foregroundColor(Color(TPPConfiguration.accentColor()))
       Spacer()
     }
-    .opacity(0.0)
+    .opacity(model.showUnreadIndicator ? 1.0 : 0.0)
   }
+ 
 
   @ViewBuilder private var titleCoverImageView: some View {
     ZStack {
@@ -68,7 +72,8 @@ struct NormalBookCell: View {
         .frame(height: 125, alignment: .top)
       audiobookIndicator
     }
-    .frame(width: imageViewWidth)
+    .frame(width: imageViewWidth, alignment: .topLeading)
+    .padding(.leading, 15)
     .padding(.trailing, 2)
 
   }
@@ -93,7 +98,9 @@ struct NormalBookCell: View {
       Text(model.authors)
         .lineLimit(2)
         .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
-    }.padding(.leading, 10)
+        .padding(.bottom, 2)
+    }
+    .padding(.leading, 10)
   }
 
   @ViewBuilder private var primaryButtonsView: some View {
@@ -113,6 +120,7 @@ struct NormalBookCell: View {
       .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
       .padding(.leading, 10)
       .padding(.top, 10)
+      .padding(.bottom, 5)
     }
   }
 
@@ -134,9 +142,6 @@ struct NormalBookCell: View {
       .clipShape(RoundedRectangle(cornerRadius: 10))
       .background(infoBackgroundColor)
       .padding(.leading, 10)
-      .padding(.top, 5)
-      .padding(.bottom, 5)
-
     }
   }
 
@@ -151,16 +156,31 @@ struct NormalBookCell: View {
           color: Color.white
         )
         .bottomrRightJustified()
-        .padding(.trailing, -6)
-        .padding(.bottom, 32)
+        .padding(.trailing, -10)
+        .padding(.bottom, 13)
     }
   }
 
   /// Helper functions
 
-  private func bookHasInfoText() -> Bool {
+  private func bookCellHeight() -> CGFloat {
+    let device: UIUserInterfaceIdiom = UIDevice.current.userInterfaceIdiom
     let infoText: String = getInfoText()
-    return !infoText.isEmpty
+
+    switch device {
+
+      case .pad:
+        return normalCellHeightForPad
+
+      case .phone:
+       return infoText.isEmpty
+        ? normalCellHeightForPhone
+        : largerCellHeightForPhone
+
+      default:
+        return 250
+    }
+
   }
 
   private func getInfoText() -> String {
