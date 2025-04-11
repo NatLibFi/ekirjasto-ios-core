@@ -1,5 +1,5 @@
 //
-//  CustomGridLayout.swift
+//  AdaptableGridLayout.swift
 //  Palace
 //
 //  Created by Maurice Carrier on 2/24/23.
