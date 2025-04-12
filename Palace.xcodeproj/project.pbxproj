@@ -2819,33 +2819,11 @@
 		739ECB2725101F1600691A70 /* Catalog */ = {
 			isa = PBXGroup;
 			children = (
-				11F3773119E0876F00487769 /* TPPCatalogFacet.h */,
-				11F3773219E0876F00487769 /* TPPCatalogFacet.m */,
-				112C684D19EF003300106973 /* TPPCatalogFacetGroup.h */,
-				112C684E19EF003300106973 /* TPPCatalogFacetGroup.m */,
-				A42E0DF21B40F4E00095EBAE /* TPPCatalogFeedViewController.h */,
-				A42E0DF31B40F4E00095EBAE /* TPPCatalogFeedViewController.m */,
-				A4BA1D111B43046B006F83DF /* TPPCatalogGroupedFeed.h */,
-				A4BA1D121B43046B006F83DF /* TPPCatalogGroupedFeed.m */,
-				A4BA1D0C1B430341006F83DF /* TPPCatalogGroupedFeedViewController.h */,
-				A4BA1D0D1B430341006F83DF /* TPPCatalogGroupedFeedViewController.m */,
-				1183F33F194F723D00DC322F /* TPPCatalogLane.h */,
-				1183F340194F723D00DC322F /* TPPCatalogLane.m */,
-				1183F339194B775900DC322F /* TPPCatalogLaneCell.h */,
-				1183F33A194B775900DC322F /* TPPCatalogLaneCell.m */,
-				E6D848E22171334800CEC142 /* TPPContentTypeBadge.swift */,
-				11548C0C1939147D009DBF2E /* TPPCatalogNavigationController.h */,
-				11548C0D1939147D009DBF2E /* TPPCatalogNavigationController.m */,
-				739ECB2A25102A2B00691A70 /* TPPCatalogs+SE.swift */,
-				118A0B1919915BDF00792DDE /* TPPCatalogSearchViewController.h */,
-				118A0B1A19915BDF00792DDE /* TPPCatalogSearchViewController.m */,
-				119BEBB719902A8800121439 /* TPPOpenSearchDescription.h */,
-				119BEBB819902A8800121439 /* TPPOpenSearchDescription.m */,
-				1114A69F195884CB007507A2 /* TPPCatalogUngroupedFeed.h */,
-				1114A6A0195884CB007507A2 /* TPPCatalogUngroupedFeed.m */,
-				11A16E67195B2BD3004147F4 /* TPPCatalogUngroupedFeedViewController.h */,
-				11A16E68195B2BD3004147F4 /* TPPCatalogUngroupedFeedViewController.m */,
-				E683953A217663B100371072 /* TPPFacetViewDefaultDataSource.swift */,
+				75EA32252DAA402500FD3AC2 /* Facet */,
+				75EA322A2DAA4B2700FD3AC2 /* Feed */,
+				75EA32282DAA407800FD3AC2 /* Lane */,
+				75EA32292DAA4AE700FD3AC2 /* Navigation */,
+				75EA32242DAA401300FD3AC2 /* Search */,
 			);
 			path = Catalog;
 			sourceTree = "<group>";
@@ -2886,20 +2864,8 @@
 		73B5DFD8260529BE00225C12 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				750732EE2D887258005B2254 /* BookSelectionState.swift */,
-				E5FC12AD2A24EB1C000BFED5 /* ChapterLocation+Extensions.swift */,
-				E5A1412928D4F1B20091AD2D /* TPPBook.swift */,
-				73B5DFFB26055F8B00225C12 /* TPPBook+Additions.swift */,
-				E523116928504B85007D1DB5 /* TPPBook+Extensions.swift */,
-				E6DA7E9F1F2A718600CFBEC8 /* TPPBookAuthor.swift */,
-				73FB0AC824EB403D0072E430 /* TPPBookContentTypeConverter.swift */,
-				E78AE7F5291BFC6200884446 /* TPPBookCoverRegistry.swift */,
-				E78AE7FF291BFCC600884446 /* TPPBookLocation.swift */,
-				E71A422A29017C58008FC910 /* TPPBookRegistry.swift */,
-				E78AE801291C1D8600884446 /* TPPBookRegistryRecord.swift */,
-				E523124A285C3828007D1DB5 /* TPPBookRegistry+Extensions.swift */,
-				171966A824170819007BB87E /* TPPBookState.swift */,
-				E5A1413428D94DDA0091AD2D /* TPPContentType.swift */,
+				75EA32232DAA3FA400FD3AC2 /* Registry */,
+				75EA32222DA98D8A00FD3AC2 /* Book */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2907,42 +2873,12 @@
 		73B5DFD9260529C600225C12 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				73B5DFDB26052A1800225C12 /* TPPBookButtonsState.h */,
-				73B5DFDA26052A1800225C12 /* TPPBookButtonsState.m */,
-				E66A6C421EAFB63300AA282D /* TPPBookButtonsView.h */,
-				E66A6C431EAFB63300AA282D /* TPPBookButtonsView.m */,
-				11580AC61986A77B00949A15 /* TPPBookCell.h */,
-				11580AC71986A77B00949A15 /* TPPBookCell.m */,
-				1120749119D20BF9008203A4 /* TPPBookCellCollectionViewController.h */,
-				1120749219D20BF9008203A4 /* TPPBookCellCollectionViewController.m */,
-				111197261986B43B0014462F /* TPPBookCellDelegate.h */,
-				111197271986B43B0014462F /* TPPBookCellDelegate.m */,
-				1111973D1988226F0014462F /* TPPBookDetailDownloadFailedView.h */,
-				1111973E1988226F0014462F /* TPPBookDetailDownloadFailedView.m */,
-				11119740198827850014462F /* TPPBookDetailDownloadingView.h */,
-				11119741198827850014462F /* TPPBookDetailDownloadingView.m */,
-				111197371987F4070014462F /* TPPBookDetailNormalView.h */,
-				111197381987F4070014462F /* TPPBookDetailNormalView.m */,
-				8CE9C470237F84820072E964 /* TPPBookDetailsProblemDocumentViewController.swift */,
-				E6B3269E1EE066DE00DB877A /* TPPBookDetailTableView.swift */,
-				110AF8941961D94D004887C3 /* TPPBookDetailView.h */,
-				110AF8951961D94D004887C3 /* TPPBookDetailView.m */,
-				110AF89A1961ED1F004887C3 /* TPPBookDetailViewController.h */,
-				110AF89B1961ED1F004887C3 /* TPPBookDetailViewController.m */,
-				11078355198160A50071AB1E /* TPPBookDownloadFailedCell.h */,
-				11078356198160A50071AB1E /* TPPBookDownloadFailedCell.m */,
-				11B6020319806CD300800DA9 /* TPPBookDownloadingCell.h */,
-				11B6020419806CD300800DA9 /* TPPBookDownloadingCell.m */,
-				11A16E6D195B60DF004147F4 /* TPPBookNormalCell.h */,
-				11A16E6E195B60DF004147F4 /* TPPBookNormalCell.m */,
-				085D31D51BE29E38007F7672 /* TPPProblemReportViewController.h */,
-				085D31D61BE29E38007F7672 /* TPPProblemReportViewController.m */,
-				085D31D81BE29ED4007F7672 /* TPPProblemReportViewController.xib */,
-				E59892EC28AC909000C44A85 /* AudiobookSampleToolbar.swift */,
-				E55E2FA729E7AFCD0093F916 /* AudiobookBookmarkBusinessLogic.swift */,
-				E5024A8C2A0E8761006BF653 /* TPPBookCellDelegate+Extensions.swift */,
-				36A527DC2BDBC0EA009101F5 /* TestLoginUI.swift */,
-				36A527E02BDBC4F9009101F5 /* TestLoginViewController.swift */,
+				75EA321F2DA98C1400FD3AC2 /* Audiobook */,
+				75EA321C2DA98B7500FD3AC2 /* BookButtons */,
+				75EA321D2DA98B8B00FD3AC2 /* BookCell */,
+				75EA321B2DA98B2A00FD3AC2 /* BookDetailView */,
+				75EA321E2DA98BBC00FD3AC2 /* BookProblem */,
+				75EA32202DA98C2400FD3AC2 /* TestLogin */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -3354,6 +3290,190 @@
 				75EA32172DA97D6100FD3AC2 /* EdgeBorder.swift */,
 			);
 			path = Border;
+			sourceTree = "<group>";
+		};
+		75EA321B2DA98B2A00FD3AC2 /* BookDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				1111973D1988226F0014462F /* TPPBookDetailDownloadFailedView.h */,
+				1111973E1988226F0014462F /* TPPBookDetailDownloadFailedView.m */,
+				11119740198827850014462F /* TPPBookDetailDownloadingView.h */,
+				11119741198827850014462F /* TPPBookDetailDownloadingView.m */,
+				111197371987F4070014462F /* TPPBookDetailNormalView.h */,
+				111197381987F4070014462F /* TPPBookDetailNormalView.m */,
+				110AF8941961D94D004887C3 /* TPPBookDetailView.h */,
+				110AF8951961D94D004887C3 /* TPPBookDetailView.m */,
+				110AF89A1961ED1F004887C3 /* TPPBookDetailViewController.h */,
+				110AF89B1961ED1F004887C3 /* TPPBookDetailViewController.m */,
+				E6B3269E1EE066DE00DB877A /* TPPBookDetailTableView.swift */,
+			);
+			path = BookDetailView;
+			sourceTree = "<group>";
+		};
+		75EA321C2DA98B7500FD3AC2 /* BookButtons */ = {
+			isa = PBXGroup;
+			children = (
+				73B5DFDB26052A1800225C12 /* TPPBookButtonsState.h */,
+				73B5DFDA26052A1800225C12 /* TPPBookButtonsState.m */,
+				E66A6C421EAFB63300AA282D /* TPPBookButtonsView.h */,
+				E66A6C431EAFB63300AA282D /* TPPBookButtonsView.m */,
+			);
+			path = BookButtons;
+			sourceTree = "<group>";
+		};
+		75EA321D2DA98B8B00FD3AC2 /* BookCell */ = {
+			isa = PBXGroup;
+			children = (
+				11580AC61986A77B00949A15 /* TPPBookCell.h */,
+				11580AC71986A77B00949A15 /* TPPBookCell.m */,
+				1120749119D20BF9008203A4 /* TPPBookCellCollectionViewController.h */,
+				1120749219D20BF9008203A4 /* TPPBookCellCollectionViewController.m */,
+				111197261986B43B0014462F /* TPPBookCellDelegate.h */,
+				111197271986B43B0014462F /* TPPBookCellDelegate.m */,
+				E5024A8C2A0E8761006BF653 /* TPPBookCellDelegate+Extensions.swift */,
+				11078355198160A50071AB1E /* TPPBookDownloadFailedCell.h */,
+				11078356198160A50071AB1E /* TPPBookDownloadFailedCell.m */,
+				11B6020319806CD300800DA9 /* TPPBookDownloadingCell.h */,
+				11B6020419806CD300800DA9 /* TPPBookDownloadingCell.m */,
+				11A16E6D195B60DF004147F4 /* TPPBookNormalCell.h */,
+				11A16E6E195B60DF004147F4 /* TPPBookNormalCell.m */,
+			);
+			path = BookCell;
+			sourceTree = "<group>";
+		};
+		75EA321E2DA98BBC00FD3AC2 /* BookProblem */ = {
+			isa = PBXGroup;
+			children = (
+				8CE9C470237F84820072E964 /* TPPBookDetailsProblemDocumentViewController.swift */,
+				085D31D51BE29E38007F7672 /* TPPProblemReportViewController.h */,
+				085D31D61BE29E38007F7672 /* TPPProblemReportViewController.m */,
+				085D31D81BE29ED4007F7672 /* TPPProblemReportViewController.xib */,
+			);
+			path = BookProblem;
+			sourceTree = "<group>";
+		};
+		75EA321F2DA98C1400FD3AC2 /* Audiobook */ = {
+			isa = PBXGroup;
+			children = (
+				E55E2FA729E7AFCD0093F916 /* AudiobookBookmarkBusinessLogic.swift */,
+				E59892EC28AC909000C44A85 /* AudiobookSampleToolbar.swift */,
+				E6D848E22171334800CEC142 /* TPPContentTypeBadge.swift */,
+			);
+			path = Audiobook;
+			sourceTree = "<group>";
+		};
+		75EA32202DA98C2400FD3AC2 /* TestLogin */ = {
+			isa = PBXGroup;
+			children = (
+				36A527E02BDBC4F9009101F5 /* TestLoginViewController.swift */,
+				36A527DC2BDBC0EA009101F5 /* TestLoginUI.swift */,
+			);
+			path = TestLogin;
+			sourceTree = "<group>";
+		};
+		75EA32222DA98D8A00FD3AC2 /* Book */ = {
+			isa = PBXGroup;
+			children = (
+				E5A1412928D4F1B20091AD2D /* TPPBook.swift */,
+				171966A824170819007BB87E /* TPPBookState.swift */,
+				750732EE2D887258005B2254 /* BookSelectionState.swift */,
+				73B5DFFB26055F8B00225C12 /* TPPBook+Additions.swift */,
+				E523116928504B85007D1DB5 /* TPPBook+Extensions.swift */,
+				E6DA7E9F1F2A718600CFBEC8 /* TPPBookAuthor.swift */,
+				E5A1413428D94DDA0091AD2D /* TPPContentType.swift */,
+				73FB0AC824EB403D0072E430 /* TPPBookContentTypeConverter.swift */,
+				E78AE7FF291BFCC600884446 /* TPPBookLocation.swift */,
+				E5FC12AD2A24EB1C000BFED5 /* ChapterLocation+Extensions.swift */,
+			);
+			path = Book;
+			sourceTree = "<group>";
+		};
+		75EA32232DAA3FA400FD3AC2 /* Registry */ = {
+			isa = PBXGroup;
+			children = (
+				E78AE7F5291BFC6200884446 /* TPPBookCoverRegistry.swift */,
+				E71A422A29017C58008FC910 /* TPPBookRegistry.swift */,
+				E523124A285C3828007D1DB5 /* TPPBookRegistry+Extensions.swift */,
+				E78AE801291C1D8600884446 /* TPPBookRegistryRecord.swift */,
+			);
+			path = Registry;
+			sourceTree = "<group>";
+		};
+		75EA32242DAA401300FD3AC2 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				118A0B1919915BDF00792DDE /* TPPCatalogSearchViewController.h */,
+				118A0B1A19915BDF00792DDE /* TPPCatalogSearchViewController.m */,
+				119BEBB719902A8800121439 /* TPPOpenSearchDescription.h */,
+				119BEBB819902A8800121439 /* TPPOpenSearchDescription.m */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		75EA32252DAA402500FD3AC2 /* Facet */ = {
+			isa = PBXGroup;
+			children = (
+				11F3773119E0876F00487769 /* TPPCatalogFacet.h */,
+				11F3773219E0876F00487769 /* TPPCatalogFacet.m */,
+				112C684D19EF003300106973 /* TPPCatalogFacetGroup.h */,
+				112C684E19EF003300106973 /* TPPCatalogFacetGroup.m */,
+				E683953A217663B100371072 /* TPPFacetViewDefaultDataSource.swift */,
+			);
+			path = Facet;
+			sourceTree = "<group>";
+		};
+		75EA32262DAA403600FD3AC2 /* Grouped */ = {
+			isa = PBXGroup;
+			children = (
+				A4BA1D111B43046B006F83DF /* TPPCatalogGroupedFeed.h */,
+				A4BA1D121B43046B006F83DF /* TPPCatalogGroupedFeed.m */,
+				A4BA1D0C1B430341006F83DF /* TPPCatalogGroupedFeedViewController.h */,
+				A4BA1D0D1B430341006F83DF /* TPPCatalogGroupedFeedViewController.m */,
+			);
+			path = Grouped;
+			sourceTree = "<group>";
+		};
+		75EA32272DAA405700FD3AC2 /* Ungrouped */ = {
+			isa = PBXGroup;
+			children = (
+				1114A69F195884CB007507A2 /* TPPCatalogUngroupedFeed.h */,
+				1114A6A0195884CB007507A2 /* TPPCatalogUngroupedFeed.m */,
+				11A16E67195B2BD3004147F4 /* TPPCatalogUngroupedFeedViewController.h */,
+				11A16E68195B2BD3004147F4 /* TPPCatalogUngroupedFeedViewController.m */,
+			);
+			path = Ungrouped;
+			sourceTree = "<group>";
+		};
+		75EA32282DAA407800FD3AC2 /* Lane */ = {
+			isa = PBXGroup;
+			children = (
+				1183F33F194F723D00DC322F /* TPPCatalogLane.h */,
+				1183F340194F723D00DC322F /* TPPCatalogLane.m */,
+				1183F339194B775900DC322F /* TPPCatalogLaneCell.h */,
+				1183F33A194B775900DC322F /* TPPCatalogLaneCell.m */,
+			);
+			path = Lane;
+			sourceTree = "<group>";
+		};
+		75EA32292DAA4AE700FD3AC2 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				11548C0C1939147D009DBF2E /* TPPCatalogNavigationController.h */,
+				11548C0D1939147D009DBF2E /* TPPCatalogNavigationController.m */,
+				739ECB2A25102A2B00691A70 /* TPPCatalogs+SE.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		75EA322A2DAA4B2700FD3AC2 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				75EA32262DAA403600FD3AC2 /* Grouped */,
+				75EA32272DAA405700FD3AC2 /* Ungrouped */,
+				A42E0DF21B40F4E00095EBAE /* TPPCatalogFeedViewController.h */,
+				A42E0DF31B40F4E00095EBAE /* TPPCatalogFeedViewController.m */,
+			);
+			path = Feed;
 			sourceTree = "<group>";
 		};
 		84B7A3421B84E8FE00584FB2 /* OpenDyslexicFont */ = {
