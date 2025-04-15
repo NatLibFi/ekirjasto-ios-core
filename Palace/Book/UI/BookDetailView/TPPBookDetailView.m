@@ -80,7 +80,7 @@
 
 @end
 
-static CGFloat const SubtitleBaselineOffset = 10;
+static CGFloat const SubtitleBaselineOffset = 8;
 static CGFloat const AuthorBaselineOffset = 12;
 static CGFloat const CoverImageAspectRatio = 0.9;
 static CGFloat const CoverImageMaxWidth = 130;
@@ -88,8 +88,8 @@ static CGFloat const TabBarHeight = 80.0;
 static CGFloat const SampleToolbarHeight = 80.0;
 static CGFloat const TitleLabelMinimumWidth = 185.0;
 static CGFloat const NormalViewMinimumHeight = 38.0;
-static CGFloat const VerticalPadding = 10.0;
-static CGFloat const MainTextPaddingLeft = 10.0;
+static CGFloat const VerticalPadding = 20.0;
+static CGFloat const MainTextPaddingLeft = 30.0;
 static NSString *DetailHTMLTemplate = nil;
 
 @implementation TPPBookDetailView
@@ -200,13 +200,13 @@ static NSString *DetailHTMLTemplate = nil;
 
 - (void)updateFonts
 {
-  self.titleLabel.font = [UIFont palaceFontOfSize:20]; //Edited by Ellibs
-  self.subtitleLabel.font = [UIFont palaceFontOfSize:18]; //Edited by Ellibs
-  self.bookFormatLabel.font = [UIFont palaceFontOfSize:16];
-  self.authorsLabel.font = [UIFont palaceFontOfSize:18]; //Edited by Ellibs
+  self.titleLabel.font = [UIFont palaceFontOfSize:18]; //Edited by Ellibs
+  self.subtitleLabel.font = [UIFont palaceFontOfSize:14]; //Edited by Ellibs
+  self.bookFormatLabel.font = [UIFont palaceFontOfSize:12];
+  self.authorsLabel.font = [UIFont palaceFontOfSize:14]; //Edited by Ellibs
   self.readMoreLabel.titleLabel.font = [UIFont palaceFontOfSize:18];
   self.summarySectionLabel.font = [UIFont palaceFontOfSize:18]; //Edited by Ellibs
-  self.infoSectionLabel.font = [UIFont palaceFontOfSize:18]; //Edited by Ellibs
+  self.infoSectionLabel.font = [UIFont palaceFontOfSize:16]; //Edited by Ellibs
   [self.footerTableView reloadData];
 }
 
@@ -260,7 +260,7 @@ static NSString *DetailHTMLTemplate = nil;
     attrString = [[NSAttributedString alloc] initWithString:@""];
   }
   self.summaryTextView.attributedText = attrString;
-  self.summaryTextView.font = [UIFont palaceFontOfSize:18]; 
+  self.summaryTextView.font = [UIFont palaceFontOfSize:16];
   [[NSOperationQueue mainQueue] addOperationWithBlock:^{
     // this needs to happen asynchronously because the HTML text may overwrite
     // our color
@@ -323,7 +323,7 @@ static NSString *DetailHTMLTemplate = nil;
   self.titleLabel.attributedText = TPPAttributedStringForTitleFromString(self.book.title);
 
   self.subtitleLabel = [[UILabel alloc] init];
-  self.subtitleLabel.attributedText = TPPAttributedStringForTitleFromString(self.book.subtitle);
+  self.subtitleLabel.attributedText = TPPAttributedStringForSubtitleFromString(self.book.subtitle);
   self.subtitleLabel.numberOfLines = 0;
 
 
@@ -512,7 +512,7 @@ static NSString *DetailHTMLTemplate = nil;
   [self.visualEffectView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero excludingEdge:ALEdgeBottom];
   [self.visualEffectView autoPinEdge:ALEdgeBottom toEdge:ALEdgeTop ofView:self.normalView];
   
-  [self.coverImageView autoPinEdgeToSuperviewMargin:ALEdgeLeading withInset:-15]; //Edited by Ellibs
+  [self.coverImageView autoPinEdgeToSuperviewMargin:ALEdgeLeft]; //Edited by Ellibs
   [self.coverImageView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:VerticalPadding];
   [self.coverImageView autoMatchDimension:ALDimensionWidth toDimension:ALDimensionHeight ofView:self.coverImageView withMultiplier:CoverImageAspectRatio];
   [self.coverImageView autoSetDimension:ALDimensionWidth toSize:CoverImageMaxWidth relation:NSLayoutRelationLessThanOrEqual];
@@ -585,19 +585,21 @@ static NSString *DetailHTMLTemplate = nil;
   [self.infoSectionLabel autoPinEdgeToSuperviewMargin:ALEdgeLeading];
   
   [self.publishedLabelValue autoPinEdgeToSuperviewMargin:ALEdgeTrailing relation:NSLayoutRelationGreaterThanOrEqual];
-  [self.publishedLabelValue autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.infoSectionLabel withOffset:VerticalPadding];
+  [self.publishedLabelValue autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.bookLanguageLabelValue];
   [self.publishedLabelValue autoPinEdge:ALEdgeLeading toEdge:ALEdgeTrailing ofView:self.publishedLabelKey withOffset:MainTextPaddingLeft];
   
   [self.publisherLabelValue autoPinEdgeToSuperviewMargin:ALEdgeTrailing relation:NSLayoutRelationGreaterThanOrEqual];
   [self.publisherLabelValue autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.publishedLabelValue];
   [self.publisherLabelValue autoPinEdge:ALEdgeLeading toEdge:ALEdgeTrailing ofView:self.publisherLabelKey withOffset:MainTextPaddingLeft];
   
-  [self.bookLanguageLabelValue autoPinEdgeToSuperviewMargin:ALEdgeTrailing relation:NSLayoutRelationGreaterThanOrEqual];
-  [self.bookLanguageLabelValue autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.publisherLabelValue];
-  [self.bookLanguageLabelValue autoPinEdge:ALEdgeLeading toEdge:ALEdgeTrailing ofView:self.categoriesLabelKey withOffset:MainTextPaddingLeft];
+  if (self.bookLanguageLabelValue.text) {
+    [self.bookLanguageLabelValue autoPinEdgeToSuperviewMargin:ALEdgeTrailing relation:NSLayoutRelationGreaterThanOrEqual];
+    [self.bookLanguageLabelValue autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.infoSectionLabel withOffset:VerticalPadding];
+    [self.bookLanguageLabelValue autoPinEdge:ALEdgeLeading toEdge:ALEdgeTrailing ofView:self.bookLanguageLabelKey withOffset:MainTextPaddingLeft];
+  }
   
   [self.categoriesLabelValue autoPinEdgeToSuperviewMargin:ALEdgeTrailing relation:NSLayoutRelationGreaterThanOrEqual];
-  [self.categoriesLabelValue autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.bookLanguageLabelValue];
+  [self.categoriesLabelValue autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.publisherLabelValue];
   [self.categoriesLabelValue autoPinEdge:ALEdgeLeading toEdge:ALEdgeTrailing ofView:self.categoriesLabelKey withOffset:MainTextPaddingLeft];
   
   /*[self.distributorLabelValue autoPinEdgeToSuperviewMargin:ALEdgeTrailing relation:NSLayoutRelationGreaterThanOrEqual];

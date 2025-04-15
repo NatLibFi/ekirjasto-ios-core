@@ -27,17 +27,17 @@
 {
   [super layoutSubviews];
   
-  self.cover.frame = CGRectMake((20 / UIScreen.mainScreen.scale),
-                                (20 / UIScreen.mainScreen.scale),
-                                (CGRectGetHeight([self contentFrame]) - 70) * (10 / 12.0),
-                                (CGRectGetHeight([self contentFrame]) - 70)
+  self.cover.frame = CGRectMake(((20 / UIScreen.mainScreen.scale) + 25),
+                                (20 / UIScreen.mainScreen.scale + 5),
+                                (CGRectGetHeight([self contentFrame]) - 85) * (10 / 12.0),
+                                (CGRectGetHeight([self contentFrame]) - 85)
                                 );
   
   // The extra five height pixels account for a bug in |sizeThatFits:| that does not properly take
   // into account |lineHeightMultiple|.
-  CGFloat const titleWidth = CGRectGetWidth([self contentFrame]) - 155;         //Edited by Ellibs
-  self.title.frame = CGRectMake(145,                                            //Edited by Ellibs
-                                (10 / UIScreen.mainScreen.scale),               //Edited by Ellibs
+  CGFloat const titleWidth = CGRectGetWidth([self contentFrame]) - 170;
+  self.title.frame = CGRectMake(160,
+                                (10 / UIScreen.mainScreen.scale),
                                 titleWidth,
                                 [self.title sizeThatFits:
                                  CGSizeMake(titleWidth, CGFLOAT_MAX)].height + 5);
@@ -47,8 +47,8 @@
   CGRect bookFormatLabelRect = CGRectMake(0, 0, bookFormatLabelSize.width, bookFormatLabelSize.height);
   self.bookFormatLabel.frame = bookFormatLabelRect;
   CGRect bookFormatLabelFrame = self.bookFormatLabel.frame;
-  bookFormatLabelFrame.origin = CGPointMake(145, CGRectGetMaxY(self.title.frame) + 8);
-  bookFormatLabelFrame.size.width = CGRectGetWidth([self contentFrame]) - 155;
+  bookFormatLabelFrame.origin = CGPointMake(160, CGRectGetMaxY(self.title.frame) + 3);
+  bookFormatLabelFrame.size.width = CGRectGetWidth([self contentFrame]) - 170;
   self.bookFormatLabel.frame = bookFormatLabelFrame;
   
   [self.bookStateInfoLabel sizeToFit];
@@ -56,8 +56,8 @@
   CGRect bookStateInfoLabelRect = CGRectMake(0, 0, bookStateInfoLabelSize.width, bookStateInfoLabelSize.height);
   self.bookStateInfoLabel.frame = bookStateInfoLabelRect;
   CGRect bookStateInfoLabelFrame = self.bookStateInfoLabel.frame;
-  bookStateInfoLabelFrame.origin = CGPointMake(145, CGRectGetMaxY(self.title.frame) + 70);
-  bookStateInfoLabelFrame.size.width = CGRectGetWidth([self contentFrame]) - 155;
+  bookStateInfoLabelFrame.origin = CGPointMake(160, CGRectGetMaxY(self.title.frame) + 60);
+  bookStateInfoLabelFrame.size.width = CGRectGetWidth([self contentFrame]) - 170;
   self.bookStateInfoLabel.frame = bookStateInfoLabelFrame;
   
   [self.authors sizeToFit];
@@ -65,8 +65,8 @@
   CGRect authorsRect = CGRectMake(0, 0, authorsSize.width, authorsSize.height);
   self.authors.frame = authorsRect;
   CGRect authorFrame = self.authors.frame;
-  authorFrame.origin = CGPointMake(145, CGRectGetMaxY(self.title.frame) + 33);
-  authorFrame.size.width = CGRectGetWidth([self contentFrame]) - 155;
+  authorFrame.origin = CGPointMake(160, CGRectGetMaxY(self.title.frame) + 28);
+  authorFrame.size.width = CGRectGetWidth([self contentFrame]) - 170;
   self.authors.frame = authorFrame;
   
   [self.buttonsView sizeToFit];
@@ -137,8 +137,8 @@
     [self.contentView addSubview:self.buttonsView];
     self.buttonsView.translatesAutoresizingMaskIntoConstraints = NO;
    
-    [self.buttonsView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.cover];
-    [self.buttonsView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.cover withOffset:15];
+    [self.buttonsView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.contentView withOffset:20];
+    [self.buttonsView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.cover withOffset:25];
     [self.buttonsView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.contentView withOffset:-15];
     [self.buttonsView layoutIfNeeded];
   }
@@ -189,7 +189,7 @@
   }
   
   if([book defaultBookContentType] == TPPBookContentTypeAudiobook) {
-    self.cover.contentMode = UIViewContentModeScaleToFill;
+    self.cover.contentMode = UIViewContentModeScaleAspectFill;
   } else {
     self.cover.contentMode = UIViewContentModeScaleAspectFit;
   }
