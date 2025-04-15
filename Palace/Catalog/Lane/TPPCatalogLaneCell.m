@@ -79,7 +79,7 @@
 
 - (void)layoutSubviews
 {
-  CGFloat const padding = 10.0;
+  CGFloat const padding = 15.0;
   
   CGFloat x = padding;
   CGFloat const height = CGRectGetHeight(self.contentView.frame);
