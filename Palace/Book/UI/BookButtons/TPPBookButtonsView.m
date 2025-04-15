@@ -126,6 +126,7 @@
   [self.constraints removeAllObjects];
 
   int buttonsViewWidth = self.bounds.size.width;
+  double iPadButtonsViewMaxWidth = 540.0;
   int numberOfButtons = (int)self.visibleButtons.count;
   double buttonOffset = 6.0;
   TPPRoundedButton *previousButton = nil;
@@ -141,7 +142,7 @@
       if (numberOfButtons == 3) {
         [self.constraints addObject:[button
                                      autoSetDimension:ALDimensionWidth
-                                     toSize:(buttonsViewWidth/3 - buttonOffset)
+                                     toSize:MIN((buttonsViewWidth/3 - buttonOffset), (iPadButtonsViewMaxWidth/3 - buttonOffset))
                                      relation:NSLayoutRelationLessThanOrEqual
                                     ]];
       }
@@ -149,7 +150,7 @@
       if (numberOfButtons == 1 || numberOfButtons == 2) {
         [self.constraints addObject:[button
                                      autoSetDimension:ALDimensionWidth
-                                     toSize:(buttonsViewWidth/2 - buttonOffset)
+                                     toSize:MIN((buttonsViewWidth/2 - buttonOffset), (iPadButtonsViewMaxWidth/2 - buttonOffset))
                                      relation:NSLayoutRelationGreaterThanOrEqual
                                     ]];
       }
@@ -166,7 +167,7 @@
                                    autoPinEdge:ALEdgeLeading
                                    toEdge:ALEdgeTrailing
                                    ofView:previousButton
-                                   withOffset:6.0
+                                   withOffset:buttonOffset*2
                                   ]];
     }
 
@@ -388,8 +389,11 @@
     // Re-enable animations as per usual.
     [UIView setAnimationsEnabled:YES];
 
-    // Provide End-Date for checked out loans
     [button setType:TPPRoundedButtonTypeNormal];
+
+    // Provide End-Date for checked out loans
+    // Button with clock icon is not currently used in app
+    /*
     if ([buttonInfo[AddIndicatorKey] isEqualToValue:@(YES)]) {
       [self.book.defaultAcquisition.availability
        matchUnavailable:nil
@@ -408,7 +412,8 @@
         }
       }];
     }
-    
+    */
+
     [visibleButtons addObject:button];
   }
   for (TPPRoundedButton *button in @[self.downloadButton, self.deleteButton, self.readButton, self.cancelButton, self.sampleButton]) {

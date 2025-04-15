@@ -28,7 +28,7 @@ typedef NS_ENUM (NSInteger, NYPLProblemReportButtonState) {
   if(!self) return nil;
   
   self.messageLabel = [[UILabel alloc] init];
-  self.messageLabel.font = [UIFont palaceFontOfSize: 18]; //Edited by Ellibs
+  self.messageLabel.font = [UIFont palaceFontOfSize: 16]; //Edited by Ellibs
   self.messageLabel.textColor = [TPPConfiguration ekirjastoBlack]; //Edited by Ellibs
   self.messageLabel.numberOfLines = 0;
   self.messageLabel.textAlignment = NSTextAlignmentCenter;
