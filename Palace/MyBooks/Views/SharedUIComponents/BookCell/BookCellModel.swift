@@ -66,6 +66,10 @@ class BookCellModel: ObservableObject {
     state.buttonState.buttonTypes(book: book)
   }
 
+  var secondaryButtonTypes: [BookButtonType] {
+    state.buttonState.secondaryButtonTypes(book: book)
+  }
+
   private weak var buttonDelegate = TPPBookCellDelegate.shared()
   private weak var downloadDelegate: TPPBookDownloadCancellationDelegate?
 
