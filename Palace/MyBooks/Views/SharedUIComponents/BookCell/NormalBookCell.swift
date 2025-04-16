@@ -22,7 +22,11 @@ struct NormalBookCell: View {
         //unreadImageView
         titleCoverImageView
         VStack(alignment: .leading) {
-          bookInfoView
+          HStack(alignment: .top) {
+            bookInfoView
+            Spacer()
+            secondaryButtonsView
+          }
           Spacer()
         }
         .padding(.leading, 8)
@@ -62,7 +66,6 @@ struct NormalBookCell: View {
     }
     .opacity(model.showUnreadIndicator ? 1.0 : 0.0)
   }
- 
 
   @ViewBuilder private var titleCoverImageView: some View {
     ZStack {
@@ -124,6 +127,21 @@ struct NormalBookCell: View {
     }
   }
 
+  @ViewBuilder private var secondaryButtonsView: some View {
+    HStack {
+      ForEach(model.secondaryButtonTypes, id: \.self) { type in
+        IconButtonView(
+          title: type.localizedTitle,
+          indicatorDate: model.indicatorDate(for: type),
+          action: { model.callDelegate(for: type) }
+        )
+        .disabled(type.isDisabled)
+        .opacity(type.isDisabled ? 0.5 : 1.0)
+      }
+    }
+    .padding(.leading, 10)
+  }
+
   @ViewBuilder private var bookStateInfoView: some View {
 
     let infoText: String = getInfoText()
@@ -173,9 +191,9 @@ struct NormalBookCell: View {
         return normalCellHeightForPad
 
       case .phone:
-       return infoText.isEmpty
-        ? normalCellHeightForPhone
-        : largerCellHeightForPhone
+        return infoText.isEmpty
+          ? normalCellHeightForPhone
+          : largerCellHeightForPhone
 
       default:
         return 250
