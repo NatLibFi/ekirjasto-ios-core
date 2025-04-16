@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct ImageProviders {
+
   struct AudiobookSampleToolbar {
     static let pause = Image(systemName: "pause.circle")
     static let play = Image(systemName: "play.circle")
@@ -22,5 +23,8 @@ struct ImageProviders {
     static let clock = Image("Clock")
     static let myLibraryIcon = Image("MyLibraryIcon")
     static let search = Image("Search")
+    static let selectionIconPlus = Image("BookmarkOff")   // TODO: replace placeholder image
+    static let selectionIconCheck = Image("BookmarkOn") // TODO: replace placeholder image
   }
+
 }
