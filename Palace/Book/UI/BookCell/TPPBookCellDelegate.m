@@ -117,6 +117,18 @@ static const int kServerUpdateDelay = 15;
 #endif
 }
 
+- (void)didSelectSelectForBook:(TPPBook *)book
+                    completion:(void (^ __nullable)(void))completion
+{
+  TPPLOG(@"Did select select for book.");
+}
+
+- (void)didSelectUnselectForBook:(TPPBook *)book
+                      completion:(void (^ __nullable)(void))completion
+{
+  TPPLOG(@"Did select unselect for book.");
+}
+
 - (void)openBook:(TPPBook *)book
 {
   [TPPCirculationAnalytics postEvent:@"open_book" withBook:book];
