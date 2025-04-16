@@ -18,6 +18,8 @@ enum BookButtonType: String {
   case cancel
   case remove
   case `return`
+  case select
+  case unselect
 
   var localizedTitle: String {
     NSLocalizedString(
