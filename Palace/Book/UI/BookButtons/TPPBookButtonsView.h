@@ -10,6 +10,8 @@
 - (void)didSelectDownloadForBook:(TPPBook *_Null_unspecified)book;
 - (void)didSelectReadForBook:(TPPBook *_Null_unspecified)book;
 - (void)didSelectPlaySample:(TPPBook *_Null_unspecified)book;
+- (void)didSelectSelectForBook:(TPPBook *_Null_unspecified)book completion:(void (^ _Nullable)(void))completion;
+- (void)didSelectUnselectForBook:(TPPBook *_Null_unspecified)book completion:(void (^ _Nullable)(void))completion;
 
 @end
 

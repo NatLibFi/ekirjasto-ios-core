@@ -109,7 +109,7 @@ class BookCellModel: ObservableObject {
 
     self.image = cachedImage
   }
-  
+
   // This function is used in NormalBookCell views
   // when we need to know if the book is for example already in loan for user
   func bookCellBookButtonState(book: TPPBook) -> BookButtonState {
@@ -148,6 +148,7 @@ class BookCellModel: ObservableObject {
 }
 
 extension BookCellModel {
+
   func callDelegate(for action: BookButtonType) {
     switch action {
     case .download, .retry, .get, .reserve:
@@ -158,6 +159,10 @@ extension BookCellModel {
       didSelectCancel()
     case .read, .listen:
       didSelectRead()
+    case .select:
+      didSelectSelect()
+    case .unselect:
+      didSelectUnselect()
     }
   }
 
@@ -238,4 +243,18 @@ extension BookCellModel {
   func didSelectCancel() {
     MyBooksDownloadCenter.shared.cancelDownload(for: book.identifier)
   }
+
+  func didSelectSelect() {
+    isLoading = true
+    self.buttonDelegate?.didSelectSelect(for: book)
+    TPPRootTabBarController.shared().dismiss(animated: true)
+  }
+
+  func didSelectUnselect() {
+    isLoading = true
+    self.buttonDelegate?.didSelectUnselect(for: book)
+    TPPRootTabBarController.shared().dismiss(animated: true)
+  }
+
 }
+
