@@ -22,6 +22,7 @@ enum BookButtonState {
 }
 
 extension BookButtonState {
+
   func buttonTypes(book: TPPBook) -> [BookButtonType] {
     var buttons = [BookButtonType]()
 
@@ -75,6 +76,19 @@ extension BookButtonState {
 
     return buttons
   }
+
+  func secondaryButtonTypes(book: TPPBook) -> [BookButtonType] {
+    var secondaryButtonTypes = [BookButtonType]()
+
+    if TPPBookRegistry.shared.selectionState(for: book.identifier) == .Selected {
+      secondaryButtonTypes.append(.unselect)
+    } else {
+      secondaryButtonTypes.append(.select)
+    }
+
+    return secondaryButtonTypes
+  }
+
 }
 
 extension BookButtonState {
