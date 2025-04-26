@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct ImageProviders {
 
@@ -15,7 +16,7 @@ struct ImageProviders {
     static let play = Image(systemName: "play.circle")
     static let stepBack = Image(systemName: "gobackward.30")
   }
-  
+
   struct MyBooksView {
     static let bookPlaceholder = UIImage(systemName: "book.closed.fill")
     static let audiobookBadge = Image("AudiobookBadge")
@@ -23,8 +24,14 @@ struct ImageProviders {
     static let clock = Image("Clock")
     static let myLibraryIcon = Image("MyLibraryIcon")
     static let search = Image("Search")
-    static let selectionIconPlus = Image("BookmarkOff")   // TODO: replace placeholder image
+    static let selectionIconPlus = Image("BookmarkOff") // TODO: replace placeholder image
     static let selectionIconCheck = Image("BookmarkOn") // TODO: replace placeholder image
   }
 
+}
+
+// UIKit Images for Objective-C code
+@objc public class ImageProvidersMyBooksViewObjcClass: NSObject {
+  @objc static let selectionIconPlus = UIImage(named: "BookmarkOff") // TODO: replace placeholder image
+  @objc static let selectionIconCheck = UIImage(named: "BookmarkOn") // TODO: replace placeholder image
 }
