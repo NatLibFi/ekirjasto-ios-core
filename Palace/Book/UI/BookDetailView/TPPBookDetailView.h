@@ -5,6 +5,7 @@
 @class TPPCatalogLane;
 @class TPPBookDetailTableView;
 typedef NS_ENUM(NSInteger, TPPBookState);
+typedef NS_ENUM(NSInteger, BookSelectionState);
 @protocol TPPCatalogLaneCellDelegate;
 
 @protocol TPPBookDetailViewDelegate
@@ -26,6 +27,7 @@ static CGFloat const SummaryTextAbbreviatedHeight = 150.0;
 @property (nonatomic) double downloadProgress;
 @property (nonatomic) BOOL downloadStarted;
 @property (nonatomic) TPPBookState state;
+@property (nonatomic) BookSelectionState selectionState;
 @property (nonatomic) TPPBookDetailTableViewDelegate *tableViewDelegate;
 @property (nonatomic, readonly) UIButton *readMoreLabel;
 @property (nonatomic, readonly) UITextView *summaryTextView;
