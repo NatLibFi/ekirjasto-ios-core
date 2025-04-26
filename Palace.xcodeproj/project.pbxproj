@@ -1032,6 +1032,12 @@
 		7530C8D12D80CF700024E184 /* FavoritesMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7530C8D02D80CF660024E184 /* FavoritesMainView.swift */; };
 		7530C8D22D80CF700024E184 /* FavoritesMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7530C8D02D80CF660024E184 /* FavoritesMainView.swift */; };
 		7530C8D32D80CF700024E184 /* FavoritesMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7530C8D02D80CF660024E184 /* FavoritesMainView.swift */; };
+		7582FFD02DB9188A0057AC71 /* BookSelectionButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582FFCF2DB918880057AC71 /* BookSelectionButtonsView.m */; };
+		7582FFD12DB9188A0057AC71 /* BookSelectionButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582FFCF2DB918880057AC71 /* BookSelectionButtonsView.m */; };
+		7582FFD22DB9188A0057AC71 /* BookSelectionButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582FFCF2DB918880057AC71 /* BookSelectionButtonsView.m */; };
+		7582FFD52DBAE1FB0057AC71 /* BookSelectionButtonsState.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582FFD42DBAE1F00057AC71 /* BookSelectionButtonsState.m */; };
+		7582FFD62DBAE1FB0057AC71 /* BookSelectionButtonsState.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582FFD42DBAE1F00057AC71 /* BookSelectionButtonsState.m */; };
+		7582FFD72DBAE1FB0057AC71 /* BookSelectionButtonsState.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582FFD42DBAE1F00057AC71 /* BookSelectionButtonsState.m */; };
 		75E833DA2D73B49400D2B840 /* LoansAndHoldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E833D92D73B48D00D2B840 /* LoansAndHoldsView.swift */; };
 		75E833DB2D73B49400D2B840 /* LoansAndHoldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E833D92D73B48D00D2B840 /* LoansAndHoldsView.swift */; };
 		75E833DC2D73B49400D2B840 /* LoansAndHoldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E833D92D73B48D00D2B840 /* LoansAndHoldsView.swift */; };
@@ -1972,6 +1978,10 @@
 		7530C8C22D80C80B0024E184 /* FavoritesMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesMainViewController.swift; sourceTree = "<group>"; };
 		7530C8C62D80CA6E0024E184 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		7530C8D02D80CF660024E184 /* FavoritesMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesMainView.swift; sourceTree = "<group>"; };
+		7582FFCE2DB918630057AC71 /* BookSelectionButtonsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookSelectionButtonsView.h; sourceTree = "<group>"; };
+		7582FFCF2DB918880057AC71 /* BookSelectionButtonsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookSelectionButtonsView.m; sourceTree = "<group>"; };
+		7582FFD32DBADF240057AC71 /* BookSelectionButtonsState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookSelectionButtonsState.h; sourceTree = "<group>"; };
+		7582FFD42DBAE1F00057AC71 /* BookSelectionButtonsState.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookSelectionButtonsState.m; sourceTree = "<group>"; };
 		75E833D92D73B48D00D2B840 /* LoansAndHoldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoansAndHoldsView.swift; sourceTree = "<group>"; };
 		75E833E12D73B4B900D2B840 /* LoansAndHoldsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoansAndHoldsViewController.swift; sourceTree = "<group>"; };
 		75E834132D76088600D2B840 /* HoldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldsView.swift; sourceTree = "<group>"; };
@@ -3313,6 +3323,10 @@
 		75EA321C2DA98B7500FD3AC2 /* BookButtons */ = {
 			isa = PBXGroup;
 			children = (
+				7582FFD32DBADF240057AC71 /* BookSelectionButtonsState.h */,
+				7582FFD42DBAE1F00057AC71 /* BookSelectionButtonsState.m */,
+				7582FFCE2DB918630057AC71 /* BookSelectionButtonsView.h */,
+				7582FFCF2DB918880057AC71 /* BookSelectionButtonsView.m */,
 				73B5DFDB26052A1800225C12 /* TPPBookButtonsState.h */,
 				73B5DFDA26052A1800225C12 /* TPPBookButtonsState.m */,
 				E66A6C421EAFB63300AA282D /* TPPBookButtonsView.h */,
@@ -4892,6 +4906,7 @@
 				331263752A287F53006BA87D /* TPPEncryptedPDFPageViewController.swift in Sources */,
 				363C620C2B14F08C00858AA5 /* UserProfileDocument+Links.swift in Sources */,
 				331263762A287F53006BA87D /* AdobeDRMContentProtection.swift in Sources */,
+				7582FFD02DB9188A0057AC71 /* BookSelectionButtonsView.m in Sources */,
 				331263772A287F53006BA87D /* TPPBookLocation.swift in Sources */,
 				331263782A287F53006BA87D /* TPPEncryptedPDFDataProvider.m in Sources */,
 				331263792A287F53006BA87D /* TPPNetworkExecutor.swift in Sources */,
@@ -4904,6 +4919,7 @@
 				3312637F2A287F53006BA87D /* NSError+NYPLAdditions.swift in Sources */,
 				331263802A287F53006BA87D /* TPPReachability.m in Sources */,
 				750732EF2D887261005B2254 /* BookSelectionState.swift in Sources */,
+				7582FFD62DBAE1FB0057AC71 /* BookSelectionButtonsState.m in Sources */,
 				331263812A287F53006BA87D /* TPPCatalogLaneCell.m in Sources */,
 				336F0D582A432860009E37F6 /* EkirjastoRoundedLabel.swift in Sources */,
 				331263822A287F53006BA87D /* URLResponse+NYPL.swift in Sources */,
@@ -5301,6 +5317,7 @@
 				36A07DBE2BB5B6FD00583E0B /* PasskeyView.swift in Sources */,
 				21E41788292810F600A78606 /* TPPPDFThumbnailView.swift in Sources */,
 				E795A76E2A74074300314EC8 /* DataManager.swift in Sources */,
+				7582FFD52DBAE1FB0057AC71 /* BookSelectionButtonsState.m in Sources */,
 				73EB0AD225821DF4006BC997 /* TPPBookCellDelegate.m in Sources */,
 				E733E4AE2AFD792100D5052A /* UserProfileDocument+Links.swift in Sources */,
 				E5EFDE79298C43DD00258CA3 /* BookButtonState.swift in Sources */,
@@ -5423,6 +5440,7 @@
 				73EB0B1E25821DF4006BC997 /* TPPAccountSignInViewController.m in Sources */,
 				73EB0B1F25821DF4006BC997 /* UserProfileDocument.swift in Sources */,
 				21E41777292810E000A78606 /* TPPPDFDocumentMetadata.swift in Sources */,
+				7582FFD12DB9188A0057AC71 /* BookSelectionButtonsView.m in Sources */,
 				E76AD92C296DCB76008ECC61 /* NotificationService.swift in Sources */,
 				73EB0B2025821DF4006BC997 /* AccountsManager.swift in Sources */,
 				217595DE27B680D400BA0FDD /* TPPReaderSettingsVC.swift in Sources */,
@@ -5498,6 +5516,7 @@
 				739062D225358CF900D0743D /* TPPSignInBusinessLogicUIDelegate.swift in Sources */,
 				E57E798429D4D407006D0F87 /* String+Extensions.swift in Sources */,
 				E7376EC0287DE9C00095AADF /* CGSize.swift in Sources */,
+				7582FFD72DBAE1FB0057AC71 /* BookSelectionButtonsState.m in Sources */,
 				1120749319D20BF9008203A4 /* TPPBookCellCollectionViewController.m in Sources */,
 				0857A0FF247835FF00C7984E /* TPPKeychainStoredVariable.swift in Sources */,
 				750732F12D887261005B2254 /* BookSelectionState.swift in Sources */,
@@ -5741,6 +5760,7 @@
 				2126FE2E25C059250095C45C /* ReaderError.swift in Sources */,
 				21562CC3276BB52700C03372 /* AdobeDRMAlerts.swift in Sources */,
 				5D7CF8B922C3FC06007CAA34 /* TPPErrorLogger.swift in Sources */,
+				7582FFD22DB9188A0057AC71 /* BookSelectionButtonsView.m in Sources */,
 				E7A9909027EE4EF400D9486F /* LicensesService.swift in Sources */,
 				E5FFB96728AED70E0042907F /* ActivityIndicator.swift in Sources */,
 				E7FD4E52286CCF2C00D26A3B /* TPPPDFLocation.swift in Sources */,
