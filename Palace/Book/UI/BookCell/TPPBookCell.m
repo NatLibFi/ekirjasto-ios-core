@@ -57,7 +57,7 @@ TPPBookCell *TPPBookCellDequeue(UICollectionView *const collectionView,
       cell.book = book;
       cell.delegate = [TPPBookCellDelegate sharedDelegate];
       cell.state = TPPBookButtonsViewStateWithAvailability(book.defaultAcquisition.availability);
-
+      cell.selectionState = BookSelectionButtonsViewStateWithBook(book);
       return cell;
     }
     case TPPBookStateDownloadNeeded:
@@ -68,6 +68,7 @@ TPPBookCell *TPPBookCellDequeue(UICollectionView *const collectionView,
       cell.book = book;
       cell.delegate = [TPPBookCellDelegate sharedDelegate];
       cell.state = TPPBookButtonsStateDownloadNeeded;
+      cell.selectionState = BookSelectionButtonsViewStateWithBook(book);
       return cell;
     }
     case TPPBookStateDownloadSuccessful:
@@ -78,6 +79,7 @@ TPPBookCell *TPPBookCellDequeue(UICollectionView *const collectionView,
       cell.book = book;
       cell.delegate = [TPPBookCellDelegate sharedDelegate];
       cell.state = TPPBookButtonsStateDownloadSuccessful;
+      cell.selectionState = BookSelectionButtonsViewStateWithBook(book);
       return cell;
     }
     // SAML started is part of download process, in this step app does authenticate user but didn't begin file downloading yet
@@ -112,7 +114,7 @@ TPPBookCell *TPPBookCellDequeue(UICollectionView *const collectionView,
       cell.book = book;
       cell.delegate = [TPPBookCellDelegate sharedDelegate];
       cell.state = TPPBookButtonsViewStateWithAvailability(book.defaultAcquisition.availability);
-
+      cell.selectionState = BookSelectionButtonsViewStateWithBook(book);
       return cell;
     }
     case TPPBookStateUsed:
@@ -123,6 +125,7 @@ TPPBookCell *TPPBookCellDequeue(UICollectionView *const collectionView,
       cell.book = book;
       cell.delegate = [TPPBookCellDelegate sharedDelegate];
       cell.state = TPPBookButtonsStateUsed;
+      cell.selectionState = BookSelectionButtonsViewStateWithBook(book);
       return cell;
     }
     case TPPBookStateUnsupported: {
@@ -132,6 +135,7 @@ TPPBookCell *TPPBookCellDequeue(UICollectionView *const collectionView,
       cell.book = book;
       cell.delegate = [TPPBookCellDelegate sharedDelegate];
       cell.state = TPPBookButtonsStateUnsupported;
+      cell.selectionState = BookSelectionButtonsViewStateWithBook(book);
       return cell;
     }
   }

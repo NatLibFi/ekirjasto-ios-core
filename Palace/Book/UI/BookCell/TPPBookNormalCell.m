@@ -3,6 +3,7 @@
 
 #import "TPPConfiguration.h"
 #import "TPPBookButtonsView.h"
+#import "BookSelectionButtonsView.h"
 #import "Palace-Swift.h"
 
 #import "TPPBookNormalCell.h"
@@ -11,6 +12,7 @@
 
 @property (nonatomic) UILabel *authors;
 @property (nonatomic) TPPBookButtonsView *buttonsView;
+@property (nonatomic) BookSelectionButtonsView *selectionButtonsView;
 @property (nonatomic) UILabel *title;
 @property (nonatomic) UILabel *bookFormatLabel;
 @property (nonatomic) UILabel *bookStateInfoLabel;
@@ -38,7 +40,7 @@
   CGFloat const titleWidth = CGRectGetWidth([self contentFrame]) - 170;
   self.title.frame = CGRectMake(160,
                                 (10 / UIScreen.mainScreen.scale),
-                                titleWidth,
+                                (titleWidth - 30),
                                 [self.title sizeThatFits:
                                  CGSizeMake(titleWidth, CGFLOAT_MAX)].height + 5);
   
@@ -50,7 +52,7 @@
   bookFormatLabelFrame.origin = CGPointMake(160, CGRectGetMaxY(self.title.frame) + 3);
   bookFormatLabelFrame.size.width = CGRectGetWidth([self contentFrame]) - 170;
   self.bookFormatLabel.frame = bookFormatLabelFrame;
-  
+
   [self.bookStateInfoLabel sizeToFit];
   CGSize bookStateInfoLabelSize = [self.bookStateInfoLabel sizeThatFits:CGSizeMake(titleWidth, CGFLOAT_MAX)];
   CGRect bookStateInfoLabelRect = CGRectMake(0, 0, bookStateInfoLabelSize.width, bookStateInfoLabelSize.height);
@@ -59,7 +61,7 @@
   bookStateInfoLabelFrame.origin = CGPointMake(160, CGRectGetMaxY(self.title.frame) + 60);
   bookStateInfoLabelFrame.size.width = CGRectGetWidth([self contentFrame]) - 170;
   self.bookStateInfoLabel.frame = bookStateInfoLabelFrame;
-  
+
   [self.authors sizeToFit];
   CGSize authorsSize = [self.authors sizeThatFits:CGSizeMake(titleWidth, CGFLOAT_MAX)];
   CGRect authorsRect = CGRectMake(0, 0, authorsSize.width, authorsSize.height);
@@ -68,13 +70,18 @@
   authorFrame.origin = CGPointMake(160, CGRectGetMaxY(self.title.frame) + 28);
   authorFrame.size.width = CGRectGetWidth([self contentFrame]) - 170;
   self.authors.frame = authorFrame;
-  
+
   [self.buttonsView sizeToFit];
   CGRect frame = self.buttonsView.frame;
   frame.origin = CGPointMake(185,
                              (CGRectGetHeight([self contentFrame]) - CGRectGetHeight(frame) - 5)
                              );
   self.buttonsView.frame = frame;
+
+  CGFloat const selectionButtonWidth = 15.0;
+  CGRect selectionButtonsViewFrame = self.selectionButtonsView.frame;
+  selectionButtonsViewFrame.size.width = selectionButtonWidth;
+  self.selectionButtonsView.frame = selectionButtonsViewFrame;
 
   CGRect unreadImageViewFrame = self.unreadImageView.frame;
   unreadImageViewFrame.origin.x = (CGRectGetMinX(self.cover.frame) -
@@ -120,7 +127,7 @@
     [self.contentView addSubview:self.bookFormatLabel];
     [self.contentView setNeedsLayout];
   }
-  
+
   if(!self.bookStateInfoLabel) {
     self.bookStateInfoLabel = [[UILabel alloc] init];
     self.bookStateInfoLabel.numberOfLines = 2;
@@ -143,7 +150,18 @@
     [self.buttonsView layoutIfNeeded];
   }
   self.buttonsView.book = book;
-  
+
+  if(!self.selectionButtonsView) {
+    self.selectionButtonsView = [[BookSelectionButtonsView alloc] initWithBook:book delegate:[TPPBookCellDelegate sharedDelegate]];
+    [self.contentView addSubview:self.selectionButtonsView];
+    self.selectionButtonsView.translatesAutoresizingMaskIntoConstraints = NO;
+
+    [self.selectionButtonsView autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:self.title withOffset:0];
+    [self.selectionButtonsView autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.contentView withOffset:(10/UIScreen.mainScreen.scale)];
+    [self.selectionButtonsView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.contentView withOffset:-15];
+    [self.selectionButtonsView layoutIfNeeded];
+  }
+
   if(!self.unreadImageView) {
     self.unreadImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Unread"]];
     self.unreadImageView.image = [self.unreadImageView.image
@@ -161,6 +179,7 @@
   if (!self.contentBadge) {
     self.contentBadge = [[TPPContentBadgeImageView alloc] initWithBadgeImage:TPPBadgeImageAudiobook];
   }
+
   if ([book defaultBookContentType] == TPPBookContentTypeAudiobook) {
     self.title.accessibilityLabel = [book.title stringByAppendingString:@". Audiobook."];
     [TPPContentBadgeImageView pinWithBadge:self.contentBadge toView:self.cover isLane:NO];
@@ -241,8 +260,17 @@
 - (void)setState:(TPPBookButtonsState const)state
 {
   _state = state;
+
   self.buttonsView.state = state;
   self.unreadImageView.hidden = (state != TPPBookButtonsStateDownloadSuccessful);
+  [self setNeedsLayout];
+}
+
+- (void)setSelectionState:(BookSelectionButtonsState const)selectionState
+{
+  _selectionState = selectionState;
+
+  self.selectionButtonsView.selectionState = selectionState;
   [self setNeedsLayout];
 }
 
