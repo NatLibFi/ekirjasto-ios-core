@@ -53,6 +53,9 @@
   self.bookDetailView.state = [[TPPBookRegistry shared]
                                stateFor:self.book.identifier];
 
+  self.bookDetailView.selectionState = [[TPPBookRegistry shared]
+                               selectionStateFor:self.book.identifier];
+
   if(UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad &&
      [[TPPRootTabBarController sharedController] traitCollection].horizontalSizeClass != UIUserInterfaceSizeClassCompact) {
     self.modalPresentationStyle = UIModalPresentationFormSheet;
@@ -103,6 +106,9 @@
   
   [self.bookDetailView setState:[[TPPBookRegistry shared]
                                  stateFor:self.book.identifier]];
+
+  [self.bookDetailView setSelectionState:[[TPPBookRegistry shared] selectionStateFor:self.book.identifier]];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -315,6 +321,7 @@
       self.bookDetailView.book = newBook;
     }
     self.bookDetailView.state = [registry stateFor:self.book.identifier];
+    self.bookDetailView.selectionState = [registry selectionStateFor:self.book.identifier];
   }];
 }
 
