@@ -34,8 +34,6 @@ jobs:
           private-key-name: ekirjasto-ci-ed25519
           private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           host: github.com
-      - name: Force Xcode 16.2
-        run: sudo xcode-select -switch /Applications/Xcode_16.2.0.app/Contents/Developer
 
       - name: Bootstrap (and reveal secrets)
         env:
