@@ -10,6 +10,11 @@
 #     https://docs.fastlane.tools/plugins/available-plugins
 #     https://docs.fastlane.tools/actions/build_app/
 
+
+# Select Xcode
+
+xcode_select "/Applications/Xcode.app"
+
 #
 # Get changelog text (for a given language).
 #
