@@ -161,6 +161,7 @@
     [self.selectionButtonsView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.contentView withOffset:-15];
     [self.selectionButtonsView layoutIfNeeded];
   }
+  self.selectionButtonsView.book = book;
 
   if(!self.unreadImageView) {
     self.unreadImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Unread"]];

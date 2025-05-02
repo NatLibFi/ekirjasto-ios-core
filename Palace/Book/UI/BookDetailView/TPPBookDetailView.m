@@ -913,6 +913,7 @@ NSString *PlaySampleNotification = @"ToggleSampleNotification";
   _book = book;
   self.normalView.book = book;
   self.buttonsView.book = book;
+  self.selectionButtonsView.book = book;
 }
 
 - (double)downloadProgress
