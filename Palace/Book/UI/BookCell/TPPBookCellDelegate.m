@@ -120,13 +120,15 @@ static const int kServerUpdateDelay = 15;
 - (void)didSelectSelectForBook:(TPPBook *)book
                     completion:(void (^ __nullable)(void))completion
 {
-  TPPLOG(@"Did select select for book.");
+  TPPLOG_F(@"Did select select for book: %@", [book loggableDictionary]);
+  [[MyBooksSelectionCenter shared] startBookSelectFor:book completion:completion];
 }
 
 - (void)didSelectUnselectForBook:(TPPBook *)book
                       completion:(void (^ __nullable)(void))completion
 {
-  TPPLOG(@"Did select unselect for book.");
+  TPPLOG_F(@"Did select unselect for book: %@", [book loggableDictionary]);
+  [[MyBooksSelectionCenter shared] startBookUnselectFor:book completion:completion];
 }
 
 - (void)openBook:(TPPBook *)book
