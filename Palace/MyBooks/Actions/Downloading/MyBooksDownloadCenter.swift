@@ -68,16 +68,18 @@ import OverdriveProcessor
         
         let location = self?.bookRegistry.location(forIdentifier: borrowedBook.identifier)
 
-        self?.bookRegistry.addBook(
-          borrowedBook,
-          location: location,
-          state: .DownloadNeeded,
-          selectionState: .Selected, // just placeholder code
-          fulfillmentId: nil,
-          readiumBookmarks: nil,
-          genericBookmarks: nil
-        )
-        
+        let selectionState: BookSelectionState = (borrowedEntry.selected != nil)
+        ? .Selected
+        : .Unselected
+
+        self?.bookRegistry.addBook(borrowedBook,
+                                   location: location,
+                                   state: .DownloadNeeded,
+                                   selectionState: selectionState,
+                                   fulfillmentId: nil,
+                                   readiumBookmarks: nil,
+                                   genericBookmarks: nil)
+
         if shouldAttemptDownload {
           self?.startDownloadIfAvailable(book: borrowedBook)
         }
@@ -181,15 +183,17 @@ import OverdriveProcessor
   
   private func processUnregisteredState(for book: TPPBook, location: TPPBookLocation?, loginRequired: Bool?) -> TPPBookState {
     if book.defaultAcquisitionIfBorrow == nil && (book.defaultAcquisitionIfOpenAccess != nil || !(loginRequired ?? false)) {
-      bookRegistry.addBook(
-        book,
-        location: location,
-        state: .DownloadNeeded,
-        selectionState: .Selected, //just placeholder code
-        fulfillmentId: nil,
-        readiumBookmarks: nil,
-        genericBookmarks: nil
-      )
+
+      let selectionState: BookSelectionState =  bookRegistry.selectionState(for: book.identifier)
+
+      bookRegistry.addBook(book,
+                           location: location,
+                           state: .DownloadNeeded,
+                           selectionState: selectionState,
+                           fulfillmentId: nil,
+                           readiumBookmarks: nil,
+                           genericBookmarks: nil)
+
       return .DownloadNeeded
     }
     return .Unregistered
@@ -925,10 +929,13 @@ extension MyBooksDownloadCenter: URLSessionTaskDelegate {
 
     self.taskIdentifierToBook[task.taskIdentifier] = book
     task.resume()
+
+    let selectionState: BookSelectionState = bookRegistry.selectionState(for: book.identifier)
+
     bookRegistry.addBook(book,
                          location: bookRegistry.location(forIdentifier: book.identifier),
                          state: .Downloading,
-                         selectionState: .Selected, // just placeholder codd
+                         selectionState: selectionState,
                          fulfillmentId: nil,
                          readiumBookmarks: nil,
                          genericBookmarks: nil)
@@ -1020,14 +1027,16 @@ extension MyBooksDownloadCenter {
   
   func failDownloadWithAlert(for book: TPPBook, withMessage message: String? = nil) {
     let location = bookRegistry.location(forIdentifier: book.identifier)
-    
+
+    let selectionState: BookSelectionState = .SelectionUnregistered
+
     bookRegistry.addBook(book,
-                                   location: location,
-                                   state: .DownloadFailed,
-                                   selectionState: .Selected, // just placeholder code
-                                   fulfillmentId: nil,
-                                   readiumBookmarks: nil,
-                                   genericBookmarks: nil)
+                         location: location,
+                         state: .DownloadFailed,
+                         selectionState: selectionState,
+                         fulfillmentId: nil,
+                         readiumBookmarks: nil,
+                         genericBookmarks: nil)
     
     DispatchQueue.main.async {
       let errorMessage = message ?? "No error message"
