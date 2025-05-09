@@ -69,8 +69,47 @@ class MyBooksSelectionCenter: NSObject {
     book: TPPBook,
     completion: (() -> Void)? = nil
   ) {
-    // send select book request
-    // if success, update book registry
+
+    guard let alternateURL: URL = book.alternateURL else {
+      // if book has no alternateUrl
+      // do not proceed with selecting
+      return
+    }
+
+    // We use function withURL here
+    // so we can update the book registry with
+    // the latest book data we have on server
+    // (book data in app could already be stale)
+    TPPOPDSFeed.withURL(
+      alternateURL,
+      shouldResetCache: true
+    ) {
+      [weak self] feed, error in
+
+      if let feed = feed,
+        let selectedEntry = feed.entries.first as? TPPOPDSEntry,
+        let selectedBook = TPPBook(entry: selectedEntry)
+      {
+
+        ATLog(
+          .info,
+          "Start POST request and book registry update for selected book: "
+            + "\(selectedBook.loggableDictionary())"
+        )
+
+        // send select book request to backend
+        // update book registry with selected book record
+
+      } else {
+        // maybe an error
+        // stop book processing
+        // and show alert to user
+        self?.stopProcessing(book)
+        self?.showGenericSelectionFailedAlert(book)
+      }
+
+    }
+
   }
 
   // MARK: - Unselect book functions: removing book from favorites
@@ -121,8 +160,47 @@ class MyBooksSelectionCenter: NSObject {
     book: TPPBook,
     completion: (() -> Void)? = nil
   ) {
-    // send unselect book request
-    // if success, update book registry
+
+    guard let alternateURL: URL = book.alternateURL else {
+      // if book has no alternateUrl
+      // do not proceed with unselecting
+      return
+    }
+
+    // We use function withURL here
+    // so we can update the book registry with
+    // the latest book data we have on server
+    // (book data in app could already be stale)
+    TPPOPDSFeed.withURL(
+      alternateURL,
+      shouldResetCache: true
+    ) {
+      [weak self] feed, error in
+
+      if let feed = feed,
+        let unselectedEntry = feed.entries.first as? TPPOPDSEntry,
+        let unselectedBook = TPPBook(entry: unselectedEntry)
+      {
+
+        ATLog(
+          .info,
+          "Start POST request and book registry update for unselected book: "
+            + "\(unselectedBook.loggableDictionary())"
+        )
+
+        // send unselect book request to backend
+        // update book registry with unselected book record
+
+      } else {
+        // maybe an error
+        // stop book processing
+        // and show alert to user
+        self?.stopProcessing(book)
+        self?.showGenericSelectionFailedAlert(book)
+      }
+
+    }
+
   }
 
   // MARK: - Helper functions for book selection functions
@@ -152,6 +230,40 @@ class MyBooksSelectionCenter: NSObject {
     }
 
     return false
+  }
+
+  private func showGenericSelectionFailedAlert(_ book: TPPBook) {
+    let alert = createFavoritesAlert(book)
+    showFavoritesAlertToUser(alert)
+  }
+
+  private func createFavoritesAlert(_ book: TPPBook)
+    -> UIAlertController
+  {
+    let title: String = "Error in favorite action"  //TODO: just a placeholder for actual localised title
+
+    let message: String = String(
+      format: "Could not update favorite status of book '%@'.",
+      book.title
+    )  //TODO: just a placeholder for actual localised message
+
+    let alert = TPPAlertUtils.alert(
+      title: title,
+      message: message
+    )
+
+    return alert
+  }
+
+  private func showFavoritesAlertToUser(_ alert: UIAlertController) {
+    DispatchQueue.main.async {
+      TPPAlertUtils.presentFromViewControllerOrNil(
+        alertController: alert,
+        viewController: nil,
+        animated: true,
+        completion: nil
+      )
+    }
   }
 
 }
