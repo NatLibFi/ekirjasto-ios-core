@@ -721,26 +721,36 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
     }
   }
 
-  /// Saves book registry data.
+  /// Saves book registry data
+  /// and posts notification to observers that the registry has changed
+  /// (this usually triggers the views load new data and refresh)
   private func save() {
+
     guard let account = AccountsManager.shared.currentAccount?.uuid,
       let registryUrl = registryUrl(for: account)
     else {
       return
     }
+
     do {
       if !FileManager.default.fileExists(atPath: registryUrl.path) {
         try FileManager.default.createDirectory(
           at: registryUrl.deletingLastPathComponent(),
           withIntermediateDirectories: true)
       }
+
       let registryValues = registry.values.map { $0.dictionaryRepresentation }  //.withNullValues() }
       let registryObject = [TPPBookRegistryKey.records.rawValue: registryValues]
-      let registryData = try JSONSerialization.data(
-        withJSONObject: registryObject, options: .fragmentsAllowed)
-      try registryData.write(to: registryUrl, options: .atomic)
-      NotificationCenter.default.post(
-        name: .TPPBookRegistryDidChange, object: nil, userInfo: nil)
+      let registryData = try JSONSerialization.data(withJSONObject: registryObject,
+                                                    options: .fragmentsAllowed)
+
+      try registryData.write(to: registryUrl,
+                             options: .atomic)
+
+      NotificationCenter.default.post(name: .TPPBookRegistryDidChange,
+                                      object: nil,
+                                      userInfo: nil)
+
     } catch {
       Log.error(
         #file, "Error saving book registry: \(error.localizedDescription)")
@@ -837,10 +847,22 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
     save()
   }
 
-  /// Given an identifier, this method removes a book from the registry.
+  /// Given an identifier, this method removes a book from the registry
+  /// if the book is not selected as favorite
   func removeBook(forIdentifier bookIdentifier: String) {
-    coverRegistry.removePinnedThumbnailImageForBookIdentifier(bookIdentifier)
-    registry.removeValue(forKey: bookIdentifier)
+
+    if registry[bookIdentifier]?.selectionState == .Selected {
+      // favorite books should not be removed
+      // just update the book state to unregistered
+      // and otherwise keep the book in registry
+      registry[bookIdentifier]?.state = .Unregistered
+    } else {
+      // as the book is not a favorite book
+      // it is safe to remove from book registry
+      coverRegistry.removePinnedThumbnailImageForBookIdentifier(bookIdentifier)
+      registry.removeValue(forKey: bookIdentifier)
+    }
+
     save()
   }
 
@@ -896,15 +918,27 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
   }
 
   /// This will update the book like updateBook does, but will also set its state to unregistered, then
-  /// broadcast the change, then remove the book from the registry. This gives any views using the book
-  /// a chance to update their copy with the new one, without having to keep it in the registry after.
+  /// broadcast the change, then remove the book from the registry (if it's not a favorite book).
+  /// This gives any views using the book a chance to update their copy with the new one,
+  /// without having to keep it in the registry after.
   func updateAndRemoveBook(_ book: TPPBook) {
+
     guard registry[book.identifier] != nil else {
       return
     }
-    coverRegistry.removePinnedThumbnailImageForBookIdentifier(book.identifier)
-    registry[book.identifier]?.book = book
-    registry[book.identifier]?.state = .Unregistered
+
+    if registry[book.identifier]?.selectionState == .Selected {
+      // Updating and removing a favorite book
+      registry[book.identifier]?.book = book
+      registry[book.identifier]?.state = .Unregistered
+    } else {
+      // Not a favorite book
+      // so we can do more cleanup
+      coverRegistry.removePinnedThumbnailImageForBookIdentifier(book.identifier)
+      registry[book.identifier]?.book = book
+      registry[book.identifier]?.state = .Unregistered
+    }
+
     save()
   }
 
