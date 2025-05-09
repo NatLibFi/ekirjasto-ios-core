@@ -98,17 +98,60 @@ class MyBooksSelectionCenter: NSObject {
         )
 
         // send select book request to backend
+
         // update book registry with selected book record
+        self?.updateBookRegistryWithSelectedBook(selectedBook)
 
       } else {
         // maybe an error
         // stop book processing
         // and show alert to user
-        self?.stopProcessing(book)
-        self?.showGenericSelectionFailedAlert(book)
+        self?.handleUnexpectedBookSelectionError(book)
       }
 
     }
+
+  }
+
+  private func updateBookRegistryWithSelectedBook(_ book: TPPBook) {
+
+    if self.bookIsAlreadyRegistered(book) {
+      self.updateBookAsSelectedInBookRegistry(book)
+      return
+    }
+
+    if self.bookIsNew(book) {
+      self.addBookAsSelectedToBookRegistry(
+        book,
+        location: bookRegistry.location(forIdentifier: book.identifier)
+      )
+      return
+    }
+
+    handleUnexpectedBookSelectionError(book)
+  }
+
+  private func updateBookAsSelectedInBookRegistry(_ book: TPPBook) {
+    bookRegistry.updateBook(
+      book,
+      selectionState: .Selected
+    )
+  }
+
+  func addBookAsSelectedToBookRegistry(
+    _ book: TPPBook,
+    location: TPPBookLocation? = nil
+  ) {
+
+    bookRegistry.addBook(
+      book,
+      location: location,
+      state: .Unregistered,
+      selectionState: .Selected,
+      fulfillmentId: nil,
+      readiumBookmarks: nil,
+      genericBookmarks: nil
+    )
 
   }
 
@@ -189,18 +232,41 @@ class MyBooksSelectionCenter: NSObject {
         )
 
         // send unselect book request to backend
+
         // update book registry with unselected book record
+        self?.updateBookRegistryWithUnselectedBook(unselectedBook)
 
       } else {
         // maybe an error
         // stop book processing
         // and show alert to user
-        self?.stopProcessing(book)
-        self?.showGenericSelectionFailedAlert(book)
+        self?.handleUnexpectedBookSelectionError(book)
       }
 
     }
 
+  }
+
+  private func updateBookRegistryWithUnselectedBook(_ book: TPPBook) {
+
+    if self.bookIsAlreadyRegistered(book) == true {
+      // favorite book should alredy be in book registry
+      // so we can just update the book record
+      self.updateBookAsUnselectedInBookRegistry(book)
+    } else {
+      // if book for some reason is not in registry
+      // there is something wrong, do not proceed
+      stopProcessing(book)
+      showGenericSelectionFailedAlert(book)
+    }
+
+  }
+
+  private func updateBookAsUnselectedInBookRegistry(_ book: TPPBook) {
+    bookRegistry.updateBook(
+      book,
+      selectionState: .Unselected
+    )
   }
 
   // MARK: - Helper functions for book selection functions
@@ -211,6 +277,26 @@ class MyBooksSelectionCenter: NSObject {
     }
 
     return true
+  }
+
+  private func bookIsAlreadyRegistered(_ book: TPPBook) -> Bool {
+    let bookRecord = bookRegistry.book(forIdentifier: book.identifier)
+
+    if bookRecord != nil {
+      return true
+    }
+
+    return false
+  }
+
+  private func bookIsNew(_ book: TPPBook) -> Bool {
+    let bookRecord = bookRegistry.book(forIdentifier: book.identifier)
+
+    if bookRecord == nil {
+      return true
+    }
+
+    return false
   }
 
   private func startProcessing(_ book: TPPBook) {
@@ -230,6 +316,11 @@ class MyBooksSelectionCenter: NSObject {
     }
 
     return false
+  }
+
+  private func handleUnexpectedBookSelectionError(_ book: TPPBook) {
+    stopProcessing(book)
+    showGenericSelectionFailedAlert(book)
   }
 
   private func showGenericSelectionFailedAlert(_ book: TPPBook) {
