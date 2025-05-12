@@ -35,7 +35,6 @@ extension UIFont {
       let baseFontSize = UIFont.preferredFont(forTextStyle: textStyle).pointSize
       let setFontSize: CGFloat
       setFontSize = baseFontSize * fontMultiplier
-      //print("Adjusted size: \(setFontSize), multiplier: \(fontMultiplier) in PalaceFont")
       let font = UIFont(name: TPPConfiguration.ekirjastoFontName(), size: setFontSize) ?? UIFont.systemFont(ofSize: setFontSize, weight: weight)
       return font
       // Apply system font size adjustment to the given size
@@ -62,7 +61,6 @@ extension UIFont {
       let baseFontSize = UIFont.preferredFont(forTextStyle: textStyle).pointSize
       let setFontSize: CGFloat
       setFontSize = baseFontSize * fontMultiplier
-      //print("Adjusted size: \(setFontSize), multiplier: \(fontMultiplier) in semiBoldPalaceFont")
       let font = UIFont(name: TPPConfiguration.ekirjastoFontName(), size: setFontSize) ?? UIFont.systemFont(ofSize: setFontSize, weight: weight)
       return font
       // Apply system font size adjustment to the given size
@@ -89,7 +87,6 @@ extension UIFont {
       let baseFontSize = UIFont.preferredFont(forTextStyle: textStyle).pointSize
       let setFontSize: CGFloat
       setFontSize = baseFontSize * fontMultiplier
-      //print("Adjusted size: \(setFontSize), multiplier: \(fontMultiplier) in boldPalaceFont")
       let font = UIFont(name: TPPConfiguration.ekirjastoFontName(), size: setFontSize) ?? UIFont.systemFont(ofSize: setFontSize, weight: weight)
       return font
       // Apply system font size adjustment to the given size
@@ -125,7 +122,6 @@ extension UIFont {
     if fontSizeAdjusted {
       // Apply user font size adjustment to the given font size
       setFontSize = fontSize * fontMultiplier
-      //print("Adjusted size: \(setFontSize), multiplier: \(fontMultiplier) in palaceFont")
       let font = UIFont(name: TPPConfiguration.ekirjastoFontName(), size: setFontSize) ?? UIFont.systemFont(ofSize: setFontSize)
       return font
     // Apply system font size adjustment to the given size
@@ -154,7 +150,6 @@ extension UIFont {
     if fontSizeAdjusted {
       // Apply user font size adjustment to the given font size
       setFontSize = fontSize * fontMultiplier
-      //print("Adjusted size: \(setFontSize), multiplier: \(fontMultiplier) in semiBoldPalace")
       let font = UIFont(name: TPPConfiguration.ekirjastoFontName(), size: setFontSize) ?? UIFont.systemFont(ofSize: setFontSize)
       return font
     // Apply system font size adjustment to the given size
@@ -183,7 +178,6 @@ extension UIFont {
     if fontSizeAdjusted {
       // Apply user font size adjustment to the given font size
       setFontSize = fontSize * fontMultiplier
-      //print("Adjusted size: \(setFontSize), multiplier: \(fontMultiplier) in boldPalace")
       let font = UIFont(name: TPPConfiguration.ekirjastoFontName(), size: setFontSize) ?? UIFont.systemFont(ofSize: setFontSize)
       return font
     // Apply system font size adjustment to the given size
