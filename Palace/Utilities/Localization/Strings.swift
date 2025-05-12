@@ -47,6 +47,8 @@ struct Strings {
     static let userDeniedLocationAccess = NSLocalizedString("User denied location access. Go to system settings to enable location access for E-kirjasto.", comment: "Error message shown to user when location services are denied.")
     static let uknownLocationError = NSLocalizedString("Unkown error occurred. Please try again.", comment: "Error message shown to user when an unknown location error occurs.")
     static let locationFetchFailed = NSLocalizedString("Failed to get current location. Please try again.", comment: "Error message shown to user when CoreLocation does not return the current location.")
+    static let bookFavoriteActionFailedNotificationAlertTitle = NSLocalizedString("Favorites update failed", comment: "The title in a notification alert informing the user that the there was an error in adding the book to favorites or removing the book from favorites")
+    static let bookFavoriteActionFailedNotificationAlertMessage = NSLocalizedString("We were unable to save the changes to your Favorites list with book\n \"%@\".\n\n Please try again soon.", comment: "The message in a notification alert informing the user that the there was an error in adding the book to favorites or removing the book from favorites")
   }
   
   struct Generic {
@@ -271,6 +273,10 @@ struct Strings {
     static let checkoutTitle = NSLocalizedString("Check Out", comment: "")
     static let readyForDownloadTitle = NSLocalizedString("Ready for Download", comment: "The title for a notification banner informing the user that a reserved book is now available for download")
     static let readyForDownloadBody = NSLocalizedString("The title you reserved %@ is available.", comment: "The body text for a notification banner informing the user that a reserved book is now available for download")
+    static let bookAddedToFavoritesNotificationBannerTitle = NSLocalizedString("Book added to Favorites", comment: "The title in a notification banner informing the user that the book is added to user's favorite books")
+    static let bookAddedToFavoritesNotificationBannerMessage = NSLocalizedString("\"%@\" has been added to your Favorites.", comment: "The message in a notification banner informing the user that the book is added to user's favorite books")
+    static let bookRemovedFromFavoritesNotificationBannerTitle = NSLocalizedString("Book removed from Favorites", comment: "The title in a notification banner informing the user that the book is removed from user's favorite books")
+    static let bookRemovedFromFavoritesNotificationBannerMessage = NSLocalizedString("\"%@\" has been removed from your Favorites.", comment: "The message in a notification banner informing the user that the book is removed from user's favorite books")
   }
   
   struct MyBooksView {

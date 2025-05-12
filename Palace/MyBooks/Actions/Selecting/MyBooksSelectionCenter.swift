@@ -32,6 +32,7 @@ class MyBooksSelectionCenter: NSObject {
     if !bookHasIdentifier(book) {
       // if book has no identifier
       // do not proceed with selecting
+      showGenericSelectionFailedAlert(book)
       return
     }
 
@@ -163,6 +164,7 @@ class MyBooksSelectionCenter: NSObject {
           self.updateBookRegistryWithSelectedBook(book)
 
           // show notification of successful addition to favorites
+          self.showAddedToFavoritesSuccessNotification(book)
 
         } else {
           self.showGenericSelectionFailedAlert(book)
@@ -236,6 +238,19 @@ class MyBooksSelectionCenter: NSObject {
     return selectBookURL
   }
 
+  private func showAddedToFavoritesSuccessNotification(_ book: TPPBook) {
+    let title: String = String.localizedStringWithFormat(
+      Strings.UserNotifications.bookAddedToFavoritesNotificationBannerTitle)
+    let message: String = String.localizedStringWithFormat(
+      Strings.UserNotifications.bookAddedToFavoritesNotificationBannerMessage,
+      book.title)
+
+    TPPUserNotifications.createNotificationBannerForBookSelection(
+      book,
+      notificationBannerTitle: title,
+      notificationBannerMessage: message)
+  }
+
   // MARK: - Unselect book functions: removing book from favorites
 
   @objc func startBookUnselect(
@@ -246,6 +261,7 @@ class MyBooksSelectionCenter: NSObject {
     if bookHasIdentifier(book) == false {
       // if book has no identifier
       // do not proceed with unselecting
+      showGenericSelectionFailedAlert(book)
       return
     }
 
@@ -379,6 +395,7 @@ class MyBooksSelectionCenter: NSObject {
           self.updateBookRegistryWithUnselectedBook(book)
 
           // show notification of successful removal from favorites
+          self.showRemovedFromFavoritesSuccessNotification(book)
 
         } else {
           self.showGenericSelectionFailedAlert(book)
@@ -430,6 +447,19 @@ class MyBooksSelectionCenter: NSObject {
     }
 
     return unselectBookURL
+  }
+
+  private func showRemovedFromFavoritesSuccessNotification(_ book: TPPBook) {
+    let title: String = String.localizedStringWithFormat(
+      Strings.UserNotifications.bookRemovedFromFavoritesNotificationBannerTitle)
+    let message: String = String.localizedStringWithFormat(
+      Strings.UserNotifications
+        .bookRemovedFromFavoritesNotificationBannerMessage, book.title)
+
+    TPPUserNotifications.createNotificationBannerForBookSelection(
+      book,
+      notificationBannerTitle: title,
+      notificationBannerMessage: message)
   }
 
   // MARK: - Helper functions for book selection functions
@@ -495,7 +525,7 @@ class MyBooksSelectionCenter: NSObject {
     TPPErrorLogger.logError(
       error,
       summary:
-        "Could not send POST request for selecting or unselecting a book",
+        "Could not send POST for selecting or DELETE request unselecting a book",
       metadata: [
         "requestURL": requestURL,
         "statusCode": response?.statusCode ?? 0,
@@ -509,12 +539,11 @@ class MyBooksSelectionCenter: NSObject {
   }
 
   private func createFavoritesAlert(_ book: TPPBook) -> UIAlertController {
-    let title: String = "Error in favorite action"  //TODO: just a placeholder for actual localised title
-
-    let message: String = String(
-      format: "Could not update favorite status of book '%@'.",
-      book.title
-    )  //TODO: just a placeholder for actual localised message
+    let title: String = String.localizedStringWithFormat(
+      Strings.Error.bookFavoriteActionFailedNotificationAlertTitle)
+    let message: String = String.localizedStringWithFormat(
+      Strings.Error.bookFavoriteActionFailedNotificationAlertMessage, book.title
+    )
 
     let alert = TPPAlertUtils.alert(
       title: title,
