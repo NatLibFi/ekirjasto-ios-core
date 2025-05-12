@@ -73,6 +73,7 @@ class MyBooksSelectionCenter: NSObject {
     guard let alternateURL: URL = book.alternateURL else {
       // if book has no alternateUrl
       // do not proceed with selecting
+      self.showGenericSelectionFailedAlert(book)
       return
     }
 
@@ -80,6 +81,11 @@ class MyBooksSelectionCenter: NSObject {
     // so we can update the book registry with
     // the latest book data we have on server
     // (book data in app could already be stale)
+    ATLog(
+      .info,
+      "Start GET request for book \(book.title) to refresh book record data"
+    )
+
     TPPOPDSFeed.withURL(
       alternateURL,
       shouldResetCache: true
@@ -98,15 +104,70 @@ class MyBooksSelectionCenter: NSObject {
         )
 
         // send select book request to backend
-
-        // update book registry with selected book record
-        self?.updateBookRegistryWithSelectedBook(selectedBook)
+        self?.sendSelectBookRequest(
+          book: selectedBook,
+          selectionState: .Selected
+        )
 
       } else {
         // maybe an error
         // stop book processing
         // and show alert to user
         self?.handleUnexpectedBookSelectionError(book)
+      }
+
+    }
+
+  }
+
+  private func sendSelectBookRequest(
+    book: TPPBook,
+    selectionState: BookSelectionState
+  ) {
+
+    ATLog(
+      .info,
+      "Sending POST request to select book \(book.title)"
+    )
+
+    let selectBookURL: URL = createSelectBookURL(book)
+    let selectBookRequest: URLRequest = createSelectBookRequest(selectBookURL)
+
+    _ = TPPNetworkExecutor.shared.addBearerAndExecute(selectBookRequest) {
+      _, response, error in
+
+      self.bookRegistry.setProcessing(false, for: book.identifier)
+
+      if let error = error {
+
+        self.logErrorInSendingBookSelectionRequest(
+          response: response as? HTTPURLResponse,
+          error: error,
+          requestURL: selectBookURL
+        )
+
+        self.showGenericSelectionFailedAlert(book)
+      }
+
+      if let response = response {
+
+        let responseStatusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
+
+        ATLog(
+          .debug,
+          "Response status code after sending select book request: '\(responseStatusCode)'"
+        )
+
+        if responseStatusCode == 200 {
+          // update book registry with selected book record
+          self.updateBookRegistryWithSelectedBook(book)
+
+          // show notification of successful addition to favorites
+
+        } else {
+          self.showGenericSelectionFailedAlert(book)
+        }
+
       }
 
     }
@@ -138,7 +199,7 @@ class MyBooksSelectionCenter: NSObject {
     )
   }
 
-  func addBookAsSelectedToBookRegistry(
+  private func addBookAsSelectedToBookRegistry(
     _ book: TPPBook,
     location: TPPBookLocation? = nil
   ) {
@@ -153,6 +214,26 @@ class MyBooksSelectionCenter: NSObject {
       genericBookmarks: nil
     )
 
+  }
+
+  private func createSelectBookRequest(_ selectBookURL: URL) -> URLRequest {
+    var selectBookRequest = URLRequest(url: selectBookURL)
+    selectBookRequest.httpMethod = "POST"
+
+    return selectBookRequest
+  }
+
+  private func createSelectBookURL(_ book: TPPBook) -> URL {
+    var selectBookURL: URL
+    let alternateURL: URL = book.alternateURL!
+
+    if #available(iOS 16.0, *) {
+      selectBookURL = alternateURL.appending(path: "select_book")
+    } else {
+      selectBookURL = alternateURL.appendingPathComponent("select_book")
+    }
+
+    return selectBookURL
   }
 
   // MARK: - Unselect book functions: removing book from favorites
@@ -199,7 +280,7 @@ class MyBooksSelectionCenter: NSObject {
 
   }
 
-  func sendUnselectBookRequestAndUpdateBookRegistry(
+  private func sendUnselectBookRequestAndUpdateBookRegistry(
     book: TPPBook,
     completion: (() -> Void)? = nil
   ) {
@@ -207,6 +288,7 @@ class MyBooksSelectionCenter: NSObject {
     guard let alternateURL: URL = book.alternateURL else {
       // if book has no alternateUrl
       // do not proceed with unselecting
+      self.showGenericSelectionFailedAlert(book)
       return
     }
 
@@ -214,6 +296,11 @@ class MyBooksSelectionCenter: NSObject {
     // so we can update the book registry with
     // the latest book data we have on server
     // (book data in app could already be stale)
+    ATLog(
+      .info,
+      "Start GET request for book \(book.title) to refresh book record data"
+    )
+
     TPPOPDSFeed.withURL(
       alternateURL,
       shouldResetCache: true
@@ -227,20 +314,76 @@ class MyBooksSelectionCenter: NSObject {
 
         ATLog(
           .info,
-          "Start POST request and book registry update for unselected book: "
+          "Start unselect request and book registry update for unselected book: "
             + "\(unselectedBook.loggableDictionary())"
         )
 
         // send unselect book request to backend
-
-        // update book registry with unselected book record
-        self?.updateBookRegistryWithUnselectedBook(unselectedBook)
+        self?.sendUnselectBookRequest(
+          book: unselectedBook,
+          selectionState: .Selected
+        )
 
       } else {
         // maybe an error
         // stop book processing
         // and show alert to user
         self?.handleUnexpectedBookSelectionError(book)
+      }
+
+    }
+
+  }
+
+  private func sendUnselectBookRequest(
+    book: TPPBook,
+    selectionState: BookSelectionState
+  ) {
+
+    let unselectBookURL: URL = createUnselectBookURL(book)
+    let unselectBookRequest: URLRequest = createUnselectBookRequest(
+      unselectBookURL)
+
+    ATLog(
+      .info,
+      "Sending DELETE request for unselecting book \(book.title)"
+    )
+
+    _ = TPPNetworkExecutor.shared.addBearerAndExecute(unselectBookRequest) {
+      _, response, error in
+
+      self.bookRegistry.setProcessing(false, for: book.identifier)
+
+      if let error = error {
+
+        self.logErrorInSendingBookSelectionRequest(
+          response: response as? HTTPURLResponse,
+          error: error,
+          requestURL: unselectBookURL
+        )
+
+        self.showGenericSelectionFailedAlert(book)
+      }
+
+      if let response = response {
+
+        let responseStatusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
+
+        ATLog(
+          .debug,
+          "Response status code after sending unselect book request: '\(responseStatusCode)'"
+        )
+
+        if responseStatusCode == 200 {
+          // update book registry with unselected book record
+          self.updateBookRegistryWithUnselectedBook(book)
+
+          // show notification of successful removal from favorites
+
+        } else {
+          self.showGenericSelectionFailedAlert(book)
+        }
+
       }
 
     }
@@ -267,6 +410,26 @@ class MyBooksSelectionCenter: NSObject {
       book,
       selectionState: .Unselected
     )
+  }
+
+  private func createUnselectBookRequest(_ unselectBookURL: URL) -> URLRequest {
+    var unselectBookRequest = URLRequest(url: unselectBookURL)
+    unselectBookRequest.httpMethod = "DELETE"
+
+    return unselectBookRequest
+  }
+
+  private func createUnselectBookURL(_ book: TPPBook) -> URL {
+    var unselectBookURL: URL
+    let alternateURL: URL = book.alternateURL!
+
+    if #available(iOS 16.0, *) {
+      unselectBookURL = alternateURL.appending(path: "unselect_book")
+    } else {
+      unselectBookURL = alternateURL.appendingPathComponent("unselect_book")
+    }
+
+    return unselectBookURL
   }
 
   // MARK: - Helper functions for book selection functions
@@ -323,14 +486,29 @@ class MyBooksSelectionCenter: NSObject {
     showGenericSelectionFailedAlert(book)
   }
 
+  private func logErrorInSendingBookSelectionRequest(
+    response: HTTPURLResponse?,
+    error: Error,
+    requestURL: URL
+  ) {
+
+    TPPErrorLogger.logError(
+      error,
+      summary:
+        "Could not send POST request for selecting or unselecting a book",
+      metadata: [
+        "requestURL": requestURL,
+        "statusCode": response?.statusCode ?? 0,
+      ])
+
+  }
+
   private func showGenericSelectionFailedAlert(_ book: TPPBook) {
     let alert = createFavoritesAlert(book)
     showFavoritesAlertToUser(alert)
   }
 
-  private func createFavoritesAlert(_ book: TPPBook)
-    -> UIAlertController
-  {
+  private func createFavoritesAlert(_ book: TPPBook) -> UIAlertController {
     let title: String = "Error in favorite action"  //TODO: just a placeholder for actual localised title
 
     let message: String = String(
