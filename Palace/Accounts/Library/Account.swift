@@ -40,6 +40,7 @@ protocol AccountLogoDelegate: AnyObject {
     case oauthIntermediary = "http://librarysimplified.org/authtype/OAuth-with-intermediary"
     case saml = "http://librarysimplified.org/authtype/SAML-2.0"
     case token = "http://thepalaceproject.org/authtype/basic-token"
+    case ekirjasto = "http://e-kirjasto.fi/authtype/ekirjasto"
     case none
   }
   
@@ -96,12 +97,13 @@ protocol AccountLogoDelegate: AnyObject {
         coppaOverUrl = nil
         tokenURL = nil
 
-      case .none, .basic, .anonymous:
+      case .none, .basic, .anonymous, .ekirjasto:
         oauthIntermediaryUrl = nil
         coppaUnderUrl = nil
         coppaOverUrl = nil
         samlIdps = nil
         tokenURL = nil
+        
       case .token:
         tokenURL = URL.init(string: auth.links?.first(where: { $0.rel == "authenticate" })?.href ?? "")
         oauthIntermediaryUrl = nil
@@ -138,6 +140,10 @@ protocol AccountLogoDelegate: AnyObject {
 
     var isToken: Bool {
       authType == .token
+    }
+    
+    var isEkirjasto: Bool {
+      authType == .ekirjasto
     }
     
     var catalogRequiresAuthentication: Bool {
