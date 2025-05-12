@@ -82,32 +82,66 @@ class HoldsViewModel: ObservableObject {
   }
 
   private func registerForNotifications() {
+
     NotificationCenter.default.addObserver(
-      self, selector: #selector(bookRegistryDidChange),
+      self,
+      selector: #selector(bookRegistryDidChange),
       name: .TPPBookRegistryDidChange,
       object: nil)
+
     NotificationCenter.default.addObserver(
-      self, selector: #selector(bookRegistryStateDidChange),
+      self,
+      selector: #selector(bookRegistryStateDidChange),
       name: .TPPBookRegistryDidChange,
       object: nil)
+
     NotificationCenter.default.addObserver(
-      self, selector: #selector(syncBegan),
+      self,
+      selector: #selector(syncBegan),
       name: .TPPSyncBegan,
       object: nil)
+
     NotificationCenter.default.addObserver(
-      self, selector: #selector(syncEnded),
+      self,
+      selector: #selector(syncEnded),
       name: .TPPSyncEnded,
       object: nil)
+
     NotificationCenter.default.addObserver(
-      self, selector: #selector(stopLoading),
+      self,
+      selector: #selector(stopLoading(_:)),
       name: .TPPBookProcessingDidChange,
       object: nil)
+
   }
 
-  @objc private func stopLoading() {
-    DispatchQueue.main.async {
-      self.isLoading.toggle()
+  @objc private func stopLoading(_ notification: Notification) {
+
+    guard let userInfo = notification.userInfo,
+      let bookProcessingBookID = userInfo[
+        TPPNotificationKeys.bookProcessingBookIDKey] as? String,
+      let bookProcessingValue = notification.userInfo?[
+        TPPNotificationKeys.bookProcessingValueKey] as? Bool
+    else {
+      // return, as we do not have enough information in notification
+      // to update the Holds view based on book processing
+      return
     }
+
+    guard
+      self.books.contains(where: { book in
+        book.identifier == bookProcessingBookID
+      })
+    else {
+      // return, as this book is not currently in Holds view
+      // so no need to update view based on book processing
+      return
+    }
+
+    DispatchQueue.main.async {
+      self.isLoading = bookProcessingValue
+    }
+
   }
 
   @objc private func bookRegistryDidChange() {
