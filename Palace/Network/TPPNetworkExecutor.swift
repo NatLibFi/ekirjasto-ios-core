@@ -506,13 +506,13 @@ extension TPPNetworkExecutor {
         do {
           if let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
             let sharedAccount = TPPUserAccount.sharedAccount()
-            
+            //Get accessToken from the data and set it to the account
                 if let accessToken = json["access_token"] as? String {
-                    print("ACCESS TOKEN \(accessToken)") //NEW TOKEN
+                    print("ACCESS TOKEN \(accessToken)")
                     sharedAccount.setAuthToken(accessToken,barcode: nil, pin: nil, expirationDate: nil)
-
                 }
-                if let patronInfo = json["patron_info"] as? String { //PATRON INFO
+            //Get permanent id from patron info and set it to the account
+                if let patronInfo = json["patron_info"] as? String {
                     if let patronData = patronInfo.data(using: .utf8) {
                         if let patronObject = try JSONSerialization.jsonObject(with: patronData, options: []) as? [String: Any] {
                             if let patronPermanentId = patronObject["permanent_id"] as? String {
