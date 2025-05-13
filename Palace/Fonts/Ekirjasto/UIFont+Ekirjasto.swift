@@ -39,7 +39,6 @@ extension UIFont {
       return font
       // Apply system font size adjustment to the given size
     } else {
-      print("Using system font size")
       let font = UIFont(name: TPPConfiguration.ekirjastoFontName(), size: UIFont.preferredFont(forTextStyle: textStyle).pointSize) ?? UIFont.systemFont(ofSize: UIFont.preferredFont(forTextStyle: textStyle).pointSize, weight: weight)
       return UIFontMetrics.default.scaledFont(for: font)
     }
@@ -65,7 +64,6 @@ extension UIFont {
       return font
       // Apply system font size adjustment to the given size
     } else {
-      print("Using system font size")
       let font = UIFont(name: TPPConfiguration.ekirjastoFontName(), size: UIFont.preferredFont(forTextStyle: textStyle).pointSize) ?? UIFont.systemFont(ofSize: UIFont.preferredFont(forTextStyle: textStyle).pointSize, weight: weight)
       return UIFontMetrics.default.scaledFont(for: font)
     }
@@ -91,7 +89,6 @@ extension UIFont {
       return font
       // Apply system font size adjustment to the given size
     } else {
-      print("Using system font size")
       let font = UIFont(name: TPPConfiguration.ekirjastoFontName(), size: UIFont.preferredFont(forTextStyle: textStyle).pointSize) ?? UIFont.systemFont(ofSize: UIFont.preferredFont(forTextStyle: textStyle).pointSize, weight: weight)
       return UIFontMetrics.default.scaledFont(for: font)
     }
@@ -182,7 +179,6 @@ extension UIFont {
       return font
     // Apply system font size adjustment to the given size
     } else {
-      print("Using system font size")
       let font = UIFont(name: TPPConfiguration.ekirjastoFontName(), size: fontSize) ?? UIFont.systemFont(ofSize: fontSize)
       return UIFontMetrics.default.scaledFont(for: font)
     }
