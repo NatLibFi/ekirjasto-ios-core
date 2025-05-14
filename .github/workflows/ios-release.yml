@@ -17,7 +17,7 @@ env:
 
 jobs:
   build:
-    runs-on: macOS-13
+    runs-on: macOS-15
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -34,8 +34,8 @@ jobs:
           private-key-name: ekirjasto-ci-ed25519
           private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           host: github.com
-      - name: Force Xcode 15
-        run: sudo xcode-select -switch /Applications/Xcode_15.0.1.app
+      - name: Force Xcode 16
+        run: sudo xcode-select -switch /Applications/Xcode_16.2.app
 
       - name: Bootstrap (and reveal secrets)
         env:
