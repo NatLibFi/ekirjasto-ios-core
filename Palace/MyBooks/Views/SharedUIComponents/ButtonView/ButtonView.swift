@@ -75,10 +75,6 @@ struct IconButtonView: View {
   var backgroundFill: Color? = nil
   var action: () -> Void
 
-  private var accessiblityString: String {
-    "Add or remove book from favorites"
-  }
-
   var body: some View {
     Button(action: action) {
 
@@ -111,7 +107,11 @@ struct IconButtonView: View {
           ? Color("ColorEkirjastoLightestGreen")
           : backgroundFill)
     )
-    .accessibilityLabel(accessiblityString)
+    .accessibilityLabel(
+      title == "Select"
+      ? Strings.BookCell.removeFromFavoritesButtonLabel
+      : Strings.BookCell.addToFavoritesButtonLabel
+    )
   }
 }
 
