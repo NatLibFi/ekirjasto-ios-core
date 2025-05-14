@@ -11,10 +11,13 @@ import SwiftUI
 
 struct NormalBookCell: View {
   @ObservedObject var model: BookCellModel
-  private let largerCellHeightForPhone: CGFloat = 250
   private let normalCellHeightForPhone: CGFloat = 200
+  private let largerCellHeightForPhone: CGFloat = 250
+  private let largestCellHeightForPhone: CGFloat = 275
   private let normalCellHeightForPad: CGFloat = 250
+  private let largerCellHeightForPad: CGFloat = 275
   private let imageViewWidth: CGFloat = 100
+  private let fontMultiplier: CGFloat = UserDefaults.standard.double(forKey: "fontMultiplier")
 
   var body: some View {
     VStack(alignment: .leading) {
@@ -85,7 +88,7 @@ struct NormalBookCell: View {
   @ViewBuilder private var bookInfoView: some View {
     VStack(alignment: .leading) {
       Text(model.title)
-        .lineLimit(3)
+        .lineLimit(fontMultiplier > 1 ? 1 : 3)
         .font(Font(uiFont: UIFont.palaceFont(ofSize: 18)))
         .fixedSize(horizontal: false, vertical: true)
         .accessibilityLabel(
@@ -99,7 +102,7 @@ struct NormalBookCell: View {
         .font(Font(uiFont: UIFont.palaceFont(ofSize: 14)))
         .padding(.bottom, 2)
       Text(model.authors)
-        .lineLimit(2)
+        .lineLimit(fontMultiplier > 1 ? 1 : 2)
         .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
         .padding(.bottom, 2)
     }
@@ -188,12 +191,22 @@ struct NormalBookCell: View {
     switch device {
 
       case .pad:
-        return normalCellHeightForPad
+        return (fontMultiplier > 1)
+        ? largerCellHeightForPad
+        : normalCellHeightForPad
 
       case .phone:
-        return infoText.isEmpty
-          ? normalCellHeightForPhone
-          : largerCellHeightForPhone
+
+        return (fontMultiplier > 1)
+        // user has increased font size,
+        // show even larger book cells
+        ? (infoText.isEmpty
+            ? largerCellHeightForPhone
+            : largestCellHeightForPhone)
+        // user has the default font size
+        : (infoText.isEmpty
+            ? normalCellHeightForPhone
+            : largerCellHeightForPhone)
 
       default:
         return 250

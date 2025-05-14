@@ -80,7 +80,7 @@
 
 @end
 
-static CGFloat const SubtitleBaselineOffset = 8;
+static CGFloat const SubtitleBaselineOffset = 25;
 static CGFloat const AuthorBaselineOffset = 12;
 static CGFloat const CoverImageAspectRatio = 0.9;
 static CGFloat const CoverImageMaxWidth = 130;
@@ -556,7 +556,17 @@ static NSString *DetailHTMLTemplate = nil;
 
   [self.buttonsView autoPinEdgeToSuperviewMargin:ALEdgeLeft];
   [self.buttonsView autoPinEdgeToSuperviewMargin:ALEdgeRight];
-  [self.buttonsView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.coverImageView withOffset:VerticalPadding relation:NSLayoutRelationGreaterThanOrEqual];
+
+  double fontMultiplier = [[NSUserDefaults standardUserDefaults] doubleForKey:@"fontMultiplier"];
+
+  // This workaround that handles the user setting a font size preference via app settings
+  // might also add some visually unnecessary extra space between coverimage and buttonsview
+  // when the default text size is used
+  if (fontMultiplier == 2.0) {
+    [self.buttonsView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.authorsLabel withOffset:50 relation:NSLayoutRelationGreaterThanOrEqual];
+  } else {
+    [self.buttonsView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.authorsLabel withOffset:85 relation:NSLayoutRelationGreaterThanOrEqual];
+  }
 
   [self.normalView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.buttonsView withOffset:VerticalPadding];
   [self.normalView autoPinEdgeToSuperviewEdge:ALEdgeRight];

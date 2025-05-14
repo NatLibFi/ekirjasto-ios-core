@@ -29,10 +29,23 @@
 {
   [super layoutSubviews];
   
+  static CGFloat coverFrameHeightAdjuster;
+
+  if([[NSUserDefaults standardUserDefaults] doubleForKey:@"fontMultiplier"] > 1 && self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular) {
+    // This is used only for larger text sizes on iPad.
+    // Makes the cover image slighty smaller
+    // which adds more space for large texts and big buttons
+    coverFrameHeightAdjuster = 100;
+  } else {
+    // The default setting,
+    // used for iPhone with all text sizes and for iPad with normal text size
+    coverFrameHeightAdjuster = 85;
+  }
+
   self.cover.frame = CGRectMake(((20 / UIScreen.mainScreen.scale) + 25),
                                 (20 / UIScreen.mainScreen.scale + 5),
-                                (CGRectGetHeight([self contentFrame]) - 85) * (10 / 12.0),
-                                (CGRectGetHeight([self contentFrame]) - 85)
+                                (CGRectGetHeight([self contentFrame]) - coverFrameHeightAdjuster) * (10 / 12.0),
+                                (CGRectGetHeight([self contentFrame]) - coverFrameHeightAdjuster)
                                 );
   
   // The extra five height pixels account for a bug in |sizeThatFits:| that does not properly take
@@ -99,7 +112,11 @@
   
   if(!self.authors) {
     self.authors = [[UILabel alloc] init];
-    self.authors.numberOfLines = 2;
+    if([[NSUserDefaults standardUserDefaults] doubleForKey:@"fontMultiplier"] > 1) {
+      self.authors.numberOfLines = 1;
+    } else {
+      self.authors.numberOfLines = 2;
+    }
     self.authors.font = [UIFont palaceFontOfSize:16];
     [self.contentView addSubview:self.authors];
   }
@@ -114,7 +131,11 @@
 
   if(!self.title) {
     self.title = [[UILabel alloc] init];
-    self.title.numberOfLines = 2;
+    if([[NSUserDefaults standardUserDefaults] doubleForKey:@"fontMultiplier"] > 1) {
+      self.title.numberOfLines = 1;
+    } else {
+      self.title.numberOfLines = 2;
+    }
     self.title.font = [UIFont palaceFontOfSize:20];
     [self.contentView addSubview:self.title];
     [self.contentView setNeedsLayout];
@@ -130,7 +151,11 @@
 
   if(!self.bookStateInfoLabel) {
     self.bookStateInfoLabel = [[UILabel alloc] init];
-    self.bookStateInfoLabel.numberOfLines = 2;
+    if([[NSUserDefaults standardUserDefaults] doubleForKey:@"fontMultiplier"] > 1) {
+      self.bookStateInfoLabel.numberOfLines = 1;
+    } else {
+      self.bookStateInfoLabel.numberOfLines = 2;
+    }
     self.bookStateInfoLabel.backgroundColor = [TPPConfiguration ekirjastoYellow];
     self.bookStateInfoLabel.font = [UIFont palaceFontOfSize:14];
     [self.contentView addSubview:self.bookStateInfoLabel];
