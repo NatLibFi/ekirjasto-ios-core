@@ -60,7 +60,8 @@ platform :ios do
     run_tests(
       project: "Palace.xcodeproj",
       devices: ["iPhone 15 Pro"], 
-      scheme: "Ekirjasto"
+      scheme: "Ekirjasto",
+      xcargs: 'EXCLUDED_ARCHS[sdk=iphonesimulator*]=x86_64',
     )
   end
   
