@@ -72,32 +72,35 @@
 - (void)setupButtons {
   self.selectButton = [[UIButton alloc] init];
   self.unselectButton = [[UIButton alloc] init];
-
+  
   UIImage *selectBookImage = [ImageProvidersMyBooksViewObjcClass selectionIconPlus];
   UIImage *unselectBookImage = [ImageProvidersMyBooksViewObjcClass selectionIconCheck];
-
+  
   [self.selectButton
    setImage:selectBookImage
    forState:UIControlStateNormal
   ];
-
+  
   [self.unselectButton
    setImage:unselectBookImage
    forState:UIControlStateNormal
   ];
-
+  
   [self.selectButton
    addTarget:self
    action:@selector(didSelectSelect)
    forControlEvents:UIControlEventTouchUpInside
   ];
-
+  
   [self.unselectButton
    addTarget:self
    action:@selector(didSelectUnselect)
    forControlEvents:UIControlEventTouchUpInside
   ];
-
+  
+  self.selectButton.accessibilityLabel = NSLocalizedString(@"Add to favorites", nil);
+  self.unselectButton.accessibilityLabel = NSLocalizedString(@"Remove from favorites", nil);
+  
   [self addSubview:self.selectButton];
   [self addSubview:self.unselectButton];
 }
