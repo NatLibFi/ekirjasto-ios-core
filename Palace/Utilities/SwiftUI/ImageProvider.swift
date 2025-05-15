@@ -24,14 +24,14 @@ struct ImageProviders {
     static let clock = Image("Clock")
     static let myLibraryIcon = Image("MyLibraryIcon")
     static let search = Image("Search")
-    static let selectionIconPlus = Image("BookmarkOff") // TODO: replace placeholder image
-    static let selectionIconCheck = Image("BookmarkOn") // TODO: replace placeholder image
+    static let selectionIconPlus = Image("CirclePlus") // TODO: replace placeholder image
+    static let selectionIconCheck = Image("CircleCheck") // TODO: replace placeholder image
   }
 
 }
 
 // UIKit Images for Objective-C code
 @objc public class ImageProvidersMyBooksViewObjcClass: NSObject {
-  @objc static let selectionIconPlus = UIImage(named: "BookmarkOff") // TODO: replace placeholder image
-  @objc static let selectionIconCheck = UIImage(named: "BookmarkOn") // TODO: replace placeholder image
+  @objc static let selectionIconPlus = UIImage(named: "CirclePlus") // TODO: replace placeholder image
+  @objc static let selectionIconCheck = UIImage(named: "CircleCheck") // TODO: replace placeholder image
 }
