@@ -157,6 +157,7 @@
       self.bookStateInfoLabel.numberOfLines = 2;
     }
     self.bookStateInfoLabel.backgroundColor = [TPPConfiguration ekirjastoYellow];
+    self.bookStateInfoLabel.textColor = [TPPConfiguration ekirjastoBlack];
     self.bookStateInfoLabel.font = [UIFont palaceFontOfSize:14];
     [self.contentView addSubview:self.bookStateInfoLabel];
     [self.contentView setNeedsLayout];
