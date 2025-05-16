@@ -66,7 +66,7 @@ enum NYPLResult<SuccessInfo> {
            useTokenIfAvailable: Bool = true,
            completion: @escaping (_ result: NYPLResult<Data>) -> Void) {
     //Print where we are making the get request to
-    ATLog(.debug, String(describing: reqURL.absoluteString))
+    print("GET:", reqURL.absoluteString)
     let req = request(for: reqURL, useTokenIfAvailable: useTokenIfAvailable)
     executeRequest(req, completion: completion)
   }
@@ -168,7 +168,7 @@ extension TPPNetworkExecutor: TPPRequestExecuting {
   ///   - completion: Always called when the resource is either fetched from
     //If we use Ekirjasto as our authentication definition, execute this
     if let authDefinition = TPPUserAccount.sharedAccount().authDefinition, authDefinition.isEkirjasto {
-      ATLog(.debug, "Ekirjasto execution")
+      print("Ekirjasto execution")
       //If there is a token, execute request with the token
       executeRequestWithToken(req, completion: completion)
       }
@@ -368,7 +368,7 @@ extension TPPNetworkExecutor {
     var req = request(for: reqURL)
     req.httpMethod = "PUT"
     //Print where we are making the PUT request to
-    ATLog(.debug, String(describing: reqURL.absoluteString))
+    print("PUT:", reqURL.absoluteString)
     let completionWrapper: (_ result: NYPLResult<Data>) -> Void = { result in
       switch result {
       case let .success(data, response): completion(data, response, nil)
