@@ -33,7 +33,7 @@ final class ButtonStateTests: XCTestCase {
   
   func testCanBorrowEpub() {
     let testState = BookButtonState.canBorrow
-    let expectedbuttons = [BookButtonType.get, .sample]
+    let expectedbuttons = [BookButtonType.get]
     let resultButtons = testState.buttonTypes(book: testEpub)
     
     XCTAssertTrue(Set(expectedbuttons) == Set(resultButtons))
@@ -41,7 +41,7 @@ final class ButtonStateTests: XCTestCase {
   
   func testCanBorrowAudiobook() {
     let testState = BookButtonState.canBorrow
-    let expectedbuttons = [BookButtonType.get, .audiobookSample]
+    let expectedbuttons = [BookButtonType.get]
     let resultButtons = testState.buttonTypes(book: testAudiobook)
     
     XCTAssertTrue(Set(expectedbuttons) == Set(resultButtons))
@@ -49,7 +49,7 @@ final class ButtonStateTests: XCTestCase {
   
   func testCanHoldEpub() {
     let testState = BookButtonState.canHold
-    let expectedbuttons = [BookButtonType.reserve, .sample]
+    let expectedbuttons = [BookButtonType.reserve]
     let resultButtons = testState.buttonTypes(book: testEpub)
     
     XCTAssertTrue(Set(expectedbuttons) == Set(resultButtons))
@@ -57,7 +57,7 @@ final class ButtonStateTests: XCTestCase {
   
   func testCanHoldAudiobook() {
     let testState = BookButtonState.canHold
-    let expectedbuttons = [BookButtonType.reserve, .audiobookSample]
+    let expectedbuttons = [BookButtonType.reserve]
     let resultButtons = testState.buttonTypes(book: testAudiobook)
     
     XCTAssertTrue(Set(expectedbuttons) == Set(resultButtons))
@@ -65,7 +65,7 @@ final class ButtonStateTests: XCTestCase {
   
   func testHoldingEpub() {
     let testState = BookButtonState.holding
-    let expectedbuttons = [BookButtonType.remove, .sample]
+    let expectedbuttons = [BookButtonType.remove]
     let resultButtons = testState.buttonTypes(book: testEpub)
     
     XCTAssertTrue(Set(expectedbuttons) == Set(resultButtons))
@@ -73,7 +73,7 @@ final class ButtonStateTests: XCTestCase {
   
   func testHoldingAudiobook() {
     let testState = BookButtonState.holding
-    let expectedbuttons = [BookButtonType.remove, .audiobookSample]
+    let expectedbuttons = [BookButtonType.remove]
     let resultButtons = testState.buttonTypes(book: testAudiobook)
     
     XCTAssertTrue(Set(expectedbuttons) == Set(resultButtons))

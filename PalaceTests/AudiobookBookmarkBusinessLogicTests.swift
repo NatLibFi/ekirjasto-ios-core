@@ -121,7 +121,7 @@ class AudiobookBookmarkBusinessLogicTests: XCTestCase {
     )
 
     mockRegistry = TPPBookRegistryMock()
-    mockRegistry.addBook(book: fakeBook, state: .DownloadSuccessful)
+    mockRegistry.addBook(book: fakeBook, state: .DownloadSuccessful, selectionState: .Unselected)
     mockAnnotations = TPPAnnotationMock()
   }
 

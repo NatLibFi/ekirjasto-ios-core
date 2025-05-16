@@ -58,7 +58,7 @@ class TPPReaderBookmarksBusinessLogicTests: XCTestCase {
       )
             
       bookRegistryMock = TPPBookRegistryMock()
-      bookRegistryMock.addBook(book: fakeBook, state: .DownloadSuccessful)
+      bookRegistryMock.addBook(book: fakeBook, state: .DownloadSuccessful, selectionState: .Unselected)
       libraryAccountMock = TPPLibraryAccountMock()
       let manifest = Manifest(metadata: Metadata(title: "fakeMetadata"))
       let pub = Publication(manifest: manifest)
