@@ -391,14 +391,14 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
   func syncLoansAndHolds(
     completion: completionType? = nil
   ) {
-    ATLog(
+    printToConsole(
       .info,
       "Book registry starting loans+holds sync..."
     )
 
     // if loansURL is not found, return
     guard let loansUrl = AccountsManager.shared.currentAccount?.loansUrl else {
-      ATLog(
+      printToConsole(
         .info,
         "Book registry aborting loans+holds sync, no URL for loans+holds feed"
       )
@@ -407,7 +407,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
 
     // if already synced with this URL, return
     if syncUrl == loansUrl {
-      ATLog(
+      printToConsole(
         .info,
         "Book registry skipping loans+holds sync, already synced"
       )
@@ -417,7 +417,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
     // setting state and syncUrl for book registry syncing
     state = .syncing
     syncUrl = loansUrl
-    ATLog(
+    printToConsole(
       .info,
       "[LOANS+HOLDS SYNC START] book registry state: \(self.state) and syncURL: \(syncUrl as URL?)"
     )
@@ -432,7 +432,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
         defer {
           self.state = .loaded
           self.syncUrl = nil
-          ATLog(
+          printToConsole(
             .info,
             "[LOANS+HOLDS SYNC END] book registry state: \(self.state) and syncURL: \(self.syncUrl as URL?)"
           )
@@ -440,7 +440,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
 
         // return as it is not the right time to do sync
         if self.syncUrl != loansUrl {
-          ATLog(
+          printToConsole(
             .info,
             "Book registry aborting loans+holds sync, syncURL mismatch"
           )
@@ -453,7 +453,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
         // - and no number of ready books (false)
         // and return
         if let errorDocument = errorDocument {
-          ATLog(
+          printToConsole(
             .info,
             "Book registry aborting loans+holds sync, errorDocument created"
           )
@@ -467,7 +467,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
         // - and no number of ready books (false)
         // and return.
         guard let feed = feed else {
-          ATLog(
+          printToConsole(
             .info,
             "Book registry aborting loans+holds sync, no feed"
           )
@@ -495,7 +495,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
             continue
           }
 
-          ATLog(
+          printToConsole(
             .info,
             "Book in loans+holds feed: \(book.title)"
           )
@@ -554,7 +554,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
 
         // First get the books from registry that the user has on hold
         for book in self.heldBooks {
-          ATLog(
+          printToConsole(
             .info,
             "Book on hold: \(book.title)"
           )
@@ -575,7 +575,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
         // We need to update the notification badge to let the user know,
         // that his/her reservation is ready to be borrowed
         if UIApplication.shared.applicationIconBadgeNumber != readyBooks {
-          ATLog(
+          printToConsole(
             .info,
             "Number of new books ready to be borrowed: \(readyBooks)"
           )
@@ -610,14 +610,14 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
   func syncSelected(
     completion: completionType? = nil
   ) {
-    ATLog(
+    printToConsole(
       .info,
       "Starting selected sync..."
     )
 
     guard let selectionUrl = AccountsManager.shared.currentAccount?.selectionUrl
     else {
-      ATLog(
+      printToConsole(
         .info,
         "Book registry aborting selected sync, no URL for selection feed"
       )
@@ -625,7 +625,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
     }
 
     if syncUrl == selectionUrl {
-      ATLog(
+      printToConsole(
         .info,
         "Book registry skipping selected sync, already synced"
       )
@@ -635,7 +635,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
     state = .syncing
     syncUrl = selectionUrl
 
-    ATLog(
+    printToConsole(
       .info,
       "[SELECTED SYNC START] book registry state: \(self.state) and syncURL: \(syncUrl as URL?)"
     )
@@ -648,14 +648,14 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
           self.state = .loaded
           self.syncUrl = nil
 
-          ATLog(
+          printToConsole(
             .info,
             "[SELECTED SYNC END] book registry state: \(self.state) and syncURL: \(self.syncUrl as URL?)"
           )
         }
 
         if self.syncUrl != selectionUrl {
-          ATLog(
+          printToConsole(
             .info,
             "Book registry aborting selected sync, syncURL mismatch"
           )
@@ -663,7 +663,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
         }
 
         if let errorDocument = errorDocument {
-          ATLog(
+          printToConsole(
             .info,
             "Book registry aborting loans+holds sync, errorDocument created"
           )
@@ -672,7 +672,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
         }
 
         guard let feed = feed else {
-          ATLog(
+          printToConsole(
             .info,
             "Book registry aborting selected sync, no feed"
           )
@@ -687,7 +687,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
             continue
           }
 
-          ATLog(
+          printToConsole(
             .info,
             "Book in selected feed: \(book.title)"
           )
@@ -826,7 +826,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
 
     coverRegistry.pinThumbnailImageForBook(book)
 
-    ATLog(
+    printToConsole(
       .info,
       "Adding book to book registry "
         + "with title: '\(book.title)' and "
@@ -885,7 +885,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
       andNewBook: book
     )
 
-    ATLog(
+    printToConsole(
       .info,
       "Updating book in book registry "
         + "with title: '\(book.title)' and "

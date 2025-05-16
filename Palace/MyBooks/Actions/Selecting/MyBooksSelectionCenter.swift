@@ -41,7 +41,7 @@ class MyBooksSelectionCenter: NSObject {
     let selectionStateAsString: String = BookSelectionStateHelper.stringValue(
       from: selectionState)
 
-    ATLog(
+    printToConsole(
       .info,
       "Start book select for book "
         + "with title: '\(book.title)' "
@@ -82,7 +82,7 @@ class MyBooksSelectionCenter: NSObject {
     // so we can update the book registry with
     // the latest book data we have on server
     // (book data in app could already be stale)
-    ATLog(
+    printToConsole(
       .info,
       "Start GET request for book \(book.title) to refresh book record data"
     )
@@ -98,7 +98,7 @@ class MyBooksSelectionCenter: NSObject {
         let selectedBook = TPPBook(entry: selectedEntry)
       {
 
-        ATLog(
+        printToConsole(
           .info,
           "Start POST request and book registry update for selected book: "
             + "\(selectedBook.loggableDictionary())"
@@ -126,7 +126,7 @@ class MyBooksSelectionCenter: NSObject {
     selectionState: BookSelectionState
   ) {
 
-    ATLog(
+    printToConsole(
       .info,
       "Sending POST request to select book \(book.title)"
     )
@@ -154,7 +154,7 @@ class MyBooksSelectionCenter: NSObject {
 
         let responseStatusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
 
-        ATLog(
+        printToConsole(
           .debug,
           "Response status code after sending select book request: '\(responseStatusCode)'"
         )
@@ -270,7 +270,7 @@ class MyBooksSelectionCenter: NSObject {
     let selectionStateAsString: String = BookSelectionStateHelper.stringValue(
       from: selectionState)
 
-    ATLog(
+    printToConsole(
       .info,
       "Start book unselect for book "
         + "with title: '\(book.title)' "
@@ -312,7 +312,7 @@ class MyBooksSelectionCenter: NSObject {
     // so we can update the book registry with
     // the latest book data we have on server
     // (book data in app could already be stale)
-    ATLog(
+    printToConsole(
       .info,
       "Start GET request for book \(book.title) to refresh book record data"
     )
@@ -328,7 +328,7 @@ class MyBooksSelectionCenter: NSObject {
         let unselectedBook = TPPBook(entry: unselectedEntry)
       {
 
-        ATLog(
+        printToConsole(
           .info,
           "Start unselect request and book registry update for unselected book: "
             + "\(unselectedBook.loggableDictionary())"
@@ -360,7 +360,7 @@ class MyBooksSelectionCenter: NSObject {
     let unselectBookRequest: URLRequest = createUnselectBookRequest(
       unselectBookURL)
 
-    ATLog(
+    printToConsole(
       .info,
       "Sending DELETE request for unselecting book \(book.title)"
     )
@@ -385,7 +385,7 @@ class MyBooksSelectionCenter: NSObject {
 
         let responseStatusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
 
-        ATLog(
+        printToConsole(
           .debug,
           "Response status code after sending unselect book request: '\(responseStatusCode)'"
         )
