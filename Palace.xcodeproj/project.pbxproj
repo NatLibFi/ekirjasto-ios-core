@@ -1020,6 +1020,9 @@
 		750732EF2D887261005B2254 /* BookSelectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750732EE2D887258005B2254 /* BookSelectionState.swift */; };
 		750732F02D887261005B2254 /* BookSelectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750732EE2D887258005B2254 /* BookSelectionState.swift */; };
 		750732F12D887261005B2254 /* BookSelectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750732EE2D887258005B2254 /* BookSelectionState.swift */; };
+		751517AA2DD72F5500FFF64C /* PrintHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751517A92DD72F5000FFF64C /* PrintHelper.swift */; };
+		751517AB2DD72F5500FFF64C /* PrintHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751517A92DD72F5000FFF64C /* PrintHelper.swift */; };
+		751517AC2DD72F5500FFF64C /* PrintHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751517A92DD72F5000FFF64C /* PrintHelper.swift */; };
 		7530C8BF2D80C7F90024E184 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7530C8BE2D80C7E00024E184 /* FavoritesView.swift */; };
 		7530C8C02D80C7F90024E184 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7530C8BE2D80C7E00024E184 /* FavoritesView.swift */; };
 		7530C8C12D80C7F90024E184 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7530C8BE2D80C7E00024E184 /* FavoritesView.swift */; };
@@ -1977,6 +1980,7 @@
 		73F713672417240100C63B81 /* UIViewController+TPP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+TPP.swift"; path = "Palace/Reader2/UI/UIViewController+TPP.swift"; sourceTree = SOURCE_ROOT; };
 		73FB0AC824EB403D0072E430 /* TPPBookContentTypeConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPPBookContentTypeConverter.swift; sourceTree = "<group>"; };
 		750732EE2D887258005B2254 /* BookSelectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSelectionState.swift; sourceTree = "<group>"; };
+		751517A92DD72F5000FFF64C /* PrintHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintHelper.swift; sourceTree = "<group>"; };
 		7530C8BE2D80C7E00024E184 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		7530C8C22D80C80B0024E184 /* FavoritesMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesMainViewController.swift; sourceTree = "<group>"; };
 		7530C8C62D80CA6E0024E184 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
@@ -2955,6 +2959,7 @@
 			isa = PBXGroup;
 			children = (
 				2D382BD61D08BA99002C423D /* Log.swift */,
+				751517A92DD72F5000FFF64C /* PrintHelper.swift */,
 				7340DA6724B7F27900361387 /* TPPBook+Logging.swift */,
 				E66AE32F1DC0FCFC00124AE2 /* TPPCirculationAnalytics.swift */,
 				5D7CF8B422C3FC06007CAA34 /* TPPErrorLogger.swift */,
@@ -4948,6 +4953,7 @@
 				331263832A287F53006BA87D /* TPPSettings+SE.swift in Sources */,
 				331263842A287F53006BA87D /* TPPSettingsAccountDetailViewController.m in Sources */,
 				331263852A287F53006BA87D /* EpubSample.swift in Sources */,
+				751517AA2DD72F5500FFF64C /* PrintHelper.swift in Sources */,
 				331263862A287F53006BA87D /* TPPPDFPreviewGridDelegate.swift in Sources */,
 				331263872A287F53006BA87D /* AudioBookVendorsHelper.swift in Sources */,
 				331263882A287F53006BA87D /* LoadingViewController.swift in Sources */,
@@ -5389,6 +5395,7 @@
 				E56724BF2A13223700972828 /* TPPBookCellDelegate+Extensions.swift in Sources */,
 				73B5E0012605679B00225C12 /* TPPBook+Additions.swift in Sources */,
 				73EB0AF425821DF4006BC997 /* Data+Base64.swift in Sources */,
+				751517AC2DD72F5500FFF64C /* PrintHelper.swift in Sources */,
 				21E4177D292810E000A78606 /* TPPPDFLocation.swift in Sources */,
 				E55E2FA629E7A9670093F916 /* AudioBookmark.swift in Sources */,
 				73EB0AF625821DF4006BC997 /* TPPCatalogFacetGroup.m in Sources */,
@@ -5607,6 +5614,7 @@
 				215C866D27064198005F9621 /* BundleExtension.swift in Sources */,
 				E699BA402166598B00A0736A /* TPPEntryPointView.swift in Sources */,
 				A46226271B39D4980063F549 /* TPPOPDSGroup.m in Sources */,
+				751517AB2DD72F5500FFF64C /* PrintHelper.swift in Sources */,
 				E76AD92B296DCB76008ECC61 /* NotificationService.swift in Sources */,
 				A93F9F9721CDACF700BD3B0C /* TPPAppReviewPrompt.swift in Sources */,
 				73DB56C625F769FF003788EE /* TPPLastReadPositionSynchronizer.swift in Sources */,
