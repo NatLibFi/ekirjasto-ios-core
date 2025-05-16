@@ -197,17 +197,35 @@ class NotificationService: NSObject, UNUserNotificationCenterDelegate, Messaging
   // MARK: - Notification Center Delegate Methods
   
   /// Called when the app is in foreground
-  func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+  func userNotificationCenter(_ center: UNUserNotificationCenter,
+                              willPresent notification: UNNotification,
+                              withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+  ) {
+    
     // Shows notification banner on screen
-    completionHandler([.banner, .badge, .sound])
-    // Update loans
-    TPPBookRegistry.shared.sync()
+    completionHandler([
+      .banner,
+      .badge,
+      .sound
+    ])
+    
+    // The app is already open and in foreground,
+    // so let's just show the notifications for now,
+    // as syncing book registry also triggers refreshing the UI.
+    // TPPBookRegistry.shared.sync()
   }
   
   /// Called when the user responded to the notification by opening the application, dismissing the notification or choosing a UNNotificationAction
-  func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+  func userNotificationCenter(_ center: UNUserNotificationCenter,
+                              didReceive response: UNNotificationResponse,
+                              withCompletionHandler completionHandler: @escaping () -> Void
+  ) {
+    
+    // Shows notification banner on screen
     completionHandler()
-    // Update loans
+    
+    // Sync the book registry with server data
     TPPBookRegistry.shared.sync()
   }
+  
 }

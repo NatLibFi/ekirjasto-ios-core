@@ -23,7 +23,6 @@
 #import "TPPCatalogGroupedFeed.h"
 #import "TPPConfiguration.h"
 #import "TPPFacetView.h"
-#import "TPPHoldsNavigationController.h"
 #import "TPPKeychain.h"
 #import "TPPLocalization.h"
 #import "TPPOPDS.h"

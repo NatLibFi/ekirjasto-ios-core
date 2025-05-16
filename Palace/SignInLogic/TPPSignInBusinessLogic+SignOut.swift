@@ -127,6 +127,14 @@ func performLogOut() {
     userAccount.removeAll()
     selectedIDP = nil
     uiDelegate?.businessLogicDidFinishDeauthorizing(self)
+
+    // reset app icon badge
+    UIApplication.shared.applicationIconBadgeNumber = 0
+
+    // reset all tab item badges
+    for tabItem in TPPRootTabBarController.shared().tabBar.items ?? [] {
+      tabItem.badgeValue = nil
+    }
     
     // Reset all webviews on logout.
     WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in

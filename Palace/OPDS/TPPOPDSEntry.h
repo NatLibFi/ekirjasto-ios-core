@@ -24,6 +24,7 @@
 @property (nonatomic, readonly) NSString *providerName; // nilable
 @property (nonatomic, readonly) NSDate *published; // nilable
 @property (nonatomic, readonly) NSString *publisher; // nilable
+@property (nonatomic, readonly) NSDate *selected; // nilable
 @property (nonatomic, readonly) NSString *summary; // nilable
 @property (nonatomic, readonly) NSString *title;
 @property (nonatomic, readonly) NSDate *updated;
