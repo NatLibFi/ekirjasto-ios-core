@@ -10,6 +10,7 @@ import Foundation
 @testable import Palace
 
 class TPPBookRegistryMock: NSObject, TPPBookRegistrySyncing, TPPBookRegistryProvider {
+
   var isSyncing = false
   var registry = [String: TPPBookRegistryRecord]()
   var processing = [String: Bool]()
@@ -35,8 +36,8 @@ class TPPBookRegistryMock: NSObject, TPPBookRegistrySyncing, TPPBookRegistryProv
   func save() {
   }
     
-  func addBook(book: TPPBook, state: TPPBookState) {
-    registry[book.identifier] = TPPBookRegistryRecord(book: book, location: nil, state: state, fulfillmentId: nil, readiumBookmarks: [], genericBookmarks: [])
+  func addBook(book: TPPBook, state: TPPBookState, selectionState: Palace.BookSelectionState) {
+    registry[book.identifier] = TPPBookRegistryRecord(book: book, location: nil, state: state, selectionState: selectionState, fulfillmentId: nil, readiumBookmarks: [], genericBookmarks: [])
   }
     
   func readiumBookmarks(forIdentifier identifier: String) -> [TPPReadiumBookmark] {
@@ -112,8 +113,12 @@ class TPPBookRegistryMock: NSObject, TPPBookRegistrySyncing, TPPBookRegistryProv
     self.registry[bookIdentifier]?.state ?? .Unregistered
   }
   
-  func addBook(_ book: Palace.TPPBook, location: Palace.TPPBookLocation?, state: Palace.TPPBookState, fulfillmentId: String?, readiumBookmarks: [Palace.TPPReadiumBookmark]?, genericBookmarks: [Palace.TPPBookLocation]?) {
-    self.addBook(book: book, state: state)
+  func selectionState(for bookIdentifier: String) -> Palace.BookSelectionState {
+    self.registry[bookIdentifier]?.selectionState ?? .SelectionUnregistered
+  }
+  
+  func addBook(_ book: Palace.TPPBook, location: Palace.TPPBookLocation?, state: Palace.TPPBookState, selectionState: Palace.BookSelectionState, fulfillmentId: String?, readiumBookmarks: [Palace.TPPReadiumBookmark]?, genericBookmarks: [Palace.TPPBookLocation]?) {
+    self.addBook(book: book, state: state, selectionState: selectionState)
   }
   
   func removeBook(forIdentifier bookIdentifier: String) {
@@ -124,8 +129,16 @@ class TPPBookRegistryMock: NSObject, TPPBookRegistrySyncing, TPPBookRegistryProv
     self.registry.removeValue(forKey: book.identifier)
   }
   
+  func updateBook(_ book: Palace.TPPBook, selectionState: Palace.BookSelectionState) {
+    self.addBook(book: book, state: self.registry[book.identifier]!.state, selectionState: selectionState)
+  }
+  
   func setState(_ state: Palace.TPPBookState, for bookIdentifier: String) {
     self.registry[bookIdentifier]?.state = state
+  }
+  
+  func setSelectionState(_ selectionState: Palace.BookSelectionState, for bookIdentifier: String) {
+    self.registry[bookIdentifier]?.selectionState = selectionState
   }
   
   func book(forIdentifier bookIdentifier: String) -> Palace.TPPBook? {
