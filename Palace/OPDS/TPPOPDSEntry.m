@@ -27,6 +27,7 @@
 @property (nonatomic) NSString *providerName;
 @property (nonatomic) NSDate *published;
 @property (nonatomic) NSString *publisher;
+@property (nonatomic) NSDate *selected;
 @property (nonatomic) NSString *summary;
 @property (nonatomic) NSString *title;
 @property (nonatomic) NSDate *updated;
@@ -185,6 +186,18 @@
   }
   
   self.publisher = [entryXML firstChildWithName:@"publisher"].value;
+  
+  {
+    NSString *const selectedString = [entryXML firstChildWithName:@"selected"].value;
+    
+    if(selectedString) {
+      self.selected = [NSDate dateWithRFC3339String:selectedString];
+      TPPLOG_F(@"Entry contains optional 'selected' element: %@", self.selected);
+    } else {
+      self.selected = nil;
+      TPPLOG(@"Entry does not contain optional 'selected' element.");
+    }
+  }
   
   self.summary = [entryXML firstChildWithName:@"summary"].value;
   

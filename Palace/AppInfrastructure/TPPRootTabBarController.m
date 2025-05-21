@@ -1,13 +1,12 @@
 #import "TPPCatalogNavigationController.h"
-#import "TPPHoldsNavigationController.h"
 #import "TPPRootTabBarController.h"
 #import "Palace-Swift.h"
 
 @interface TPPRootTabBarController () <UITabBarControllerDelegate>
 
 @property (nonatomic) TPPCatalogNavigationController *catalogNavigationController;
-@property (nonatomic) TPPMyBooksViewController *myBooksNavigationController;
-@property (nonatomic) TPPHoldsNavigationController *holdsNavigationController;
+@property (nonatomic) LoansAndHoldsViewController *loansAndHoldsNavigationController;
+@property (nonatomic) FavoritesMainViewController *favoritesMainNavigationController;
 @property (nonatomic) EkirjastoMagazineNavigationController *magazineViewController;
 @property (nonatomic) UIViewController *settingsViewController;
 @property (readwrite) TPPR2Owner *r2Owner;
@@ -42,18 +41,32 @@
   
   self.delegate = self;
   
-  self.catalogNavigationController = [[TPPCatalogNavigationController alloc] init];
-  self.myBooksNavigationController = (TPPMyBooksViewController * ) [TPPMyBooksViewController makeSwiftUIViewWithDismissHandler:^{
-    [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
-  }];
-  self.holdsNavigationController = [[TPPHoldsNavigationController alloc] init];
+  self.catalogNavigationController = [
+    [TPPCatalogNavigationController alloc] init
+  ];
+  
+  self.loansAndHoldsNavigationController = (LoansAndHoldsViewController *) [
+    LoansAndHoldsViewController makeSwiftUIViewWithDismissHandler:^{
+      [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
+    }
+  ];
+  
+  self.favoritesMainNavigationController = (FavoritesMainViewController *) [
+    FavoritesMainViewController makeSwiftUIViewWithDismissHandler:^{
+      [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
+    }
+  ];
+  
   self.magazineViewController = [
     [EkirjastoMagazineNavigationController alloc] initWithRootViewController:
       [[DigitalMagazineBrowserViewController alloc] init]
   ];
-  self.settingsViewController =  [TPPSettingsViewController makeSwiftUIViewWithDismissHandler:^{
-    [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
-  }];
+  
+  self.settingsViewController =  [
+    TPPSettingsViewController makeSwiftUIViewWithDismissHandler:^{
+      [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
+    }
+  ];
 
   [self setTabViewControllers];
 
@@ -103,16 +116,23 @@
 - (void)setTabViewControllersInternal
 {
     // E-kirjasto supports reservations (==holds) so it's check has been removed.
-    self.viewControllers = @[self.catalogNavigationController,
-                             self.myBooksNavigationController,
-                             self.holdsNavigationController,
-                             self.magazineViewController,
-                             self.settingsViewController];
-    self.viewControllerNames = @[@"catalogNavigationController",
-                                  @"myBooksNavigationController",
-                                  @"holdsNavigationController",
-                                  @"magazineViewController",
-                                  @"settingsViewController"];
+    
+  self.viewControllers = @[
+    self.catalogNavigationController,
+    self.loansAndHoldsNavigationController,
+    self.favoritesMainNavigationController,
+    self.magazineViewController,
+    self.settingsViewController
+  ];
+    
+  self.viewControllerNames = @[
+      @"catalogNavigationController",
+      @"loansAndHoldsNavigationController",
+      @"favoritesAndReadNavigationController",
+      @"magazineViewController",
+      @"settingsViewController"
+    ];
+  
 }
 
 - (void)showAndReloadCatalogViewController

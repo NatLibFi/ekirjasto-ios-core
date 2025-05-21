@@ -190,6 +190,7 @@ protocol AccountLogoDelegate: AnyObject {
   let userProfileUrl:String?
   let signUpUrl:URL?
   let loansUrl:URL?
+  let selectionUrl: URL?
   var defaultAuth: Authentication? {
     guard auths.count > 1 else { return auths.first }
     return auths.first(where: { !$0.catalogRequiresAuthentication }) ?? auths.first
@@ -250,6 +251,12 @@ protocol AccountLogoDelegate: AnyObject {
     supportsReservations = authenticationDocument.features?.disabled?.contains("https://librarysimplified.org/rel/policy/reservations") != true
     userProfileUrl = authenticationDocument.links?.first(where: { $0.rel == "http://librarysimplified.org/terms/rel/user-profile" })?.href
     loansUrl = URL.init(string: authenticationDocument.links?.first(where: { $0.rel == "http://opds-spec.org/shelf" })?.href ?? "")
+
+    selectionUrl = URL.init(
+      string: authenticationDocument.links?.first(where: {
+        $0.rel == "http://opds-spec.org/shelf/selected_books"
+      })?.href ?? "")
+
     supportsSimplyESync = userProfileUrl != nil
     
     mainColor = authenticationDocument.colorScheme
@@ -408,6 +415,10 @@ protocol AccountLogoDelegate: AnyObject {
     return details?.loansUrl
   }
   
+  var selectionUrl: URL? {
+    return details?.selectionUrl
+  }
+
   init(publication: OPDS2Publication) {
     
     name = publication.metadata.title
