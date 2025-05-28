@@ -14,7 +14,6 @@ struct TPPSettingsView: View {
   @State private var logoutText = ""
   @State private var orientation: UIDeviceOrientation = UIDevice.current.orientation
   @State private var selectedView: Int? = 0
-  @State private var syncEnabled = true
   @State private var toggleLogoutWarning = false
   @State private var toggleSyncBookmarks = AccountsManager.shared.accounts().first?.details?.syncPermissionGranted ?? false
   
@@ -29,11 +28,14 @@ struct TPPSettingsView: View {
   
   @ViewBuilder private var settingsListView: some View {
     List {
+      //E-library logo header
       eLibraryLogoSection
+      //Login, logout, dependents buttons
       accountSection
-      syncBookmarksSection
+      //Info buttons
       infoSection
-      natLibFiLogoSection
+      //Footer with NatLibFiLogo and version code
+      natLibFiLogoAndVersionSection
     }
     .listStyle(GroupedListStyle())
   }
@@ -72,40 +74,41 @@ struct TPPSettingsView: View {
     }
   }
   
+  /* syncBookmarks button, not in use currently.
+   Can be implemented again when sync is available
   @ViewBuilder private var syncBookmarksSection: some View {
-    Section(
-      footer: Text(NSLocalizedString("Save your reading position and bookmarks to all your other devices.", comment: "Explain to the user they can save their bookmarks in the cloud across all their devices."))
-    ) {
-      Toggle(isOn: $toggleSyncBookmarks) {
-        Text(Strings.Settings.syncBookmarks)
-          .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
-      }
-      .disabled(!syncEnabled)
-      .onChange(of: toggleSyncBookmarks) { value in
-        TPPSignInBusinessLogic.getShared { logic in
-          logic?.changeSyncPermission(to: value, postServerSyncCompletion: { value in
-            toggleSyncBookmarks = value
-          })
-        }
-      }
-      .onAppear {
-        TPPSignInBusinessLogic.getShared { logic in
-          logic?.checkSyncPermission(preWork: {
-            syncEnabled = false
-          }, postWork: { enableSync in
-            syncEnabled = true
-            toggleSyncBookmarks = enableSync
-          })
-        }
-      }
-    }
-    .font(Font(uiFont: UIFont.palaceFont(ofSize: 12)))
-  }
+       Section(
+         footer: Text(NSLocalizedString("Save your reading position and bookmarks to all your other devices.", comment: "Explain to the user they can save their bookmarks in the cloud across all their devices."))
+       ) {
+         Toggle(isOn: $toggleSyncBookmarks) {
+           Text(Strings.Settings.syncBookmarks)
+             .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
+         }
+         .disabled(!syncEnabled)
+         .onChange(of: toggleSyncBookmarks) { value in
+           TPPSignInBusinessLogic.getShared { logic in
+             logic?.changeSyncPermission(to: value, postServerSyncCompletion: { value in
+               toggleSyncBookmarks = value
+             })
+           }
+         }
+         .onAppear {
+           TPPSignInBusinessLogic.getShared { logic in
+             logic?.checkSyncPermission(preWork: {
+               syncEnabled = false
+             }, postWork: { enableSync in
+               syncEnabled = true
+               toggleSyncBookmarks = enableSync
+             })
+           }
+         }
+       }
+       .font(Font(uiFont: UIFont.palaceFont(ofSize: 12)))
+     }
+  */
   
   @ViewBuilder private var infoSection: some View {
-    Section(
-      footer: versionInfo
-    ) {
+    Section {
       feedbackRow
       accessibilityRow
       privacyRow
@@ -113,21 +116,6 @@ struct TPPSettingsView: View {
       userAgreementRow
       instructionsRow
       preferencesRow
-    }
-  }
-  
-  @ViewBuilder private var natLibFiLogoSection: some View {
-    let natLibFiLogo = ["fi", "sv"].contains(Locale.current.languageCode)
-      ? "NatLibFiLogoFiSv"
-      : "NatLibFiLogoEn"
-    
-    HStack {
-      Spacer()
-      Image(natLibFiLogo)
-        .resizable()
-        .aspectRatio(contentMode: .fit)
-        .frame(width: 200)
-      Spacer()
     }
   }
   
@@ -144,11 +132,13 @@ struct TPPSettingsView: View {
       TPPSignInBusinessLogic.getShared { logic in
         if let _logic = logic {
           if _logic.shouldShowSyncButton() && !self.toggleSyncBookmarks {
-            self.logoutText = NSLocalizedString("If you sign out without enabling Sync, your books and any saved bookmarks will be removed.", comment: "")
+            self.logoutText = Strings.Settings.signOutConfirmationBookSync
           } else {
-            self.logoutText = NSLocalizedString("If you sign out, your books and any saved bookmarks will be removed.", comment: "")
+            self.logoutText = Strings.Settings.signOutConfirmationNoBookSync
           }
         }
+        //Override the logout text so enabling Sync is not mentioned anymore
+        self.logoutText = Strings.Settings.signOutConfirmationNoBookSync
         toggleLogoutWarning = true
       }
     } label: {
@@ -219,6 +209,30 @@ struct TPPSettingsView: View {
       )
     }
     .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
+  }
+  
+  @ViewBuilder private var natLibFiLogoAndVersionSection: some View {
+  //Footer with the NatLibFi logo and version info
+    Section{}
+    footer:{
+      VStack{
+        natLibFiLogo
+        versionInfo
+      }
+    }
+  }
+  
+  @ViewBuilder private var natLibFiLogo: some View {
+    let natLibFiLogo = ["fi", "sv"].contains(Locale.current.languageCode)
+      ? "NatLibFiLogoFiSv"
+      : "NatLibFiLogoEn"
+    
+    HStack {
+      Image(natLibFiLogo)
+        .resizable()
+        .aspectRatio(contentMode: .fit)
+        .frame(width: 200)
+    }
   }
   
   @ViewBuilder private var versionInfo: some View {

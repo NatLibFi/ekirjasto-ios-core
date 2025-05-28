@@ -59,8 +59,9 @@ platform :ios do
   lane :test do
     run_tests(
       project: "Palace.xcodeproj",
-      devices: ["iPhone 12 Pro"], # TODO:SAMI: Change to iPhone 15 Pro?
-      scheme: "Ekirjasto"
+      devices: ["iPhone 15 Pro"], 
+      scheme: "Ekirjasto",
+      xcargs: 'EXCLUDED_ARCHS[sdk=iphonesimulator*]=x86_64',
     )
   end
   

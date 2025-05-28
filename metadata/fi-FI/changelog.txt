@@ -1,4 +1,3 @@
-1.2.2
-- Päivitys äänikirjatyökaluun
-- Korjaus ladattujen kirjatiedostojen poistamiseen laitteesta
-- Lisätty linkki sovelluksen käyttöohjeisiin
+1.3.0
+- Uusi ominaisuus: Lisää kirjoja suosikkilistalle
+- Bugikorjauksia
