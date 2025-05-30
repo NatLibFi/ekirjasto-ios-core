@@ -1272,10 +1272,10 @@
          "string" : "\nOlet sijalla %1$ld jonossa %2$ld teoksen osalta."
       },
       "\"%@\" has been added to your Favorites." : {
-         "string" : ""
+         "string" : "\"%@\" on lisätty suosikkeihisi."
       },
       "\"%@\" has been removed from your Favorites." : {
-         "string" : ""
+         "string" : "\"%@\" on poistettu suosikeistasi."
       },
       "%02d hr %02 dmin" : {
          "string" : "%1$d h %2$d min"
@@ -1461,7 +1461,7 @@
          "string" : "Lisää kirjasto"
       },
       "Add to favorites" : {
-         "string" : ""
+         "string" : "Lisää suosikiksi"
       },
       "Advanced" : {
          "string" : "Edistynyt"
@@ -1533,7 +1533,7 @@
          "string" : "Kirjan kansi"
       },
       "Book added to Favorites" : {
-         "string" : ""
+         "string" : "Kirja lisätty suosikkeihin"
       },
       "Book format" : {
          "string" : "Tiedostomuoto"
@@ -1542,7 +1542,7 @@
          "string" : "Kirjan tiedostomuoto:"
       },
       "Book removed from Favorites" : {
-         "string" : ""
+         "string" : "Kirja poistettu suosikeista."
       },
       "Bookmark added" : {
          "string" : "Kirjanmerkki lisättiin"
@@ -1743,10 +1743,10 @@
          "string" : "Kelaa eteenpäin %d sekuntia"
       },
       "Favorites" : {
-         "string" : ""
+         "string" : "Suosikit"
       },
       "Favorites update failed" : {
-         "string" : ""
+         "string" : "Suosikkien päivitys epäonnistui"
       },
       "Feedback" : {
          "string" : "Palaute"
@@ -1869,7 +1869,7 @@
          "string" : "Ladataan... Odota."
       },
       "Loans" : {
-         "string" : ""
+         "string" : "Lainat"
       },
       "Location Recovery Error" : {
          "string" : "Sijainnin palautusvirhe"
@@ -1896,7 +1896,7 @@
          "string" : "Siirry"
       },
       "My Books" : {
-         "string" : "Lainat"
+         "string" : "Kirjani"
       },
       "Narrators" : {
          "string" : "Lukijat"
@@ -2052,7 +2052,7 @@
          "string" : "Lataa uudelleen"
       },
       "Remaining loan time is not available." : {
-         "string" : ""
+         "string" : "Tietoa jäljellä olevasta laina-ajasta ei ole saatavilla."
       },
       "Remove" : {
          "string" : "Poista"
@@ -2064,7 +2064,7 @@
          "string" : "Poista varaus"
       },
       "Remove from favorites" : {
-         "string" : ""
+         "string" : "Poista suosikeista"
       },
       "Report an Issue" : {
          "string" : "Ilmoita ongelmasta"
@@ -2127,7 +2127,7 @@
          "string" : "Hae varauksista"
       },
       "Select" : {
-         "string" : ""
+         "string" : "Valitse"
       },
       "Select Year" : {
          "string" : "Valitse vuosi"
@@ -2178,13 +2178,13 @@
          "string" : "Kirjaudu sisään"
       },
       "Sign in to see your books." : {
-         "string" : ""
+         "string" : "Kirjaudu sisään nähdäksesi lainasi."
       },
       "Sign in to see your favorites." : {
-         "string" : ""
+         "string" : "Kirjaudu sisään nähdäksesi suosikkisi."
       },
       "Sign in to see your reservations." : {
-         "string" : ""
+         "string" : "Kirjaudu sisään nähdäksesi varauksesi."
       },
       "Sign in with a passkey" : {
          "string" : "Kirjaudu sisään pääsyavaimella"
@@ -2361,7 +2361,7 @@
          "string" : "Tapahtui tuntematon virhe. Yritä uudelleen."
       },
       "Unselect" : {
-         "string" : ""
+         "string" : "Poista valinta"
       },
       "Unsupported Item" : {
          "string" : "Kohdetta ei tueta"
@@ -2397,10 +2397,10 @@
          "string" : "Sinulla ei ole voimassa olevia lainoja."
       },
       "Visit the Catalog to add books to My Books.\n Number of loans is limited to 5.\n Ensure good internet connection when downloading a book and make sure there is enough space on your device." : {
-         "string" : ""
+         "string" : "Sinulla ei ole lainoja. \nLainoja voi olla enintään 5.\nVarmista riittävä internetyhteys, kun lataat kirjaa. Varmista myös, että laitteella on riittävästi muistitilaa."
       },
       "Visit the Catalog to add books to your Favorites." : {
-         "string" : ""
+         "string" : "Sinulla ei ole vielä suosikkeja. Voit lisätä suosikkeja, kun selaat kirjoja."
       },
       "WAITING FOR AVAILABILITY" : {
          "string" : "ODOTETAAN SAATAVUUTTA"
@@ -2412,7 +2412,7 @@
          "string" : "Emme pääse kirjastoosi tällä hetkellä. Yritä uudelleen sulkemalla sovellus ja avaamalla se uudelleen."
       },
       "We were unable to save the changes to your Favorites list with book\n \"%@\".\n\n Please try again soon." : {
-         "string" : ""
+         "string" : "Suosikkilistaa ei voitu päivittää koskien kirjaa \n\"%@\" \nYritä myöhemmin uudelleen."
       },
       "We're sorry. Currently we do not support signups for new patrons via the app." : {
          "string" : "Emme valitettavasti tällä hetkellä tue uusien asiakkaiden rekisteröitymistä sovelluksen kautta."
@@ -2424,7 +2424,7 @@
          "string" : "Tervetuloa Open eBooksiin"
       },
       "When you reserve a book from the catalog, it will show up here.\n Look here from time to time to see if your book is available to download.\n Number of reservations is limited to 5." : {
-         "string" : ""
+         "string" : "Sinulla ei ole varauksia.\nVarauksia voi olla enintään 5."
       },
       "When you reserve a book from the catalog, it will show up here. Look here from time to time to see if your book is available to download." : {
          "string" : "Sinulla ei ole voimassa olevia varauksia."
@@ -2442,10 +2442,10 @@
          "string" : "Olet jonossa sijalla %ld."
       },
       "You are at position %@ in the queue for this book." : {
-         "string" : ""
+         "string" : "Olet tämän kirjan varausjonossa sijalla %@"
       },
       "You are at position %ld in the queue for this book." : {
-         "string" : ""
+         "string" : "Olet tämän kirjan varausjonossa sijalla %ld"
       },
       "You have already checked out this loan. You may need to refresh your My Books list to download the title." : {
          "string" : "Olet jo lainannut tämän teoksen. Sinun on ehkä päivitettävä Omat lainat -listasi, jotta voit ladata teoksen."
@@ -2454,10 +2454,10 @@
          "string" : "Olet poistanut tämän sovelluksen sijaintipalvelut käytöstä."
       },
       "You have this book on hold." : {
-         "string" : ""
+         "string" : "Sinulla on tämä kirja varattuna."
       },
       "You have this book on loan for %@." : {
-         "string" : ""
+         "string" : "Laina-aikaa on jäljellä %@."
       },
       "You must enable camera access for this application in order to sign up for a library card." : {
          "string" : "Sinun on sallittava kameran käyttö tässä sovelluksessa, jotta voit rekisteröityä kirjastokortin käyttäjäksi."
@@ -2499,7 +2499,7 @@
          "string" : "{???, plural, one {1 pv} other {%d pv}}"
       },
       "eBook" : {
-         "string" : ""
+         "string" : "e-kirja"
       },
       "eCard" : {
          "string" : "eCard"
@@ -2540,10 +2540,10 @@
          "string" : "\nDu är på plats %1$ld i kö för %2$ld kopior."
       },
       "\"%@\" has been added to your Favorites." : {
-         "string" : ""
+         "string" : "\"%@\" har blivit tillagd till dina Favoriter."
       },
       "\"%@\" has been removed from your Favorites." : {
-         "string" : ""
+         "string" : "\"%@ har blivit borttagen från dina Favoriter."
       },
       "%02d hr %02 dmin" : {
          "string" : "%1$d h %2$d min"
@@ -2729,7 +2729,7 @@
          "string" : "Lägg till bibliotek"
       },
       "Add to favorites" : {
-         "string" : ""
+         "string" : "Lägg till i favoriter"
       },
       "Advanced" : {
          "string" : "Avancerat"
@@ -2801,7 +2801,7 @@
          "string" : "Bokomslag"
       },
       "Book added to Favorites" : {
-         "string" : ""
+         "string" : "Böcker tillagda till Favoriter"
       },
       "Book format" : {
          "string" : "Bokformat"
@@ -2810,7 +2810,7 @@
          "string" : "Bokformat:"
       },
       "Book removed from Favorites" : {
-         "string" : ""
+         "string" : "Boken borttagen från Favoriter"
       },
       "Bookmark added" : {
          "string" : "Bokmärke lades till"
@@ -2828,7 +2828,7 @@
          "string" : "Reglage för ljusstryka"
       },
       "Browse Books" : {
-         "string" : "Bläddra bland böcker"
+         "string" : "Bläddra böcker"
       },
       "By signing in, you agree the End User License Agreement" : {
          "string" : "Genom att logga in godkänner du slutanvändaravtalet"
@@ -3011,10 +3011,10 @@
          "string" : "Spola framåt %d sekunder"
       },
       "Favorites" : {
-         "string" : ""
+         "string" : "Favoriter"
       },
       "Favorites update failed" : {
-         "string" : ""
+         "string" : "Uppdateringen av Favoriter misslyckades."
       },
       "Feedback" : {
          "string" : "Respons"
@@ -3137,7 +3137,7 @@
          "string" : "Laddar ner... Vänligen vänta."
       },
       "Loans" : {
-         "string" : ""
+         "string" : "Lån"
       },
       "Location Recovery Error" : {
          "string" : "Fel vid återställning av position"
@@ -3164,7 +3164,7 @@
          "string" : "Flytta"
       },
       "My Books" : {
-         "string" : "Mina lån"
+         "string" : "Mina Böcker"
       },
       "Narrators" : {
          "string" : "Uppläsare"
@@ -3320,7 +3320,7 @@
          "string" : "Ladda på nytt"
       },
       "Remaining loan time is not available." : {
-         "string" : ""
+         "string" : "Återstående lånetid är inte tillgänglig."
       },
       "Remove" : {
          "string" : "Ta bort"
@@ -3332,7 +3332,7 @@
          "string" : "Ta bort reservation"
       },
       "Remove from favorites" : {
-         "string" : ""
+         "string" : "Ta bort från favoriter"
       },
       "Report an Issue" : {
          "string" : "Rapportera ett problem"
@@ -3395,7 +3395,7 @@
          "string" : "Sök i reservationer"
       },
       "Select" : {
-         "string" : ""
+         "string" : "Välj"
       },
       "Select Year" : {
          "string" : "Välj år"
@@ -3446,13 +3446,13 @@
          "string" : "Logga in"
       },
       "Sign in to see your books." : {
-         "string" : ""
+         "string" : "Logga in för att se dina böcker."
       },
       "Sign in to see your favorites." : {
-         "string" : ""
+         "string" : "Logga in för att sina dina favoriter."
       },
       "Sign in to see your reservations." : {
-         "string" : ""
+         "string" : "Logga in för att se dina reserveringar."
       },
       "Sign in with a passkey" : {
          "string" : "Logga in med en nyckelkod"
@@ -3629,7 +3629,7 @@
          "string" : "Det har uppstått ett okänt fel. Försök på nytt."
       },
       "Unselect" : {
-         "string" : ""
+         "string" : "Avmarkera"
       },
       "Unsupported Item" : {
          "string" : "Objektet stöds inte"
@@ -3665,10 +3665,10 @@
          "string" : "Besök katalogen för att\nlägga till böcker i Mina lån."
       },
       "Visit the Catalog to add books to My Books.\n Number of loans is limited to 5.\n Ensure good internet connection when downloading a book and make sure there is enough space on your device." : {
-         "string" : ""
+         "string" : "Gå till katalogen för att lägga till böcker till Mina böcker.\nAntalet lån är begränsat till 5.\nSäkerställ en bra internet förbindelse då du laddar ner böcker och se till att det finns tillräckligt utrymme på enheten."
       },
       "Visit the Catalog to add books to your Favorites." : {
-         "string" : ""
+         "string" : "Gå till Katalogen för att lägga till böcker till dina Favoriter."
       },
       "WAITING FOR AVAILABILITY" : {
          "string" : "VÄNTAR PÅ TILLGÄNGLIGHET"
@@ -3680,7 +3680,7 @@
          "string" : "Vi kan inte hämta ditt bibliotek just nu. Stäng och starta om appen för att försöka på nytt."
       },
       "We were unable to save the changes to your Favorites list with book\n \"%@\".\n\n Please try again soon." : {
-         "string" : ""
+         "string" : "Vi kunde inte spara förändringarna i din favoritlista med böcker\n\"%@\"\n\nVar vänlig och försök igen snart."
       },
       "We're sorry. Currently we do not support signups for new patrons via the app." : {
          "string" : "Vi beklagar. För närvarande stöds inte registrering av nya kunder via appen."
@@ -3692,7 +3692,7 @@
          "string" : "Välkommen till Open eBooks"
       },
       "When you reserve a book from the catalog, it will show up here.\n Look here from time to time to see if your book is available to download.\n Number of reservations is limited to 5." : {
-         "string" : ""
+         "string" : "Då du reserverar en bok från katalogen, kommer den att synas här.\nTitta här då och då för att se om din bok är tillgänglig att ladda ner.\nAntalet reserveringar är begränsat till 5."
       },
       "When you reserve a book from the catalog, it will show up here. Look here from time to time to see if your book is available to download." : {
          "string" : "När du reserverar en bok från katalogen kommer den att visas här. Titta in här då och då för att se om din bok kan laddas ner."
@@ -3710,10 +3710,10 @@
          "string" : "Du är på plats %ld i kön."
       },
       "You are at position %@ in the queue for this book." : {
-         "string" : ""
+         "string" : "Du är på plats %@ i kön till den här boken."
       },
       "You are at position %ld in the queue for this book." : {
-         "string" : ""
+         "string" : "Du är på plats %ld i kön till den här boken."
       },
       "You have already checked out this loan. You may need to refresh your My Books list to download the title." : {
          "string" : "Du har redan lånat denna bok. Det kan hända att du måste uppdatera listan i Mina lån för att ladda ner titeln."
@@ -3722,10 +3722,10 @@
          "string" : "Du har inaktiverat positionstjänster för denna app."
       },
       "You have this book on hold." : {
-         "string" : ""
+         "string" : "Du har reserverat den här boken."
       },
       "You have this book on loan for %@." : {
-         "string" : ""
+         "string" : "Du har den här boken utlånad till %@."
       },
       "You must enable camera access for this application in order to sign up for a library card." : {
          "string" : "Du måste tillåta kameraåtkomst för denna app för att registrera dig för ett bibliotekskort."
@@ -3767,7 +3767,7 @@
          "string" : "{???, plural, one {1 d} other {%d d}}"
       },
       "eBook" : {
-         "string" : ""
+         "string" : "eBok"
       },
       "eCard" : {
          "string" : "e-kort"
