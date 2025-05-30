@@ -9,13 +9,13 @@ NSString * const _Nonnull ContentTypeEpubZip = @"application/epub+zip";
 NSString * const _Nonnull ContentTypeFindaway = @"application/vnd.librarysimplified.findaway.license+json";
 NSString * const _Nonnull ContentTypeOpenAccessAudiobook = @"application/audiobook+json";
 NSString * const _Nonnull ContentTypeOpenAccessPDF = @"application/pdf";
-NSString * const _Nonnull ContentTypeFeedbooksAudiobook = @"application/audiobook+json;profile=\"http://www.feedbooks.com/audiobooks/access-restriction\"";
+NSString * const _Nonnull ContentTypeFeedbooksAudiobook = @"application/audiobook+json;profile=\"http://www.feedbooks.com/audiobooks/access-restriction\""; //Type that caused problems
 NSString * const _Nonnull ContentTypeOctetStream = @"application/octet-stream";
 NSString * const _Nonnull ContentTypeOverdriveAudiobook = @"application/vnd.overdrive.circulation.api+json;profile=audiobook";
-NSString * const _Nonnull ContentTypeOverdriveAudiobookActual = @"application/json";
+NSString * const _Nonnull ContentTypeOverdriveAudiobookActual = @"application/json"; //Not used in this file
 NSString * const _Nonnull ContentTypeReadiumLCP = @"application/vnd.readium.lcp.license.v1.0+json";
 NSString * const _Nonnull ContentTypeReadiumLCPPDF = @"application/pdf";
-NSString * const _Nonnull ContentTypePDFLCP = @"application/pdf+lcp";
+NSString * const _Nonnull ContentTypePDFLCP = @"application/pdf+lcp"; //Not used in this file
 NSString * const _Nonnull ContentTypeAudiobookLCP = @"application/audiobook+lcp";
 NSString * const _Nonnull ContentTypeAudiobookZip = @"application/audiobook+zip";
 NSString * const _Nonnull ContentTypeBiblioboard = @"application/json";
@@ -53,21 +53,21 @@ NSString * const _Nonnull ContentTypeBiblioboard = @"application/json";
       ContentTypeBearerToken,
       ContentTypeEpubZip,
 #if FEATURE_DRM_CONNECTOR
-      ContentTypeAdobeAdept,
+      ContentTypeAdobeAdept, //Not in Android
 #endif
       ContentTypeFindaway,
       ContentTypeOpenAccessAudiobook,
       ContentTypeOpenAccessPDF,
-      ContentTypeFeedbooksAudiobook,
-      ContentTypeOverdriveAudiobook,
-      ContentTypeOctetStream,
-      ContentTypeBiblioboard,
+      //ContentTypeFeedbooksAudiobook, //Caused problems, Commented out, Not in Android
+      ContentTypeOverdriveAudiobook, //Not in Android
+      ContentTypeOctetStream, //Not in Android
+      ContentTypeBiblioboard, //Not in Android
 #if LCP
       ContentTypeReadiumLCP,
       ContentTypeAudiobookLCP,
       ContentTypeReadiumLCPPDF,
 #endif
-      ContentTypeAudiobookZip
+      ContentTypeAudiobookZip //Not in Android
     ]];
   }
 

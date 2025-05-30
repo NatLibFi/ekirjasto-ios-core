@@ -913,8 +913,15 @@ extension MyBooksDownloadCenter: URLSessionTaskDelegate {
     self.taskIdentifierToRedirectAttempts.removeValue(forKey: task.taskIdentifier)
     
     if let error = error as NSError?, error.code != NSURLErrorCancelled {
-      logBookDownloadFailure(book, reason: "networking error", downloadTask: task, metadata: ["urlSessionError": error])
-      failDownloadWithAlert(for: book)
+      //If the error is CannotDecodeRawData error, most likely the book format is one we can't handle, so inform user
+      if(error.code == NSURLErrorCannotDecodeRawData){
+        logBookDownloadFailure(book, reason: "unsupported book format", downloadTask: task, metadata: ["urlSessionError" : error])
+        failDownloadWithAlert(for: book, withMessage: "Unsupported book format.")
+      } else {
+        //Else throw a generic error without a message
+        logBookDownloadFailure(book, reason: "networking error", downloadTask: task, metadata: ["urlSessionError": error])
+        failDownloadWithAlert(for: book)
+      }
       return
     }
   }
