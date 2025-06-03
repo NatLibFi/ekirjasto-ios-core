@@ -284,6 +284,8 @@ struct Strings {
   struct MyBooksView {
     static let loansAndHoldsNavTitle = NSLocalizedString("My Books", comment: "Tab title for loans and holds view")
     static let favoritesAndReadNavTitle = NSLocalizedString("Favorites", comment: "Tab title for favorites and read books view")
+    static let loansNavTitle = NSLocalizedString("Loans", comment: "Tab title for loans view")
+    static let holdsNavTitle = NSLocalizedString("Holds", comment: "Tab title for holds view")
     static let sortBy = NSLocalizedString("Sort By:", comment: "")
     static let searchBooks = NSLocalizedString("Search My Books", comment: "")
     static let emptyViewMessage = NSLocalizedString("Visit the Catalog to\nadd books to My Books.", comment: "")

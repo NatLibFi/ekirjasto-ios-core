@@ -61,8 +61,13 @@ struct LoansAndHoldsView: View {
         "View list of books on loan or list of books on hold",
         selection: $selectedSubview
       ) {
+        //Add the localized title for the holds and loans buttons
         ForEach(subviews, id: \.self) {
-          Text($0)
+          if($0 == "Loans") {
+            Text(Strings.MyBooksView.loansNavTitle)
+          } else {
+            Text(Strings.MyBooksView.holdsNavTitle)
+          }
         }
       }
       .pickerStyle(.segmented)
