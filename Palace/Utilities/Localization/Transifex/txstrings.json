@@ -525,6 +525,9 @@
       "Hide Barcode" : {
          "string" : "Hide Barcode"
       },
+      "Holds" : {
+         "string" : "Holds"
+      },
       "Holds %@" : {
          "string" : "Holds %@"
       },
@@ -1793,6 +1796,9 @@
       "Hide Barcode" : {
          "string" : "Piilota viivakoodi"
       },
+      "Holds" : {
+         "string" : "Varaukset"
+      },
       "Holds %@" : {
          "string" : "Varaa kohteen %@"
       },
@@ -3060,6 +3066,9 @@
       },
       "Hide Barcode" : {
          "string" : "Dölj streckkod"
+      },
+      "Holds" : {
+         "string" : "Reserveringar"
       },
       "Holds %@" : {
          "string" : "Reservationer %@"
