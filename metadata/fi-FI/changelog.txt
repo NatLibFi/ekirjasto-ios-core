@@ -1,4 +1,3 @@
-1.3.1
-- Uusi ominaisuus: Lisää kirjoja suosikkilistalle
+1.3.2
 - Bugikorjauksia
 - Käännöskorjauksia
