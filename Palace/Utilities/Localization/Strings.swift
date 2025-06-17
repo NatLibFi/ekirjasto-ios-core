@@ -324,6 +324,10 @@ struct Strings {
     static let bookIsAvailableToBorrow = NSLocalizedString("This book is available to borrow.", comment: "Text that informs that the book the user queued for is now ready to borrow.")
     static let addToFavoritesButtonLabel = NSLocalizedString("Add to favorites", comment: "Accessiblity label for a button that adds a book to the user's favorite books.")
     static let removeFromFavoritesButtonLabel = NSLocalizedString("Remove from favorites", comment: "Accessiblity label for a button that removes a book from the user's favorite books.")
+    static let accessModeLabel = NSLocalizedString("Access mode", comment: "Name for the access mode field in the book details view")
+    static let accessibilityFeaturesLabel = NSLocalizedString("Accessibility features", comment: "Name for the accesibility features field in the book details view")
+    static let accessibilitySummaryLabel = NSLocalizedString("Accessibility summary", comment: "Name for the accesibility summary field in the book details view")
+    static let accessibilityDataNotYetAvailable = NSLocalizedString("Not yet available", comment: "Placeholder text shown when accessibility data for a book is not yet available.")
   }
   
   struct TPPAccountRegistration {
