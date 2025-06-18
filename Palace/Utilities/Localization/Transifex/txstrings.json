@@ -174,8 +174,17 @@
       "Accept" : {
          "string" : "Accept"
       },
+      "Access mode" : {
+         "string" : "Access mode"
+      },
       "Accessibility Statement" : {
          "string" : "Accessibility Statement"
+      },
+      "Accessibility features" : {
+         "string" : "Accessibility features"
+      },
+      "Accessibility summary" : {
+         "string" : "Accessibility summary"
       },
       "AccessibilitySwitchLibrary" : {
          "string" : "AccessibilitySwitchLibrary"
@@ -656,6 +665,9 @@
       },
       "Not Now" : {
          "string" : "Not Now"
+      },
+      "Not yet available" : {
+         "string" : "Not yet available"
       },
       "OK" : {
          "string" : "OK"
@@ -1445,8 +1457,17 @@
       "Accept" : {
          "string" : "Hyväksy"
       },
+      "Access mode" : {
+         "string" : ""
+      },
       "Accessibility Statement" : {
          "string" : "Saavutettavuusseloste"
+      },
+      "Accessibility features" : {
+         "string" : ""
+      },
+      "Accessibility summary" : {
+         "string" : ""
       },
       "AccessibilitySwitchLibrary" : {
          "string" : "AccessibilitySwitchLibrary"
@@ -1928,6 +1949,9 @@
       "Not Now" : {
          "string" : "Ei nyt"
       },
+      "Not yet available" : {
+         "string" : ""
+      },
       "OK" : {
          "string" : "OK"
       },
@@ -2061,7 +2085,7 @@
          "string" : "Tietoa jäljellä olevasta laina-ajasta ei ole saatavilla."
       },
       "Remove" : {
-         "string" : "Poista"
+         "string" : "Palauta"
       },
       "Remove Bookmark" : {
          "string" : "Poista kirjanmerkki"
@@ -2716,8 +2740,17 @@
       "Accept" : {
          "string" : "Godkänn"
       },
+      "Access mode" : {
+         "string" : ""
+      },
       "Accessibility Statement" : {
          "string" : "Tillgänglighetsutlåtande"
+      },
+      "Accessibility features" : {
+         "string" : ""
+      },
+      "Accessibility summary" : {
+         "string" : ""
       },
       "AccessibilitySwitchLibrary" : {
          "string" : "AccessibilitySwitchLibrary"
@@ -3198,6 +3231,9 @@
       },
       "Not Now" : {
          "string" : "Inte nu"
+      },
+      "Not yet available" : {
+         "string" : ""
       },
       "OK" : {
          "string" : "Ok"
