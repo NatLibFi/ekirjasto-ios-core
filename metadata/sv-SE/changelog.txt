@@ -1,3 +1,4 @@
-1.3.2
+1.3.4
+Vi utvecklar appen och åtgärdar buggar kontinuerligt. Kom ihåg att kontrollera att du alltid använder den nyaste versionen av appen.
 - Bugfixar
-- Översättningsfixar
+- UI-uppdateringar
