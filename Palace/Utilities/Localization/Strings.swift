@@ -49,6 +49,10 @@ struct Strings {
     static let locationFetchFailed = NSLocalizedString("Failed to get current location. Please try again.", comment: "Error message shown to user when CoreLocation does not return the current location.")
     static let bookFavoriteActionFailedNotificationAlertTitle = NSLocalizedString("Favorites update failed", comment: "The title in a notification alert informing the user that the there was an error in adding the book to favorites or removing the book from favorites")
     static let bookFavoriteActionFailedNotificationAlertMessage = NSLocalizedString("We were unable to save the changes to your Favorites list with book\n \"%@\".\n\n Please try again soon.", comment: "The message in a notification alert informing the user that the there was an error in adding the book to favorites or removing the book from favorites")
+    static let noErrorMessage = NSLocalizedString("No error message", comment: "Message informing that there is no detailed error message available.")
+    static let downloadFailedTitle = NSLocalizedString("Download failed", comment: "Error title informing that download failed.")
+    static let downloadFailedMessage = NSLocalizedString("The download could not be completed.", comment: "Error message informing that download failed.")
+    static let downloadFailedMessageWithBookTitle = NSLocalizedString("The download for \"%@\" could not be completed.", comment: "Error message informing that download failed for a specific book title")
   }
   
   struct Generic {
@@ -316,7 +320,6 @@ struct Strings {
     static let removeReservation = NSLocalizedString("Remove Reservation", comment: "")
     static let removeReservationMessage = NSLocalizedString("Are you sure you want to remove \"%@\" from your reservations? You will no longer be in line for this book.", comment: "Message shown in an alert to the user prior to returning a reserved title.")
     static let downloading = NSLocalizedString("Downloading", comment: "")
-    static let downloadFailedMessage = NSLocalizedString("The download could not be completed.", comment: "")
     static let loanTimeNotAvailable = NSLocalizedString("Remaining loan time is not available.", comment: "Text informing the user that the remaining loan time could not be determined.")
     static let loanTimeRemaining = NSLocalizedString("You have this book on loan for %@.", comment: "Text that tells the user how much time they have left to read the book.")
     static let bookIsOnHoldForUser = NSLocalizedString("You have this book on hold.", comment: "Text that informs the user that the book is held for the user.")

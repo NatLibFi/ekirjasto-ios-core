@@ -42,7 +42,7 @@ struct DownloadingBookCell: View {
   @ViewBuilder private var statusView: some View {
     switch model.state.buttonState {
     case .downloadFailed:
-      Text(Strings.BookCell.downloadFailedMessage)
+        Text(Strings.Error.downloadFailedMessage)
         .horizontallyCentered()
         .padding(.top, 5)
         .font(Font(uiFont: UIFont.palaceFont(ofSize: 12)))

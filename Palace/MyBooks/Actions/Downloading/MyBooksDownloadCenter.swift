@@ -1046,10 +1046,15 @@ extension MyBooksDownloadCenter {
                          genericBookmarks: nil)
     
     DispatchQueue.main.async {
-      let errorMessage = message ?? "No error message"
-      let formattedMessage = String.localizedStringWithFormat(NSLocalizedString("The download for %@ could not be completed.", comment: ""), book.title)
-      let finalMessage = "\(formattedMessage)\n\(errorMessage)"
-      let alert = TPPAlertUtils.alert(title: "DownloadFailed", message: finalMessage)
+      let downloadFailedTitle = Strings.Error.downloadFailedTitle
+      let downloadFailedMessage = String.localizedStringWithFormat(Strings.Error.downloadFailedMessageWithBookTitle, book.title)
+      let detailedErrorMessage = message ?? Strings.Error.noErrorMessage
+      
+      let alert = TPPAlertUtils.alert(
+        title: downloadFailedTitle,
+        message: "\(downloadFailedMessage)\n\(detailedErrorMessage)"
+      )
+      
       DispatchQueue.main.async {
         TPPAlertUtils.presentFromViewControllerOrNil(alertController: alert, viewController: nil, animated: true, completion: nil)
       }
