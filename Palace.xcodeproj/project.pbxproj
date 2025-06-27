@@ -1044,6 +1044,9 @@
 		7582FFD52DBAE1FB0057AC71 /* BookSelectionButtonsState.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582FFD42DBAE1F00057AC71 /* BookSelectionButtonsState.m */; };
 		7582FFD62DBAE1FB0057AC71 /* BookSelectionButtonsState.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582FFD42DBAE1F00057AC71 /* BookSelectionButtonsState.m */; };
 		7582FFD72DBAE1FB0057AC71 /* BookSelectionButtonsState.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582FFD42DBAE1F00057AC71 /* BookSelectionButtonsState.m */; };
+		75A33F772E0F022700C147CC /* TPPRootTabBarController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A33F762E0F020F00C147CC /* TPPRootTabBarController+Extensions.swift */; };
+		75A33F782E0F022700C147CC /* TPPRootTabBarController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A33F762E0F020F00C147CC /* TPPRootTabBarController+Extensions.swift */; };
+		75A33F792E0F022700C147CC /* TPPRootTabBarController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A33F762E0F020F00C147CC /* TPPRootTabBarController+Extensions.swift */; };
 		75E833DA2D73B49400D2B840 /* LoansAndHoldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E833D92D73B48D00D2B840 /* LoansAndHoldsView.swift */; };
 		75E833DB2D73B49400D2B840 /* LoansAndHoldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E833D92D73B48D00D2B840 /* LoansAndHoldsView.swift */; };
 		75E833DC2D73B49400D2B840 /* LoansAndHoldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E833D92D73B48D00D2B840 /* LoansAndHoldsView.swift */; };
@@ -1990,6 +1993,7 @@
 		7582FFCF2DB918880057AC71 /* BookSelectionButtonsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookSelectionButtonsView.m; sourceTree = "<group>"; };
 		7582FFD32DBADF240057AC71 /* BookSelectionButtonsState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookSelectionButtonsState.h; sourceTree = "<group>"; };
 		7582FFD42DBAE1F00057AC71 /* BookSelectionButtonsState.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookSelectionButtonsState.m; sourceTree = "<group>"; };
+		75A33F762E0F020F00C147CC /* TPPRootTabBarController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TPPRootTabBarController+Extensions.swift"; sourceTree = "<group>"; };
 		75E833D92D73B48D00D2B840 /* LoansAndHoldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoansAndHoldsView.swift; sourceTree = "<group>"; };
 		75E833E12D73B4B900D2B840 /* LoansAndHoldsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoansAndHoldsViewController.swift; sourceTree = "<group>"; };
 		75E834132D76088600D2B840 /* HoldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldsView.swift; sourceTree = "<group>"; };
@@ -2633,6 +2637,7 @@
 				738CB2052509A87700891F31 /* TPPConfiguration+SE.swift */,
 				11548C091939136C009DBF2E /* TPPRootTabBarController.h */,
 				11548C0A1939136C009DBF2E /* TPPRootTabBarController.m */,
+				75A33F762E0F020F00C147CC /* TPPRootTabBarController+Extensions.swift */,
 				739ECB2D25108EE800691A70 /* TPPRootTabBarController+SE.swift */,
 				730EDFFF251567820038DD9F /* TPPLibraryNavigationController.h */,
 				730EE000251567820038DD9F /* TPPLibraryNavigationController.m */,
@@ -5067,6 +5072,7 @@
 				331263EA2A287F53006BA87D /* NSString+TPPStringAdditions.m in Sources */,
 				331263EC2A287F53006BA87D /* TPPRequestExecuting.swift in Sources */,
 				75EA32182DA97D6600FD3AC2 /* EdgeBorder.swift in Sources */,
+				75A33F782E0F022700C147CC /* TPPRootTabBarController+Extensions.swift in Sources */,
 				9D8FE1902BA8DFBC00084363 /* EkirjastoMagazineNavigationController.swift in Sources */,
 				331263ED2A287F53006BA87D /* TPPCookiesWebViewController.swift in Sources */,
 				331263EE2A287F53006BA87D /* TPPSamlIDPCell.swift in Sources */,
@@ -5143,6 +5149,7 @@
 				73D8D28125A68D4F00DF5F69 /* EPUBModule.swift in Sources */,
 				21F4BF3B26BC62D4000CF592 /* AdobeCertificate.swift in Sources */,
 				73EB0A6725821DF4006BC997 /* TPPCirculationAnalytics.swift in Sources */,
+				75A33F772E0F022700C147CC /* TPPRootTabBarController+Extensions.swift in Sources */,
 				73EB0A6825821DF4006BC997 /* TPPBookState.swift in Sources */,
 				7530C8C92D80CA750024E184 /* FavoritesViewModel.swift in Sources */,
 				73EB0A6925821DF4006BC997 /* APIKeys.swift in Sources */,
@@ -5834,6 +5841,7 @@
 				089E430C24A2459100310360 /* TPPLoginCellTypes.swift in Sources */,
 				1158812E1A894F4E008672C3 /* TPPAccountSignInViewController.m in Sources */,
 				E55E2FA829E7AFCD0093F916 /* AudiobookBookmarkBusinessLogic.swift in Sources */,
+				75A33F792E0F022700C147CC /* TPPRootTabBarController+Extensions.swift in Sources */,
 				E59526EB28D24FC000C179DA /* AudiobookSample.swift in Sources */,
 				E5B2B8DA275952EC00150ED4 /* TPPSettingsView.swift in Sources */,
 				212B99D7258A36FD00C8BF79 /* LCPAudiobooks.swift in Sources */,

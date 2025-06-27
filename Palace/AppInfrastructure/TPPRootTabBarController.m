@@ -205,4 +205,13 @@ shouldSelectViewController:(nonnull UIViewController *)viewController
    animated:animated];
 }
 
+  // Detects changes in the app user interface environment
+  // such as rotating the device, switching to dark mode etc.
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+  TPPLOG(@"App trait collection did change.");
+  
+  [super traitCollectionDidChange:previousTraitCollection];
+  [self handleTraitCollectionChange:previousTraitCollection];
+}
+
 @end
