@@ -344,4 +344,14 @@ struct Strings {
     static let borrowFailedMessage = NSLocalizedString("Borrowing %@ could not be completed.", comment: "")
     static let loanAlreadyExistsAlertMessage = NSLocalizedString("You have already checked out this loan. You may need to refresh your My Books list to download the title.", comment: "")
   }
+  
+  struct TimeAndDuration {
+    static let hour = NSLocalizedString("hour", comment: "Hour (in singular), used for example when audiobook duration is displayed for user, '1 hour'.")
+    static let hours = NSLocalizedString("hours", comment: "Hours (in plural), used for example when audiobook duration is displayed for user, '3 hours'.")
+    static let minute = NSLocalizedString("minute", comment: "Minute (in singular), used for example when audiobook duration is displayed for user, '1 minute'.")
+    static let minutes = NSLocalizedString("minutes", comment: "Minutes (in plural), used for example when audiobook duration is displayed for user, '3 minutes'.")
+    static let second = NSLocalizedString("second", comment: "Second (in singular), used for example when audiobook duration is displayed for user, '1 second'.")
+    static let seconds = NSLocalizedString("seconds", comment: "Seconds (in plural), used for example when audiobook duration is displayed for user, '3 seconds'.")
+  }
+    
 }

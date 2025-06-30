@@ -444,6 +444,8 @@ static NSString *DetailHTMLTemplate = nil;
   NSString *const accessibilityFeaturesValueString = [NSString stringWithFormat:@"%@",NSLocalizedString(@"Not yet available", nil)];
   NSString *const accessibilitySummaryValueString = [NSString stringWithFormat:@"%@",NSLocalizedString(@"Not yet available", nil)];
   
+  NSString *const bookDurationValueString = [self displayStringForDuration: self.book.bookDuration];
+  
   if (!categoriesValueString && !publishedValueString && !publisherValueString && !self.book.distributor) {
     self.topFootnoteSeparater.hidden = YES;
     self.bottomFootnoteSeparator.hidden = YES;
@@ -481,7 +483,7 @@ static NSString *DetailHTMLTemplate = nil;
   self.accessModeLabelValue = [self createFooterLabelWithString:accessModeValueString alignment:NSTextAlignmentRight];
   self.accessibilityFeaturesLabelValue = [self createFooterLabelWithString:accessibilityFeaturesValueString alignment:NSTextAlignmentRight];
   self.accessibilitySummaryLabelValue = [self createFooterLabelWithString:accessibilitySummaryValueString alignment:NSTextAlignmentRight];
-  self.bookDurationLabelValue = [self createFooterLabelWithString:[self displayStringForDuration: self.book.bookDuration] alignment:NSTextAlignmentLeft];
+  self.bookDurationLabelValue = [self createFooterLabelWithString:bookDurationValueString alignment:NSTextAlignmentLeft];
   self.narratorsLabelValue.numberOfLines = 0;
 
   self.topFootnoteSeparater = [[UIView alloc] init];
@@ -508,11 +510,34 @@ static NSString *DetailHTMLTemplate = nil;
   return label;
 }
 
+  // Returns the book's duration as a localized string, formatted from its total duration in seconds.
 - (NSString *) displayStringForDuration: (NSString *) durationInSeconds {
   double totalSeconds = [durationInSeconds doubleValue];
+  
   int hours = (int)(totalSeconds / 3600);
   int minutes = (int)((totalSeconds - (hours * 3600)) / 60);
-  return [NSString stringWithFormat:@"%d hours, %d minutes", hours, minutes];
+  
+  NSString *hoursAsString = [NSString stringWithFormat:@"%d", hours];
+  NSString *minutesAsString = [NSString stringWithFormat:@"%d", minutes];
+  
+  // Checks whether to use the singular form instead of the plural (hour or hours, minute or minutes)
+  // and then formats the hour and minute units accordingly
+  NSString *hourTimeUnit = hours == 1 ? NSLocalizedString(@"hour", nil) : NSLocalizedString(@"hours", nil);
+  NSString *minuteTimeUnit = minutes == 1 ? NSLocalizedString(@"minute", nil) : NSLocalizedString(@"minutes", nil);
+  
+  NSString *durationAsString;
+  
+  if (hours > 0) {
+    // Always show minutes if the book is at least 1 hour long (even if it is just 1 hour, 0 minutes)
+    // Examples: "3 hours, 33 minutes" "1 hour, 33 minutes" "1 hour, 1 minute"
+    durationAsString = [NSString stringWithFormat:@"%@ %@, %@ %@", hoursAsString, hourTimeUnit, minutesAsString, minuteTimeUnit];
+  } else {
+    // but if the book is less than an hour long, only show the minutes (don't show zero hours)
+    // Example: "33 minutes" "1 minute"
+    durationAsString = [NSString stringWithFormat:@"%@ %@", minutesAsString, minuteTimeUnit];
+  }
+  
+  return durationAsString;
 }
 
 - (void)setupAutolayoutConstraints
