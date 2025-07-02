@@ -1254,11 +1254,23 @@
       "ePub" : {
          "string" : "ePub"
       },
+      "hour" : {
+         "string" : "hour"
+      },
       "hour_suffix_long" : {
          "string" : "{???, plural, one {1 hour} other {%d hours}}"
       },
       "hour_suffix_short" : {
          "string" : "{???, plural, one {1 h} other {%d h}}"
+      },
+      "hours" : {
+         "string" : "hours"
+      },
+      "minute" : {
+         "string" : "minute"
+      },
+      "minutes" : {
+         "string" : "minutes"
       },
       "month_suffix_long" : {
          "string" : "{???, plural, one {1 month} other {%d months}}"
@@ -1268,6 +1280,12 @@
       },
       "sec" : {
          "string" : "sec"
+      },
+      "second" : {
+         "string" : "second"
+      },
+      "seconds" : {
+         "string" : "seconds"
       },
       "week_suffix_long" : {
          "string" : "{???, plural, one {1 week} other {%d weeks}}"
@@ -1458,16 +1476,16 @@
          "string" : "Hyväksy"
       },
       "Access mode" : {
-         "string" : ""
+         "string" : "Saavutettavuus"
       },
       "Accessibility Statement" : {
          "string" : "Saavutettavuusseloste"
       },
       "Accessibility features" : {
-         "string" : ""
+         "string" : "Saavutettavuusominaisuudet"
       },
       "Accessibility summary" : {
-         "string" : ""
+         "string" : "Saavutettavuusyhteenveto"
       },
       "AccessibilitySwitchLibrary" : {
          "string" : "AccessibilitySwitchLibrary"
@@ -1950,7 +1968,7 @@
          "string" : "Ei nyt"
       },
       "Not yet available" : {
-         "string" : ""
+         "string" : "Ei vielä saatavilla"
       },
       "OK" : {
          "string" : "OK"
@@ -2085,7 +2103,7 @@
          "string" : "Tietoa jäljellä olevasta laina-ajasta ei ole saatavilla."
       },
       "Remove" : {
-         "string" : "Palauta"
+         "string" : "Poista"
       },
       "Remove Bookmark" : {
          "string" : "Poista kirjanmerkki"
@@ -2537,11 +2555,23 @@
       "ePub" : {
          "string" : "ePub"
       },
+      "hour" : {
+         "string" : "tunti"
+      },
       "hour_suffix_long" : {
          "string" : "{???, plural, one {1 tunti} other {%d tuntia}}"
       },
       "hour_suffix_short" : {
          "string" : "{???, plural, one {1 h} other {%d h}}"
+      },
+      "hours" : {
+         "string" : "tuntia"
+      },
+      "minute" : {
+         "string" : "minuutti"
+      },
+      "minutes" : {
+         "string" : "minuuttia"
       },
       "month_suffix_long" : {
          "string" : "{???, plural, one {1 kuukausi} other {%d kuukautta}}"
@@ -2551,6 +2581,12 @@
       },
       "sec" : {
          "string" : "s"
+      },
+      "second" : {
+         "string" : "sekunti"
+      },
+      "seconds" : {
+         "string" : "sekuntia"
       },
       "week_suffix_long" : {
          "string" : "{???, plural, one {1 viikko} other {%d viikkoa}}"
@@ -2741,16 +2777,16 @@
          "string" : "Godkänn"
       },
       "Access mode" : {
-         "string" : ""
+         "string" : "Tillgänglighet"
       },
       "Accessibility Statement" : {
          "string" : "Tillgänglighetsutlåtande"
       },
       "Accessibility features" : {
-         "string" : ""
+         "string" : "Tillgänglighetsfunktioner"
       },
       "Accessibility summary" : {
-         "string" : ""
+         "string" : "Tillgänglighetssammanfattning"
       },
       "AccessibilitySwitchLibrary" : {
          "string" : "AccessibilitySwitchLibrary"
@@ -3233,7 +3269,7 @@
          "string" : "Inte nu"
       },
       "Not yet available" : {
-         "string" : ""
+         "string" : "Inte tillgänglig ännu"
       },
       "OK" : {
          "string" : "Ok"
@@ -3820,11 +3856,23 @@
       "ePub" : {
          "string" : "ePub"
       },
+      "hour" : {
+         "string" : "timme"
+      },
       "hour_suffix_long" : {
          "string" : "{???, plural, one {1 timme} other {%d timmar}}"
       },
       "hour_suffix_short" : {
          "string" : "{???, plural, one {1 h} other {%d h}}"
+      },
+      "hours" : {
+         "string" : "timmar"
+      },
+      "minute" : {
+         "string" : "minut"
+      },
+      "minutes" : {
+         "string" : "minuter"
       },
       "month_suffix_long" : {
          "string" : "{???, plural, one {1 månad} other {%d månader}}"
@@ -3834,6 +3882,12 @@
       },
       "sec" : {
          "string" : "sek"
+      },
+      "second" : {
+         "string" : "sekund"
+      },
+      "seconds" : {
+         "string" : "sekunder"
       },
       "week_suffix_long" : {
          "string" : "{???, plural, one {1 vecka} other {%d veckor}}"

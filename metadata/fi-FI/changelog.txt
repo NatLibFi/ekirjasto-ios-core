@@ -1,4 +1,5 @@
-1.3.4
+1.3.6
 Kehitämme sovellusta ja korjaamme bugeja jatkuvasti. Tarkistathan, että sinulla on aina käytössäsi sovelluksen uusin versio.
+
 - Bugikorjauksia
 - Käyttöliittymäpäivityksiä
