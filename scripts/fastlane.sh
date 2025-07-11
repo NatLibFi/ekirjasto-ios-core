@@ -19,6 +19,8 @@ fatal() {
 # Set some environment variables to make Fastlane work smoothly
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
+export FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT=60
+export FASTLANE_XCODEBUILD_SETTINGS_RETRIES=10
 
 if command -v bundle > /dev/null 2>&1; then
   bundle install || exit $?
