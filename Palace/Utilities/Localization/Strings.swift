@@ -94,6 +94,10 @@ struct Strings {
     static let returnActionTitle = NSLocalizedString("Return", comment: "Button title for keeping an audiobook")
   }
   
+  struct Search {
+    static let startSearchInstructionMessage = NSLocalizedString("You can search for a book or an author using the search bar above.\n\nIf you want to search through all books, ensure you are on the Browse Books tab with 'All' selected.", comment: "Instructions for users on how to perform a search. Visible in the view before the first search. Keep the newlines to preserve paragraph formatting in the UI.")
+  }
+  
   struct Settings {
     static let settings = NSLocalizedString("Settings", comment: "")
     static let settingsNavTitle = NSLocalizedString("Settings", comment: "Tab title for settings view")

@@ -26,6 +26,7 @@
 @property (nonatomic) TPPReloadView *reloadView;
 @property (nonatomic) UISearchBar *searchBar;
 @property (nonatomic) UILabel *noResultsLabel;
+@property (nonatomic) UILabel *startSearchLabel;
 @property (nonatomic) TPPFacetBarView *facetBarView;
 @property (nonatomic) NSTimer *debounceTimer;
 
@@ -92,6 +93,27 @@
   [self.noResultsLabel sizeToFit];
   self.noResultsLabel.hidden = YES;
   [self.view addSubview:self.noResultsLabel];
+  
+  // Show instructions for user how to search books or authors.
+  // This message is shown in the empty search view before first search,
+  // and is replaced with actual search results (or "no results found") after search
+  self.startSearchLabel = [[UILabel alloc] init];
+  self.startSearchLabel.text = NSLocalizedString(@"You can search for a book or an author using the search bar above.\n\nIf you want to search through all books, ensure you are on the Browse Books tab with 'All' selected.", nil);
+  self.startSearchLabel.font = [UIFont palaceFontOfSize:18];
+  self.startSearchLabel.textColor = [UIColor grayColor];
+  self.startSearchLabel.numberOfLines = 0;
+  self.startSearchLabel.textAlignment = NSTextAlignmentCenter;
+  self.startSearchLabel.hidden = NO;
+  
+  [self.view addSubview:self.startSearchLabel];
+  
+  self.startSearchLabel.translatesAutoresizingMaskIntoConstraints = NO;
+  [NSLayoutConstraint activateConstraints:@[
+    [self.startSearchLabel.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
+    [self.startSearchLabel.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor],
+    [self.startSearchLabel.leadingAnchor constraintGreaterThanOrEqualToAnchor:self.view.leadingAnchor constant:20],
+    [self.startSearchLabel.trailingAnchor constraintLessThanOrEqualToAnchor:self.view.trailingAnchor constant:-20]
+  ]];
   
   __weak TPPCatalogSearchViewController *weakSelf = self;
   self.reloadView = [[TPPReloadView alloc] init];
@@ -218,6 +240,7 @@ didSelectItemAtIndexPath:(NSIndexPath *const)indexPath
 {
   self.collectionView.hidden = YES;
   self.noResultsLabel.hidden = YES;
+  self.startSearchLabel.hidden = YES;
   self.reloadView.hidden = YES;
   self.searchActivityIndicatorView.hidden = NO;
   [self.searchActivityIndicatorView startAnimating];
