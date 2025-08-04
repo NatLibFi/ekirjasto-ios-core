@@ -10,14 +10,23 @@ import Foundation
 import SwiftUI
 
 class TPPSettingsViewController: NSObject {
+  
   @objc static func makeSwiftUIView(dismissHandler: @escaping (() -> Void)) -> UIViewController {
     let controller = UIHostingController(rootView: TPPSettingsView())
-    controller.title = Strings.Settings.settings
+    controller.title = Strings.Settings.settingsNavTitle
     controller.tabBarItem.image = UIImage(named: "Settings")
     controller.tabBarItem.selectedImage = UIImage(named: "SettingsSelected")
-    controller.tabBarItem.imageInsets = UIEdgeInsets(top: 4.0, left: 0.0, bottom: -4.0, right: 0.0);
+    controller.tabBarItem.imageInsets = UIEdgeInsets(top: 4.0, left: 0.0, bottom: -4.0, right: 0.0)
+    controller.navigationItem.backButtonTitle = Strings.Settings.settingsNavTitle
+    
+    let titleViewLabel = UILabel()
+    titleViewLabel.text = Strings.Settings.settingsNavTitle
+    titleViewLabel.font = UIFont.palaceFont(ofSize: 16)
+    titleViewLabel.accessibilityTraits = .header
+    controller.navigationItem.titleView = titleViewLabel
+   
     let navigationController = UINavigationController(rootViewController: controller)
-
     return navigationController
   }
+  
 }
