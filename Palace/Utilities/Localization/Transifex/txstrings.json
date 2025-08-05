@@ -1194,6 +1194,9 @@
       "You are at position %ld in the queue for this book." : {
          "string" : "You are at position %ld in the queue for this book."
       },
+      "You can search for a book or an author using the search bar above.\n\nIf you want to search through all books, ensure you are on the Browse Books tab with 'All' selected." : {
+         "string" : "You can search for a book or an author using the search bar above.\n\nIf you want to search through all books, ensure you are on the Browse Books tab with 'All' selected."
+      },
       "You have already checked out this loan. You may need to refresh your My Books list to download the title." : {
          "string" : "You have already checked out this loan. You may need to refresh your My Books list to download the title."
       },
@@ -2495,6 +2498,9 @@
       "You are at position %ld in the queue for this book." : {
          "string" : "Olet tämän kirjan varausjonossa sijalla %ld"
       },
+      "You can search for a book or an author using the search bar above.\n\nIf you want to search through all books, ensure you are on the Browse Books tab with 'All' selected." : {
+         "string" : "Voit etsiä kirjaa tai kirjailijaa yllä olevan haun avulla.\n\nJos haluat kohdistaa haun kaikkiin kirjoihin, varmista, että olet Selaa-välilehdellä ja että 'Kaikki' on valittuna."
+      },
       "You have already checked out this loan. You may need to refresh your My Books list to download the title." : {
          "string" : "Olet jo lainannut tämän teoksen. Sinun on ehkä päivitettävä Omat lainat -listasi, jotta voit ladata teoksen."
       },
@@ -3795,6 +3801,9 @@
       },
       "You are at position %ld in the queue for this book." : {
          "string" : "Du är på plats %ld i kön till den här boken."
+      },
+      "You can search for a book or an author using the search bar above.\n\nIf you want to search through all books, ensure you are on the Browse Books tab with 'All' selected." : {
+         "string" : "Du kan söka efter en bok eller en författare med hjälp av sökfältet ovan.\n\nOm du vill rikta sökningen till alla böcker, se till att du är på fliken Bläddra böcker och att 'Alla' är valt."
       },
       "You have already checked out this loan. You may need to refresh your My Books list to download the title." : {
          "string" : "Du har redan lånat denna bok. Det kan hända att du måste uppdatera listan i Mina lån för att ladda ner titeln."
