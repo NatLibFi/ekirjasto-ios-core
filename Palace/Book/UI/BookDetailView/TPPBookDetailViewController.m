@@ -58,7 +58,7 @@
 
   if(UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad &&
      [[TPPRootTabBarController sharedController] traitCollection].horizontalSizeClass != UIUserInterfaceSizeClassCompact) {
-    self.modalPresentationStyle = UIModalPresentationFormSheet;
+    self.modalPresentationStyle = UIModalPresentationPageSheet;
   }
 
   [[NSNotificationCenter defaultCenter] addObserver:self
@@ -246,7 +246,7 @@
     [viewController.navigationController pushViewController:self animated:YES];
   } else {
     UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:self];
-    navVC.modalPresentationStyle = UIModalPresentationFormSheet;
+    navVC.modalPresentationStyle = UIModalPresentationPageSheet;
     [viewController presentViewController:navVC animated:YES completion:nil];
   }
 }
@@ -269,7 +269,7 @@
                                                                traitCollection:(UITraitCollection *)traitCollection
 {
   if (traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular) {
-    return UIModalPresentationFormSheet;
+    return UIModalPresentationPageSheet;
   } else {
     return UIModalPresentationNone;
   }

@@ -196,6 +196,7 @@ static NSString *DetailHTMLTemplate = nil;
      [[TPPRootTabBarController sharedController] traitCollection].horizontalSizeClass != UIUserInterfaceSizeClassCompact) {
     self.closeButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [self.closeButton setTitle:NSLocalizedString(@"Close", nil) forState:UIControlStateNormal];
+    self.closeButton.titleLabel.font = [UIFont palaceFontOfSize:20];
     [self.closeButton setTitleColor:[TPPConfiguration mainColor] forState:UIControlStateNormal];
     [self.closeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
     [self.closeButton setContentEdgeInsets:UIEdgeInsetsMake(0, 2, 0, 0)];
@@ -788,7 +789,7 @@ static NSString *DetailHTMLTemplate = nil;
   if (self.closeButton) {
     [self.closeButton autoPinEdgeToSuperviewMargin:ALEdgeTrailing];
     [self.closeButton autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.titleLabel];
-    [self.closeButton autoSetDimension:ALDimensionWidth toSize:80 relation:NSLayoutRelationLessThanOrEqual];
+    [self.closeButton autoSetDimension:ALDimensionWidth toSize:100 relation:NSLayoutRelationLessThanOrEqual];
     [NSLayoutConstraint deactivateConstraints:@[selectionButtonConstraint]];
     [self.closeButton autoPinEdge:ALEdgeLeading toEdge:ALEdgeTrailing ofView:self.titleLabel withOffset:MainTextPaddingLeft];
     [self.closeButton setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];

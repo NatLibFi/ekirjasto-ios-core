@@ -126,7 +126,7 @@
   [self.constraints removeAllObjects];
 
   int buttonsViewWidth = self.bounds.size.width;
-  double iPadButtonsViewMaxWidth = 540.0;
+  double iPadButtonsViewMaxWidth = 704.0; // for comparison with default value
   int numberOfButtons = (int)self.visibleButtons.count;
   double buttonOffset = 6.0;
   TPPRoundedButton *previousButton = nil;
