@@ -20,7 +20,7 @@ struct TPPSettingsView: View {
   var body: some View {
     settingsListView
       .navigationBarItems(leading: leadingBarButton)
-      .navigationBarTitle(Strings.Settings.settings)
+      .navigationBarTitle(Strings.Settings.settingsNavTitle)
       .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
         self.orientation = UIDevice.current.orientation
       }

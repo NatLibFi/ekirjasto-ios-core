@@ -26,6 +26,7 @@
 @property (nonatomic) TPPReloadView *reloadView;
 @property (nonatomic) UISearchBar *searchBar;
 @property (nonatomic) UILabel *noResultsLabel;
+@property (nonatomic) UILabel *startSearchLabel;
 @property (nonatomic) TPPFacetBarView *facetBarView;
 @property (nonatomic) NSTimer *debounceTimer;
 
@@ -84,12 +85,35 @@
   [self.searchBar sizeToFit];
   [self.searchBar becomeFirstResponder];
   
+  [self addSearchBarAsTitleViewOrSubview];
+  
   self.noResultsLabel = [[UILabel alloc] init];
   self.noResultsLabel.text = NSLocalizedString(@"No Results Found", nil);
   self.noResultsLabel.font = [UIFont palaceFontOfSize:17];
   [self.noResultsLabel sizeToFit];
   self.noResultsLabel.hidden = YES;
   [self.view addSubview:self.noResultsLabel];
+  
+  // Show instructions for user how to search books or authors.
+  // This message is shown in the empty search view before first search,
+  // and is replaced with actual search results (or "no results found") after search
+  self.startSearchLabel = [[UILabel alloc] init];
+  self.startSearchLabel.text = NSLocalizedString(@"You can search for a book or an author using the search bar above.\n\nIf you want to search through all books, ensure you are on the Browse Books tab with 'All' selected.", nil);
+  self.startSearchLabel.font = [UIFont palaceFontOfSize:18];
+  self.startSearchLabel.textColor = [UIColor grayColor];
+  self.startSearchLabel.numberOfLines = 0;
+  self.startSearchLabel.textAlignment = NSTextAlignmentCenter;
+  self.startSearchLabel.hidden = NO;
+  
+  [self.view addSubview:self.startSearchLabel];
+  
+  self.startSearchLabel.translatesAutoresizingMaskIntoConstraints = NO;
+  [NSLayoutConstraint activateConstraints:@[
+    [self.startSearchLabel.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
+    [self.startSearchLabel.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor],
+    [self.startSearchLabel.leadingAnchor constraintGreaterThanOrEqualToAnchor:self.view.leadingAnchor constant:20],
+    [self.startSearchLabel.trailingAnchor constraintLessThanOrEqualToAnchor:self.view.trailingAnchor constant:-20]
+  ]];
   
   __weak TPPCatalogSearchViewController *weakSelf = self;
   self.reloadView = [[TPPReloadView alloc] init];
@@ -101,8 +125,6 @@
   };
   self.reloadView.hidden = YES;
   [self.view addSubview:self.reloadView];
-  
-  self.navigationItem.titleView = self.searchBar;
 }
 
 - (void)viewWillLayoutSubviews
@@ -120,20 +142,14 @@
   [self.noResultsLabel integralizeFrame];
 
   [self.reloadView centerInSuperview];
+  
+
 }
 
 - (void)viewDidLayoutSubviews
 {
   [super viewDidLayoutSubviews];
-  UIEdgeInsets newInsets = UIEdgeInsetsMake(CGRectGetMaxY(self.facetBarView.frame),
-                                            0,
-                                            self.bottomLayoutGuide.length,
-                                            0);
-  if (!UIEdgeInsetsEqualToEdgeInsets(self.collectionView.contentInset, newInsets)) {
-    //self.collectionView.contentInset = newInsets; //disabled by Ellibs
-    self.collectionView.contentInset = UIEdgeInsetsMake(130, 0, self.bottomLayoutGuide.length, 0); //Added by Ellibs
-    //self.collectionView.scrollIndicatorInsets = newInsets; //disabled by Ellibs
-  }
+  [self updateSearchResultContentInsets];
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
@@ -224,6 +240,7 @@ didSelectItemAtIndexPath:(NSIndexPath *const)indexPath
 {
   self.collectionView.hidden = YES;
   self.noResultsLabel.hidden = YES;
+  self.startSearchLabel.hidden = YES;
   self.reloadView.hidden = YES;
   self.searchActivityIndicatorView.hidden = NO;
   [self.searchActivityIndicatorView startAnimating];
@@ -327,6 +344,111 @@ didSelectItemAtIndexPath:(NSIndexPath *const)indexPath
   //[self.facetBarView autoPinEdgeToSuperviewEdge:ALEdgeLeading];
   //[self.facetBarView autoPinEdgeToSuperviewEdge:ALEdgeTrailing];
   //[self.facetBarView autoPinEdgeToSuperviewMargin:ALEdgeTop];
+}
+
+- (void)addSearchBarAsTitleViewOrSubview
+{
+  // Set some defaults and checks
+  // to help handle all different cases of
+  // how searchbars and searchsheets are shown in the app
+  BOOL isRunningiOS18OrLater = NO;
+  BOOL hasParentCatalogNavigationController = [[self parentViewController] isKindOfClass:[TPPCatalogNavigationController class]];
+  BOOL isUsingPadDevice = [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad;
+  BOOL isUsingRegularSizeClass = [[TPPRootTabBarController sharedController] traitCollection].horizontalSizeClass == UIUserInterfaceSizeClassRegular;
+  
+  if (@available(iOS 18, *)) {
+    isRunningiOS18OrLater = YES;
+  }
+  
+  // Because of the floating tab bar we can not use the default approach
+  BOOL shouldAddSearchBarAsSubview = hasParentCatalogNavigationController && isUsingPadDevice && isUsingRegularSizeClass && isRunningiOS18OrLater;
+
+  // Determine the display style for the search bar:
+  // a) As a subview in the current view, keeping the top bar intact
+  // b) Integrated into the top bar, the default
+  // Note: In MyBooks views, the search sheet is already opened within the view,
+  // so option b) is used there also
+  if (shouldAddSearchBarAsSubview) {
+    [self.view addSubview:self.searchBar];
+    [self updateSearchBarFrame];
+  } else {
+    // use the default approach
+    self.navigationItem.titleView = self.searchBar;
+  }
+  
+}
+
+- (void)updateSearchBarFrame
+{
+  CGFloat searchBarOffsetX= 0.0;
+  CGFloat searchBarWidth = self.view.frame.size.width;
+  CGFloat searchBarHeight = self.searchBar.frame.size.height;
+  // This default is just an approximation
+  // to position the search bar in catalog Objective-C views
+  // similarly to the MyBooks SwiftUI views.
+  CGFloat searchBarOffsetY = 86.0;
+  
+  self.searchBar.frame = CGRectMake(searchBarOffsetX,
+                                    searchBarOffsetY,
+                                    searchBarWidth,
+                                    searchBarHeight);
+}
+
+- (void)updateSearchResultContentInsets
+{
+  // Set some defaults first
+  BOOL isRunningiOS18OrLater = NO;
+  CGFloat bottomContentInset = self.view.safeAreaInsets.bottom;
+  CGFloat leftContentInset = 0.0;
+  CGFloat rightContentInset = 0.0;
+  // Top inset value 75.0 is the default
+  // and used for search sheets opened from MyBooks (SwiftUI) views
+  CGFloat topContentInset = 75.0;
+
+  // Then some checks to help handle all different cases of
+  // how searchbars and searchsheets are shown in the app
+  BOOL hasParentCatalogNavigationController = [[self parentViewController] isKindOfClass:[TPPCatalogNavigationController class]];
+  BOOL isUsingPadDevice = [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad;
+  BOOL isUsingRegularSizeClass = [[TPPRootTabBarController sharedController] traitCollection].horizontalSizeClass == UIUserInterfaceSizeClassRegular;
+  
+  if (@available(iOS 18, *)) {
+    isRunningiOS18OrLater = YES;
+  }
+  
+  BOOL isFloatingTabBarVisibleOnPad = isUsingRegularSizeClass && isRunningiOS18OrLater;
+  
+  // If user is in MyBooks views and opens search sheet from there,
+  // the parent controller is different, these are skipped.
+  // and the default topContentInsent is used instead.
+  if (hasParentCatalogNavigationController) {
+    // User has navigated to the Browse Books (Objective-C) view
+    // and opened the search sheet
+    
+    if (isUsingPadDevice) {
+      // Device is iPad
+      
+      if (isFloatingTabBarVisibleOnPad) {
+        [self updateSearchBarFrame];
+        topContentInset = 150.0;
+      } else {
+        // Device interface is compact (or unspecified) OR iOS is older than 18.
+        // Bottom tab bar is visible.
+        topContentInset = 100.0;
+      }
+      
+    } else {
+      // Device is iPhone
+      topContentInset = 120.0;
+    }
+    
+  }
+  
+  // Set insets around content in search sheet (around the search results).
+  // Top inset varies based on device and style of search bar.
+  self.collectionView.contentInset = UIEdgeInsetsMake(topContentInset,
+                                                      leftContentInset,
+                                                      bottomContentInset,
+                                                      rightContentInset);
 }
 
 #pragma mark NYPLEntryPointViewDelegate

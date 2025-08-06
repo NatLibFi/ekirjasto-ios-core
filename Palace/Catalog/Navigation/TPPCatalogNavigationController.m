@@ -42,6 +42,19 @@
                          initWithURL:urlToLoad];
   
   self.viewController.title = NSLocalizedString(@"Browse Books", nil);
+  
+  // Title label view is used to make sure that view's name remains visible,
+  // at the top of the view, because the actual view title may be hidden.
+  // Title label was added because iPads using iOS 18 or higher
+  // use the floating tab bar with a regular horizontal size class.
+  UILabel *titleViewlabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 150)];
+  titleViewlabel.numberOfLines = 0;
+  titleViewlabel.lineBreakMode = NSLineBreakByWordWrapping;
+  titleViewlabel.textAlignment = NSTextAlignmentCenter;
+  titleViewlabel.font = [UIFont semiBoldPalaceFontOfSize: 16];
+  titleViewlabel.text = NSLocalizedString(@"Browse Books", nil);
+  titleViewlabel.accessibilityTraits = UIAccessibilityTraitHeader;
+  self.viewController.navigationItem.titleView = titleViewlabel;
 
 #ifdef SIMPLYE
   [self setNavigationLeftBarButtonForVC:self.viewController];
