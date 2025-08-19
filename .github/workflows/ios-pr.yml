@@ -29,7 +29,7 @@ jobs:
         run: scripts/show-ci-info.sh
 
       - name: SSH setup (for cloning ekirjasto-ios-keys through Fastlane match)
-        uses: MrSquaare/ssh-setup-action@v3.1.0
+        uses: MrSquaare/ssh-setup-action@v3.1.1
         with:
           private-key-name: ekirjasto-ci-ed25519
           private-key: ${{ secrets.SSH_PRIVATE_KEY }}
