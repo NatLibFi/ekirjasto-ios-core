@@ -1,5 +1,4 @@
-1.3.6
 Vi utvecklar appen och åtgärdar buggar kontinuerligt. Kom ihåg att kontrollera att du alltid använder den nyaste versionen av appen.
 
-- Bugfixar
-- UI-uppdateringar
+I den här versionen: 
+- UI-uppdateringar för iPad
