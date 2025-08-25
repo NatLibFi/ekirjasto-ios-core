@@ -79,7 +79,7 @@ private let ButtonPadding: CGFloat = 6.0
     self.imageEdgeInsets = UIEdgeInsets(top: 1, left: 8, bottom: -1, right: -8)
     self.contentHorizontalAlignment = .trailing
     self.semanticContentAttribute = .forceRightToLeft
-    self.tintColor = UIColor(named: "ColorEkirjastoGreen")!
+    self.tintColor = UIColor(named: "ColorEkirjastoBlack")!
     titleLabel?.font = UIFont.boldPalaceFont(ofSize: 13)
   }
   
