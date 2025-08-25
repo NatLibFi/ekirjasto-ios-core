@@ -59,14 +59,24 @@
      forControlEvents:UIControlEventTouchUpInside];
     button.exclusiveTouch = YES;
     [buttons addObject:button];
-    button.accessibilityLabel = book.title;
+    //Add accessibilitylable for a book of unknown type
+    button.accessibilityLabel = [NSString stringWithFormat:NSLocalizedString(@"%@ by %@", nil), book.title, book.authors];
+    //Add hint telling what happens when title is tapped
+    button.accessibilityHint = [NSString stringWithFormat:NSLocalizedString(@"Show book's page", nil)];
     [self.scrollView addSubview:button];
     
     if ([book defaultBookContentType] == TPPBookContentTypeAudiobook) {
+      //Add accessibility label for audiobook
+      button.accessibilityLabel = button.accessibilityLabel = [NSString stringWithFormat:NSLocalizedString(@"%@ by %@, audiobook", nil), book.title, book.authors];;
       TPPContentBadgeImageView *badge = [[TPPContentBadgeImageView alloc] initWithBadgeImage:TPPBadgeImageAudiobook];
       [TPPContentBadgeImageView pinWithBadge:badge toView:button isLane:YES];
-      button.accessibilityLabel = [@"Audiobook: " stringByAppendingString:book.title];
       button.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 6, 0);
+    } else if ([book defaultBookContentType] == TPPBookContentTypePdf) {
+      //Add accessibility label for Pdf
+      button.accessibilityLabel = [NSString stringWithFormat:NSLocalizedString(@"%@ by %@, Pdf", nil), book.title, book.authors];
+    } else if ([book defaultBookContentType] == TPPBookContentTypeEpub) {
+      //Add accessibility label for Epub
+      button.accessibilityLabel = [NSString stringWithFormat:NSLocalizedString(@"%@ by %@, ebook", nil), book.title, book.authors];
     }
   }];
   
