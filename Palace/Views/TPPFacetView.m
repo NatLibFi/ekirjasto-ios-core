@@ -127,9 +127,15 @@ CGFloat const toolbarHeight = 40;
 
 - (void)didSelectGroup:(UIButton *)sender
 {
+  //Add the name of the facet group to the top of the facets
+  //To indicate what we are choosing
+  //To match the swift implementation
+  NSString *title = [self.dataSource
+   facetView:self nameForFacetGroupAtIndex:sender.tag];
+  
   UIAlertController *const alertController =
     [UIAlertController
-     alertControllerWithTitle:nil
+     alertControllerWithTitle:title
      message:nil
      preferredStyle:UIAlertControllerStyleActionSheet];
   
