@@ -77,10 +77,22 @@
   
   self.searchBar = [[UISearchBar alloc] init];
   self.searchBar.delegate = self;
-  self.searchBar.placeholder = NSLocalizedString(@"Search", nil);
-  self.searchBar.searchTextField.leftView.tintColor = [UIColor colorNamed:@"ColorEkirjastoSearchBarText"];
+  
+  // Create an attribute with desired color for the placeholder text
+  NSDictionary *attributes = @{
+    NSForegroundColorAttributeName: [UIColor colorNamed:@"ColorEkirjastoAlwaysBlack"]
+  };
+  // Create placeholder with attributes
+  NSAttributedString *attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Search", nil) attributes:attributes];
+  // Set the attributed placeholder
+  self.searchBar.searchTextField.attributedPlaceholder = attributedPlaceholder;
+  // The magnifying glass color
+  self.searchBar.searchTextField.leftView.tintColor = [UIColor colorNamed:@"ColorEkirjastoAlwaysBlack"];
+  // The user-written text color
   self.searchBar.searchTextField.textColor = [UIColor colorNamed:@"ColorEkirjastoAlwaysBlack"];
+  // The blinking line color
   self.searchBar.searchTextField.tintColor = [UIColor colorNamed:@"ColorEkirjastoSearchBarText"];
+  // Color of search background
   self.searchBar.searchTextField.backgroundColor = [UIColor colorNamed:@"ColorEkirjastoSearchBar"];
   [self.searchBar sizeToFit];
   [self.searchBar becomeFirstResponder];
@@ -100,7 +112,7 @@
   self.startSearchLabel = [[UILabel alloc] init];
   self.startSearchLabel.text = NSLocalizedString(@"You can search for a book or an author using the search bar above.\n\nIf you want to search through all books, ensure you are on the Browse Books tab with 'All' selected.", nil);
   self.startSearchLabel.font = [UIFont palaceFontOfSize:18];
-  self.startSearchLabel.textColor = [UIColor grayColor];
+  self.startSearchLabel.textColor = [UIColor colorNamed:@"ColorEkirjastoBlack"];
   self.startSearchLabel.numberOfLines = 0;
   self.startSearchLabel.textAlignment = NSTextAlignmentCenter;
   self.startSearchLabel.hidden = NO;
