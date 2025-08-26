@@ -121,7 +121,7 @@ struct HoldsView: View {
   @ViewBuilder private var emptyHoldsView: some View {
     Text(Strings.MyBooksView.holdsEmptyViewMessage)
       .multilineTextAlignment(.center)
-      .foregroundColor(.gray)
+      .foregroundColor(Color("ColorEkirjastoBlack"))
       .horizontallyCentered()
       .verticallyCentered()
   }
@@ -129,7 +129,7 @@ struct HoldsView: View {
   @ViewBuilder private var logInInstructionsView: some View {
     Text(Strings.MyBooksView.holdsNotLoggedInViewMessage)
       .multilineTextAlignment(.center)
-      .foregroundColor(.gray)
+      .foregroundColor(Color("ColorEkirjastoBlack"))
       .horizontallyCentered()
       .verticallyCentered()
   }

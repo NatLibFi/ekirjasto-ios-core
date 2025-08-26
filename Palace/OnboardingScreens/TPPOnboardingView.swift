@@ -117,7 +117,7 @@ struct TPPOnboardingView: View {
       } label: {
         Image(systemName: "xmark.circle.fill")
           .font(.title)
-          .foregroundColor(.gray)
+          .foregroundColor(.black)
           .padding(.top, 50)
       }
       .accessibility(label: Text(Strings.Generic.close))
