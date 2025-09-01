@@ -73,7 +73,7 @@
       button.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 6, 0);
     } else if ([book defaultBookContentType] == TPPBookContentTypePdf) {
       //Add accessibility label for Pdf
-      button.accessibilityLabel = [NSString stringWithFormat:NSLocalizedString(@"%@ by %@, Pdf", nil), book.title, book.authors];
+      button.accessibilityLabel = [NSString stringWithFormat:NSLocalizedString(@"%@ by %@, pdf", nil), book.title, book.authors];
     } else if ([book defaultBookContentType] == TPPBookContentTypeEpub) {
       //Add accessibility label for Epub
       button.accessibilityLabel = [NSString stringWithFormat:NSLocalizedString(@"%@ by %@, ebook", nil), book.title, book.authors];
