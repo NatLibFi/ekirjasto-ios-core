@@ -36,6 +36,24 @@
       "%@ (file %@ of %d)" : {
          "string" : "%1$@ (file %2$@ of %3$d)"
       },
+      "%@ -lane" : {
+         "string" : "%@ -lane"
+      },
+      "%@ by %@" : {
+         "string" : "%1$@ by %2$@"
+      },
+      "%@ by %@, Pdf" : {
+         "string" : "%1$@ by %2$@, Pdf"
+      },
+      "%@ by %@, audiobook" : {
+         "string" : "%1$@ by %2$@, audiobook"
+      },
+      "%@ by %@, ebook" : {
+         "string" : "%1$@ by %2$@, ebook"
+      },
+      "%@ by %@, pdf" : {
+         "string" : "%1$@ by %2$@, pdf"
+      },
       "%@ played. %@ remaining." : {
          "string" : "%1$@ played. %2$@ remaining."
       },
@@ -329,6 +347,9 @@
       },
       "Category" : {
          "string" : "Category"
+      },
+      "Change %@ choice" : {
+         "string" : "Change %@ choice"
       },
       "Chapters" : {
          "string" : "Chapters"
@@ -918,6 +939,9 @@
       "Show Barcode" : {
          "string" : "Show Barcode"
       },
+      "Show book's page" : {
+         "string" : "Show book's page"
+      },
       "Sign In Error" : {
          "string" : "Sign In Error"
       },
@@ -1340,6 +1364,24 @@
       "%@ (file %@ of %d)" : {
          "string" : "%1$@ (tiedosto %2$@/%3$d)"
       },
+      "%@ -lane" : {
+         "string" : "%@ kategoria"
+      },
+      "%@ by %@" : {
+         "string" : "%1$@, tekijä %2$@"
+      },
+      "%@ by %@, Pdf" : {
+         "string" : "%1$@, tekijä %2$@, pdf"
+      },
+      "%@ by %@, audiobook" : {
+         "string" : "%1$@, tekijä %2$@, äänikirja"
+      },
+      "%@ by %@, ebook" : {
+         "string" : "%1$@, tekijä %2$@, e-kirja"
+      },
+      "%@ by %@, pdf" : {
+         "string" : "%1$@, tekijä %2$@, pdf"
+      },
       "%@ played. %@ remaining." : {
          "string" : "%1$@ toistettu. %2$@ jäljellä."
       },
@@ -1633,6 +1675,9 @@
       },
       "Category" : {
          "string" : "Luokka"
+      },
+      "Change %@ choice" : {
+         "string" : "Vaihda %@ valintaa"
       },
       "Chapters" : {
          "string" : "Luvut"
@@ -2222,6 +2267,9 @@
       "Show Barcode" : {
          "string" : "Näytä viivakoodi"
       },
+      "Show book's page" : {
+         "string" : "Näytä kirjan sivu"
+      },
       "Sign In Error" : {
          "string" : "Kirjautumisvirhe"
       },
@@ -2644,6 +2692,24 @@
       "%@ (file %@ of %d)" : {
          "string" : "%1$@ (fil %2$@ av %3$d)"
       },
+      "%@ -lane" : {
+         "string" : "%@ kategori"
+      },
+      "%@ by %@" : {
+         "string" : "%1$@ av %2$@"
+      },
+      "%@ by %@, Pdf" : {
+         "string" : "%1$@ av %2$@, pdf"
+      },
+      "%@ by %@, audiobook" : {
+         "string" : "%1$@ av %2$@, ljudbok"
+      },
+      "%@ by %@, ebook" : {
+         "string" : "%1$@ av %2$@, e-bok"
+      },
+      "%@ by %@, pdf" : {
+         "string" : "%1$@ av %2$@, pdf"
+      },
       "%@ played. %@ remaining." : {
          "string" : "%1$@ uppspelat. %2$@ återstår."
       },
@@ -2937,6 +3003,9 @@
       },
       "Category" : {
          "string" : "Kategori"
+      },
+      "Change %@ choice" : {
+         "string" : "Ändra %@ valet"
       },
       "Chapters" : {
          "string" : "Kapitel"
@@ -3525,6 +3594,9 @@
       },
       "Show Barcode" : {
          "string" : "Visa streckkod"
+      },
+      "Show book's page" : {
+         "string" : "Visa bokens sida"
       },
       "Sign In Error" : {
          "string" : "Inloggningsfel"
