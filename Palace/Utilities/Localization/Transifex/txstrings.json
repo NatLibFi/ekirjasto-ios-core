@@ -321,6 +321,9 @@
       "Browse Books" : {
          "string" : "Browse Books"
       },
+      "Browse the selection, borrow and read or listen! If a book is on loan, press \"reserve\" to get it when it becomes available." : {
+         "string" : "Browse the selection, borrow and read or listen! If a book is on loan, press \"reserve\" to get it when it becomes available."
+      },
       "By signing in, you agree the End User License Agreement" : {
          "string" : "By signing in, you agree the End User License Agreement"
       },
@@ -717,6 +720,9 @@
       "Opens audiobook %@ for listening" : {
          "string" : "Opens audiobook %@ for listening"
       },
+      "Or do you want something to listen to? The collection also includes an untold number of audiobooks! Click \"borrow\" to listen to the audiobook." : {
+         "string" : "Or do you want something to listen to? The collection also includes an untold number of audiobooks! Click \"borrow\" to listen to the audiobook."
+      },
       "PDF" : {
          "string" : "PDF"
       },
@@ -996,6 +1002,12 @@
       "Swedish" : {
          "string" : "Swedish"
       },
+      "Swipe left for next page." : {
+         "string" : "Swipe left for next page."
+      },
+      "Swipe left to close tutorial." : {
+         "string" : "Swipe left to close tutorial."
+      },
       "Sync Bookmarks" : {
          "string" : "Sync Bookmarks"
       },
@@ -1191,6 +1203,9 @@
       "We're sorry. Our sign up system is currently down. Please try again later." : {
          "string" : "We're sorry. Our sign up system is currently down. Please try again later."
       },
+      "Welcome to E-library! This service is provided by your local library." : {
+         "string" : "Welcome to E-library! This service is provided by your local library."
+      },
       "Welcome to Open eBooks" : {
          "string" : "Welcome to Open eBooks"
       },
@@ -1217,6 +1232,9 @@
       },
       "You are at position %ld in the queue for this book." : {
          "string" : "You are at position %ld in the queue for this book."
+      },
+      "You can browse e-books and audiobooks by genre, book or author, or browse recommendation lists made by librarians." : {
+         "string" : "You can browse e-books and audiobooks by genre, book or author, or browse recommendation lists made by librarians."
       },
       "You can search for a book or an author using the search bar above.\n\nIf you want to search through all books, ensure you are on the Browse Books tab with 'All' selected." : {
          "string" : "You can search for a book or an author using the search bar above.\n\nIf you want to search through all books, ensure you are on the Browse Books tab with 'All' selected."
@@ -1649,6 +1667,9 @@
       "Browse Books" : {
          "string" : "Selaa"
       },
+      "Browse the selection, borrow and read or listen! If a book is on loan, press \"reserve\" to get it when it becomes available." : {
+         "string" : "Selaa valikoimaa, lainaa ja lue tai kuuntele! Jos kirja on lainassa, paina varaa, saat sen käyttöösi kun se vapautuu. "
+      },
       "By signing in, you agree the End User License Agreement" : {
          "string" : "Kirjautumalla sisään hyväksyt loppukäyttäjän lisenssisopimuksen"
       },
@@ -2045,6 +2066,9 @@
       "Opens audiobook %@ for listening" : {
          "string" : "Avaa äänikirjan %@ kuuntelua varten"
       },
+      "Or do you want something to listen to? The collection also includes an untold number of audiobooks! Click \"borrow\" to listen to the audiobook." : {
+         "string" : "Vai haluatko sittenkin kuunneltavaa? Kokoelmassa myös lukematon määrä äänikirjoja! Klikkaa lainaa ja pääset kuuntelemaan äänikirjan."
+      },
       "PDF" : {
          "string" : "PDF"
       },
@@ -2324,6 +2348,12 @@
       "Swedish" : {
          "string" : "ruotsi"
       },
+      "Swipe left for next page." : {
+         "string" : "Seuraava sivu pyyhkäisemällä vasemmalle."
+      },
+      "Swipe left to close tutorial." : {
+         "string" : "Sulje ohje pyyhkäisemällä vasemmalle."
+      },
       "Sync Bookmarks" : {
          "string" : "Synkronoi kirjanmerkit"
       },
@@ -2519,6 +2549,9 @@
       "We're sorry. Our sign up system is currently down. Please try again later." : {
          "string" : "Olemme pahoillamme. Kirjautumisjärjestelmämme on tällä hetkellä poissa käytöstä. Yritä myöhemmin uudelleen."
       },
+      "Welcome to E-library! This service is provided by your local library." : {
+         "string" : "Tervetuloa E-kirjastoon! Tämän palvelun sinulle tarjoaa kotikuntasi kirjasto."
+      },
       "Welcome to Open eBooks" : {
          "string" : "Tervetuloa Open eBooksiin"
       },
@@ -2545,6 +2578,9 @@
       },
       "You are at position %ld in the queue for this book." : {
          "string" : "Olet tämän kirjan varausjonossa sijalla %ld"
+      },
+      "You can browse e-books and audiobooks by genre, book or author, or browse recommendation lists made by librarians." : {
+         "string" : "Voit selata e- ja äänikirjoja lajeittain, kirjan tai kirjailijan mukaan tai tutkia kirjastolaisten tekemiä nostolistoja. "
       },
       "You can search for a book or an author using the search bar above.\n\nIf you want to search through all books, ensure you are on the Browse Books tab with 'All' selected." : {
          "string" : "Voit etsiä kirjaa tai kirjailijaa yllä olevan haun avulla.\n\nJos haluat kohdistaa haun kaikkiin kirjoihin, varmista, että olet Selaa-välilehdellä ja että 'Kaikki' on valittuna."
@@ -2977,6 +3013,9 @@
       "Browse Books" : {
          "string" : "Bläddra böcker"
       },
+      "Browse the selection, borrow and read or listen! If a book is on loan, press \"reserve\" to get it when it becomes available." : {
+         "string" : "Bläddra i urvalet, låna och läs eller lyssna! Om boken är utlånad, tryck på reservera för att få den när den blir tillgänglig."
+      },
       "By signing in, you agree the End User License Agreement" : {
          "string" : "Genom att logga in godkänner du slutanvändaravtalet"
       },
@@ -3373,6 +3412,9 @@
       "Opens audiobook %@ for listening" : {
          "string" : "Öppnar ljudboken %@ för att lyssna"
       },
+      "Or do you want something to listen to? The collection also includes an untold number of audiobooks! Click \"borrow\" to listen to the audiobook." : {
+         "string" : "Eller vill du sen också lyssna på något? I samlingen finns även ett otaligt antal ljudböcker! Klicka på låna så kommer du åt att lyssna på ljudboken. "
+      },
       "PDF" : {
          "string" : "PDF"
       },
@@ -3652,6 +3694,12 @@
       "Swedish" : {
          "string" : "svenska"
       },
+      "Swipe left for next page." : {
+         "string" : "Svep åt vänster för nästa sidan."
+      },
+      "Swipe left to close tutorial." : {
+         "string" : "Svep åt vänster för att stänga handledningen."
+      },
       "Sync Bookmarks" : {
          "string" : "Synkronisera bokmärken"
       },
@@ -3847,6 +3895,9 @@
       "We're sorry. Our sign up system is currently down. Please try again later." : {
          "string" : "Vi beklagar. Vårt registreringssystem ligger nere just nu. Försök på nytt senare."
       },
+      "Welcome to E-library! This service is provided by your local library." : {
+         "string" : "Välkommen till e-biblioteket! Denna tjänst erbjuds till dig av din hemkommuns biblioteket."
+      },
       "Welcome to Open eBooks" : {
          "string" : "Välkommen till Open eBooks"
       },
@@ -3873,6 +3924,9 @@
       },
       "You are at position %ld in the queue for this book." : {
          "string" : "Du är på plats %ld i kön till den här boken."
+      },
+      "You can browse e-books and audiobooks by genre, book or author, or browse recommendation lists made by librarians." : {
+         "string" : "Du kan bläddra bland e- och ljudböcker enligt genre, bok eller författare eller undersöka bibliotekspersonalens listor med verk de vill. "
       },
       "You can search for a book or an author using the search bar above.\n\nIf you want to search through all books, ensure you are on the Browse Books tab with 'All' selected." : {
          "string" : "Du kan söka efter en bok eller en författare med hjälp av sökfältet ovan.\n\nOm du vill rikta sökningen till alla böcker, se till att du är på fliken Bläddra böcker och att 'Alla' är valt."
