@@ -81,9 +81,8 @@ struct TPPOnboardingView: View {
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width: geometry.size.width)
-            .accessibility(label: Text(onboardingImageDescriptions[index]))
-            .accessibilityHint(Text(Strings.TPPOnboardingView.swipeNextHint))
-            .accessibility(hint: Text(index == onboardingImageNames.count - 1 ? Strings.TPPOnboardingView.swipeCloseHint : Strings.TPPOnboardingView.swipeNextHint))
+            .accessibilityLabel(Text(onboardingImageDescriptions[index]))
+            .accessibilityHint(Text(index == onboardingImageNames.count - 1 ? Strings.TPPOnboardingView.swipeCloseHint : Strings.TPPOnboardingView.swipeNextHint))
         }
       }
       .contentShape(Rectangle())
