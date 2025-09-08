@@ -192,6 +192,15 @@ struct Strings {
     static let bookFormatForEBooks = NSLocalizedString("eBook", comment: "Common book format name for all eBooks.")
   }
   
+  struct TPPOnboardingView {
+    static let contentDescription1 = NSLocalizedString("Welcome to E-library! This service is provided by your local library.", comment: "Text of the first page of the onboarding tutorial")
+    static let contentDescription2 = NSLocalizedString("You can browse e-books and audiobooks by genre, book or author, or browse recommendation lists made by librarians.", comment: "Text of the second page of the onboarding tutorial")
+    static let contentDescription3 = NSLocalizedString("Browse the selection, borrow and read or listen! If a book is on loan, press \"reserve\" to get it when it becomes available.", comment: "Text of the third page of the onboarding tutorial")
+    static let contentDescription4 = NSLocalizedString("Or do you want something to listen to? The collection also includes an untold number of audiobooks! Click \"borrow\" to listen to the audiobook.", comment: "Text of the fourth page of the onboarding tutorial")
+    static let swipeNextHint = NSLocalizedString("Swipe left for next page.", comment: "Hint to show next image in the onboarding tutorial")
+    static let swipeCloseHint = NSLocalizedString("Swipe left to close tutorial.", comment: "Hint to close the onboarding tutorial")
+  }
+  
   struct TPPPDFNavigation {
     static let resume = NSLocalizedString("Resume", comment: "A button to continue reading title.")
   }
@@ -286,6 +295,18 @@ struct Strings {
     static let bookRemovedFromFavoritesNotificationBannerMessage = NSLocalizedString("\"%@\" has been removed from your Favorites.", comment: "The message in a notification banner informing the user that the book is removed from user's favorite books")
   }
   
+  struct TPPCatalogLaneCell {
+    static let audioDescriptionEbook = NSLocalizedString("%@ by %@, ebook", comment: "BookCover cell accessibility label for ebook")
+    static let audioDescriptionPdf = NSLocalizedString("%@ by %@, pdf", comment: "BookCover cell accessibility label for pdf")
+    static let audioDescriptionAudiobook = NSLocalizedString("%@ by %@, audiobook", comment: "BookCover cell accessibility label for audiobook")
+    static let audioDescriptionUnknownFormat = NSLocalizedString("%@ by %@", comment: "BookCover cell accessibility label for unknown format")
+    static let audioDescriptionAction = NSLocalizedString("Show book's page", comment: "Describes what happens when the user taps the book cover")
+  }
+  
+  struct TPPCatalogGroupedViewController {
+    static let laneDescription = NSLocalizedString("%@ -lane", comment: "Audio description for lane title")
+  }
+  
   struct MyBooksView {
     static let loansAndHoldsNavTitle = NSLocalizedString("My Books", comment: "Tab title for loans and holds view")
     static let favoritesAndReadNavTitle = NSLocalizedString("Favorites", comment: "Tab title for favorites and read books view")
@@ -310,6 +331,7 @@ struct Strings {
   struct FacetView {
     static let author = NSLocalizedString("Author", comment: "")
     static let title = NSLocalizedString("Title", comment: "")
+    static let facetHint = NSLocalizedString("Change %@ choice", comment: "Read out hint when a facet is possibly selected")
   }
   
   struct BookCell {

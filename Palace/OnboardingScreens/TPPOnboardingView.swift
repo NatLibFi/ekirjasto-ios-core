@@ -15,6 +15,14 @@ struct TPPOnboardingView: View {
   private var activationDistance: CGFloat = 0.8
   
   private var onboardingImageNames : [String]
+  
+  private var onboardingImageDescriptions : [String] = [
+    Strings.TPPOnboardingView.contentDescription1,
+    Strings.TPPOnboardingView.contentDescription2,
+    Strings.TPPOnboardingView.contentDescription3,
+    Strings.TPPOnboardingView.contentDescription4
+  ]
+  
   @GestureState private var translation: CGFloat = 0
   
   @State private var showLoginView = false
@@ -68,12 +76,13 @@ struct TPPOnboardingView: View {
   private func onboardingSlides() -> some View {
     GeometryReader { geometry in
       HStack(spacing: 0) {
-        ForEach(onboardingImageNames, id: \.self) { imageName in
-          Image(imageName)
+        ForEach(0..<onboardingImageNames.count, id: \.self) { index in
+          Image(onboardingImageNames[index])
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width: geometry.size.width)
-            .accessibility(label: Text(NSLocalizedString(imageName, comment: "Onboarding slide localised description")))
+            .accessibilityLabel(Text(onboardingImageDescriptions[index]))
+            .accessibilityHint(Text(index == onboardingImageNames.count - 1 ? Strings.TPPOnboardingView.swipeCloseHint : Strings.TPPOnboardingView.swipeNextHint))
         }
       }
       .contentShape(Rectangle())
@@ -117,7 +126,7 @@ struct TPPOnboardingView: View {
       } label: {
         Image(systemName: "xmark.circle.fill")
           .font(.title)
-          .foregroundColor(.gray)
+          .foregroundColor(Color("ColorEkirjastoBlack"))
           .padding(.top, 50)
       }
       .accessibility(label: Text(Strings.Generic.close))

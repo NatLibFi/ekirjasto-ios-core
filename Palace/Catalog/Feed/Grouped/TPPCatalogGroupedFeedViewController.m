@@ -314,7 +314,7 @@ viewForHeaderInSection:(NSInteger const)section
     button.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     button.tag = section;
     TPPCatalogLane *const lane = self.feed.lanes[button.tag];
-    button.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"More %@ books", nil), lane.title];
+    button.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"%@ -lane", nil), lane.title];
     button.accessibilityTraits = UIAccessibilityTraitHeader;
     button.accessibilityHint = NSLocalizedString(@"Tap to view more books in this category", "Descriptive label for screen readers");
     [button addTarget:self
@@ -324,7 +324,7 @@ viewForHeaderInSection:(NSInteger const)section
     [view addSubview:button];
   }
   
-  // Creates a button with text and arrrow and allows the user to tap on it to view more books in the category.
+  // Creates a button with text and arrow and allows the user to tap on it to view more books in the category.
   {
     UIButton *const button = [UIButton buttonWithType:UIButtonTypeSystem];
     button.titleLabel.font = [UIFont palaceFontOfSize:14]; //Edited by Ellibs
@@ -341,7 +341,7 @@ viewForHeaderInSection:(NSInteger const)section
     button.frame = CGRectMake(CGRectGetWidth(view.frame) - CGRectGetWidth(button.frame) - 30, //Edited by Ellibs
                               13,
                               CGRectGetWidth(button.frame)+30, //Edited by Ellibs
-                              CGRectGetHeight(button.frame));
+                              CGRectGetHeight(button.frame)+15);
     button.tag = section;
     TPPCatalogLane *const lane = self.feed.lanes[button.tag];
     button.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"More %@ books", nil), lane.title];

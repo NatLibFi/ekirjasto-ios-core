@@ -312,7 +312,6 @@ private let standardCellHeight: CGFloat = 44.0
       moreButton.setTitleColor(.black, for: .normal)
     }
     moreButton.titleLabel?.font = UIFont.palaceFont(ofSize: 14) //Edited by Ellibs
-    moreButton.tintColor = UIColor(named: "ColorEkirjastoGreen") //Added by Ellibs
     moreButton.contentHorizontalAlignment = .trailing //Added by Ellibs
     moreButton.semanticContentAttribute = .forceRightToLeft //Added by Ellibs
     moreButton.setImage(UIImage(named: "ArrowRight"), for: .normal) //Added by Ellibs

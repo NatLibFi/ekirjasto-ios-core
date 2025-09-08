@@ -79,7 +79,7 @@ struct FavoritesView: View {
           VStack {
             // user is logged in and has no favorite books
             // show instructions how to add a book to favorites
-            emptyHoldsView
+            emptyFavoritesView
           }
           .frame(minHeight: geometry.size.height)
           .refreshable {
@@ -119,10 +119,10 @@ struct FavoritesView: View {
 
   }
 
-  @ViewBuilder private var emptyHoldsView: some View {
+  @ViewBuilder private var emptyFavoritesView: some View {
     Text(Strings.MyBooksView.favoritesEmptyViewMessage)
       .multilineTextAlignment(.center)
-      .foregroundColor(.gray)
+      .foregroundColor(Color("ColorEkirjastoBlack"))
       .horizontallyCentered()
       .verticallyCentered()
   }
@@ -130,7 +130,7 @@ struct FavoritesView: View {
   @ViewBuilder private var logInInstructionsView: some View {
     Text(Strings.MyBooksView.favoritesNotLoggedInViewMessage)
       .multilineTextAlignment(.center)
-      .foregroundColor(.gray)
+      .foregroundColor(Color("ColorEkirjastoBlack"))
       .horizontallyCentered()
       .verticallyCentered()
   }

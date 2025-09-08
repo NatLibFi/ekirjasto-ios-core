@@ -113,7 +113,7 @@ extension TPPConfiguration {
   
   @objc static func iconColor() -> UIColor {
     if #available(iOS 13, *) {
-      return UIColor(named: "ColorEkirjastoIcon")!
+      return UIColor(named: "ColorEkirjastoBlack")!
     } else {
       return .black
     }

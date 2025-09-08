@@ -33,16 +33,18 @@ struct FacetView: View {
 
   private var sortView: some View {
 
+    //Create the button with the active sort option shown
     Button(action: {
       showAlert = true
     }) {
       Text(facetViewModel.activeSort.localizedString)
         .font(Font(uiFont: UIFont.boldPalaceFont(ofSize: 13)))
+        .accessibilityHint(String.localizedStringWithFormat(Strings.FacetView.facetHint, facetViewModel.groupName))
       Image("ArrowDown")
         .resizable()
         .scaledToFill()
         .frame(width: 19, height: 19)
-        .foregroundColor(Color("ColorEkirjastoGreen"))
+        .foregroundColor(Color("ColorEkirjastoBlack"))
         .padding(EdgeInsets(top: 1, leading: -8, bottom: -1, trailing: 8))
     }
 
@@ -60,7 +62,7 @@ struct FacetView: View {
         })
 
       buttons.append(
-        Alert.Button.default(Text(facetViewModel.activeSort.localizedString)) {
+        ActionSheet.Button.default(Text(facetViewModel.activeSort.localizedString)) {
           self.facetViewModel.activeSort = facetViewModel.activeSort
         })
     }

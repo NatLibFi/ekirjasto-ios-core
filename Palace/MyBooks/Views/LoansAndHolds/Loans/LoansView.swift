@@ -117,7 +117,7 @@ struct LoansView: View {
   @ViewBuilder private var emptyLoansView: some View {
     Text(Strings.MyBooksView.loansEmptyViewMessage)
       .multilineTextAlignment(.center)
-      .foregroundColor(.gray)
+      .foregroundColor(Color("ColorEkirjastoBlack"))
       .horizontallyCentered()
       .verticallyCentered()
   }
@@ -125,7 +125,7 @@ struct LoansView: View {
   @ViewBuilder private var logInInstructionsView: some View {
     Text(Strings.MyBooksView.loansNotLoggedInViewMessage)
       .multilineTextAlignment(.center)
-      .foregroundColor(.gray)
+      .foregroundColor(Color("ColorEkirjastoBlack"))
       .horizontallyCentered()
       .verticallyCentered()
   }
