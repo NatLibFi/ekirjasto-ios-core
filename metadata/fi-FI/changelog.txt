@@ -1,4 +1,4 @@
 Kehitämme sovellusta ja korjaamme bugeja jatkuvasti. Tarkistathan, että sinulla on aina käytössäsi sovelluksen uusin versio.
 
 Tässä versiossa:
-- käyttöliittymäpäivityksiä iPadille
+- saavutettavuuspäivityksiä

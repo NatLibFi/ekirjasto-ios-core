@@ -1,4 +1,4 @@
 We are continually developing the app and fixing bugs. Please make sure that you are always using the latest version.
 
 In this version:
-- iPad UI updates
+- accessibility updates
