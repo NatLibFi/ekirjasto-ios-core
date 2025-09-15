@@ -1,4 +1,4 @@
 Vi utvecklar appen och åtgärdar buggar kontinuerligt. Kom ihåg att kontrollera att du alltid använder den nyaste versionen av appen.
 
 I den här versionen: 
-- UI-uppdateringar för iPad
+- tillgänglighetsuppdateringar
