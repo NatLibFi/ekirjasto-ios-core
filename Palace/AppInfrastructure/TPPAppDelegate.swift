@@ -21,7 +21,9 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
   // MARK: - Application Lifecycle
   
   func applicationDidFinishLaunching(_ application: UIApplication) {
+    printToConsole(.debug, "Call FirebaseApp.configure")
     FirebaseApp.configure()
+    
     TPPErrorLogger.configureCrashAnalytics()
 
     // Perform data migrations as early as possible before anything has a chance to access them
@@ -168,7 +170,8 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
     // Initialize book registry
     _ = TPPBookRegistry.shared
     
-    // Push Notificatoins
+    // Push Notifications
+    printToConsole(.debug, "Call NotificationService.shared.setupPushNotifications()")
     NotificationService.shared.setupPushNotifications()
   }
   
