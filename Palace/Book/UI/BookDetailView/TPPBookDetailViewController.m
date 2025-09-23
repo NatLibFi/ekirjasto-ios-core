@@ -189,6 +189,11 @@
   [self.navigationController pushViewController:problemVC animated:YES];
 }
 
+-(void)didSelectReadMoreAboutAccessibilityForBook:(TPPBook *)book sender:(id)sender {
+  UIViewController *accessibilityViewController = [[AccessibilityViewWrapper new] makeAccessibilityViewUIWithBook:book];
+  [self presentViewController:accessibilityViewController animated:YES completion:nil];
+}
+
 - (void)didSelectMoreBooksForLane:(TPPCatalogLane *)lane
 {
   NSURL *urlToLoad = lane.subsectionURL;

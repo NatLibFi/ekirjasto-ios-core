@@ -14,6 +14,7 @@ typedef NS_ENUM(NSInteger, BookSelectionState);
 - (void)didSelectCancelDownloadingForBookDetailView:(TPPBookDetailView *)detailView;
 - (void)didSelectCloseButton:(TPPBookDetailView *)detailView;
 - (void)didSelectMoreBooksForLane:(TPPCatalogLane *)lane;
+- (void)didSelectReadMoreAboutAccessibilityForBook:(TPPBook *)book sender:(id)sender;
 - (void)didSelectReportProblemForBook:(TPPBook *)book sender:(id)sender;
 - (void)didSelectViewIssuesForBook:(TPPBook *)book sender:(id)sender;
 

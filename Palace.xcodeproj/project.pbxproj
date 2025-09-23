@@ -1047,6 +1047,12 @@
 		75A33F772E0F022700C147CC /* TPPRootTabBarController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A33F762E0F020F00C147CC /* TPPRootTabBarController+Extensions.swift */; };
 		75A33F782E0F022700C147CC /* TPPRootTabBarController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A33F762E0F020F00C147CC /* TPPRootTabBarController+Extensions.swift */; };
 		75A33F792E0F022700C147CC /* TPPRootTabBarController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A33F762E0F020F00C147CC /* TPPRootTabBarController+Extensions.swift */; };
+		75CC30AE2E7A9A7A004D39BB /* AccessibilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CC30AD2E7A9A69004D39BB /* AccessibilityView.swift */; };
+		75CC30AF2E7A9A7A004D39BB /* AccessibilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CC30AD2E7A9A69004D39BB /* AccessibilityView.swift */; };
+		75CC30B02E7A9A7A004D39BB /* AccessibilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CC30AD2E7A9A69004D39BB /* AccessibilityView.swift */; };
+		75CC30B22E7A9FE8004D39BB /* AccessibilityViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CC30B12E7A9FDD004D39BB /* AccessibilityViewWrapper.swift */; };
+		75CC30B32E7A9FE8004D39BB /* AccessibilityViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CC30B12E7A9FDD004D39BB /* AccessibilityViewWrapper.swift */; };
+		75CC30B42E7A9FE8004D39BB /* AccessibilityViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CC30B12E7A9FDD004D39BB /* AccessibilityViewWrapper.swift */; };
 		75E833DA2D73B49400D2B840 /* LoansAndHoldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E833D92D73B48D00D2B840 /* LoansAndHoldsView.swift */; };
 		75E833DB2D73B49400D2B840 /* LoansAndHoldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E833D92D73B48D00D2B840 /* LoansAndHoldsView.swift */; };
 		75E833DC2D73B49400D2B840 /* LoansAndHoldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E833D92D73B48D00D2B840 /* LoansAndHoldsView.swift */; };
@@ -1994,6 +2000,8 @@
 		7582FFD32DBADF240057AC71 /* BookSelectionButtonsState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookSelectionButtonsState.h; sourceTree = "<group>"; };
 		7582FFD42DBAE1F00057AC71 /* BookSelectionButtonsState.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookSelectionButtonsState.m; sourceTree = "<group>"; };
 		75A33F762E0F020F00C147CC /* TPPRootTabBarController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TPPRootTabBarController+Extensions.swift"; sourceTree = "<group>"; };
+		75CC30AD2E7A9A69004D39BB /* AccessibilityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityView.swift; sourceTree = "<group>"; };
+		75CC30B12E7A9FDD004D39BB /* AccessibilityViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityViewWrapper.swift; sourceTree = "<group>"; };
 		75E833D92D73B48D00D2B840 /* LoansAndHoldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoansAndHoldsView.swift; sourceTree = "<group>"; };
 		75E833E12D73B4B900D2B840 /* LoansAndHoldsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoansAndHoldsViewController.swift; sourceTree = "<group>"; };
 		75E834132D76088600D2B840 /* HoldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldsView.swift; sourceTree = "<group>"; };
@@ -3260,6 +3268,15 @@
 			path = Actions;
 			sourceTree = "<group>";
 		};
+		75CC30AC2E7A99C9004D39BB /* Accessibility */ = {
+			isa = PBXGroup;
+			children = (
+				75CC30B12E7A9FDD004D39BB /* AccessibilityViewWrapper.swift */,
+				75CC30AD2E7A9A69004D39BB /* AccessibilityView.swift */,
+			);
+			path = Accessibility;
+			sourceTree = "<group>";
+		};
 		75E833BD2D7373CE00D2B840 /* Facet */ = {
 			isa = PBXGroup;
 			children = (
@@ -3682,6 +3699,7 @@
 		A823D816192BABA400B55DE2 /* Palace */ = {
 			isa = PBXGroup;
 			children = (
+				75CC30AC2E7A99C9004D39BB /* Accessibility */,
 				9D92C7502BA250650058FB9C /* EkirjastoDigitalMagazine */,
 				E759B2052A1BF7AA0041B075 /* PalaceDebug.entitlements */,
 				E59892DD28A9AA7400C44A85 /* Samples */,
@@ -4764,6 +4782,7 @@
 				331262DE2A287F53006BA87D /* TPPR2Owner.swift in Sources */,
 				331262DF2A287F53006BA87D /* TPPLibraryDescriptionCell.swift in Sources */,
 				331262E02A287F53006BA87D /* EPUBModule.swift in Sources */,
+				75CC30B42E7A9FE8004D39BB /* AccessibilityViewWrapper.swift in Sources */,
 				3379F8202A5D422600E9945F /* EkirjastoArrowDownButton.swift in Sources */,
 				331262E12A287F53006BA87D /* AdobeCertificate.swift in Sources */,
 				331262E22A287F53006BA87D /* TPPCirculationAnalytics.swift in Sources */,
@@ -4913,6 +4932,7 @@
 				3312635E2A287F53006BA87D /* TPPFacetBarView.swift in Sources */,
 				3312635F2A287F53006BA87D /* (null) in Sources */,
 				331263602A287F53006BA87D /* TPPCaching.swift in Sources */,
+				75CC30B02E7A9A7A004D39BB /* AccessibilityView.swift in Sources */,
 				331263612A287F53006BA87D /* AudiobookSample.swift in Sources */,
 				331263622A287F53006BA87D /* UIView+TPPViewAdditions.m in Sources */,
 				331263632A287F53006BA87D /* LoansView.swift in Sources */,
@@ -5171,6 +5191,7 @@
 				73EB0A7525821DF4006BC997 /* TPPConfiguration.m in Sources */,
 				73EB0A7625821DF4006BC997 /* TPPAlertUtils.swift in Sources */,
 				21E417962928136300A78606 /* AudiobookSampleToolbar.swift in Sources */,
+				75CC30B22E7A9FE8004D39BB /* AccessibilityViewWrapper.swift in Sources */,
 				73EB0A7725821DF4006BC997 /* OPDS2Publication.swift in Sources */,
 				73EB0A7825821DF4006BC997 /* String+MD5.swift in Sources */,
 				73EB0A7925821DF4006BC997 /* TPPNetworkQueue.swift in Sources */,
@@ -5273,6 +5294,7 @@
 				17E81F0B261522B3001003C2 /* TPPRoundedButton.swift in Sources */,
 				75E833DB2D73B49400D2B840 /* LoansAndHoldsView.swift in Sources */,
 				73B5DFDF26052A1800225C12 /* TPPBookButtonsState.m in Sources */,
+				75CC30AE2E7A9A7A004D39BB /* AccessibilityView.swift in Sources */,
 				21E41780292810EE00A78606 /* TPPPDFPage+serialization.swift in Sources */,
 				73EB0A9F25821DF4006BC997 /* DPLAAudiobooks.swift in Sources */,
 				E5239A1F2992107D00850941 /* BookCell.swift in Sources */,
@@ -5532,6 +5554,7 @@
 				2146872D2559A64B007B401A /* LCPLibraryService.swift in Sources */,
 				11369D48199527C200BB11F8 /* TPPJSON.m in Sources */,
 				E795A76D2A74074300314EC8 /* DataManager.swift in Sources */,
+				75CC30AF2E7A9A7A004D39BB /* AccessibilityView.swift in Sources */,
 				36A07DBC2BB5B49C00583E0B /* PasskeyView.swift in Sources */,
 				E5824BDF2994AC2900DE76C2 /* NormalBookCell.swift in Sources */,
 				7327A89323EE017300954748 /* TPPMainThreadChecker.swift in Sources */,
@@ -5556,6 +5579,7 @@
 				7582FFD72DBAE1FB0057AC71 /* BookSelectionButtonsState.m in Sources */,
 				1120749319D20BF9008203A4 /* TPPBookCellCollectionViewController.m in Sources */,
 				0857A0FF247835FF00C7984E /* TPPKeychainStoredVariable.swift in Sources */,
+				75CC30B32E7A9FE8004D39BB /* AccessibilityViewWrapper.swift in Sources */,
 				750732F12D887261005B2254 /* BookSelectionState.swift in Sources */,
 				111559ED19B8FA590003BE94 /* TPPXML.m in Sources */,
 				E523124B285C3828007D1DB5 /* TPPBookRegistry+Extensions.swift in Sources */,
