@@ -63,6 +63,7 @@ class UserNotificationService:
     printToConsole(.debug, "Initializing UserNotificationService instance")
 
     super.init()
+    addUserStateObservers()
   }
 
   // MARK: - Set up FCM notifications
@@ -169,4 +170,68 @@ class UserNotificationService:
   //        - FCM service uses FCM token directly to send notifications to the user's device
 
 
+  // MARK: - Add observers for user state
+  
+  // Register observers for notifications
+  // related to account change and user logging in events
+  // Note: NotificationCenter != UNUserNotificationCenter
+  private func addUserStateObservers() {
+    
+    // Observe when user changes library account in the app
+    NotificationCenter.default.addObserver(
+      forName: NSNotification.Name.TPPCurrentAccountDidChange,
+      object: nil,
+      queue: nil
+    ) { notification in
+      self.handleAccountDidChangeStatusChange(notification: notification)
+    }
+    
+    // Observe when user is logging into the app
+    NotificationCenter.default.addObserver(
+      forName: NSNotification.Name.TPPIsSigningIn,
+      object: nil,
+      queue: nil
+    ) { notification in
+      self.handleSigningInStatusChange(notification: notification)
+    }
+    
+  }
+  
+  // Refresh the FCM token when user changes library account
+  private func handleAccountDidChangeStatusChange(notification: Notification) {
+    // printToConsole(.debug, "User library account has changed, refreshing token.")
+    
+    // Removed token refresh code from here,
+    // because there is no need to refresh token at this point,
+    // with the current app initialization and login flow.
+    // When the E-kirjasto library account is set, the user is not signed in,
+    // and authentication is needed for updating the token.
+    // E-kirjasto app is set to use only one library account,
+    // and the logged-in user can not change his/her library in the app.
+    // Also, accountDidChange notification is send for every book registry sync,
+    // and we need to to refresh the FCM token only at login moment.
+    
+  }
+  
+  // Refresh the FCM token when user logs in
+  private func handleSigningInStatusChange(notification: Notification) {
+    
+    // Set isSigningIn using the notification object
+    guard let isSigningIn = notification.object as? Bool else {
+      // Notification object is not a Bool, ignore this notification
+      return
+    }
+    
+    if isSigningIn {
+      // The user is still logging in so no action is needed at this time.
+      printToConsole(.debug, "User is still logging in, no action needed.")
+      return
+    }
+    
+    // isSigningIn is false, so the user has completed
+    // the signing-in process and we can proceed to refresh the token.
+    printToConsole(.debug, "User signing in process has finished, refreshing token.")
+    // fetch and save token
+  }
+  
 }
