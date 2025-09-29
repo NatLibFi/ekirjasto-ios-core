@@ -257,8 +257,28 @@ class UserNotificationService:
     
   }
   
-  func fetchAndRemoveTokenOnLogout() {
-    // code here
+  // Fetches the user's device FCM token from the FCM service
+  // and deletes it from the app's backend storage if it is found
+  func fetchAndRemoveTokenOnLogout(
+    completion: @escaping (Bool) -> Void
+  ) {
+    printToConsole(.debug, "Refreshing user's device FCM token...")
+    
+    fetchFCMTokenFromFCMService { fetchedToken in
+      
+      // First check that the token was successfully retrieved
+      guard let token = fetchedToken else {
+        printToConsole(.debug, "Failed to retrieve FCM token")
+        completion(false)
+        return
+      }
+      
+      // Clear retrieved FCM token from backend
+      self.deleteToken(token) { isDeleted in
+        completion(isDeleted)
+      }
+    }
+    
   }
   
   
