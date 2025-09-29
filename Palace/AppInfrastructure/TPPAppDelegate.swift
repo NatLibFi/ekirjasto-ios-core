@@ -21,7 +21,10 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
   // MARK: - Application Lifecycle
   
   func applicationDidFinishLaunching(_ application: UIApplication) {
+    
+    // Configure E-kirjasto app to use defined Firebase services
     FirebaseApp.configure()
+    
     TPPErrorLogger.configureCrashAnalytics()
 
     // Perform data migrations as early as possible before anything has a chance to access them
@@ -168,8 +171,9 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
     // Initialize book registry
     _ = TPPBookRegistry.shared
     
-    // Push Notificatoins
-    NotificationService.shared.setupPushNotifications()
+    // Asking UserNotificationService to setup so that app instance on device is ready
+    // for receiving remote (push) notifications send from backend via FCM service
+    UserNotificationService.shared.setupFCMNotifications()
   }
   
   // TODO: This method is deprecated, we should migrate to BGAppRefreshTask in the BackgroundTasks framework instead
