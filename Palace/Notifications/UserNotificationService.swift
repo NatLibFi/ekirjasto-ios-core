@@ -169,6 +169,33 @@ class UserNotificationService:
   //     b) Android devices:
   //        - FCM service uses FCM token directly to send notifications to the user's device
 
+  
+  // MARK: - Messaging Delegate Functions
+  
+  // This function is called when a new FCM registration token is send to the app.
+  //
+  // FCM token is a String that uniquely identifies the user's device (= app instance on device)
+  // and is used for receiving remote (push) notifications.
+  //
+  // FCM token is send from FCM service to the app automatically
+  // after the user's device (= app instance on device) has registered to the FCM service.
+  //
+  // New FCM token is automatically created for the device when
+  // - User installs E-kirjasto app for the device (for the first time or reinstallation after removal)
+  // - User restores E-kirjasto app on a new device
+  // - User removes E-kirjasto app's app data
+  public func messaging(
+    _ messaging: Messaging,
+    didReceiveRegistrationToken fcmToken: String?
+  ) {
+    
+    printToConsole(.debug, "Received a device registration token from FCM: \(fcmToken ?? "No FCM token")")
+    
+    // We need to update the token data stored in our backend FCM token storage,
+    // so we can send notifications from our backend to this device using the new token
+    updateFCMToken(fcmToken)
+  }
+
 
   // MARK: - Add observers for user state
   
@@ -827,6 +854,22 @@ class UserNotificationService:
      }
      */
     
+  }
+  
+  
+  // MARK: - Class helper functions
+  
+  // Make sure app data is refreshed,
+  // especially the book registry
+  private func refreshAppData() {
+    
+    // Sync the book registry with the latest data from the server.
+    // This makes sure that the app displays up-to-date book data
+    // so that the user does not need to refresh manually
+    // to see the data the notification informed of.
+    TPPBookRegistry.shared.sync()
+    
+    // do other app data updates here
   }
   
 
