@@ -267,4 +267,13 @@ class UserNotificationService:
     
   }
   
+  
+  // MARK: - For Objective-C compatibility
+  
+  // Use when UserNotificationService instance is needed in Objective-C code.
+  @objc
+  static func sharedService() -> UserNotificationService {
+    return shared
+  }
+  
 }
