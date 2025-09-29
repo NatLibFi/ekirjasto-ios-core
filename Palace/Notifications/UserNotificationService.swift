@@ -18,6 +18,37 @@ class UserNotificationService:
   MessagingDelegate
 {
 
+  // MARK: - Define data structure for tokens
+
+  // Token Data Overview:
+  // - structure is based on the Lyrasis API documentation
+  // - token is used to uniquely identify each device for push notifications
+  // - if a user has multiple devices with the E-kirjasto app, each device has it's own token
+  struct TokenData: Codable {
+    let device_token: String
+    let token_type: String
+
+    // Creating a TokenData instance.
+    // - device_token is received from FCM server.
+    // - token_type differentiates Android and iOS devices in backend.
+    init(token: String) {
+      self.device_token = token
+      self.token_type = "FCMiOS"
+    }
+
+    // Encoding this TokenData instance to JSON,
+    // used in bodies of requests send to backend.
+    //  Example:
+    //    {
+    //      "device_token":"abc123-defghij456789_k10lmnopqrstuvxyz",
+    //      "token_type":"FCMiOS"
+    //    }
+    var data: Data? {
+      try? JSONEncoder().encode(self)
+    }
+
+  }
+
   // MARK: - Initialize UserNotificationCenter
 
   // Create an instance of UNNotificationCenter object
@@ -81,8 +112,7 @@ class UserNotificationService:
 
       // Check if there was an error during the authorization request
       if let error = error {
-        printToConsole(.error, "Error requesting notification authorization: \(error.localizedDescription)"
-        )
+        printToConsole(.error, "Error requesting notification authorization: \(error.localizedDescription)")
         return
       }
 
@@ -107,7 +137,7 @@ class UserNotificationService:
   // Set the Firebase Cloud Messaging delegate
   private func setupMessagingDelegate() {
     printToConsole(.debug, "Setting the messaging delegate for Firebase Cloud Messaging")
-    
+
     Messaging.messaging().delegate = self
   }
 
