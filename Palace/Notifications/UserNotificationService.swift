@@ -268,6 +268,41 @@ class UserNotificationService:
   }
   
   
+  // MARK: - Create URLs and requests for backend FCM token storage
+  
+  // Create the base URL for FCM token storage using the user's profile URL.
+  // This is the E-kirjasto backend endpoint for app's FCM token related requests.
+  // Returns
+  // - the created URL
+  // - nil, if creating the URL fails
+  private func createFCMTokenStorageBaseURL() -> URL? {
+    
+    // Get the user's profile URL string from the current account
+    guard
+      let userProfileURLString = AccountsManager.shared.currentAccount?.details?.userProfileUrl,
+      let baseURL = URL(string: userProfileURLString),
+      var components = URLComponents(url: baseURL, resolvingAgainstBaseURL: false)
+    else {
+      // Note: user account details such as userProfileUrl
+      // are only available after the user has logged in
+      // so this should always fail before logging in
+      printToConsole(.debug, "Could not get acoount's userProfileURL")
+      return nil
+    }
+    
+    // Append "devices/" endpoint to the path of the base URL
+    components.path += "devices/"
+    
+    // Check that the constructed URL is valid
+    guard let FCMTokenStorageBaseURL = components.url else {
+      printToConsole(.debug, "Could not create valid backend FCM token storage URL")
+      return nil
+    }
+    
+    return FCMTokenStorageBaseURL
+  }
+  
+  
   // MARK: - For Objective-C compatibility
   
   // Use when UserNotificationService instance is needed in Objective-C code.
