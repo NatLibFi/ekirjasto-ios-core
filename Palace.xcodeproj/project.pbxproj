@@ -1044,6 +1044,9 @@
 		7566BEA12EA7C612009EEF9C /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7566BEA02EA7C604009EEF9C /* ToastView.swift */; };
 		7566BEA22EA7C612009EEF9C /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7566BEA02EA7C604009EEF9C /* ToastView.swift */; };
 		7566BEA32EA7C612009EEF9C /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7566BEA02EA7C604009EEF9C /* ToastView.swift */; };
+		7557C4342E8AF6A600181B79 /* UserNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7557C4332E8AF69E00181B79 /* UserNotificationService.swift */; };
+		7557C4352E8AF6A600181B79 /* UserNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7557C4332E8AF69E00181B79 /* UserNotificationService.swift */; };
+		7557C4362E8AF6A600181B79 /* UserNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7557C4332E8AF69E00181B79 /* UserNotificationService.swift */; };
 		7582FFD02DB9188A0057AC71 /* BookSelectionButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582FFCF2DB918880057AC71 /* BookSelectionButtonsView.m */; };
 		7582FFD12DB9188A0057AC71 /* BookSelectionButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582FFCF2DB918880057AC71 /* BookSelectionButtonsView.m */; };
 		7582FFD22DB9188A0057AC71 /* BookSelectionButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582FFCF2DB918880057AC71 /* BookSelectionButtonsView.m */; };
@@ -1997,6 +2000,7 @@
 		753D8D242DCE29A80092FD39 /* MyBooksSelectionCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBooksSelectionCenter.swift; sourceTree = "<group>"; };
 		7566BE9C2EA7C5F8009EEF9C /* ToastService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastService.swift; sourceTree = "<group>"; };
 		7566BEA02EA7C604009EEF9C /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
+		7557C4332E8AF69E00181B79 /* UserNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationService.swift; sourceTree = "<group>"; };
 		7582FFCE2DB918630057AC71 /* BookSelectionButtonsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookSelectionButtonsView.h; sourceTree = "<group>"; };
 		7582FFCF2DB918880057AC71 /* BookSelectionButtonsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookSelectionButtonsView.m; sourceTree = "<group>"; };
 		7582FFD32DBADF240057AC71 /* BookSelectionButtonsState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookSelectionButtonsState.h; sourceTree = "<group>"; };
@@ -4080,6 +4084,7 @@
 		E76AD929296DCB43008ECC61 /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
+				7557C4332E8AF69E00181B79 /* UserNotificationService.swift */,
 				E76AD92A296DCB76008ECC61 /* NotificationService.swift */,
 			);
 			path = Notifications;
@@ -4866,6 +4871,7 @@
 				331263262A287F53006BA87D /* DispatchQueue.swift in Sources */,
 				331263272A287F53006BA87D /* TPPAssociatedColors.swift in Sources */,
 				331263282A287F53006BA87D /* TPPReturnPromptHelper.swift in Sources */,
+				7557C4352E8AF6A600181B79 /* UserNotificationService.swift in Sources */,
 				331263292A287F53006BA87D /* TPPOpenSearchDescription.m in Sources */,
 				3312632A2A287F53006BA87D /* TPPPDFPreviewBar.swift in Sources */,
 				3312632B2A287F53006BA87D /* TPPLCPLicense.swift in Sources */,
@@ -5487,6 +5493,7 @@
 				E78AE804291C1D8A00884446 /* TPPBookRegistry.swift in Sources */,
 				73EB0B1725821DF4006BC997 /* TPPLibraryNavigationController.m in Sources */,
 				73D8D27725A68D3B00DF5F69 /* UIViewController+TPP.swift in Sources */,
+				7557C4362E8AF6A600181B79 /* UserNotificationService.swift in Sources */,
 				73EB0B1825821DF4006BC997 /* RemoteHTMLViewController.swift in Sources */,
 				73EB0B1925821DF4006BC997 /* TPPBookDetailsProblemDocumentViewController.swift in Sources */,
 				73EB0B1A25821DF4006BC997 /* TPPCatalogGroupedFeed.m in Sources */,
@@ -5632,6 +5639,7 @@
 				11396FB9193D289100E16EE8 /* NSDate+NYPLDateAdditions.m in Sources */,
 				21E7E07B24FEA7E800189224 /* DPLAAudiobooks.swift in Sources */,
 				36833E4C2B5E937000D7B6B2 /* PasskeyManager.swift in Sources */,
+				7557C4342E8AF6A600181B79 /* UserNotificationService.swift in Sources */,
 				52545185217A76FF00BBC1B4 /* TPPUserNotifications.swift in Sources */,
 				E53CDA882A2FBCD800C6008A /* LocationManager.swift in Sources */,
 				1183F341194F723D00DC322F /* TPPCatalogLane.m in Sources */,
