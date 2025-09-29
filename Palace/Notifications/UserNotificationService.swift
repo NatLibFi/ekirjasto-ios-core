@@ -140,5 +140,33 @@ class UserNotificationService:
 
     Messaging.messaging().delegate = self
   }
+  
+  
+  // MARK: - Overview of FCM service and different tokens
+  
+  // Abbreviations:
+  // - APNs = Apple Push Notification service
+  // - FCM = Firebase Cloud Messaging
+  //
+  // Note:
+  // - Both services have tokens, but if just "token" is used in this file,
+  //   it is used to refer the device's FCM token, not device's APNs token.
+  //
+  // Differences with iOS and Android devices using FCM service:
+  //  1. When user installs E-kirjasto app, user's device registers with the FCM service
+  //  2. Device receives tokens from the FCM service
+  //      a) iOS device receives 2 tokens:
+  //        - FCM token that identifies the device for FCM notifications
+  //        - APNs token that is used for delivering notifications on iOS devices
+  //      b) Android device receives 1 token:
+  //        - FCM token that identifies the device for FCM notifications
+  //  3. When the E-kirjasto backend wants to send a notification,
+  //       it contacts the FCM server with the specific FCM token
+  //   4. How tokens are used in the FCM service
+  //     a) iOS devices:
+  //        - FCM service uses the APNs token to route the notification through APNs to the user's device
+  //     b) Android devices:
+  //        - FCM service uses FCM token directly to send notifications to the user's device
+
 
 }
