@@ -234,4 +234,37 @@ class UserNotificationService:
     // fetch and save token
   }
   
+  
+  // MARK: - Fetch FCM token
+  
+  // Fetch the FCM token for the user's device from the FCM service
+  private func fetchFCMTokenFromFCMService(
+    completion: @escaping (String?) -> Void
+  ) {
+    printToConsole(.debug, "Fetching FCM Token from the FCM service...")
+    
+    // Get FCM token for the device straight from the FCM service
+    Messaging.messaging().token { fetchedToken, error in
+      
+      if let error = error {
+        // there was an error fetching the token
+        printToConsole(.debug, "Error in fetching FCM token from the FCM service: \(error)")
+        
+        completion(nil)
+      } else if let token = fetchedToken {
+        // Successfully fetched the token, return it via the completion handler.
+        printToConsole(.debug, "Success in fetching FCM token from the FCM service: \(token)")
+        
+        completion(token)
+      } else {
+        // Token is nil for some reason
+        printToConsole(.debug, "FCM token is nil, it may not be available yet.")
+        
+        completion(nil)
+      }
+      
+    }
+    
+  }
+  
 }
