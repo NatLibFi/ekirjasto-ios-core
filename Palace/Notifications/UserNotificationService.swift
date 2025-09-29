@@ -404,6 +404,139 @@ class UserNotificationService:
   }
   
   
+  // MARK: - Update FCM token in backend FCM token storage
+  
+  // Update the FCM token to storage (app backend).
+  // If this FCM token is a new token
+  //   -> save (create) the token to storage.
+  // If this FCM token is already found on storage
+  //   -> currently no changes are needed.
+  private func updateFCMToken(_ fcmToken: String?) {
+    printToConsole(.debug, "Updating FCM token storage...")
+    
+    guard let token = fcmToken, !token.isEmpty
+    else {
+      // The FCM token is  nil or empty
+      printToConsole(.debug, "Invalid FCM token, cannot update FCM token storage")
+      return
+    }
+    
+    // First check if token already exists in our FCM token storage
+    checkTokenExists(token) {
+      exists, _ in
+      
+      if let tokenExists = exists {
+        // Token existence check was successfully performed
+        
+        //  Handle the check result
+        if tokenExists {
+          // FCM token is already stored, no action needed
+          printToConsole(.debug, "Token is already stored -> do nothing")
+        } else {
+          // FCM token was not found, so it is a new token, let's save it
+          printToConsole(
+            .debug, "Token was not found so it is a new token -> save it")
+          self.saveToken(token)
+          
+          // Update the account status if needed (Palace example code)
+          // AccountsManager.shared.currentAccount?.hasUpdatedToken = true
+        }
+        
+      } else {
+        // Token existence check failed for some reason
+        printToConsole(.debug, "Token check failed -> do nothing")
+        
+        // Update the account status if needed (Palace example code)
+        // AccountsManager.shared.currentAccount?.hasUpdatedToken = false
+      }
+      
+    }
+    
+  }
+  
+  // Check if FCM token already exists on the backend FCM token storage.
+  // The existence of FCM token is based on the server response status code.
+  private func checkTokenExists(
+    _ token: String,
+    completion: @escaping (Bool?, Error?) -> Void
+  ) {
+    
+    printToConsole(.debug, "Starting token existence check")
+    
+    guard let request = createCheckTokenRequest(token) else {
+      printToConsole(.debug, "Failed to create request for checking token")
+      completion(nil, nil)
+      return
+    }
+    
+    _ = TPPNetworkExecutor.shared.addBearerAndExecute(request) {
+      result, response, error in
+      
+      // Make sure the response has HTTP status code
+      guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
+        printToConsole(.debug,"Check token response is not an HTTP response, no status code.")
+        // Return nil for check result and nil for result error
+        completion(nil, nil)
+        return
+      }
+      
+      // Handle the response from backend
+      self.handleTokenCheckReponseStatusCode(
+        statusCode,
+        error: error,
+        completion: completion
+      )
+      
+    }
+    
+  }
+  
+  // Handles the HTTP response from the token check request.
+  // Returns in completion
+  // - true, when FCM token is already found on backend storage (200 OK)
+  // - false, when FCM token is not found on backend storage (404 NOT fOUND)
+  // Otherwise, returns nil for any other status code.
+  // Also returns in completion nil for errors
+  private func handleTokenCheckReponseStatusCode(
+    _ statusCode: Int,
+    error: Error? = nil,
+    completion: @escaping (Bool?, Error?) -> Void
+  ) {
+    
+    printToConsole(.debug, "Token check completed with response status: \(String(describing: statusCode))")
+    
+    // Handle the response status code
+    switch statusCode {
+      case 200:
+        printToConsole(.debug, "FCM token check result: token exists on backend FCM token storage")
+        // Return true for token existence + nil for error
+        completion(true, nil)
+      case 404:
+        printToConsole(.debug, "FCM token check result: token does not exist on backend FCM token storage")
+        // Return false for token existence + nil for error
+        completion(false, nil)
+      default:
+        printToConsole(.debug, "Token check could not be completed, unexpected response from backend FCM token storage")
+        
+        // Return nil for token existence + nil for error
+        completion(nil, error)  // Return nil for existence and error for error (could be nil)
+    }
+    
+  }
+  
+  // Save token to the backend FCM token storage
+  // - token: FCM token value
+  private func saveToken(_ token: String) {
+    // send save token request
+  }
+  
+  
+  // Save token to the backend FCM token storage
+  // - token: FCM token value
+  private func saveToken(_ token: String) {
+    // send save token request
+  }
+  
   // MARK: - For Objective-C compatibility
   
   // Use when UserNotificationService instance is needed in Objective-C code.
