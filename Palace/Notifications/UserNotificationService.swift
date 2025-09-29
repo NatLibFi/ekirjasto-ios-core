@@ -302,6 +302,107 @@ class UserNotificationService:
     return FCMTokenStorageBaseURL
   }
   
+  // Create the URL GET request for checking the FCM token.
+  private func createCheckTokenRequest(_ token: String) -> URLRequest? {
+    
+    // Get the base URL for the notification endpoint
+    guard let baseURL = createFCMTokenStorageBaseURL() else {
+      printToConsole(.debug, "Could not get the backend FCM token storage baseurl.")
+      return nil
+    }
+    
+    // Create URL components from the base URL
+    var components = URLComponents(url: baseURL, resolvingAgainstBaseURL: false)
+    
+    // Append the device token as a query parameter
+    components?.queryItems = [
+      URLQueryItem(
+        name: "device_token",
+        value: token
+      )
+    ]
+    
+    // Check that the url is ok
+    guard let requestURL = components?.url else {
+      printToConsole(.debug, "Could not create checkTokenRequestURL from components.")
+      return nil
+    }
+    
+    // Create the URL request
+    var checkTokenRequest = URLRequest(url: requestURL)
+    checkTokenRequest.httpMethod = "GET"
+    
+    printToConsole(.debug, "Request for checking token created: \(checkTokenRequest)")
+    
+    return checkTokenRequest
+  }
+  
+  // Create the URL PUT request for saving the FCM token.
+  private func createSaveTokenRequest(_ token: String) -> URLRequest? {
+    
+    // Create the base URL for the backend FCM token storage
+    guard let FCMTokenStorageBaseURL = createFCMTokenStorageBaseURL() else {
+      printToConsole(.debug, "Could not create backend FCM token storage URL")
+      return nil
+    }
+    
+    printToConsole(
+      .debug,
+      "Request URL created for FCM token saving: \(FCMTokenStorageBaseURL)")
+    
+    // Create the request body from the token data
+    guard let requestBody = TokenData(token: token).data
+    else {
+      printToConsole(.error, "Failed to create request body for token")
+      return nil
+    }
+    
+    printToConsole(
+      .debug,
+      "Request body created for FCM token saving: \(String(describing: String(data: requestBody, encoding: .utf8)))"
+    )
+    
+    // Create the URLRequest object
+    var saveTokenRequest = URLRequest(url: FCMTokenStorageBaseURL)
+    
+    saveTokenRequest.httpMethod = "PUT"
+    saveTokenRequest.httpBody = requestBody
+    
+    return saveTokenRequest
+  }
+  
+  // Create the URL DELETE request for deleting the FCM token.
+  private func createDeleteTokenRequest(_ token: String) -> URLRequest? {
+    
+    // Create the base URL for the backend FCM token storage
+    guard let FCMTokenStorageBaseURL = createFCMTokenStorageBaseURL() else {
+      printToConsole(.debug, "Could not create backend FCM token storage URL")
+      return nil
+    }
+    
+    printToConsole(.debug, "Request URL created for FCM token deletion: \(FCMTokenStorageBaseURL)")
+    
+    // Create the request body from the token data
+    guard let requestBody = TokenData(token: token).data
+    else {
+      printToConsole(.error, "Failed to create request body for token")
+      return nil
+    }
+    
+    printToConsole(
+      .debug,
+      "Request body created for FCM token deletion: \(String(describing: String(data: requestBody, encoding: .utf8)))"
+    )
+    
+    // Create the URLRequest object
+    var deleteTokenRequest = URLRequest(url: FCMTokenStorageBaseURL)
+    
+    deleteTokenRequest.httpMethod = "DELETE"
+    deleteTokenRequest.httpBody = requestBody
+    
+    return deleteTokenRequest
+  }
+  
   
   // MARK: - For Objective-C compatibility
   
