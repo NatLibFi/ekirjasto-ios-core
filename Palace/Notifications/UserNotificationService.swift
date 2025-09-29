@@ -231,7 +231,34 @@ class UserNotificationService:
     // isSigningIn is false, so the user has completed
     // the signing-in process and we can proceed to refresh the token.
     printToConsole(.debug, "User signing in process has finished, refreshing token.")
-    // fetch and save token
+    fetchAndAddTokenOnLogin()
+  }
+  
+  
+  // MARK: - Refresh FCM token on user login and logout
+  
+  // Fetches the user's device FCM token from the FCM service
+  // and saves it to app's backend storage if it is a new token
+  private func fetchAndAddTokenOnLogin() {
+    printToConsole(.debug, "Refreshing user's device FCM token...")
+    
+    // Fetching the token registered for the device from FCM service
+    fetchFCMTokenFromFCMService { fetchedToken in
+      
+      // First check that the token was successfully retrieved
+      guard let token = fetchedToken else {
+        printToConsole(.debug, "Failed to retrieve FCM token")
+        return
+      }
+      
+      // Update the backend storage with retrieved FCM token
+      self.updateFCMToken(token)
+    }
+    
+  }
+  
+  func fetchAndRemoveTokenOnLogout() {
+    // code here
   }
   
   
