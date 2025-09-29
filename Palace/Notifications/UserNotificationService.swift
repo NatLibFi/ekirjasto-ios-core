@@ -524,17 +524,113 @@ class UserNotificationService:
     
   }
   
-  // Save token to the backend FCM token storage
+  
+  // MARK: - Save FCM token to backend FCM token storage
+  
+  // Save token to the server.
   // - token: FCM token value
   private func saveToken(_ token: String) {
-    // send save token request
+    
+    printToConsole(.debug, "Saving FCM token...")
+    
+    // Create the URL request
+    guard
+      let saveTokenRequest = createSaveTokenRequest(token)
+    else {
+      printToConsole(.error, "Failed to create request for saving token")
+      return
+    }
+    
+    _ = TPPNetworkExecutor.shared.addBearerAndExecute(saveTokenRequest) {
+      _, response, error in
+      
+      // Check that we have a response
+      guard let response = response else {
+        // Return false with completion handler, because got no response
+        //completion(false)
+        return
+      }
+      
+      // Handle the response received from backend
+      self.handleTokenSaveResponse(response: response)
+      
+      // Handle error that occurred during the request
+      if let error = error {
+        self.handleTokenSaveError(
+          error: error,
+          request: saveTokenRequest,
+          response: response as? HTTPURLResponse,
+          tokenData: token
+        )
+      }
+      
+    }
   }
   
+  // Handle the response received from backend after deleting the FCM token.
+  private func handleTokenSaveResponse(response: URLResponse) {
+    
+    // Extract the HTTP status code from the response
+    // use 0 as default if status code is not available
+    let responseStatusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
+    
+    printToConsole(.debug, "Response status code after sending save token request: \(responseStatusCode)")
+    
+    switch responseStatusCode {
+      case 201:
+        // Status code is "201 Created"
+        // FCM token saving was successful
+        printToConsole(.debug, "FCM token was successfully saved")
+      case 200:
+        // Status code is "200 OK"
+        // FCM token was already found, no need to save
+        printToConsole(.debug, "FCM token was already saved")
+      case 400:
+        // Status code is "400 Bad request"
+        // FCM token type was malformatted
+        printToConsole(.debug, "FCM token type was wrong for saving")
+      default:
+        // FCM token save failed for some reason
+        printToConsole(.debug, "FCM token save failed")
+    }
+    
+  }
   
-  // Save token to the backend FCM token storage
-  // - token: FCM token value
-  private func saveToken(_ token: String) {
-    // send save token request
+  // Handle the error that occured during the token save request
+  private func handleTokenSaveError(
+    error: Error,
+    request: URLRequest,
+    response: HTTPURLResponse?,
+    tokenData: String
+  ) {
+    
+    // Check that error is not 400
+    guard let responseStatusCode = response?.statusCode,
+          responseStatusCode != 400
+    else {
+      // return because 400 is valid known status code
+      // for malformatted token
+      return
+    }
+    
+    printToConsole(.debug, "Error in saving token: \(error)")
+    
+    // Short summary message for the error
+    let errorSummary = "PUT FCM token request errored"
+    
+    // Collect error metadata related
+    let errorMetadata: [String: Any] = [
+      "requestURL": request.url!,
+      "tokenData": tokenData,
+      "statusCode": response?.statusCode ?? 0,
+    ]
+    
+    TPPErrorLogger.logError(
+      error,
+      summary: errorSummary,
+      metadata: errorMetadata
+    )
+    
   }
   
   // MARK: - For Objective-C compatibility
