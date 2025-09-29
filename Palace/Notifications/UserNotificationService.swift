@@ -633,6 +633,156 @@ class UserNotificationService:
     
   }
   
+  
+  // MARK: - Delete FCM token from backend FCM token storage
+  
+  // Delete the FCM token and call the completion handler with the result.
+  // Completion closure returns
+  // - true if deletion was success
+  // - false otherwise (errors and other failures)
+  private func deleteToken(
+    _ token: String,
+    completion: @escaping (Bool) -> Void
+  ) {
+    
+    printToConsole(.debug, "Deleting FCM token...")
+    
+    // Create the URL request for deleting the token
+    guard let deleteTokenRequest = createDeleteTokenRequest(token) else {
+      printToConsole(.error, "Failed to create request for deleting token")
+      // Return false, because could not create request
+      completion(false)
+      return
+    }
+    
+    // Execute the network request to delete the token
+    _ = TPPNetworkExecutor.shared.addBearerAndExecute(deleteTokenRequest) {
+      _, response, error in
+      
+      // Check that we have a response
+      guard let response = response else {
+        // Return false with completion handler, because got no response
+        completion(false)
+        return
+      }
+      
+      // Handle the response received from backend
+      let isDeleted = self.handleTokenDeleteResponse(response: response)
+      
+      // Handle possible errors that occurred during the request
+      if let error = error {
+        self.handleTokenDeleteError(
+          error: error,
+          request: deleteTokenRequest,
+          response: response as? HTTPURLResponse,
+          tokenData: token
+        )
+      }
+      
+      // Return the check result with completion handler,
+      // isDeleted could be true or false based on deletion success
+      completion(isDeleted)
+      
+    }
+  }
+  
+  // Handle the response received from backend after deleting the FCM token.
+  // Returns
+  //  - true if the deletion was successful
+  //  - false otherwise
+  private func handleTokenDeleteResponse(response: URLResponse) -> Bool {
+    
+    // Extract the HTTP status code from the response
+    // use 0 as default if status code is not available
+    let responseStatusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
+    
+    printToConsole(.debug, "Response status code after sending delete token request: \(responseStatusCode)")
+    
+    switch responseStatusCode {
+      case 204:
+        // Status code is "204 No Content"
+        // FCM token was deleted
+        printToConsole(.debug, "FCM token was deleted successfully")
+        return true
+      case 404:
+        // Status code is "404 Not Found"
+        // FCM token was not found for deletion
+        printToConsole(.debug, "FCM token was not found for deletion")
+        return false  // should this be true?!
+      default:
+        // FCM token deletion failed for some reason
+        printToConsole(.debug, "FCM token deletion failed")
+        
+        return false
+    }
+    
+  }
+  
+  // Handle the error that occured during the FCM token delete request
+  private func handleTokenDeleteError(
+    error: Error,
+    request: URLRequest,
+    response: HTTPURLResponse?,
+    tokenData: String
+  ) {
+    
+    // Check that error is not 404
+    guard let responseStatusCode = response?.statusCode,
+          responseStatusCode != 404
+    else {
+      // return because 404 is valid known status code
+      // for token not found on database
+      return
+    }
+    
+    printToConsole(.debug, "Error in deleting token: \(error)")
+    
+    // Short summary message for the error
+    let errorSummary = "DELETE FCM token data request errored"
+    
+    // Collect error metadata related
+    let errorMetadata: [String: Any] = [
+      "requestURL": request.url!,
+      "tokenData": tokenData,
+      "statusCode": response?.statusCode ?? 0,
+    ]
+    
+    TPPErrorLogger.logError(
+      error,
+      summary: errorSummary,
+      metadata: errorMetadata
+    )
+    
+  }
+  
+  // Delete token from account (on library account change).
+  // E-kirjasto has only one library, so this is currently never called
+  func deleteTokenFromAccount(_ account: Account) {
+    // Just commenting this out for now as this function does not work.
+    // Also, code related to user changing accounts is not used in current app
+    
+    /*
+     printToConsole(.debug, "Deleting token from account...")
+     
+     account.getProfileDocument { profileDocument in
+     guard let endpointHref = profileDocument?.linksWith(.deviceRegistration).first?.href,
+     let endpointUrl = URL(string: endpointHref)
+     else {
+     return
+     }
+     
+     Messaging.messaging().token { token, _ in
+     if let token {
+     self.deleteToken(token, FCMTokenStorageBaseURL: endpointUrl)
+     }
+     }
+     
+     }
+     */
+    
+  }
+  
+
   // MARK: - For Objective-C compatibility
   
   // Use when UserNotificationService instance is needed in Objective-C code.
