@@ -2,7 +2,6 @@
 //  UserNotificationService.swift
 //
 
-
 import FirebaseCore
 import FirebaseMessaging
 import UserNotifications
@@ -19,5 +18,22 @@ class UserNotificationService:
   UNUserNotificationCenterDelegate,
   MessagingDelegate
 {
-  // Code here
+
+
+  // MARK: - Initialize UserNotificationCenter
+
+  // Create an instance of UNNotificationCenter object
+  // to manage notifications within this class
+  private let userNotificationCenter = UNUserNotificationCenter.current()
+
+  // Sharing and using only this one UserNotificationService within the app
+  static let shared = UserNotificationService()
+
+  // Initializing UserNotificationService instance
+  override init() {
+    printToConsole(.debug, "Initializing UserNotificationService instance")
+
+    super.init()
+  }
+
 }
