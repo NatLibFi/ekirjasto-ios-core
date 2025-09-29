@@ -197,6 +197,83 @@ class UserNotificationService:
   }
 
 
+  // MARK: - Notification Center Delegate Functions
+  
+  // This function is called automatically when notification is received on the device
+  // and when the app is in the foreground (is currently active).
+  // We can define here how the notification is presented to the user,
+  // and what else should happen in the app.
+  func userNotificationCenter(
+    _ center: UNUserNotificationCenter,
+    willPresent notification: UNNotification,
+    withCompletionHandler completionHandler: @escaping (
+      UNNotificationPresentationOptions
+    ) -> Void
+  ) {
+    
+    printToConsole(.debug, "App will present remote notification to user")
+    
+    // Define how the notification should be presented to the user.
+    let presentationOptions: UNNotificationPresentationOptions = [
+      .banner,
+      .badge,
+      .sound,
+    ]
+    
+    // Call the completion handler with the chosen presentation options,
+    // which tells the app to show the notification as a banner,
+    // update the icon badge and play a sound
+    completionHandler(presentationOptions)
+    
+    refreshAppData()
+  }
+  
+  // This function is called automatically when the user interacts with the notification,
+  // for example if the user opens the app or dismisses the notification.
+  // We can define here how to respond to the user's chosen action
+  func userNotificationCenter(
+    _ center: UNUserNotificationCenter,
+    didReceive response: UNNotificationResponse,
+    withCompletionHandler completionHandler: @escaping () -> Void
+  ) {
+    
+    printToConsole(.debug, "User did receive a remote notification")
+    
+    // User has now selected an action:
+    switch response.actionIdentifier {
+        
+      case UNNotificationDefaultActionIdentifier:
+        // The user opened the notification
+        printToConsole(.debug, "User opened the nofication")
+        
+        // Extract the userInfo dictionary from the notification
+        let userInfo = response.notification.request.content.userInfo
+        printToConsole(.debug, "userInfo: \(userInfo)")
+        
+        refreshAppData()
+        
+      case UNNotificationDismissActionIdentifier:
+        // The user dismissed the notification
+        printToConsole(.debug, "User dismissed the nofication")
+        
+        // Extract the userInfo dictionary from the notification
+        let userInfo = response.notification.request.content.userInfo
+        printToConsole(.debug, "userInfo: \(userInfo)")
+        
+        refreshAppData()
+        
+      default:
+        printToConsole(.debug, "User did something else to the nofication")
+        // do nothing
+    }
+    
+    // We must call the completion handler at the end to let the device's system know
+    // that we have finished processing the user's action,
+    // and the device system can close the notifation.
+    completionHandler()
+  }
+
+
   // MARK: - Add observers for user state
   
   // Register observers for notifications
