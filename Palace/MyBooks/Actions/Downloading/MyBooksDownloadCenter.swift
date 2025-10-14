@@ -254,9 +254,9 @@ import Foundation
       } else {
         // Some error happened
         // for example with acquisition url or feed
-        self?.process(
+        self?.processBookDownloadError(
           error: error as? [String: Any],
-          for: book
+          book: book
         )
 
       }
@@ -296,10 +296,10 @@ import Foundation
 
   }
 
-  // Function for handling errors
-  private func process(
+  // Function for handling errors occured during book download
+  private func processBookDownloadError(
     error: [String: Any]?,
-    for book: TPPBook
+    book: TPPBook
   ) {
 
     guard let errorType = error?["type"] as? String else {
@@ -818,128 +818,16 @@ import Foundation
 }
 
 extension MyBooksDownloadCenter {
-  func deleteLocalContent(for identifier: String, account: String? = nil) {
-    guard let book = bookRegistry.book(forIdentifier: identifier),
-          // Use currentAccountId, which represents the UUID of the library in circulation managed, to determine the book path.
-          let currentAccountId = AccountsManager.shared.currentAccountId,
-          let bookURL = fileUrl(for: identifier, account: currentAccountId) else {
-      NSLog("WARNING: Could not find book to delete local content.")
-      return
-    }
-    
-    do {
-      switch book.defaultBookContentType {
-      case .epub:
-        try FileManager.default.removeItem(at: bookURL)
-      case .audiobook:
-        deleteLocalContent(forAudiobook: book, at: bookURL)
-      case .pdf:
-        try FileManager.default.removeItem(at: bookURL)
-#if LCP
-        try LCPPDFs.deletePdfContent(url: bookURL)
-#endif
-      case .unsupported:
-        break
-      }
-    } catch {
-      NSLog("Failed to remove local content for download: \(error.localizedDescription)")
-    }
-  }
   
-  func deleteLocalContent(forAudiobook book: TPPBook, at bookURL: URL) {
-    guard let data = try? Data(contentsOf: bookURL) else { return }
+  
+  // MARK: - Return, delete or remove a book
 
-    var dict = [String: Any]()
-    
-#if FEATURE_OVERDRIVE
-    if book.distributor == OverdriveDistributorKey {
-      if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-        dict = json ?? [String: Any]()
-      }
-
-      dict["id"] = book.identifier
-    }
-#endif
-    
-#if LCP
-    if LCPAudiobooks.canOpenBook(book) {
-      let lcpAudiobooks = LCPAudiobooks(for: bookURL)
-      lcpAudiobooks?.contentDictionary { dict, error in
-        if let _ = error {
-          // LCPAudiobooks logs this error
-          return
-        }
-        if let dict = dict {
-          // Delete decrypted content for the book
-          let mutableDict = dict.mutableCopy() as? [String: Any]
-          AudiobookFactory.audiobook(mutableDict ?? [:])?.deleteLocalContent()
-        }
-      }
-      // Delete LCP book file
-      if FileManager.default.fileExists(atPath: bookURL.path) {
-        do {
-          try FileManager.default.removeItem(at: bookURL)
-        } catch {
-          TPPErrorLogger.logError(error, summary: "Failed to delete LCP audiobook local content", metadata: ["book": book.loggableShortString()])
-        }
-      }
-    } else {
-      // Not an LCP book
-      AudiobookFactory.audiobook(dict)?.deleteLocalContent()
-    }
-#else
-    AudiobookFactory.audiobook(dict)?.deleteLocalContent()
-#endif
-    cleanAllDecryptedFiles()
-  }
-  
-  /// - Parameter url: URL to check
-  /// - Returns: Whether the URL corresponds to a decrypted file of this task
-  /// Cleans all decrypted files from the cache directory, even when audiobook is not available
-  func cleanAllDecryptedFiles() {
-    guard let cacheDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first else {
-      ATLog(.error, "Could not find caches directory.")
-      return
-    }
-    
-    do {
-      let fileManager = FileManager.default
-      let cachedFiles = try fileManager.contentsOfDirectory(at: cacheDirectory,
-                                                            includingPropertiesForKeys: nil)
-      
-      var filesRemoved = 0
-      
-      for file in cachedFiles {
-        let fileName = file.lastPathComponent
-        let fileExtension = file.pathExtension.lowercased()
-        let nameWithoutExtension = file.deletingPathExtension().lastPathComponent
-        
-        // Check if the file name is a SHA-256 hash (64 characters hex)
-        let isHashedFile = nameWithoutExtension.count == 64 &&
-        nameWithoutExtension.range(of: "^[A-Fa-f0-9]{64}$",
-                                   options: .regularExpression) != nil
-        // Check if it's an audio file
-        let isAudioFile = ["mp3", "m4a", "m4b"].contains(fileExtension)
-        
-        if isHashedFile && isAudioFile {
-          do {
-            try fileManager.removeItem(at: file)
-            filesRemoved += 1
-            ATLog(.debug, "Removed cached file: \(fileName)")
-          } catch {
-            ATLog(.warn, "Could not delete cached file: \(fileName)", error: error)
-          }
-        }
-      }
-      
-      ATLog(.debug, "Cache cleanup completed. Removed \(filesRemoved) files.")
-      
-    } catch {
-      ATLog(.error, "Error accessing cache directory", error: error)
-    }
-  }
-  
-  @objc func returnBook(withIdentifier identifier: String, completion: (() -> Void)? = nil) {
+  // This function is called when user selects the delete book button.
+  // Delete book button is the button with text 'Return' or 'Delete' or "Remove".
+  @objc func returnBook(
+    withIdentifier identifier: String,
+    completion: (() -> Void)? = nil
+  ) {
 
     if isLoginRequired() {
       // User is not currently logged in in the app
@@ -959,78 +847,460 @@ extension MyBooksDownloadCenter {
     }
 
     guard let book = bookRegistry.book(forIdentifier: identifier) else {
+      // No book to delete, return
       return
     }
-    
+
+    printToConsole(
+      .info,
+      "Starting to return the book: \(book.loggableShortString())"
+    )
+
+    // book is downloaded if it's state is .DownloadSuccessful or .Used
     let state = bookRegistry.state(for: identifier)
-    let downloaded = (state == .DownloadSuccessful) || (state == .Used)
-    
+    let isDownloaded = (state == .DownloadSuccessful) || (state == .Used)
+
     // Process Adobe Return
-#if FEATURE_DRM_CONNECTOR
-    if let fulfillmentId = bookRegistry.fulfillmentId(forIdentifier: identifier),
-       userAccount.authDefinition?.needsAuth == true {
-      NSLog("Return attempt for book. userID: %@", userAccount.userID ?? "")
-      NYPLADEPT.sharedInstance().returnLoan(fulfillmentId,
-                                            userID: userAccount.userID,
-                                            deviceID: userAccount.deviceID) { success, error in
-        if !success {
-          NSLog("Failed to return loan via NYPLAdept.")
+    // Not used in Ekirjasto
+    #if FEATURE_DRM_CONNECTOR
+      if let fulfillmentId = bookRegistry.fulfillmentId(forIdentifier: identifier),
+        userAccount.authDefinition?.needsAuth == true
+      {
+        NSLog("Return attempt for book. userID: %@", userAccount.userID ?? "")
+
+        NYPLADEPT.sharedInstance().returnLoan(
+          fulfillmentId,
+          userID: userAccount.userID,
+          deviceID: userAccount.deviceID
+        ) { success, error in
+
+          if !success {
+            NSLog("Failed to return loan via NYPLAdept.")
+          }
+
         }
+
       }
-    }
-#endif
-    
+    #endif
+
     if book.revokeURL == nil {
-      if downloaded {
-        deleteLocalContent(for: identifier)
-      }
-      bookRegistry.removeBook(forIdentifier: identifier)
-    } else {
-      bookRegistry.setProcessing(true, for: book.identifier)
-      
-      TPPOPDSFeed.withURL(book.revokeURL, shouldResetCache: false) { feed, error in
-        self.bookRegistry.setProcessing(false, for: book.identifier)
-        
-        if let feed = feed, feed.entries.count == 1, let entry = feed.entries[0] as? TPPOPDSEntry {
-          if downloaded {
-            self.deleteLocalContent(for: identifier)
-          }
-          if let returnedBook = TPPBook(entry: entry) {
-            self.bookRegistry.updateAndRemoveBook(returnedBook)
-          } else {
-            NSLog("Failed to create book from entry. Book not removed from registry.")
-          }
-        } else {
-          if let errorType = error?["type"] as? String {
-            if errorType == TPPProblemDocument.TypeNoActiveLoan {
-              if downloaded {
-                self.deleteLocalContent(for: identifier)
-              }
-              self.bookRegistry.removeBook(forIdentifier: identifier)
-            } else if errorType == TPPProblemDocument.TypeInvalidCredentials {
-              NSLog("Invalid credentials problem when returning a book, present sign in VC")
-              self.reauthenticator.authenticateIfNeeded(self.userAccount,
-                                                        usingExistingCredentials: false) { [weak self] in
-                self?.returnBook(withIdentifier: identifier)
-              }
-            }
-          } else {
-            DispatchQueue.main.async {
-              let formattedMessage = String(format: NSLocalizedString("The return of %@ could not be completed.", comment: ""), book.title)
-              let alert = TPPAlertUtils.alert(title: "ReturnFailed", message: formattedMessage)
-              if let error = error as? Decoder, let document = try? TPPProblemDocument(from: error) {
-                TPPAlertUtils.setProblemDocument(controller: alert, document: document, append: true)
-              }
-              DispatchQueue.main.async {
-                TPPAlertUtils.presentFromViewControllerOrNil(alertController: alert, viewController: nil, animated: true, completion: nil)
-              }
-            }
-          }
-        }
-      }
+      // no book revoke url so we cannot send request to backend
+      // so remove the book data locally and return
+
+      removeBookLocally(
+        bookIdentifier: identifier,
+        bookIsDownloaded: isDownloaded
+      )
+
+      return
     }
+
+    processRegularBookReturn(
+      book: book,
+      bookIdentifier: identifier,
+      bookIsDownloaded: isDownloaded
+    )
+
   }
+
+  // Just clear the user's book registry
+  // and local data of book
+  func removeBookLocally(
+    bookIdentifier: String,
+    bookIsDownloaded: Bool
+  ) {
+
+    printToConsole(
+      .info,
+      "Removing book locally"
+    )
+
+    if bookIsDownloaded {
+      deleteLocalContent(for: bookIdentifier)
+    }
+
+    bookRegistry.removeBook(forIdentifier: bookIdentifier)
+  }
+
+  // Revoke the book (send request to backend)
+  // and remove the book from registry
+  // and clean local data
+  func processRegularBookReturn(
+    book: TPPBook,
+    bookIdentifier: String,
+    bookIsDownloaded: Bool
+  ) {
+
+    printToConsole(
+      .info,
+      "Starting to process regular return for book: \(book.loggableShortString())"
+    )
+
+    bookRegistry.setProcessing(true, for: book.identifier)
+
+    TPPOPDSFeed.withURL(
+      book.revokeURL,
+      shouldResetCache: false
+    ) { feed, error in
+
+      self.bookRegistry.setProcessing(false, for: book.identifier)
+
+      if let feed = feed,
+        feed.entries.count == 1,
+        let entry = feed.entries[0] as? TPPOPDSEntry
+      {
+
+        if bookIsDownloaded {
+          self.deleteLocalContent(for: bookIdentifier)
+        }
+
+        if let returnedBook = TPPBook(entry: entry) {
+          self.bookRegistry.updateAndRemoveBook(returnedBook)
+        } else {
+          printToConsole(
+            .debug,
+            "Failed to create book from entry. Book not removed from registry."
+          )
+        }
+
+      } else {
+
+        self.processBookReturnError(
+          error: error as? [String: Any],
+          book: book,
+          bookIsDownloaded: bookIsDownloaded,
+          bookIdentifier: bookIdentifier
+        )
+
+      }
+
+    }
+
+  }
+
+  // Function for handling errors occured during book return
+  func processBookReturnError(
+    error: [String: Any]?,
+    book: TPPBook,
+    bookIsDownloaded: Bool,
+    bookIdentifier: String
+  ) {
+
+    printToConsole(
+      .info,
+      "Processing book return error for book: \(book.loggableShortString())"
+    )
+
+    guard let errorType = error?["type"] as? String else {
+      // If error does not have a type
+      // just show generic alert and return
+      showGenericReturnFailedAlert(book: book)
+      return
+    }
+
+    let alertTitle: String
+    var alertMessage: String
+    var alert: UIAlertController
+
+    switch errorType {
+
+      case TPPProblemDocument.TypeNoActiveLoan:
+
+        if bookIsDownloaded {
+          self.deleteLocalContent(for: bookIdentifier)
+        }
+
+        self.bookRegistry.removeBook(forIdentifier: bookIdentifier)
+
+        // do not show alert to user, just return
+        return
+
+      case TPPProblemDocument.TypeInvalidCredentials:
+
+        self.reauthenticator.authenticateIfNeeded(
+          self.userAccount,
+          usingExistingCredentials: false
+        ) { [weak self] in
+          self?.returnBook(withIdentifier: bookIdentifier)
+        }
+
+        // do not show alert to user, just return
+        return
+
+      default:
+
+        alertTitle = "ReturnFailed"
+        alertMessage = String(
+          format: NSLocalizedString("The return of %@ could not be completed.", comment: ""),
+          book.title
+        )
+
+        alert = TPPAlertUtils.alert(
+          title: alertTitle,
+          message: alertMessage
+        )
+
+        if let error = error as? Decoder,
+          let document = try? TPPProblemDocument(from: error)
+        {
+          TPPAlertUtils.setProblemDocument(
+            controller: alert,
+            document: document,
+            append: true
+          )
+        }
+
+    }
+
+    DispatchQueue.main.async {
+
+      TPPAlertUtils.presentFromViewControllerOrNil(
+        alertController: alert,
+        viewController: nil,
+        animated: true,
+        completion: nil
+      )
+
+    }
+
+  }
+
+  func showGenericReturnFailedAlert(book: TPPBook) {
+
+    printToConsole(
+      .info,
+      "Showing generic return failed alert for user"
+    )
+
+    let formattedMessage = String(
+      format: NSLocalizedString("The return of %@ could not be completed.", comment: ""),
+      book.title
+    )
+
+    let alert = TPPAlertUtils.alert(
+      title: "ReturnFailed",
+      message: formattedMessage
+    )
+
+    DispatchQueue.main.async {
+
+      TPPAlertUtils.presentFromViewControllerOrNil(
+        alertController: alert,
+        viewController: nil,
+        animated: true,
+        completion: nil
+      )
+
+    }
+
+  }
+
+  // Checks the book type (eBook, audiobook, PDF etc.)
+  // and proceeds with correct deletion approach.
+  // Note: deleteLocalContent function is also called from book registry
+  func deleteLocalContent(
+    for identifier: String,
+    account: String? = nil
+  ) {
+    
+    printToConsole(
+      .info,
+      "Start deletion of book local content"
+    )
+
+    guard let book = bookRegistry.book(forIdentifier: identifier) else {
+      // Book is not found in book registry, return
+      return
+    }
+
+    guard let currentAccountId = AccountsManager.shared.currentAccountId,
+      let bookURL = fileUrl(for: identifier, account: currentAccountId)
+    else {
+      // Use currentAccountId to determine the book path.
+      // It represents the UUID of the library in circulation managed.
+
+      // Return if book file url could not be formed
+      NSLog("WARNING: Could not find book to delete local content.")
+      return
+    }
+
+    do {
+      
+      switch book.defaultBookContentType {
+
+        case .epub:
+            try FileManager.default.removeItem(at: bookURL)
+
+        case .audiobook:
+          deleteLocalContentForAudiobook(
+            audiobook: book,
+            bookURL: bookURL
+          )
+
+        case .pdf:
+            try FileManager.default.removeItem(at: bookURL)
+
+            #if LCP
+              try LCPPDFs.deletePdfContent(url: bookURL)
+            #endif
+
+        case .unsupported:
+          break
+
+        }
+
+    } catch {
+
+      NSLog("Failed to remove local content for download: \(error.localizedDescription)")
+
+    }
+
+  }
+
+  // This function is called from normal deleteLocalContent function
+  // and used only for audiobooks
+  func deleteLocalContentForAudiobook(
+    audiobook: TPPBook,
+    bookURL: URL
+  ) {
+
+    printToConsole(
+      .info,
+      "Deleting local content for an audiobook"
+    )
+
+    guard let data = try? Data(contentsOf: bookURL) else {
+      // could not get the data to be deleted
+      // using the given book url, return
+      return
+    }
+
+    var dict = [String: Any]()
+
+    #if FEATURE_OVERDRIVE
+      if book.distributor == OverdriveDistributorKey {
+        if let json = try? JSONSerialization.jsonObject(with: data, options: [])
+          as? [String: Any]
+        {
+          dict = json ?? [String: Any]()
+        }
+
+        dict["id"] = audiobook.identifier
+      }
+    #endif
+
+    #if LCP
+    if LCPAudiobooks.canOpenBook(audiobook) {
+
+        let lcpAudiobooks = LCPAudiobooks(for: bookURL)
+
+        lcpAudiobooks?.contentDictionary { dict, error in
+
+          if error != nil {
+            // LCPAudiobooks logs this error
+            return
+          }
+
+          if let dict = dict {
+            // Delete decrypted content for the book
+            let mutableDict = dict.mutableCopy() as? [String: Any]
+            AudiobookFactory.audiobook(mutableDict ?? [:])?.deleteLocalContent()
+          }
+
+        }
+
+        // Delete LCP book file
+        if FileManager.default.fileExists(atPath: bookURL.path) {
+
+          do {
+            try FileManager.default.removeItem(at: bookURL)
+          } catch {
+            TPPErrorLogger.logError(
+              error, summary: "Failed to delete LCP audiobook local content",
+              metadata: ["book": audiobook.loggableShortString()])
+          }
+
+        }
+
+      } else {
+        // Not an LCP book
+        AudiobookFactory.audiobook(dict)?.deleteLocalContent()
+      }
+    #else
+      AudiobookFactory.audiobook(dict)?.deleteLocalContent()
+    #endif
+
+    cleanAllDecryptedFiles()
+
+  }
+
+  /// - Parameter url: URL to check
+  /// - Returns: Whether the URL corresponds to a decrypted file of this task
+  /// Cleans all decrypted files from the cache directory, even when audiobook is not available
+  func cleanAllDecryptedFiles() {
+
+    printToConsole(
+      .info,
+      "Cleaning all decrypted files from cache directory"
+    )
+
+    guard
+      let cacheDirectory = FileManager.default.urls(
+        for: .cachesDirectory,
+        in: .userDomainMask
+      ).first
+    else {
+      ATLog(.error, "Could not find caches directory.")
+      return
+    }
+
+    do {
+      
+      let fileManager = FileManager.default
+      
+      let cachedFiles = try fileManager.contentsOfDirectory(
+        at: cacheDirectory,
+        includingPropertiesForKeys: nil
+      )
+
+      var filesRemoved = 0
+
+      for file in cachedFiles {
+        let fileName = file.lastPathComponent
+        let fileExtension = file.pathExtension.lowercased()
+        let nameWithoutExtension = file.deletingPathExtension().lastPathComponent
+
+        // Check if the file name is a SHA-256 hash (64 characters hex)
+        let isHashedFile = nameWithoutExtension.count == 64
+          && nameWithoutExtension.range(of: "^[A-Fa-f0-9]{64}$", options: .regularExpression) != nil
+        
+        // Check if it's an audio file
+        let isAudioFile = ["mp3", "m4a", "m4b"].contains(fileExtension)
+
+        if isHashedFile && isAudioFile {
+          
+          do {
+            try fileManager.removeItem(at: file)
+            filesRemoved += 1
+            ATLog(.debug, "Removed cached file: \(fileName)")
+          } catch {
+            ATLog(.warn, "Could not delete cached file: \(fileName)", error: error)
+          }
+          
+        }
+        
+      }
+
+      ATLog(.debug, "Cache cleanup completed. Removed \(filesRemoved) files.")
+
+    } catch {
+      ATLog(.error, "Error accessing cache directory", error: error)
+    }
+    
+  }
+  
 }
+
 
 extension MyBooksDownloadCenter: URLSessionDownloadDelegate {
   func urlSession(
