@@ -940,6 +940,20 @@ extension MyBooksDownloadCenter {
   }
   
   @objc func returnBook(withIdentifier identifier: String, completion: (() -> Void)? = nil) {
+
+    if isLoginRequired() {
+      // User is not currently logged in in the app
+
+      printToConsole(
+        .debug,
+        "User is not logged in, stop book returning and show the E-kirjasto login view"
+      )
+
+      // show the E-kirjasto login view for the user and return
+      EkirjastoLoginViewController.show {}
+      return
+    }
+
     defer {
       completion?()
     }
