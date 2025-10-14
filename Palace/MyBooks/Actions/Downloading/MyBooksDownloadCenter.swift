@@ -302,6 +302,29 @@ import OverdriveProcessor
   }
 #endif
 
+  // Check if user needs to log in to the app
+  private func isLoginRequired() -> Bool {
+
+    // Check if user account requires authentication for book actions
+    // For Ekirjasto, true is always expected (also set as default here...)
+    let needsAuthentication = userAccount.authDefinition?.needsAuth ?? true
+
+    // Check if user has valid credentials
+    // for Ekirjasto users, this is true if user has logged in in app
+    let isAuthenticated = userAccount.hasCredentials()
+
+    // User is not logged in AND the account requires it
+    // user needs to login so return true
+    if !isAuthenticated || needsAuthentication {
+      return true
+    }
+
+    // Otherwise return false,
+    // login is not required
+    return false
+
+  }
+
   private func processRegularDownload(for book: TPPBook, withState state: TPPBookState, andRequest initedRequest: URLRequest?) {
     let request: URLRequest
     if let initedRequest = initedRequest {
