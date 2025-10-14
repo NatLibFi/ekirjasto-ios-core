@@ -9,28 +9,28 @@
 import Foundation
 
 #if FEATURE_OVERDRIVE
-import OverdriveProcessor
+  import OverdriveProcessor
 #endif
 
 @objc class MyBooksDownloadCenter: NSObject, URLSessionDelegate {
   typealias DisplayStrings = Strings.MyDownloadCenter
-  
+
   @objc static let shared = MyBooksDownloadCenter()
-  
+
   private var userAccount: TPPUserAccount
   private var reauthenticator: Reauthenticator
   private var bookRegistry: TPPBookRegistryProvider
-  
+
   private var bookIdentifierOfBookToRemove: String?
   private var broadcastScheduled = false
   private var session: URLSession!
-  
-  private var bookIdentifierToDownloadInfo: [String: MyBooksDownloadInfo ] = [:]
+
+  private var bookIdentifierToDownloadInfo: [String: MyBooksDownloadInfo] = [:]
   private var bookIdentifierToDownloadProgress: [String: Progress] = [:]
   private var bookIdentifierToDownloadTask: [String: URLSessionDownloadTask] = [:]
   private var taskIdentifierToBook: [Int: TPPBook] = [:]
   private var taskIdentifierToRedirectAttempts: [Int: Int] = [:]
-  
+
   init(
     userAccount: TPPUserAccount = TPPUserAccount.sharedAccount(),
     reauthenticator: Reauthenticator = TPPReauthenticator(),
@@ -41,116 +41,36 @@ import OverdriveProcessor
     self.reauthenticator = reauthenticator
 
     super.init()
-    
-#if FEATURE_DRM_CONNECTOR
-    if !(AdobeCertificate.defaultCertificate?.hasExpired ?? true)
-    {
-      NYPLADEPT.sharedInstance().delegate = self
-    }
-#else
-    NSLog("Cannot import ADEPT")
-#endif
-    
+
+    #if FEATURE_DRM_CONNECTOR
+      if !(AdobeCertificate.defaultCertificate?.hasExpired ?? true) {
+        NYPLADEPT.sharedInstance().delegate = self
+      }
+    #else
+      NSLog("Cannot import ADEPT")
+    #endif
+
     let backgroundIdentifier = (Bundle.main.bundleIdentifier ?? "") + ".downloadCenterBackgroundIdentifier"
+
     let configuration = URLSessionConfiguration.background(withIdentifier: backgroundIdentifier)
-    self.session = URLSession(configuration: configuration, delegate: self, delegateQueue: .main)
-  }
-  
-  func startBorrow(for book: TPPBook, attemptDownload shouldAttemptDownload: Bool, borrowCompletion: (() -> Void)? = nil) {
-    bookRegistry.setProcessing(true, for: book.identifier)
-  
-    TPPOPDSFeed.withURL((book.defaultAcquisition)?.hrefURL, shouldResetCache: true) { [weak self] feed, error in
-      self?.bookRegistry.setProcessing(false, for: book.identifier)
-      
-      if let feed = feed,
-         let borrowedEntry = feed.entries.first as? TPPOPDSEntry,
-         let borrowedBook = TPPBook(entry: borrowedEntry) {
-        
-        let location = self?.bookRegistry.location(forIdentifier: borrowedBook.identifier)
 
-        let selectionState: BookSelectionState = (borrowedEntry.selected != nil)
-        ? .Selected
-        : .Unselected
+    self.session = URLSession(
+      configuration: configuration,
+      delegate: self,
+      delegateQueue: .main
+    )
 
-        self?.bookRegistry.addBook(borrowedBook,
-                                   location: location,
-                                   state: .DownloadNeeded,
-                                   selectionState: selectionState,
-                                   fulfillmentId: nil,
-                                   readiumBookmarks: nil,
-                                   genericBookmarks: nil)
+  }
 
-        if shouldAttemptDownload {
-          self?.startDownloadIfAvailable(book: borrowedBook)
-        }
-        
-      } else {
-        self?.process(error: error as? [String: Any], for: book)
-      }
-      
-      DispatchQueue.main.async {
-        borrowCompletion?()
-      }
-    }
-  }
-  
-  private func startDownloadIfAvailable(book: TPPBook) {
-    let downloadAction = { [weak self] in
-      self?.startDownload(for: book)
-    }
-    
-    book.defaultAcquisition?.availability.matchUnavailable(
-      nil,
-      limited: { _ in downloadAction() },
-      unlimited: { _ in downloadAction() },
-      reserved: nil,
-      ready: { _ in downloadAction() })
-  }
-  
-  private func process(error: [String: Any]?, for book: TPPBook) {
-    guard let errorType = error?["type"] as? String else {
-      showGenericBorrowFailedAlert(for: book)
-      return
-    }
-    
-    let alertTitle = DisplayStrings.borrowFailed
-    var alertMessage: String
-    var alert: UIAlertController
-    
-    switch errorType {
-    case TPPProblemDocument.TypeLoanAlreadyExists:
-      alertMessage = DisplayStrings.loanAlreadyExistsAlertMessage
-      alert = TPPAlertUtils.alert(title: alertTitle, message: alertMessage)
-      
-    case TPPProblemDocument.TypeInvalidCredentials:
-      NSLog("Invalid credentials problem when borrowing a book, present sign in VC")
-      reauthenticator.authenticateIfNeeded(userAccount, usingExistingCredentials: false) { [weak self] in
-        self?.startDownload(for: book)
-      }
-      return
-    default:
-      alertMessage = String(format: DisplayStrings.borrowFailedMessage, book.title)
-      alert = TPPAlertUtils.alert(title: alertTitle, message: alertMessage)
-      
-      if let error = error {
-        TPPAlertUtils.setProblemDocument(controller: alert, document:  TPPProblemDocument.fromDictionary(error), append: false)
-      }
-    }
-    
-    DispatchQueue.main.async {
-      TPPAlertUtils.presentFromViewControllerOrNil(alertController: alert, viewController: nil, animated: true, completion: nil)
-    }
-  }
-  
-  private func showGenericBorrowFailedAlert(for book: TPPBook) {
-    let formattedMessage = String(format: DisplayStrings.borrowFailedMessage, book.title)
-    let alert = TPPAlertUtils.alert(title: DisplayStrings.borrowFailed, message: formattedMessage)
-    DispatchQueue.main.async {
-      TPPAlertUtils.presentFromViewControllerOrNil(alertController: alert, viewController: nil, animated: true, completion: nil)
-    }
-  }
-  
-  @objc func startDownload(for book: TPPBook, withRequest initedRequest: URLRequest? = nil) {
+
+  // MARK: - Get, download and reserve a book
+
+  // This function is called when user selects the download book button.
+  // Download book button is the button with text 'Get' or 'Download' or "Reserve".
+  @objc func startDownload(
+    for book: TPPBook,
+    withRequest initedRequest: URLRequest? = nil
+  ) {
 
     if isLoginRequired() {
       // User is not currently logged in in the app
@@ -168,159 +88,377 @@ import OverdriveProcessor
     var state = bookRegistry.state(for: book.identifier)
     let location = bookRegistry.location(forIdentifier: book.identifier)
     let loginRequired = userAccount.authDefinition?.needsAuth
-    
+
+    // First check the book's state
     switch state {
-    case .Unregistered:
-      state = processUnregisteredState(
-        for: book,
-        location: location,
-        loginRequired: loginRequired
-      )
-    case .Downloading:
-      return
-    case .DownloadFailed, .DownloadNeeded, .Holding, .SAMLStarted:
-      break
-    case .DownloadSuccessful, .Used, .Unsupported:
-      NSLog("Ignoring nonsensical download request.")
-      return
+
+      case .Unregistered:
+        // This state is expected.
+        // If book is unregistered it means
+        // that the book is not in book registry.
+
+        // This processing function basically checks
+        // if this book can be added to book registry
+        // without borrowing it (open access for example)
+
+        // The expected new state set here
+        // is .Unregistered for E-kirjasto books
+        state = processUnregisteredState(
+          for: book,
+          location: location,
+          loginRequired: loginRequired
+        )
+
+      case .Downloading:
+        // return because this state means
+        // that we already downloading the book
+        return
+
+      case .DownloadFailed,
+        .DownloadNeeded,
+        .Holding,
+        .SAMLStarted:
+        // These states are expected.
+        // Break here and continue with rest of this function
+        // to proceed with download
+        break
+
+      case .DownloadSuccessful,
+        .Used,
+        .Unsupported:
+        // return because these states mean
+        // that the book has already been downloaded
+        NSLog("Ignoring nonsensical download request.")
+        return
+
     }
 
-    if userAccount.hasCredentials() || !(loginRequired ?? false) {
-      processDownloadWithCredentials(for: book, withState: state, andRequest: initedRequest)
-    } else {
-      EkirjastoLoginViewController.show {
-        self.processDownloadWithCredentials(for: book, withState: state, andRequest: initedRequest)
-      }
-      //requestCredentialsAndStartDownload(for: book)
-    }
+    // If we end up here after state check,
+    // then the book state is suitable
+    // to proceed with the download
+    // and user is already logged in in app.
+    // Suitable book state is .Unregistered, DownloadFailed,
+    // DownloadNeeded or Holding for Ekirjasto books.
+    processDownloadWithCredentials(
+      for: book,
+      withState: state,
+      andRequest: initedRequest
+    )
+
   }
-  
-  private func processUnregisteredState(for book: TPPBook, location: TPPBookLocation?, loginRequired: Bool?) -> TPPBookState {
-    if book.defaultAcquisitionIfBorrow == nil && (book.defaultAcquisitionIfOpenAccess != nil || !(loginRequired ?? false)) {
 
-      let selectionState: BookSelectionState =  bookRegistry.selectionState(for: book.identifier)
-
-      bookRegistry.addBook(book,
-                           location: location,
-                           state: .DownloadNeeded,
-                           selectionState: selectionState,
-                           fulfillmentId: nil,
-                           readiumBookmarks: nil,
-                           genericBookmarks: nil)
-
-      return .DownloadNeeded
-    }
-    return .Unregistered
-  }
-
-  private func requestCredentialsAndStartDownload(for book: TPPBook) {
-#if FEATURE_DRM_CONNECTOR
-    if AdobeCertificate.defaultCertificate?.hasExpired ?? false {
-      // ADEPT crashes the app with expired certificate.
-      TPPAlertUtils.presentFromViewControllerOrNil(alertController: TPPAlertUtils.expiredAdobeDRMAlert(), viewController: nil, animated: true, completion: nil)
-    } else {
-      TPPAccountSignInViewController.requestCredentials { [weak self] in
-        self?.startDownload(for: book)
-      }
-    }
-#else
-    TPPAccountSignInViewController.requestCredentials { [weak self] in
-      self?.startDownload(for: book)
-    }
-#endif
-  }
-  
+  // Function that checks the state of the book in book registry.
+  // If the book is not borrowed for the user, proceed with borrowing the book first.
+  // Otherwise, the user has already this book on loan, so proceed straight to download
   private func processDownloadWithCredentials(
     for book: TPPBook,
     withState state: TPPBookState,
     andRequest initedRequest: URLRequest?
   ) {
+
+    printToConsole(
+      .info,
+      "Starting to process download with credentials for book: \(book.loggableShortString())"
+    )
+
+    // Not borrowed yet to user,
+    // first we need to add the to book registry
     if state == .Unregistered || state == .Holding {
-      startBorrow(for: book, attemptDownload: true, borrowCompletion: nil)
+      startBorrow(
+        for: book,
+        attemptDownload: true,
+        borrowCompletion: nil
+      )
+
     } else {
-#if FEATURE_OVERDRIVE
-      if book.distributor == OverdriveDistributorKey && book.defaultBookContentType == .audiobook {
-        processOverdriveDownload(for: book, withState: state)
-        return
-      }
-#endif
-      processRegularDownload(for: book, withState: state, andRequest: initedRequest)
-    }
-  }
-  
-#if FEATURE_OVERDRIVE
-  private func processOverdriveDownload(for book: TPPBook, withState state: TPPBookState) {
-    guard let url = book.defaultAcquisition?.hrefURL else { return }
-    
-    let completion: ([AnyHashable: Any]?, Error?) -> Void = { [weak self] responseHeaders, error in
-      self?.handleOverdriveResponse(for: book, url: url, withState: state, responseHeaders: responseHeaders, error: error)
-    }
-    
-    if let token = userAccount.authToken {
-      OverdriveAPIExecutor.shared.fulfillBook(urlString: url.absoluteString, authType: .token(token), completion: completion)
-    } else if let username = userAccount.username, let pin = userAccount.PIN {
-      OverdriveAPIExecutor.shared.fulfillBook(urlString: url.absoluteString, authType: .basic(username: username, pin: pin), completion: completion)
-    }
-  }
-#endif
 
-#if FEATURE_OVERDRIVE
-  private func handleOverdriveResponse(
+      #if FEATURE_OVERDRIVE
+        if book.distributor == OverdriveDistributorKey
+          && book.defaultBookContentType == .audiobook
+        {
+          
+          processOverdriveDownload(
+            for: book,
+            withState: state
+          )
+          
+          return
+        }
+      #endif
+
+      // Already borrowed and added to book registry,
+      // proceed with download
+      processRegularDownload(
+        for: book,
+        withState: state,
+        andRequest: initedRequest
+      )
+
+    }
+
+  }
+
+  // First gets the book entry
+  // and then adds the book to registry
+  // and then moves on to download if no problems occur
+  func startBorrow(
     for book: TPPBook,
-    url: URL?,
-    withState state: TPPBookState,
-    responseHeaders: [AnyHashable: Any]?,
-    error: Error?
+    attemptDownload shouldAttemptDownload: Bool,
+    borrowCompletion: (() -> Void)? = nil
   ) {
-    let summaryWrongHeaders = "Overdrive audiobook fulfillment: wrong headers"
-    let nA = "N/A"
-    let responseHeadersKey = "responseHeaders"
-    let acquisitionURLKey = "acquisitionURL"
-    let bookKey = "book"
-    let bookRegistryStateKey = "bookRegistryState"
-    
-    if let error = error {
-      let summary = "Overdrive audiobook fulfillment error"
 
-      TPPErrorLogger.logError(error, summary: summary, metadata: [
-        responseHeadersKey: responseHeaders ?? nA,
-        acquisitionURLKey: url?.absoluteString ?? nA,
-        bookKey: book.loggableDictionary,
-        bookRegistryStateKey: TPPBookStateHelper.stringValue(from: state)
-      ])
-      self.failDownloadWithAlert(for: book)
-      return
+    printToConsole(
+      .info,
+      "Starting to borrow the book: \(book.loggableShortString())"
+    )
+
+    bookRegistry.setProcessing(true, for: book.identifier)
+
+    // Get the feed with book url
+    TPPOPDSFeed.withURL(
+      (book.defaultAcquisition)?.hrefURL,
+      shouldResetCache: true
+    ) { [weak self] feed, error in
+
+      self?.bookRegistry.setProcessing(false, for: book.identifier)
+
+      // Check that a book object can be created
+      // from the book entry
+      // that was recieved in the feed
+      if let feed = feed,
+        let borrowedEntry = feed.entries.first as? TPPOPDSEntry,
+        let borrowedBook = TPPBook(entry: borrowedEntry)
+      {
+
+        let location = self?.bookRegistry.location(forIdentifier: borrowedBook.identifier)
+
+        let selectionState: BookSelectionState = (borrowedEntry.selected != nil)
+          ? .Selected
+          : .Unselected
+
+        // Add the book to registry first
+        self?.bookRegistry.addBook(
+          borrowedBook,
+          location: location,
+          state: .DownloadNeeded,
+          selectionState: selectionState,
+          fulfillmentId: nil,
+          readiumBookmarks: nil,
+          genericBookmarks: nil)
+
+        // then proceed to download
+        if shouldAttemptDownload {
+          self?.startDownloadIfAvailable(book: borrowedBook)
+        }
+
+      } else {
+        // Some error happened
+        // for example with acquisition url or feed
+        self?.process(
+          error: error as? [String: Any],
+          for: book
+        )
+
+      }
+
+      DispatchQueue.main.async {
+        // do this only if completion was passed as parameter
+        // (the default is nil for borrowCompletion)
+        borrowCompletion?()
+      }
+
     }
-    
-    let normalizedHeaders = responseHeaders?.mapKeys { String(describing: $0).lowercased() }
-    let scopeKey = "x-overdrive-scope"
-    let patronAuthorizationKey = "x-overdrive-patron-authorization"
-    let locationKey = "location"
-    
-    guard let scope = normalizedHeaders?[scopeKey] as? String,
-          let patronAuthorization = normalizedHeaders?[patronAuthorizationKey] as? String,
-          let requestURLString = normalizedHeaders?[locationKey] as? String,
-          let request = OverdriveAPIExecutor.shared.getManifestRequest(urlString: requestURLString, token: patronAuthorization, scope: scope)
-    else {
-      TPPErrorLogger.logError(withCode: .overdriveFulfillResponseParseFail, summary: summaryWrongHeaders, metadata: [
-        responseHeadersKey: responseHeaders ?? nA,
-        acquisitionURLKey: url?.absoluteString ?? nA,
-        bookKey: book.loggableDictionary,
-        bookRegistryStateKey: TPPBookStateHelper.stringValue(from: state)
-      ])
-      self.failDownloadWithAlert(for: book)
-      return
-    }
-    
-    self.addDownloadTask(with: request, book: book)
+
   }
-#endif
 
-  // Check if user needs to log in to the app
+  // Check if book is available for user
+  // if yes, start the download
+  private func startDownloadIfAvailable(book: TPPBook) {
+
+    // Create variable downloadAction,
+    // which is a closure that
+    // calls function startDownload
+    let downloadAction = { [weak self] in
+      self?.startDownload(for: book)
+    }
+
+    // Get the availability data for this book.
+    // First checks the availability status of the book using matchUnavailable function
+    // and then continues to the closure (to book download),
+    // if book is available for user to get
+    book.defaultAcquisition?.availability.matchUnavailable(
+      nil,
+      limited: { _ in downloadAction() },
+      unlimited: { _ in downloadAction() },
+      reserved: nil,
+      ready: { _ in downloadAction() }
+    )
+
+  }
+
+  // Function for handling errors
+  private func process(
+    error: [String: Any]?,
+    for book: TPPBook
+  ) {
+
+    guard let errorType = error?["type"] as? String else {
+      // If error does not have a type
+      // just show generic alert and return
+      showGenericBorrowFailedAlert(for: book)
+      return
+    }
+
+    // The rest of this function assumes
+    // that a problem document dictionary
+    // has been received from the backend
+    // because error has type.
+    let alertTitle = DisplayStrings.borrowFailed
+    var alertMessage: String
+    var alert: UIAlertController
+
+    switch errorType {
+
+      case TPPProblemDocument.TypeLoanAlreadyExists:
+        alertMessage = DisplayStrings.loanAlreadyExistsAlertMessage
+        alert = TPPAlertUtils.alert(
+          title: alertTitle,
+          message: alertMessage
+        )
+
+      case TPPProblemDocument.TypeInvalidCredentials:
+        // Note for Ekirjasto
+        // Missing authentication and recieved error 401
+        // is send as an authentication documentation from backend,
+        // not as a problem document.
+        // It means that we never end up to this case.
+        NSLog("Invalid credentials problem when borrowing a book, present sign in VC")
+
+        reauthenticator.authenticateIfNeeded(
+          userAccount,
+          usingExistingCredentials: false
+        ) { [weak self] in
+          self?.startDownload(for: book)
+        }
+
+        return
+
+      default:
+        // Some other problem document type received with error
+        alertMessage = String(
+          format: DisplayStrings.borrowFailedMessage, book.title)
+        alert = TPPAlertUtils.alert(
+          title: alertTitle,
+          message: alertMessage)
+
+        if let error = error {
+          TPPAlertUtils.setProblemDocument(
+            controller: alert,
+            document: TPPProblemDocument.fromDictionary(error),
+            append: false
+          )
+        }
+
+    }
+
+    // Finally show the alert for user
+    // formed from the problem document
+    DispatchQueue.main.async {
+
+      TPPAlertUtils.presentFromViewControllerOrNil(
+        alertController: alert,
+        viewController: nil,
+        animated: true,
+        completion: nil
+      )
+
+    }
+
+  }
+
+  // Shows alert to user that the borrow failed for book
+  // no extra infomation of error is added
+  private func showGenericBorrowFailedAlert(for book: TPPBook) {
+    let formattedMessage = String(
+      format: DisplayStrings.borrowFailedMessage,
+      book.title
+    )
+
+    let alert = TPPAlertUtils.alert(
+      title: DisplayStrings.borrowFailed,
+      message: formattedMessage
+    )
+
+    DispatchQueue.main.async {
+
+      TPPAlertUtils.presentFromViewControllerOrNil(
+        alertController: alert,
+        viewController: nil,
+        animated: true,
+        completion: nil
+      )
+
+    }
+
+  }
+
+  // This function basically just adds the book to book registry
+  // if book is open access and no login is needed for user's account
+  // For Ekirjasto, this check usually just returns the state .Unregistered
+  private func processUnregisteredState(
+    for book: TPPBook,
+    location: TPPBookLocation?,
+    loginRequired: Bool?
+  ) -> TPPBookState {
+
+    // Book state is .Unregistered at the start
+
+    // book.defaultAcquisitionIfBorrow
+    //  - this is normally not nil for E-kirjasto books
+    //    because books have borrow relation
+    let isBorrowAcquisitionDefined = book.defaultAcquisitionIfBorrow != nil
+
+    // book.defaultAcquisitionIfOpenAccess
+    //  - this is normally nil for E-kirjasto book
+    //    because books are not open access, but licensed
+    let isOpenAccessAcquisitionDefined =
+      book.defaultAcquisitionIfOpenAccess != nil
+
+    // loginRequired (given as parameter)
+    //  - user could be either logged in or logged out in Ekirjasto
+    //    but at this point the user should already be logged in.
+    let userNeedsToLogin = loginRequired ?? false
+
+    if !isBorrowAcquisitionDefined
+      && (isOpenAccessAcquisitionDefined || !userNeedsToLogin)
+    {
+
+      // We end up here only if book is not borrowable
+      // and it is either open access book or user does not need to login
+
+      let selectionState: BookSelectionState = bookRegistry.selectionState(for: book.identifier)
+
+      bookRegistry.addBook(
+        book,
+        location: location,
+        state: .DownloadNeeded,
+        selectionState: selectionState,
+        fulfillmentId: nil,
+        readiumBookmarks: nil,
+        genericBookmarks: nil)
+
+      return .DownloadNeeded
+    }
+
+    // This return state is expected in Ekirjasto
+    return .Unregistered
+  }
+
+  // Check if user needs to login in app
   private func isLoginRequired() -> Bool {
 
     // Check if user account requires authentication for book actions
-    // For Ekirjasto, true is always expected (also set as default here...)
+    // For Ekirjasto true is always expected (also set as default here...)
     let needsAuthentication = userAccount.authDefinition?.needsAuth ?? true
 
     // Check if user has valid credentials
@@ -336,61 +474,118 @@ import OverdriveProcessor
     // Otherwise return false,
     // login is not required
     return false
-
   }
 
-  private func processRegularDownload(for book: TPPBook, withState state: TPPBookState, andRequest initedRequest: URLRequest?) {
+  // Create the url request for download
+  // and add the download task
+  private func processRegularDownload(
+    for book: TPPBook,
+    withState state: TPPBookState,
+    andRequest initedRequest: URLRequest?
+  ) {
+
+    printToConsole(
+      .info,
+      "Starting to process regular download for book: \(book.loggableShortString())"
+    )
+
     let request: URLRequest
+
     if let initedRequest = initedRequest {
       request = initedRequest
+
     } else if let url = book.defaultAcquisition?.hrefURL {
       request = TPPNetworkExecutor.bearerAuthorized(request: URLRequest(url: url))
+
     } else {
-      logInvalidURLRequest(for: book, withState: state, url: nil, request: nil)
+      logInvalidURLRequest(
+        for: book,
+        withState: state,
+        url: nil,
+        request: nil
+      )
+
       return
     }
 
     guard let _ = request.url else {
-      logInvalidURLRequest(for: book, withState: state, url: book.defaultAcquisition?.hrefURL, request: request)
+
+      logInvalidURLRequest(
+        for: book,
+        withState: state,
+        url: book.defaultAcquisition?.hrefURL,
+        request: request
+      )
+
       return
     }
-  
-    if let cookies = userAccount.cookies, state != .SAMLStarted {
-      handleSAMLStartedState(for: book, withRequest: request, cookies: cookies)
+
+    if let cookies = userAccount.cookies,
+      state != .SAMLStarted
+    {
+
+      handleSAMLStartedState(
+        for: book,
+        withRequest: request,
+        cookies: cookies
+      )
+
     } else {
+
       clearAndSetCookies()
-      addDownloadTask(with: request, book: book)
+      addDownloadTask(
+        with: request,
+        book: book
+      )
+
     }
+
   }
-  
-  private func logInvalidURLRequest(for book: TPPBook, withState state: TPPBookState, url: URL?, request: URLRequest?) {
-    bookRegistry.setState(.SAMLStarted, for: book.identifier)
-    guard let someCookies = self.userAccount.cookies, var mutableRequest = request else { return }
+
+  private func logInvalidURLRequest(
+    for book: TPPBook,
+    withState state: TPPBookState,
+    url: URL?,
+    request: URLRequest?
+  ) {
     
+    bookRegistry.setState(.SAMLStarted, for: book.identifier)
+    
+    guard let someCookies = self.userAccount.cookies,
+      var mutableRequest = request
+    else { return }
+
     DispatchQueue.main.async { [weak self] in
+      
       guard let self = self else { return }
-      
+
       mutableRequest.cachePolicy = .reloadIgnoringCacheData
-      
+
       let loginCancelHandler: () -> Void = { [weak self] in
         self?.bookRegistry.setState(.DownloadNeeded, for: book.identifier)
         self?.cancelDownload(for: book.identifier)
       }
-      
-      let bookFoundHandler: (_ request: URLRequest?, _ cookies: [HTTPCookie]) -> Void = { [weak self] request, cookies in
-        self?.userAccount.setCookies(cookies)
-        self?.startDownload(for: book, withRequest: mutableRequest)
-      }
-      
-      let problemFoundHandler: (_ problemDocument: TPPProblemDocument?) -> Void = { [weak self] problemDocument in
-        guard let self = self else { return }
-        self.bookRegistry.setState(.DownloadNeeded, for: book.identifier)
-        
-        self.reauthenticator.authenticateIfNeeded(self.userAccount, usingExistingCredentials: false) { [weak self] in
-          self?.startDownload(for: book)
+
+      let bookFoundHandler:
+        (_ request: URLRequest?, _ cookies: [HTTPCookie]) -> Void = {
+          [weak self] request, cookies in
+          self?.userAccount.setCookies(cookies)
+          self?.startDownload(for: book, withRequest: mutableRequest)
         }
-      }
-    
+
+      let problemFoundHandler:
+        (_ problemDocument: TPPProblemDocument?) -> Void = {
+          [weak self] problemDocument in
+          guard let self = self else { return }
+          self.bookRegistry.setState(.DownloadNeeded, for: book.identifier)
+
+          self.reauthenticator.authenticateIfNeeded(
+            self.userAccount, usingExistingCredentials: false
+          ) { [weak self] in
+            self?.startDownload(for: book)
+          }
+        }
+
       let model = TPPCookiesWebViewModel(
         cookies: someCookies,
         request: mutableRequest,
@@ -400,50 +595,83 @@ import OverdriveProcessor
         problemFoundHandler: problemFoundHandler,
         autoPresentIfNeeded: true
       )
+      
       let cookiesVC = TPPCookiesWebViewController(model: model)
       cookiesVC.loadViewIfNeeded()
+      
+    }
+    
+  }
+
+  private func handleSAMLStartedState(
+    for book: TPPBook,
+    withRequest request: URLRequest,
+    cookies: [HTTPCookie]
+  ) {
+    
+    bookRegistry.setState(.SAMLStarted, for: book.identifier)
+
+    DispatchQueue.main.async { [weak self] in
+      
+      var mutableRequest = request
+      mutableRequest.cachePolicy = .reloadIgnoringCacheData
+
+      let model = TPPCookiesWebViewModel(
+        cookies: cookies, request: mutableRequest, loginCompletionHandler: nil,
+        loginCancelHandler: {
+          self?.handleLoginCancellation(for: book)
+        },
+        bookFoundHandler: { request, cookies in
+          self?.handleBookFound(
+            for: book, withRequest: request, cookies: cookies)
+        },
+        problemFoundHandler: { problemDocument in
+          self?.handleProblem(for: book, problemDocument: problemDocument)
+        }, autoPresentIfNeeded: true)
+
+      let cookiesVC = TPPCookiesWebViewController(model: model)
+      cookiesVC.loadViewIfNeeded()
+      
     }
   }
 
-  private func handleSAMLStartedState(for book: TPPBook, withRequest request: URLRequest, cookies: [HTTPCookie]) {
-    bookRegistry.setState(.SAMLStarted, for: book.identifier)
-    
-    DispatchQueue.main.async { [weak self] in
-      var mutableRequest = request
-      mutableRequest.cachePolicy = .reloadIgnoringCacheData
-      
-      let model = TPPCookiesWebViewModel(cookies: cookies, request: mutableRequest, loginCompletionHandler: nil, loginCancelHandler: {
-        self?.handleLoginCancellation(for: book)
-      }, bookFoundHandler: { request, cookies in
-        self?.handleBookFound(for: book, withRequest: request, cookies: cookies)
-      }, problemFoundHandler: { problemDocument in
-        self?.handleProblem(for: book, problemDocument: problemDocument)
-      }, autoPresentIfNeeded: true)
-      
-      let cookiesVC = TPPCookiesWebViewController(model: model)
-      cookiesVC.loadViewIfNeeded()
-    }
-  }
-  
   private func handleLoginCancellation(for book: TPPBook) {
     bookRegistry.setState(.DownloadNeeded, for: book.identifier)
     cancelDownload(for: book.identifier)
   }
-  
-  private func handleBookFound(for book: TPPBook, withRequest request: URLRequest?, cookies: [HTTPCookie]) {
+
+  private func handleBookFound(
+    for book: TPPBook,
+    withRequest request: URLRequest?,
+    cookies: [HTTPCookie]
+  ) {
     userAccount.setCookies(cookies)
+    
     if let request = request {
-      startDownload(for: book, withRequest: request)
+      startDownload(
+        for: book,
+        withRequest: request
+      )
     }
+    
   }
 
-  private func handleProblem(for book: TPPBook, problemDocument: TPPProblemDocument?) {
+  private func handleProblem(
+    for book: TPPBook,
+    problemDocument: TPPProblemDocument?
+  ) {
+    
     bookRegistry.setState(.DownloadNeeded, for: book.identifier)
-    reauthenticator.authenticateIfNeeded(userAccount, usingExistingCredentials: false) {
+    
+    reauthenticator.authenticateIfNeeded(
+      userAccount,
+      usingExistingCredentials: false
+    ) {
       self.startDownload(for: book)
     }
+    
   }
-  
+
   private func clearAndSetCookies() {
     let cookieStorage = session.configuration.httpCookieStorage
     cookieStorage?.cookies?.forEach { cookieStorage?.deleteCookie($0) }
@@ -451,29 +679,142 @@ import OverdriveProcessor
   }
 
   @objc func cancelDownload(for identifier: String) {
+    
     guard let info = downloadInfo(forBookIdentifier: identifier) else {
       let state = bookRegistry.state(for: identifier)
       if state != .DownloadFailed {
         NSLog("Ignoring nonsensical cancellation request.")
         return
       }
-      
+
       bookRegistry.setState(.DownloadNeeded, for: identifier)
       return
     }
-    
-#if FEATURE_DRM_CONNECTOR
-    if info.rightsManagement == .adobe {
-      NYPLADEPT.sharedInstance().cancelFulfillment(withTag: identifier)
-      return
-    }
-#endif
+
+    #if FEATURE_DRM_CONNECTOR
+      if info.rightsManagement == .adobe {
+        NYPLADEPT.sharedInstance().cancelFulfillment(withTag: identifier)
+        return
+      }
+    #endif
 
     info.downloadTask.cancel { [weak self] resumeData in
       self?.bookRegistry.setState(.DownloadNeeded, for: identifier)
       self?.broadcastUpdate()
     }
+    
   }
+
+  // This function is not currently used anywhere
+  private func requestCredentialsAndStartDownload(for book: TPPBook) {
+    
+    #if FEATURE_DRM_CONNECTOR
+      if AdobeCertificate.defaultCertificate?.hasExpired ?? false {
+        // ADEPT crashes the app with expired certificate.
+        TPPAlertUtils.presentFromViewControllerOrNil(
+          alertController: TPPAlertUtils.expiredAdobeDRMAlert(),
+          viewController: nil, animated: true, completion: nil)
+      } else {
+        TPPAccountSignInViewController.requestCredentials { [weak self] in
+          self?.startDownload(for: book)
+        }
+      }
+    #else
+      TPPAccountSignInViewController.requestCredentials { [weak self] in
+        self?.startDownload(for: book)
+      }
+    #endif
+    
+  }
+
+  #if FEATURE_OVERDRIVE
+    private func processOverdriveDownload(
+      for book: TPPBook,
+      withState state: TPPBookState
+    ) {
+      guard let url = book.defaultAcquisition?.hrefURL else { return }
+
+      let completion: ([AnyHashable: Any]?, Error?) -> Void = {
+        [weak self] responseHeaders, error in
+        self?.handleOverdriveResponse(
+          for: book, url: url, withState: state,
+          responseHeaders: responseHeaders, error: error)
+      }
+
+      if let token = userAccount.authToken {
+        OverdriveAPIExecutor.shared.fulfillBook(
+          urlString: url.absoluteString, authType: .token(token),
+          completion: completion)
+      } else if let username = userAccount.username, let pin = userAccount.PIN {
+        OverdriveAPIExecutor.shared.fulfillBook(
+          urlString: url.absoluteString,
+          authType: .basic(username: username, pin: pin), completion: completion
+        )
+      }
+    }
+  #endif
+
+  #if FEATURE_OVERDRIVE
+    private func handleOverdriveResponse(
+      for book: TPPBook,
+      url: URL?,
+      withState state: TPPBookState,
+      responseHeaders: [AnyHashable: Any]?,
+      error: Error?
+    ) {
+      let summaryWrongHeaders = "Overdrive audiobook fulfillment: wrong headers"
+      let nA = "N/A"
+      let responseHeadersKey = "responseHeaders"
+      let acquisitionURLKey = "acquisitionURL"
+      let bookKey = "book"
+      let bookRegistryStateKey = "bookRegistryState"
+
+      if let error = error {
+        let summary = "Overdrive audiobook fulfillment error"
+
+        TPPErrorLogger.logError(
+          error, summary: summary,
+          metadata: [
+            responseHeadersKey: responseHeaders ?? nA,
+            acquisitionURLKey: url?.absoluteString ?? nA,
+            bookKey: book.loggableDictionary,
+            bookRegistryStateKey: TPPBookStateHelper.stringValue(from: state),
+          ])
+        self.failDownloadWithAlert(for: book)
+        return
+      }
+
+      let normalizedHeaders = responseHeaders?.mapKeys {
+        String(describing: $0).lowercased()
+      }
+      let scopeKey = "x-overdrive-scope"
+      let patronAuthorizationKey = "x-overdrive-patron-authorization"
+      let locationKey = "location"
+
+      guard let scope = normalizedHeaders?[scopeKey] as? String,
+        let patronAuthorization = normalizedHeaders?[patronAuthorizationKey]
+          as? String,
+        let requestURLString = normalizedHeaders?[locationKey] as? String,
+        let request = OverdriveAPIExecutor.shared.getManifestRequest(
+          urlString: requestURLString, token: patronAuthorization, scope: scope)
+      else {
+        TPPErrorLogger.logError(
+          withCode: .overdriveFulfillResponseParseFail,
+          summary: summaryWrongHeaders,
+          metadata: [
+            responseHeadersKey: responseHeaders ?? nA,
+            acquisitionURLKey: url?.absoluteString ?? nA,
+            bookKey: book.loggableDictionary,
+            bookRegistryStateKey: TPPBookStateHelper.stringValue(from: state),
+          ])
+        self.failDownloadWithAlert(for: book)
+        return
+      }
+
+      self.addDownloadTask(with: request, book: book)
+    }
+  #endif
+
 }
 
 extension MyBooksDownloadCenter {
