@@ -151,6 +151,20 @@ import OverdriveProcessor
   }
   
   @objc func startDownload(for book: TPPBook, withRequest initedRequest: URLRequest? = nil) {
+
+    if isLoginRequired() {
+      // User is not currently logged in in the app
+
+      printToConsole(
+        .debug,
+        "User is not logged in, stop book downloading and show the E-kirjasto login view"
+      )
+
+      // show the E-kirjasto login view for the user and return
+      EkirjastoLoginViewController.show {}
+      return
+    }
+
     var state = bookRegistry.state(for: book.identifier)
     let location = bookRegistry.location(forIdentifier: book.identifier)
     let loginRequired = userAccount.authDefinition?.needsAuth
