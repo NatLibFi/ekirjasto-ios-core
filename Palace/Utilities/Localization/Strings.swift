@@ -22,6 +22,77 @@ struct Strings {
     static let alertTitle = NSLocalizedString("Announcement", comment: "")
     static let ok = NSLocalizedString("Announcement", comment: "")
   }
+  
+  struct BookCell {
+    static let delete = NSLocalizedString("Delete", comment: "")
+    static let `return` = NSLocalizedString("Return", comment: "")
+    static let remove = NSLocalizedString("Remove", comment: "")
+    static let deleteMessage = NSLocalizedString("Are you sure you want to delete \"%@\"?", comment: "Message shown in an alert to the user prior to deleting a title")
+    static let returnMessage = NSLocalizedString("Are you sure you want to return \"%@\"?", comment: "Message shown in an alert to the user prior to returning a title")
+    static let removeReservation = NSLocalizedString("Remove Reservation", comment: "")
+    static let removeReservationMessage = NSLocalizedString("Are you sure you want to remove \"%@\" from your reservations? You will no longer be in line for this book.", comment: "Message shown in an alert to the user prior to returning a reserved title.")
+    static let downloading = NSLocalizedString("Downloading", comment: "")
+    static let downloadFailedMessage = NSLocalizedString("The download could not be completed.", comment: "")
+    static let loanTimeNotAvailable = NSLocalizedString("Remaining loan time is not available.", comment: "Text informing the user that the remaining loan time could not be determined.")
+    static let loanTimeRemaining = NSLocalizedString("You have this book on loan for %@.", comment: "Text that tells the user how much time they have left to read the book.")
+    static let bookIsOnHoldForUser = NSLocalizedString("You have this book on hold.", comment: "Text that informs the user that the book is held for the user.")
+    static let bookHoldPosition = NSLocalizedString("You are at position %@ in the queue for this book.", comment: "Text that informs the user of their position on the hold list.")
+    static let bookIsAvailableToBorrow = NSLocalizedString("This book is available to borrow.", comment: "Text that informs that the book the user queued for is now ready to borrow.")
+    static let addToFavoritesButtonLabel = NSLocalizedString("Add to favorites", comment: "Accessiblity label for a button that adds a book to the user's favorite books.")
+    static let removeFromFavoritesButtonLabel = NSLocalizedString("Remove from favorites", comment: "Accessiblity label for a button that removes a book from the user's favorite books.")
+    static let accessModeLabel = NSLocalizedString("Access mode", comment: "Name for the access mode field in the book details view")
+    static let accessibilityFeaturesLabel = NSLocalizedString("Accessibility features", comment: "Name for the accesibility features field in the book details view")
+    static let accessibilitySummaryLabel = NSLocalizedString("Accessibility summary", comment: "Name for the accesibility summary field in the book details view")
+    static let accessibilityDataNotYetAvailable = NSLocalizedString("Not yet available", comment: "Placeholder text shown when accessibility data for a book is not yet available.")
+  }
+
+  struct DownloadBook {
+
+    static let borrowFailedTitle = NSLocalizedString(
+      "Borrow failed",
+      comment: "Alert title informing the user that borrowing a book failed."
+    )
+
+    static let borrowFailedMessage = NSLocalizedString(
+      "Borrowing %@ could not be completed.",
+      comment: "Alert message body informing the user that borrowing failed for a specific book title."
+    )
+
+    static let downloadFailedTitle = NSLocalizedString(
+      "Download failed",
+      comment: "Error title informing the user that download failed."
+    )
+
+    static let downloadFailedMessage = NSLocalizedString(
+      "The download could not be completed.",
+      comment: "Error message body informing the user that download failed."
+    )
+
+    static let downloadFailedMessageWithBookTitle = NSLocalizedString(
+      "The download for book %@ could not be completed.",
+      comment: "Error message body informing the user that download failed for a specific book title."
+    )
+
+    static let loanAlreadyExistsAlertMessage = NSLocalizedString(
+      "You have already checked out this loan. You may need to refresh your My Books list to download the title.",
+      comment: ""
+    )
+
+  }
+  
+  struct ReturnBook {
+
+    static let returnFailedTitle = NSLocalizedString(
+      "Return failed",
+      comment: "Title for the alert shown to user when returning a book fails"
+    )
+
+    static let returnFailedMessage = NSLocalizedString(
+      "The return of %@ could not be completed.",
+      comment: "Message body for the alert shown to user when returning a book fails"
+    )
+
+  }
 
   struct Error {
     static let loginFailedErrorTitle = NSLocalizedString("Login Failed", comment: "")
@@ -50,6 +121,26 @@ struct Strings {
     static let bookFavoriteActionFailedNotificationAlertTitle = NSLocalizedString("Favorites update failed", comment: "The title in a notification alert informing the user that the there was an error in adding the book to favorites or removing the book from favorites")
     static let bookFavoriteActionFailedNotificationAlertMessage = NSLocalizedString("We were unable to save the changes to your Favorites list with book\n \"%@\".\n\n Please try again soon.", comment: "The message in a notification alert informing the user that the there was an error in adding the book to favorites or removing the book from favorites")
   }
+
+  struct ErrorInformation {
+
+    static let errorInformationAvailable = NSLocalizedString(
+      "Additional error information:\n%@",
+      comment: "Used when additional technical error details are appended to for example the download failure message."
+    )
+
+    static let noErrorInformationAvailable = NSLocalizedString(
+      "No additional error information is available.",
+      comment: "Message informing that there is no detailed error message available."
+    )
+
+  }
+
+  struct FacetView {
+    static let author = NSLocalizedString("Author", comment: "")
+    static let title = NSLocalizedString("Title", comment: "")
+    static let facetHint = NSLocalizedString("Change %@ choice", comment: "Read out hint when a facet is possibly selected")
+  }
   
   struct Generic {
     static let back = NSLocalizedString("Back", comment: "Text for Back button")
@@ -68,6 +159,27 @@ struct Strings {
     static let done = NSLocalizedString("Done", comment: "Title for Done button")
   }
   
+  struct MyBooksView {
+    static let loansAndHoldsNavTitle = NSLocalizedString("My Books", comment: "Tab title for loans and holds view")
+    static let favoritesAndReadNavTitle = NSLocalizedString("Favorites", comment: "Tab title for favorites and read books view")
+    static let loansNavTitle = NSLocalizedString("Loans", comment: "Tab title for loans view")
+    static let holdsNavTitle = NSLocalizedString("Holds", comment: "Tab title for holds view")
+    static let sortBy = NSLocalizedString("Sort By:", comment: "")
+    static let searchBooks = NSLocalizedString("Search My Books", comment: "")
+    static let emptyViewMessage = NSLocalizedString("Visit the Catalog to\nadd books to My Books.", comment: "")
+    static let findYourLibrary = NSLocalizedString("Find Your Library", comment: "Button that lets user know they can select a library they have a card for")
+    static let addLibrary = NSLocalizedString("Add Library", comment: "Title of button to add a new library")
+    static let accountSyncingAlertTitle = NSLocalizedString("Please wait", comment: "")
+    static let accountSyncingAlertMessage = NSLocalizedString("Please wait a moment before switching library accounts", comment: "")
+    static let accessibilityShowAndReloadCatalogTab = NSLocalizedString("accessibilityShowAndReloadCatalogTab", comment: "")
+    static let loansEmptyViewMessage = NSLocalizedString("Visit the Catalog to add books to My Books.\n Number of loans is limited to 5.\n Ensure good internet connection when downloading a book and make sure there is enough space on your device.", comment: "Text shown for logged in user when they have no books on loan")
+    static let loansNotLoggedInViewMessage = NSLocalizedString("Sign in to see your books.", comment: "Text shown for non-logged in user in loans view")
+    static let holdsEmptyViewMessage = NSLocalizedString("When you reserve a book from the catalog, it will show up here.\n Look here from time to time to see if your book is available to download.\n Number of reservations is limited to 5.", comment: "Text shown for logged in user when they have no books on hold")
+    static let holdsNotLoggedInViewMessage = NSLocalizedString("Sign in to see your reservations.", comment: "Text shown for non-logged in user in holds view")
+    static let favoritesEmptyViewMessage = NSLocalizedString("Visit the Catalog to add books to your Favorites.", comment: "Text shown for logged in user when they have no favorite books")
+    static let favoritesNotLoggedInViewMessage = NSLocalizedString("Sign in to see your favorites.", comment: "Text shown for non-logged in user in favorites view")
+  }
+  
   struct OETutorialChoiceViewController {
     static let loginMessage = NSLocalizedString("You need to login to access the collection.", comment: "")
     static let requestNewCodes = NSLocalizedString("Request New Codes", comment: "")
@@ -79,6 +191,34 @@ struct Strings {
   
   struct OETutorialWelcomeViewController {
     static let description = NSLocalizedString("Welcome to Open eBooks", comment: "Welcome text")
+  }
+  
+  struct OpenBook {
+
+    static let unableToOpenBookAlertTitle = NSLocalizedString(
+      "Unable to open book",
+      comment: "Title for the alert shown to user when opening (presenting) a book fails."
+    )
+
+    static let unableToOpenBookAlertMessage = NSLocalizedString(
+      "There was a problem opening the book %@. Please try again.",
+      comment: "Alert message body informing the user that opening book failed for a specific book title."
+    )
+
+  }
+  
+  struct OpenSample {
+
+    static let unableToOpenSampleAlertTitle = NSLocalizedString(
+      "Unable to open sample",
+      comment: "Title for the alert shown to user when opening (presenting) a book sample fails."
+    )
+
+    static let unableToOpenSampleAlertMessage = NSLocalizedString(
+      "There was a problem opening the sample of the book %@. Please try again.",
+      comment: "Alert message body informing the user that opening book sample failed for a specific book title."
+    )
+
   }
   
   struct ProblemReportEmail {
@@ -162,8 +302,26 @@ struct Strings {
     static let restartText = NSLocalizedString("Preferred language saved. It will be available the next time you open the app.", comment: "")
   }
   
+  struct TimeAndDuration {
+    static let hour = NSLocalizedString("hour", comment: "Hour (in singular), used for example when audiobook duration is displayed for user, '1 hour'.")
+    static let hours = NSLocalizedString("hours", comment: "Hours (in plural), used for example when audiobook duration is displayed for user, '3 hours'.")
+    static let minute = NSLocalizedString("minute", comment: "Minute (in singular), used for example when audiobook duration is displayed for user, '1 minute'.")
+    static let minutes = NSLocalizedString("minutes", comment: "Minutes (in plural), used for example when audiobook duration is displayed for user, '3 minutes'.")
+    static let second = NSLocalizedString("second", comment: "Second (in singular), used for example when audiobook duration is displayed for user, '1 second'.")
+    static let seconds = NSLocalizedString("seconds", comment: "Seconds (in plural), used for example when audiobook duration is displayed for user, '3 seconds'.")
+  }
+  
   struct TPPAccountListDataSource {
     static let addLibrary = NSLocalizedString("Add Library", comment: "Title that also informs the user that they should choose a library from the list.")
+  }
+  
+  struct TPPAccountRegistration {
+    static let doesUserHaveLibraryCard = NSLocalizedString("Don't have a library card?", comment: "Title for registration. Asking the user if they already have a library card.")
+    static let geolocationInstructions = NSLocalizedString("E-kirjasto requires a one-time location check in order to verify your library service area. Once you choose \"Create Card\", please select \"Allow Once\" in the popup so we can verify this information.", comment: "Body for registration. Explaining the reason for requesting the user's location and instructions for how to provide permission.")
+    static let createCard = NSLocalizedString("Create Card", comment: "")
+    static let deniedLocationAccessMessage = NSLocalizedString("E-kirjasto requires a one-time location check in order to verify your library service area. You have disabled location services for this app. To enable, please select the 'Open Settings' button below then continue with card creation.", comment: "Registration message shown to user when location access has been denied.")
+    static let deniedLocationAccessMessageBoldText = NSLocalizedString("You have disabled location services for this app.", comment: "Registration message shown to user when location access has been denied.")
+    static let openSettings = NSLocalizedString("Open Settings", comment: "")
   }
   
   struct TPPBaseReaderViewController {
@@ -192,17 +350,16 @@ struct Strings {
     static let bookFormatForEBooks = NSLocalizedString("eBook", comment: "Common book format name for all eBooks.")
   }
   
-  struct TPPOnboardingView {
-    static let contentDescription1 = NSLocalizedString("Welcome to E-library! This service is provided by your local library.", comment: "Text of the first page of the onboarding tutorial")
-    static let contentDescription2 = NSLocalizedString("You can browse e-books and audiobooks by genre, book or author, or browse recommendation lists made by librarians.", comment: "Text of the second page of the onboarding tutorial")
-    static let contentDescription3 = NSLocalizedString("Browse the selection, borrow and read or listen! If a book is on loan, press \"reserve\" to get it when it becomes available.", comment: "Text of the third page of the onboarding tutorial")
-    static let contentDescription4 = NSLocalizedString("Or do you want something to listen to? The collection also includes an untold number of audiobooks! Click \"borrow\" to listen to the audiobook.", comment: "Text of the fourth page of the onboarding tutorial")
-    static let swipeNextHint = NSLocalizedString("Swipe left for next page.", comment: "Hint to show next image in the onboarding tutorial")
-    static let swipeCloseHint = NSLocalizedString("Swipe left to close tutorial.", comment: "Hint to close the onboarding tutorial")
+  struct TPPCatalogLaneCell {
+    static let audioDescriptionEbook = NSLocalizedString("%@ by %@, ebook", comment: "BookCover cell accessibility label for ebook")
+    static let audioDescriptionPdf = NSLocalizedString("%@ by %@, pdf", comment: "BookCover cell accessibility label for pdf")
+    static let audioDescriptionAudiobook = NSLocalizedString("%@ by %@, audiobook", comment: "BookCover cell accessibility label for audiobook")
+    static let audioDescriptionUnknownFormat = NSLocalizedString("%@ by %@", comment: "BookCover cell accessibility label for unknown format")
+    static let audioDescriptionAction = NSLocalizedString("Show book's page", comment: "Describes what happens when the user taps the book cover")
   }
   
-  struct TPPPDFNavigation {
-    static let resume = NSLocalizedString("Resume", comment: "A button to continue reading title.")
+  struct TPPCatalogGroupedViewController {
+    static let laneDescription = NSLocalizedString("%@ -lane", comment: "Audio description for lane title")
   }
   
   struct TPPDeveloperSettingsTableViewController {
@@ -215,16 +372,29 @@ struct Strings {
     static let endOfResults = NSLocalizedString("Reached the end of the results.", comment: "Reached the end of the results.")
   }
   
+  struct TPPLastListenedPositionSynchronizer {
+    static let syncListeningPositionAlertTitle = NSLocalizedString("Sync Listening Position", comment: "An alert title notifying the user the listening position has been synced")
+    static let syncListeningPositionAlertBody = NSLocalizedString("Do you want to move to the time on which you left off?", comment: "An alert message asking the user to perform navigation to the synced listening position or not")
+  }
+  
   struct TPPLastReadPositionSynchronizer {
     static let syncReadingPositionAlertTitle = NSLocalizedString("Sync Reading Position", comment: "An alert title notifying the user the reading position has been synced")
     static let syncReadingPositionAlertBody = NSLocalizedString("Do you want to move to the page on which you left off?", comment: "An alert message asking the user to perform navigation to the synced reading position or not")
     static let stay = NSLocalizedString("Stay", comment: "Do not perform navigation")
     static let move = NSLocalizedString("Move", comment: "Perform navigation")
   }
-
-  struct TPPLastListenedPositionSynchronizer {
-    static let syncListeningPositionAlertTitle = NSLocalizedString("Sync Listening Position", comment: "An alert title notifying the user the listening position has been synced")
-    static let syncListeningPositionAlertBody = NSLocalizedString("Do you want to move to the time on which you left off?", comment: "An alert message asking the user to perform navigation to the synced listening position or not")
+  
+  struct TPPOnboardingView {
+    static let contentDescription1 = NSLocalizedString("Welcome to E-library! This service is provided by your local library.", comment: "Text of the first page of the onboarding tutorial")
+    static let contentDescription2 = NSLocalizedString("You can browse e-books and audiobooks by genre, book or author, or browse recommendation lists made by librarians.", comment: "Text of the second page of the onboarding tutorial")
+    static let contentDescription3 = NSLocalizedString("Browse the selection, borrow and read or listen! If a book is on loan, press \"reserve\" to get it when it becomes available.", comment: "Text of the third page of the onboarding tutorial")
+    static let contentDescription4 = NSLocalizedString("Or do you want something to listen to? The collection also includes an untold number of audiobooks! Click \"borrow\" to listen to the audiobook.", comment: "Text of the fourth page of the onboarding tutorial")
+    static let swipeNextHint = NSLocalizedString("Swipe left for next page.", comment: "Hint to show next image in the onboarding tutorial")
+    static let swipeCloseHint = NSLocalizedString("Swipe left to close tutorial.", comment: "Hint to close the onboarding tutorial")
+  }
+  
+  struct TPPPDFNavigation {
+    static let resume = NSLocalizedString("Resume", comment: "A button to continue reading title.")
   }
 
   struct TPPProblemDocument {
@@ -293,92 +463,6 @@ struct Strings {
     static let bookAddedToFavoritesNotificationBannerMessage = NSLocalizedString("\"%@\" has been added to your Favorites.", comment: "The message in a notification banner informing the user that the book is added to user's favorite books")
     static let bookRemovedFromFavoritesNotificationBannerTitle = NSLocalizedString("Book removed from Favorites", comment: "The title in a notification banner informing the user that the book is removed from user's favorite books")
     static let bookRemovedFromFavoritesNotificationBannerMessage = NSLocalizedString("\"%@\" has been removed from your Favorites.", comment: "The message in a notification banner informing the user that the book is removed from user's favorite books")
-  }
-  
-  struct TPPCatalogLaneCell {
-    static let audioDescriptionEbook = NSLocalizedString("%@ by %@, ebook", comment: "BookCover cell accessibility label for ebook")
-    static let audioDescriptionPdf = NSLocalizedString("%@ by %@, pdf", comment: "BookCover cell accessibility label for pdf")
-    static let audioDescriptionAudiobook = NSLocalizedString("%@ by %@, audiobook", comment: "BookCover cell accessibility label for audiobook")
-    static let audioDescriptionUnknownFormat = NSLocalizedString("%@ by %@", comment: "BookCover cell accessibility label for unknown format")
-    static let audioDescriptionAction = NSLocalizedString("Show book's page", comment: "Describes what happens when the user taps the book cover")
-  }
-  
-  struct TPPCatalogGroupedViewController {
-    static let laneDescription = NSLocalizedString("%@ -lane", comment: "Audio description for lane title")
-  }
-  
-  struct MyBooksView {
-    static let loansAndHoldsNavTitle = NSLocalizedString("My Books", comment: "Tab title for loans and holds view")
-    static let favoritesAndReadNavTitle = NSLocalizedString("Favorites", comment: "Tab title for favorites and read books view")
-    static let loansNavTitle = NSLocalizedString("Loans", comment: "Tab title for loans view")
-    static let holdsNavTitle = NSLocalizedString("Holds", comment: "Tab title for holds view")
-    static let sortBy = NSLocalizedString("Sort By:", comment: "")
-    static let searchBooks = NSLocalizedString("Search My Books", comment: "")
-    static let emptyViewMessage = NSLocalizedString("Visit the Catalog to\nadd books to My Books.", comment: "")
-    static let findYourLibrary = NSLocalizedString("Find Your Library", comment: "Button that lets user know they can select a library they have a card for")
-    static let addLibrary = NSLocalizedString("Add Library", comment: "Title of button to add a new library")
-    static let accountSyncingAlertTitle = NSLocalizedString("Please wait", comment: "")
-    static let accountSyncingAlertMessage = NSLocalizedString("Please wait a moment before switching library accounts", comment: "")
-    static let accessibilityShowAndReloadCatalogTab = NSLocalizedString("accessibilityShowAndReloadCatalogTab", comment: "")
-    static let loansEmptyViewMessage = NSLocalizedString("Visit the Catalog to add books to My Books.\n Number of loans is limited to 5.\n Ensure good internet connection when downloading a book and make sure there is enough space on your device.", comment: "Text shown for logged in user when they have no books on loan")
-    static let loansNotLoggedInViewMessage = NSLocalizedString("Sign in to see your books.", comment: "Text shown for non-logged in user in loans view")
-    static let holdsEmptyViewMessage = NSLocalizedString("When you reserve a book from the catalog, it will show up here.\n Look here from time to time to see if your book is available to download.\n Number of reservations is limited to 5.", comment: "Text shown for logged in user when they have no books on hold")
-    static let holdsNotLoggedInViewMessage = NSLocalizedString("Sign in to see your reservations.", comment: "Text shown for non-logged in user in holds view")
-    static let favoritesEmptyViewMessage = NSLocalizedString("Visit the Catalog to add books to your Favorites.", comment: "Text shown for logged in user when they have no favorite books")
-    static let favoritesNotLoggedInViewMessage = NSLocalizedString("Sign in to see your favorites.", comment: "Text shown for non-logged in user in favorites view")
-  }
-  
-  struct FacetView {
-    static let author = NSLocalizedString("Author", comment: "")
-    static let title = NSLocalizedString("Title", comment: "")
-    static let facetHint = NSLocalizedString("Change %@ choice", comment: "Read out hint when a facet is possibly selected")
-  }
-  
-  struct BookCell {
-    static let delete = NSLocalizedString("Delete", comment: "")
-    static let `return` = NSLocalizedString("Return", comment: "")
-    static let remove = NSLocalizedString("Remove", comment: "")
-    static let deleteMessage = NSLocalizedString("Are you sure you want to delete \"%@\"?", comment: "Message shown in an alert to the user prior to deleting a title")
-    static let returnMessage = NSLocalizedString("Are you sure you want to return \"%@\"?", comment: "Message shown in an alert to the user prior to returning a title")
-    static let removeReservation = NSLocalizedString("Remove Reservation", comment: "")
-    static let removeReservationMessage = NSLocalizedString("Are you sure you want to remove \"%@\" from your reservations? You will no longer be in line for this book.", comment: "Message shown in an alert to the user prior to returning a reserved title.")
-    static let downloading = NSLocalizedString("Downloading", comment: "")
-    static let downloadFailedMessage = NSLocalizedString("The download could not be completed.", comment: "")
-    static let loanTimeNotAvailable = NSLocalizedString("Remaining loan time is not available.", comment: "Text informing the user that the remaining loan time could not be determined.")
-    static let loanTimeRemaining = NSLocalizedString("You have this book on loan for %@.", comment: "Text that tells the user how much time they have left to read the book.")
-    static let bookIsOnHoldForUser = NSLocalizedString("You have this book on hold.", comment: "Text that informs the user that the book is held for the user.")
-    static let bookHoldPosition = NSLocalizedString("You are at position %@ in the queue for this book.", comment: "Text that informs the user of their position on the hold list.")
-    static let bookIsAvailableToBorrow = NSLocalizedString("This book is available to borrow.", comment: "Text that informs that the book the user queued for is now ready to borrow.")
-    static let addToFavoritesButtonLabel = NSLocalizedString("Add to favorites", comment: "Accessiblity label for a button that adds a book to the user's favorite books.")
-    static let removeFromFavoritesButtonLabel = NSLocalizedString("Remove from favorites", comment: "Accessiblity label for a button that removes a book from the user's favorite books.")
-    static let accessModeLabel = NSLocalizedString("Access mode", comment: "Name for the access mode field in the book details view")
-    static let accessibilityFeaturesLabel = NSLocalizedString("Accessibility features", comment: "Name for the accesibility features field in the book details view")
-    static let accessibilitySummaryLabel = NSLocalizedString("Accessibility summary", comment: "Name for the accesibility summary field in the book details view")
-    static let accessibilityDataNotYetAvailable = NSLocalizedString("Not yet available", comment: "Placeholder text shown when accessibility data for a book is not yet available.")
-  }
-  
-  struct TPPAccountRegistration {
-    static let doesUserHaveLibraryCard = NSLocalizedString("Don't have a library card?", comment: "Title for registration. Asking the user if they already have a library card.")
-    static let geolocationInstructions = NSLocalizedString("E-kirjasto requires a one-time location check in order to verify your library service area. Once you choose \"Create Card\", please select \"Allow Once\" in the popup so we can verify this information.", comment: "Body for registration. Explaining the reason for requesting the user's location and instructions for how to provide permission.")
-    static let createCard = NSLocalizedString("Create Card", comment: "")
-    static let deniedLocationAccessMessage = NSLocalizedString("E-kirjasto requires a one-time location check in order to verify your library service area. You have disabled location services for this app. To enable, please select the 'Open Settings' button below then continue with card creation.", comment: "Registration message shown to user when location access has been denied.")
-    static let deniedLocationAccessMessageBoldText = NSLocalizedString("You have disabled location services for this app.", comment: "Registration message shown to user when location access has been denied.")
-    static let openSettings = NSLocalizedString("Open Settings", comment: "")
-  }
-  
-  struct MyDownloadCenter {
-    static let borrowFailed = NSLocalizedString("Borrow Failed", comment: "")
-    static let borrowFailedMessage = NSLocalizedString("Borrowing %@ could not be completed.", comment: "")
-    static let loanAlreadyExistsAlertMessage = NSLocalizedString("You have already checked out this loan. You may need to refresh your My Books list to download the title.", comment: "")
-  }
-  
-  struct TimeAndDuration {
-    static let hour = NSLocalizedString("hour", comment: "Hour (in singular), used for example when audiobook duration is displayed for user, '1 hour'.")
-    static let hours = NSLocalizedString("hours", comment: "Hours (in plural), used for example when audiobook duration is displayed for user, '3 hours'.")
-    static let minute = NSLocalizedString("minute", comment: "Minute (in singular), used for example when audiobook duration is displayed for user, '1 minute'.")
-    static let minutes = NSLocalizedString("minutes", comment: "Minutes (in plural), used for example when audiobook duration is displayed for user, '3 minutes'.")
-    static let second = NSLocalizedString("second", comment: "Second (in singular), used for example when audiobook duration is displayed for user, '1 second'.")
-    static let seconds = NSLocalizedString("seconds", comment: "Seconds (in plural), used for example when audiobook duration is displayed for user, '3 seconds'.")
   }
     
 }
