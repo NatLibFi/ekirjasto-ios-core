@@ -1038,6 +1038,12 @@
 		753D8D252DCE29B20092FD39 /* MyBooksSelectionCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753D8D242DCE29A80092FD39 /* MyBooksSelectionCenter.swift */; };
 		753D8D262DCE29B20092FD39 /* MyBooksSelectionCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753D8D242DCE29A80092FD39 /* MyBooksSelectionCenter.swift */; };
 		753D8D272DCE29B20092FD39 /* MyBooksSelectionCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753D8D242DCE29A80092FD39 /* MyBooksSelectionCenter.swift */; };
+		7566BE9D2EA7C5FC009EEF9C /* ToastService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7566BE9C2EA7C5F8009EEF9C /* ToastService.swift */; };
+		7566BE9E2EA7C5FC009EEF9C /* ToastService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7566BE9C2EA7C5F8009EEF9C /* ToastService.swift */; };
+		7566BE9F2EA7C5FC009EEF9C /* ToastService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7566BE9C2EA7C5F8009EEF9C /* ToastService.swift */; };
+		7566BEA12EA7C612009EEF9C /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7566BEA02EA7C604009EEF9C /* ToastView.swift */; };
+		7566BEA22EA7C612009EEF9C /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7566BEA02EA7C604009EEF9C /* ToastView.swift */; };
+		7566BEA32EA7C612009EEF9C /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7566BEA02EA7C604009EEF9C /* ToastView.swift */; };
 		7582FFD02DB9188A0057AC71 /* BookSelectionButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582FFCF2DB918880057AC71 /* BookSelectionButtonsView.m */; };
 		7582FFD12DB9188A0057AC71 /* BookSelectionButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582FFCF2DB918880057AC71 /* BookSelectionButtonsView.m */; };
 		7582FFD22DB9188A0057AC71 /* BookSelectionButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582FFCF2DB918880057AC71 /* BookSelectionButtonsView.m */; };
@@ -1989,6 +1995,8 @@
 		7530C8C62D80CA6E0024E184 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		7530C8D02D80CF660024E184 /* FavoritesMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesMainView.swift; sourceTree = "<group>"; };
 		753D8D242DCE29A80092FD39 /* MyBooksSelectionCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBooksSelectionCenter.swift; sourceTree = "<group>"; };
+		7566BE9C2EA7C5F8009EEF9C /* ToastService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastService.swift; sourceTree = "<group>"; };
+		7566BEA02EA7C604009EEF9C /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		7582FFCE2DB918630057AC71 /* BookSelectionButtonsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookSelectionButtonsView.h; sourceTree = "<group>"; };
 		7582FFCF2DB918880057AC71 /* BookSelectionButtonsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookSelectionButtonsView.m; sourceTree = "<group>"; };
 		7582FFD32DBADF240057AC71 /* BookSelectionButtonsState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookSelectionButtonsState.h; sourceTree = "<group>"; };
@@ -3260,6 +3268,15 @@
 			path = Actions;
 			sourceTree = "<group>";
 		};
+		7566BE9B2EA7C5C7009EEF9C /* Toast */ = {
+			isa = PBXGroup;
+			children = (
+				7566BE9C2EA7C5F8009EEF9C /* ToastService.swift */,
+				7566BEA02EA7C604009EEF9C /* ToastView.swift */,
+			);
+			path = Toast;
+			sourceTree = "<group>";
+		};
 		75E833BD2D7373CE00D2B840 /* Facet */ = {
 			isa = PBXGroup;
 			children = (
@@ -3704,6 +3721,7 @@
 				73A22980240F26C6006B9EAD /* Reader2 */,
 				73085E222502EDC6008F6244 /* Settings */,
 				7332E143252F756E0043F2E1 /* SignInLogic */,
+				7566BE9B2EA7C5C7009EEF9C /* Toast */,
 				7327A88D23EE00FE00954748 /* Utilities */,
 				73DE53332525A83F003E2C56 /* Views */,
 				738CB2092509AD3B00891F31 /* WelcomeScreen */,
@@ -4985,6 +5003,7 @@
 				3312639B2A287F53006BA87D /* TPPSettingsAdvancedViewController.swift in Sources */,
 				3312639C2A287F53006BA87D /* TPPMigrationManager.swift in Sources */,
 				363C61FE2B14E83900858AA5 /* UIHostingController+Extensions.swift in Sources */,
+				7566BEA22EA7C612009EEF9C /* ToastView.swift in Sources */,
 				3312639D2A287F53006BA87D /* Date+NYPLAdditions.swift in Sources */,
 				3312639E2A287F53006BA87D /* TPPBasicAuth.swift in Sources */,
 				3312639F2A287F53006BA87D /* OPDS2AuthenticationDocument.swift in Sources */,
@@ -5102,6 +5121,7 @@
 				75E834142D76088F00D2B840 /* HoldsView.swift in Sources */,
 				337E63B92A28A7D100FF7886 /* (null) in Sources */,
 				331264032A287F53006BA87D /* TPPBook+DistributorChecks.swift in Sources */,
+				7566BE9D2EA7C5FC009EEF9C /* ToastService.swift in Sources */,
 				331264042A287F53006BA87D /* TPPLoginCellTypes.swift in Sources */,
 				331264052A287F53006BA87D /* TPPSAMLHelper.m in Sources */,
 				331264062A287F53006BA87D /* TPPAccountSignInViewController.m in Sources */,
@@ -5263,6 +5283,7 @@
 				E733E4B12AFD7A3500D5052A /* Account+profileDocument.swift in Sources */,
 				21045C562761092C00D2D407 /* TPPOnboardingViewController.swift in Sources */,
 				17631AF025E488CD006079C4 /* TPPAgeCheckViewController.swift in Sources */,
+				7566BEA32EA7C612009EEF9C /* ToastView.swift in Sources */,
 				21989A1127B6FF0E00539B7F /* TPPReaderSettings.swift in Sources */,
 				73EB0A9D25821DF4006BC997 /* NSDate+NYPLDateAdditions.m in Sources */,
 				E792891D2861F58B000313D7 /* TPPPDFTOCView.swift in Sources */,
@@ -5443,6 +5464,7 @@
 				73EB0B0725821DF4006BC997 /* TPPOPDSEntry.m in Sources */,
 				E78AE807291C1D9600884446 /* TPPBookRegistry+Extensions.swift in Sources */,
 				73EB0B0925821DF4006BC997 /* TPPIndeterminateProgressView.m in Sources */,
+				7566BE9E2EA7C5FC009EEF9C /* ToastService.swift in Sources */,
 				73EB0B0A25821DF4006BC997 /* NSString+TPPStringAdditions.m in Sources */,
 				73EB0B0B25821DF4006BC997 /* TPPKeychainManager.swift in Sources */,
 				73DE897D260BEA13003D9135 /* TPPRequestExecuting.swift in Sources */,
@@ -5680,6 +5702,7 @@
 				11F3771F19DB62B000487769 /* TPPFacetView.m in Sources */,
 				145798F6215BE9E300F68AFD /* ProblemReportEmail.swift in Sources */,
 				E7F66E0B29E7565300B62900 /* BarcodeScanner.swift in Sources */,
+				7566BEA12EA7C612009EEF9C /* ToastView.swift in Sources */,
 				111197281986B43B0014462F /* TPPBookCellDelegate.m in Sources */,
 				111197391987F4070014462F /* TPPBookDetailNormalView.m in Sources */,
 				E7F403212899A70A004934A3 /* OPDS2LinkArray.swift in Sources */,
@@ -5794,6 +5817,7 @@
 				E708F723284783250028405B /* TPPEncryptedPDFViewer.swift in Sources */,
 				E75423252AFC381E008CB7EF /* UserProfileDocument+Links.swift in Sources */,
 				089E42C6249A823800310360 /* TPPCookiesWebViewController.swift in Sources */,
+				7566BE9F2EA7C5FC009EEF9C /* ToastService.swift in Sources */,
 				E5824BE32994B29700DE76C2 /* ButtonView.swift in Sources */,
 				0826CD2924AA21B2000F4030 /* TPPSamlIDPCell.swift in Sources */,
 				2126FE2E25C059250095C45C /* ReaderError.swift in Sources */,
