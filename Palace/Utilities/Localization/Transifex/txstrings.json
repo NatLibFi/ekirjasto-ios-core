@@ -222,6 +222,9 @@
       "Add to favorites" : {
          "string" : "Add to favorites"
       },
+      "Additional error information:\n%@" : {
+         "string" : "Additional error information:\n%@"
+      },
       "Advanced" : {
          "string" : "Advanced"
       },
@@ -311,6 +314,9 @@
       },
       "Borrow Failed" : {
          "string" : "Borrow Failed"
+      },
+      "Borrow failed" : {
+         "string" : "Borrow failed"
       },
       "Borrowing %@ could not be completed." : {
          "string" : "Borrowing %@ could not be completed."
@@ -437,6 +443,9 @@
       },
       "Download Error" : {
          "string" : "Download Error"
+      },
+      "Download failed" : {
+         "string" : "Download failed"
       },
       "Downloading" : {
          "string" : "Downloading"
@@ -678,6 +687,9 @@
       "No Results Found" : {
          "string" : "No Results Found"
       },
+      "No additional error information is available." : {
+         "string" : "No additional error information is available."
+      },
       "No dependents or children found." : {
          "string" : "No dependents or children found."
       },
@@ -866,6 +878,9 @@
       },
       "Return" : {
          "string" : "Return"
+      },
+      "Return failed" : {
+         "string" : "Return failed"
       },
       "Returns %@" : {
          "string" : "Returns %@"
@@ -1071,6 +1086,12 @@
       "The download for %@ could not be completed." : {
          "string" : "The download for %@ could not be completed."
       },
+      "The download for book \"%@\" could not be completed." : {
+         "string" : "The download for book \"%@\" could not be completed."
+      },
+      "The download for book %@ could not be completed." : {
+         "string" : "The download for book %@ could not be completed."
+      },
       "The item you are trying to open is not currently supported." : {
          "string" : "The item you are trying to open is not currently supported."
       },
@@ -1097,6 +1118,12 @@
       },
       "There was a problem contacting the server.\nPlease make sure you are connected to the internet, or try again later." : {
          "string" : "There was a problem contacting the server.\nPlease make sure you are connected to the internet, or try again later."
+      },
+      "There was a problem opening the book %@. Please try again." : {
+         "string" : "There was a problem opening the book %@. Please try again."
+      },
+      "There was a problem opening the sample of the book %@. Please try again." : {
+         "string" : "There was a problem opening the sample of the book %@. Please try again."
       },
       "This URL cannot be found. Please close the app entirely and reload it. If the problem persists, please contact your library's Help Desk." : {
          "string" : "This URL cannot be found. Please close the app entirely and reload it. If the problem persists, please contact your library's Help Desk."
@@ -1136,6 +1163,12 @@
       },
       "Unable to load the web page at this time." : {
          "string" : "Unable to load the web page at this time."
+      },
+      "Unable to open book" : {
+         "string" : "Unable to open book"
+      },
+      "Unable to open sample" : {
+         "string" : "Unable to open sample"
       },
       "Under 13" : {
          "string" : "Under 13"
@@ -1568,6 +1601,9 @@
       "Add to favorites" : {
          "string" : "Lisää suosikiksi"
       },
+      "Additional error information:\n%@" : {
+         "string" : "Virheen lisätiedot:\n%@"
+      },
       "Advanced" : {
          "string" : "Edistynyt"
       },
@@ -1656,6 +1692,9 @@
          "string" : "Kirjanmerkit"
       },
       "Borrow Failed" : {
+         "string" : "Lainaus epäonnistui"
+      },
+      "Borrow failed" : {
          "string" : "Lainaus epäonnistui"
       },
       "Borrowing %@ could not be completed." : {
@@ -1783,6 +1822,9 @@
       },
       "Download Error" : {
          "string" : "Latausvirhe"
+      },
+      "Download failed" : {
+         "string" : "Lataus epäonnistui"
       },
       "Downloading" : {
          "string" : "Ladataan"
@@ -2024,6 +2066,9 @@
       "No Results Found" : {
          "string" : "Ei hakutuloksia"
       },
+      "No additional error information is available." : {
+         "string" : "Virheestä ei ole saatavilla lisätietoja."
+      },
       "No dependents or children found." : {
          "string" : "Lapsia tai muita huollettavia ei löytynyt."
       },
@@ -2212,6 +2257,9 @@
       },
       "Return" : {
          "string" : "Palauta"
+      },
+      "Return failed" : {
+         "string" : "Palautus epäonnistui"
       },
       "Returns %@" : {
          "string" : "Palauttaa kohteen %@"
@@ -2417,6 +2465,12 @@
       "The download for %@ could not be completed." : {
          "string" : "Teoksen %@ latausta ei voitu suorittaa loppuun."
       },
+      "The download for book \"%@\" could not be completed." : {
+         "string" : "Kirjan \\\"%@\\\" latausta ei voitu suorittaa loppuun."
+      },
+      "The download for book %@ could not be completed." : {
+         "string" : "Kirjan %@ latausta ei voitu suorittaa loppuun."
+      },
       "The item you are trying to open is not currently supported." : {
          "string" : "Kohdetta, jota yrität avata, ei tueta tällä hetkellä."
       },
@@ -2443,6 +2497,12 @@
       },
       "There was a problem contacting the server.\nPlease make sure you are connected to the internet, or try again later." : {
          "string" : "Yhteyden muodostamisessa palvelimeen oli ongelma.\nVarmista, että internetyhteytesi toimii, tai yritä myöhemmin uudelleen."
+      },
+      "There was a problem opening the book %@. Please try again." : {
+         "string" : "Kirjaa %@ avattaessa tapahtui virhe. Yritä uudelleen."
+      },
+      "There was a problem opening the sample of the book %@. Please try again." : {
+         "string" : "Kirjan %@ lukunäytettä avattaessa tapahtui virhe. Yritä uudelleen."
       },
       "This URL cannot be found. Please close the app entirely and reload it. If the problem persists, please contact your library's Help Desk." : {
          "string" : "Tätä URL-osoitetta ei löydy. Sulje sovellus kokonaan ja lataa se uudelleen. Jos ongelma jatkuu, ota yhteyttä kirjastosi tukipalveluun."
@@ -2482,6 +2542,12 @@
       },
       "Unable to load the web page at this time." : {
          "string" : "Verkkosivua ei voida ladata tällä hetkellä."
+      },
+      "Unable to open book" : {
+         "string" : "Kirjaa ei voitu avata"
+      },
+      "Unable to open sample" : {
+         "string" : "Lukunäytettä ei voitu avata"
       },
       "Under 13" : {
          "string" : "Alle 13"
@@ -2914,6 +2980,9 @@
       "Add to favorites" : {
          "string" : "Lägg till i favoriter"
       },
+      "Additional error information:\n%@" : {
+         "string" : "Ytterligare felinformation:\n%@"
+      },
       "Advanced" : {
          "string" : "Avancerat"
       },
@@ -3002,6 +3071,9 @@
          "string" : "Bokmärken"
       },
       "Borrow Failed" : {
+         "string" : "Det gick inte att låna"
+      },
+      "Borrow failed" : {
          "string" : "Det gick inte att låna"
       },
       "Borrowing %@ could not be completed." : {
@@ -3129,6 +3201,9 @@
       },
       "Download Error" : {
          "string" : "Fel vid nedladdning"
+      },
+      "Download failed" : {
+         "string" : "Nedladdningen misslyckades"
       },
       "Downloading" : {
          "string" : "Laddar ner"
@@ -3370,6 +3445,9 @@
       "No Results Found" : {
          "string" : "Inga resultat hittades"
       },
+      "No additional error information is available." : {
+         "string" : "Det finns ingen ytterligare information om felet."
+      },
       "No dependents or children found." : {
          "string" : "Inga minderåriga barn hittades"
       },
@@ -3558,6 +3636,9 @@
       },
       "Return" : {
          "string" : "Lämna tillbaka"
+      },
+      "Return failed" : {
+         "string" : "Återlämningen misslyckades"
       },
       "Returns %@" : {
          "string" : "Lämnar tillbaka %@"
@@ -3763,6 +3844,12 @@
       "The download for %@ could not be completed." : {
          "string" : "Nedladdningen av %@ kunde inte slutföras."
       },
+      "The download for book \"%@\" could not be completed." : {
+         "string" : "Nedladdningen av boken \\\"%@\\\" kunde inte slutföras."
+      },
+      "The download for book %@ could not be completed." : {
+         "string" : "Nedladdningen av boken %@ kunde inte slutföras."
+      },
       "The item you are trying to open is not currently supported." : {
          "string" : "Objektet du försöker öppna stöds inte för närvarande."
       },
@@ -3789,6 +3876,12 @@
       },
       "There was a problem contacting the server.\nPlease make sure you are connected to the internet, or try again later." : {
          "string" : "Det uppstod ett fel när servern anropades.\nKontrollera att du är uppkopplad till internet eller försök på nytt senare."
+      },
+      "There was a problem opening the book %@. Please try again." : {
+         "string" : "Det uppstod ett fel då boken %@ skulle öppnas. Försök på nytt."
+      },
+      "There was a problem opening the sample of the book %@. Please try again." : {
+         "string" : "Det uppstod ett fel då utdragen för boken %@ skulle öppnas. Försök på nytt."
       },
       "This URL cannot be found. Please close the app entirely and reload it. If the problem persists, please contact your library's Help Desk." : {
          "string" : "Kunde inte hitta denna URL. Stäng appen helt och starta om den. Om problemet fortsätter, kontakta ditt biblioteks supportavdelning."
@@ -3828,6 +3921,12 @@
       },
       "Unable to load the web page at this time." : {
          "string" : "Det går inte att ladda webbsidan just nu."
+      },
+      "Unable to open book" : {
+         "string" : "Boken kunde inte öppnas"
+      },
+      "Unable to open sample" : {
+         "string" : "Utdragen kunde inte öppnas."
       },
       "Under 13" : {
          "string" : "Under 13"

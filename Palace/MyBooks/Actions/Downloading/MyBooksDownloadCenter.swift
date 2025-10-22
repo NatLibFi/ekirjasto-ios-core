@@ -13,7 +13,6 @@ import Foundation
 #endif
 
 @objc class MyBooksDownloadCenter: NSObject, URLSessionDelegate {
-  typealias DisplayStrings = Strings.MyDownloadCenter
 
   @objc static let shared = MyBooksDownloadCenter()
 
@@ -313,14 +312,15 @@ import Foundation
     // that a problem document dictionary
     // has been received from the backend
     // because error has type.
-    let alertTitle = DisplayStrings.borrowFailed
+    let alertTitle = Strings.DownloadBook.borrowFailedTitle
     var alertMessage: String
     var alert: UIAlertController
 
     switch errorType {
 
       case TPPProblemDocument.TypeLoanAlreadyExists:
-        alertMessage = DisplayStrings.loanAlreadyExistsAlertMessage
+        alertMessage = Strings.DownloadBook.loanAlreadyExistsAlertMessage
+
         alert = TPPAlertUtils.alert(
           title: alertTitle,
           message: alertMessage
@@ -345,8 +345,12 @@ import Foundation
 
       default:
         // Some other problem document type received with error
-        alertMessage = String(
-          format: DisplayStrings.borrowFailedMessage, book.title)
+
+        alertMessage = String.localizedStringWithFormat(
+          Strings.DownloadBook.borrowFailedMessage,
+          book.title
+        )
+
         alert = TPPAlertUtils.alert(
           title: alertTitle,
           message: alertMessage)
@@ -379,14 +383,16 @@ import Foundation
   // Shows alert to user that the borrow failed for book
   // no extra infomation of error is added
   private func showGenericBorrowFailedAlert(for book: TPPBook) {
-    let formattedMessage = String(
-      format: DisplayStrings.borrowFailedMessage,
+
+    let borrowFailedTitle = Strings.DownloadBook.borrowFailedTitle
+    let borrowFailedMessage = String.localizedStringWithFormat(
+      Strings.DownloadBook.borrowFailedMessage,
       book.title
     )
 
     let alert = TPPAlertUtils.alert(
-      title: DisplayStrings.borrowFailed,
-      message: formattedMessage
+      title: borrowFailedTitle,
+      message: borrowFailedMessage
     )
 
     DispatchQueue.main.async {
@@ -1029,9 +1035,10 @@ extension MyBooksDownloadCenter {
 
       default:
 
-        alertTitle = "ReturnFailed"
-        alertMessage = String(
-          format: NSLocalizedString("The return of %@ could not be completed.", comment: ""),
+      alertTitle = Strings.ReturnBook.returnFailedTitle
+
+        alertMessage = String.localizedStringWithFormat(
+          Strings.ReturnBook.returnFailedMessage,
           book.title
         )
 
@@ -1072,14 +1079,16 @@ extension MyBooksDownloadCenter {
       "Showing generic return failed alert for user"
     )
 
-    let formattedMessage = String(
-      format: NSLocalizedString("The return of %@ could not be completed.", comment: ""),
+    let returnFailedTitle = Strings.ReturnBook.returnFailedTitle
+    
+    let returnFailedMessage = String.localizedStringWithFormat(
+      Strings.ReturnBook.returnFailedMessage,
       book.title
     )
 
     let alert = TPPAlertUtils.alert(
-      title: "ReturnFailed",
-      message: formattedMessage
+      title: returnFailedTitle,
+      message: returnFailedMessage
     )
 
     DispatchQueue.main.async {
@@ -1694,52 +1703,141 @@ extension MyBooksDownloadCenter {
 #endif
   }
   
-  func failDownloadWithAlert(for book: TPPBook, withMessage message: String? = nil) {
+  func failDownloadWithAlert(
+    for book: TPPBook,
+    withMessage message: String? = nil
+  ) {
+
     let location = bookRegistry.location(forIdentifier: book.identifier)
 
     let selectionState: BookSelectionState = .SelectionUnregistered
 
-    bookRegistry.addBook(book,
-                         location: location,
-                         state: .DownloadFailed,
-                         selectionState: selectionState,
-                         fulfillmentId: nil,
-                         readiumBookmarks: nil,
-                         genericBookmarks: nil)
-    
-    DispatchQueue.main.async {
-      let errorMessage = message ?? "No error message"
-      let formattedMessage = String.localizedStringWithFormat(NSLocalizedString("The download for %@ could not be completed.", comment: ""), book.title)
-      let finalMessage = "\(formattedMessage)\n\(errorMessage)"
-      let alert = TPPAlertUtils.alert(title: "DownloadFailed", message: finalMessage)
-      DispatchQueue.main.async {
-        TPPAlertUtils.presentFromViewControllerOrNil(alertController: alert, viewController: nil, animated: true, completion: nil)
-      }
+    bookRegistry.addBook(
+      book,
+      location: location,
+      state: .DownloadFailed,
+      selectionState: selectionState,
+      fulfillmentId: nil,
+      readiumBookmarks: nil,
+      genericBookmarks: nil
+    )
+
+    let downloadFailedTitle = Strings.DownloadBook.downloadFailedTitle
+    let downloadFailedMessage = String.localizedStringWithFormat(
+      Strings.DownloadBook.downloadFailedMessageWithBookTitle,
+      book.title
+    )
+
+    let detailedErrorMessage: String
+
+    if let message = message {
+      // If some error message is given,
+      // show the message in the alert for extra information
+      // the error message might not be localised,
+      // so this String is formatted with that in mind
+      detailedErrorMessage = String.localizedStringWithFormat(
+        Strings.ErrorInformation.errorInformationAvailable,
+        message
+      )
+    } else {
+      // otherwise let the user know, that there is no further info about the error
+      detailedErrorMessage = Strings.ErrorInformation.noErrorInformationAvailable
     }
-    
+
+    let alert = TPPAlertUtils.alert(
+      title: downloadFailedTitle,
+      message: "\(downloadFailedMessage)\n\n\(detailedErrorMessage)"
+    )
+
+    DispatchQueue.main.async {
+
+      TPPAlertUtils.presentFromViewControllerOrNil(
+        alertController: alert,
+        viewController: nil,
+        animated: true,
+        completion: nil
+      )
+
+    }
+
     broadcastUpdate()
   }
-  
-  func alertForProblemDocument(_ problemDoc: TPPProblemDocument?, error: Error?, book: TPPBook) {
-    let msg = String(format: NSLocalizedString("The download for %@ could not be completed.", comment: ""), book.title)
-    let alert = TPPAlertUtils.alert(title: "DownloadFailed", message: msg)
-    
+
+  func alertForProblemDocument(
+    _ problemDoc: TPPProblemDocument?,
+    error: Error?,
+    book: TPPBook
+  ) {
+
+    // forward problemdoc details
     if let problemDoc = problemDoc {
-      TPPProblemDocumentCacheManager.sharedInstance().cacheProblemDocument(problemDoc, key: book.identifier)
-      TPPAlertUtils.setProblemDocument(controller: alert, document: problemDoc, append: true)
-      
-      if problemDoc.type == TPPProblemDocument.TypeNoActiveLoan {
-        bookRegistry.removeBook(forIdentifier: book.identifier)
-      }
-    } else if let error = error {
-      alert.message = String(format: "%@\n\nError: %@", msg, error.localizedDescription)
+      handleProblemDocumentAndAlert(
+        problemDoc,
+        book: book
+      )
+
+      return
     }
-    
-    DispatchQueue.main.async {
-      TPPAlertUtils.presentFromViewControllerOrNil(alertController: alert, viewController: nil, animated: true, completion: nil)
+
+    // forward error details
+    if let error = error {
+      failDownloadWithAlert(
+        for: book,
+        withMessage: error.localizedDescription
+      )
+
+      return
     }
+
+    // otherwise just show basic alert without details
+    failDownloadWithAlert(for: book)
+
   }
-  
+
+  func handleProblemDocumentAndAlert(
+    _ problemDoc: TPPProblemDocument,
+    book: TPPBook
+  ) {
+    
+    let downloadFailedTitle = Strings.DownloadBook.downloadFailedTitle
+    let downloadFailedMessage = String.localizedStringWithFormat(
+      Strings.DownloadBook.downloadFailedMessageWithBookTitle,
+      book.title
+    )
+    
+    let alert = TPPAlertUtils.alert(
+      title: downloadFailedTitle,
+      message: downloadFailedMessage
+    )
+    
+    TPPProblemDocumentCacheManager.sharedInstance().cacheProblemDocument(
+      problemDoc,
+      key: book.identifier
+    )
+    
+    TPPAlertUtils.setProblemDocument(
+      controller: alert,
+      document: problemDoc,
+      append: true
+    )
+
+    if problemDoc.type == TPPProblemDocument.TypeNoActiveLoan {
+      bookRegistry.removeBook(forIdentifier: book.identifier)
+    }
+
+    DispatchQueue.main.async {
+
+      TPPAlertUtils.presentFromViewControllerOrNil(
+        alertController: alert,
+        viewController: nil,
+        animated: true,
+        completion: nil
+      )
+
+     }
+
+   }
+
   func moveFile(at sourceLocation: URL, toDestinationForBook book: TPPBook, forDownloadTask downloadTask: URLSessionDownloadTask) -> Bool {
     var removeError: Error?
     var moveError: Error?
