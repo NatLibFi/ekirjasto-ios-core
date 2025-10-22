@@ -107,53 +107,6 @@ let DefaultActionIdentifier = "UNNotificationDefaultActionIdentifier"
       }
     }
   }
-  
-  // Notification banner informing the user
-  // that the book is succesfully added to or removed from user's favorite books
-  class func createNotificationBannerForBookSelection(_ book: TPPBook,
-                                                      notificationBannerTitle: String,
-                                                      notificationBannerMessage: String
-  ) {
-    
-    let center = UNUserNotificationCenter.current()
-    
-    center.getNotificationSettings {
-      settings in
-      
-      guard settings.authorizationStatus == .authorized else {
-        return
-      }
-      
-      let identifier = book.identifier
-      
-      let content = UNMutableNotificationContent()
-      content.title = notificationBannerTitle
-      content.body = notificationBannerMessage
-      content.sound = UNNotificationSound.default
-      content.userInfo = ["bookID": book.identifier]
-      
-      let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1,
-                                                      repeats: false)
-      
-      let request = UNNotificationRequest.init(identifier: identifier,
-                                               content: content,
-                                               trigger: trigger)
-      
-      center.add(request) {
-        error in
-        
-        if let error = error {
-          TPPErrorLogger.logError(
-            error as NSError,
-            summary: "Error creating notification banner for book selection",
-            metadata: ["book": book.loggableDictionary()])
-        }
-        
-      }
-      
-    }
-    
-  }
 
   private func registerNotificationCategories()
   {
