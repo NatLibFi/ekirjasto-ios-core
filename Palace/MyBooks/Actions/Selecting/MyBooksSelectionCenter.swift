@@ -11,13 +11,16 @@ class MyBooksSelectionCenter: NSObject {
 
   private var userAccount: TPPUserAccount
   private var bookRegistry: TPPBookRegistryProvider
+  private var toastService: ToastService
 
   init(
     userAccount: TPPUserAccount = TPPUserAccount.sharedAccount(),
-    bookRegistry: TPPBookRegistryProvider = TPPBookRegistry.shared
+    bookRegistry: TPPBookRegistryProvider = TPPBookRegistry.shared,
+    toastService: ToastService = ToastService.shared
   ) {
     self.userAccount = userAccount
     self.bookRegistry = bookRegistry
+    self.toastService = toastService
 
     super.init()
   }
@@ -239,16 +242,14 @@ class MyBooksSelectionCenter: NSObject {
   }
 
   private func showAddedToFavoritesSuccessNotification(_ book: TPPBook) {
-    let title: String = String.localizedStringWithFormat(
-      Strings.UserNotifications.bookAddedToFavoritesNotificationBannerTitle)
+
     let message: String = String.localizedStringWithFormat(
       Strings.UserNotifications.bookAddedToFavoritesNotificationBannerMessage,
-      book.title)
+      book.title
+    )
 
-    TPPUserNotifications.createNotificationBannerForBookSelection(
-      book,
-      notificationBannerTitle: title,
-      notificationBannerMessage: message)
+    toastService.showToast(toastMessage: message)
+
   }
 
   // MARK: - Unselect book functions: removing book from favorites
@@ -450,16 +451,14 @@ class MyBooksSelectionCenter: NSObject {
   }
 
   private func showRemovedFromFavoritesSuccessNotification(_ book: TPPBook) {
-    let title: String = String.localizedStringWithFormat(
-      Strings.UserNotifications.bookRemovedFromFavoritesNotificationBannerTitle)
-    let message: String = String.localizedStringWithFormat(
-      Strings.UserNotifications
-        .bookRemovedFromFavoritesNotificationBannerMessage, book.title)
 
-    TPPUserNotifications.createNotificationBannerForBookSelection(
-      book,
-      notificationBannerTitle: title,
-      notificationBannerMessage: message)
+    let message: String = String.localizedStringWithFormat(
+      Strings.UserNotifications.bookRemovedFromFavoritesNotificationBannerMessage,
+      book.title
+    )
+
+    toastService.showToast(toastMessage: message)
+
   }
 
   // MARK: - Helper functions for book selection functions
