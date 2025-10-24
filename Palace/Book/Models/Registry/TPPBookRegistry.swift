@@ -39,6 +39,7 @@ protocol TPPBookRegistryProvider {
   )
   func removeBook(forIdentifier bookIdentifier: String)
   func updateBook(_ book: TPPBook, selectionState: BookSelectionState)
+  func compareBookAvailabilityAndNotifyUser(bookInRegistry: TPPBook, bookFromFeed: TPPBook)
   func updateAndRemoveBook(_ book: TPPBook)
 
   // Account related:
@@ -874,9 +875,12 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
       return
     }
 
-    TPPUserNotifications.compareAvailability(
-      cachedRecord: record,
-      andNewBook: book
+    // Check if a book on hold
+    // is now ready to be downloaded
+    // and notify the user immediately
+    compareBookAvailabilityAndNotifyUser(
+      bookInRegistry: record.book,
+      bookFromFeed: book
     )
 
     printToConsole(
@@ -1003,6 +1007,44 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
     registry[bookIdentifier]?.state = state
     save()
   }
+
+  /// Show a notification to user if the user's book
+  /// has moved from the "holds queue" to the "reserved queue",
+  /// and is now available for the user to checkout.
+  func compareBookAvailabilityAndNotifyUser(
+    bookInRegistry: TPPBook,
+    bookFromFeed: TPPBook
+  ) {
+
+    var bookWasOnHold = false
+    var bookIsNowReady = false
+
+    let oldAvailability = bookInRegistry.defaultAcquisition?.availability
+
+    oldAvailability?.matchUnavailable(
+      nil,
+      limited: nil,
+      unlimited: nil,
+      reserved: { _ in bookWasOnHold = true },
+      ready: nil
+    )
+
+    let newAvailability = bookFromFeed.defaultAcquisition?.availability
+
+    newAvailability?.matchUnavailable(
+      nil,
+      limited: nil,
+      unlimited: nil,
+      reserved: nil,
+      ready: { _ in bookIsNowReady = true }
+    )
+
+    if (bookWasOnHold && bookIsNowReady) {
+      UserNotificationService.shared.showBookIsAvailableNotification(bookFromFeed)
+    }
+
+  }
+
 
   // MARK: - Book Cover
 

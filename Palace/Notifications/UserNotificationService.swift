@@ -1014,6 +1014,137 @@ class UserNotificationService:
   }
 
 
+  // MARK: - Show local notification when book is available
+
+  // Display a notification banner to inform the user
+  // that a previously reserved book is now available for download
+  func showBookIsAvailableNotification(_ book: TPPBook) {
+
+    // First check if the user has granted permission for notifications
+    checkNotificationAuthorization { isAuthorized in
+
+      guard isAuthorized else {
+        // User has not given permission for notifications
+        // just return because we can not show the notification
+        return
+      }
+
+      // create the actual content for the notification
+      // using the book data
+      let notificationContent = self.createBookIsAvailableNotificationContent(book)
+
+      // create a new notification request
+      // with the book's identifier and the notification content.
+      let notificationRequest = self.createRequestForLocalNotification(
+        notificationIdentifier: book.identifier,
+        notificationContent: notificationContent
+      )
+
+      // Schedule the notification to be delivered to the user
+      self.scheduleDeliveryForLocalNotification(notificationRequest)
+    }
+
+ }
+
+  // Creates the content for the local notification that
+  // informs the user that the previously reserved book is now available for download
+  private func createBookIsAvailableNotificationContent(_ book: TPPBook) -> UNMutableNotificationContent {
+
+    // add the book identifier to the custom data of the notification
+    // so we can identify the book later if necessary.
+    let notificationUserInfo: [String: Any] = [
+      "identifier": book.identifier
+    ]
+
+    let notificationTitle = Strings.UserNotifications.readyForDownloadTitle
+
+    let notificationMessage = String.localizedStringWithFormat(
+      Strings.UserNotifications.readyForDownloadBody,
+      book.title
+    )
+
+    // just play the default sound when notification is delivered
+    let notificationSound = UNNotificationSound.default
+
+    // create a new instance of UNMutableNotificationContent
+    // that has all the needed notification details (payload)
+    let notificationContent = UNMutableNotificationContent()
+
+    // UserInfo contains the custom data added to notifications
+    notificationContent.userInfo = notificationUserInfo
+    notificationContent.title = notificationTitle
+    notificationContent.body = notificationMessage
+    notificationContent.sound = notificationSound
+
+    return notificationContent
+  }
+
+
+  // MARK: - Local notifications helper functions
+
+  // Creates a notification request for a local notification
+  // using the given parameters.
+  // - identifier: unique identifier for the notification
+  // - content: the content to be displayed in the notification
+  // - trigger: when the notification should be delivered
+  //   note: trigger is optional and if it is nil,
+  //   then the notification is delivered immediately
+  private func createRequestForLocalNotification(
+    notificationIdentifier: String,
+    notificationContent: UNMutableNotificationContent,
+    notificationTrigger: UNNotificationTrigger? = nil
+  ) -> UNNotificationRequest {
+
+    printToConsole(.debug, "Creating a local notification")
+
+    // Create the notification request
+    let notificationRequest = UNNotificationRequest.init(
+      identifier: notificationIdentifier,
+      content: notificationContent,
+      trigger: notificationTrigger
+    )
+
+    return notificationRequest
+  }
+
+
+  // Schedules the delivery of a local notification
+  // The delivery is scheduled by adding the request
+  // to the user notification center
+  private func scheduleDeliveryForLocalNotification(_ notificationRequest: UNNotificationRequest) {
+
+    printToConsole(
+      .debug,
+      "Scheduling a local notification with identifier: \(notificationRequest.identifier)"
+    )
+
+    // notificationRequest has all the information needed
+    // for the notification,
+    // such as the notification payload and trigger information
+    userNotificationCenter.add(notificationRequest) { error in
+
+      // Check if there was an error when adding the notification request
+      if let error = error {
+
+        // just log the error
+        TPPErrorLogger.logError(
+          error as NSError,
+          summary: "Error creating notification in app",
+          metadata: [
+            "book": notificationRequest.content.userInfo
+          ]
+        )
+
+      } else {
+        printToConsole(.debug,"Local notification scheduled succesfully")
+      }
+
+
+    }
+
+  }
+
+
   // MARK: - Class helper functions
   
   // Make sure app data is refreshed,
@@ -1028,7 +1159,28 @@ class UserNotificationService:
     
     // do other app data updates here
   }
-  
+
+  // Checks if the user has granted permission for notifications.
+  // Returns true in completion handler if user has allowed notifications
+  // otherwise return false in completion
+  private func checkNotificationAuthorization(completion: @escaping (Bool) -> Void) {
+
+      // Get the user's current notification settings
+      // getNotificationSettings is async func
+      userNotificationCenter.getNotificationSettings { settings in
+
+        // Check if user has given permission for notifications
+        // If the authorization status is .authorized,
+        // the user has allowed notifications
+        let isAuthorized = settings.authorizationStatus == .authorized
+
+        // Call the completion handler with the authorization status (true or false)
+        completion(isAuthorized)
+
+      }
+
+  }
+
 
   // MARK: - For Objective-C compatibility
   
