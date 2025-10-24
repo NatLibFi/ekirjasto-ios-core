@@ -580,16 +580,10 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
             "Number of new books ready to be borrowed: \(readyBooks)"
           )
 
-          UIApplication.shared.applicationIconBadgeNumber = readyBooks
+          UserNotificationService.shared.setAppIconBadge(readyBooks)
 
-          let loansAndHoldsTab = TPPRootTabBarController.shared().tabBar.items?[1]
-
-          let newTabBadgeValue =
-            readyBooks > 0
-              ? "\(readyBooks)"
-              : nil
-
-          loansAndHoldsTab?.badgeValue = newTabBadgeValue
+          // Loans & Holds tab's index is currently 1...
+          UserNotificationService.shared.setTabItemBadge(readyBooks, tabIndex: 1)
         }
 
         // And we are done with the loans+holds sync!

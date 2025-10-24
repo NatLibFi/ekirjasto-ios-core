@@ -933,7 +933,87 @@ class UserNotificationService:
     
   }
   
-  
+
+  // MARK: - Set app icon badge and tab item badge
+
+  // Set the application icon's badge number (value).
+  // If the badge value is 0, the badge is automatically hidden.
+  func setAppIconBadge(_ badge: Int) {
+
+    // Do update in main thread
+    DispatchQueue.main.async {
+
+      if #available(iOS 16.0, *) {
+        // For iOS 16 and later,
+        // use the user notification center to set the badge count
+        self.userNotificationCenter.setBadgeCount(badge)
+      } else {
+        // For older versions,
+        // just set the application icon badge number
+        UIApplication.shared.applicationIconBadgeNumber = badge
+      }
+
+    }
+
+  }
+
+  // Set the given badge value for specific tab item in the tabbar.
+  func setTabItemBadge(_ badge: Int, tabIndex: Int) {
+
+    // Update UI in main thread
+    DispatchQueue.main.async {
+
+      // Check that the tab exists
+      guard let tab = TPPRootTabBarController.shared().tabBar.items?[tabIndex] else {
+        // tab index is not valid, return
+        return
+      }
+
+      if badge > 0 {
+        // if the badge value is greater than 0,
+        // set the badge value as a string
+        tab.badgeValue = String(badge)
+      } else {
+        // if the badge value is 0 or negative,
+        // set the badge value as nil to hide it.
+        tab.badgeValue = nil
+      }
+
+    }
+
+  }
+
+  // Updates the app's badges
+  // to show the number of books ready to borrow
+  func updateAppBadges() {
+    printToConsole(.debug, "Starting to update app badges")
+
+    // counter for the number of books that are ready to borrow
+    var numberOfBooksReadyToBorrow: Int = 0
+
+    // get all books held by the user from the shared book registry
+    let heldBooks = TPPBookRegistry.shared.heldBooks
+
+    for book in heldBooks {
+      // first check the availability of the held book
+      // then increment the counter if the book is ready to borrow
+      book.defaultAcquisition?.availability.matchUnavailable(
+        nil,
+        limited: nil,
+        unlimited: nil,
+        reserved: nil,
+        ready: {_ in numberOfBooksReadyToBorrow += 1 }
+      )
+
+    }
+
+    // update app's icon and loans+holds tab icon
+    setAppIconBadge(numberOfBooksReadyToBorrow)
+    setTabItemBadge(numberOfBooksReadyToBorrow, tabIndex: 1)
+
+  }
+
+
   // MARK: - Class helper functions
   
   // Make sure app data is refreshed,
