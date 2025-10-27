@@ -40,6 +40,7 @@ protocol TPPBookRegistryProvider {
   func removeBook(forIdentifier bookIdentifier: String)
   func updateBook(_ book: TPPBook, selectionState: BookSelectionState)
   func compareBookAvailabilityAndNotifyUser(bookInRegistry: TPPBook, bookFromFeed: TPPBook)
+  func isBackgroundFetchNeeded() -> Bool
   func updateAndRemoveBook(_ book: TPPBook)
 
   // Account related:
@@ -349,6 +350,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
       // If syncError was set in first task...
       guard syncError == nil else {
         // ...call completion handler...
+
         completion?(syncError, newBooksAvailable)
         // ...and do not proceed further.
         return
@@ -365,7 +367,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
           syncError = errorDocument
         }
 
-        newBooksAvailable = newBooks
+        newBooksAvailable = newBooksAvailable || newBooks
 
         // Second asyncronous task has ended
         // We are leaving the group (again!)
@@ -403,6 +405,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
         .info,
         "Book registry aborting loans+holds sync, no URL for loans+holds feed"
       )
+      completion?(nil, false)
       return
     }
 
@@ -412,6 +415,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
         .info,
         "Book registry skipping loans+holds sync, already synced"
       )
+      completion?(nil, false)
       return
     }
 
@@ -445,6 +449,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
             .info,
             "Book registry aborting loans+holds sync, syncURL mismatch"
           )
+          completion?(nil, false)
           return
         }
 
@@ -616,6 +621,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
         .info,
         "Book registry aborting selected sync, no URL for selection feed"
       )
+      completion?(nil, false)
       return
     }
 
@@ -624,6 +630,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
         .info,
         "Book registry skipping selected sync, already synced"
       )
+      completion?(nil, false)
       return
     }
 
@@ -654,6 +661,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
             .info,
             "Book registry aborting selected sync, syncURL mismatch"
           )
+          completion?(nil, false)
           return
         }
 
@@ -1043,6 +1051,36 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
       UserNotificationService.shared.showBookIsAvailableNotification(bookFromFeed)
     }
 
+  }
+
+  // Check if background fetch is necessary
+  // and fetch new book data only if it's really needed.
+  // We want to circulate the books efficiently
+  // but also avoid unnecessary network operations on user's app.
+  func isBackgroundFetchNeeded() -> Bool {
+
+    // First check if the user is waiting for some books
+    if heldBooks.count > 0 {
+
+      printToConsole(
+        .debug,
+        "User has books on hold: background fetch is needed"
+      )
+
+      // if user has one or more books on hold,
+      // then a background fetch is needed
+      // so we can update the books' status more quickly
+      return true
+    }
+
+    printToConsole(
+      .debug,
+      "User has no books on hold: background fetch is not needed"
+    )
+
+    // user has no books on hold,
+    // no need to get new data quickly
+    return false
   }
 
 
