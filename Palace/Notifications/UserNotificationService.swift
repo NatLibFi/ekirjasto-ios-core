@@ -49,6 +49,23 @@ class UserNotificationService:
 
   }
 
+
+  // MARK: - Define identifiers for E-kirjasto notifications
+
+  struct EkirjastoNotificationIdentifiers {
+
+    // E-kirjasto notification categories
+    static let loanNotificationCategoryIdentifier = "EkirjastoLoanNotificationCategory"
+    static let holdNotificationCategoryIdentifier = "EkirjastoHoldNotificationCategory"
+
+    // E-kirjasto notification actions
+    static let defaultActionIdentifier = UNNotificationDefaultActionIdentifier
+    static let returnBookActionIdentifier = "EkirjastoReturnBookAction"
+    static let borrowBookActionIdentifier = "EkirjastoBorrowBookAction"
+
+  }
+
+
   // MARK: - Initialize UserNotificationCenter
 
   // Create an instance of UNNotificationCenter object
@@ -84,6 +101,7 @@ class UserNotificationService:
 
     // Set the messaging delegate for FCM service
     setupMessagingDelegate()
+
   }
 
   // Set the delegate of the user notification center to handle
@@ -194,11 +212,103 @@ class UserNotificationService:
     // We need to update the token data stored in our backend FCM token storage,
     // so we can send notifications from our backend to this device using the new token
     updateFCMToken(fcmToken)
+    registerNotificationCategories()
+  }
+
+
+  // MARK: - Support custom notification actions
+
+  // Set up notification categories with the user notification center.
+  // so that app can display notifications with specific actions
+  private func registerNotificationCategories() {
+    printToConsole(.debug, "Registering notification categories")
+
+    // create new category for hold and loan notifications specifically
+    let holdNotificationCategory = createNotificationCategoryForHoldNotifications()
+    let loanNotificationCategory = createNotificationCategoryForLoanNotifications()
+
+    let notificationCategories: Set<UNNotificationCategory> = [
+      holdNotificationCategory,
+      loanNotificationCategory
+      // add other categories here later if needed
+     ]
+
+    // register all categories and
+    // make them available for use when receiving notifications in device
+    userNotificationCenter.setNotificationCategories(notificationCategories)
+  }
+
+  // Create a notification category specifically for loan notifications.
+  // All custom categories must be registered after app is set up for notifications
+  // Every category has one or more actions associated with them.
+  // User can select these actions straight from the notification with a long press.
+  private func createNotificationCategoryForLoanNotifications() -> UNNotificationCategory {
+    printToConsole(.debug, "Creating notification category for loan notifications")
+
+    // this title is the button name for the action that will be shown with the notification
+    let returnBookActionTitle = Strings.BookCell.return
+
+    // first create a notification custom action
+    // that allows the user to return a book in the background.
+    // In background means: E-kirjasto app is not brought to the front in the device
+    let returnBookAction = UNNotificationAction(
+      identifier: EkirjastoNotificationIdentifiers.returnBookActionIdentifier,
+      title: returnBookActionTitle,
+      options: []
+    )
+
+    // create the actual notification category
+    // that holds all the actions related to hold notifications
+    let loanNotificationCategory = UNNotificationCategory(
+      identifier: EkirjastoNotificationIdentifiers.loanNotificationCategoryIdentifier,
+      actions: [
+        returnBookAction
+      ],
+      intentIdentifiers: [],
+      options: []
+    )
+
+    return loanNotificationCategory
+  }
+  
+
+  // Create a notification category specifically for hold notifications.
+  // All custom categories must be registered after app is set up for notifications
+  // Every category has one or more actions associated with them.
+  // User can select these actions straight from the notification with a long press.
+  private func createNotificationCategoryForHoldNotifications() -> UNNotificationCategory {
+    printToConsole(.debug, "Creating notification category for hold notifications")
+
+    // this title is the button name for the action that will be shown with the notification
+    let borrowBookActionTitle = Strings.UserNotifications.checkoutTitle
+
+    // first create a notification custom action
+    // that allows the user to borrow a book in the background
+    // in background: E-kirjasto app is not brought to the front in the device
+    // and book is not downloaded, only borrowed
+    let borrowBookAction = UNNotificationAction(
+      identifier: EkirjastoNotificationIdentifiers.borrowBookActionIdentifier,
+      title: borrowBookActionTitle,
+      options: []
+    )
+
+    // create the actual notification category
+    // that holds all the actions related to hold notifications
+    let holdNotificationCategory = UNNotificationCategory(
+      identifier: EkirjastoNotificationIdentifiers.holdNotificationCategoryIdentifier,
+      actions: [
+        borrowBookAction
+      ],
+      intentIdentifiers: [],
+      options: []
+    )
+
+    return holdNotificationCategory
   }
 
 
   // MARK: - Notification Center Delegate Functions
-  
+
   // This function is called automatically when notification is received on the device
   // and when the app is in the foreground (is currently active).
   // We can define here how the notification is presented to the user,
@@ -210,24 +320,26 @@ class UserNotificationService:
       UNNotificationPresentationOptions
     ) -> Void
   ) {
-    
+
     printToConsole(.debug, "App will present remote notification to user")
-    
+
     // Define how the notification should be presented to the user.
     let presentationOptions: UNNotificationPresentationOptions = [
       .banner,
       .badge,
-      .sound,
+      .sound
     ]
-    
+
     // Call the completion handler with the chosen presentation options,
-    // which tells the app to show the notification as a banner,
-    // update the icon badge and play a sound
+    // which tells the app to
+    // show the notification as a banner,
+    // update the icon badge and
+    // play a sound
     completionHandler(presentationOptions)
-    
+
     refreshAppData()
   }
-  
+
   // This function is called automatically when the user interacts with the notification,
   // for example if the user opens the app or dismisses the notification.
   // We can define here how to respond to the user's chosen action
@@ -236,41 +348,166 @@ class UserNotificationService:
     didReceive response: UNNotificationResponse,
     withCompletionHandler completionHandler: @escaping () -> Void
   ) {
-    
+
     printToConsole(.debug, "User did receive a remote notification")
-    
-    // User has now selected an action:
+
+    // extract the userInfo dictionary from the notification
+    // dictionary contains all custom data that was sent with the notification
+    let userInfo = response.notification.request.content.userInfo
+    printToConsole(.debug, "Notification's userInfo: \(userInfo)")
+
+    // because user has now "received notification"
+    // it also means that the user interacted with the notification somehow
+    // and this interaction was saved to the response object
     switch response.actionIdentifier {
-        
-      case UNNotificationDefaultActionIdentifier:
-        // The user opened the notification
-        printToConsole(.debug, "User opened the nofication")
-        
-        // Extract the userInfo dictionary from the notification
-        let userInfo = response.notification.request.content.userInfo
-        printToConsole(.debug, "userInfo: \(userInfo)")
-        
-        refreshAppData()
-        
-      case UNNotificationDismissActionIdentifier:
-        // The user dismissed the notification
-        printToConsole(.debug, "User dismissed the nofication")
-        
-        // Extract the userInfo dictionary from the notification
-        let userInfo = response.notification.request.content.userInfo
-        printToConsole(.debug, "userInfo: \(userInfo)")
-        
-        refreshAppData()
-        
+      // we check the action's identifier to find out which action was chosen
+
+      case EkirjastoNotificationIdentifiers.defaultActionIdentifier:
+        // user opened the notification (tapped the notification)
+        // this is probably the most used action
+        handleDefaultAction(
+          userInfo: userInfo,
+          completionHandler: completionHandler
+        )
+
+      case EkirjastoNotificationIdentifiers.returnBookActionIdentifier:
+        // user has selected the notification's custom action
+        // to return a book in the background
+        handleReturnBookAction(
+          userInfo: userInfo,
+          completionHandler: completionHandler
+        )
+
+      case EkirjastoNotificationIdentifiers.borrowBookActionIdentifier:
+        // user has selected the notification's custom action
+        // to borrow a book in the background
+        handleBorrowBookAction(
+          userInfo: userInfo,
+          completionHandler: completionHandler
+        )
+
       default:
-        printToConsole(.debug, "User did something else to the nofication")
-        // do nothing
+        // user performed some other unknown action with the notification,
+        // so do nothing, just close the notification
+        printToConsole(.debug, "User did something else with the nofication")
+
+        // We must always call the completion handler at the end
+        // to let the device's system know
+        // that we have finished processing the user's action,
+        // and the device system can now close the notification
+        completionHandler()
+
     }
-    
-    // We must call the completion handler at the end to let the device's system know
-    // that we have finished processing the user's action,
-    // and the device system can close the notifation.
+
+  }
+
+
+  // MARK: - Handle user's actions on notifications
+
+  // Handle the default action: notification is opened
+  private func handleDefaultAction(
+    userInfo: [AnyHashable: Any],
+    completionHandler: @escaping () -> Void
+  ) {
+
+    printToConsole(.debug, "User opened the app from the nofification")
+
+    // extract the identifier from the notification's user info
+    // this identifier is actually book's ISBN or other book's id in backend
+    guard let identifier = userInfo["identifier"] as? String else {
+      printToConsole(.debug, "No identifier found in notication's user info data.")
+      completionHandler()
+      return
+    }
+
+    // get the book with the identifier from the user's book registry
+    // book should be in the register if it is in borrowed, reserved or added as favourite
+    guard let book = TPPBookRegistry.shared.book(forIdentifier: identifier) else {
+      printToConsole(.debug, "Book was not found from book registry with identifier: \(identifier)")
+      completionHandler()
+      return
+    }
+
+    // first refresh the app data so everything is up to date
+    refreshAppData()
+
+    // then open the book detail view in app
+    presentBookDetailViewController(book)
+
+    // inform the device system that notification can now be closed
     completionHandler()
+  }
+
+  // Handle the custom action: return book action was selected from the notification
+  private func handleReturnBookAction(
+    userInfo: [AnyHashable: Any],
+    completionHandler: @escaping () -> Void
+  ) {
+
+    printToConsole(.debug, "User selected the return action straight from notification")
+
+    // extract the identifier from the notification's user info
+    // this identifier is actually book's ISBN or other book's id in backend
+    guard let identifier = userInfo["identifier"] as? String else {
+      printToConsole(.debug, "No identifier found in notication's user info data.")
+      completionHandler()
+      return
+    }
+
+    // get the book with the identifier from the user's book registry
+    // book should be in the register if it is in borrowed, reserved or added as favourite
+    guard let book = TPPBookRegistry.shared.book(forIdentifier: identifier) else {
+      printToConsole(.debug, "Book was not found from book registry with identifier: \(identifier)")
+      completionHandler()
+      return
+    }
+
+    // return the book in the background
+    returnBookInBackground(book) {
+
+      // refresh the app data so everything is up to date
+      self.refreshAppData()
+
+      // close the notifcation after returning the book
+      completionHandler()
+    }
+
+  }
+
+  // Handle the custom action: borrow book action was selected from the notification
+  private func handleBorrowBookAction(
+    userInfo: [AnyHashable: Any],
+    completionHandler: @escaping () -> Void
+  ) {
+
+    printToConsole(.debug, "User selected the borrow action straight from notification")
+
+    // extract the identifier from the notification's user info
+    // this identifier is actually book's ISBN or other book's id in backend
+    guard let identifier = userInfo["identifier"] as? String else {
+      printToConsole(.debug, "No identifier found in notication's user info data.")
+      completionHandler()
+      return
+    }
+
+    // get the book with the identifier from the user's book registry
+    // book should be in the register if it is in borrowed, reserved or added as favourite
+    guard let book = TPPBookRegistry.shared.book(forIdentifier: identifier) else {
+      printToConsole(.debug, "Book was not found from book registry with identifier: \(identifier)")
+      completionHandler()
+      return
+    }
+
+    // borrow the book in the background
+    borrowBookInBackground(book) {
+
+      // refresh the app data so everything is up to date
+      self.refreshAppData()
+
+      // close the notifcation after borrowing the book
+      completionHandler()
+    }
+
   }
 
 
@@ -1076,7 +1313,10 @@ class UserNotificationService:
     notificationContent.body = notificationMessage
     notificationContent.sound = notificationSound
 
+    notificationContent.categoryIdentifier = "EkirjastoHoldNotificationCategory"
+
     return notificationContent
+
   }
 
 
@@ -1181,6 +1421,172 @@ class UserNotificationService:
 
   }
 
+  // Do a background task that allows the app to continue running
+  // while returning the book:
+  // asynchronous network task in the background app state
+  private func returnBookInBackground(
+    _ book: TPPBook,
+    completion: @escaping () -> Void
+  ) {
+
+    printToConsole(
+      .debug,
+      "Starting to return a book in background with book identifier: \(book.identifier)"
+    )
+
+    let downloadCenter = MyBooksDownloadCenter.shared
+
+    // backgroundTask is some other value than .invalid
+    // when it is valid
+    var backgroundTask: UIBackgroundTaskIdentifier = .invalid
+
+    // start of a task that continues if the app enters the background
+    backgroundTask = UIApplication.shared.beginBackgroundTask {
+
+      // This completion is called shortly before
+      // the app’s remaining background time reaches 0
+      // used for ending task and cleanup
+      if backgroundTask != .invalid {
+        printToConsole(.debug, "Ending background task that is expiring: \(backgroundTask.rawValue)")
+
+        completion()
+        // end the task that was started
+        UIApplication.shared.endBackgroundTask(backgroundTask)
+        // mark background task request as invalid
+        backgroundTask = .invalid
+      }
+
+    }
+
+    printToConsole(.debug, "Beginning background task: \(backgroundTask.rawValue)")
+
+    // Check if the background task was successfully started
+    guard backgroundTask != .invalid else {
+      printToConsole(.debug, "Unable to run background task: \(backgroundTask.rawValue)")
+
+      // Make sure completion is called even if the task is not run
+      completion()
+      return
+    }
+
+    // background task body:
+    // start the returning process
+    downloadCenter.returnBook(
+      withIdentifier: book.identifier
+    ) {
+
+      // Completion handler for the returning process
+      completion()
+
+      // End the background task now if it is still valid
+       if backgroundTask != .invalid {
+         printToConsole(.debug, "Ending background task that is finished: \(backgroundTask.rawValue)")
+         UIApplication.shared.endBackgroundTask(backgroundTask)
+         backgroundTask = .invalid
+       }
+
+    }
+
+  }
+
+  // Do a background task that allows the app to continue running
+  // while borrowing the book:
+  // asynchronous network task in the background app state
+  private func borrowBookInBackground(
+    _ book: TPPBook,
+    completion: @escaping () -> Void
+  ) {
+
+    printToConsole(
+      .debug,
+      "Starting to borrow a book in background with book identifier: \(book.identifier)"
+    )
+
+    let downloadCenter = MyBooksDownloadCenter.shared
+
+    // backgroundTask is some other value than .invalid
+    // when it is valid
+    var backgroundTask: UIBackgroundTaskIdentifier = .invalid
+
+    // start of a task that continues if the app enters the background
+    backgroundTask = UIApplication.shared.beginBackgroundTask {
+
+      // This completion is called shortly before
+      // the app’s remaining background time reaches 0
+      // used for ending task and cleanup
+      if backgroundTask != .invalid {
+        printToConsole(.debug, "Ending background task that is expiring: \(backgroundTask.rawValue)")
+
+        completion()
+        // end the task that was started
+        UIApplication.shared.endBackgroundTask(backgroundTask)
+        // mark background task request as invalid
+        backgroundTask = .invalid
+      }
+
+    }
+
+    printToConsole(.debug, "Beginning background task: \(backgroundTask.rawValue)")
+
+    // Check if the background task was successfully started
+    guard backgroundTask != .invalid else {
+      printToConsole(.debug, "Unable to run background task: \(backgroundTask.rawValue)")
+
+      // Make sure completion is called even if the task is not run
+      completion()
+      return
+    }
+
+    // background task body:
+    // start the borrowing process
+    downloadCenter.startBorrow(
+      for: book,
+      attemptDownload: false
+    ) {
+
+      // Completion handler for the borrowing process
+      completion()
+
+      // End the background task now if it is still valid
+       if backgroundTask != .invalid {
+         printToConsole(.debug, "Ending background task that is finished: \(backgroundTask.rawValue)")
+         UIApplication.shared.endBackgroundTask(backgroundTask)
+         backgroundTask = .invalid
+       }
+
+    }
+
+  }
+
+  // Present book detail view for user
+  // with the book given as parameter.
+  // Note: navigation stack retains the previous view controller.
+  private func presentBookDetailViewController(_ book: TPPBook) {
+
+    printToConsole(.debug, "Starting to present BookDetailViewController")
+
+    // Check that a shared instance of the tab bar controller is available
+    // and that we can create a new instance of the book detail view controller
+    guard let tabBarController = TPPRootTabBarController.shared(),
+          let bookDetailView = TPPBookDetailViewController(book: book)
+    else {
+
+      printToConsole(.debug, "Error presenting BookDetailViewController")
+
+      // return because we can not show book detail view for user
+      return
+    }
+
+    // Open the book detail view on top of user's current view in app.
+    // User returns to the previous view when book detail view is dismissed.
+    tabBarController.safelyPresentViewController(
+      bookDetailView,
+      animated: true,
+      completion: nil
+    )
+
+  }
+
 
   // MARK: - For Objective-C compatibility
   
@@ -1189,5 +1595,5 @@ class UserNotificationService:
   static func sharedService() -> UserNotificationService {
     return shared
   }
-  
+
 }
