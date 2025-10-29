@@ -420,10 +420,12 @@ class UserNotificationService:
       return
     }
 
+    let bookIdentifier = "urn:isbn:\(identifier)"
+
     // get the book with the identifier from the user's book registry
     // book should be in the register if it is in borrowed, reserved or added as favourite
-    guard let book = TPPBookRegistry.shared.book(forIdentifier: identifier) else {
-      printToConsole(.debug, "Book was not found from book registry with identifier: \(identifier)")
+    guard let book = TPPBookRegistry.shared.book(forIdentifier: bookIdentifier) else {
+      printToConsole(.debug, "Book was not found from book registry with identifier: \(bookIdentifier)")
       completionHandler()
       return
     }
@@ -454,10 +456,12 @@ class UserNotificationService:
       return
     }
 
+    let bookIdentifier = "urn:isbn:\(identifier)"
+
     // get the book with the identifier from the user's book registry
     // book should be in the register if it is in borrowed, reserved or added as favourite
-    guard let book = TPPBookRegistry.shared.book(forIdentifier: identifier) else {
-      printToConsole(.debug, "Book was not found from book registry with identifier: \(identifier)")
+    guard let book = TPPBookRegistry.shared.book(forIdentifier: bookIdentifier) else {
+      printToConsole(.debug, "Book was not found from book registry with identifier: \(bookIdentifier)")
       completionHandler()
       return
     }
@@ -490,10 +494,12 @@ class UserNotificationService:
       return
     }
 
+    let bookIdentifier = "urn:isbn:\(identifier)"
+
     // get the book with the identifier from the user's book registry
     // book should be in the register if it is in borrowed, reserved or added as favourite
-    guard let book = TPPBookRegistry.shared.book(forIdentifier: identifier) else {
-      printToConsole(.debug, "Book was not found from book registry with identifier: \(identifier)")
+    guard let book = TPPBookRegistry.shared.book(forIdentifier: bookIdentifier) else {
+      printToConsole(.debug, "Book was not found from book registry with identifier: \(bookIdentifier)")
       completionHandler()
       return
     }
@@ -1287,10 +1293,27 @@ class UserNotificationService:
   // informs the user that the previously reserved book is now available for download
   private func createBookIsAvailableNotificationContent(_ book: TPPBook) -> UNMutableNotificationContent {
 
-    // add the book identifier to the custom data of the notification
+    var identifier: String = ""
+
+    // this is the identifier used for the book in app's book registry
+    // example of book identifier: "urn:isbn:9789123456789"
+    let bookIdentifier = book.identifier
+    let prefix = "urn:isbn:"
+
+    // check if bookIdentifier starts with the specified prefix
+    if bookIdentifier.hasPrefix(prefix) {
+        // extract just the isbn or core identifier for book
+        identifier = String(bookIdentifier.dropFirst(prefix.count))
+    } else {
+        // just use the bookIdentifier as it is
+        // because it doesn't start with the prefix
+        identifier = bookIdentifier
+    }
+
+    // add the book's identifier (isbn) to the custom data of the notification
     // so we can identify the book later if necessary.
     let notificationUserInfo: [String: Any] = [
-      "identifier": book.identifier
+      "identifier": identifier
     ]
 
     let notificationTitle = Strings.UserNotifications.readyForDownloadTitle
