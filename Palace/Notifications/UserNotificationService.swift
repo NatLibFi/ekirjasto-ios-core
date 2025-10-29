@@ -431,10 +431,10 @@ class UserNotificationService:
     }
 
     // first refresh the app data so everything is up to date
-    refreshAppData()
-
-    // then open the book detail view in app
-    presentBookDetailViewController(book)
+    refreshAppDataWithCompletion() {
+      // then open the book detail view in app
+      self.presentBookDetailViewController(book)
+    }
 
     // inform the device system that notification can now be closed
     completionHandler()
@@ -1445,6 +1445,8 @@ class UserNotificationService:
   // especially the book registry
   private func refreshAppData() {
 
+    printToConsole(.debug, "Starting to refresh app data...")
+
     // Sync the book registry with the latest data from the server.
     // This makes sure that the app displays up-to-date book data
     // so that the user does not need to refresh manually
@@ -1452,6 +1454,23 @@ class UserNotificationService:
     TPPBookRegistry.shared.sync()
 
     // do other app data updates here
+  }
+
+  private func refreshAppDataWithCompletion(completion: @escaping () -> Void) {
+
+    printToConsole(.debug, "Starting to refresh app data with completion...")
+
+    // Sync the book registry with the latest data from the server.
+    // This makes sure that the app displays up-to-date book data
+    // so that the user does not need to refresh manually
+    // to see the data the notification informed of.
+    // After sync (succesful or not) continue to completion
+    TPPBookRegistry.shared.sync { _,_  in
+
+      // After sync (succesful or not) continue to completion
+      completion()
+    }
+
   }
 
   // Do a background task that allows the app to continue running
