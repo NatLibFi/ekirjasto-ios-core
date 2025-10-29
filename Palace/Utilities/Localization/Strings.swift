@@ -300,6 +300,16 @@ struct Strings {
     static let selectEnable = NSLocalizedString("Enable preferences", comment: "")
     static let restartTitle = NSLocalizedString("Ekirjasto needs to restart", comment: "")
     static let restartText = NSLocalizedString("Preferred language saved. It will be available the next time you open the app.", comment: "")
+
+    static let notificationPreferencesButtonTitle = NSLocalizedString(
+      "Notification preferences",
+      comment: "Title for the button that opens device's system settings on app's preferences"
+    )
+    static let appPreferencesAccessibilityLabel = NSLocalizedString(
+      "Open app's preferences in device system settings",
+      comment: "Accessibility label for the button that opens device's system settings on app's preferences"
+    )
+
   }
   
   struct TimeAndDuration {
