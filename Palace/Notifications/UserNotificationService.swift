@@ -1385,20 +1385,7 @@ class UserNotificationService:
   }
 
 
-  // MARK: - Class helper functions
-  
-  // Make sure app data is refreshed,
-  // especially the book registry
-  private func refreshAppData() {
-    
-    // Sync the book registry with the latest data from the server.
-    // This makes sure that the app displays up-to-date book data
-    // so that the user does not need to refresh manually
-    // to see the data the notification informed of.
-    TPPBookRegistry.shared.sync()
-    
-    // do other app data updates here
-  }
+  // MARK: - User's authorization for notifications
 
   // Checks if the user has granted permission for notifications.
   // Returns true in completion handler if user has allowed notifications
@@ -1419,6 +1406,29 @@ class UserNotificationService:
 
       }
 
+  }
+
+  // Helper function to request user's authorization
+  // to show notifications in the app
+  @objc
+  func requestNotificationAuthorization() {
+    setupUserPermissions()
+  }
+
+
+  // MARK: - Class helper functions
+
+  // Make sure app data is refreshed,
+  // especially the book registry
+  private func refreshAppData() {
+
+    // Sync the book registry with the latest data from the server.
+    // This makes sure that the app displays up-to-date book data
+    // so that the user does not need to refresh manually
+    // to see the data the notification informed of.
+    TPPBookRegistry.shared.sync()
+
+    // do other app data updates here
   }
 
   // Do a background task that allows the app to continue running

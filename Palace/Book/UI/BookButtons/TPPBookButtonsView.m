@@ -510,7 +510,7 @@
 - (void)didSelectDownload
 {
   if (self.state == TPPBookButtonsStateCanHold) {
-    [TPPUserNotifications requestAuthorization];
+    [[UserNotificationService sharedService] requestNotificationAuthorization];
   }
   self.activityIndicator.center = self.downloadButton.center;
   [self.delegate didSelectDownloadForBook:self.book];

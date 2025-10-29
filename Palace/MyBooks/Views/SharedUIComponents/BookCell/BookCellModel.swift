@@ -234,7 +234,7 @@ extension BookCellModel {
 
   func didSelectDownload() {
     if case .canHold = state.buttonState {
-      TPPUserNotifications.requestAuthorization()
+      UserNotificationService.shared.requestNotificationAuthorization()
     }
 
     buttonDelegate?.didSelectDownload(for: book)
