@@ -39,8 +39,6 @@ protocol TPPBookRegistryProvider {
   )
   func removeBook(forIdentifier bookIdentifier: String)
   func updateBook(_ book: TPPBook, selectionState: BookSelectionState)
-  func compareBookAvailabilityAndNotifyUser(bookInRegistry: TPPBook, bookFromFeed: TPPBook)
-  func isBackgroundFetchNeeded() -> Bool
   func updateAndRemoveBook(_ book: TPPBook)
 
   // Account related:
