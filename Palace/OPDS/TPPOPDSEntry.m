@@ -14,6 +14,7 @@
 @property (nonatomic) NSArray<TPPOPDSAcquisition *> *acquisitions;
 @property (nonatomic) NSString *alternativeHeadline;
 @property (nonatomic) NSArray *authorStrings;
+@property (nonatomic) NSDictionary *accessibility;
 @property (nonatomic) NSArray<TPPOPDSLink *> *authorLinks;
 @property (nonatomic) TPPOPDSLink *seriesLink;
 @property (nonatomic) NSArray<TPPOPDSCategory *> *categories;
@@ -75,6 +76,16 @@
 
     self.authorStrings = authorStrings;
     self.authorLinks = [authorLinks copy];
+    
+#pragma mark Set the accessibility property
+    {
+      
+      NSDictionary *accessibilityDictionary;
+      
+      // set accessibility dictionary as class property 'accessibility'
+      self.accessibility = accessibilityDictionary;
+      
+    }
     
     TPPXML *const languageXML = [entryXML firstChildWithName:@"language"];
     if(languageXML){
