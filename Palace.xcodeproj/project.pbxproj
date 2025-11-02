@@ -1053,6 +1053,9 @@
 		75896B282EB77DFB0030C2BA /* AccessibilityDictionaryBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75896B272EB77DF00030C2BA /* AccessibilityDictionaryBuilder.swift */; };
 		75896B292EB77DFB0030C2BA /* AccessibilityDictionaryBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75896B272EB77DF00030C2BA /* AccessibilityDictionaryBuilder.swift */; };
 		75896B2A2EB77DFB0030C2BA /* AccessibilityDictionaryBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75896B272EB77DF00030C2BA /* AccessibilityDictionaryBuilder.swift */; };
+		75896B2E2EB7870B0030C2BA /* BookAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75896B2D2EB787040030C2BA /* BookAccessibility.swift */; };
+		75896B2F2EB7870B0030C2BA /* BookAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75896B2D2EB787040030C2BA /* BookAccessibility.swift */; };
+		75896B302EB7870B0030C2BA /* BookAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75896B2D2EB787040030C2BA /* BookAccessibility.swift */; };
 		75A33F772E0F022700C147CC /* TPPRootTabBarController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A33F762E0F020F00C147CC /* TPPRootTabBarController+Extensions.swift */; };
 		75A33F782E0F022700C147CC /* TPPRootTabBarController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A33F762E0F020F00C147CC /* TPPRootTabBarController+Extensions.swift */; };
 		75A33F792E0F022700C147CC /* TPPRootTabBarController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A33F762E0F020F00C147CC /* TPPRootTabBarController+Extensions.swift */; };
@@ -2005,6 +2008,7 @@
 		7582FFD32DBADF240057AC71 /* BookSelectionButtonsState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookSelectionButtonsState.h; sourceTree = "<group>"; };
 		7582FFD42DBAE1F00057AC71 /* BookSelectionButtonsState.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookSelectionButtonsState.m; sourceTree = "<group>"; };
 		75896B272EB77DF00030C2BA /* AccessibilityDictionaryBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityDictionaryBuilder.swift; sourceTree = "<group>"; };
+		75896B2D2EB787040030C2BA /* BookAccessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookAccessibility.swift; sourceTree = "<group>"; };
 		75A33F762E0F020F00C147CC /* TPPRootTabBarController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TPPRootTabBarController+Extensions.swift"; sourceTree = "<group>"; };
 		75E833D92D73B48D00D2B840 /* LoansAndHoldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoansAndHoldsView.swift; sourceTree = "<group>"; };
 		75E833E12D73B4B900D2B840 /* LoansAndHoldsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoansAndHoldsViewController.swift; sourceTree = "<group>"; };
@@ -3285,6 +3289,7 @@
 			isa = PBXGroup;
 			children = (
 				75896B2B2EB77E090030C2BA /* AccessibilityDictionary */,
+				75896B2C2EB786A20030C2BA /* BookAccessibility */,
 			);
 			path = Accessibility;
 			sourceTree = "<group>";
@@ -3295,6 +3300,14 @@
 				75896B272EB77DF00030C2BA /* AccessibilityDictionaryBuilder.swift */,
 			);
 			path = AccessibilityDictionary;
+			sourceTree = "<group>";
+		};
+		75896B2C2EB786A20030C2BA /* BookAccessibility */ = {
+			isa = PBXGroup;
+			children = (
+				75896B2D2EB787040030C2BA /* BookAccessibility.swift */,
+			);
+			path = BookAccessibility;
 			sourceTree = "<group>";
 		};
 		75E833BD2D7373CE00D2B840 /* Facet */ = {
@@ -5041,6 +5054,7 @@
 				331263A92A287F53006BA87D /* TPPOPDSIndirectAcquisition.m in Sources */,
 				331263AA2A287F53006BA87D /* AdobeDRMLibraryService.swift in Sources */,
 				331263AB2A287F53006BA87D /* TPPBookDetailTableView.swift in Sources */,
+				75896B2F2EB7870B0030C2BA /* BookAccessibility.swift in Sources */,
 				331263AC2A287F53006BA87D /* TPPReauthenticator.swift in Sources */,
 				337E63AC2A28A40900FF7886 /* TPPConfiguration+Ekirjasto.swift in Sources */,
 				331263AD2A287F53006BA87D /* TPPAnnouncementBusinessLogic.swift in Sources */,
@@ -5447,6 +5461,7 @@
 				73EB0AF425821DF4006BC997 /* Data+Base64.swift in Sources */,
 				751517AC2DD72F5500FFF64C /* PrintHelper.swift in Sources */,
 				21E4177D292810E000A78606 /* TPPPDFLocation.swift in Sources */,
+				75896B2E2EB7870B0030C2BA /* BookAccessibility.swift in Sources */,
 				E55E2FA629E7A9670093F916 /* AudioBookmark.swift in Sources */,
 				73EB0AF625821DF4006BC997 /* TPPCatalogFacetGroup.m in Sources */,
 				E501711127A3948C004B3392 /* TPPBookmarkFactory.swift in Sources */,
@@ -5666,6 +5681,7 @@
 				215C866D27064198005F9621 /* BundleExtension.swift in Sources */,
 				E699BA402166598B00A0736A /* TPPEntryPointView.swift in Sources */,
 				A46226271B39D4980063F549 /* TPPOPDSGroup.m in Sources */,
+				75896B302EB7870B0030C2BA /* BookAccessibility.swift in Sources */,
 				751517AB2DD72F5500FFF64C /* PrintHelper.swift in Sources */,
 				E76AD92B296DCB76008ECC61 /* NotificationService.swift in Sources */,
 				A93F9F9721CDACF700BD3B0C /* TPPAppReviewPrompt.swift in Sources */,

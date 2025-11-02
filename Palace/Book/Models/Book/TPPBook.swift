@@ -21,6 +21,7 @@ let AnalyticsURLKey: String = "analytics"
 let AnnotationsURLKey: String = "annotations"
 let AuthorLinksKey: String = "author-links"
 let AuthorsKey: String = "authors"
+let BookAccessibilityKey: String = "book-accessibility"
 let CategoriesKey: String = "categories"
 let DistributorKey: String = "distributor"
 let IdentifierKey: String = "id"
@@ -42,6 +43,7 @@ let TimeTrackingURLURLKey: String = "time-tracking-url"
 @objc class TPPBook: NSObject {
   @objc var acquisitions: [TPPOPDSAcquisition]
   @objc var bookAuthors: [TPPBookAuthor]?
+  @objc var bookAccessibility: BookAccessibility?
   @objc var categoryStrings: [String]?
   @objc var distributor: String?
   @objc var identifier: String
@@ -84,6 +86,7 @@ let TimeTrackingURLURLKey: String = "time-tracking-url"
   init(
     acquisitions: [TPPOPDSAcquisition],
     authors: [TPPBookAuthor]?,
+    bookAccessibility: BookAccessibility?,
     categoryStrings: [String]?,
     distributor: String?,
     identifier: String,
@@ -110,7 +113,7 @@ let TimeTrackingURLURLKey: String = "time-tracking-url"
   ) {
     self.acquisitions = acquisitions
     self.bookAuthors = authors
-    self.bookAuthors = authors
+    self.bookAccessibility = bookAccessibility
     self.categoryStrings = categoryStrings
     self.distributor = distributor
     self.identifier = identifier
@@ -157,6 +160,24 @@ let TimeTrackingURLURLKey: String = "time-tracking-url"
         relatedBooksURL: entry.authorLinks.count > index ? entry.authorLinks[index].href : nil
       )
     }
+    
+    // MARK: - Defining the bookAccessibility property
+
+    // bookAccessibility is an optional property
+    // this property is an instance of BookAccessibility if it is available
+    var bookAccessibility: BookAccessibility?
+
+    // check if the entry object's accessibility property value
+    // can be cast to a dictionary
+    // because we expect the accessibility data
+    // to be in dictionary format at this point
+    if let accessibilityDictionary = entry.accessibility as? AccessibilityDictionary {
+
+      // create a new instance of BookAccessibility
+      // using the accessibility dictionary
+      // and set it to the bookAccessibility property
+      bookAccessibility = BookAccessibility(accessibilityDictionary)
+    }
 
     (entry.links as? [TPPOPDSLink])?.forEach {
       switch $0.rel {
@@ -176,6 +197,7 @@ let TimeTrackingURLURLKey: String = "time-tracking-url"
     self.init(
       acquisitions: entry.acquisitions,
       authors: authors,
+      bookAccessibility: bookAccessibility,
       categoryStrings: Self.categoryStringsFromCategories(categories: entry.categories),
       distributor: entry.providerName,
       identifier: entry.identifier,
@@ -233,6 +255,9 @@ let TimeTrackingURLURLKey: String = "time-tracking-url"
     } else if let authorObject = dictionary[AuthorsKey] as? [String] {
       authorStrings = authorObject
     }
+  
+    let bookAccessibility = BookAccessibility(dictionary)
+    
     var authorLinkStrings = [String]()
     if let authorLinkObject = dictionary[AuthorLinksKey] as? [[String]], let values = authorLinkObject.first {
       authorLinkStrings = values
@@ -366,6 +391,7 @@ let TimeTrackingURLURLKey: String = "time-tracking-url"
     self.init(
       acquisitions: acquisitions,
       authors: authors,
+      bookAccessibility: bookAccessibility,
       categoryStrings: categoryStrings,
       distributor: dictionary[DistributorKey] as? String,
       identifier: identifier,
@@ -396,6 +422,7 @@ let TimeTrackingURLURLKey: String = "time-tracking-url"
     TPPBook(
       acquisitions: self.acquisitions,
       authors: book.bookAuthors,
+      bookAccessibility: book.bookAccessibility,
       categoryStrings: book.categoryStrings,
       distributor: book.distributor,
       identifier: self.identifier,
@@ -416,7 +443,7 @@ let TimeTrackingURLURLKey: String = "time-tracking-url"
       revokeURL: self.revokeURL,
       reportURL: self.reportURL,
       timeTrackingURL: self.timeTrackingURL,
-      contributors: book.contributors, 
+      contributors: book.contributors,
       bookDuration: book.bookDuration,
       language: book.language
     )
@@ -432,6 +459,7 @@ let TimeTrackingURLURLKey: String = "time-tracking-url"
       AnalyticsURLKey: analyticsURL?.absoluteString ?? "",
       AuthorLinksKey: authorLinkArray ?? [],
       AuthorsKey: authorNameArray ?? [],
+      BookAccessibilityKey: bookAccessibilityRepresentation ?? "",
       CategoriesKey: categoryStrings as Any,
       DistributorKey: distributor as Any,
       IdentifierKey: identifier,
@@ -464,6 +492,9 @@ let TimeTrackingURLURLKey: String = "time-tracking-url"
    authorNameArray?.joined(separator: "; ")
   }
   
+  @objc var bookAccessibilityRepresentation: String? {
+    bookAccessibility?.loggableBookAccessibility()
+  }
   
   @objc var categories: String? {
     categoryStrings?.joined(separator: "; ")

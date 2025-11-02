@@ -102,6 +102,7 @@ class TPPBookCreationTests: XCTestCase {
   func testBookCreationViaMemberWiseInitializer() {
     let book = TPPBook(acquisitions: opdsEntry.acquisitions,
                         authors: nil,
+                        bookAccessibility: nil,
                         categoryStrings: ["Test String 1", "Test String 2"],
                         distributor: nil,
                         identifier: "666",

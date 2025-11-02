@@ -95,6 +95,7 @@ class AudiobookBookmarkBusinessLogicTests: XCTestCase {
     fakeBook = TPPBook.init(
       acquisitions: [fakeAcquisition],
       authors: [TPPBookAuthor](),
+      bookAccessibility: nil,
       categoryStrings: [String](),
       distributor: "",
       identifier: bookIdentifier,
