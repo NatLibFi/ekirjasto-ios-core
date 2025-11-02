@@ -3277,6 +3277,13 @@
 			path = Toast;
 			sourceTree = "<group>";
 		};
+		75896B262EB77D0C0030C2BA /* Accessibility */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Accessibility;
+			sourceTree = "<group>";
+		};
 		75E833BD2D7373CE00D2B840 /* Facet */ = {
 			isa = PBXGroup;
 			children = (
@@ -3699,6 +3706,7 @@
 		A823D816192BABA400B55DE2 /* Palace */ = {
 			isa = PBXGroup;
 			children = (
+				75896B262EB77D0C0030C2BA /* Accessibility */,
 				9D92C7502BA250650058FB9C /* EkirjastoDigitalMagazine */,
 				E759B2052A1BF7AA0041B075 /* PalaceDebug.entitlements */,
 				E59892DD28A9AA7400C44A85 /* Samples */,
