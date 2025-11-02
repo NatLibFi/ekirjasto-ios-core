@@ -1050,6 +1050,9 @@
 		7582FFD52DBAE1FB0057AC71 /* BookSelectionButtonsState.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582FFD42DBAE1F00057AC71 /* BookSelectionButtonsState.m */; };
 		7582FFD62DBAE1FB0057AC71 /* BookSelectionButtonsState.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582FFD42DBAE1F00057AC71 /* BookSelectionButtonsState.m */; };
 		7582FFD72DBAE1FB0057AC71 /* BookSelectionButtonsState.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582FFD42DBAE1F00057AC71 /* BookSelectionButtonsState.m */; };
+		75896B282EB77DFB0030C2BA /* AccessibilityDictionaryBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75896B272EB77DF00030C2BA /* AccessibilityDictionaryBuilder.swift */; };
+		75896B292EB77DFB0030C2BA /* AccessibilityDictionaryBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75896B272EB77DF00030C2BA /* AccessibilityDictionaryBuilder.swift */; };
+		75896B2A2EB77DFB0030C2BA /* AccessibilityDictionaryBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75896B272EB77DF00030C2BA /* AccessibilityDictionaryBuilder.swift */; };
 		75A33F772E0F022700C147CC /* TPPRootTabBarController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A33F762E0F020F00C147CC /* TPPRootTabBarController+Extensions.swift */; };
 		75A33F782E0F022700C147CC /* TPPRootTabBarController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A33F762E0F020F00C147CC /* TPPRootTabBarController+Extensions.swift */; };
 		75A33F792E0F022700C147CC /* TPPRootTabBarController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A33F762E0F020F00C147CC /* TPPRootTabBarController+Extensions.swift */; };
@@ -2001,6 +2004,7 @@
 		7582FFCF2DB918880057AC71 /* BookSelectionButtonsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookSelectionButtonsView.m; sourceTree = "<group>"; };
 		7582FFD32DBADF240057AC71 /* BookSelectionButtonsState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookSelectionButtonsState.h; sourceTree = "<group>"; };
 		7582FFD42DBAE1F00057AC71 /* BookSelectionButtonsState.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookSelectionButtonsState.m; sourceTree = "<group>"; };
+		75896B272EB77DF00030C2BA /* AccessibilityDictionaryBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityDictionaryBuilder.swift; sourceTree = "<group>"; };
 		75A33F762E0F020F00C147CC /* TPPRootTabBarController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TPPRootTabBarController+Extensions.swift"; sourceTree = "<group>"; };
 		75E833D92D73B48D00D2B840 /* LoansAndHoldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoansAndHoldsView.swift; sourceTree = "<group>"; };
 		75E833E12D73B4B900D2B840 /* LoansAndHoldsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoansAndHoldsViewController.swift; sourceTree = "<group>"; };
@@ -3280,8 +3284,17 @@
 		75896B262EB77D0C0030C2BA /* Accessibility */ = {
 			isa = PBXGroup;
 			children = (
+				75896B2B2EB77E090030C2BA /* AccessibilityDictionary */,
 			);
 			path = Accessibility;
+			sourceTree = "<group>";
+		};
+		75896B2B2EB77E090030C2BA /* AccessibilityDictionary */ = {
+			isa = PBXGroup;
+			children = (
+				75896B272EB77DF00030C2BA /* AccessibilityDictionaryBuilder.swift */,
+			);
+			path = AccessibilityDictionary;
 			sourceTree = "<group>";
 		};
 		75E833BD2D7373CE00D2B840 /* Facet */ = {
@@ -4793,6 +4806,7 @@
 				3379F8202A5D422600E9945F /* EkirjastoArrowDownButton.swift in Sources */,
 				331262E12A287F53006BA87D /* AdobeCertificate.swift in Sources */,
 				331262E22A287F53006BA87D /* TPPCirculationAnalytics.swift in Sources */,
+				75896B292EB77DFB0030C2BA /* AccessibilityDictionaryBuilder.swift in Sources */,
 				9D92C74F2BA243320058FB9C /* DigitalMagazineBrowserViewController.swift in Sources */,
 				331262E32A287F53006BA87D /* TPPBookState.swift in Sources */,
 				331262E42A287F53006BA87D /* APIKeys.swift in Sources */,
@@ -5458,6 +5472,7 @@
 				E53573D3295613FF008BDCA4 /* LoansViewModel.swift in Sources */,
 				21E417972928137E00A78606 /* AudiobookSamplePlayer.swift in Sources */,
 				73EB0AFF25821DF4006BC997 /* URLResponse+TPPAuthentication.swift in Sources */,
+				75896B2A2EB77DFB0030C2BA /* AccessibilityDictionaryBuilder.swift in Sources */,
 				753D8D252DCE29B20092FD39 /* MyBooksSelectionCenter.swift in Sources */,
 				73EB0B0025821DF4006BC997 /* TPPCatalogSearchViewController.m in Sources */,
 				7530C8D12D80CF700024E184 /* FavoritesMainView.swift in Sources */,
@@ -5784,6 +5799,7 @@
 				75EA32192DA97D6600FD3AC2 /* EdgeBorder.swift in Sources */,
 				11548C0B1939136C009DBF2E /* TPPRootTabBarController.m in Sources */,
 				E63F2C6C1EAA81B3002B6373 /* ExtendedNavBarView.swift in Sources */,
+				75896B282EB77DFB0030C2BA /* AccessibilityDictionaryBuilder.swift in Sources */,
 				E5FC12AE2A24EB1C000BFED5 /* ChapterLocation+Extensions.swift in Sources */,
 				B51C1E0022861BAD003B49A5 /* OPDS2Link.swift in Sources */,
 				730D17CC25535954004CAC83 /* TPPSignInBusinessLogic+BookmarkSyncing.swift in Sources */,
