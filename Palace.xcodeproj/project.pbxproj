@@ -1074,6 +1074,9 @@
 		75896B532EB7F13E0030C2BA /* AccessibilityViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75896B522EB7F1310030C2BA /* AccessibilityViewBuilder.swift */; };
 		75896B542EB7F13E0030C2BA /* AccessibilityViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75896B522EB7F1310030C2BA /* AccessibilityViewBuilder.swift */; };
 		75896B552EB7F13E0030C2BA /* AccessibilityViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75896B522EB7F1310030C2BA /* AccessibilityViewBuilder.swift */; };
+		75896B6F2EB7F8EB0030C2BA /* AccessibilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75896B6E2EB7F8DC0030C2BA /* AccessibilityViewController.swift */; };
+		75896B702EB7F8EB0030C2BA /* AccessibilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75896B6E2EB7F8DC0030C2BA /* AccessibilityViewController.swift */; };
+		75896B712EB7F8EB0030C2BA /* AccessibilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75896B6E2EB7F8DC0030C2BA /* AccessibilityViewController.swift */; };
 		75A33F772E0F022700C147CC /* TPPRootTabBarController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A33F762E0F020F00C147CC /* TPPRootTabBarController+Extensions.swift */; };
 		75A33F782E0F022700C147CC /* TPPRootTabBarController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A33F762E0F020F00C147CC /* TPPRootTabBarController+Extensions.swift */; };
 		75A33F792E0F022700C147CC /* TPPRootTabBarController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A33F762E0F020F00C147CC /* TPPRootTabBarController+Extensions.swift */; };
@@ -2033,6 +2036,7 @@
 		75896B4A2EB7F0F00030C2BA /* AccessibilityItemGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityItemGroup.swift; sourceTree = "<group>"; };
 		75896B4E2EB7F1040030C2BA /* AccessibilityItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityItem.swift; sourceTree = "<group>"; };
 		75896B522EB7F1310030C2BA /* AccessibilityViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityViewBuilder.swift; sourceTree = "<group>"; };
+		75896B6E2EB7F8DC0030C2BA /* AccessibilityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityViewController.swift; sourceTree = "<group>"; };
 		75A33F762E0F020F00C147CC /* TPPRootTabBarController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TPPRootTabBarController+Extensions.swift"; sourceTree = "<group>"; };
 		75E833D92D73B48D00D2B840 /* LoansAndHoldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoansAndHoldsView.swift; sourceTree = "<group>"; };
 		75E833E12D73B4B900D2B840 /* LoansAndHoldsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoansAndHoldsViewController.swift; sourceTree = "<group>"; };
@@ -3343,6 +3347,7 @@
 				75896B4E2EB7F1040030C2BA /* AccessibilityItem.swift */,
 				75896B4A2EB7F0F00030C2BA /* AccessibilityItemGroup.swift */,
 				75896B452EB7F0A00030C2BA /* AccessibilityView.swift */,
+				75896B6E2EB7F8DC0030C2BA /* AccessibilityViewController.swift */,
 				75896B522EB7F1310030C2BA /* AccessibilityViewBuilder.swift */,
 			);
 			path = AccessibilityView;
@@ -5112,6 +5117,7 @@
 				75E833E42D73B4C100D2B840 /* LoansAndHoldsViewController.swift in Sources */,
 				331263B72A287F53006BA87D /* TPPRemoteViewController.m in Sources */,
 				331263B82A287F53006BA87D /* DRMLibraryService.swift in Sources */,
+				75896B702EB7F8EB0030C2BA /* AccessibilityViewController.swift in Sources */,
 				331263B92A287F53006BA87D /* TPPOPDSAttribute.m in Sources */,
 				331263BA2A287F53006BA87D /* FacetViewModel.swift in Sources */,
 				331263BB2A287F53006BA87D /* TPPCatalogUngroupedFeed.m in Sources */,
@@ -5601,6 +5607,7 @@
 				E7862A1E277391E200BE8AB8 /* TPPSettingsView.swift in Sources */,
 				73EB0B2525821DF4006BC997 /* TPPOPDSFeed.m in Sources */,
 				73EB0B2725821DF4006BC997 /* TPPOPDSLink.m in Sources */,
+				75896B712EB7F8EB0030C2BA /* AccessibilityViewController.swift in Sources */,
 				E7862A1D277391C100BE8AB8 /* TPPSettingsViewController.swift in Sources */,
 				73EB0B2825821DF4006BC997 /* TPPOPDSType.m in Sources */,
 				2126FE3F25C059920095C45C /* LCPLibraryService.swift in Sources */,
@@ -5673,6 +5680,7 @@
 				E523124B285C3828007D1DB5 /* TPPBookRegistry+Extensions.swift in Sources */,
 				731A5B1224621F2B00B5E663 /* TPPSignInBusinessLogic.swift in Sources */,
 				75E8341A2D7608CA00D2B840 /* HoldsViewModel.swift in Sources */,
+				75896B6F2EB7F8EB0030C2BA /* AccessibilityViewController.swift in Sources */,
 				E708F720284781D50028405B /* TPPEncryptedPDFViewController.swift in Sources */,
 				75E834152D76088F00D2B840 /* HoldsView.swift in Sources */,
 				11580AC81986A77B00949A15 /* TPPBookCell.m in Sources */,
