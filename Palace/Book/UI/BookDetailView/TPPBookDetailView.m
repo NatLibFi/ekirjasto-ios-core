@@ -248,6 +248,9 @@ static NSString *DetailHTMLTemplate = nil;
   
   self.accessibilitySectionLabel = [[EkirjastoRoundedLabel alloc] init];
   self.accessibilitySectionLabel.text = NSLocalizedString(@"Accessibility", nil);
+  self.accessibilitySectionLabel.accessibilityLabel = NSLocalizedString(@"Accessibility", nil);
+  self.accessibilitySectionLabel.accessibilityHint = NSLocalizedString(@"This section provides information about accessibility features.", nil);
+  self.accessibilitySectionLabel.accessibilityTraits = UIAccessibilityTraitHeader;
 
   self.summaryTextView = [[UITextView alloc] init];
   self.summaryTextView.backgroundColor = [UIColor clearColor];
@@ -314,6 +317,9 @@ static NSString *DetailHTMLTemplate = nil;
   [self.readMoreAboutAccessibilityLabel setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
   [self.readMoreAboutAccessibilityLabel setTitle:NSLocalizedString(@"Read more about accessibility", nil) forState:UIControlStateNormal];
   [self.readMoreAboutAccessibilityLabel setTitleColor:[TPPConfiguration mainColor] forState:UIControlStateNormal];
+  self.readMoreAboutAccessibilityLabel.accessibilityLabel = NSLocalizedString(@"Read more about accessibility", nil);
+  self.readMoreAboutAccessibilityLabel.accessibilityHint = NSLocalizedString(@"Tap to learn more about accessibility features.", nil);
+  self.readMoreAboutAccessibilityLabel.accessibilityTraits = UIAccessibilityTraitButton;
 }
 
 - (void)createHeaderLabels

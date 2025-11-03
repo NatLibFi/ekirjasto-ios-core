@@ -9,6 +9,73 @@
 import Foundation
 
 struct Strings {
+  
+  /*
+   String.localizedStringWithFormat(
+     Strings.Accessibility.accessibilityItemGroupNameLabel,
+     itemGroup.name
+   )
+   */
+  
+  struct Accessibility {
+    static let conformance = NSLocalizedString(
+      "Conformance",
+      comment: "Localisation for an accessibility property"
+    )
+    
+    static let waysOfReading = NSLocalizedString(
+      "Ways of reading",
+      comment: "Localisation for an accessibility property"
+    )
+    
+    static let headerTitleWithBook = NSLocalizedString(
+      "Accessibility of the book %@",
+      comment: "Title for the accessibility view of the book, containing the book title "
+    )
+    
+    static let noAccessibilityInfoLabel = NSLocalizedString(
+      "This book does not have any accessibility information available.",
+      comment: "Label that is displayed when there is no accessibility information"
+    )
+    
+    static let noAccessibilityInfoHint = NSLocalizedString(
+      "Return to book by tapping here.",
+      comment: "Hint for the empty accessibility view, when there is no accessibility information available"
+    )
+    
+    static let accessibilityItemGroupLabelWithName = NSLocalizedString(
+      "This book contains accessibility information about %@",
+      comment: "Accessibility label for the accessibility group's name"
+    )
+    
+    static let accessibilityItemLabelWithName = NSLocalizedString(
+      "Accessiblity item: %@",
+      comment: "Accessibility label for the accessibilty item's name"
+    )
+    
+    static let accessibilityItemsLabel = NSLocalizedString(
+      "Accessiblity items",
+      comment: "Accessibility label for the accessibilty item's name"
+    )
+    
+    static let accessibilityItemValueLabel = NSLocalizedString(
+      "Accesiblity item value: %@",
+      comment: "Accessibility label for the accessibilty item's name"
+    )
+    
+    static let closeButtonTitle = NSLocalizedString(
+      "Close",
+      comment: "Title for close button dismissing accessibility view"
+    )
+    
+    static let closeButtonHint = NSLocalizedString(
+      "Tap to close the accessibility view",
+      comment: "Accessibility hint for the close button"
+    )
+    
+
+    
+  }
 
   struct AgeCheck {
     static let title = NSLocalizedString("Age Verification", comment: "Title for Age Verification")

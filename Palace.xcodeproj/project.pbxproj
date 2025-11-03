@@ -3347,8 +3347,8 @@
 				75896B4E2EB7F1040030C2BA /* AccessibilityItem.swift */,
 				75896B4A2EB7F0F00030C2BA /* AccessibilityItemGroup.swift */,
 				75896B452EB7F0A00030C2BA /* AccessibilityView.swift */,
-				75896B6E2EB7F8DC0030C2BA /* AccessibilityViewController.swift */,
 				75896B522EB7F1310030C2BA /* AccessibilityViewBuilder.swift */,
+				75896B6E2EB7F8DC0030C2BA /* AccessibilityViewController.swift */,
 			);
 			path = AccessibilityView;
 			sourceTree = "<group>";

@@ -9,9 +9,6 @@
 import Combine
 import Foundation
 
-enum Group: Int {
-  case groupSortBy
-}
 
 @MainActor
 class LoansViewModel: ObservableObject {
