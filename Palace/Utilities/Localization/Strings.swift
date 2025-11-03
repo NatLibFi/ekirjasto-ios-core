@@ -1,5 +1,5 @@
 //
-//  DisplayStrings.swift
+//  Strings.swift
 //  Palace
 //
 //  Created by Maurice Carrier on 12/4/21.
@@ -8,16 +8,18 @@
 
 import Foundation
 
+
 struct Strings {
   
-  /*
-   String.localizedStringWithFormat(
-     Strings.Accessibility.accessibilityItemGroupNameLabel,
-     itemGroup.name
-   )
-   */
   
   struct Accessibility {
+    // Strings mosty used in AccessiblityView
+    
+    static let accessibility = NSLocalizedString(
+      "Accessibility",
+      comment: "Localisation for the word accessibility"
+    )
+    
     static let conformance = NSLocalizedString(
       "Conformance",
       comment: "Localisation for an accessibility property"
@@ -26,6 +28,21 @@ struct Strings {
     static let waysOfReading = NSLocalizedString(
       "Ways of reading",
       comment: "Localisation for an accessibility property"
+    )
+    
+    static let readMoreAboutAccessibilityTitle = NSLocalizedString(
+      "Read more about accessibility",
+      comment: "Title for button that opens accessiblity view "
+    )
+    
+    static let readMoreAboutAccessiblityButtonHint = NSLocalizedString(
+      "Tap to learn more about accessibility features.",
+      comment: "Hint for screen reader users how to open accessiblity view"
+    )
+    
+    static let readMoreAboutAccessiblityLabelHint = NSLocalizedString(
+      "This section provides information about accessibility features.",
+      comment: "Hint for screen reader users informing that this book section contains accessibility information"
     )
     
     static let headerTitleWithBook = NSLocalizedString(
@@ -38,31 +55,6 @@ struct Strings {
       comment: "Label that is displayed when there is no accessibility information"
     )
     
-    static let noAccessibilityInfoHint = NSLocalizedString(
-      "Return to book by tapping here.",
-      comment: "Hint for the empty accessibility view, when there is no accessibility information available"
-    )
-    
-    static let accessibilityItemGroupLabelWithName = NSLocalizedString(
-      "This book contains accessibility information about %@",
-      comment: "Accessibility label for the accessibility group's name"
-    )
-    
-    static let accessibilityItemLabelWithName = NSLocalizedString(
-      "Accessiblity item: %@",
-      comment: "Accessibility label for the accessibilty item's name"
-    )
-    
-    static let accessibilityItemsLabel = NSLocalizedString(
-      "Accessiblity items",
-      comment: "Accessibility label for the accessibilty item's name"
-    )
-    
-    static let accessibilityItemValueLabel = NSLocalizedString(
-      "Accesiblity item value: %@",
-      comment: "Accessibility label for the accessibilty item's name"
-    )
-    
     static let closeButtonTitle = NSLocalizedString(
       "Close",
       comment: "Title for close button dismissing accessibility view"
@@ -73,10 +65,8 @@ struct Strings {
       comment: "Accessibility hint for the close button"
     )
     
-
-    
   }
-
+  
   struct AgeCheck {
     static let title = NSLocalizedString("Age Verification", comment: "Title for Age Verification")
     static let titleLabel = NSLocalizedString("Please enter your birth year", comment: "Caption for asking user to enter their birth year")
@@ -112,55 +102,55 @@ struct Strings {
     static let accessibilitySummaryLabel = NSLocalizedString("Accessibility summary", comment: "Name for the accesibility summary field in the book details view")
     static let accessibilityDataNotYetAvailable = NSLocalizedString("Not yet available", comment: "Placeholder text shown when accessibility data for a book is not yet available.")
   }
-
+  
   struct DownloadBook {
-
+    
     static let borrowFailedTitle = NSLocalizedString(
       "Borrow failed",
       comment: "Alert title informing the user that borrowing a book failed."
     )
-
+    
     static let borrowFailedMessage = NSLocalizedString(
       "Borrowing %@ could not be completed.",
       comment: "Alert message body informing the user that borrowing failed for a specific book title."
     )
-
+    
     static let downloadFailedTitle = NSLocalizedString(
       "Download failed",
       comment: "Error title informing the user that download failed."
     )
-
+    
     static let downloadFailedMessage = NSLocalizedString(
       "The download could not be completed.",
       comment: "Error message body informing the user that download failed."
     )
-
+    
     static let downloadFailedMessageWithBookTitle = NSLocalizedString(
       "The download for book %@ could not be completed.",
       comment: "Error message body informing the user that download failed for a specific book title."
     )
-
+    
     static let loanAlreadyExistsAlertMessage = NSLocalizedString(
       "You have already checked out this loan. You may need to refresh your My Books list to download the title.",
       comment: ""
     )
-
+    
   }
   
   struct ReturnBook {
-
+    
     static let returnFailedTitle = NSLocalizedString(
       "Return failed",
       comment: "Title for the alert shown to user when returning a book fails"
     )
-
+    
     static let returnFailedMessage = NSLocalizedString(
       "The return of %@ could not be completed.",
       comment: "Message body for the alert shown to user when returning a book fails"
     )
-
+    
   }
-
+  
   struct Error {
     static let loginFailedErrorTitle = NSLocalizedString("Login Failed", comment: "")
     static let loadFailedError = NSLocalizedString("The page could not load due to a conection error.", comment: "")
@@ -188,21 +178,21 @@ struct Strings {
     static let bookFavoriteActionFailedNotificationAlertTitle = NSLocalizedString("Favorites update failed", comment: "The title in a notification alert informing the user that the there was an error in adding the book to favorites or removing the book from favorites")
     static let bookFavoriteActionFailedNotificationAlertMessage = NSLocalizedString("We were unable to save the changes to your Favorites list with book\n \"%@\".\n\n Please try again soon.", comment: "The message in a notification alert informing the user that the there was an error in adding the book to favorites or removing the book from favorites")
   }
-
+  
   struct ErrorInformation {
-
+    
     static let errorInformationAvailable = NSLocalizedString(
       "Additional error information:\n%@",
       comment: "Used when additional technical error details are appended to for example the download failure message."
     )
-
+    
     static let noErrorInformationAvailable = NSLocalizedString(
       "No additional error information is available.",
       comment: "Message informing that there is no detailed error message available."
     )
-
+    
   }
-
+  
   struct FacetView {
     static let author = NSLocalizedString("Author", comment: "")
     static let title = NSLocalizedString("Title", comment: "")
@@ -261,31 +251,31 @@ struct Strings {
   }
   
   struct OpenBook {
-
+    
     static let unableToOpenBookAlertTitle = NSLocalizedString(
       "Unable to open book",
       comment: "Title for the alert shown to user when opening (presenting) a book fails."
     )
-
+    
     static let unableToOpenBookAlertMessage = NSLocalizedString(
       "There was a problem opening the book %@. Please try again.",
       comment: "Alert message body informing the user that opening book failed for a specific book title."
     )
-
+    
   }
   
   struct OpenSample {
-
+    
     static let unableToOpenSampleAlertTitle = NSLocalizedString(
       "Unable to open sample",
       comment: "Title for the alert shown to user when opening (presenting) a book sample fails."
     )
-
+    
     static let unableToOpenSampleAlertMessage = NSLocalizedString(
       "There was a problem opening the sample of the book %@. Please try again.",
       comment: "Alert message body informing the user that opening book sample failed for a specific book title."
     )
-
+    
   }
   
   struct ProblemReportEmail {
@@ -463,7 +453,7 @@ struct Strings {
   struct TPPPDFNavigation {
     static let resume = NSLocalizedString("Resume", comment: "A button to continue reading title.")
   }
-
+  
   struct TPPProblemDocument {
     static let authenticationExpiredTitle = NSLocalizedString("Authentication Expired", comment: "Title for an error related to expired credentials")
     static let authenticationExpiredBody = NSLocalizedString("Your authentication details have expired. Please sign in again.", comment: "Message to prompt user to re-authenticate")
@@ -531,5 +521,5 @@ struct Strings {
     static let bookRemovedFromFavoritesNotificationBannerTitle = NSLocalizedString("Book removed from Favorites", comment: "The title in a notification banner informing the user that the book is removed from user's favorite books")
     static let bookRemovedFromFavoritesNotificationBannerMessage = NSLocalizedString("\"%@\" has been removed from your Favorites.", comment: "The message in a notification banner informing the user that the book is removed from user's favorite books")
   }
-    
+  
 }
