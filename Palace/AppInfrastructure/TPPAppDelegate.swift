@@ -15,13 +15,15 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
   var audiobookLifecycleManager: AudiobookLifecycleManager!
   var reachabilityManager: TPPReachability!
-  var notificationsManager: TPPUserNotifications!
   var isSigningIn = false
 
   // MARK: - Application Lifecycle
   
   func applicationDidFinishLaunching(_ application: UIApplication) {
+    
+    // Configure E-kirjasto app to use defined Firebase services
     FirebaseApp.configure()
+    
     TPPErrorLogger.configureCrashAnalytics()
 
     // Perform data migrations as early as possible before anything has a chance to access them
@@ -168,34 +170,95 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
     // Initialize book registry
     _ = TPPBookRegistry.shared
     
-    // Push Notificatoins
-    NotificationService.shared.setupPushNotifications()
+    // Asking UserNotificationService to setup so that app instance on device is ready
+    // for receiving remote (push) notifications send from backend via FCM service
+    UserNotificationService.shared.setupFCMNotifications()
   }
   
-  // TODO: This method is deprecated, we should migrate to BGAppRefreshTask in the BackgroundTasks framework instead
-  func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-    let startDate = Date()
-    if TPPUserNotifications.backgroundFetchIsNeeded() {
-      Log.log(String(format: "%@: %@", #function, "[Background Fetch] Starting book registry sync. ElapsedTime=\(-startDate.timeIntervalSinceNow)"))
-      TPPBookRegistry.shared.sync { errorDocument, newBooks in
-        var result: String
-        if errorDocument != nil {
-          result = "error document"
-          completionHandler(.failed)
-        } else if newBooks {
-          result = "new ready books available"
-          completionHandler(.newData)
-        } else {
-          result = "no ready books fetched"
-          completionHandler(.noData)
-        }
-        Log.log(String(format: "%@: %@", #function, "[Background Fetch] Completed with \(result). ElapsedTime=\(-startDate.timeIntervalSinceNow)"))
-      }
-    } else {
+  // TODO: performFetchWithCompletionHandler is deprecated
+  // we should migrate to BGAppRefreshTask in the BackgroundTasks framework instead
+  func application(
+    _ application: UIApplication,
+    performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
+  ) {
+
+    printToConsole(.debug, "Performing fetch with completion handler")
+
+    // we make a record of the start time to find out how long this fetch takes
+    let startTime = Date()
+    let shouldFetchData: Bool = TPPBookRegistry.shared.isBackgroundFetchNeeded()
+
+    guard shouldFetchData else {
+      // background fetch is not needed
+      // prevent unnecessary fetch in app
+
+      printToConsole(
+        .info,
+        "Check confirmed that background fetch is not needed. " +
+        "Elapsed time = \(-startTime.timeIntervalSinceNow)"
+      )
+
+      // inform that fetch resulted in no new data and return
       completionHandler(.noData)
+      return
     }
+
+    printToConsole(
+      .info,
+      "Background fetch starting, doing book registry sync next. " +
+      "Elapsed time = \(-startTime.timeIntervalSinceNow)"
+    )
+
+    // Fetch new data from backend and update user's book registry
+    TPPBookRegistry.shared.sync { errorDocument, newBooks in
+
+      guard errorDocument == nil else {
+        // An error occurred in the sync
+
+        printToConsole(
+          .debug,
+          "Book sync failed when doing backround fetch, error document:  \(String(describing: errorDocument)). " +
+          "Elapsed time = \(-startTime.timeIntervalSinceNow)"
+        )
+
+        // inform that fetch resulted in failure and return
+        completionHandler(.failed)
+        return
+      }
+
+      // handle the results of the successful fetch (book sync)
+      switch (newBooks) {
+
+        case true:
+          // new books are available for download after syncing
+
+          printToConsole(
+            .info,
+            "Book sync during the background fetch was successful, and new ready books were available for download. " +
+            "Elapsed time = \(-startTime.timeIntervalSinceNow)"
+          )
+
+          // inform that fetch resulted in new data
+          completionHandler(.newData)
+
+        case false:
+          // no new books are available after syncing
+
+          printToConsole(
+            .info,
+            "Book sync during the background fetch was successful, but no new books were available for download. " +
+            "Elapsed time = \(-startTime.timeIntervalSinceNow)"
+          )
+
+          // inform that fetch resulted in no new data
+          completionHandler(.noData)
+
+      }
+
+    }
+
   }
-  
+
   func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
     
     

@@ -245,6 +245,8 @@ import Foundation
           readiumBookmarks: nil,
           genericBookmarks: nil)
 
+        UserNotificationService.shared.updateAppBadges()
+
         // then proceed to download
         if shouldAttemptDownload {
           self?.startDownloadIfAvailable(book: borrowedBook)
@@ -962,6 +964,7 @@ extension MyBooksDownloadCenter {
 
         if let returnedBook = TPPBook(entry: entry) {
           self.bookRegistry.updateAndRemoveBook(returnedBook)
+          UserNotificationService.shared.updateAppBadges()
         } else {
           printToConsole(
             .debug,

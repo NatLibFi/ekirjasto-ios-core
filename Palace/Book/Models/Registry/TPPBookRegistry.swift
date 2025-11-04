@@ -348,6 +348,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
       // If syncError was set in first task...
       guard syncError == nil else {
         // ...call completion handler...
+
         completion?(syncError, newBooksAvailable)
         // ...and do not proceed further.
         return
@@ -364,7 +365,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
           syncError = errorDocument
         }
 
-        newBooksAvailable = newBooks
+        newBooksAvailable = newBooksAvailable || newBooks
 
         // Second asyncronous task has ended
         // We are leaving the group (again!)
@@ -402,6 +403,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
         .info,
         "Book registry aborting loans+holds sync, no URL for loans+holds feed"
       )
+      completion?(nil, false)
       return
     }
 
@@ -411,6 +413,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
         .info,
         "Book registry skipping loans+holds sync, already synced"
       )
+      completion?(nil, false)
       return
     }
 
@@ -444,6 +447,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
             .info,
             "Book registry aborting loans+holds sync, syncURL mismatch"
           )
+          completion?(nil, false)
           return
         }
 
@@ -580,16 +584,10 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
             "Number of new books ready to be borrowed: \(readyBooks)"
           )
 
-          UIApplication.shared.applicationIconBadgeNumber = readyBooks
+          UserNotificationService.shared.setAppIconBadge(readyBooks)
 
-          let loansAndHoldsTab = TPPRootTabBarController.shared().tabBar.items?[1]
-
-          let newTabBadgeValue =
-            readyBooks > 0
-              ? "\(readyBooks)"
-              : nil
-
-          loansAndHoldsTab?.badgeValue = newTabBadgeValue
+          // Loans & Holds tab's index is currently 1...
+          UserNotificationService.shared.setTabItemBadge(readyBooks, tabIndex: 1)
         }
 
         // And we are done with the loans+holds sync!
@@ -621,6 +619,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
         .info,
         "Book registry aborting selected sync, no URL for selection feed"
       )
+      completion?(nil, false)
       return
     }
 
@@ -629,6 +628,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
         .info,
         "Book registry skipping selected sync, already synced"
       )
+      completion?(nil, false)
       return
     }
 
@@ -659,6 +659,7 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
             .info,
             "Book registry aborting selected sync, syncURL mismatch"
           )
+          completion?(nil, false)
           return
         }
 
@@ -880,9 +881,12 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
       return
     }
 
-    TPPUserNotifications.compareAvailability(
-      cachedRecord: record,
-      andNewBook: book
+    // Check if a book on hold
+    // is now ready to be downloaded
+    // and notify the user immediately
+    compareBookAvailabilityAndNotifyUser(
+      bookInRegistry: record.book,
+      bookFromFeed: book
     )
 
     printToConsole(
@@ -1009,6 +1013,74 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
     registry[bookIdentifier]?.state = state
     save()
   }
+
+  /// Show a notification to user if the user's book
+  /// has moved from the "holds queue" to the "reserved queue",
+  /// and is now available for the user to checkout.
+  func compareBookAvailabilityAndNotifyUser(
+    bookInRegistry: TPPBook,
+    bookFromFeed: TPPBook
+  ) {
+
+    var bookWasOnHold = false
+    var bookIsNowReady = false
+
+    let oldAvailability = bookInRegistry.defaultAcquisition?.availability
+
+    oldAvailability?.matchUnavailable(
+      nil,
+      limited: nil,
+      unlimited: nil,
+      reserved: { _ in bookWasOnHold = true },
+      ready: nil
+    )
+
+    let newAvailability = bookFromFeed.defaultAcquisition?.availability
+
+    newAvailability?.matchUnavailable(
+      nil,
+      limited: nil,
+      unlimited: nil,
+      reserved: nil,
+      ready: { _ in bookIsNowReady = true }
+    )
+
+    if (bookWasOnHold && bookIsNowReady) {
+      UserNotificationService.shared.showBookIsAvailableNotification(bookFromFeed)
+    }
+
+  }
+
+  // Check if background fetch is necessary
+  // and fetch new book data only if it's really needed.
+  // We want to circulate the books efficiently
+  // but also avoid unnecessary network operations on user's app.
+  func isBackgroundFetchNeeded() -> Bool {
+
+    // First check if the user is waiting for some books
+    if heldBooks.count > 0 {
+
+      printToConsole(
+        .debug,
+        "User has books on hold: background fetch is needed"
+      )
+
+      // if user has one or more books on hold,
+      // then a background fetch is needed
+      // so we can update the books' status more quickly
+      return true
+    }
+
+    printToConsole(
+      .debug,
+      "User has no books on hold: background fetch is not needed"
+    )
+
+    // user has no books on hold,
+    // no need to get new data quickly
+    return false
+  }
+
 
   // MARK: - Book Cover
 

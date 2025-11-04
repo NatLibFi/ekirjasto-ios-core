@@ -122,26 +122,45 @@ func performLogOut() {
   #endif
   
   private func completeLogOutProcess() {
-    bookDownloadsCenter.reset(libraryAccountID)
-    bookRegistry.reset(libraryAccountID)
-    userAccount.removeAll()
-    selectedIDP = nil
-    uiDelegate?.businessLogicDidFinishDeauthorizing(self)
-
+    
+    // Authentication is needed for removing user's device FCM token
+    UserNotificationService.shared.fetchAndRemoveTokenOnLogout { _ in
+      
+      // After removing the user's notification token for the device
+      // continue with resetting and removing other user data,
+      // including authentication, which is ok to remove at this point
+      
+      // Always do these even if the token deletion was unsuccessful:
+      self.bookDownloadsCenter.reset(self.libraryAccountID)
+      self.bookRegistry.reset(self.libraryAccountID)
+      self.userAccount.removeAll()
+      self.selectedIDP = nil
+      self.uiDelegate?.businessLogicDidFinishDeauthorizing(self)
+    }
+    
     // reset app icon badge
     UIApplication.shared.applicationIconBadgeNumber = 0
-
+    
     // reset all tab item badges
     for tabItem in TPPRootTabBarController.shared().tabBar.items ?? [] {
       tabItem.badgeValue = nil
     }
     
     // Reset all webviews on logout.
-    WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
-        records.forEach { record in
-            WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
-        }
+    WKWebsiteDataStore.default().fetchDataRecords(
+      ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()
+    ) { records in
+
+      records.forEach { record in
+        WKWebsiteDataStore.default().removeData(
+          ofTypes: record.dataTypes,
+          for: [record],
+          completionHandler: {}
+        )
+      }
+
     }
+    
   }
 
   #if FEATURE_DRM_CONNECTOR

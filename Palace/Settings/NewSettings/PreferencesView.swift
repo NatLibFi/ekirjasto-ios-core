@@ -33,8 +33,14 @@ struct PreferencesView: View {
       // However, the app specific language can be changed from device system settings
       languagePreferencesSection
         .disabled(toggleState == false)
+
+      // If user has disabled the app preferences
+      // the notifications preferences cannot be accessed straight from app.
+      // However, the app notifications settings can be changed from device system settings
+      notificationPreferencesSection
+        .disabled(toggleState == false)
     }
-    
+
     // If user has disabled the app preferences
     // the text size preferences cannot be accessed straight from app.
     // However, the app specific text size can be changed from device control center
@@ -114,7 +120,33 @@ struct PreferencesView: View {
       .accessibilityLabel(tsx.selectL)
     }
   }
-  
+
+  // Shortcut button for the user to navigate to device system settings
+  // User can change the settings and authorization
+  // on how app's local and remote notifications (push notifications)
+  // are displayed in the device or if they are displayed at all
+  @ViewBuilder private var notificationPreferencesSection: some View {
+    // This is the link to E-kirjasto settings in iOS system settings
+    // You can also navigate to Settings -> Apps -> E-kirjasto
+    let appSystemSettingsURL = URL(string: UIApplication.openSettingsURLString)!
+
+    Section {
+      Button {
+        UIApplication.shared.open(appSystemSettingsURL)
+      } label: {
+        HStack {
+          Text(Strings.Preferences.notificationPreferencesButtonTitle)
+            .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
+          Spacer()
+          Image("ArrowRight")
+            .padding(.leading, 10)
+            .foregroundColor(Color(uiColor: .lightGray))
+        }
+      }
+      .accessibilityLabel(Strings.Preferences.appPreferencesAccessibilityLabel)
+    }
+  }
+
   // Slider for user to select the text size for the app
   // User can only make text bigger than default, not smaller
   @ViewBuilder private var textSizePreferencesSection: some View {
