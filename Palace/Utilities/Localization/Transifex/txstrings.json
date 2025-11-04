@@ -705,6 +705,9 @@
       "Not yet available" : {
          "string" : "Not yet available"
       },
+      "Notification preferences" : {
+         "string" : "Notification preferences"
+      },
       "OK" : {
          "string" : "OK"
       },
@@ -719,6 +722,9 @@
       },
       "Open Settings" : {
          "string" : "Open Settings"
+      },
+      "Open app's preferences in device system settings" : {
+         "string" : "Open app's preferences in device system settings"
       },
       "Open dyslexic font" : {
          "string" : "Open dyslexic font"
@@ -2084,6 +2090,9 @@
       "Not yet available" : {
          "string" : "Ei vielä saatavilla"
       },
+      "Notification preferences" : {
+         "string" : "Ilmoitusasetukset"
+      },
       "OK" : {
          "string" : "OK"
       },
@@ -2098,6 +2107,9 @@
       },
       "Open Settings" : {
          "string" : "Avaa asetukset"
+      },
+      "Open app's preferences in device system settings" : {
+         "string" : "Avaa sovelluksen asetukset laitteen järjestelmäasetuksissa"
       },
       "Open dyslexic font" : {
          "string" : "Open dyslexic -fontti"
@@ -3463,6 +3475,9 @@
       "Not yet available" : {
          "string" : "Inte tillgänglig ännu"
       },
+      "Notification preferences" : {
+         "string" : "Notisinställningar"
+      },
       "OK" : {
          "string" : "Ok"
       },
@@ -3477,6 +3492,9 @@
       },
       "Open Settings" : {
          "string" : "Öppna inställningar"
+      },
+      "Open app's preferences in device system settings" : {
+         "string" : "Öppna appinställningarna i enhetsinställningarna"
       },
       "Open dyslexic font" : {
          "string" : "OpenDyslexic-typsnitt"
