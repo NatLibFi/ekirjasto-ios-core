@@ -2,3 +2,4 @@ Kehitämme sovellusta ja korjaamme bugeja jatkuvasti. Tarkistathan, että sinull
 
 Tässä versiossa:
 - saavutettavuuspäivityksiä
+- ilmoitusten päivityksiä ja korjauksia

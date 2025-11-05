@@ -2,3 +2,4 @@ We are continually developing the app and fixing bugs. Please make sure that you
 
 In this version:
 - accessibility updates
+- notification updates and fixes
