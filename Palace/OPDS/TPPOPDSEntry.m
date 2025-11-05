@@ -14,6 +14,7 @@
 @property (nonatomic) NSArray<TPPOPDSAcquisition *> *acquisitions;
 @property (nonatomic) NSString *alternativeHeadline;
 @property (nonatomic) NSArray *authorStrings;
+@property (nonatomic) NSDictionary *accessibility;
 @property (nonatomic) NSArray<TPPOPDSLink *> *authorLinks;
 @property (nonatomic) TPPOPDSLink *seriesLink;
 @property (nonatomic) NSArray<TPPOPDSCategory *> *categories;
@@ -76,6 +77,26 @@
     self.authorStrings = authorStrings;
     self.authorLinks = [authorLinks copy];
     
+    #pragma mark Set the accessibility property
+    {
+      // initialize a dictionary builder helper
+      AccessibilityDictionaryBuilder *dictionaryBuilder =
+          [[AccessibilityDictionaryBuilder alloc] init];
+
+      // dictionary builder extracts the accessibility data from the entry XML
+      // and returns a dictionary that stores all the accessibility fields
+      NSDictionary *accessibilityDictionary =
+          [dictionaryBuilder buildAccessibilityDictionaryFrom:entryXML];
+
+      // set the accessibility dictionary as the class property 'accessibility'
+      // note: accsssibility property could also be an empty dictionary
+      // if no accessibility fields were found
+      TPPLOG_F(@"Setting accessibility property to entry: %@",
+               accessibilityDictionary);
+
+      self.accessibility = accessibilityDictionary;
+    }
+
     TPPXML *const languageXML = [entryXML firstChildWithName:@"language"];
     if(languageXML){
       self.language = languageXML.value;

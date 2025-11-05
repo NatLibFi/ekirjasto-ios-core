@@ -32,6 +32,7 @@ class TPPReaderBookmarksBusinessLogicTests: XCTestCase {
       let fakeBook = TPPBook.init(
         acquisitions: [fakeAcquisition],
         authors: [TPPBookAuthor](),
+        bookAccessibility: nil,
         categoryStrings: [String](),
         distributor: "",
         identifier: bookIdentifier,

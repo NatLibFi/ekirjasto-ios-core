@@ -50,6 +50,7 @@ struct TPPBookMocker {
     let fakeBook = TPPBook(
       acquisitions: [fakeAcquisition],
       authors: [TPPBookAuthor(authorName: "Author \(identifier)", relatedBooksURL: nil)],
+      bookAccessibility: nil,
       categoryStrings: ["Category \(identifier)"],
       distributor: "Distributor \(identifier)",
       identifier: identifier,

@@ -42,9 +42,6 @@
       "%@ by %@" : {
          "string" : "%1$@ by %2$@"
       },
-      "%@ by %@, Pdf" : {
-         "string" : "%1$@ by %2$@, Pdf"
-      },
       "%@ by %@, audiobook" : {
          "string" : "%1$@ by %2$@, audiobook"
       },
@@ -71,9 +68,6 @@
       },
       "%@ version %@ (%@)" : {
          "string" : "%1$@ version %2$@ (%3$@)"
-      },
-      "%@%" : {
-         "string" : "%1$@%2$"
       },
       "%@%%" : {
          "string" : "%@%%"
@@ -107,15 +101,6 @@
       },
       "%d seconds" : {
          "string" : "%d seconds"
-      },
-      "(book.title) is an Adobe PDF, which is not supported." : {
-         "string" : "(book.title) is an Adobe PDF, which is not supported."
-      },
-      "(dateType.rawValue)_suffix_long" : {
-         "string" : "(dateType.rawValue)_suffix_long"
-      },
-      "(dateType.rawValue)_suffix_short" : {
-         "string" : "(dateType.rawValue)_suffix_short"
       },
       "0.75×" : {
          "string" : "0.75×"
@@ -177,9 +162,6 @@
       "ABCabc" : {
          "string" : "ABCabc"
       },
-      "AVAILABLE FOR CHECKOUT" : {
-         "string" : "AVAILABLE FOR CHECKOUT"
-      },
       "Aa" : {
          "string" : "Aa"
       },
@@ -195,17 +177,20 @@
       "Access mode" : {
          "string" : "Access mode"
       },
+      "Accessibility" : {
+         "string" : "Accessibility"
+      },
       "Accessibility Statement" : {
          "string" : "Accessibility Statement"
       },
       "Accessibility features" : {
          "string" : "Accessibility features"
       },
+      "Accessibility of the book %@" : {
+         "string" : "Accessibility of the book %@"
+      },
       "Accessibility summary" : {
          "string" : "Accessibility summary"
-      },
-      "AccessibilitySwitchLibrary" : {
-         "string" : "AccessibilitySwitchLibrary"
       },
       "Account" : {
          "string" : "Account"
@@ -252,9 +237,6 @@
       "Announcement" : {
          "string" : "Announcement"
       },
-      "Are you sure you want ot remove \"%@\" from your reservations? You will no longer be in line for this book." : {
-         "string" : "Are you sure you want ot remove \"%@\" from your reservations? You will no longer be in line for this book."
-      },
       "Are you sure you want to delete \"%@\"?" : {
          "string" : "Are you sure you want to delete \"%@\"?"
       },
@@ -279,9 +261,6 @@
       "Author" : {
          "string" : "Author"
       },
-      "Available for checkout in less than %@." : {
-         "string" : "Available for checkout in less than %@."
-      },
       "Back" : {
          "string" : "Back"
       },
@@ -300,9 +279,6 @@
       "Book format" : {
          "string" : "Book format"
       },
-      "Book format:" : {
-         "string" : "Book format:"
-      },
       "Book removed from Favorites" : {
          "string" : "Book removed from Favorites"
       },
@@ -311,9 +287,6 @@
       },
       "Bookmarks" : {
          "string" : "Bookmarks"
-      },
-      "Borrow Failed" : {
-         "string" : "Borrow Failed"
       },
       "Borrow failed" : {
          "string" : "Borrow failed"
@@ -371,6 +344,9 @@
       },
       "Close" : {
          "string" : "Close"
+      },
+      "Conformance" : {
+         "string" : "Conformance"
       },
       "Connection Failed" : {
          "string" : "Connection Failed"
@@ -534,9 +510,6 @@
       "Finnish" : {
          "string" : "Finnish"
       },
-      "Font size" : {
-         "string" : "Font size"
-      },
       "Forgot your password?" : {
          "string" : "Forgot your password?"
       },
@@ -620,9 +593,6 @@
       },
       "Keep" : {
          "string" : "Keep"
-      },
-      "Kirjaudu palveluun" : {
-         "string" : "Kirjaudu palveluun"
       },
       "Language" : {
          "string" : "Language"
@@ -825,6 +795,9 @@
       "Read more" : {
          "string" : "Read more"
       },
+      "Read more about accessibility" : {
+         "string" : "Read more about accessibility"
+      },
       "Reader settings" : {
          "string" : "Reader settings"
       },
@@ -836,9 +809,6 @@
       },
       "Reject" : {
          "string" : "Reject"
-      },
-      "Rekisteröidy palveluun" : {
-         "string" : "Rekisteröidy palveluun"
       },
       "Reload" : {
          "string" : "Reload"
@@ -866,9 +836,6 @@
       },
       "Requesting" : {
          "string" : "Requesting"
-      },
-      "Reservations" : {
-         "string" : "Reservations"
       },
       "Reserve" : {
          "string" : "Reserve"
@@ -918,9 +885,6 @@
       "Search My Books" : {
          "string" : "Search My Books"
       },
-      "Search Reservations" : {
-         "string" : "Search Reservations"
-      },
       "Select" : {
          "string" : "Select"
       },
@@ -932,9 +896,6 @@
       },
       "Select a dependent" : {
          "string" : "Select a dependent"
-      },
-      "Select font size" : {
-         "string" : "Select font size"
       },
       "Select language" : {
          "string" : "Select language"
@@ -1047,6 +1008,12 @@
       "Table of contents and bookmarks" : {
          "string" : "Table of contents and bookmarks"
       },
+      "Tap to close the accessibility view" : {
+         "string" : "Tap to close the accessibility view"
+      },
+      "Tap to learn more about accessibility features." : {
+         "string" : "Tap to learn more about accessibility features."
+      },
       "Tap to view more books in this category" : {
          "string" : "Tap to view more books in this category"
       },
@@ -1061,12 +1028,6 @@
       },
       "The DRM Library is taking longer than expected. Please wait and try again later.\n\nIf the problem persists, try to sign out and back in again from the Library Settings menu." : {
          "string" : "The DRM Library is taking longer than expected. Please wait and try again later.\n\nIf the problem persists, try to sign out and back in again from the Library Settings menu."
-      },
-      "The Palace App requires a one-time location check in order to verify your library service area. Once you choose \"Create Card\", please select \"Allow Once\" in the popup so we can verify this information." : {
-         "string" : "The Palace App requires a one-time location check in order to verify your library service area. Once you choose \"Create Card\", please select \"Allow Once\" in the popup so we can verify this information."
-      },
-      "The Palace App requires a one-time location check in order to verify your library service area. You have disabled location services for this app. To enable, please select the 'Open Settings' button below then continue with card creation." : {
-         "string" : "The Palace App requires a one-time location check in order to verify your library service area. You have disabled location services for this app. To enable, please select the 'Open Settings' button below then continue with card creation."
       },
       "The audiobook you are trying to open appears to be corrupted. Try downloading it again." : {
          "string" : "The audiobook you are trying to open appears to be corrupted. Try downloading it again."
@@ -1089,12 +1050,6 @@
       "The download could not be completed.\nScroll down to 'View Issues' to see details." : {
          "string" : "The download could not be completed.\nScroll down to 'View Issues' to see details."
       },
-      "The download for %@ could not be completed." : {
-         "string" : "The download for %@ could not be completed."
-      },
-      "The download for book \"%@\" could not be completed." : {
-         "string" : "The download for book \"%@\" could not be completed."
-      },
       "The download for book %@ could not be completed." : {
          "string" : "The download for book %@ could not be completed."
       },
@@ -1112,9 +1067,6 @@
       },
       "The title you reserved %@ is available." : {
          "string" : "The title you reserved %@ is available."
-      },
-      "The title you reserved, (book.title), is available." : {
-         "string" : "The title you reserved, (book.title), is available."
       },
       "There are no bookmarks for this book." : {
          "string" : "There are no bookmarks for this book."
@@ -1134,11 +1086,17 @@
       "This URL cannot be found. Please close the app entirely and reload it. If the problem persists, please contact your library's Help Desk." : {
          "string" : "This URL cannot be found. Please close the app entirely and reload it. If the problem persists, please contact your library's Help Desk."
       },
+      "This book does not have any accessibility information available." : {
+         "string" : "This book does not have any accessibility information available."
+      },
       "This book is available to borrow." : {
          "string" : "This book is available to borrow."
       },
       "This reservation will be automatically cancelled in %@." : {
          "string" : "This reservation will be automatically cancelled in %@."
+      },
+      "This section provides information about accessibility features." : {
+         "string" : "This section provides information about accessibility features."
       },
       "Three quarters of normal speed. Slower." : {
          "string" : "Three quarters of normal speed. Slower."
@@ -1197,9 +1155,6 @@
       "User denied location access. Go to system settings to enable location access for E-kirjasto." : {
          "string" : "User denied location access. Go to system settings to enable location access for E-kirjasto."
       },
-      "User denied location access. Go to system settings to enable location access for the Palace App." : {
-         "string" : "User denied location access. Go to system settings to enable location access for the Palace App."
-      },
       "User instructions" : {
          "string" : "User instructions"
       },
@@ -1224,11 +1179,11 @@
       "Visit the Catalog to add books to your Favorites." : {
          "string" : "Visit the Catalog to add books to your Favorites."
       },
-      "WAITING FOR AVAILABILITY" : {
-         "string" : "WAITING FOR AVAILABILITY"
-      },
       "Wait" : {
          "string" : "Wait"
+      },
+      "Ways of reading" : {
+         "string" : "Ways of reading"
       },
       "We can’t get your library right now. Please close and reopen the app to try again." : {
          "string" : "We can’t get your library right now. Please close and reopen the app to try again."
@@ -1251,17 +1206,11 @@
       "When you reserve a book from the catalog, it will show up here.\n Look here from time to time to see if your book is available to download.\n Number of reservations is limited to 5." : {
          "string" : "When you reserve a book from the catalog, it will show up here.\n Look here from time to time to see if your book is available to download.\n Number of reservations is limited to 5."
       },
-      "When you reserve a book from the catalog, it will show up here. Look here from time to time to see if your book is available to download." : {
-         "string" : "When you reserve a book from the catalog, it will show up here. Look here from time to time to see if your book is available to download."
-      },
       "White on black text" : {
          "string" : "White on black text"
       },
       "Would you like to return it?" : {
          "string" : "Would you like to return it?"
-      },
-      "You are %ld in line for %ld copies." : {
-         "string" : "You are %1$ld in line for %2$ld copies."
       },
       "You are %ld in line." : {
          "string" : "You are %ld in line."
@@ -1577,7 +1526,13 @@
       "Accept" : {
          "string" : "Hyväksy"
       },
+      "Accesiblity item value: %@" : {
+         "string" : ""
+      },
       "Access mode" : {
+         "string" : "Saavutettavuus"
+      },
+      "Accessibility" : {
          "string" : "Saavutettavuus"
       },
       "Accessibility Statement" : {
@@ -1586,11 +1541,23 @@
       "Accessibility features" : {
          "string" : "Saavutettavuusominaisuudet"
       },
+      "Accessibility of the book %@" : {
+         "string" : "Kirjan %@ saavutettavuus"
+      },
       "Accessibility summary" : {
          "string" : "Saavutettavuusyhteenveto"
       },
       "AccessibilitySwitchLibrary" : {
          "string" : "AccessibilitySwitchLibrary"
+      },
+      "Accessiblity" : {
+         "string" : "Savutettavuus"
+      },
+      "Accessiblity item: %@" : {
+         "string" : ""
+      },
+      "Accessiblity items" : {
+         "string" : ""
       },
       "Account" : {
          "string" : "Tili"
@@ -1756,6 +1723,9 @@
       },
       "Close" : {
          "string" : "Sulje"
+      },
+      "Conformance" : {
+         "string" : "Saavutettavuusstandardien noudattaminen"
       },
       "Connection Failed" : {
          "string" : "Yhteyden muodostaminen epäonnistui"
@@ -2210,6 +2180,9 @@
       "Read more" : {
          "string" : "Lue lisää"
       },
+      "Read more about accessibility" : {
+         "string" : "Lue lisää saavutettavuudesta"
+      },
       "Reader settings" : {
          "string" : "Lukijan asetukset"
       },
@@ -2272,6 +2245,9 @@
       },
       "Return failed" : {
          "string" : "Palautus epäonnistui"
+      },
+      "Return to book by tapping here." : {
+         "string" : ""
       },
       "Returns %@" : {
          "string" : "Palauttaa kohteen %@"
@@ -2432,6 +2408,12 @@
       "Table of contents and bookmarks" : {
          "string" : "Sisällysluettelo ja kirjanmerkit"
       },
+      "Tap to close the accessibility view" : {
+         "string" : "Sulje saavutettavuusnäkymä napauttamalla."
+      },
+      "Tap to learn more about accessibility features." : {
+         "string" : "Napauta saadaksesi lisätietoja saavutettavuudesta."
+      },
       "Tap to view more books in this category" : {
          "string" : "Napauta nähdäksesi lisää kirjoja tässä kategoriassa."
       },
@@ -2519,11 +2501,20 @@
       "This URL cannot be found. Please close the app entirely and reload it. If the problem persists, please contact your library's Help Desk." : {
          "string" : "Tätä URL-osoitetta ei löydy. Sulje sovellus kokonaan ja lataa se uudelleen. Jos ongelma jatkuu, ota yhteyttä kirjastosi tukipalveluun."
       },
+      "This book contains accessibility information about %@" : {
+         "string" : ""
+      },
+      "This book does not have any accessibility information available." : {
+         "string" : "Tällä kirjalla ei ole vielä saavuttavuustietoja."
+      },
       "This book is available to borrow." : {
          "string" : "Tämän kirjan voi lainata."
       },
       "This reservation will be automatically cancelled in %@." : {
          "string" : "Tämä varaus peruutetaan automaattisesti seuraavan ajan kuluttua: %@."
+      },
+      "This section provides information about accessibility features." : {
+         "string" : "Tässä osiossa on tietoa saavutettavuudesta."
       },
       "Three quarters of normal speed. Slower." : {
          "string" : "Kolme neljäsosaa normaalista nopeudesta. Hitaampi."
@@ -2614,6 +2605,9 @@
       },
       "Wait" : {
          "string" : "Odota"
+      },
+      "Ways of reading" : {
+         "string" : "Lukemisen keinot"
       },
       "We can’t get your library right now. Please close and reopen the app to try again." : {
          "string" : "Emme pääse kirjastoosi tällä hetkellä. Yritä uudelleen sulkemalla sovellus ja avaamalla se uudelleen."
@@ -2812,9 +2806,6 @@
       "%@ by %@" : {
          "string" : "%1$@ av %2$@"
       },
-      "%@ by %@, Pdf" : {
-         "string" : "%1$@ av %2$@, pdf"
-      },
       "%@ by %@, audiobook" : {
          "string" : "%1$@ av %2$@, ljudbok"
       },
@@ -2841,9 +2832,6 @@
       },
       "%@ version %@ (%@)" : {
          "string" : "%1$@ version %2$@ (%3$@)"
-      },
-      "%@%" : {
-         "string" : "%1$@%2$"
       },
       "%@%%" : {
          "string" : "%@%%"
@@ -2877,15 +2865,6 @@
       },
       "%d seconds" : {
          "string" : "%d sekunder"
-      },
-      "(book.title) is an Adobe PDF, which is not supported." : {
-         "string" : "(book.title) är en Adobe PDF och stöds således inte."
-      },
-      "(dateType.rawValue)_suffix_long" : {
-         "string" : "(dateType.rawValue)_suffix_long"
-      },
-      "(dateType.rawValue)_suffix_short" : {
-         "string" : "(dateType.rawValue)_suffix_short"
       },
       "0.75×" : {
          "string" : "0.75×"
@@ -2947,9 +2926,6 @@
       "ABCabc" : {
          "string" : "ABCabc"
       },
-      "AVAILABLE FOR CHECKOUT" : {
-         "string" : "KAN LÅNAS"
-      },
       "Aa" : {
          "string" : "Aa"
       },
@@ -2965,17 +2941,20 @@
       "Access mode" : {
          "string" : "Tillgänglighet"
       },
+      "Accessibility" : {
+         "string" : "Tillgänglighet"
+      },
       "Accessibility Statement" : {
          "string" : "Tillgänglighetsutlåtande"
       },
       "Accessibility features" : {
          "string" : "Tillgänglighetsfunktioner"
       },
+      "Accessibility of the book %@" : {
+         "string" : "Tillgänglighet för boken %@"
+      },
       "Accessibility summary" : {
          "string" : "Tillgänglighetssammanfattning"
-      },
-      "AccessibilitySwitchLibrary" : {
-         "string" : "AccessibilitySwitchLibrary"
       },
       "Account" : {
          "string" : "Konto"
@@ -3022,9 +3001,6 @@
       "Announcement" : {
          "string" : "Tillkännagivande"
       },
-      "Are you sure you want ot remove \"%@\" from your reservations? You will no longer be in line for this book." : {
-         "string" : "Är du säker att du vill ta bort \"%@\" från dina reservationer? Du kommer inte längre att stå i kö till denna bok."
-      },
       "Are you sure you want to delete \"%@\"?" : {
          "string" : "Är du säker att du vill radera \"%@\"?"
       },
@@ -3049,9 +3025,6 @@
       "Author" : {
          "string" : "Författare"
       },
-      "Available for checkout in less than %@." : {
-         "string" : "Kan lånas om mindre än %@."
-      },
       "Back" : {
          "string" : "Tillbaka"
       },
@@ -3070,9 +3043,6 @@
       "Book format" : {
          "string" : "Bokformat"
       },
-      "Book format:" : {
-         "string" : "Bokformat:"
-      },
       "Book removed from Favorites" : {
          "string" : "Boken borttagen från Favoriter"
       },
@@ -3082,11 +3052,8 @@
       "Bookmarks" : {
          "string" : "Bokmärken"
       },
-      "Borrow Failed" : {
-         "string" : "Det gick inte att låna"
-      },
       "Borrow failed" : {
-         "string" : "Det gick inte att låna"
+         "string" : "Utlåningen misslyckades"
       },
       "Borrowing %@ could not be completed." : {
          "string" : "Det gick inte att låna %@."
@@ -3141,6 +3108,9 @@
       },
       "Close" : {
          "string" : "Stäng"
+      },
+      "Conformance" : {
+         "string" : "Tillgänglighetskrav"
       },
       "Connection Failed" : {
          "string" : "Anslutning misslyckades"
@@ -3304,9 +3274,6 @@
       "Finnish" : {
          "string" : "finska"
       },
-      "Font size" : {
-         "string" : "Teckenstorlek"
-      },
       "Forgot your password?" : {
          "string" : "Glömt ditt lösenord?"
       },
@@ -3390,9 +3357,6 @@
       },
       "Keep" : {
          "string" : "Behåll"
-      },
-      "Kirjaudu palveluun" : {
-         "string" : "Logga in i tjänsten"
       },
       "Language" : {
          "string" : "språk"
@@ -3494,7 +3458,7 @@
          "string" : "Öppna inställningar"
       },
       "Open app's preferences in device system settings" : {
-         "string" : "Öppna appinställningarna i enhetsinställningarna"
+         "string" : "Öppna appinställningarna i enhetens inställningar"
       },
       "Open dyslexic font" : {
          "string" : "OpenDyslexic-typsnitt"
@@ -3595,6 +3559,9 @@
       "Read more" : {
          "string" : "Läs mer"
       },
+      "Read more about accessibility" : {
+         "string" : "Läs mer om tillgänglighet."
+      },
       "Reader settings" : {
          "string" : "Läsarinställningar"
       },
@@ -3606,9 +3573,6 @@
       },
       "Reject" : {
          "string" : "Avvisa"
-      },
-      "Rekisteröidy palveluun" : {
-         "string" : "Registrera dig i tjänsten"
       },
       "Reload" : {
          "string" : "Ladda på nytt"
@@ -3636,9 +3600,6 @@
       },
       "Requesting" : {
          "string" : "Begär"
-      },
-      "Reservations" : {
-         "string" : "Reservationer"
       },
       "Reserve" : {
          "string" : "Reservera"
@@ -3688,9 +3649,6 @@
       "Search My Books" : {
          "string" : "Sök i Mina lån"
       },
-      "Search Reservations" : {
-         "string" : "Sök i reservationer"
-      },
       "Select" : {
          "string" : "Välj"
       },
@@ -3702,9 +3660,6 @@
       },
       "Select a dependent" : {
          "string" : "Välj ett minderårigt barn"
-      },
-      "Select font size" : {
-         "string" : "Välj teckenstorlek"
       },
       "Select language" : {
          "string" : "Välj språk"
@@ -3817,6 +3772,12 @@
       "Table of contents and bookmarks" : {
          "string" : "Innehållsförteckning och bokmärken"
       },
+      "Tap to close the accessibility view" : {
+         "string" : "Tryck för att stänga tillgänglighetsvyn."
+      },
+      "Tap to learn more about accessibility features." : {
+         "string" : "Tryck för att läsa mer om tillgänglighet."
+      },
       "Tap to view more books in this category" : {
          "string" : "Klicka för att se fler böcker i denna kategori"
       },
@@ -3831,12 +3792,6 @@
       },
       "The DRM Library is taking longer than expected. Please wait and try again later.\n\nIf the problem persists, try to sign out and back in again from the Library Settings menu." : {
          "string" : "DRM-biblioteket tar längre tid än väntat. Vänligen vänta och försök på nytt senare.\n\nOm problemet fortsätter försök logga ut och sedan in igen via menyn för biblioteksinställningar."
-      },
-      "The Palace App requires a one-time location check in order to verify your library service area. Once you choose \"Create Card\", please select \"Allow Once\" in the popup so we can verify this information." : {
-         "string" : "E-biblioteksappen behöver kontrollera din position en gång för att verifiera ditt område för bibliotekstjänster. Efter att du valt \"Skapa kort\" välj \"Tillåt en gång\" i popup-fönstret så att vi kan verifiera denna information."
-      },
-      "The Palace App requires a one-time location check in order to verify your library service area. You have disabled location services for this app. To enable, please select the 'Open Settings' button below then continue with card creation." : {
-         "string" : "E-biblioteksappen behöver kontrollera din position en gång för att verifiera ditt område för bibliotekstjänster. Du har inaktiverat positionstjänsten för denna app. För att aktivera den välj knappen Öppna inställningar nedan för att fortsätta skapa kort."
       },
       "The audiobook you are trying to open appears to be corrupted. Try downloading it again." : {
          "string" : "Ljudboken som du försöker öppna verkar vara skadad. Försöka ladda ner den på nytt."
@@ -3859,12 +3814,6 @@
       "The download could not be completed.\nScroll down to 'View Issues' to see details." : {
          "string" : "Nedladdningen kunde inte slutföras.\nRulla ner till Visa problem för mer information."
       },
-      "The download for %@ could not be completed." : {
-         "string" : "Nedladdningen av %@ kunde inte slutföras."
-      },
-      "The download for book \"%@\" could not be completed." : {
-         "string" : "Nedladdningen av boken \\\"%@\\\" kunde inte slutföras."
-      },
       "The download for book %@ could not be completed." : {
          "string" : "Nedladdningen av boken %@ kunde inte slutföras."
       },
@@ -3883,9 +3832,6 @@
       "The title you reserved %@ is available." : {
          "string" : "Titeln du reserverat är %@ tillgänglig."
       },
-      "The title you reserved, (book.title), is available." : {
-         "string" : "Titeln du reserverat, (book.title), är tillgänglig."
-      },
       "There are no bookmarks for this book." : {
          "string" : "Det finns inga bokmärken för denna bok."
       },
@@ -3896,19 +3842,25 @@
          "string" : "Det uppstod ett fel när servern anropades.\nKontrollera att du är uppkopplad till internet eller försök på nytt senare."
       },
       "There was a problem opening the book %@. Please try again." : {
-         "string" : "Det uppstod ett fel då boken %@ skulle öppnas. Försök på nytt."
+         "string" : "Det uppstod ett fel då boken %@ skulle öppnas. Vänligen försök på nytt."
       },
       "There was a problem opening the sample of the book %@. Please try again." : {
-         "string" : "Det uppstod ett fel då utdragen för boken %@ skulle öppnas. Försök på nytt."
+         "string" : "Det uppstod ett fel då utdraget av boken %@ skulle öppnas. Vänligen försök på nytt."
       },
       "This URL cannot be found. Please close the app entirely and reload it. If the problem persists, please contact your library's Help Desk." : {
          "string" : "Kunde inte hitta denna URL. Stäng appen helt och starta om den. Om problemet fortsätter, kontakta ditt biblioteks supportavdelning."
+      },
+      "This book does not have any accessibility information available." : {
+         "string" : "Den här boken har ännu ingen tillgänglighetsinformation."
       },
       "This book is available to borrow." : {
          "string" : "Denna bok är tillgänglig för utlåning."
       },
       "This reservation will be automatically cancelled in %@." : {
          "string" : "Denna reservation återkallas automatiskt om %@."
+      },
+      "This section provides information about accessibility features." : {
+         "string" : "Det här avsnittet innehåller information om tillgänglighet."
       },
       "Three quarters of normal speed. Slower." : {
          "string" : "Tre fjärdedelar av normal hastighet. Långsammare."
@@ -3944,7 +3896,7 @@
          "string" : "Boken kunde inte öppnas"
       },
       "Unable to open sample" : {
-         "string" : "Utdragen kunde inte öppnas."
+         "string" : "Utdraget kunde inte öppnas."
       },
       "Under 13" : {
          "string" : "Under 13"
@@ -3966,9 +3918,6 @@
       },
       "User denied location access. Go to system settings to enable location access for E-kirjasto." : {
          "string" : "Positionsåtkomst nekad av användaren. Gå till systeminställningarna för att ge E-biblioteket positionsåtkomst."
-      },
-      "User denied location access. Go to system settings to enable location access for the Palace App." : {
-         "string" : "Positionsåtkomst nekad av användaren. Gå till systeminställningarna för att ge E-biblioteksappen positionsåtkomst."
       },
       "User instructions" : {
          "string" : "Anvisnigar för användare"
@@ -3994,11 +3943,11 @@
       "Visit the Catalog to add books to your Favorites." : {
          "string" : "Gå till Katalogen för att lägga till böcker till dina Favoriter."
       },
-      "WAITING FOR AVAILABILITY" : {
-         "string" : "VÄNTAR PÅ TILLGÄNGLIGHET"
-      },
       "Wait" : {
          "string" : "Vänta"
+      },
+      "Ways of reading" : {
+         "string" : "Olika sätt att läsa"
       },
       "We can’t get your library right now. Please close and reopen the app to try again." : {
          "string" : "Vi kan inte hämta ditt bibliotek just nu. Stäng och starta om appen för att försöka på nytt."
@@ -4021,17 +3970,11 @@
       "When you reserve a book from the catalog, it will show up here.\n Look here from time to time to see if your book is available to download.\n Number of reservations is limited to 5." : {
          "string" : "Då du reserverar en bok från katalogen, kommer den att synas här.\nTitta här då och då för att se om din bok är tillgänglig att ladda ner.\nAntalet reserveringar är begränsat till 5."
       },
-      "When you reserve a book from the catalog, it will show up here. Look here from time to time to see if your book is available to download." : {
-         "string" : "När du reserverar en bok från katalogen kommer den att visas här. Titta in här då och då för att se om din bok kan laddas ner."
-      },
       "White on black text" : {
          "string" : "Vit text på svart bakgrund"
       },
       "Would you like to return it?" : {
          "string" : "Vill du lämna den tillbaka?"
-      },
-      "You are %ld in line for %ld copies." : {
-         "string" : "Du är på plats %1$ld i kö för %2$ld kopior."
       },
       "You are %ld in line." : {
          "string" : "Du är på plats %ld i kön."

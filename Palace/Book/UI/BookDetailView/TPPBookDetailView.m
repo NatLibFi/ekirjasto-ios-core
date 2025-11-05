@@ -48,8 +48,10 @@
 @property (nonatomic) UITextView *summaryTextView;
 @property (nonatomic) NSLayoutConstraint *textHeightConstraint;
 @property (nonatomic) UIButton *readMoreLabel;
+@property (nonatomic) UIButton *readMoreAboutAccessibilityLabel;
 
 @property (nonatomic) EkirjastoRoundedLabel *infoSectionLabel;
+@property (nonatomic) EkirjastoRoundedLabel *accessibilitySectionLabel;
 @property (nonatomic) UILabel *publishedLabelKey;
 @property (nonatomic) UILabel *publisherLabelKey;
 @property (nonatomic) UILabel *categoriesLabelKey;
@@ -61,9 +63,6 @@
 @property (nonatomic) UILabel *isbnLabelKey;
 @property (nonatomic) UILabel *translatorsLabelKey;
 @property (nonatomic) UILabel *illustratorsLabelKey;
-@property (nonatomic) UILabel *accessibilityFeaturesLabelKey;
-@property (nonatomic) UILabel *accessibilitySummaryLabelKey;
-@property (nonatomic) UILabel *accessModeLabelKey;
 @property (nonatomic) UILabel *publishedLabelValue;
 @property (nonatomic) UILabel *publisherLabelValue;
 @property (nonatomic) UILabel *categoriesLabelValue;
@@ -74,9 +73,6 @@
 @property (nonatomic) UILabel *bookLanguageLabelValue;
 @property (nonatomic) UILabel *isbnLabelValue;
 @property (nonatomic) UILabel *translatorsLabelValue;
-@property (nonatomic) UILabel *accessibilityFeaturesLabelValue;
-@property (nonatomic) UILabel *accessibilitySummaryLabelValue;
-@property (nonatomic) UILabel *accessModeLabelValue;
 @property (nonatomic) UILabel *illustratorsLabelValue;
 
 @property (nonatomic) TPPBookDetailTableView *footerTableView;
@@ -163,9 +159,6 @@ static NSString *DetailHTMLTemplate = nil;
   [self.containerView addSubview:self.translatorsLabelKey];
   [self.containerView addSubview:self.narratorsLabelKey];
   [self.containerView addSubview:self.illustratorsLabelKey];
-  [self.containerView addSubview:self.accessModeLabelKey];
-  [self.containerView addSubview:self.accessibilityFeaturesLabelKey];
-  [self.containerView addSubview:self.accessibilitySummaryLabelKey];
 
   if (self.book.isAudiobook) {
     [self.containerView addSubview:self.bookDurationLabelKey];
@@ -181,14 +174,13 @@ static NSString *DetailHTMLTemplate = nil;
   [self.containerView addSubview:self.translatorsLabelValue];
   [self.containerView addSubview:self.narratorsLabelValue];
   [self.containerView addSubview:self.illustratorsLabelValue];
-  [self.containerView addSubview:self.accessModeLabelValue];
-  [self.containerView addSubview:self.accessibilityFeaturesLabelValue];
-  [self.containerView addSubview:self.accessibilitySummaryLabelValue];
   
   if (self.book.isAudiobook) {
     [self.containerView addSubview:self.bookDurationLabelValue];
   }
   
+  [self.containerView addSubview:self.accessibilitySectionLabel];
+  [self.containerView addSubview:self.readMoreAboutAccessibilityLabel];
   [self.containerView addSubview:self.footerTableView];
   [self.containerView addSubview:self.bottomFootnoteSeparator];
   
@@ -221,6 +213,8 @@ static NSString *DetailHTMLTemplate = nil;
   self.readMoreLabel.titleLabel.font = [UIFont palaceFontOfSize:18];
   self.summarySectionLabel.font = [UIFont palaceFontOfSize:18]; //Edited by Ellibs
   self.infoSectionLabel.font = [UIFont palaceFontOfSize:16]; //Edited by Ellibs
+  self.accessibilitySectionLabel.font = [UIFont palaceFontOfSize:16]; //Edited by Ellibs
+  self.readMoreAboutAccessibilityLabel.titleLabel.font = [UIFont palaceFontOfSize:14];
   [self.footerTableView reloadData];
 }
 
@@ -252,6 +246,12 @@ static NSString *DetailHTMLTemplate = nil;
   self.infoSectionLabel = [[EkirjastoRoundedLabel alloc] init];
   self.infoSectionLabel.text = NSLocalizedString(@"Information", nil);
   
+  self.accessibilitySectionLabel = [[EkirjastoRoundedLabel alloc] init];
+  self.accessibilitySectionLabel.text = NSLocalizedString(@"Accessibility", nil);
+  self.accessibilitySectionLabel.accessibilityLabel = NSLocalizedString(@"Accessibility", nil);
+  self.accessibilitySectionLabel.accessibilityHint = NSLocalizedString(@"This section provides information about accessibility features.", nil);
+  self.accessibilitySectionLabel.accessibilityTraits = UIAccessibilityTraitHeader;
+
   self.summaryTextView = [[UITextView alloc] init];
   self.summaryTextView.backgroundColor = [UIColor clearColor];
   self.summaryTextView.scrollEnabled = NO;
@@ -304,6 +304,22 @@ static NSString *DetailHTMLTemplate = nil;
   [self.readMoreLabel setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
   [self.readMoreLabel setTitle:NSLocalizedString(@"Read more", nil) forState:UIControlStateNormal]; //Edited by Ellibs
   [self.readMoreLabel setTitleColor:[TPPConfiguration mainColor] forState:UIControlStateNormal];
+
+  self.readMoreAboutAccessibilityLabel = [[UIButton alloc] init];
+  self.readMoreAboutAccessibilityLabel.titleLabel.textAlignment = NSTextAlignmentRight;
+  self.readMoreAboutAccessibilityLabel.semanticContentAttribute = UISemanticContentAttributeForceRightToLeft;
+  [self.readMoreAboutAccessibilityLabel setImage:readmoreArrow forState:UIControlStateNormal];
+  self.readMoreAboutAccessibilityLabel.tintColor = [TPPConfiguration iconColor];
+  self.readMoreAboutAccessibilityLabel.imageEdgeInsets = UIEdgeInsetsMake(1, 10, -1, 0);
+  self.readMoreAboutAccessibilityLabel.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10);
+  [self.readMoreAboutAccessibilityLabel setTitleColor:[TPPConfiguration compatiblePrimaryColor] forState:UIControlStateNormal];
+  [self.readMoreAboutAccessibilityLabel addTarget:self action:@selector(readMoreAboutAccessibilityTapped:) forControlEvents:UIControlEventTouchUpInside];
+  [self.readMoreAboutAccessibilityLabel setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+  [self.readMoreAboutAccessibilityLabel setTitle:NSLocalizedString(@"Read more about accessibility", nil) forState:UIControlStateNormal];
+  [self.readMoreAboutAccessibilityLabel setTitleColor:[TPPConfiguration mainColor] forState:UIControlStateNormal];
+  self.readMoreAboutAccessibilityLabel.accessibilityLabel = NSLocalizedString(@"Read more about accessibility", nil);
+  self.readMoreAboutAccessibilityLabel.accessibilityHint = NSLocalizedString(@"Tap to learn more about accessibility features.", nil);
+  self.readMoreAboutAccessibilityLabel.accessibilityTraits = UIAccessibilityTraitButton;
 }
 
 - (void)createHeaderLabels
@@ -410,11 +426,7 @@ static NSString *DetailHTMLTemplate = nil;
   NSString *const narratorsKeyString =
     self.book.narrators ? [NSString stringWithFormat:@"%@: ", NSLocalizedString(@"Narrators", nil)] : nil;
   NSString *const translatorsKeyString = self.book.translators ? [NSString stringWithFormat:@"%@: ", NSLocalizedString(@"Translators", nil)] : nil;
-  
-  NSString *const accessModeKeyString = [NSString stringWithFormat:@"%@: ",NSLocalizedString(@"Access mode", nil)];
-  NSString *const accessibilityFeaturesKeyString = [NSString stringWithFormat:@"%@: ",NSLocalizedString(@"Accessibility features", nil)];
-  NSString *const accessibilitySummaryKeyString = [NSString stringWithFormat:@"%@: ",NSLocalizedString(@"Accessibility summary", nil)];
-  
+
   NSString *const illustratorsKeyString = self.book.illustrators ? [NSString stringWithFormat:@"%@: ", NSLocalizedString(@"Illustrators", nil)] : nil;
   NSString *const bookDurationKeyString = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"Duration", nil)];
 
@@ -441,10 +453,6 @@ static NSString *DetailHTMLTemplate = nil;
   NSString *const illustratorsValueString = self.book.illustrators;
   NSString *const translatorsValueString = self.book.translators;
   
-  NSString *const accessModeValueString = [NSString stringWithFormat:@"%@",NSLocalizedString(@"Not yet available", nil)];
-  NSString *const accessibilityFeaturesValueString = [NSString stringWithFormat:@"%@",NSLocalizedString(@"Not yet available", nil)];
-  NSString *const accessibilitySummaryValueString = [NSString stringWithFormat:@"%@",NSLocalizedString(@"Not yet available", nil)];
-  
   NSString *const bookDurationValueString = [self displayStringForDuration: self.book.bookDuration];
   
   if (!categoriesValueString && !publishedValueString && !publisherValueString && !self.book.distributor) {
@@ -463,10 +471,6 @@ static NSString *DetailHTMLTemplate = nil;
   self.illustratorsLabelKey = [self createFooterLabelWithString:illustratorsKeyString alignment:NSTextAlignmentRight];
   self.translatorsLabelKey = [self createFooterLabelWithString:translatorsKeyString alignment:NSTextAlignmentRight];
   
-  self.accessModeLabelKey = [self createFooterLabelWithString:accessModeKeyString alignment:NSTextAlignmentRight];
-  self.accessibilityFeaturesLabelKey = [self createFooterLabelWithString:accessibilityFeaturesKeyString alignment:NSTextAlignmentRight];
-  self.accessibilitySummaryLabelKey = [self createFooterLabelWithString:accessibilitySummaryKeyString alignment:NSTextAlignmentRight];
-  
   self.bookDurationLabelKey = [self createFooterLabelWithString:bookDurationKeyString alignment:NSTextAlignmentRight];
 
   self.bookLanguageLabelValue = [self createFooterLabelWithString:bookLanguageValueString alignment:NSTextAlignmentLeft];
@@ -481,9 +485,6 @@ static NSString *DetailHTMLTemplate = nil;
   self.narratorsLabelValue = [self createFooterLabelWithString:narratorsValueString alignment:NSTextAlignmentLeft];
   self.translatorsLabelValue = [self createFooterLabelWithString:translatorsValueString alignment:NSTextAlignmentLeft];
   self.illustratorsLabelValue = [self createFooterLabelWithString:illustratorsValueString alignment:NSTextAlignmentLeft];
-  self.accessModeLabelValue = [self createFooterLabelWithString:accessModeValueString alignment:NSTextAlignmentRight];
-  self.accessibilityFeaturesLabelValue = [self createFooterLabelWithString:accessibilityFeaturesValueString alignment:NSTextAlignmentRight];
-  self.accessibilitySummaryLabelValue = [self createFooterLabelWithString:accessibilitySummaryValueString alignment:NSTextAlignmentRight];
   self.bookDurationLabelValue = [self createFooterLabelWithString:bookDurationValueString alignment:NSTextAlignmentLeft];
   self.narratorsLabelValue.numberOfLines = 0;
 
@@ -652,6 +653,7 @@ static NSString *DetailHTMLTemplate = nil;
   [self.readMoreLabel autoPinEdge:ALEdgeBottom toEdge:ALEdgeTop ofView:self.topFootnoteSeparater withOffset:-15]; //Edited by Ellibs
 
   [self.infoSectionLabel autoPinEdgeToSuperviewMargin:ALEdgeLeading];
+  [self.infoSectionLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.readMoreLabel];
 
   [self.publishedLabelValue autoPinEdgeToSuperviewMargin:ALEdgeTrailing relation:NSLayoutRelationGreaterThanOrEqual];
   [self.publishedLabelValue autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.bookLanguageLabelValue];
@@ -695,21 +697,9 @@ static NSString *DetailHTMLTemplate = nil;
   [self.illustratorsLabelValue autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.narratorsLabelValue];
   [self.illustratorsLabelValue autoPinEdge:ALEdgeLeading toEdge:ALEdgeTrailing ofView:self.illustratorsLabelKey withOffset:MainTextPaddingLeft];
   
-  [self.accessModeLabelValue autoPinEdgeToSuperviewMargin:ALEdgeTrailing relation:NSLayoutRelationGreaterThanOrEqual];
-  [self.accessModeLabelValue autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.illustratorsLabelValue];
-  [self.accessModeLabelValue autoPinEdge:ALEdgeLeading toEdge:ALEdgeTrailing ofView:self.accessModeLabelKey withOffset:MainTextPaddingLeft];
-  
-  [self.accessibilityFeaturesLabelValue autoPinEdgeToSuperviewMargin:ALEdgeTrailing relation:NSLayoutRelationGreaterThanOrEqual];
-  [self.accessibilityFeaturesLabelValue autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.accessModeLabelValue];
-  [self.accessibilityFeaturesLabelValue autoPinEdge:ALEdgeLeading toEdge:ALEdgeTrailing ofView:self.accessibilityFeaturesLabelKey withOffset:MainTextPaddingLeft];
-  
-  [self.accessibilitySummaryLabelValue autoPinEdgeToSuperviewMargin:ALEdgeTrailing relation:NSLayoutRelationGreaterThanOrEqual];
-  [self.accessibilitySummaryLabelValue autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.accessibilityFeaturesLabelValue];
-  [self.accessibilitySummaryLabelValue autoPinEdge:ALEdgeLeading toEdge:ALEdgeTrailing ofView:self.accessibilitySummaryLabelKey withOffset:MainTextPaddingLeft];
-
   if (self.book.hasDuration) {
     [self.bookDurationLabelValue autoPinEdgeToSuperviewMargin:ALEdgeTrailing relation:NSLayoutRelationGreaterThanOrEqual];
-    [self.bookDurationLabelValue autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.accessibilitySummaryLabelValue];
+    [self.bookDurationLabelValue autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.illustratorsLabelValue];
     [self.bookDurationLabelValue autoPinEdge:ALEdgeLeading toEdge:ALEdgeTrailing ofView:self.bookDurationLabelKey withOffset:MainTextPaddingLeft];
   }
 
@@ -763,28 +753,22 @@ static NSString *DetailHTMLTemplate = nil;
   [self.illustratorsLabelKey autoPinEdge:ALEdgeTrailing toEdge:ALEdgeTrailing ofView:self.translatorsLabelKey];
   [self.illustratorsLabelKey autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.illustratorsLabelValue];
   [self.illustratorsLabelKey setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
-  
-  [self.accessModeLabelKey autoPinEdgeToSuperviewMargin:ALEdgeLeading];
-  [self.accessModeLabelKey autoPinEdge:ALEdgeTrailing toEdge:ALEdgeTrailing ofView:self.illustratorsLabelKey];
-  [self.accessModeLabelKey autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.accessModeLabelValue];
-  [self.accessModeLabelKey setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
-  
-  [self.accessibilityFeaturesLabelKey autoPinEdgeToSuperviewMargin:ALEdgeLeading];
-  [self.accessibilityFeaturesLabelKey autoPinEdge:ALEdgeTrailing toEdge:ALEdgeTrailing ofView:self.illustratorsLabelKey];
-  [self.accessibilityFeaturesLabelKey autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.accessibilityFeaturesLabelValue];
-  [self.accessibilityFeaturesLabelKey setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
-  
-  [self.accessibilitySummaryLabelKey autoPinEdgeToSuperviewMargin:ALEdgeLeading];
-  [self.accessibilitySummaryLabelKey autoPinEdge:ALEdgeTrailing toEdge:ALEdgeTrailing ofView:self.illustratorsLabelKey];
-  [self.accessibilitySummaryLabelKey autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.accessibilitySummaryLabelValue];
-  [self.accessibilitySummaryLabelKey setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
 
   if (self.book.hasDuration) {
     [self.bookDurationLabelKey autoPinEdgeToSuperviewMargin:ALEdgeLeading];
     [self.bookDurationLabelKey autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.bookDurationLabelValue];
     [self.bookDurationLabelKey autoPinEdge:ALEdgeTrailing toEdge:ALEdgeTrailing ofView:self.illustratorsLabelKey];
     [self.bookDurationLabelKey setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+    [self.accessibilitySectionLabel autoPinEdgeToSuperviewMargin:ALEdgeLeading];
+    [self.accessibilitySectionLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.bookDurationLabelKey withOffset: 15];
+  } else {
+    [self.accessibilitySectionLabel autoPinEdgeToSuperviewMargin:ALEdgeLeading];
+    [self.accessibilitySectionLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.illustratorsLabelKey withOffset: 15];
   }
+
+  [self.readMoreAboutAccessibilityLabel autoPinEdgeToSuperviewMargin:ALEdgeLeading];
+  [self.readMoreAboutAccessibilityLabel autoPinEdgeToSuperviewMargin:ALEdgeTrailing];
+  [self.readMoreAboutAccessibilityLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.accessibilitySectionLabel];
 
   if (self.closeButton) {
     [self.closeButton autoPinEdgeToSuperviewMargin:ALEdgeTrailing];
@@ -804,14 +788,10 @@ static NSString *DetailHTMLTemplate = nil;
   [self.bottomFootnoteSeparator autoPinEdgeToSuperviewEdge:ALEdgeRight];
   [self.bottomFootnoteSeparator autoPinEdgeToSuperviewMargin:ALEdgeLeft];
 
-  if (self.book.hasDuration) {
-    [self.bottomFootnoteSeparator autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.bookDurationLabelKey withOffset:VerticalPadding];
-  } else {
-    [self.bottomFootnoteSeparator autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.accessibilitySummaryLabelValue withOffset:VerticalPadding];
-  }
+  [self.bottomFootnoteSeparator autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.readMoreAboutAccessibilityLabel withOffset:15];
 
   [self.footerTableView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(0, 10, 0, 0) excludingEdge:ALEdgeTop];
-  [self.footerTableView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.accessibilitySummaryLabelValue withOffset:VerticalPadding];
+  [self.footerTableView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.bottomFootnoteSeparator withOffset:VerticalPadding];
 
 }
 
@@ -1054,6 +1034,11 @@ NSString *PlaySampleNotification = @"ToggleSampleNotification";
   self.textHeightConstraint.active = NO;
   [self.readMoreLabel removeFromSuperview];
   [self.topFootnoteSeparater autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.summaryTextView withOffset:VerticalPadding];
+}
+
+- (void)readMoreAboutAccessibilityTapped:(__unused UIButton *)sender
+{
+  [self.detailViewDelegate didSelectReadMoreAboutAccessibilityForBook:self.book sender:sender];
 }
 
 - (void)viewIssuesTapped {

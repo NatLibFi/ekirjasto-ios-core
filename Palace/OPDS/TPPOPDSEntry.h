@@ -10,6 +10,7 @@
 @property (nonatomic, readonly) NSArray<TPPOPDSAcquisition *> *acquisitions;
 @property (nonatomic, readonly) NSString *alternativeHeadline; // nilable
 @property (nonatomic, readonly) NSArray *authorStrings;
+@property (nonatomic, readonly) NSDictionary *accessibility;
 @property (nonatomic, readonly) NSArray<TPPOPDSLink *> *authorLinks;
 @property (nonatomic, readonly) TPPOPDSLink *seriesLink;
 @property (nonatomic, readonly) NSArray<TPPOPDSCategory *> *categories;
