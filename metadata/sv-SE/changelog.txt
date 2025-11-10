@@ -2,3 +2,4 @@ Vi utvecklar appen och åtgärdar buggar kontinuerligt. Kom ihåg att kontroller
 
 I den här versionen: 
 - tillgänglighetsuppdateringar
+- notisuppdateringar och -fixar
