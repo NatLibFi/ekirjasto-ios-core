@@ -81,16 +81,26 @@ class TPPUserAccountAuthentication: ObservableObject {
   }
 
   var authDefinition: AccountDetails.Authentication? {
+
     get {
-      guard let read = _authDefinition.read() else {
-        if let libraryUUID = self.libraryUUID {
-          return AccountsManager.shared.account(libraryUUID)?.details?.auths.first
-        }
-            
-        return AccountsManager.shared.currentAccount?.details?.auths.first
+
+      // try to read authentication from storage
+      // the storage key is "authDefinition"
+      if let savedAuth = _authDefinition.read() {
+        return savedAuth
       }
-      return read
+
+      // if authentication definition was not found,
+      // try to get the default authentication from the library account
+      if let libraryUUID = self.libraryUUID {
+        return AccountsManager.shared.account(libraryUUID)?.details?.defaultAuth
+      }
+
+      // otherwise, use default authentication from the current account
+      return AccountsManager.shared.currentAccount?.details?.defaultAuth
+
     }
+
     set {
       guard let newValue = newValue else { return }
       _authDefinition.write(newValue)
