@@ -147,9 +147,7 @@ class HoldsViewModel: ObservableObject {
   @objc private func bookRegistryDidChange() {
     self.loadData()
     DispatchQueue.main.async {
-      self.userIsLoggedIn =
-        !TPPUserAccount.sharedAccount().needsAuth
-        && TPPUserAccount.sharedAccount().hasCredentials()
+      self.userIsLoggedIn = TPPUserAccount.sharedAccount().isSignedIn()
       self.userHasBooksOnHold = self.books.count > 0
     }
   }
@@ -165,13 +163,12 @@ class HoldsViewModel: ObservableObject {
       loadData()
     }
 
-    if TPPUserAccount.sharedAccount().needsAuth
-      && !TPPUserAccount.sharedAccount().hasCredentials()
-    {
-      TPPAccountSignInViewController.requestCredentials(completion: nil)
-    } else {
+    if TPPUserAccount.sharedAccount().isSignedIn() {
       TPPBookRegistry.shared.sync()
+    } else {
+      TPPAccountSignInViewController.requestCredentials(completion: nil)
     }
+
   }
 
   func refresh() {
