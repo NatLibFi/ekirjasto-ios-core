@@ -499,15 +499,33 @@ class MyBooksSelectionCenter: NSObject {
     bookRegistry.setProcessing(false, for: book.identifier)
   }
 
+  // Check if user needs to login in app
   private func isLoginRequired() -> Bool {
-    let needsAuthentication = userAccount.authDefinition?.needsAuth ?? true
-    let isAuthenticated = userAccount.hasCredentials()
 
-    if !isAuthenticated || needsAuthentication {
-      return true
+    // first make sure that the user account
+    // requires authentication for book actions
+    // note: Ekirjasto user accounts always need authentication
+    guard
+      let accountNeedsAuthentication = userAccount.authDefinition?.needsAuth,
+      accountNeedsAuthentication else {
+
+      // just return false because
+      // there is no need for user to login to use the account
+      return false
     }
 
-    return false
+    let userIsSignedIn = userAccount.isSignedIn()
+
+    // check if user has valid credentials
+    if userIsSignedIn {
+      // just return false
+      // because user is already logged in
+      return false
+    }
+
+    // otherwise return true
+    // because login is required!
+    return true
   }
 
   private func handleUnexpectedBookSelectionError(_ book: TPPBook) {

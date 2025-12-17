@@ -465,23 +465,30 @@ import Foundation
   // Check if user needs to login in app
   private func isLoginRequired() -> Bool {
 
-    // Check if user account requires authentication for book actions
-    // For Ekirjasto true is always expected (also set as default here...)
-    let needsAuthentication = userAccount.authDefinition?.needsAuth ?? true
+    // first make sure that the user account
+    // requires authentication for book actions
+    // note: Ekirjasto user accounts always need authentication
+    guard
+      let accountNeedsAuthentication = userAccount.authDefinition?.needsAuth,
+      accountNeedsAuthentication else {
 
-    // Check if user has valid credentials
-    // for Ekirjasto users, this is true if user has logged in in app
-    let isAuthenticated = userAccount.hasCredentials()
-
-    // User is not logged in AND the account requires it
-    // user needs to login so return true
-    if !isAuthenticated || needsAuthentication {
-      return true
+      // just return false because
+      // there is no need for user to login to use the account
+      return false
     }
 
-    // Otherwise return false,
-    // login is not required
-    return false
+    let userIsSignedIn = userAccount.isSignedIn()
+
+    // check if user has valid credentials
+    if userIsSignedIn {
+      // just return false
+      // because user is already logged in
+      return false
+    }
+
+    // otherwise return true
+    // because login is required!
+    return true
   }
 
   // Create the url request for download
