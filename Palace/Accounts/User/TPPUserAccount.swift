@@ -364,9 +364,17 @@ class TPPUserAccountAuthentication: ObservableObject {
     }
   }
 
-  var needsAuth:Bool {
+  // needsAuth TPPUserAccount property defines
+  // if authentication is required for user account.
+  // The check is based on library account's authentication type.
+  var needsAuth: Bool {
     let authType = authDefinition?.authType ?? .none
-    return authType == .basic || authType == .oauthIntermediary || authType == .saml || authType == .token
+
+    return authType == .ekirjasto
+      || authType == .basic
+      || authType == .oauthIntermediary
+      || authType == .saml
+      || authType == .token
   }
 
   var needsAgeCheck:Bool {

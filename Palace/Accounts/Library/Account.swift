@@ -114,8 +114,50 @@ protocol AccountLogoDelegate: AnyObject {
       }
     }
 
+    // Check if the authentication type is Ekirjasto
+    // this is the main authentication type
+    // for E-kirjasto app
+    var isEkirjasto: Bool {
+      authType == .ekirjasto
+    }
+
+    // Check if the authentication type is basic
+    // This secondary authentication type is used
+    // mostly just for testing purposes
+    var isBasic: Bool {
+      authType == .basic
+    }
+
+    // Check if the authentication type is OAuth with intermediary
+    // not used in E-kirjasto app
+    var isOauth: Bool {
+      authType == .oauthIntermediary
+    }
+
+    // Check if the authentication type is SAML
+    // not used in E-kirjasto app
+    var isSaml: Bool {
+      authType == .saml
+    }
+
+    // Check if the authentication type is token based
+    // not used in E-kirjasto app
+    var isToken: Bool {
+      authType == .token
+    }
+    
+    // Property for AccountDetails nested class Authentication
+    // that defines if authentication is required for library account.
+    // It is always needed in E-kirjasto app (for E-kirjasto library account)
     var needsAuth: Bool {
-      authType == .basic || authType == .oauthIntermediary || authType == .saml || authType == .token
+      return isEkirjasto || isBasic || isOauth || isSaml || isToken
+    }
+    
+    var catalogRequiresAuthentication: Bool {
+      // you need an oauth token in order to access catalogs
+      // if authentication type is
+      // either oauth with intermediary (ex. Clever), or SAML
+      authType == .oauthIntermediary
     }
 
     var needsAgeCheck: Bool {
@@ -124,31 +166,6 @@ protocol AccountLogoDelegate: AnyObject {
 
     func coppaURL(isOfAge: Bool) -> URL? {
       isOfAge ? coppaOverUrl : coppaUnderUrl
-    }
-
-    var isBasic: Bool {
-      authType == .basic
-    }
-
-    var isOauth: Bool {
-      authType == .oauthIntermediary
-    }
-
-    var isSaml: Bool {
-      authType == .saml
-    }
-
-    var isToken: Bool {
-      authType == .token
-    }
-    
-    var isEkirjasto: Bool {
-      authType == .ekirjasto
-    }
-    
-    var catalogRequiresAuthentication: Bool {
-      // you need an oauth token in order to access catalogs if authentication type is either oauth with intermediary (ex. Clever), or SAML
-      authType == .oauthIntermediary 
     }
 
     func encode(with coder: NSCoder) {
