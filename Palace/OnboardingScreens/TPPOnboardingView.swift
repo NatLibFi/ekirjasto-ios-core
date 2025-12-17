@@ -13,6 +13,7 @@ struct TPPOnboardingView: View {
   // 2 x pan distance to switch between slides
   // (relative to screen width)
   private var activationDistance: CGFloat = 0.8
+  private var userAccount: TPPUserAccount =  TPPUserAccount.sharedAccount()
   
   private var onboardingImageNames : [String]
   
@@ -25,13 +26,19 @@ struct TPPOnboardingView: View {
   
   @GestureState private var translation: CGFloat = 0
   
-  @State private var showLoginView = false
-  
   @State private var currentIndex = 0 {
     didSet {
       // Dismiss the view after the user swipes past the last slide.
       if currentIndex == onboardingImageNames.count {
-        showLoginView = true
+        
+        if userAccount.isSignedIn() {
+          self.dismissView()
+        } else {
+          EkirjastoLoginViewController.show {
+            self.dismissView()
+          }
+        }
+        
       }
     }
   }
@@ -54,19 +61,14 @@ struct TPPOnboardingView: View {
       onboardingImageNames = ["IntroEN1","IntroEN2","IntroEN3","IntroEN4"]
     }
     
-    
     self.dismissView = dismissHandler
   }
   
   var body: some View {
     ZStack(alignment: .top) {
-      if(showLoginView) {
-        EkirjastoLoginView(dismissView: self.dismissView)
-      } else {
-        onboardingSlides()
-        pagerDots()
-        closeButton()
-      }
+      onboardingSlides()
+      pagerDots()
+      closeButton()
     }
     .edgesIgnoringSafeArea(.all)
     .statusBar(hidden: true)
@@ -122,7 +124,13 @@ struct TPPOnboardingView: View {
     HStack {
       Spacer()
       Button {
-        showLoginView = true
+        if userAccount.isSignedIn() {
+          self.dismissView()
+        } else {
+          EkirjastoLoginViewController.show {
+            self.dismissView()
+          }
+        }
       } label: {
         Image(systemName: "xmark.circle.fill")
           .font(.title)
