@@ -66,6 +66,8 @@ import Foundation
 
   // This function is called when user selects the download book button.
   // Download book button is the button with text 'Get' or 'Download' or "Reserve".
+  // Note: this means that the processes for borrowing a book or reserving a book
+  // are also started from here, not just the downloading process
   @objc func startDownload(
     for book: TPPBook,
     withRequest initedRequest: URLRequest? = nil
@@ -163,9 +165,11 @@ import Foundation
     // Not borrowed yet to user,
     // first we need to add the to book registry
     if state == .Unregistered || state == .Holding {
+      // set attemptDownload as false
+      // so book is only borrowed, not downloaded also
       startBorrow(
         for: book,
-        attemptDownload: true,
+        attemptDownload: false,
         borrowCompletion: nil
       )
 
@@ -199,7 +203,12 @@ import Foundation
 
   // First gets the book entry
   // and then adds the book to registry
-  // and then moves on to download if no problems occur
+  // and then moves on to downloading book
+  // if it was also requested
+  // Note: parameter shouldAttemptDownload
+  // should be false for E-kirjasto
+  // as borrowing a book and downloading a book
+  // are separate actions for a user
   func startBorrow(
     for book: TPPBook,
     attemptDownload shouldAttemptDownload: Bool,
