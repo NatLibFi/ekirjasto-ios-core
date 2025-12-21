@@ -264,7 +264,7 @@ import Foundation
       } else {
         // Some error happened
         // for example with acquisition url or feed
-        self?.processBookDownloadError(
+        self?.processBookBorrowError(
           error: error as? [String: Any],
           book: book
         )
@@ -306,8 +306,8 @@ import Foundation
 
   }
 
-  // Function for handling errors occured during book download
-  private func processBookDownloadError(
+  // Function for handling errors occured during book borrowing
+  private func processBookBorrowError(
     error: [String: Any]?,
     book: TPPBook
   ) {
