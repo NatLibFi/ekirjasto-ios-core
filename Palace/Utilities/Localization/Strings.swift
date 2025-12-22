@@ -135,6 +135,11 @@ struct Strings {
       comment: ""
     )
     
+    static let readyToRead = NSLocalizedString(
+      "Your book is ready to read!",
+      comment: "Message body shown in a toast to user when a book is downloaded and ready to read (or listened to)."
+      )
+    
   }
   
   struct ReturnBook {
