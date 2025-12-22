@@ -19,6 +19,7 @@ import Foundation
   private var userAccount: TPPUserAccount
   private var reauthenticator: Reauthenticator
   private var bookRegistry: TPPBookRegistryProvider
+  private var toastService: ToastService
 
   private var bookIdentifierOfBookToRemove: String?
   private var broadcastScheduled = false
@@ -33,11 +34,13 @@ import Foundation
   init(
     userAccount: TPPUserAccount = TPPUserAccount.sharedAccount(),
     reauthenticator: Reauthenticator = TPPReauthenticator(),
-    bookRegistry: TPPBookRegistryProvider = TPPBookRegistry.shared
+    bookRegistry: TPPBookRegistryProvider = TPPBookRegistry.shared,
+    toastService: ToastService = ToastService.shared
   ) {
     self.userAccount = userAccount
     self.bookRegistry = bookRegistry
     self.reauthenticator = reauthenticator
+    self.toastService = toastService
 
     super.init()
 
@@ -1704,6 +1707,7 @@ extension MyBooksDownloadCenter {
         self.bookRegistry.setState(.Downloading, for: book.identifier)
         LCPPDFs(url: bookURL)?.extract(url: bookURL) { _, _ in
           self.bookRegistry.setState(.DownloadSuccessful, for: book.identifier)
+          self.toastService.showToast(toastMessage: Strings.DownloadBook.readyToRead)
         }
       }
     }
@@ -1873,6 +1877,7 @@ extension MyBooksDownloadCenter {
     
     if success {
       bookRegistry.setState(.DownloadSuccessful, for: book.identifier)
+      toastService.showToast(toastMessage: Strings.DownloadBook.readyToRead)
     } else if let moveError = moveError {
       logBookDownloadFailure(book, reason: "Couldn't move book to final disk location", downloadTask: downloadTask, metadata: [
         "moveError": moveError,
@@ -1890,6 +1895,7 @@ extension MyBooksDownloadCenter {
     do {
       let _ = try FileManager.default.replaceItemAt(destURL, withItemAt: sourceLocation, options: .usingNewMetadataOnly)
       bookRegistry.setState(.DownloadSuccessful, for: book.identifier)
+      toastService.showToast(toastMessage: Strings.DownloadBook.readyToRead)
       return true
     } catch {
       logBookDownloadFailure(book,
