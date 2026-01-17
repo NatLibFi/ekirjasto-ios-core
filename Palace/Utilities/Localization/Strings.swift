@@ -79,7 +79,71 @@ struct Strings {
     static let alertTitle = NSLocalizedString("Announcement", comment: "")
     static let ok = NSLocalizedString("Announcement", comment: "")
   }
-  
+
+  struct BookAvailabilityStatus {
+
+    static let availableCopies = NSLocalizedString(
+      "Available: %@ / %@",
+      comment: "Text that informs the user about the number of available copies out of the total copies of the book."
+    )
+
+    static let availableCopiesAndHoldPosition = NSLocalizedString(
+      "Your hold position: %@ / %@, available: %@ / %@",
+      comment: "Text that informs the user about the user's position in the hold queue, and the number of available copies of the book."
+    )
+
+    static let availableCopiesAndHoldQueue = NSLocalizedString(
+      "Hold queue: %@, available: %@ / %@",
+      comment: "Text that informs the user about the number of people in the hold queue and the number of available copies of the book."
+    )
+
+    static let availableForBorrowing = NSLocalizedString(
+      "This book is available to borrow.",
+      comment: "Text that informs that the book is available to be borrowed."
+    )
+
+    static let availableForHold = NSLocalizedString(
+      "This book is available to place on hold.",
+      comment: "Text informing the user that the book can be reserved because all copies are currently on loan."
+    )
+
+    static let currentlyOnLoan = NSLocalizedString(
+      "You have this book on loan.",
+      comment: "Text that tells the user they currently have the book on loan."
+    )
+
+    static let currentlyOnHold = NSLocalizedString(
+      "You have this book on hold.",
+      comment: "Text that informs the user that the user has placed the book on hold."
+    )
+
+    static let holdQueuePosition = NSLocalizedString(
+      "You are at position %@ in the queue for this book.",
+      comment: "Text that informs the user about their position in the hold queue for the book."
+    )
+
+    static let holdQueuePositionShort = NSLocalizedString(
+      "Your hold position: %@",
+      comment: "Text that is shorter version of the user's position in the hold queue for the book."
+    )
+
+    static let readyForBorrowing = NSLocalizedString(
+      "Ready to borrow!",
+      comment: "Text that informs that the book on hold is now ready to be borrowed."
+    )
+
+    static let remainingLoanTime = NSLocalizedString(
+      "You have this book on loan for %@.",
+      comment: "Text that tells the user the remaining time they have to keep the borrowed book."
+    )
+
+    static let remainingLoanTimeShort = NSLocalizedString(
+      "Remaining loan time: %@",
+      comment: "Text that is shorter version of the remaining time to return the borrowed book."
+    )
+
+  }
+
   struct BookCell {
     static let delete = NSLocalizedString("Delete", comment: "")
     static let `return` = NSLocalizedString("Return", comment: "")
@@ -91,10 +155,6 @@ struct Strings {
     static let downloading = NSLocalizedString("Downloading", comment: "")
     static let downloadFailedMessage = NSLocalizedString("The download could not be completed.", comment: "")
     static let loanTimeNotAvailable = NSLocalizedString("Remaining loan time is not available.", comment: "Text informing the user that the remaining loan time could not be determined.")
-    static let loanTimeRemaining = NSLocalizedString("You have this book on loan for %@.", comment: "Text that tells the user how much time they have left to read the book.")
-    static let bookIsOnHoldForUser = NSLocalizedString("You have this book on hold.", comment: "Text that informs the user that the book is held for the user.")
-    static let bookHoldPosition = NSLocalizedString("You are at position %@ in the queue for this book.", comment: "Text that informs the user of their position on the hold list.")
-    static let bookIsAvailableToBorrow = NSLocalizedString("This book is available to borrow.", comment: "Text that informs that the book the user queued for is now ready to borrow.")
     static let addToFavoritesButtonLabel = NSLocalizedString("Add to favorites", comment: "Accessiblity label for a button that adds a book to the user's favorite books.")
     static let removeFromFavoritesButtonLabel = NSLocalizedString("Remove from favorites", comment: "Accessiblity label for a button that removes a book from the user's favorite books.")
     static let accessModeLabel = NSLocalizedString("Access mode", comment: "Name for the access mode field in the book details view")
