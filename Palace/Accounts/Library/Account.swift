@@ -114,8 +114,50 @@ protocol AccountLogoDelegate: AnyObject {
       }
     }
 
+    // Check if the authentication type is Ekirjasto
+    // this is the main authentication type
+    // for E-kirjasto app
+    var isEkirjasto: Bool {
+      authType == .ekirjasto
+    }
+
+    // Check if the authentication type is basic
+    // This secondary authentication type is used
+    // mostly just for testing purposes
+    var isBasic: Bool {
+      authType == .basic
+    }
+
+    // Check if the authentication type is OAuth with intermediary
+    // not used in E-kirjasto app
+    var isOauth: Bool {
+      authType == .oauthIntermediary
+    }
+
+    // Check if the authentication type is SAML
+    // not used in E-kirjasto app
+    var isSaml: Bool {
+      authType == .saml
+    }
+
+    // Check if the authentication type is token based
+    // not used in E-kirjasto app
+    var isToken: Bool {
+      authType == .token
+    }
+    
+    // Property for AccountDetails nested class Authentication
+    // that defines if authentication is required for library account.
+    // It is always needed in E-kirjasto app (for E-kirjasto library account)
     var needsAuth: Bool {
-      authType == .basic || authType == .oauthIntermediary || authType == .saml || authType == .token
+      return isEkirjasto || isBasic || isOauth || isSaml || isToken
+    }
+    
+    var catalogRequiresAuthentication: Bool {
+      // you need an oauth token in order to access catalogs
+      // if authentication type is
+      // either oauth with intermediary (ex. Clever), or SAML
+      authType == .oauthIntermediary
     }
 
     var needsAgeCheck: Bool {
@@ -124,31 +166,6 @@ protocol AccountLogoDelegate: AnyObject {
 
     func coppaURL(isOfAge: Bool) -> URL? {
       isOfAge ? coppaOverUrl : coppaUnderUrl
-    }
-
-    var isBasic: Bool {
-      authType == .basic
-    }
-
-    var isOauth: Bool {
-      authType == .oauthIntermediary
-    }
-
-    var isSaml: Bool {
-      authType == .saml
-    }
-
-    var isToken: Bool {
-      authType == .token
-    }
-    
-    var isEkirjasto: Bool {
-      authType == .ekirjasto
-    }
-    
-    var catalogRequiresAuthentication: Bool {
-      // you need an oauth token in order to access catalogs if authentication type is either oauth with intermediary (ex. Clever), or SAML
-      authType == .oauthIntermediary 
     }
 
     func encode(with coder: NSCoder) {
@@ -191,10 +208,36 @@ protocol AccountLogoDelegate: AnyObject {
   let signUpUrl:URL?
   let loansUrl:URL?
   let selectionUrl: URL?
+
+  // AccountDetails class property defaultAuth
+  // returns the default authentication for Account.
+  // This could also be called the primary authentication.
+  // Note: usually there is only one authentication available
+  // in the authentication document anyway (the E-kirjasto authentication)
   var defaultAuth: Authentication? {
-    guard auths.count > 1 else { return auths.first }
-    return auths.first(where: { !$0.catalogRequiresAuthentication }) ?? auths.first
+
+    // first check if authentication with type .ekirjasto is available
+    // this is the primary authentication for E-kirjasto mobile app
+    // so it is most important and should be used as default if available
+    if let ekirjastoAuthentication = findAuthentication(authType: .ekirjasto) {
+
+      // return .ekirjasto type Authentication if it is found
+      return ekirjastoAuthentication
+    }
+
+    // otherwise, just return the first Authentication option
+    // in the list of all the authentications for the account
+    return auths.first
   }
+
+  // Helper function to find an authentication
+  // that has the type given as parameter
+  private func findAuthentication(authType: AuthType) -> Authentication? {
+
+    // return the first authentication that matches the type
+    return auths.first { $0.authType == authType }
+  }
+
   var needsAgeCheck: Bool {
     // this will tell if any authentication method requires age check
     return auths.contains(where: { $0.needsAgeCheck })
@@ -233,20 +276,23 @@ protocol AccountLogoDelegate: AnyObject {
       setAccountDictionaryKey(userAboveAgeKey, toValue: newValue as AnyObject)
     }
   }
-  
-  init(authenticationDocument: OPDS2AuthenticationDocument, uuid: String) {
+
+  init(
+    authenticationDocument: OPDS2AuthenticationDocument,
+    uuid: String
+  ) {
+
     defaults = .standard
+
     self.uuid = uuid
 
-    auths = authenticationDocument.authentication?.map({ (opdsAuth) -> Authentication in
-      return Authentication.init(auth: opdsAuth)
-    }) ?? []
+    // get all OPDSAuthentication objects from the document
+    let opdsAuthentications = authenticationDocument.authentication ?? []
 
-//    // TODO: Code below will remove all oauth only auth methods, this behaviour wasn't tested though
-//    // and may produce undefined results in viewcontrollers that do present auth methods if none are available
-//    auths = authenticationDocument.authentication?.map({ (opdsAuth) -> Authentication in
-//      return Authentication.init(auth: opdsAuth)
-//    }).filter { $0.authType != .oauthIntermediary } ?? []
+    // map each OPDSAuthentication to Authentication object
+    auths = opdsAuthentications.map { opdsAuthentication in
+      return Authentication(auth: opdsAuthentication)
+    }
 
     supportsReservations = authenticationDocument.features?.disabled?.contains("https://librarysimplified.org/rel/policy/reservations") != true
     userProfileUrl = authenticationDocument.links?.first(where: { $0.rel == "http://librarysimplified.org/terms/rel/user-profile" })?.href

@@ -147,7 +147,12 @@
   };
 
   TPPUserAccount * const user = TPPUserAccount.sharedAccount;
+  
   if (user.authDefinition.needsAgeCheck) {
+    // Note: this block is not used for E-kirjasto app,
+    // as the age is currently checked at authentication phase
+    // and the catalog is available for all authenticated users
+    
     [[[AccountsManager shared] ageCheck] verifyCurrentAccountAgeRequirementWithUserAccountProvider:[TPPUserAccount sharedAccount]
                                                                      currentLibraryAccountProvider:[AccountsManager shared]
                                                                                         completion:^(BOOL isOfAge)  {
@@ -156,11 +161,22 @@
         completion();
       }];
     }];
-  } else if (user.catalogRequiresAuthentication && !user.hasCredentials) {
-    // we're signed out, so sign in
-    [EkirjastoLoginViewControllerC showWithNavController:nil dismissHandler:^{
-      [TPPMainThreadRun asyncIfNeeded:completion];
-    }];
+    
+  } else if (user.catalogRequiresAuthentication) {
+    // Note: this block is not used for E-kirjasto app,
+    // as the catalog can be browsed without logging in
+    
+    if (!user.isSignedIn) {
+      // user is logged out, show the login view
+      // Note: this EkirjastoLoginView logic was most likely
+      // implemented here just by manually replacing the old Palace code,
+      // but it probably was never tested very carefully,
+      // as we do not have this feature in E-kirjasto app
+      //[EkirjastoLoginViewControllerC showWithNavController:nil dismissHandler:^{
+      //  [TPPMainThreadRun asyncIfNeeded:completion];
+      //}];
+    }
+    
   } else {
     [TPPMainThreadRun asyncIfNeeded:completion];
   }
