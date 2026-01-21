@@ -105,7 +105,7 @@ fi
 if [ -z "$EKIRJASTO_LIBLCP_DEPENDENCY_SECRET" ]; then
   info "Not revealing liblcp dependency secret, EKIRJASTO_LIBLCP_DEPENDENCY_SECRET is not set"
 else
-  info "Revealing revealing liblcp dependency secret"
+  info "Revealing liblcp dependency secret"
   sed "${sedArgs[@]}" 's#/test/liblcp.json" ~> 4.1.0#/'"$EKIRJASTO_LIBLCP_DEPENDENCY_SECRET"'/liblcp.json" ~> 4.1.0#' \
     ./Cartfile
   sed "${sedArgs[@]}" 's#/test/liblcp.json" "4.1.0"#/'"$EKIRJASTO_LIBLCP_DEPENDENCY_SECRET"'/liblcp.json" "4.1.0"#' \
