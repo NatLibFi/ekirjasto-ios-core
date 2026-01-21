@@ -19,6 +19,7 @@ import Foundation
   private var userAccount: TPPUserAccount
   private var reauthenticator: Reauthenticator
   private var bookRegistry: TPPBookRegistryProvider
+  private var toastService: ToastService
 
   private var bookIdentifierOfBookToRemove: String?
   private var broadcastScheduled = false
@@ -33,11 +34,13 @@ import Foundation
   init(
     userAccount: TPPUserAccount = TPPUserAccount.sharedAccount(),
     reauthenticator: Reauthenticator = TPPReauthenticator(),
-    bookRegistry: TPPBookRegistryProvider = TPPBookRegistry.shared
+    bookRegistry: TPPBookRegistryProvider = TPPBookRegistry.shared,
+    toastService: ToastService = ToastService.shared
   ) {
     self.userAccount = userAccount
     self.bookRegistry = bookRegistry
     self.reauthenticator = reauthenticator
+    self.toastService = toastService
 
     super.init()
 
@@ -66,6 +69,8 @@ import Foundation
 
   // This function is called when user selects the download book button.
   // Download book button is the button with text 'Get' or 'Download' or "Reserve".
+  // Note: this means that the processes for borrowing a book or reserving a book
+  // are also started from here, not just the downloading process
   @objc func startDownload(
     for book: TPPBook,
     withRequest initedRequest: URLRequest? = nil
@@ -163,9 +168,11 @@ import Foundation
     // Not borrowed yet to user,
     // first we need to add the to book registry
     if state == .Unregistered || state == .Holding {
+      // set attemptDownload as false
+      // so book is only borrowed, not downloaded also
       startBorrow(
         for: book,
-        attemptDownload: true,
+        attemptDownload: false,
         borrowCompletion: nil
       )
 
@@ -199,7 +206,12 @@ import Foundation
 
   // First gets the book entry
   // and then adds the book to registry
-  // and then moves on to download if no problems occur
+  // and then moves on to downloading book
+  // if it was also requested
+  // Note: parameter shouldAttemptDownload
+  // should be false for E-kirjasto
+  // as borrowing a book and downloading a book
+  // are separate actions for a user
   func startBorrow(
     for book: TPPBook,
     attemptDownload shouldAttemptDownload: Bool,
@@ -255,7 +267,7 @@ import Foundation
       } else {
         // Some error happened
         // for example with acquisition url or feed
-        self?.processBookDownloadError(
+        self?.processBookBorrowError(
           error: error as? [String: Any],
           book: book
         )
@@ -297,8 +309,8 @@ import Foundation
 
   }
 
-  // Function for handling errors occured during book download
-  private func processBookDownloadError(
+  // Function for handling errors occured during book borrowing
+  private func processBookBorrowError(
     error: [String: Any]?,
     book: TPPBook
   ) {
@@ -1702,6 +1714,7 @@ extension MyBooksDownloadCenter {
         self.bookRegistry.setState(.Downloading, for: book.identifier)
         LCPPDFs(url: bookURL)?.extract(url: bookURL) { _, _ in
           self.bookRegistry.setState(.DownloadSuccessful, for: book.identifier)
+          self.toastService.showToast(toastMessage: Strings.DownloadBook.readyToRead)
         }
       }
     }
@@ -1871,6 +1884,7 @@ extension MyBooksDownloadCenter {
     
     if success {
       bookRegistry.setState(.DownloadSuccessful, for: book.identifier)
+      toastService.showToast(toastMessage: Strings.DownloadBook.readyToRead)
     } else if let moveError = moveError {
       logBookDownloadFailure(book, reason: "Couldn't move book to final disk location", downloadTask: downloadTask, metadata: [
         "moveError": moveError,
@@ -1888,6 +1902,7 @@ extension MyBooksDownloadCenter {
     do {
       let _ = try FileManager.default.replaceItemAt(destURL, withItemAt: sourceLocation, options: .usingNewMetadataOnly)
       bookRegistry.setState(.DownloadSuccessful, for: book.identifier)
+      toastService.showToast(toastMessage: Strings.DownloadBook.readyToRead)
       return true
     } catch {
       logBookDownloadFailure(book,
