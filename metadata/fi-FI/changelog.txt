@@ -1,5 +1,4 @@
 Kehitämme sovellusta ja korjaamme bugeja jatkuvasti. Tarkistathan, että sinulla on aina käytössäsi sovelluksen uusin versio.
 
 Tässä versiossa:
-- saavutettavuuspäivityksiä
-- ilmoitusten päivityksiä ja korjauksia
+- kirjan voi nyt lainata ensin ja ladata myöhemmin

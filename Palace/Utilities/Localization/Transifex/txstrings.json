@@ -804,6 +804,9 @@
       "Ready for Download" : {
          "string" : "Ready for Download"
       },
+      "Ready to borrow!" : {
+         "string" : "Ready to borrow!"
+      },
       "Register a passkey" : {
          "string" : "Register a passkey"
       },
@@ -815,6 +818,9 @@
       },
       "Remaining loan time is not available." : {
          "string" : "Remaining loan time is not available."
+      },
+      "Remaining loan time: %@" : {
+         "string" : "Remaining loan time: %@"
       },
       "Remove" : {
          "string" : "Remove"
@@ -1092,6 +1098,9 @@
       "This book is available to borrow." : {
          "string" : "This book is available to borrow."
       },
+      "This book is available to place on hold." : {
+         "string" : "This book is available to place on hold."
+      },
       "This reservation will be automatically cancelled in %@." : {
          "string" : "This reservation will be automatically cancelled in %@."
       },
@@ -1239,6 +1248,9 @@
       "You have this book on loan for %@." : {
          "string" : "You have this book on loan for %@."
       },
+      "You have this book on loan." : {
+         "string" : "You have this book on loan."
+      },
       "You must enable camera access for this application in order to sign up for a library card." : {
          "string" : "You must enable camera access for this application in order to sign up for a library card."
       },
@@ -1263,8 +1275,17 @@
       "Your dependent should receive the invitation soon.\n\nAdvise them to open the link in the email on their device and create a passkey. This will make logging in easier." : {
          "string" : "Your dependent should receive the invitation soon.\n\nAdvise them to open the link in the email on their device and create a passkey. This will make logging in easier."
       },
+      "Your hold position: %@" : {
+         "string" : "Your hold position: %@"
+      },
+      "Your hold position: %ld" : {
+         "string" : "Your hold position: %ld"
+      },
       "Your report will be reviewed as soon as possible." : {
          "string" : "Your report will be reviewed as soon as possible."
+      },
+      "Your reservation will expire in %@." : {
+         "string" : "Your reservation will expire in %@."
       },
       "accessibilityShowAndReloadCatalogTab" : {
          "string" : "accessibilityShowAndReloadCatalogTab"
@@ -1376,9 +1397,6 @@
       "%@ by %@" : {
          "string" : "%1$@, tekijä %2$@"
       },
-      "%@ by %@, Pdf" : {
-         "string" : "%1$@, tekijä %2$@, pdf"
-      },
       "%@ by %@, audiobook" : {
          "string" : "%1$@, tekijä %2$@, äänikirja"
       },
@@ -1405,9 +1423,6 @@
       },
       "%@ version %@ (%@)" : {
          "string" : "%1$@ versio %2$@ (%3$@)"
-      },
-      "%@%" : {
-         "string" : "%1$@%2$"
       },
       "%@%%" : {
          "string" : "%@%%"
@@ -1441,15 +1456,6 @@
       },
       "%d seconds" : {
          "string" : "%d sekuntia"
-      },
-      "(book.title) is an Adobe PDF, which is not supported." : {
-         "string" : "(book.title) on Adobe PDF -tiedosto, jota ei tueta."
-      },
-      "(dateType.rawValue)_suffix_long" : {
-         "string" : "(dateType.rawValue)_suffix_long"
-      },
-      "(dateType.rawValue)_suffix_short" : {
-         "string" : "(dateType.rawValue)_suffix_short"
       },
       "0.75×" : {
          "string" : "0.75×"
@@ -1511,9 +1517,6 @@
       "ABCabc" : {
          "string" : "ABCabc"
       },
-      "AVAILABLE FOR CHECKOUT" : {
-         "string" : "LAINATTAVISSA"
-      },
       "Aa" : {
          "string" : "Aa"
       },
@@ -1525,9 +1528,6 @@
       },
       "Accept" : {
          "string" : "Hyväksy"
-      },
-      "Accesiblity item value: %@" : {
-         "string" : ""
       },
       "Access mode" : {
          "string" : "Saavutettavuus"
@@ -1546,18 +1546,6 @@
       },
       "Accessibility summary" : {
          "string" : "Saavutettavuusyhteenveto"
-      },
-      "AccessibilitySwitchLibrary" : {
-         "string" : "AccessibilitySwitchLibrary"
-      },
-      "Accessiblity" : {
-         "string" : "Savutettavuus"
-      },
-      "Accessiblity item: %@" : {
-         "string" : ""
-      },
-      "Accessiblity items" : {
-         "string" : ""
       },
       "Account" : {
          "string" : "Tili"
@@ -1604,9 +1592,6 @@
       "Announcement" : {
          "string" : "Ilmoitus"
       },
-      "Are you sure you want ot remove \"%@\" from your reservations? You will no longer be in line for this book." : {
-         "string" : "Haluatko varmasti poistaa teoksen %@ varauksistasi? Sen jälkeen et enää jonota tätä kirjaa."
-      },
       "Are you sure you want to delete \"%@\"?" : {
          "string" : "Haluatko varmasti palauttaa teoksen %@?"
       },
@@ -1631,9 +1616,6 @@
       "Author" : {
          "string" : "Tekijä"
       },
-      "Available for checkout in less than %@." : {
-         "string" : "Saatavilla lainattavaksi alle %@ kuluttua."
-      },
       "Back" : {
          "string" : "Takaisin"
       },
@@ -1652,9 +1634,6 @@
       "Book format" : {
          "string" : "Tiedostomuoto"
       },
-      "Book format:" : {
-         "string" : "Kirjan tiedostomuoto:"
-      },
       "Book removed from Favorites" : {
          "string" : "Kirja poistettu suosikeista."
       },
@@ -1663,9 +1642,6 @@
       },
       "Bookmarks" : {
          "string" : "Kirjanmerkit"
-      },
-      "Borrow Failed" : {
-         "string" : "Lainaus epäonnistui"
       },
       "Borrow failed" : {
          "string" : "Lainaus epäonnistui"
@@ -1889,9 +1865,6 @@
       "Finnish" : {
          "string" : "suomi"
       },
-      "Font size" : {
-         "string" : "Fonttikoko"
-      },
       "Forgot your password?" : {
          "string" : "Unohditko salasanasi?"
       },
@@ -1975,9 +1948,6 @@
       },
       "Keep" : {
          "string" : "Säilytä"
-      },
-      "Kirjaudu palveluun" : {
-         "string" : "Kirjaudu palveluun"
       },
       "Language" : {
          "string" : "Kieli"
@@ -2189,20 +2159,23 @@
       "Ready for Download" : {
          "string" : "Valmis ladattavaksi"
       },
+      "Ready to borrow!" : {
+         "string" : "Varauksesi on lainattavissa!"
+      },
       "Register a passkey" : {
          "string" : "Rekisteröi pääsyavain"
       },
       "Reject" : {
          "string" : "Hylkää"
       },
-      "Rekisteröidy palveluun" : {
-         "string" : "Rekisteröidy palveluun"
-      },
       "Reload" : {
          "string" : "Lataa uudelleen"
       },
       "Remaining loan time is not available." : {
          "string" : "Tietoa jäljellä olevasta laina-ajasta ei ole saatavilla."
+      },
+      "Remaining loan time: %@" : {
+         "string" : "Laina-aikaa jäljellä: %@"
       },
       "Remove" : {
          "string" : "Poista"
@@ -2225,9 +2198,6 @@
       "Requesting" : {
          "string" : "Pyydetään"
       },
-      "Reservations" : {
-         "string" : "Varaukset"
-      },
       "Reserve" : {
          "string" : "Varaa"
       },
@@ -2245,9 +2215,6 @@
       },
       "Return failed" : {
          "string" : "Palautus epäonnistui"
-      },
-      "Return to book by tapping here." : {
-         "string" : ""
       },
       "Returns %@" : {
          "string" : "Palauttaa kohteen %@"
@@ -2279,9 +2246,6 @@
       "Search My Books" : {
          "string" : "Hae Omat lainat -listasta."
       },
-      "Search Reservations" : {
-         "string" : "Hae varauksista"
-      },
       "Select" : {
          "string" : "Valitse"
       },
@@ -2293,9 +2257,6 @@
       },
       "Select a dependent" : {
          "string" : "Valitse huollettava"
-      },
-      "Select font size" : {
-         "string" : "Valitse fonttikoko"
       },
       "Select language" : {
          "string" : "Valitse kieli"
@@ -2429,12 +2390,6 @@
       "The DRM Library is taking longer than expected. Please wait and try again later.\n\nIf the problem persists, try to sign out and back in again from the Library Settings menu." : {
          "string" : "DRM-kirjastolla kestää odotettua kauemmin. Odota ja yritä myöhemmin uudelleen.\n\nJos ongelma jatkuu, kokeile kirjautua ulos ja uudelleen sisään Kirjaston asetukset -valikosta."
       },
-      "The Palace App requires a one-time location check in order to verify your library service area. Once you choose \"Create Card\", please select \"Allow Once\" in the popup so we can verify this information." : {
-         "string" : "Palace-sovellus vaatii kertaluonteisen sijainnin tarkistuksen, jotta kirjastopalvelualueesi voidaan vahvistaa. Valitse ensin Luo kortti ja valitse sitten ponnahdusikkunassa Salli kerran, jotta voimme vahvistaa tämän tiedon."
-      },
-      "The Palace App requires a one-time location check in order to verify your library service area. You have disabled location services for this app. To enable, please select the 'Open Settings' button below then continue with card creation." : {
-         "string" : "Palace-sovellus vaatii kertaluonteisen sijainnin tarkistuksen, jotta kirjastopalvelualueesi voidaan vahvistaa. Olet poistanut sijaintipalvelut käytöstä tämän sovelluksen kohdalla. Ota ne käyttöön valitsemalla alla oleva Avaa asetukset -painike. Jatka sen jälkeen kortin luomista."
-      },
       "The audiobook you are trying to open appears to be corrupted. Try downloading it again." : {
          "string" : "Äänikirja, jota yrität avata, vaikuttaa olevan vioittunut. Kokeile ladata se uudelleen."
       },
@@ -2456,12 +2411,6 @@
       "The download could not be completed.\nScroll down to 'View Issues' to see details." : {
          "string" : "Latausta ei voitu suorittaa loppuun.\nKatso tiedot selaamalla alaspäin kohtaan Näytä ongelmat."
       },
-      "The download for %@ could not be completed." : {
-         "string" : "Teoksen %@ latausta ei voitu suorittaa loppuun."
-      },
-      "The download for book \"%@\" could not be completed." : {
-         "string" : "Kirjan \\\"%@\\\" latausta ei voitu suorittaa loppuun."
-      },
       "The download for book %@ could not be completed." : {
          "string" : "Kirjan %@ latausta ei voitu suorittaa loppuun."
       },
@@ -2479,9 +2428,6 @@
       },
       "The title you reserved %@ is available." : {
          "string" : "Nimeke, jonka varasit  %@ on saatavilla."
-      },
-      "The title you reserved, (book.title), is available." : {
-         "string" : "Varaamasi teos (book.title) on saatavilla."
       },
       "There are no bookmarks for this book." : {
          "string" : "Tässä kirjassa ei ole kirjanmerkkejä."
@@ -2501,14 +2447,14 @@
       "This URL cannot be found. Please close the app entirely and reload it. If the problem persists, please contact your library's Help Desk." : {
          "string" : "Tätä URL-osoitetta ei löydy. Sulje sovellus kokonaan ja lataa se uudelleen. Jos ongelma jatkuu, ota yhteyttä kirjastosi tukipalveluun."
       },
-      "This book contains accessibility information about %@" : {
-         "string" : ""
-      },
       "This book does not have any accessibility information available." : {
-         "string" : "Tällä kirjalla ei ole vielä saavuttavuustietoja."
+         "string" : "Tällä kirjalla ei ole saavutettavuustietoja."
       },
       "This book is available to borrow." : {
          "string" : "Tämän kirjan voi lainata."
+      },
+      "This book is available to place on hold." : {
+         "string" : "Voit varata tämän kirjan."
       },
       "This reservation will be automatically cancelled in %@." : {
          "string" : "Tämä varaus peruutetaan automaattisesti seuraavan ajan kuluttua: %@."
@@ -2573,9 +2519,6 @@
       "User denied location access. Go to system settings to enable location access for E-kirjasto." : {
          "string" : "Käyttäjä kielsi sijaintitietojen käytön. Siirry järjestelmän asetuksiin ja ota sijaintitiedot käyttöön E-kirjastossa."
       },
-      "User denied location access. Go to system settings to enable location access for the Palace App." : {
-         "string" : "Käyttäjä kielsi sijaintitietojen käytön. Siirry järjestelmän asetuksiin ja ota sijaintitiedot käyttöön Palace-sovelluksessa."
-      },
       "User instructions" : {
          "string" : "Käyttöohjeet"
       },
@@ -2599,9 +2542,6 @@
       },
       "Visit the Catalog to add books to your Favorites." : {
          "string" : "Sinulla ei ole vielä suosikkeja. Voit lisätä suosikkeja, kun selaat kirjoja."
-      },
-      "WAITING FOR AVAILABILITY" : {
-         "string" : "ODOTETAAN SAATAVUUTTA"
       },
       "Wait" : {
          "string" : "Odota"
@@ -2630,17 +2570,11 @@
       "When you reserve a book from the catalog, it will show up here.\n Look here from time to time to see if your book is available to download.\n Number of reservations is limited to 5." : {
          "string" : "Sinulla ei ole varauksia.\nVarauksia voi olla enintään 5."
       },
-      "When you reserve a book from the catalog, it will show up here. Look here from time to time to see if your book is available to download." : {
-         "string" : "Sinulla ei ole voimassa olevia varauksia."
-      },
       "White on black text" : {
          "string" : "Valkoinen teksti mustalla"
       },
       "Would you like to return it?" : {
          "string" : "Haluatko palauttaa sen?"
-      },
-      "You are %ld in line for %ld copies." : {
-         "string" : "Olet sijalla %1$ld jonossa %2$ld teoksen osalta."
       },
       "You are %ld in line." : {
          "string" : "Olet jonossa sijalla %ld."
@@ -2669,6 +2603,9 @@
       "You have this book on loan for %@." : {
          "string" : "Laina-aikaa on jäljellä %@."
       },
+      "You have this book on loan." : {
+         "string" : "Sinulla on tämä kirja lainassa."
+      },
       "You must enable camera access for this application in order to sign up for a library card." : {
          "string" : "Sinun on sallittava kameran käyttö tässä sovelluksessa, jotta voit rekisteröityä kirjastokortin käyttäjäksi."
       },
@@ -2693,8 +2630,17 @@
       "Your dependent should receive the invitation soon.\n\nAdvise them to open the link in the email on their device and create a passkey. This will make logging in easier." : {
          "string" : "Huollettavan pitäisi saada kutsu pian.\n\nOhjeista häntä avaamaan sähköpostiin tuleva linkki omalla mobiililaitteellaan ja luomaan pääsyavain. Pääsyavain tarvitaan, kun hän kirjautuu E-kirjasto-sovellukseen."
       },
+      "Your hold position: %@" : {
+         "string" : "Varaussijasi: %@"
+      },
+      "Your hold position: %ld" : {
+         "string" : "Varaussijasi: %ld"
+      },
       "Your report will be reviewed as soon as possible." : {
          "string" : "Ilmoituksesi tarkistetaan mahdollisimman pian."
+      },
+      "Your reservation will expire in %@." : {
+         "string" : "Varauksesi on voimassa %@."
       },
       "accessibilityShowAndReloadCatalogTab" : {
          "string" : "Näytä ja lataa uudelleen Selaa kirjoja välilehti"
@@ -3560,13 +3506,16 @@
          "string" : "Läs mer"
       },
       "Read more about accessibility" : {
-         "string" : "Läs mer om tillgänglighet."
+         "string" : "Läs mer om tillgänglighet"
       },
       "Reader settings" : {
          "string" : "Läsarinställningar"
       },
       "Ready for Download" : {
          "string" : "Redo att laddas ner"
+      },
+      "Ready to borrow!" : {
+         "string" : "Din reservering kan nu lånas!"
       },
       "Register a passkey" : {
          "string" : "Registrera en nyckelkod"
@@ -3579,6 +3528,9 @@
       },
       "Remaining loan time is not available." : {
          "string" : "Återstående lånetid är inte tillgänglig."
+      },
+      "Remaining loan time: %@" : {
+         "string" : "Återstående lånetid: %@"
       },
       "Remove" : {
          "string" : "Ta bort"
@@ -3856,6 +3808,9 @@
       "This book is available to borrow." : {
          "string" : "Denna bok är tillgänglig för utlåning."
       },
+      "This book is available to place on hold." : {
+         "string" : "Du kan reservera den här boken."
+      },
       "This reservation will be automatically cancelled in %@." : {
          "string" : "Denna reservation återkallas automatiskt om %@."
       },
@@ -4003,6 +3958,9 @@
       "You have this book on loan for %@." : {
          "string" : "Du har den här boken utlånad till %@."
       },
+      "You have this book on loan." : {
+         "string" : "Du har redan lånat denna bok."
+      },
       "You must enable camera access for this application in order to sign up for a library card." : {
          "string" : "Du måste tillåta kameraåtkomst för denna app för att registrera dig för ett bibliotekskort."
       },
@@ -4027,8 +3985,17 @@
       "Your dependent should receive the invitation soon.\n\nAdvise them to open the link in the email on their device and create a passkey. This will make logging in easier." : {
          "string" : "Ditt minderåriga barn kommer att få en inbjudan snart. Råd dem att öppna länken i e-postmeddelandet på sin enhet och skapa en nyckelkod. Detta kommer att göra det lättare att logga in."
       },
+      "Your hold position: %@" : {
+         "string" : "Din plats i kön: %@"
+      },
+      "Your hold position: %ld" : {
+         "string" : "Din plats i kön: %ld"
+      },
       "Your report will be reviewed as soon as possible." : {
          "string" : "Din rapport kommer att behandlas så snart som möjligt."
+      },
+      "Your reservation will expire in %@." : {
+         "string" : "Din reservering är i kraft %@."
       },
       "accessibilityShowAndReloadCatalogTab" : {
          "string" : "accessibilityShowAndReloadCatalogTab"

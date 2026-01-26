@@ -1,5 +1,4 @@
 We are continually developing the app and fixing bugs. Please make sure that you are always using the latest version.
 
 In this version:
-- accessibility updates
-- notification updates and fixes
+- you can now borrow the book first and download it later
