@@ -1161,11 +1161,17 @@
       "User Agreement" : {
          "string" : "User Agreement"
       },
+      "User Surveys" : {
+         "string" : "User Surveys"
+      },
       "User denied location access. Go to system settings to enable location access for E-kirjasto." : {
          "string" : "User denied location access. Go to system settings to enable location access for E-kirjasto."
       },
       "User instructions" : {
          "string" : "User instructions"
+      },
+      "UserSurveys" : {
+         "string" : "UserSurveys"
       },
       "Username:" : {
          "string" : "Username:"
@@ -2516,11 +2522,17 @@
       "User Agreement" : {
          "string" : "Käyttäjäsopimus"
       },
+      "User Surveys" : {
+         "string" : "Käyttäjäkyselyt"
+      },
       "User denied location access. Go to system settings to enable location access for E-kirjasto." : {
          "string" : "Käyttäjä kielsi sijaintitietojen käytön. Siirry järjestelmän asetuksiin ja ota sijaintitiedot käyttöön E-kirjastossa."
       },
       "User instructions" : {
          "string" : "Käyttöohjeet"
+      },
+      "UserSurveys" : {
+         "string" : "Käyttäjäkyselyt"
       },
       "Username:" : {
          "string" : "Käyttäjänimi"
@@ -3871,11 +3883,17 @@
       "User Agreement" : {
          "string" : "Användaravtal"
       },
+      "User Surveys" : {
+         "string" : "Användarenkäter"
+      },
       "User denied location access. Go to system settings to enable location access for E-kirjasto." : {
          "string" : "Positionsåtkomst nekad av användaren. Gå till systeminställningarna för att ge E-biblioteket positionsåtkomst."
       },
       "User instructions" : {
          "string" : "Anvisnigar för användare"
+      },
+      "UserSurveys" : {
+         "string" : "Användarenkäter"
       },
       "Username:" : {
          "string" : "Användarnamn:"
