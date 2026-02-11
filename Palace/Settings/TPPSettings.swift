@@ -184,48 +184,62 @@ func feedbackURL(appLanguage: String!) -> String {
   // The URL base is same for all NatLibFi HTML pages
   static let natlibfiOrigin = "https://www.kansalliskirjasto.fi"
 
+  // The language code used as part of the path for each language version
+  static let languageCode =
+    switch appLanguage {
+      case "fi": "fi"
+      case "sv": "sv"
+      case "en": "en"
+      default: "fi"
+    }
+
   // E-library HTML pages use different path for each language version
   // Finnish language version is used as default
-  static let elibraryPath = switch appLanguage {
-  case "fi": "fi/e-kirjasto"
-  case "sv": "sv/e-biblioteket"
-  case "en": "en/e-library"
-  default: "fi/e-kirjasto"
-  }
+  static let elibraryPath =
+    switch appLanguage {
+      case "fi": "e-kirjasto"
+      case "sv": "e-biblioteket"
+      case "en": "e-library"
+      default: "e-kirjasto"
+    }
 
-  static let accessibilityResource = switch appLanguage {
-  case "fi": "e-kirjaston-saavutettavuusseloste"
-  case "sv": "e-bibliotekets-tillganglighetsutlatande"
-  case "en": "e-library-accessibility-statement"
-  default: "e-kirjaston-saavutettavuusseloste"
-  }
+  static let accessibilityResource =
+    switch appLanguage {
+      case "fi": "e-kirjaston-saavutettavuusseloste"
+      case "sv": "e-bibliotekets-tillganglighetsutlatande"
+      case "en": "e-library-accessibility-statement"
+      default: "e-kirjaston-saavutettavuusseloste"
+    }
 
-  static let instructionsResource = switch appLanguage {
-  case "fi": "e-kirjasto-sovelluksen-kayttoohje"
-  case "sv": "anvisningar-e-biblioteket"
-  case "en": "e-library-instructions"
-  default: "e-kirjasto-sovelluksen-kayttoohje"
-  }
+  static let instructionsResource =
+    switch appLanguage {
+      case "fi": "e-kirjasto-sovelluksen-kayttoohje"
+      case "sv": "anvisningar-e-biblioteket"
+      case "en": "e-library-instructions"
+      default: "e-kirjasto-sovelluksen-kayttoohje"
+    }
 
-  static let privacyPolicyResource = switch appLanguage {
-  case "fi": "e-kirjaston-tietosuoja-ja-rekisteriseloste"
-  case "sv": "dataskydds-och-registerbeskrivning"
-  case "en": "privacy-policy-data-protection-statement-and-description-data-file"
-  default: "e-kirjaston-tietosuoja-ja-rekisteriseloste"
-  }
+  static let privacyPolicyResource =
+    switch appLanguage {
+      case "fi": "e-kirjaston-tietosuoja-ja-rekisteriseloste"
+      case "sv": "dataskydds-och-registerbeskrivning"
+      case "en": "privacy-policy-data-protection-statement-and-description-data-file"
+      default: "e-kirjaston-tietosuoja-ja-rekisteriseloste"
+    }
 
-  static let userAgreementResource = switch appLanguage {
-  case "fi": "e-kirjaston-kayttoehdot"
-  case "sv": "e-bibliotekets-anvandarvillkor"
-  case "en": "e-library-terms-use"
-  default: "e-kirjaston-kayttoehdot"
-  }
+  static let userAgreementResource =
+    switch appLanguage {
+      case "fi": "e-kirjaston-kayttoehdot"
+      case "sv": "e-bibliotekets-anvandarvillkor"
+      case "en": "e-library-terms-use"
+      default: "e-kirjaston-kayttoehdot"
+    }
 
-  static let TPPAccessibilityURLString = "\(natlibfiOrigin)/\(elibraryPath)/\(accessibilityResource)"
+  static let TPPAccessibilityURLString = "\(natlibfiOrigin)/\(languageCode)/\(elibraryPath)/\(accessibilityResource)"
   static let TPPFeedbackURLString = feedbackURL(appLanguage: appLanguage)
-  static let TPPInstructionsURLString = "\(natlibfiOrigin)/\(elibraryPath)/\(instructionsResource)"
-  static let TPPPrivacyPolicyURLString = "\(natlibfiOrigin)/\(elibraryPath)/\(privacyPolicyResource)"
-  static let TPPUserAgreementURLString = "\(natlibfiOrigin)/\(elibraryPath)/\(userAgreementResource)"
+  static let TPPInstructionsURLString = "\(natlibfiOrigin)/\(languageCode)/\(elibraryPath)/\(instructionsResource)"
+  static let TPPPrivacyPolicyURLString = "\(natlibfiOrigin)/\(languageCode)/\(elibraryPath)/\(privacyPolicyResource)"
+  static let TPPUserAgreementURLString = "\(natlibfiOrigin)/\(languageCode)/\(elibraryPath)/\(userAgreementResource)"
 
   private static let customMainFeedURLKey = "NYPLSettingsCustomMainFeedURL"
   private static let accountMainFeedURLKey = "NYPLSettingsAccountMainFeedURL"
