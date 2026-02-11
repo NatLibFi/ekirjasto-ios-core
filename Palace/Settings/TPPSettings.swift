@@ -235,11 +235,20 @@ func feedbackURL(appLanguage: String!) -> String {
       default: "e-kirjaston-kayttoehdot"
     }
 
+  static let userSurveysResource =
+    switch appLanguage {
+      case "fi": "e-kirjaston-kayttajakyselyt"
+      case "sv": "e-bibliotekets-anvandarenkater"
+      case "en": "e-library-user-surveys"
+      default: "e-kirjaston-kayttajakyselyt"
+  }
+
   static let TPPAccessibilityURLString = "\(natlibfiOrigin)/\(languageCode)/\(elibraryPath)/\(accessibilityResource)"
   static let TPPFeedbackURLString = feedbackURL(appLanguage: appLanguage)
   static let TPPInstructionsURLString = "\(natlibfiOrigin)/\(languageCode)/\(elibraryPath)/\(instructionsResource)"
   static let TPPPrivacyPolicyURLString = "\(natlibfiOrigin)/\(languageCode)/\(elibraryPath)/\(privacyPolicyResource)"
   static let TPPUserAgreementURLString = "\(natlibfiOrigin)/\(languageCode)/\(elibraryPath)/\(userAgreementResource)"
+  static let TPPUserSurveysURLString = "\(natlibfiOrigin)/\(languageCode)/\(userSurveysResource)"
 
   private static let customMainFeedURLKey = "NYPLSettingsCustomMainFeedURL"
   private static let accountMainFeedURLKey = "NYPLSettingsAccountMainFeedURL"
