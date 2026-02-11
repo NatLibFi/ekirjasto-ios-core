@@ -126,6 +126,7 @@ struct TPPSettingsView: View {
   @ViewBuilder private var userInsightsSection: some View {
     Section {
       feedbackRow
+      userSurveysRow
     }
   }
 
@@ -280,7 +281,7 @@ struct TPPSettingsView: View {
   @ViewBuilder private var accessibilityRow: some View {
     navigationLinkRow(
       title: Strings.Settings.accessibility,
-      index: 3,
+      index: 4,
       selection: $selectedView,
       destination: remoteHTMLView(
         url: TPPSettings.TPPAccessibilityURLString,
@@ -292,7 +293,7 @@ struct TPPSettingsView: View {
   @ViewBuilder private var privacyRow: some View {
     navigationLinkRow(
       title: Strings.Settings.privacyPolicy,
-      index: 4,
+      index: 5,
       selection: $selectedView,
       destination: remoteHTMLView(
         url: TPPSettings.TPPPrivacyPolicyURLString,
@@ -304,7 +305,7 @@ struct TPPSettingsView: View {
   @ViewBuilder private var softwareLicensesRow: some View {
     navigationLinkRow(
       title: Strings.Settings.softwareLicenses,
-      index: 6,
+      index: 7,
       selection: $selectedView,
       destination: bundledHTMLView(
         resource: "software-licenses",
@@ -316,7 +317,7 @@ struct TPPSettingsView: View {
   @ViewBuilder private var userAgreementRow: some View {
     navigationLinkRow(
       title: Strings.Settings.eula,
-      index: 5,
+      index: 6,
       selection: $selectedView,
       destination: remoteHTMLView(
         url: TPPSettings.TPPUserAgreementURLString,
@@ -333,6 +334,18 @@ struct TPPSettingsView: View {
       destination: remoteHTMLView(
         url: TPPSettings.TPPInstructionsURLString,
         title: Strings.Settings.instructions
+      ).anyView()
+    )
+  }
+
+  @ViewBuilder private var userSurveysRow: some View {
+    navigationLinkRow(
+      title: Strings.Settings.userSurveys,
+      index: 3,
+      selection: $selectedView,
+      destination: remoteHTMLView(
+        url: TPPSettings.TPPUserSurveysURLString,
+        title: Strings.Settings.userSurveys
       ).anyView()
     )
   }
