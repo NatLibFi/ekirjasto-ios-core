@@ -28,12 +28,21 @@ struct TPPSettingsView: View {
   
   @ViewBuilder private var settingsListView: some View {
     List {
-      //E-library logo header
+      // E-library logo header
       eLibraryLogoSection
-      //Login, logout, dependents buttons
+
+      // Login, logout, dependents buttons
       accountSection
-      //Info buttons
-      infoSection
+
+      // User's app settings and instructions buttons
+      settingsAndHelpSection
+
+      // Buttons to leave feedback or participate in a survey
+      userInsightsSection
+
+      // User agreement, accessibility info etc. buttons
+      userRightsAndAccessibilitySection
+
       //Footer with NatLibFiLogo and version code
       natLibFiLogoAndVersionSection
     }
@@ -106,16 +115,27 @@ struct TPPSettingsView: View {
        .font(Font(uiFont: UIFont.palaceFont(ofSize: 12)))
      }
   */
+
+  @ViewBuilder private var settingsAndHelpSection: some View {
+    Section {
+      preferencesRow
+      instructionsRow
+    }
+  }
   
-  @ViewBuilder private var infoSection: some View {
+  @ViewBuilder private var userInsightsSection: some View {
     Section {
       feedbackRow
+      userSurveysRow
+    }
+  }
+
+  @ViewBuilder private var userRightsAndAccessibilitySection: some View {
+    Section {
       accessibilityRow
       privacyRow
-      softwareLicensesRow
       userAgreementRow
-      instructionsRow
-      preferencesRow
+      softwareLicensesRow
     }
   }
   
@@ -249,7 +269,7 @@ struct TPPSettingsView: View {
   @ViewBuilder private var feedbackRow: some View {
     navigationLinkRow(
       title: Strings.Settings.feedback,
-      index: 1,
+      index: 2,
       selection: $selectedView,
       destination: remoteHTMLView(
         url: TPPSettings.TPPFeedbackURLString,
@@ -257,11 +277,11 @@ struct TPPSettingsView: View {
       ).anyView()
     )
   }
-  
+
   @ViewBuilder private var accessibilityRow: some View {
     navigationLinkRow(
       title: Strings.Settings.accessibility,
-      index: 2,
+      index: 4,
       selection: $selectedView,
       destination: remoteHTMLView(
         url: TPPSettings.TPPAccessibilityURLString,
@@ -273,7 +293,7 @@ struct TPPSettingsView: View {
   @ViewBuilder private var privacyRow: some View {
     navigationLinkRow(
       title: Strings.Settings.privacyPolicy,
-      index: 3,
+      index: 5,
       selection: $selectedView,
       destination: remoteHTMLView(
         url: TPPSettings.TPPPrivacyPolicyURLString,
@@ -285,7 +305,7 @@ struct TPPSettingsView: View {
   @ViewBuilder private var softwareLicensesRow: some View {
     navigationLinkRow(
       title: Strings.Settings.softwareLicenses,
-      index: 4,
+      index: 7,
       selection: $selectedView,
       destination: bundledHTMLView(
         resource: "software-licenses",
@@ -297,7 +317,7 @@ struct TPPSettingsView: View {
   @ViewBuilder private var userAgreementRow: some View {
     navigationLinkRow(
       title: Strings.Settings.eula,
-      index: 5,
+      index: 6,
       selection: $selectedView,
       destination: remoteHTMLView(
         url: TPPSettings.TPPUserAgreementURLString,
@@ -309,11 +329,23 @@ struct TPPSettingsView: View {
   @ViewBuilder private var instructionsRow: some View {
     navigationLinkRow(
       title: Strings.Settings.instructions,
-      index: 6,
+      index: 1,
       selection: $selectedView,
       destination: remoteHTMLView(
         url: TPPSettings.TPPInstructionsURLString,
         title: Strings.Settings.instructions
+      ).anyView()
+    )
+  }
+
+  @ViewBuilder private var userSurveysRow: some View {
+    navigationLinkRow(
+      title: Strings.Settings.userSurveys,
+      index: 3,
+      selection: $selectedView,
+      destination: remoteHTMLView(
+        url: TPPSettings.TPPUserSurveysURLString,
+        title: Strings.Settings.userSurveys
       ).anyView()
     )
   }
@@ -375,3 +407,4 @@ struct TPPSettingsView: View {
       .navigationBarTitle(Text(title))
   }
 }
+

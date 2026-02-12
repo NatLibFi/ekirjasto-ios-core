@@ -325,7 +325,10 @@ struct Strings {
     static let loginFooterUserAgreementText = NSLocalizedString("By signing in, you agree the End User License Agreement", comment: "")
     static let faq = NSLocalizedString("FAQ", comment: "")
     static let instructions = NSLocalizedString("User instructions", comment: "Title of a button that links to a HTML resource containing E-library user instructions")
-    
+    static let userSurveys = NSLocalizedString(
+      "User Surveys",
+      comment: "Title of a button that links to a HTML resource containing E-library user surveys.")
+
     // dependents
     static let dependentsButton = NSLocalizedString("Invite a Dependent", comment: "")
     static let dependents = NSLocalizedString("Dependents", comment: "")
