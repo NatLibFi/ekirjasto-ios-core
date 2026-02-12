@@ -261,6 +261,9 @@
       "Author" : {
          "string" : "Author"
       },
+      "Available: %@ %@ %@" : {
+         "string" : "Available: %1$@ %2$@ %3$@"
+      },
       "Back" : {
          "string" : "Back"
       },
@@ -539,6 +542,9 @@
       },
       "Hide Barcode" : {
          "string" : "Hide Barcode"
+      },
+      "Hold queue: %@, available: %@ %@ %@" : {
+         "string" : "Hold queue: %1$@, available: %2$@ %3$@ %4$@"
       },
       "Holds" : {
          "string" : "Holds"
@@ -1284,6 +1290,9 @@
       "Your hold position: %@" : {
          "string" : "Your hold position: %@"
       },
+      "Your hold position: %@ %@ %@, available: %@ %@ %@" : {
+         "string" : "Your hold position: %1$@ %2$@ %3$@, available: %4$@ %5$@ %6$@"
+      },
       "Your hold position: %ld" : {
          "string" : "Your hold position: %ld"
       },
@@ -1622,6 +1631,9 @@
       "Author" : {
          "string" : "Tekijä"
       },
+      "Available: %@ %@ %@" : {
+         "string" : "Saatavissa: %1$@ %2$@ %3$@"
+      },
       "Back" : {
          "string" : "Takaisin"
       },
@@ -1900,6 +1912,9 @@
       },
       "Hide Barcode" : {
          "string" : "Piilota viivakoodi"
+      },
+      "Hold queue: %@, available: %@ %@ %@" : {
+         "string" : "Varauksia: %1$@, saatavissa: %2$@ %3$@ %4$@"
       },
       "Holds" : {
          "string" : "Varaukset"
@@ -2613,7 +2628,7 @@
          "string" : "Sinulla on tämä kirja varattuna."
       },
       "You have this book on loan for %@." : {
-         "string" : "Laina-aikaa on jäljellä %@."
+         "string" : "Sinulla on tämä kirja lainassa %@."
       },
       "You have this book on loan." : {
          "string" : "Sinulla on tämä kirja lainassa."
@@ -2644,6 +2659,9 @@
       },
       "Your hold position: %@" : {
          "string" : "Varaussijasi: %@"
+      },
+      "Your hold position: %@ %@ %@, available: %@ %@ %@" : {
+         "string" : "Varaussijasi: %1$@ %2$@ %3$@, saatavissa: %4$@ %5$@ %6$@"
       },
       "Your hold position: %ld" : {
          "string" : "Varaussijasi: %ld"
@@ -2983,6 +3001,9 @@
       "Author" : {
          "string" : "Författare"
       },
+      "Available: %@ %@ %@" : {
+         "string" : "Tillgänglig: %1$@ %2$@ %3$@"
+      },
       "Back" : {
          "string" : "Tillbaka"
       },
@@ -3261,6 +3282,9 @@
       },
       "Hide Barcode" : {
          "string" : "Dölj streckkod"
+      },
+      "Hold queue: %@, available: %@ %@ %@" : {
+         "string" : "Reserveringar: %1$@, tillgänglig: %2$@ %3$@ %4$@"
       },
       "Holds" : {
          "string" : "Reserveringar"
@@ -4005,6 +4029,9 @@
       },
       "Your hold position: %@" : {
          "string" : "Din plats i kön: %@"
+      },
+      "Your hold position: %@ %@ %@, available: %@ %@ %@" : {
+         "string" : "Din plats i kön: %1$@ %2$@ %3$@, tillgänglig: %4$@ %5$@ %6$@"
       },
       "Your hold position: %ld" : {
          "string" : "Din plats i kön: %ld"
