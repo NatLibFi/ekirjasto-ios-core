@@ -200,11 +200,15 @@ typedef NS_ENUM (NSInteger, NYPLProblemReportButtonState) {
   NSString *copiesAvailableString = [NSString stringWithFormat:@"%ld", (unsigned long)copiesAvailable];
   NSString *copiesTotalString = [NSString stringWithFormat:@"%ld", (unsigned long)copiesTotal];
 
+  // define a separate string for the slash / because of Transifex
+  static NSString *const slashString = @"/";
+
   // define a message for the book's availability status
   // Example: "Available: 4 / 10"
-  NSString *detailedMessage = [NSString stringWithFormat:NSLocalizedString(@"Available: %@ / %@", nil),
-                                copiesAvailableString,
-                                copiesTotalString];
+  NSString *detailedMessage = [NSString stringWithFormat:NSLocalizedString(@"Available: %@ %@ %@", nil),
+                               copiesAvailableString,
+                               slashString,
+                               copiesTotalString];
   
   // define a linebreak string
   NSString *lineBreak = @"\n";
@@ -266,12 +270,16 @@ typedef NS_ENUM (NSInteger, NYPLProblemReportButtonState) {
   NSString *holdsTotalString = [NSString stringWithFormat:@"%ld", (unsigned long)holdsTotal];
   NSString *copiesAvailableString = [NSString stringWithFormat:@"%ld", (unsigned long)copiesAvailable];
   NSString *copiesTotalString = [NSString stringWithFormat:@"%ld", (unsigned long)copiesTotal];
-  
+
+  // define a separate string for the slash / because of Transifex
+  static NSString *const slashString = @"/";
+
   // define a message for the book's  queue and availability status "Hold queue: 6, available: 0 / 25"
-  NSString *detailedMessage = [NSString stringWithFormat:NSLocalizedString(@"Hold queue: %@, available: %@ / %@", nil),
-                                holdsTotalString,
-                                copiesAvailableString,
-                                copiesTotalString];
+  NSString *detailedMessage = [NSString stringWithFormat:NSLocalizedString(@"Hold queue: %@, available: %@ %@ %@", nil),
+                               holdsTotalString,
+                               copiesAvailableString,
+                               slashString,
+                               copiesTotalString];
   
   // define a linebreak string
   NSString *lineBreak = @"\n";
@@ -402,13 +410,18 @@ typedef NS_ENUM (NSInteger, NYPLProblemReportButtonState) {
   NSString *copiesAvailableString = [NSString stringWithFormat:@"%ld", (unsigned long)copiesAvailable];
   NSString *copiesTotalString = [NSString stringWithFormat:@"%ld", (unsigned long)copiesTotal];
 
+  // define a separate string for the slash / because of Transifex
+  static NSString *const slashString = @"/";
+
   // format the detailed message with hold position and availability info
   // Example: 'Your hold position: 3 / 7, available: 0 / 25'
-  NSString *detailedMessage = [NSString stringWithFormat:NSLocalizedString(@"Your hold position: %@ / %@, available: %@ / %@", nil),
-                                       holdsPositionString,
-                                       holdsTotalString,
-                                       copiesAvailableString,
-                                       copiesTotalString];
+  NSString *detailedMessage = [NSString stringWithFormat:NSLocalizedString(@"Your hold position: %@ %@ %@, available: %@ %@ %@", nil),
+                               holdsPositionString,
+                               slashString,
+                               holdsTotalString,
+                               copiesAvailableString,
+                               slashString,
+                               copiesTotalString];
 
   // define a linebreak string
   NSString *lineBreak = @"\n";

@@ -83,17 +83,17 @@ struct Strings {
   struct BookAvailabilityStatus {
 
     static let availableCopies = NSLocalizedString(
-      "Available: %@ / %@",
+      "Available: %@ %@ %@",
       comment: "Text that informs the user about the number of available copies out of the total copies of the book."
     )
 
     static let availableCopiesAndHoldPosition = NSLocalizedString(
-      "Your hold position: %@ / %@, available: %@ / %@",
+      "Your hold position: %@ %@ %@, available: %@ %@ %@",
       comment: "Text that informs the user about the user's position in the hold queue, and the number of available copies of the book."
     )
 
     static let availableCopiesAndHoldQueue = NSLocalizedString(
-      "Hold queue: %@, available: %@ / %@",
+      "Hold queue: %@, available: %@ %@ %@",
       comment: "Text that informs the user about the number of people in the hold queue and the number of available copies of the book."
     )
 
