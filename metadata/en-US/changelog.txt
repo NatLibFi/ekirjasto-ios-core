@@ -1,4 +1,5 @@
 We are continually developing the app and fixing bugs. Please make sure that you are always using the latest version.
 
 In this version:
-- you can now borrow the book first and download it later
+- The app now displays more detailed information about book availability, such as the number of available copies and the length of the reservation queue
+- A new section has been added to the Settings tab, allowing you to respond to user surveys
