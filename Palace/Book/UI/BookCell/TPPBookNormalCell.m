@@ -256,7 +256,7 @@
   }
    unlimited:nil
    reserved:^(TPPOPDSAcquisitionAvailabilityReserved *const _Nonnull reserved) {
-      holdPosition = reserved.holdPosition;
+      holdPosition = reserved.holdsPosition;
     }
    ready:^(TPPOPDSAcquisitionAvailabilityReady *const _Nonnull ready) {
       dateUntilHoldExpires = ready.until;
@@ -264,15 +264,15 @@
   ];
   
   if (dateUntilLoanExpires) {
-    return [NSString stringWithFormat:NSLocalizedString(@"You have this book on loan for %@.", nil), dateUntilLoanExpires.longTimeUntilString];
+    return [NSString stringWithFormat:NSLocalizedString(@"Remaining loan time: %@", nil), dateUntilLoanExpires.longTimeUntilString];
   }
   
   if (holdPosition > 0) {
-    return [NSString stringWithFormat:NSLocalizedString(@"You are at position %ld in the queue for this book.", nil), (long)holdPosition];
+    return [NSString stringWithFormat:NSLocalizedString(@"Your hold position: %ld", nil), (long)holdPosition];
   }
   
   if (dateUntilHoldExpires) {
-    return [NSString stringWithFormat:NSLocalizedString(@"This reservation will be automatically cancelled in %@.", nil), dateUntilHoldExpires.longTimeUntilString];
+    return [NSString stringWithFormat:NSLocalizedString(@"Ready to borrow!", nil)];
   }
     
   return @"";

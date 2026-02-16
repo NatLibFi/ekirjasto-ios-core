@@ -13,6 +13,7 @@ let DeprecatedAvailableCopiesKey: String = "available-copies"
 let DeprecatedAvailableUntilKey: String = "available-until"
 let DeprecatedAvailabilityStatusKey: String = "availability-status"
 let DeprecatedHoldsPositionKey: String = "holds-position"
+let DeprecatedTotalHoldsKey: String = "total-holds"
 let DeprecatedTotalCopiesKey: String = "total-copies"
 
 let AcquisitionsKey: String = "acquisitions"
@@ -282,10 +283,15 @@ let TimeTrackingURLURLKey: String = "time-tracking-url"
       reportURL = URL(string: (dictionary[DeprecatedAcquisitionKey] as? [String: String])?["report"] ?? "")
       
       let availabilityStatus = dictionary[DeprecatedAvailabilityStatusKey] as? String
-      let holdsPositionString = dictionary[DeprecatedHoldsPositionKey] as? String
-      var holdsPosition: Int?
-      if let holdsPositioningString = holdsPositionString {
-        holdsPosition = Int(holdsPositioningString)
+      
+      var positionHolds: Int?
+      if let holdsPositioningString = dictionary[DeprecatedHoldsPositionKey] as? String {
+        positionHolds = Int(holdsPositioningString)
+      }
+      
+      var totalHolds: Int?
+      if let totalHoldsString = dictionary[DeprecatedTotalHoldsKey] as? String {
+        totalHolds = Int(totalHoldsString)
       }
 
       var availableCopies: Int?
@@ -319,12 +325,15 @@ let TimeTrackingURLURLKey: String = "time-tracking-url"
         }
       case "unavailable":
         availability = TPPOPDSAcquisitionAvailabilityUnavailable(
-          copiesHeld: UInt(availableCopies ?? NSNotFound),
+          holdsTotal: UInt(totalHolds ?? NSNotFound),
+          copiesAvailable: UInt(availableCopies ?? NSNotFound),
           copiesTotal: UInt(totalCopies ?? NSNotFound)
         )
       case "reserved":
         availability = TPPOPDSAcquisitionAvailabilityReserved(
-          holdPosition: UInt(holdsPosition ?? NSNotFound),
+          holdsPosition: UInt(positionHolds ?? NSNotFound),
+          holdsTotal: UInt(totalHolds ?? NSNotFound),
+          copiesAvailable: UInt(availableCopies ?? NSNotFound),
           copiesTotal: UInt(totalCopies ?? NSNotFound),
           since: until,
           until: until

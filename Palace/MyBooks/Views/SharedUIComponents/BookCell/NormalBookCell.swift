@@ -264,14 +264,14 @@ struct NormalBookCell: View {
       timeUntilString.isEmpty
       ? Strings.BookCell.loanTimeNotAvailable
       : String.localizedStringWithFormat(
-        Strings.BookCell.loanTimeRemaining, timeUntilString)
+        Strings.BookAvailabilityStatus.remainingLoanTimeShort, timeUntilString)
 
     return loanTimeInfoText
   }
 
   private func getHoldPositionInfoText() -> String {
     var holdPositionInfoText: String = ""
-    var holdPosition: UInt?
+    var holdsPosition: UInt?
     //var copiesTotal: TPPOPDSAcquisitionAvailabilityCopies?
 
     model.book.defaultAcquisition?.availability.matchUnavailable(
@@ -279,25 +279,25 @@ struct NormalBookCell: View {
       limited: nil,
       unlimited: nil,
       reserved: { reservedAvailability in
-        holdPosition = reservedAvailability.holdPosition
+        holdsPosition = reservedAvailability.holdsPosition
         //copiesTotal = reservedAvailability.copiesTotal
       },
       ready: nil
     )
 
     // use copiesTotal here, if number of book copies is needed in infoText
-    if let bookHoldPosition = holdPosition {
+    if let bookHoldPosition = holdsPosition {
       holdPositionInfoText = String.localizedStringWithFormat(
-        Strings.BookCell.bookHoldPosition, String(bookHoldPosition))
+        Strings.BookAvailabilityStatus.holdQueuePositionShort, String(bookHoldPosition))
     } else {
-      holdPositionInfoText = Strings.BookCell.bookIsOnHoldForUser
+      holdPositionInfoText = Strings.BookAvailabilityStatus.currentlyOnHold
     }
 
     return holdPositionInfoText
   }
 
   private func getAvailableToBorrowInfoText() -> String {
-    return Strings.BookCell.bookIsAvailableToBorrow
+    return Strings.BookAvailabilityStatus.availableForBorrowing
   }
 
 }
