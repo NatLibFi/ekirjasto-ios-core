@@ -1,4 +1,5 @@
 Vi utvecklar appen och åtgärdar buggar kontinuerligt. Kom ihåg att kontrollera att du alltid använder den nyaste versionen av appen.
 
 I den här versionen: 
-- nu kan du låna boken först och ladda ner den senare
+- Appen visar nu mer detaljerad information om tillgången på böcker, såsom antalet tillgängliga exemplar och längden på reservationskön
+- På Inställningar-fliken finns nu en ny sektion där du kan svara på användarenkäter
