@@ -56,7 +56,8 @@ basename "$0"
 
 info "Building 3rd party dependencies..."
 
-(cd readium-sdk; bash MakeHeaders.sh Apple) || fatal "Error making Readium headers" $?
+# NOTE: readium-sdk MakeHeaders.sh removed — old Readium 1 C++ SDK is no longer used.
+# The app uses the modern Readium swift-toolkit (R2) via SPM.
 
 # Rebuild Carthage dependencies
 ./scripts/build-carthage.sh || fatal "Carthage build failed" $?
