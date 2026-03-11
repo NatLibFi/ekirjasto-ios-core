@@ -213,7 +213,7 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
 
     URLSession.shared.dataTask(with: startRequest) { data, response, error in
       print("passkey start error: \(error.debugDescription))")
-      print("passkey start result: \(String(bytes: data!.bytes, encoding: .utf8))")
+      print("passkey start result: \(String(data: data!, encoding: .utf8) ?? "")")
       
       let httpResponse = response as! HTTPURLResponse
 
@@ -291,7 +291,7 @@ class PasskeyManager : NSObject, ASAuthorizationControllerPresentationContextPro
     //print("login content: \(content)")
     URLSession.shared.dataTask(with: finishRequest) { _data,_response,_error in
       print("passkey finish error: \(_error.debugDescription))")
-      print("passkey finish result: \(String(bytes: _data!.bytes, encoding: .utf8))")
+      print("passkey finish result: \(String(data: _data!, encoding: .utf8) ?? "")")
       
       if let httpResponse = _response as? HTTPURLResponse {
         print("passkey status: \(httpResponse.statusCode)")

@@ -1,9 +1,3 @@
-[submodule "readium-sdk"]
-	path = readium-sdk
-	url = https://github.com/ThePalaceProject/mobile-readium-sdk
-[submodule "readium-shared-js"]
-	path = readium-shared-js
-	url = https://github.com/readium/readium-shared-js.git
 [submodule "ios-tenprintcover"]
 	path = ios-tenprintcover
 	url = https://github.com/ThePalaceProject/ios-tenprintcover.git
