@@ -79,7 +79,15 @@ static CGFloat const kTableViewCrossfadeDuration = 0.3;
   self.refreshControl = [[UIRefreshControl alloc] init];
   [self.refreshControl addTarget:self action:@selector(userDidRefresh:) forControlEvents:UIControlEventValueChanged];
 
-  self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+  UITableViewStyle tableStyle = UITableViewStylePlain;
+  if (@available(iOS 26, *)) {
+    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+      // Grouped style disables sticky section headers on iPad,
+      // which avoids opaque headers clashing with Liquid Glass nav bar.
+      tableStyle = UITableViewStyleGrouped;
+    }
+  }
+  self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:tableStyle];
   self.tableView.autoresizingMask = (UIViewAutoresizingFlexibleWidth |
                                      UIViewAutoresizingFlexibleHeight);
   self.tableView.alpha = 0.0;
@@ -100,12 +108,27 @@ static CGFloat const kTableViewCrossfadeDuration = 0.3;
   self.facetBarView.entryPointView.dataSource = self;
   self.facetBarView.delegate = self;
   
-  [self.view addSubview:self.facetBarView];
-  
-  [self.facetBarView autoPinEdgeToSuperviewSafeArea:ALEdgeTop];// Added by Ellibs
+  // On iPad with iOS 26, move the segmented control into the navigation bar
+  // titleView so it merges with the Liquid Glass bar, and hide the facet bar.
+  BOOL useNavBarSegmentedControl = NO;
+  if (@available(iOS 26, *)) {
+    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+      useNavBarSegmentedControl = YES;
+    }
+  }
 
-  [self.facetBarView autoPinEdgeToSuperviewEdge:ALEdgeLeading];
-  [self.facetBarView autoPinEdgeToSuperviewEdge:ALEdgeTrailing];
+  if (useNavBarSegmentedControl) {
+    // Don't add the facet bar to the view at all on iPad iOS 26.
+    // Instead, create a segmented control in the navigation bar.
+    [self setupNavBarSegmentedControl];
+  } else {
+    [self.view addSubview:self.facetBarView];
+
+    [self.facetBarView autoPinEdgeToSuperviewSafeArea:ALEdgeTop];// Added by Ellibs
+
+    [self.facetBarView autoPinEdgeToSuperviewEdge:ALEdgeLeading];
+    [self.facetBarView autoPinEdgeToSuperviewEdge:ALEdgeTrailing];
+  }
   
   if(self.feed.openSearchURL) {
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
@@ -132,6 +155,48 @@ static CGFloat const kTableViewCrossfadeDuration = 0.3;
   
   [self downloadImages];
   [self enable3DTouch];
+}
+
+/// On iPad iOS 26, place the entry point segmented control (All/Audiobooks/eBooks)
+/// directly in the navigation bar's titleView so it integrates with Liquid Glass.
+- (void)setupNavBarSegmentedControl
+{
+  NSArray<TPPCatalogFacet *> *facets = self.feed.entryPoints;
+  if (facets.count < 2) {
+    return;
+  }
+
+  NSMutableArray<NSString *> *titles = [NSMutableArray arrayWithCapacity:facets.count];
+  for (TPPCatalogFacet *facet in facets) {
+    if (facet.title) {
+      [titles addObject:facet.title];
+    }
+  }
+  if (titles.count < 2) {
+    return;
+  }
+
+  UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:titles];
+  for (NSUInteger i = 0; i < facets.count; i++) {
+    if (facets[i].active) {
+      segmentedControl.selectedSegmentIndex = i;
+      break;
+    }
+  }
+  [segmentedControl addTarget:self
+                       action:@selector(navBarSegmentDidChange:)
+             forControlEvents:UIControlEventValueChanged];
+
+  self.remoteViewController.navigationItem.titleView = segmentedControl;
+}
+
+- (void)navBarSegmentDidChange:(UISegmentedControl *)sender
+{
+  NSArray<TPPCatalogFacet *> *facets = self.feed.entryPoints;
+  NSInteger index = sender.selectedSegmentIndex;
+  if (index >= 0 && index < (NSInteger)facets.count) {
+    [self entryPointViewDidSelectWithEntryPointFacet:facets[index]];
+  }
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent
@@ -306,9 +371,14 @@ viewForHeaderInSection:(NSInteger const)section
   UIView *const view = [[UIView alloc] initWithFrame:frame];
   view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
   if (@available(iOS 26, *)) {
-    view.backgroundColor = [TPPConfiguration backgroundColor];
-    // Lock to current interface style so Liquid Glass cannot flip it mid-scroll
-    view.overrideUserInterfaceStyle = self.traitCollection.userInterfaceStyle;
+    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+      // On iPad, use a clear background so headers blend with Liquid Glass
+      view.backgroundColor = UIColor.clearColor;
+    } else {
+      view.backgroundColor = [TPPConfiguration backgroundColor];
+      // Lock to current interface style so Liquid Glass cannot flip it mid-scroll
+      view.overrideUserInterfaceStyle = self.traitCollection.userInterfaceStyle;
+    }
   } else {
     view.backgroundColor = [[TPPConfiguration backgroundColor] colorWithAlphaComponent:0.9];
   }
