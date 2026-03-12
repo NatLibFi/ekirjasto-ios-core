@@ -104,9 +104,11 @@ class TPPEPUBViewController: TPPBaseReaderViewController {
 
   override open func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
-    if let appearance = TPPConfiguration.defaultAppearance() {
-      navigationController?.navigationBar.setAppearance(appearance)
-      navigationController?.navigationBar.forceUpdateAppearance(style: systemUserInterfaceStyle)
+    if #unavailable(iOS 26) {
+      if let appearance = TPPConfiguration.defaultAppearance() {
+        navigationController?.navigationBar.setAppearance(appearance)
+        navigationController?.navigationBar.forceUpdateAppearance(style: systemUserInterfaceStyle)
+      }
     }
 
     navigationController?.navigationBar.tintColor = TPPConfiguration.iconColor()
@@ -173,12 +175,14 @@ extension TPPEPUBViewController: TPPReaderSettingsDelegate {
   /// - Parameter appearance: The appearance.
   internal func setUIColor(for appearance: UserProperty) {
     let colors = TPPAssociatedColors.colors(for: appearance)
-    
+
     navigator.view.backgroundColor = colors.backgroundColor
     view.backgroundColor = colors.backgroundColor
     view.tintColor = colors.textColor
-    navigationController?.navigationBar.setAppearance(TPPConfiguration.appearance(withBackgroundColor: colors.backgroundColor))
-    navigationController?.navigationBar.forceUpdateAppearance(style: colors.navigationColor == .black ? .light : .dark)
+    if #unavailable(iOS 26) {
+      navigationController?.navigationBar.setAppearance(TPPConfiguration.appearance(withBackgroundColor: colors.backgroundColor))
+      navigationController?.navigationBar.forceUpdateAppearance(style: colors.navigationColor == .black ? .light : .dark)
+    }
     navigationController?.navigationBar.tintColor = colors.navigationColor
     tabBarController?.tabBar.tintColor = colors.navigationColor
   }

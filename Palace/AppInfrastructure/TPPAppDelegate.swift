@@ -48,6 +48,7 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
     // If we use SceneDelegate now, the app crashes during TPPRootTabBarController.shared initialization.
     // There can be other places in code that use TPPAppDelegate.window property.
     window = UIWindow()
+    window?.backgroundColor = TPPConfiguration.backgroundColor()
     window?.tintColor = TPPConfiguration.mainColor()
     window?.tintAdjustmentMode = .normal
     window?.makeKeyAndVisible()
@@ -142,27 +143,26 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
     // Set the appearance of the tab bar (the bottom bar in app)
     // Use the tabBarAppearance already defined for the tab bar
     
-    UITabBar.appearance().standardAppearance = tabBarAppearance
-    UITabBar.appearance().tintColor = TPPConfiguration.compatiblePrimaryColor()
-    UITabBar.appearance().backgroundColor = TPPConfiguration.backgroundColor()
-    
-    
-    // UINavigationBar
-    // Set the appearance of the navigation bar (the top bar in app)
-    // Two size variations exist:
-    //      standardAppearance = used if navigation bar is currently of normal (standard) height
-    //      compactAppearance = used if small navigation bar is shown (iPhone in landscape)
-    // Standard and compact apperances are used when user is scrolling down the content in view,
-    // otherwise the scroll edge apperances are used (for example if there is no scrollable content in view)
-    //      scrollEdgeAppearance = used when view is scrolled to top (content top is "touching" the navigation bar)
-    
-    UINavigationBar.appearance().tintColor = TPPConfiguration.iconColor()
-    UINavigationBar.appearance().standardAppearance = TPPConfiguration.defaultAppearance()
-    UINavigationBar.appearance().compactAppearance = TPPConfiguration.defaultAppearance()
-    UINavigationBar.appearance().scrollEdgeAppearance = TPPConfiguration.defaultAppearance()
-    
-    if #available(iOS 15.0, *) {
-      UINavigationBar.appearance().compactScrollEdgeAppearance = TPPConfiguration.defaultAppearance()
+    if #available(iOS 26, *) {
+      // On iOS 26+, let Liquid Glass handle tab bar and navigation bar appearance.
+      // Only set tint colors to preserve branding.
+      UITabBar.appearance().tintColor = TPPConfiguration.compatiblePrimaryColor()
+      UINavigationBar.appearance().tintColor = TPPConfiguration.iconColor()
+    } else {
+      UITabBar.appearance().standardAppearance = tabBarAppearance
+      UITabBar.appearance().tintColor = TPPConfiguration.compatiblePrimaryColor()
+      UITabBar.appearance().backgroundColor = TPPConfiguration.backgroundColor()
+
+      // UINavigationBar
+      // Set the appearance of the navigation bar (the top bar in app)
+      UINavigationBar.appearance().tintColor = TPPConfiguration.iconColor()
+      UINavigationBar.appearance().standardAppearance = TPPConfiguration.defaultAppearance()
+      UINavigationBar.appearance().compactAppearance = TPPConfiguration.defaultAppearance()
+      UINavigationBar.appearance().scrollEdgeAppearance = TPPConfiguration.defaultAppearance()
+
+      if #available(iOS 15.0, *) {
+        UINavigationBar.appearance().compactScrollEdgeAppearance = TPPConfiguration.defaultAppearance()
+      }
     }
 
     TPPErrorLogger.logNewAppLaunch()

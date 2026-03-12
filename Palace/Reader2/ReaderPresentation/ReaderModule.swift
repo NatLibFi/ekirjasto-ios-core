@@ -117,7 +117,16 @@ final class ReaderModule: ReaderModuleAPI {
       readerVC.navigationItem.backBarButtonItem = backItem
       readerVC.extendedLayoutIncludesOpaqueBars = true
       readerVC.hidesBottomBarWhenPushed = true
-      navigationController.pushViewController(readerVC, animated: true)
+
+      // On iPad with iOS 18+, the floating tab bar is not hidden by
+      // hidesBottomBarWhenPushed. Present modally to avoid tab bar overlay.
+      if UIDevice.current.userInterfaceIdiom == .pad {
+        let readerNav = UINavigationController(rootViewController: readerVC)
+        readerNav.modalPresentationStyle = .fullScreen
+        navigationController.present(readerNav, animated: true)
+      } else {
+        navigationController.pushViewController(readerVC, animated: true)
+      }
 
     } catch {
       delegate?.presentError(error, from: navigationController)

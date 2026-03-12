@@ -75,10 +75,10 @@ static CGFloat const kTableViewCrossfadeDuration = 0.3;
   [super viewDidLoad];
   
   self.view.backgroundColor = [TPPConfiguration backgroundColor];
-  
+
   self.refreshControl = [[UIRefreshControl alloc] init];
   [self.refreshControl addTarget:self action:@selector(userDidRefresh:) forControlEvents:UIControlEventValueChanged];
-  
+
   self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
   self.tableView.autoresizingMask = (UIViewAutoresizingFlexibleWidth |
                                      UIViewAutoresizingFlexibleHeight);
@@ -88,7 +88,9 @@ static CGFloat const kTableViewCrossfadeDuration = 0.3;
   self.tableView.delegate = self;
   self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
   self.tableView.allowsSelection = NO;
-  if (@available(iOS 11.0, *)) {
+  if (@available(iOS 26, *)) {
+    self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAutomatic;
+  } else if (@available(iOS 11.0, *)) {
     self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
   }
   [self.tableView addSubview:self.refreshControl];
@@ -135,16 +137,22 @@ static CGFloat const kTableViewCrossfadeDuration = 0.3;
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {
   [super didMoveToParentViewController:parent];
-  
+
   if(parent) {
+    // On iOS 26, contentInsetAdjustmentBehavior is Automatic,
+    // so the system handles insets. Skip manual inset calculation.
+    if (@available(iOS 26, *)) {
+      return;
+    }
+
     CGFloat top = parent.topLayoutGuide.length;
-    
+
     if (self.facetBarView.frame.size.height > 0) {
       top = CGRectGetMaxY(self.facetBarView.frame) + kTableViewInsetAdjustmentWithEntryPoints;
     }
-    
+
     CGFloat bottom = parent.bottomLayoutGuide.length;
-    
+
     UIEdgeInsets insets = UIEdgeInsetsMake(top, 0, bottom, 0);
     self.tableView.contentInset = insets;
     self.tableView.scrollIndicatorInsets = insets;
@@ -297,7 +305,13 @@ viewForHeaderInSection:(NSInteger const)section
   CGRect const frame = CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame), kSectionHeaderHeight);
   UIView *const view = [[UIView alloc] initWithFrame:frame];
   view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-  view.backgroundColor = [[TPPConfiguration backgroundColor] colorWithAlphaComponent:0.9];
+  if (@available(iOS 26, *)) {
+    view.backgroundColor = [TPPConfiguration backgroundColor];
+    // Lock to current interface style so Liquid Glass cannot flip it mid-scroll
+    view.overrideUserInterfaceStyle = self.traitCollection.userInterfaceStyle;
+  } else {
+    view.backgroundColor = [[TPPConfiguration backgroundColor] colorWithAlphaComponent:0.9];
+  }
   
   // Creates a header button that displays the title of a category and allows the user to tap on it to view more books in that category.
   {
