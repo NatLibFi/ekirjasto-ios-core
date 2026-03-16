@@ -19,11 +19,17 @@ class TPPSettingsViewController: NSObject {
     controller.tabBarItem.imageInsets = UIEdgeInsets(top: 4.0, left: 0.0, bottom: -4.0, right: 0.0)
     controller.navigationItem.backButtonTitle = Strings.Settings.settingsNavTitle
     
-    let titleViewLabel = UILabel()
-    titleViewLabel.text = Strings.Settings.settingsNavTitle
-    titleViewLabel.font = UIFont.palaceFont(ofSize: 16)
-    titleViewLabel.accessibilityTraits = .header
-    controller.navigationItem.titleView = titleViewLabel
+    // On iPad iOS 26+, the floating tab bar already shows the title,
+    // so the extra label is redundant.
+    if #available(iOS 26, *), UIDevice.current.userInterfaceIdiom == .pad {
+      // No titleView needed — tab bar shows the title
+    } else {
+      let titleViewLabel = UILabel()
+      titleViewLabel.text = Strings.Settings.settingsNavTitle
+      titleViewLabel.font = UIFont.palaceFont(ofSize: 16)
+      titleViewLabel.accessibilityTraits = .header
+      controller.navigationItem.titleView = titleViewLabel
+    }
    
     let navigationController = UINavigationController(rootViewController: controller)
     return navigationController

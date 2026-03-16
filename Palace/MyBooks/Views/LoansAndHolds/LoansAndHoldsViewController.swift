@@ -16,10 +16,12 @@ class LoansAndHoldsViewController: NSObject {
     // LoansAndHoldsMainView (a SwiftUI view) into the app's UIKit view hierarchy.
     // LoansViewModel and HoldsViewModel contain the main logic for these subviews,
     // and we pass them as parameters for the LoansAndHoldsMainView
+    let selection = LoansAndHoldsSelection()
     let hostingController = UIHostingController(
       rootView: LoansAndHoldsView(
         loansViewModel: LoansViewModel(),
-        holdsViewModel: HoldsViewModel()
+        holdsViewModel: HoldsViewModel(),
+        selection: selection
       )
     )
 
@@ -36,13 +38,29 @@ class LoansAndHoldsViewController: NSObject {
     // Title view label is displayed at the top of the view,
     // below the floating tab bar, for iPads running iOS 18 or higher
     // with a regular horizontal size class.
-    //The style matches the lane titles of the catalog's ungrouped view.
-    let titleViewLabel = UILabel()
-    titleViewLabel.text = Strings.MyBooksView.loansAndHoldsNavTitle
-    titleViewLabel.font = UIFont.palaceFont(ofSize: 16)
-    titleViewLabel.textAlignment = .center
-    titleViewLabel.accessibilityTraits = .header
-    hostingController.navigationItem.titleView = titleViewLabel
+    // On iPad iOS 26+, the floating tab bar already shows the title,
+    // so the extra label is redundant.
+    if #available(iOS 26, *), UIDevice.current.userInterfaceIdiom == .pad {
+      // Place Loans/Holds segmented control in the nav bar titleView
+      // to match the Browse Books style with Liquid Glass.
+      let segmentedControl = UISegmentedControl(items: [
+        Strings.MyBooksView.loansNavTitle,
+        Strings.MyBooksView.holdsNavTitle
+      ])
+      segmentedControl.selectedSegmentIndex = 0
+      segmentedControl.addAction(UIAction { [weak selection] action in
+        guard let control = action.sender as? UISegmentedControl else { return }
+        selection?.selectedSubview = control.selectedSegmentIndex == 0 ? "Loans" : "Holds"
+      }, for: .valueChanged)
+      hostingController.navigationItem.titleView = segmentedControl
+    } else {
+      let titleViewLabel = UILabel()
+      titleViewLabel.text = Strings.MyBooksView.loansAndHoldsNavTitle
+      titleViewLabel.font = UIFont.palaceFont(ofSize: 16)
+      titleViewLabel.textAlignment = .center
+      titleViewLabel.accessibilityTraits = .header
+      hostingController.navigationItem.titleView = titleViewLabel
+    }
 
     // Button text for returning to this view.
     // This button is displayed in book detail view and search view,

@@ -98,6 +98,11 @@ static CGFloat const kTableViewCrossfadeDuration = 0.3;
   self.tableView.allowsSelection = NO;
   if (@available(iOS 26, *)) {
     self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAutomatic;
+    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+      // Hide the top scroll edge fade so section headers near the top
+      // are not blurred by the Liquid Glass nav bar effect.
+      self.tableView.topEdgeEffect.hidden = YES;
+    }
   } else if (@available(iOS 11.0, *)) {
     self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
   }
@@ -575,15 +580,32 @@ viewForHeaderInSection:(NSInteger const)section
 
   UIViewController *const viewController = [[TPPCatalogFeedViewController alloc]
                                             initWithURL:urlToLoad];
-  
-  UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 150)];
-  label.numberOfLines = 0;
-  label.lineBreakMode = NSLineBreakByWordWrapping;
-  label.textAlignment = NSTextAlignmentCenter;
-  label.font = [UIFont semiBoldPalaceFontOfSize: 16];
-  label.text = lane.title;
-  label.accessibilityTraits = UIAccessibilityTraitHeader;
-  viewController.navigationItem.titleView = label;
+
+  BOOL useStandardTitle = NO;
+  if (@available(iOS 26, *)) {
+    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+      useStandardTitle = YES;
+    }
+  }
+
+  if (useStandardTitle) {
+    // On iPad iOS 26, use the standard title which centers properly
+    // in the Liquid Glass navigation bar.
+    viewController.title = lane.title;
+    // Only prevent extending under the top bar so content
+    // doesn't show through the transparent tab bar area.
+    // Keep bottom edge extended so content reaches the screen edge.
+    viewController.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
+  } else {
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 150)];
+    label.numberOfLines = 0;
+    label.lineBreakMode = NSLineBreakByWordWrapping;
+    label.textAlignment = NSTextAlignmentCenter;
+    label.font = [UIFont semiBoldPalaceFontOfSize: 16];
+    label.text = lane.title;
+    label.accessibilityTraits = UIAccessibilityTraitHeader;
+    viewController.navigationItem.titleView = label;
+  }
 
   [self.navigationController pushViewController:viewController animated:YES];
 }

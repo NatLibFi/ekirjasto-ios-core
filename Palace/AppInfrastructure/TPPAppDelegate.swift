@@ -145,9 +145,16 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
     
     if #available(iOS 26, *) {
       // On iOS 26+, let Liquid Glass handle tab bar and navigation bar appearance.
-      // Only set tint colors to preserve branding.
+      // Set tint colors to preserve branding and use default background
+      // to get a solid nav bar (matching the standard iOS behavior).
       UITabBar.appearance().tintColor = TPPConfiguration.compatiblePrimaryColor()
       UINavigationBar.appearance().tintColor = TPPConfiguration.iconColor()
+      let navAppearance = UINavigationBarAppearance()
+      navAppearance.configureWithDefaultBackground()
+      UINavigationBar.appearance().standardAppearance = navAppearance
+      UINavigationBar.appearance().scrollEdgeAppearance = navAppearance
+      UINavigationBar.appearance().compactAppearance = navAppearance
+      UINavigationBar.appearance().compactScrollEdgeAppearance = navAppearance
     } else {
       UITabBar.appearance().standardAppearance = tabBarAppearance
       UITabBar.appearance().tintColor = TPPConfiguration.compatiblePrimaryColor()

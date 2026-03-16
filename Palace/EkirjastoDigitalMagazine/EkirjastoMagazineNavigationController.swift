@@ -10,8 +10,14 @@ class EkirjastoMagazineNavigationController: TPPLibraryNavigationController {
 
   override init(rootViewController: UIViewController) {
     super.init(rootViewController: rootViewController)
-    
-    navigationBar.isHidden = true
+
+    // On iPad iOS 26, show the navigation bar so the floating tab bar
+    // does not overlap the web content.
+    if #available(iOS 26, *), UIDevice.current.userInterfaceIdiom == .pad {
+      navigationBar.isHidden = false
+    } else {
+      navigationBar.isHidden = true
+    }
     
     tabBarItem.title = NSLocalizedString("Magazines", comment: "")
     tabBarItem.image = UIImage(named: "Magazines")
