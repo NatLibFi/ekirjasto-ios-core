@@ -72,8 +72,10 @@ class TPPEPUBViewController: TPPBaseReaderViewController {
     super.willMove(toParent: parent)
 
     // Restore catalog default UI colors
-    navigationController?.navigationBar.barStyle = .default
-    navigationController?.navigationBar.barTintColor = nil
+    if #unavailable(iOS 26) {
+      navigationController?.navigationBar.barStyle = .default
+      navigationController?.navigationBar.barTintColor = nil
+    }
   }
 
   override open func viewWillAppear(_ animated: Bool) {
