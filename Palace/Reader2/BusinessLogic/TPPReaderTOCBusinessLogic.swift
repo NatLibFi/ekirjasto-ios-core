@@ -21,7 +21,17 @@ class TPPReaderTOCBusinessLogic {
   init(r2Publication: Publication, currentLocation: Locator?) {
     self.publication = r2Publication
     self.currentLocation = currentLocation
-    self.tocElements = flatten(publication.tableOfContents)
+    // tableOfContents is async in Readium 3.x; load synchronously via Task
+    var toc: [Link] = []
+    let semaphore = DispatchSemaphore(value: 0)
+    Task {
+      if let result = try? await r2Publication.tableOfContents().get() {
+        toc = result
+      }
+      semaphore.signal()
+    }
+    semaphore.wait()
+    self.tocElements = flatten(toc)
   }
 
   private func flatten(_ links: [Link], level: Int = 0) -> [(level: Int, link: Link)] {
@@ -36,12 +46,13 @@ class TPPReaderTOCBusinessLogic {
     guard tocElements.indices.contains(index) else {
       return nil
     }
-    return Locator(link: tocElements[index].link)
+    let link = tocElements[index].link
+    return Locator(href: link.url(), mediaType: link.mediaType ?? .html, title: link.title)
   }
 
   func shouldSelectTOCItem(at index: Int) -> Bool {
     // If the locator's href is #, then the item is not a link.
-    guard let locator = tocLocator(at: index), locator.href != "#" else {
+    guard let locator = tocLocator(at: index), locator.href.string != "#" else {
       return false
     }
     return true

@@ -12,14 +12,14 @@ import ReadiumNavigator
 import ReadiumShared
 
 protocol TPPReaderSettingsDelegate: AnyObject {
-    func getUserSettings() -> UserSettings
-    func updateUserSettingsStyle()
-    func setUIColor(for appearance: UserProperty)
+    func getPreferences() -> EPUBPreferences
+    func submitPreferences(_ preferences: EPUBPreferences)
+    func setUIColor(for theme: Theme?)
 }
 
 class TPPReaderSettingsVC: UIViewController {
-  static func makeSwiftUIView(settings: UserSettings, delegate: TPPReaderSettingsDelegate) -> UIViewController {
-    let readerSettings = TPPReaderSettings(userSettings: settings, delegate: delegate)
+  static func makeSwiftUIView(preferences: EPUBPreferences, delegate: TPPReaderSettingsDelegate) -> UIViewController {
+    let readerSettings = TPPReaderSettings(preferences: preferences, delegate: delegate)
     let controller = UIHostingController(rootView: TPPReaderSettingsView(settings: readerSettings))
     return controller
   }

@@ -12,6 +12,7 @@
 
 import R2LCPClient
 import ReadiumLCP
+import ReadiumShared
 
 let lcpService: LCPService = {
   let httpClient = DefaultHTTPClient()

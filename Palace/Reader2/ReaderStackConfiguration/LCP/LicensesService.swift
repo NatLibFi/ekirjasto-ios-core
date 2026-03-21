@@ -9,7 +9,7 @@
 import Foundation
 import ReadiumShared
 import ReadiumLCP
-import ZIPFoundation
+import ReadiumZIPFoundation
 
 enum TPPLicensesServiceError: Error {
   case licenseError(message: String)

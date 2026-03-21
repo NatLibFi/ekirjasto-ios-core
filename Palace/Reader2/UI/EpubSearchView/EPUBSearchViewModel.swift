@@ -10,97 +10,89 @@ import Foundation
 import ReadiumShared
 import ReadiumNavigator
 
-protocol EPUBSearchDelegate: class {
+protocol EPUBSearchDelegate: AnyObject {
   func didSelect(location: Locator)
 }
 
 final class EPUBSearchViewModel: ObservableObject {
   enum State {
     case empty
-    case starting(R2Shared.Cancellable?)
-    case idle(SearchIterator, isFetching: Bool)
-    case loadingNext(SearchIterator, R2Shared.Cancellable?)
+    case searching
+    case idle
     case end
-    case failure(LocalizedError)
-  
+    case failure(Error)
+
     var isLoadingState: Bool {
       switch self {
-        case .starting, .loadingNext:
+        case .searching:
          return true
       default:
         return false
       }
     }
   }
-  
+
   @Published private(set) var state: State = .empty
   @Published private(set) var results: [Locator] = []
-  
+
   private var publication: Publication
+  private var searchIterator: SearchIterator?
+  private var searchTask: Task<Void, Never>?
   weak var delegate: EPUBSearchDelegate?
-  
+
   init(publication: Publication) {
     self.publication = publication
   }
 
   func search(with query: String) {
     cancelSearch()
-    
-    let cancellable = publication._search(query: query) { result in
+    state = .searching
+
+    searchTask = Task {
+      let result = await publication.search(query: query)
       switch result {
       case .success(let iterator):
-        self.state = .idle(iterator, isFetching: false)
-        self.fetchNextBatch()
+        self.searchIterator = iterator
+        await fetchNextBatch()
       case .failure(let error):
-        self.state = .failure(error)
+        await MainActor.run {
+          self.state = .failure(error)
+        }
       }
     }
-    
-    state = .starting(cancellable)
   }
 
-  func fetchNextBatch() {
-    guard case let .idle(iterator, _) = state else { return }
-    
-    state = .loadingNext(iterator, nil)
-    
-    let cancellable = iterator.next { result in
-      switch result {
-      case .success(let collection):
-        if let collection = collection {
+  func fetchNextBatch() async {
+    guard let iterator = searchIterator else { return }
+
+    let result = await iterator.next()
+    switch result {
+    case .success(let collection):
+      if let collection = collection {
+        await MainActor.run {
           for locator in collection.locators {
             if !self.results.contains(where: { $0.href == locator.href }) {
               self.results.append(locator)
             }
           }
-          self.state = .idle(iterator, isFetching: false)
-        } else {
+          self.state = .idle
+        }
+      } else {
+        await MainActor.run {
           self.state = .end
         }
-        
-      case .failure(let error):
+      }
+    case .failure(let error):
+      await MainActor.run {
         self.state = .failure(error)
       }
     }
-    
-    state = .loadingNext(iterator, cancellable)
   }
 
-
-  
   func cancelSearch() {
-    switch state {
-    case .starting(let cancellable):
-      cancellable?.cancel()
-    case .idle(let iterator, _):
-      iterator.close()
-    case .loadingNext(let iterator, let cancellable):
-      cancellable?.cancel()
-      iterator.close()
-    default:
-      break
-    }
-    
+    searchTask?.cancel()
+    searchTask = nil
+    searchIterator = nil
     results.removeAll()
     state = .empty
   }

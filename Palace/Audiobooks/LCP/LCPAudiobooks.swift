@@ -16,16 +16,18 @@ import PalaceAudiobookToolkit
 
 /// LCP Audiobooks helper class
 @objc class LCPAudiobooks: NSObject {
-    
+
   private let audiobookUrlKey = "audiobookUrl"
   private let audioFileHrefKey = "audioFileHref"
   private let destinationFileUrlKey = "destinationFileUrl"
   private static let expectedAcquisitionType = "application/vnd.readium.lcp.license.v1.0+json"
-  
+
   private let audiobookUrl: URL
   private let lcpService = LCPLibraryService()
-  private let streamer: Streamer
-  
+  private let httpClient: HTTPClient
+  private let assetRetriever: AssetRetriever
+  private let publicationOpener: PublicationOpener
+
   /// Initialize for an LCP audiobook
   /// - Parameter audiobookUrl: must be a file with `.lcpa` extension
   @objc init?(for audiobookUrl: URL) {
@@ -35,26 +37,47 @@ import PalaceAudiobookToolkit
       return nil
     }
     self.audiobookUrl = audiobookUrl
-    self.streamer = Streamer(contentProtections: [contentProtection])
+    self.httpClient = DefaultHTTPClient()
+    self.assetRetriever = AssetRetriever(httpClient: httpClient)
+    self.publicationOpener = PublicationOpener(
+      parser: DefaultPublicationParser(
+        httpClient: httpClient,
+        assetRetriever: assetRetriever,
+        pdfFactory: DefaultPDFDocumentFactory()
+      ),
+      contentProtections: [contentProtection]
+    )
   }
-  
+
   /// Content dictionary for `AudiobookFactory`
   @objc func contentDictionary(completion: @escaping (_ json: NSDictionary?, _ error: NSError?) -> ()) {
     let manifestPath = "manifest.json"
-    let asset = FileAsset(url: self.audiobookUrl)
-    streamer.open(asset: asset, allowUserInteraction: false) { result in
+    Task {
       do {
-        let publication = try result.get()
-        let resourse = publication.getResource(at: manifestPath)
-        let json = try resourse.readAsJSON().get()
-        completion(json as NSDictionary, nil)
+        guard let url = FileURL(url: audiobookUrl) else {
+          completion(nil, LCPAudiobooks.nsError(for: NSError(domain: "LCPAudiobooks", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
+          return
+        }
+        let asset = try await assetRetriever.retrieve(url: url).get()
+        let publication = try await publicationOpener.open(asset: asset, allowUserInteraction: false).get()
+        let manifestLink = publication.linkWithHREF(AnyURL(string: "/" + manifestPath)!) ?? publication.linkWithHREF(AnyURL(string: manifestPath)!)
+        if let manifestLink = manifestLink, let resource = publication.get(manifestLink) {
+          let data = try await resource.read().get()
+          if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? NSDictionary {
+            completion(json, nil)
+          } else {
+            completion(nil, LCPAudiobooks.nsError(for: NSError(domain: "LCPAudiobooks", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to parse manifest"])))
+          }
+        } else {
+          completion(nil, LCPAudiobooks.nsError(for: NSError(domain: "LCPAudiobooks", code: -1, userInfo: [NSLocalizedDescriptionKey: "Resource not found"])))
+        }
       } catch {
         TPPErrorLogger.logError(error, summary: "Error reading LCP \(manifestPath) file", metadata: [self.audiobookUrlKey: self.audiobookUrl])
         completion(nil, LCPAudiobooks.nsError(for: error))
       }
     }
   }
-  
+
   /// Check if the book is LCP audiobook
   /// - Parameter book: audiobook
   /// - Returns: `true` if the book is an LCP DRM protected audiobook, `false` otherwise
@@ -67,7 +90,7 @@ import PalaceAudiobookToolkit
   /// - Parameter error: Error object
   /// - Returns: NSError object
   private static func nsError(for error: Error) -> NSError {
-    let description = (error as? LCPError)?.errorDescription ?? error.localizedDescription
+    let description = error.localizedDescription
     return NSError(domain: "SimplyE.LCPAudiobooks", code: 0, userInfo: [
       NSLocalizedDescriptionKey: description,
       "Error": error
@@ -79,19 +102,23 @@ import PalaceAudiobookToolkit
 extension LCPAudiobooks: DRMDecryptor {
 
   /// Decrypt protected file
-  /// - Parameters:
-  ///   - url: encrypted file URL.
-  ///   - resultUrl: URL to save decrypted file at.
-  ///   - completion: decryptor callback with optional `Error`.
   func decrypt(url: URL, to resultUrl: URL, completion: @escaping (Error?) -> Void) {
-    let asset = FileAsset(url: self.audiobookUrl)
-    streamer.open(asset: asset, allowUserInteraction: false) { result in
+    Task {
       do {
-        let publication = try result.get()
-        let resource = publication.getResource(at: url.path)
-        let data = try resource.read().get()
-        try data.write(to: resultUrl)
-        completion(nil)
+        guard let assetUrl = FileURL(url: audiobookUrl) else {
+          completion(NSError(domain: "LCPAudiobooks", code: -1))
+          return
+        }
+        let asset = try await assetRetriever.retrieve(url: assetUrl).get()
+        let publication = try await publicationOpener.open(asset: asset, allowUserInteraction: false).get()
+        let resourceLink = publication.linkWithHREF(AnyURL(string: "/" + url.path)!) ?? publication.linkWithHREF(AnyURL(string: url.path)!)
+        if let resourceLink = resourceLink, let resource = publication.get(resourceLink) {
+          let data = try await resource.read().get()
+          try data.write(to: resultUrl)
+          completion(nil)
+        } else {
+          completion(NSError(domain: "LCPAudiobooks", code: -1, userInfo: [NSLocalizedDescriptionKey: "Resource not found"]))
+        }
       } catch {
         TPPErrorLogger.logError(error, summary: "Error decrypting LCP audio file", metadata: [
           self.audiobookUrlKey: self.audiobookUrl,
@@ -101,18 +128,6 @@ extension LCPAudiobooks: DRMDecryptor {
         completion(error)
       }
     }
-  }
-}
-
-private extension Publication {
-  // R2 has changed its expectation about the leading slash;
-  // here we verify both cases.
-  func getResource(at path: String) -> Resource {
-    let resource = get("/" + path)
-    guard type(of: resource) != FailureResource.self else {
-      return get(path)
-    }
-    return resource
   }
 }
 

@@ -11,23 +11,23 @@ import ReadiumShared
 import ReadiumNavigator
 
 class TPPReaderSettings: ObservableObject {
-  
-  /// `fontSize` user property value
-  @Published var fontSize: Float = 100
-  
-  /// Minimal font size for `fontSize` user property
-  private var minFontSize: Float = 100
-  
-  /// Maximal font size for `fontSize` user property
-  private var maxFontSize: Float = 100
-  
+
+  /// Font size as percentage (e.g. 1.0 = 100%)
+  @Published var fontSize: Double = 1.0
+
+  /// Minimum font size
+  private let minFontSize: Double = 0.75
+
+  /// Maximum font size
+  private let maxFontSize: Double = 2.50
+
   /// Increase/decrease step
-  private var fontSizeStep: Float = 100
-  
+  private let fontSizeStep: Double = 0.125
+
   @Published var fontFamilyIndex: Int = 0
-  
+
   @Published var appearanceIndex: Int = 0
-  
+
   @Published var screenBrightness: Double {
     didSet {
       if UIScreen.main.brightness != screenBrightness {
@@ -35,109 +35,99 @@ class TPPReaderSettings: ObservableObject {
       }
     }
   }
-  
+
   @Published var textColor: UIColor = .black
-  
+
   @Published var backgroundColor: UIColor = .white
-  
-  private(set) var userSettings: UserSettings
-  private var delegate: TPPReaderSettingsDelegate?
-  
-  init(userSettings: UserSettings, delegate: TPPReaderSettingsDelegate) {
-    self.userSettings = userSettings
+
+  private(set) var preferences: EPUBPreferences
+  private weak var delegate: TPPReaderSettingsDelegate?
+
+  /// Font family options matching the legacy Readium CSS defaults
+  static let fontFamilies = ["Original", "Helvetica Neue", "Iowan Old Style", "Athelas", "Seravek", "OpenDyslexic", "AccessibleDfA", "IA Writer Duospace"]
+
+  /// Appearance themes
+  static let themes: [Theme?] = [.light, .sepia, .dark]
+
+  init(preferences: EPUBPreferences, delegate: TPPReaderSettingsDelegate) {
+    self.preferences = preferences
     self.delegate = delegate
 
-    // Set font size variation
-    if let settingsFontSize = userSettings.userProperties.getProperty(reference: ReadiumCSSReference.fontSize.rawValue) as? Incrementable {
-      settingsFontSize.max = 250.0
-      settingsFontSize.min = 75.0
-      settingsFontSize.step = 12.5
+    // Font size
+    self.fontSize = preferences.fontSize ?? 1.0
 
-      self.fontSize = settingsFontSize.value
-      self.minFontSize = settingsFontSize.min
-      self.maxFontSize = settingsFontSize.max
-      self.fontSizeStep = settingsFontSize.step
+    // Font family
+    if let family = preferences.fontFamily?.rawValue,
+       let index = TPPReaderSettings.fontFamilies.firstIndex(of: family) {
+      self.fontFamilyIndex = index
     }
-    
-    if let fontFamily = userSettings.userProperties.getProperty(reference: ReadiumCSSReference.fontFamily.rawValue) as? Enumerable {
-      self.fontFamilyIndex = fontFamily.index
+
+    // Appearance/theme
+    if let theme = preferences.theme,
+       let index = TPPReaderSettings.themes.firstIndex(of: theme) {
+      self.appearanceIndex = index
     }
-    
-    if let appearance = userSettings.userProperties.getProperty(reference: ReadiumCSSReference.appearance.rawValue) as? Enumerable {
-      self.appearanceIndex = appearance.index
-      let colors = TPPAssociatedColors.colors(for: appearance)
-      backgroundColor = colors.backgroundColor
-      textColor = colors.textColor
-    }
-    
+
+    // Colors
+    let colors = TPPAssociatedColors.colors(forTheme: preferences.theme)
+    self.backgroundColor = colors.backgroundColor
+    self.textColor = colors.textColor
+
     screenBrightness = UIScreen.main.brightness
   }
-  
+
   /// Convenience init for previews
   init() {
-    userSettings = UserSettings()
+    preferences = .empty
     screenBrightness = UIScreen.main.brightness
   }
-  
-  /// Increase `fontSize` user property by `step` value, defined for this property.
+
+  /// Increase font size
   func increaseFontSize() {
-    if let settingsFontSize = userSettings.userProperties.getProperty(reference: ReadiumCSSReference.fontSize.rawValue) as? Incrementable {
-      settingsFontSize.increment()
-      fontSize = settingsFontSize.value
-      delegate?.updateUserSettingsStyle()
-      userSettings.save()
-    }
+    fontSize = min(fontSize + fontSizeStep, maxFontSize)
+    preferences.fontSize = fontSize
+    delegate?.submitPreferences(preferences)
   }
-  
-  /// Decrease `fontSize` user property by `step` value, defined for this property.
+
+  /// Decrease font size
   func decreaseFontSize() {
-    if let settingsFontSize = userSettings.userProperties.getProperty(reference: ReadiumCSSReference.fontSize.rawValue) as? Incrementable {
-      settingsFontSize.decrement()
-      fontSize = settingsFontSize.value
-      delegate?.updateUserSettingsStyle()
-      userSettings.save()
-    }
+    fontSize = max(fontSize - fontSizeStep, minFontSize)
+    preferences.fontSize = fontSize
+    delegate?.submitPreferences(preferences)
   }
-  
+
   /// Indicates whether `fontSize` property can be increased
   var canIncreaseFontSize: Bool {
-    fontSize + fontSizeStep < maxFontSize
+    fontSize + fontSizeStep <= maxFontSize
   }
-  
+
   /// Indicates whether `fontSize` property can be decreased
   var canDecreaseFontSize: Bool {
-    fontSize - fontSizeStep > minFontSize
+    fontSize - fontSizeStep >= minFontSize
   }
-  
-  /// Changes selected appearance index in `userSettings`
-  /// - Parameter appearanceIndex: index of selected appearance
+
+  /// Changes selected appearance/theme
   func changeAppearance(appearanceIndex: Int) {
-    if let appearance = userSettings.userProperties.getProperty(reference: ReadiumCSSReference.appearance.rawValue) as? Enumerable {
-      appearance.index = appearanceIndex
-      self.appearanceIndex = appearanceIndex
-      delegate?.updateUserSettingsStyle()
-      delegate?.setUIColor(for: appearance)
-      let colors = TPPAssociatedColors.colors(for: appearance)
-      backgroundColor = colors.backgroundColor
-      textColor = colors.textColor
-      userSettings.save()
-    }
+    self.appearanceIndex = appearanceIndex
+    let theme = TPPReaderSettings.themes[appearanceIndex]
+    preferences.theme = theme
+    delegate?.submitPreferences(preferences)
+    delegate?.setUIColor(for: theme)
+    let colors = TPPAssociatedColors.colors(forTheme: theme)
+    backgroundColor = colors.backgroundColor
+    textColor = colors.textColor
   }
-  
-  /// Changes selected font family indes in `userSettings`
-  /// - Parameter fontFamilyIndex: index of selected font family
+
+  /// Changes selected font family
   func changeFontFamily(fontFamilyIndex: Int) {
-    if let fontFamily = userSettings.userProperties.getProperty(reference: ReadiumCSSReference.fontFamily.rawValue) as? Enumerable,
-       let fontOverride = userSettings.userProperties.getProperty(reference: ReadiumCSSReference.fontOverride.rawValue) as? Switchable {
-      fontFamily.index = fontFamilyIndex
-      self.fontFamilyIndex = fontFamilyIndex
-      if fontFamily.index != 0 {
-        fontOverride.on = true
-      } else {
-        fontOverride.on = false
-      }
-      delegate?.updateUserSettingsStyle()
-      userSettings.save()
+    self.fontFamilyIndex = fontFamilyIndex
+    if fontFamilyIndex == 0 {
+      preferences.fontFamily = nil
+      preferences.publisherStyles = true
+    } else {
+      preferences.fontFamily = FontFamily(rawValue: TPPReaderSettings.fontFamilies[fontFamilyIndex])
+      preferences.publisherStyles = false
     }
+    delegate?.submitPreferences(preferences)
   }
 }

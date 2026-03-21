@@ -30,8 +30,7 @@ import ReadiumStreamer
     readerModule = ReaderModule(delegate: self,
                                 bookRegistry: TPPBookRegistry.shared)
 
-    // Set Readium 2's logging minimum level.
-    R2EnableLog(withMinimumSeverityLevel: .debug)
+    // R2EnableLog removed in Readium 3.x
   }
 
   deinit {

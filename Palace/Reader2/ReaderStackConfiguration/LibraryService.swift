@@ -58,16 +58,9 @@ final class LibraryService: Loggable {
   // MARK: Opening
 
   /// Opens the Readium 2 Publication for the given `book`.
-  ///
-  /// - Parameters:
-  ///   - book: The book to be opened.
-  ///   - sender: The VC that requested the opening and that will handle
-  ///   error alerts or other messages for the user.
-  ///   - completion: When this is called, the book is ready for
-  ///   presentation if there are no errors.
   func openBook(_ book: TPPBook,
                 sender: UIViewController,
-                completion: @escaping (CancellableResult<Publication, LibraryServiceError>) -> Void) {
+                completion: @escaping (Result<Publication, LibraryServiceError>) -> Void) {
 
     guard let bookUrl = book.url else {
       completion(.failure(.invalidBook))
@@ -82,15 +75,19 @@ final class LibraryService: Loggable {
   func openSample(_ book: TPPBook,
                   sampleURL: URL,
                 sender: UIViewController,
-                completion: @escaping (CancellableResult<Publication, LibraryServiceError>) -> Void) {
+                completion: @escaping (Result<Publication, LibraryServiceError>) -> Void) {
     Task {
       await openAndPresent(url: sampleURL, bookIdentifier: book.identifier, allowUserInteraction: true, sender: sender, completion: completion)
     }
   }
 
-  private func openAndPresent(url: URL, bookIdentifier: String, allowUserInteraction: Bool, sender: UIViewController?, completion: @escaping (CancellableResult<Publication, LibraryServiceError>) -> Void) async {
+  private func openAndPresent(url: URL, bookIdentifier: String, allowUserInteraction: Bool, sender: UIViewController?, completion: @escaping (Result<Publication, LibraryServiceError>) -> Void) async {
     do {
-      let asset = try await assetRetriever.retrieve(url: AnyURL(url)!).get()
+      guard let fileUrl = FileURL(url: url) else {
+        completion(.failure(.invalidBook))
+        return
+      }
+      let asset = try await assetRetriever.retrieve(url: fileUrl).get()
       let publication = try await publicationOpener.open(asset: asset, allowUserInteraction: allowUserInteraction, sender: sender).get()
 
       guard !publication.isRestricted else {
@@ -98,7 +95,7 @@ final class LibraryService: Loggable {
         if let error = publication.protectionError {
           completion(.failure(.openFailed(error)))
         } else {
-          completion(.cancelled)
+          completion(.failure(.openFailed(NSError(domain: "LibraryService", code: -1, userInfo: [NSLocalizedDescriptionKey: "Publication is restricted"]))))
         }
         return
       }

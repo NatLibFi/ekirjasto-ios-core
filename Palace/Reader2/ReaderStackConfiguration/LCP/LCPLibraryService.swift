@@ -55,21 +55,12 @@ import ReadiumLCP
   
   /// Fulfill LCP license publication.
   /// - Parameter file: LCP license file.
-  /// - Returns: fulfilled publication as `Deferred` (`CancellableReesult` interenally) object.
-  func fulfill(_ file: URL) -> Deferred<DRMFulfilledPublication, Error> {
-    return deferred { completion in
-      self.lcpService.acquirePublication(from: file) { result in
-        completion(result
-          .map {
-            DRMFulfilledPublication(
-              localURL: $0.localURL,
-              suggestedFilename: $0.suggestedFilename
-            )
-        }
-        .eraseToAnyError()
-        )
-      }
-    }
+  func fulfill(_ file: URL) async throws -> DRMFulfilledPublication {
+    let result = try await lcpService.acquirePublication(from: file)
+    return DRMFulfilledPublication(
+      localURL: result.localURL,
+      suggestedFilename: result.suggestedFilename
+    )
   }
 
   /// Fulfill LCP license publication
@@ -87,7 +78,7 @@ import ReadiumLCP
       guard error == nil else {
         let domain = "LCP fulfillment error"
         let code = TPPErrorCode.lcpDRMFulfillmentFail.rawValue
-        let errorDescription = (error as? LCPError)?.errorDescription ?? (error as? TPPLicensesServiceError)?.description ?? error?.localizedDescription
+        let errorDescription = (error as? TPPLicensesServiceError)?.description ?? error?.localizedDescription
         let nsError = NSError(domain: domain, code: code, userInfo: [
           NSLocalizedDescriptionKey: errorDescription as Any
         ])

@@ -19,7 +19,7 @@ struct TPPAppearanceColors {
   let foregroundColor: UIColor
   let selectedForegroundColor: UIColor
   let tintColor: UIColor
-  
+
   /// Black text on white background set of colors
   static var blackOnWhiteColors: TPPAppearanceColors {
     TPPAppearanceColors(
@@ -64,31 +64,25 @@ struct TPPAppearanceColors {
 class TPPAssociatedColors {
 
   static let shared = TPPAssociatedColors()
-  
-  /// epubNavigaor property, set this one when user opens a book
-  var userSettings: UserSettings?
-  
+
+  /// Current theme, updated when user opens a book or changes settings
+  var currentTheme: Theme?
+
   /// Colors for selected appearance
   var appearanceColors: TPPAppearanceColors {
-    let appearance = userSettings?.userProperties.getProperty(reference: ReadiumCSSReference.appearance.rawValue)
-    return TPPAssociatedColors.colors(for: appearance)
+    return TPPAssociatedColors.colors(forTheme: currentTheme)
   }
-  
-  /// Get associated colors for a specific appearance setting.
-  /// - parameter appearance: The selected appearance.
-  /// - Returns: A tuple with a background color and a text color.
-  static func colors(for appearance: UserProperty? = nil) -> TPPAppearanceColors {
-    if let appearance = appearance {
-      switch appearance.toString() {
-      case "readium-sepia-on":
-        return .blackOnSepiaColors
-      case "readium-night-on":
-        return .whiteOnBlackColors
-      default:
-        return .blackOnWhiteColors
-      }
+
+  /// Get associated colors for a specific theme.
+  static func colors(forTheme theme: Theme? = nil) -> TPPAppearanceColors {
+    switch theme {
+    case .sepia:
+      return .blackOnSepiaColors
+    case .dark:
+      return .whiteOnBlackColors
+    default:
+      return .blackOnWhiteColors
     }
-    return .blackOnWhiteColors
   }
 
 }

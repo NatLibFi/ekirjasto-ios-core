@@ -70,7 +70,7 @@ struct SuomiIdentificationWebView: UIViewRepresentable {
       if let url = webView.url {
         if url.absoluteString.contains("saml2acs") || url.absoluteString.contains("finish") {
           let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
-          let token = urlComponents?.queryItems?.first(where: {$0.name == "token"})?.value
+          let _token = urlComponents?.queryItems?.first(where: {$0.name == "token"})?.value
           
           webView.configuration.websiteDataStore.httpCookieStore.getAllCookies() { (cookies) in
             
