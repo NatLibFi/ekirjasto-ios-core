@@ -12,7 +12,7 @@
 
 import Foundation
 import UIKit
-import R2Shared
+import ReadiumShared
 import ReadiumLCP
 
 
@@ -33,7 +33,16 @@ import ReadiumLCP
   private var authenticationCallbacks: [String: (String?) -> Void] = [:]
   
   override init() {
-    self.lcpService = LCPService(client: lcpClient)
+    // These will be set up properly when LibraryService provides them
+    let httpClient = DefaultHTTPClient()
+    let assetRetriever = AssetRetriever(httpClient: httpClient)
+    self.lcpService = LCPService(
+      client: lcpClient,
+      licenseRepository: LCPKeychainLicenseRepository(),
+      passphraseRepository: LCPKeychainPassphraseRepository(),
+      assetRetriever: assetRetriever,
+      httpClient: httpClient
+    )
     super.init()
   }
   

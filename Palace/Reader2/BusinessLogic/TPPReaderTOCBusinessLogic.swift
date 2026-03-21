@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import R2Shared
+import ReadiumShared
 
 typealias TPPReaderTOCLink = (level: Int, link: Link)
 

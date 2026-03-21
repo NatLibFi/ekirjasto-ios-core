@@ -9,8 +9,8 @@
 import Foundation
 import Combine
 import AVFoundation
-import R2Shared
-import R2Navigator
+import ReadiumShared
+import ReadiumNavigator
 
 /// Iterator direction
 private enum Direction {

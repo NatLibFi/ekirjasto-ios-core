@@ -7,8 +7,8 @@
 //
 
 import SwiftUI
-import R2Shared
-import R2Navigator
+import ReadiumShared
+import ReadiumNavigator
 
 class TPPReaderSettings: ObservableObject {
   

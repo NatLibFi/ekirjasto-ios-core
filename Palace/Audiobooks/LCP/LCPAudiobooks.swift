@@ -9,8 +9,8 @@
 #if LCP
 
 import Foundation
-import R2Shared
-import R2Streamer
+import ReadiumShared
+import ReadiumStreamer
 import ReadiumLCP
 import PalaceAudiobookToolkit
 

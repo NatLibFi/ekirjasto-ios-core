@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import R2Shared
+import ReadiumShared
 
 extension TPPBookLocation {
   static let r2Renderer = "readium2"
@@ -100,8 +100,8 @@ extension TPPBookLocation {
                                       position: position,
                                       otherLocations: otherLocations)
     
-    return Locator(href: href,
-                   type: type,
+    return Locator(href: AnyURL(string: href)!,
+                   mediaType: MediaType(type) ?? .binary,
                    title: title,
                    locations: locations)
   }

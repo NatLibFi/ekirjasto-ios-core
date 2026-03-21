@@ -11,8 +11,8 @@
 
 import UIKit
 import SwiftUI
-import R2Shared
-import R2Navigator
+import ReadiumShared
+import ReadiumNavigator
 
 class TPPEPUBViewController: TPPBaseReaderViewController {
 
@@ -23,7 +23,6 @@ class TPPEPUBViewController: TPPBaseReaderViewController {
   init(publication: Publication,
        book: TPPBook,
        initialLocation: Locator?,
-       resourcesServer: ResourcesServer,
        forSample: Bool = false) {
 
     systemUserInterfaceStyle = UITraitCollection.current.userInterfaceStyle
@@ -48,7 +47,6 @@ class TPPEPUBViewController: TPPBaseReaderViewController {
 
     let navigator = EPUBNavigatorViewController(publication: publication,
                                                 initialLocation: initialLocation,
-                                                resourcesServer: resourcesServer,
                                                 config: config)
 
     TPPAssociatedColors.shared.userSettings = navigator.userSettings

@@ -12,17 +12,15 @@
 
 import Foundation
 import UIKit
-import R2Shared
+import ReadiumShared
 
 
 final class EPUBModule: ReaderFormatModule {
   
   weak var delegate: ModuleDelegate?
-  let resourcesServer: ResourcesServer
-  
-  init(delegate: ModuleDelegate?, resourcesServer: ResourcesServer) {
+
+  init(delegate: ModuleDelegate?) {
     self.delegate = delegate
-    self.resourcesServer = resourcesServer
   }
     
   func supports(_ publication: Publication) -> Bool {
@@ -42,7 +40,6 @@ final class EPUBModule: ReaderFormatModule {
     let epubVC = TPPEPUBViewController(publication: publication,
                                         book: book,
                                         initialLocation: initialLocation,
-                                        resourcesServer: resourcesServer,
                                         forSample: forSample)
     epubVC.moduleDelegate = delegate
     return epubVC

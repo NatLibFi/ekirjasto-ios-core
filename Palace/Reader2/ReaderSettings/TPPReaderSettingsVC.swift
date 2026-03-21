@@ -8,8 +8,8 @@
 
 import UIKit
 import SwiftUI
-import R2Navigator
-import R2Shared
+import ReadiumNavigator
+import ReadiumShared
 
 protocol TPPReaderSettingsDelegate: AnyObject {
     func getUserSettings() -> UserSettings

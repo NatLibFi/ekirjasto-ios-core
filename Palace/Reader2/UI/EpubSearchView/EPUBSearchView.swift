@@ -8,8 +8,8 @@
 
 import SwiftUI
 import Combine
-import R2Shared
-import R2Navigator
+import ReadiumShared
+import ReadiumNavigator
 
 struct EPUBSearchView: View {
   @ObservedObject var viewModel: EPUBSearchViewModel

@@ -12,7 +12,7 @@
 
 import Foundation
 import UIKit
-import R2Shared
+import ReadiumShared
 
 
 /// Base module delegate, that sub-modules' delegate can extend.
@@ -50,7 +50,6 @@ protocol ReaderModuleAPI {
 final class ReaderModule: ReaderModuleAPI {
   
   weak var delegate: ModuleDelegate?
-  private let resourcesServer: ResourcesServer
   private let bookRegistry: TPPBookRegistryProvider
   private let progressSynchronizer: TPPLastReadPositionSynchronizer
 
@@ -58,15 +57,13 @@ final class ReaderModule: ReaderModuleAPI {
   var formatModules: [ReaderFormatModule] = []
 
   init(delegate: ModuleDelegate?,
-       resourcesServer: ResourcesServer,
        bookRegistry: TPPBookRegistryProvider) {
     self.delegate = delegate
-    self.resourcesServer = resourcesServer
     self.bookRegistry = bookRegistry
     self.progressSynchronizer = TPPLastReadPositionSynchronizer(bookRegistry: bookRegistry)
 
     formatModules = [
-      EPUBModule(delegate: self.delegate, resourcesServer: resourcesServer)
+      EPUBModule(delegate: self.delegate)
     ]
   }
   

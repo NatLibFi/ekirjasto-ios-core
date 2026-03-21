@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import R2Shared
-import R2Navigator
+import ReadiumShared
+import ReadiumNavigator
 
 protocol EPUBSearchDelegate: class {
   func didSelect(location: Locator)

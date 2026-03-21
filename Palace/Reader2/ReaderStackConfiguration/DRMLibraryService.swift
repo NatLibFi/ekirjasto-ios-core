@@ -8,7 +8,7 @@
 //
 
 import Foundation
-import R2Shared
+import ReadiumShared
 
 struct DRMFulfilledPublication {
   let localURL: URL

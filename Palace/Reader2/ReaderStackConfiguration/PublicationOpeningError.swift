@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import R2Shared
+import ReadiumShared
 
 // Extending R2Shared opening error to get underlying error message from Adobe DRM
 extension Publication.OpeningError {

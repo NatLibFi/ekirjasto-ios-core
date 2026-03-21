@@ -11,7 +11,7 @@
 //
 
 import Foundation
-import R2Shared
+import ReadiumShared
 
 enum LibraryServiceError: LocalizedError {
   
@@ -23,13 +23,7 @@ enum LibraryServiceError: LocalizedError {
     case .invalidBook:
       return Strings.Error.invalidBookError
     case .openFailed(let error):
-      var errorDescription = error.localizedDescription
-      // Publication opening may fail due to DRM error
-      // Trying to get DRM error description
-      if let openingError = error as? Publication.OpeningError,
-         let drmErrorDescription = openingError.drmErrorDescription {
-        errorDescription = drmErrorDescription
-      }
+      let errorDescription = error.localizedDescription
       return String(format: Strings.Error.openFailedError, errorDescription)
     }
   }
