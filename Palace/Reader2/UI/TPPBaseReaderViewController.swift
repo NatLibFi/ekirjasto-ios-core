@@ -391,7 +391,8 @@ class TPPBaseReaderViewController: UIViewController, Loggable {
   }
 
   @objc private func goBackward() {
-    navigator.goBackward(animated: false) {
+    Task {
+      await navigator.goBackward()
       if let title = self.navigator.currentLocation?.title {
         UIAccessibility.post(notification: .announcement, argument: title)
       }
@@ -399,7 +400,8 @@ class TPPBaseReaderViewController: UIViewController, Loggable {
   }
 
   @objc private func goForward() {
-    navigator.goForward(animated: false) {
+    Task {
+      await navigator.goForward()
       if let title = self.navigator.currentLocation?.title {
         UIAccessibility.post(notification: .announcement, argument: title)
       }
@@ -428,7 +430,7 @@ extension TPPBaseReaderViewController: NavigatorDelegate {
       }
       
       if let position = locator.locations.position {
-        return String(format: Strings.TPPBaseReaderViewController.pageOf, position) + "\(publication.positions.count)" + chapterTitle
+        return String(format: Strings.TPPBaseReaderViewController.pageOf, position) + chapterTitle
       } else if let progression = locator.locations.totalProgression {
         return "\(progression)%" + chapterTitle
       } else {
@@ -469,14 +471,11 @@ extension TPPBaseReaderViewController: VisualNavigatorDelegate {
     let viewport = navigator.view.bounds
     // Skips to previous/next pages if the tap is on the content edges.
     let thresholdRange = 0...(0.2 * viewport.width)
-    var moved = false
     if thresholdRange ~= point.x {
-      moved = navigator.goLeft(animated: false)
+      Task { await navigator.goLeft(options: NavigatorGoOptions()) }
     } else if thresholdRange ~= (viewport.maxX - point.x) {
-      moved = navigator.goRight(animated: false)
-    }
-
-    if !moved {
+      Task { await navigator.goRight(options: NavigatorGoOptions()) }
+    } else {
       toggleNavigationBar()
     }
   }
@@ -495,7 +494,7 @@ extension TPPBaseReaderViewController: TPPReaderPositionsDelegate {
     }
 
     if let location = loc as? Locator {
-      navigator.go(to: location)
+      Task { await navigator.go(to: location) }
     }
   }
 
@@ -510,7 +509,7 @@ extension TPPBaseReaderViewController: TPPReaderPositionsDelegate {
 
     let r2bookmark = bookmark.convertToR2(from: publication)
     if let locator = r2bookmark?.locator {
-      navigator.go(to: locator)
+      Task { await navigator.go(to: locator) }
     }
   }
 

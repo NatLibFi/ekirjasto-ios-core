@@ -56,11 +56,19 @@ import ReadiumLCP
   /// Fulfill LCP license publication.
   /// - Parameter file: LCP license file.
   func fulfill(_ file: URL) async throws -> DRMFulfilledPublication {
-    let result = try await lcpService.acquirePublication(from: file)
-    return DRMFulfilledPublication(
-      localURL: result.localURL,
-      suggestedFilename: result.suggestedFilename
-    )
+    guard let fileUrl = FileURL(url: file) else {
+      throw NSError(domain: "LCPLibraryService", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid file URL"])
+    }
+    let result = await lcpService.acquirePublication(from: .file(fileUrl))
+    switch result {
+    case .success(let acquired):
+      return DRMFulfilledPublication(
+        localURL: acquired.localURL.url,
+        suggestedFilename: acquired.suggestedFilename
+      )
+    case .failure(let error):
+      throw error
+    }
   }
 
   /// Fulfill LCP license publication

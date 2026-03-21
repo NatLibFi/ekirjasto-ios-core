@@ -63,7 +63,17 @@ extension TPPPDFDocument {
   
   /// PDF title
   var title: String? {
-    isEncrypted ? encryptedDocument?.title : document?.title
+    if isEncrypted {
+      return encryptedDocument?.title
+    }
+    // PDFDocument.title is async in iOS 26; use document info dict
+    guard let doc = document?.documentRef,
+          let info = doc.info else { return nil }
+    var stringRef: CGPDFStringRef?
+    guard CGPDFDictionaryGetString(info, "Title", &stringRef),
+          let stringRef = stringRef,
+          let cfString = CGPDFStringCopyTextString(stringRef) else { return nil }
+    return cfString as String
   }
   
   /// Decrypt PDF data

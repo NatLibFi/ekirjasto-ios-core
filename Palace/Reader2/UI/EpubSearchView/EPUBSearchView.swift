@@ -62,7 +62,7 @@ struct EPUBSearchView: View {
               rowView(locator)
                 .onAppear(perform: {
                   if shouldFetchMoreResults(for: locator) {
-                    viewModel.fetchNextBatch()
+                    Task { await viewModel.fetchNextBatch() }
                   }
                 })
             }

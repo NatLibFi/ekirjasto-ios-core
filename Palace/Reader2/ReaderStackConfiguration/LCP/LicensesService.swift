@@ -63,21 +63,19 @@ class TPPLicensesService: NSObject {
   /// - Parameters:
   ///   - lcpl: license URL
   ///   - file: LCP-protected file URL
-  func injectLicense(lcpl: URL, to file: URL, at path: String) throws {
-    guard let archive = Archive(url: file, accessMode: .update) else {
-      throw TPPLicensesServiceError.licenseError(message: "Error opening archive file \(file.path)")
-    }
-    
+  func injectLicense(lcpl: URL, to file: URL, at path: String) async throws {
+    let archive = try await Archive(url: file, accessMode: .update)
+
     do {
       // Removes the old License if it already exists in the archive, otherwise we get duplicated entries
-      if let oldLicense = archive[path] {
-        try archive.remove(oldLicense)
+      if let oldLicense = try await archive.get(path) {
+        try await archive.remove(oldLicense)
       }
 
       // Stores the License into the ZIP file
       let data = try Data(contentsOf: lcpl)
-      try archive.addEntry(with: path, type: .file, uncompressedSize: UInt32(data.count), provider: { (position, size) -> Data in
-        return data[position..<size]
+      try await archive.addEntry(with: path, type: .file, uncompressedSize: Int64(data.count), provider: { (position, size) -> Data in
+        return data[Int(position)..<Int(size)]
       })
     } catch {
       throw TPPLicensesServiceError.licenseError(message: "Error injecting license file: \(error.localizedDescription)")
@@ -108,11 +106,13 @@ extension TPPLicensesService: URLSessionDownloadDelegate {
     }
     // Check if we need to inject license file for the link ContentType
     if let licensePathInZip = self.pathInZip(for: link) {
-      do {
-        try self.injectLicense(lcpl: lcpl, to: location, at: licensePathInZip)
-        completionHandler?(location, nil)
-      } catch {
-        completionHandler?(nil, error)
+      Task {
+        do {
+          try await self.injectLicense(lcpl: lcpl, to: location, at: licensePathInZip)
+          self.completionHandler?(location, nil)
+        } catch {
+          self.completionHandler?(nil, error)
+        }
       }
     }
   }
