@@ -66,20 +66,16 @@ class TPPLicensesService: NSObject {
   func injectLicense(lcpl: URL, to file: URL, at path: String) async throws {
     let archive = try await Archive(url: file, accessMode: .update)
 
-    do {
-      // Removes the old License if it already exists in the archive, otherwise we get duplicated entries
-      if let oldLicense = try await archive.get(path) {
-        try await archive.remove(oldLicense)
-      }
-
-      // Stores the License into the ZIP file
-      let data = try Data(contentsOf: lcpl)
-      try await archive.addEntry(with: path, type: .file, uncompressedSize: Int64(data.count), provider: { (position, size) -> Data in
-        return data[Int(position)..<Int(size)]
-      })
-    } catch {
-      throw TPPLicensesServiceError.licenseError(message: "Error injecting license file: \(error.localizedDescription)")
+    // Removes the old License if it already exists
+    if let oldLicense = try await archive.get(path) {
+      try await archive.remove(oldLicense)
     }
+
+    // Stores the License into the ZIP file
+    let data = try Data(contentsOf: lcpl)
+    try await archive.addEntry(with: path, type: .file, uncompressedSize: Int64(data.count), provider: { (position, size) -> Data in
+      return data[Int(position)..<Int(size)]
+    })
   }
   
   /// Defines path inside .zip file to write license file to.
@@ -106,12 +102,25 @@ extension TPPLicensesService: URLSessionDownloadDelegate {
     }
     // Check if we need to inject license file for the link ContentType
     if let licensePathInZip = self.pathInZip(for: link) {
+      // The temp file at `location` is deleted when this delegate returns.
+      // Copy it to a stable location first, then inject the license async.
+      let stableURL = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString + "." + location.pathExtension)
+      do {
+        try FileManager.default.copyItem(at: location, to: stableURL)
+      } catch {
+        completionHandler?(nil, error)
+        return
+      }
       Task {
         do {
-          try await self.injectLicense(lcpl: lcpl, to: location, at: licensePathInZip)
-          self.completionHandler?(location, nil)
+          try await self.injectLicense(lcpl: lcpl, to: stableURL, at: licensePathInZip)
+          await MainActor.run {
+            self.completionHandler?(stableURL, nil)
+          }
         } catch {
-          self.completionHandler?(nil, error)
+          await MainActor.run {
+            self.completionHandler?(nil, error)
+          }
         }
       }
     }

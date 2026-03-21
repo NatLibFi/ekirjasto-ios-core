@@ -83,17 +83,19 @@ import ReadiumLCP
     return TPPLicensesService().acquirePublication(from: file) { progressValue in
       progress(progressValue)
     } completion: { localUrl, error in
-      guard error == nil else {
-        let domain = "LCP fulfillment error"
-        let code = TPPErrorCode.lcpDRMFulfillmentFail.rawValue
-        let errorDescription = (error as? TPPLicensesServiceError)?.description ?? error?.localizedDescription
-        let nsError = NSError(domain: domain, code: code, userInfo: [
-          NSLocalizedDescriptionKey: errorDescription as Any
-        ])
-        completion(nil, nsError)
-        return
+      DispatchQueue.main.async {
+        guard error == nil else {
+          let domain = "LCP fulfillment error"
+          let code = TPPErrorCode.lcpDRMFulfillmentFail.rawValue
+          let errorDescription = (error as? TPPLicensesServiceError)?.description ?? error?.localizedDescription
+          let nsError = NSError(domain: domain, code: code, userInfo: [
+            NSLocalizedDescriptionKey: errorDescription as Any
+          ])
+          completion(nil, nsError)
+          return
+        }
+        completion(localUrl, nil)
       }
-      completion(localUrl, nil)
     }
   }
   

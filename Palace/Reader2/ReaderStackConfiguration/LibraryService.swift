@@ -27,6 +27,9 @@ final class LibraryService: Loggable {
   let assetRetriever: AssetRetriever
   private let publicationOpener: PublicationOpener
   private var drmLibraryServices = [DRMLibraryService]()
+  /// Keep a strong reference to the current publication so its resources
+  /// (and the underlying container) stay alive while the reader is open.
+  var currentPublication: Publication?
 
   private lazy var documentDirectory = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
 
@@ -88,7 +91,9 @@ final class LibraryService: Loggable {
         return
       }
       let asset = try await assetRetriever.retrieve(url: fileUrl).get()
+      Log.debug(#file, "Asset retrieved: \(asset)")
       let publication = try await publicationOpener.open(asset: asset, allowUserInteraction: allowUserInteraction, sender: sender).get()
+      Log.debug(#file, "Publication opened: \(publication.metadata.title), baseURL: \(publication.baseURL?.string ?? "nil"), readingOrder: \(publication.readingOrder.count) items")
 
       guard !publication.isRestricted else {
         stopOpeningIndicator(identifier: bookIdentifier)
@@ -100,10 +105,11 @@ final class LibraryService: Loggable {
         return
       }
 
-      completion(.success(publication))
+      self.currentPublication = publication
+      await MainActor.run { completion(.success(publication)) }
     } catch {
       stopOpeningIndicator(identifier: bookIdentifier)
-      completion(.failure(.openFailed(error)))
+      await MainActor.run { completion(.failure(.openFailed(error))) }
     }
   }
 
