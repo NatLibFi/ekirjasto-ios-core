@@ -45,8 +45,13 @@ struct SuomiIdentificationWebView: UIViewRepresentable {
     view.configuration.websiteDataStore = WKWebsiteDataStore.nonPersistent()
     let authentication = authenticationDocument?.authentication?.first(where: { $0.type == "http://e-kirjasto.fi/authtype/ekirjasto"})
     let link = authentication?.links?.first(where: {$0.rel == "tunnistus_start"})
-    let start = link
-    var request = URLRequest(url: URL(string: "\(start!.href)&state=app")!)
+    guard let href = link?.href, let url = URL(string: "\(href)&state=app") else {
+      TPPErrorLogger.logError(withCode: .noURL,
+                              summary: "Missing tunnistus_start link for authentication",
+                              metadata: nil)
+      return view
+    }
+    var request = URLRequest(url: url)
     request.addValue("application/json", forHTTPHeaderField: "accept")
     request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
     
