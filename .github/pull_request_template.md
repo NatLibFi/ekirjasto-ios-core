@@ -18,3 +18,7 @@
 **Did someone actually run this code to verify it works?**
 
 **Have the Transifex translators been notified?**
+
+**AI was used during the process and I have described how.**
+
+- [ ] AI was used during the process and I have described above how.
