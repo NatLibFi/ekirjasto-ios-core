@@ -53,6 +53,8 @@ class LoansAndHoldsViewController: NSObject {
         selection?.selectedSubview = control.selectedSegmentIndex == 0 ? "Loans" : "Holds"
       }, for: .valueChanged)
       hostingController.navigationItem.titleView = segmentedControl
+    } else if #available(iOS 26, *) {
+      // On iPhone iOS 26, use standard nav bar title (no custom label needed)
     } else {
       let titleViewLabel = UILabel()
       titleViewLabel.text = Strings.MyBooksView.loansAndHoldsNavTitle

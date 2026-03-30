@@ -79,7 +79,7 @@
 		11B6020519806CD300800DA9 /* TPPBookDownloadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B6020419806CD300800DA9 /* TPPBookDownloadingCell.m */; };
 		11C113D019F842B9005B3F63 /* reader.html in Resources */ = {isa = PBXBuildFile; fileRef = 11C113CF19F842B9005B3F63 /* reader.html */; };
 		11C113D219F842BE005B3F63 /* host_app_feedback.js in Resources */ = {isa = PBXBuildFile; fileRef = 11C113D119F842BE005B3F63 /* host_app_feedback.js */; };
-		11C113D719F84613005B3F63 /* simplified.js in Resources */ = {isa = PBXBuildFile; fileRef = 11C113D519F84613005B3F63 /* simplified.js */; };
+		11C113D719F84613005B3F63 /* Simplified.js in Resources */ = {isa = PBXBuildFile; fileRef = 11C113D519F84613005B3F63 /* Simplified.js */; };
 		11C5DD16197727A6005A9945 /* TPPKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C5DD15197727A6005A9945 /* TPPKeychain.m */; };
 		11E0208D197F05D9009DEA93 /* UIFont+TPPSystemFontOverride.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E0208C197F05D9009DEA93 /* UIFont+TPPSystemFontOverride.m */; };
 		11F3771F19DB62B000487769 /* TPPFacetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F3771E19DB62B000487769 /* TPPFacetView.m */; };
@@ -580,7 +580,7 @@
 		331264432A287F53006BA87D /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 119503E61993F914009FB788 /* libxml2.dylib */; };
 		331264442A287F53006BA87D /* Minizip.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2198690C267E29B00041369E /* Minizip.xcframework */; };
 		331264472A287F53006BA87D /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84B7A3431B84E8FE00584FB2 /* OFL.txt */; };
-		331264482A287F53006BA87D /* simplified.js in Resources */ = {isa = PBXBuildFile; fileRef = 11C113D519F84613005B3F63 /* simplified.js */; };
+		331264482A287F53006BA87D /* Simplified.js in Resources */ = {isa = PBXBuildFile; fileRef = 11C113D519F84613005B3F63 /* Simplified.js */; };
 		331264492A287F53006BA87D /* TPPProblemReportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085D31D81BE29ED4007F7672 /* TPPProblemReportViewController.xib */; };
 		3312644A2A287F53006BA87D /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5BEEFF826BD919E00C2A50B /* OpenSans-Regular.ttf */; };
 		3312644D2A287F53006BA87D /* ReaderClientCert.sig in Resources */ = {isa = PBXBuildFile; fileRef = 085D31FB1BE7BE86007F7672 /* ReaderClientCert.sig */; };
@@ -981,7 +981,7 @@
 		73EB0B4525821DF4006BC997 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 119503E81993F919009FB788 /* libz.dylib */; };
 		73EB0B4625821DF4006BC997 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 119503E61993F914009FB788 /* libxml2.dylib */; };
 		73EB0B5925821DF4006BC997 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84B7A3431B84E8FE00584FB2 /* OFL.txt */; };
-		73EB0B5A25821DF4006BC997 /* simplified.js in Resources */ = {isa = PBXBuildFile; fileRef = 11C113D519F84613005B3F63 /* simplified.js */; };
+		73EB0B5A25821DF4006BC997 /* Simplified.js in Resources */ = {isa = PBXBuildFile; fileRef = 11C113D519F84613005B3F63 /* Simplified.js */; };
 		73EB0B5B25821DF4006BC997 /* TPPProblemReportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085D31D81BE29ED4007F7672 /* TPPProblemReportViewController.xib */; };
 		73EB0B5D25821DF4006BC997 /* ReaderClientCert.sig in Resources */ = {isa = PBXBuildFile; fileRef = 085D31FB1BE7BE86007F7672 /* ReaderClientCert.sig */; };
 		73EB0B5E25821DF4006BC997 /* software-licenses.html in Resources */ = {isa = PBXBuildFile; fileRef = 2D6256901D41582A0080A81F /* software-licenses.html */; };
@@ -1647,7 +1647,7 @@
 		11B6020419806CD300800DA9 /* TPPBookDownloadingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPPBookDownloadingCell.m; sourceTree = "<group>"; };
 		11C113CF19F842B9005B3F63 /* reader.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = reader.html; sourceTree = "<group>"; };
 		11C113D119F842BE005B3F63 /* host_app_feedback.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = host_app_feedback.js; sourceTree = "<group>"; };
-		11C113D519F84613005B3F63 /* simplified.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = simplified.js; sourceTree = "<group>"; };
+		11C113D519F84613005B3F63 /* Simplified.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Simplified.js; sourceTree = "<group>"; };
 		11C5DD14197727A6005A9945 /* TPPKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPPKeychain.h; sourceTree = "<group>"; };
 		11C5DD15197727A6005A9945 /* TPPKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPPKeychain.m; sourceTree = "<group>"; };
 		11C5DD171977335E005A9945 /* TPPKeychainTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPPKeychainTests.m; sourceTree = "<group>"; };
@@ -2355,7 +2355,7 @@
 			children = (
 				11C113D119F842BE005B3F63 /* host_app_feedback.js */,
 				11C113CF19F842B9005B3F63 /* reader.html */,
-				11C113D519F84613005B3F63 /* simplified.js */,
+				11C113D519F84613005B3F63 /* Simplified.js */,
 			);
 			name = Reader;
 			sourceTree = "<group>";
@@ -3537,13 +3537,6 @@
 			path = EkirjastoDigitalMagazine;
 			sourceTree = "<group>";
 		};
-		A49C25411AE05A2600D63B89 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		A823D804192BABA400B55DE2 = {
 			isa = PBXGroup;
 			children = (
@@ -4227,9 +4220,6 @@
 					ProjectRef = E553424F293FB23F004FF34A /* PalaceAudiobookToolkit.xcodeproj */;
 				},
 				{
-					ProductGroup = A49C25411AE05A2600D63B89 /* Products */;
-				},
-				{
 					ProductGroup = 1112A81A1A322C53002B8CC1 /* Products */;
 					ProjectRef = 1112A8191A322C53002B8CC1 /* TenPrintCover.xcodeproj */;
 				},
@@ -4355,7 +4345,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				331264472A287F53006BA87D /* OFL.txt in Resources */,
-				331264482A287F53006BA87D /* simplified.js in Resources */,
+				331264482A287F53006BA87D /* Simplified.js in Resources */,
 				331264492A287F53006BA87D /* TPPProblemReportViewController.xib in Resources */,
 				3312644A2A287F53006BA87D /* OpenSans-Regular.ttf in Resources */,
 				368EE7682BC5F82200663D37 /* PrivacyInfo.xcprivacy in Resources */,
@@ -4392,7 +4382,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				73EB0B5925821DF4006BC997 /* OFL.txt in Resources */,
-				73EB0B5A25821DF4006BC997 /* simplified.js in Resources */,
+				73EB0B5A25821DF4006BC997 /* Simplified.js in Resources */,
 				73EB0B5B25821DF4006BC997 /* TPPProblemReportViewController.xib in Resources */,
 				E5BEF00926BD919F00C2A50B /* OpenSans-Regular.ttf in Resources */,
 				73EB0B5D25821DF4006BC997 /* ReaderClientCert.sig in Resources */,
@@ -4422,7 +4412,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84B7A3461B84E8FE00584FB2 /* OFL.txt in Resources */,
-				11C113D719F84613005B3F63 /* simplified.js in Resources */,
+				11C113D719F84613005B3F63 /* Simplified.js in Resources */,
 				085D31D91BE29ED4007F7672 /* TPPProblemReportViewController.xib in Resources */,
 				E5BEF00826BD919F00C2A50B /* OpenSans-Regular.ttf in Resources */,
 				2D4379FE1C46FDB600AE1AD5 /* ReaderClientCert.sig in Resources */,
@@ -5938,7 +5928,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = "10000";
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = QA5XMCRV5M;
 				ENABLE_BITCODE = NO;
@@ -6002,7 +5992,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = "10000";
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88CBA74T8K;
 				ENABLE_BITCODE = NO;
@@ -6062,7 +6052,7 @@
 				CODE_SIGN_ENTITLEMENTS = Palace/PalaceDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = "10000";
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6250,7 +6240,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = "10000";
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = QA5XMCRV5M;
 				ENABLE_BITCODE = NO;
@@ -6314,7 +6304,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = "10000";
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88CBA74T8K;
 				ENABLE_BITCODE = NO;
@@ -6374,7 +6364,7 @@
 				CODE_SIGN_ENTITLEMENTS = Palace/PalaceDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = "10000";
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6562,7 +6552,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = "10000";
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = QA5XMCRV5M;
 				ENABLE_BITCODE = NO;
@@ -6626,7 +6616,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = "10000";
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88CBA74T8K;
 				ENABLE_BITCODE = NO;
@@ -6686,7 +6676,7 @@
 				CODE_SIGN_ENTITLEMENTS = Palace/PalaceDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = "10000";
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6874,7 +6864,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = "10000";
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = QA5XMCRV5M;
 				ENABLE_BITCODE = NO;
@@ -6938,7 +6928,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = "10000";
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88CBA74T8K;
 				ENABLE_BITCODE = NO;
@@ -6998,7 +6988,7 @@
 				CODE_SIGN_ENTITLEMENTS = Palace/PalaceDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = "10000";
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -7182,7 +7172,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = "10000";
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = QA5XMCRV5M;
 				ENABLE_BITCODE = NO;
@@ -7243,7 +7233,7 @@
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
 				CODE_SIGN_ENTITLEMENTS = Palace/SimplyE.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = "10000";
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = 88CBA74T8K;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88CBA74T8K;
 				ENABLE_BITCODE = NO;
@@ -7302,7 +7292,7 @@
 				CODE_SIGN_ENTITLEMENTS = Palace/SimplyE.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = "10000";
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = 88CBA74T8K;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88CBA74T8K;
 				ENABLE_BITCODE = NO;
@@ -7483,7 +7473,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = "10000";
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = QA5XMCRV5M;
 				ENABLE_BITCODE = NO;
@@ -7544,7 +7534,7 @@
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
 				CODE_SIGN_ENTITLEMENTS = Palace/SimplyE.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = "10000";
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = 88CBA74T8K;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88CBA74T8K;
 				ENABLE_BITCODE = NO;
@@ -7603,7 +7593,7 @@
 				CODE_SIGN_ENTITLEMENTS = Palace/SimplyE.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = "10000";
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = 88CBA74T8K;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88CBA74T8K;
 				ENABLE_BITCODE = NO;
@@ -7784,7 +7774,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = "10000";
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = QA5XMCRV5M;
 				ENABLE_BITCODE = NO;
@@ -7845,7 +7835,7 @@
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
 				CODE_SIGN_ENTITLEMENTS = Palace/SimplyE.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = "10000";
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = 88CBA74T8K;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88CBA74T8K;
 				ENABLE_BITCODE = NO;
@@ -7904,7 +7894,7 @@
 				CODE_SIGN_ENTITLEMENTS = Palace/SimplyE.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = "10000";
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = 88CBA74T8K;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88CBA74T8K;
 				ENABLE_BITCODE = NO;
@@ -8085,7 +8075,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = "10000";
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = QA5XMCRV5M;
 				ENABLE_BITCODE = NO;
@@ -8146,7 +8136,7 @@
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
 				CODE_SIGN_ENTITLEMENTS = Palace/SimplyE.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = "10000";
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = 88CBA74T8K;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88CBA74T8K;
 				ENABLE_BITCODE = NO;
@@ -8205,7 +8195,7 @@
 				CODE_SIGN_ENTITLEMENTS = Palace/SimplyE.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = "10000";
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = 88CBA74T8K;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88CBA74T8K;
 				ENABLE_BITCODE = NO;
@@ -8452,7 +8442,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = "10000";
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = QA5XMCRV5M;
 				ENABLE_BITCODE = NO;
@@ -8514,7 +8504,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = "10000";
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = QA5XMCRV5M;
 				ENABLE_BITCODE = NO;
@@ -8574,7 +8564,7 @@
 				CODE_SIGN_ENTITLEMENTS = Palace/PalaceDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = "10000";
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -8631,7 +8621,7 @@
 				CODE_SIGN_ENTITLEMENTS = Palace/SimplyE.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = "10000";
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = 88CBA74T8K;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88CBA74T8K;
 				ENABLE_BITCODE = NO;
@@ -8816,7 +8806,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = "10000";
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88CBA74T8K;
 				ENABLE_BITCODE = NO;
@@ -8876,7 +8866,7 @@
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
 				CODE_SIGN_ENTITLEMENTS = Palace/SimplyE.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = "10000";
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = 88CBA74T8K;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88CBA74T8K;
 				ENABLE_BITCODE = NO;

@@ -81,11 +81,9 @@ static CGFloat const kTableViewCrossfadeDuration = 0.3;
 
   UITableViewStyle tableStyle = UITableViewStylePlain;
   if (@available(iOS 26, *)) {
-    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-      // Grouped style disables sticky section headers on iPad,
-      // which avoids opaque headers clashing with Liquid Glass nav bar.
-      tableStyle = UITableViewStyleGrouped;
-    }
+    // Grouped style disables sticky section headers,
+    // which avoids opaque headers clashing with the nav bar area.
+    tableStyle = UITableViewStyleGrouped;
   }
   self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:tableStyle];
   self.tableView.autoresizingMask = (UIViewAutoresizingFlexibleWidth |
@@ -97,11 +95,15 @@ static CGFloat const kTableViewCrossfadeDuration = 0.3;
   self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
   self.tableView.allowsSelection = NO;
   if (@available(iOS 26, *)) {
-    self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAutomatic;
     if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+      self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAutomatic;
       // Hide the top scroll edge fade so section headers near the top
       // are not blurred by the Liquid Glass nav bar effect.
       self.tableView.topEdgeEffect.hidden = YES;
+    } else {
+      // On iPhone iOS 26, use Never so the table doesn't extend
+      // under the nav bar (matching pre-iOS 26 behavior).
+      self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
   } else if (@available(iOS 11.0, *)) {
     self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
@@ -209,10 +211,14 @@ static CGFloat const kTableViewCrossfadeDuration = 0.3;
   [super didMoveToParentViewController:parent];
 
   if(parent) {
-    // On iOS 26, contentInsetAdjustmentBehavior is Automatic,
-    // so the system handles insets. Skip manual inset calculation.
+    // On iPad iOS 26, the facet bar is hidden (moved to nav bar) and
+    // contentInsetAdjustmentBehavior handles insets. Skip manual calculation.
+    // On iPhone iOS 26, the facet bar is still visible, so we still
+    // need manual insets to push the table below it.
     if (@available(iOS 26, *)) {
-      return;
+      if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        return;
+      }
     }
 
     CGFloat top = parent.topLayoutGuide.length;
@@ -376,14 +382,9 @@ viewForHeaderInSection:(NSInteger const)section
   UIView *const view = [[UIView alloc] initWithFrame:frame];
   view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
   if (@available(iOS 26, *)) {
-    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-      // On iPad, use a clear background so headers blend with Liquid Glass
-      view.backgroundColor = UIColor.clearColor;
-    } else {
-      view.backgroundColor = [TPPConfiguration backgroundColor];
-      // Lock to current interface style so Liquid Glass cannot flip it mid-scroll
-      view.overrideUserInterfaceStyle = self.traitCollection.userInterfaceStyle;
-    }
+    // Use clear background — grouped style with non-sticky headers
+    // means they scroll with content and don't need a background.
+    view.backgroundColor = UIColor.clearColor;
   } else {
     view.backgroundColor = [[TPPConfiguration backgroundColor] colorWithAlphaComponent:0.9];
   }
@@ -583,18 +584,13 @@ viewForHeaderInSection:(NSInteger const)section
 
   BOOL useStandardTitle = NO;
   if (@available(iOS 26, *)) {
-    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-      useStandardTitle = YES;
-    }
+    useStandardTitle = YES;
   }
 
   if (useStandardTitle) {
-    // On iPad iOS 26, use the standard title which centers properly
-    // in the Liquid Glass navigation bar.
+    // On iOS 26, use the standard title and prevent extending under
+    // the top bar so content doesn't show through.
     viewController.title = lane.title;
-    // Only prevent extending under the top bar so content
-    // doesn't show through the transparent tab bar area.
-    // Keep bottom edge extended so content reaches the screen edge.
     viewController.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
   } else {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 150)];

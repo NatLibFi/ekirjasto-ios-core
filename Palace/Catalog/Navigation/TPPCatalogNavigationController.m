@@ -49,17 +49,13 @@
   // use the floating tab bar with a regular horizontal size class.
   // On iPad iOS 26+, the floating tab bar already shows the title,
   // and the segmented control replaces the titleView in the grouped feed.
-  BOOL iPadIOS26 = NO;
+  BOOL iOS26 = NO;
   if (@available(iOS 26, *)) {
-    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-      iPadIOS26 = YES;
-      // Prevent the view from extending under the nav bar, so the
-      // view's background color creates a solid area below the tab bar,
-      // matching the SwiftUI tabs (My Books, Favorites, etc.).
-      self.viewController.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
-    }
+    iOS26 = YES;
+    // Prevent the view from extending under the nav bar.
+    self.viewController.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
   }
-  if (!iPadIOS26) {
+  if (!iOS26) {
     UILabel *titleViewlabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 150)];
     titleViewlabel.numberOfLines = 0;
     titleViewlabel.lineBreakMode = NSLineBreakByWordWrapping;
@@ -200,6 +196,9 @@
 {
   [super viewDidLoad];
 
+  // Prevent the navigation bar from auto-hiding on scroll
+  self.hidesBarsOnSwipe = NO;
+
   // On iPad iOS 26, hide the nav bar background to match the SwiftUI tabs
   // (My Books, Favorites) which use .toolbarBackground(.hidden).
   // The view's own backgroundColor provides the solid area below the tab bar.
@@ -207,6 +206,16 @@
     if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
       UINavigationBarAppearance *appearance = [[UINavigationBarAppearance alloc] init];
       [appearance configureWithTransparentBackground];
+      self.navigationBar.standardAppearance = appearance;
+      self.navigationBar.scrollEdgeAppearance = appearance;
+      self.navigationBar.compactAppearance = appearance;
+      self.navigationBar.compactScrollEdgeAppearance = appearance;
+    } else {
+      // On iPhone iOS 26, force an opaque nav bar so content
+      // doesn't show through the Liquid Glass translucency.
+      UINavigationBarAppearance *appearance = [[UINavigationBarAppearance alloc] init];
+      [appearance configureWithOpaqueBackground];
+      appearance.backgroundColor = [TPPConfiguration backgroundColor];
       self.navigationBar.standardAppearance = appearance;
       self.navigationBar.scrollEdgeAppearance = appearance;
       self.navigationBar.compactAppearance = appearance;

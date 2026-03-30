@@ -21,8 +21,8 @@ class TPPSettingsViewController: NSObject {
     
     // On iPad iOS 26+, the floating tab bar already shows the title,
     // so the extra label is redundant.
-    if #available(iOS 26, *), UIDevice.current.userInterfaceIdiom == .pad {
-      // No titleView needed — tab bar shows the title
+    if #available(iOS 26, *) {
+      // On iOS 26, use standard nav bar title (no custom label needed)
     } else {
       let titleViewLabel = UILabel()
       titleViewLabel.text = Strings.Settings.settingsNavTitle
