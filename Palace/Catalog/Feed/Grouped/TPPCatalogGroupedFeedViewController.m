@@ -99,7 +99,9 @@ static CGFloat const kTableViewCrossfadeDuration = 0.3;
       self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAutomatic;
       // Hide the top scroll edge fade so section headers near the top
       // are not blurred by the Liquid Glass nav bar effect.
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 260000
       self.tableView.topEdgeEffect.hidden = YES;
+#endif
     } else {
       // On iPhone iOS 26, use Never so the table doesn't extend
       // under the nav bar (matching pre-iOS 26 behavior).
