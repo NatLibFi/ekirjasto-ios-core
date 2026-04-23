@@ -21,8 +21,15 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
+
       - name: Checkout submodules
         run: git submodule update --init --recursive
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+          bundler-cache: true
+
       - name: Show build info
         env:
           TEST_SECRET: ${{ secrets.MASK_TEST }}
@@ -34,6 +41,7 @@ jobs:
           private-key-name: ekirjasto-ci-ed25519
           private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           host: github.com
+
       - name: Force Xcode 26
         run: sudo xcode-select -switch /Applications/Xcode_26.2.app
 
@@ -67,14 +75,17 @@ jobs:
 
       - name: Run minimal release checks
         run: scripts/release-checks.sh --minimal
+
       - name: Build release build and upload to Testflight (config=production)
         env:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
         run: scripts/build.sh release_upload config:production
+
       - name: Build release build and upload to Testflight (config=beta)
         env:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
         run: scripts/build.sh release_upload config:beta
+
       - name: Build release build and upload to Testflight (config=dev)
         env:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
