@@ -487,7 +487,14 @@ extension TPPNetworkExecutor {
     
     let link = authentication?.links?.first(where: {$0.rel == "authenticate"})
     //Make a post request to the authentication URL
-    var request = URLRequest(url: URL(string:link!.href)!)
+    guard let href = link?.href, let url = URL(string: href) else {
+      TPPErrorLogger.logError(withCode: .noURL,
+                              summary: "Missing authentication link for token auth",
+                              metadata: ["account": currentAccount?.name ?? "nil"])
+      completion?(nil)
+      return
+    }
+    var request = URLRequest(url: url)
     request.httpMethod = "POST"
     
     //Prints the token

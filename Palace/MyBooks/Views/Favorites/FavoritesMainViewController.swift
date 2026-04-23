@@ -36,13 +36,18 @@ class FavoritesMainViewController: NSObject {
     // Title view label is displayed at the top of the view,
     // below the floating tab bar, for iPads running iOS 18 or higher
     // with a regular horizontal size class.
-    //The style matches the lane titles of the catalog's ungrouped view.
-    let titleViewLabel = UILabel()
-    titleViewLabel.text = Strings.MyBooksView.favoritesAndReadNavTitle
-    titleViewLabel.font = UIFont.palaceFont(ofSize: 16)
-    titleViewLabel.textAlignment = .center
-    titleViewLabel.accessibilityTraits = .header
-    hostingController.navigationItem.titleView = titleViewLabel
+    // On iPad iOS 26+, the floating tab bar already shows the title,
+    // so the extra label is redundant.
+    if #available(iOS 26, *) {
+      // On iOS 26, use standard nav bar title (no custom label needed)
+    } else {
+      let titleViewLabel = UILabel()
+      titleViewLabel.text = Strings.MyBooksView.favoritesAndReadNavTitle
+      titleViewLabel.font = UIFont.palaceFont(ofSize: 16)
+      titleViewLabel.textAlignment = .center
+      titleViewLabel.accessibilityTraits = .header
+      hostingController.navigationItem.titleView = titleViewLabel
+    }
 
     // Button text for returning to this view.
     // This button is displayed in book detail view and search view,

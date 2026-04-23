@@ -120,9 +120,11 @@ class TPPReaderPositionsVC: UIViewController, UITableViewDataSource, UITableView
 
     configRefreshControl()
 
-    navigationController?.navigationBar.barStyle = .default
-    navigationController?.navigationBar.isTranslucent = true
-    navigationController?.navigationBar.barTintColor = nil
+    if #unavailable(iOS 26) {
+      navigationController?.navigationBar.barStyle = .default
+      navigationController?.navigationBar.isTranslucent = true
+      navigationController?.navigationBar.barTintColor = nil
+    }
     navigationController?.navigationBar.tintColor = readerColors.tintColor
   }
 

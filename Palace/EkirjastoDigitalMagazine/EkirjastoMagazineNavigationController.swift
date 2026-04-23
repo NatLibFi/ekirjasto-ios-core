@@ -10,8 +10,14 @@ class EkirjastoMagazineNavigationController: TPPLibraryNavigationController {
 
   override init(rootViewController: UIViewController) {
     super.init(rootViewController: rootViewController)
-    
+
     navigationBar.isHidden = true
+
+    // On iPad iOS 26, add extra top inset so the web content clears
+    // the floating tab bar. The web app renders its own navigation UI.
+    if #available(iOS 26, *), UIDevice.current.userInterfaceIdiom == .pad {
+      rootViewController.additionalSafeAreaInsets = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
+    }
     
     tabBarItem.title = NSLocalizedString("Magazines", comment: "")
     tabBarItem.image = UIImage(named: "Magazines")

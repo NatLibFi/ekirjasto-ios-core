@@ -17,6 +17,7 @@ struct FavoritesMainView: View {
     ContentView
       .navigationBarItems(leading: EKirjastoButton)
       .navigationBarTitle(Strings.MyBooksView.favoritesAndReadNavTitle)
+      .modifier(HideNavBarBackgroundOnIPadIOS26())
       .onReceive(
         NotificationCenter.default.publisher(
           for: UIDevice.orientationDidChangeNotification)

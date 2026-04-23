@@ -10,7 +10,17 @@ import Foundation
 
 extension TPPAppDelegate {
   func topViewController(_ viewController: UIViewController? = nil) -> UIViewController? {
-    guard let controller = viewController ?? UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController else {
+    let keyWindow: UIWindow? = {
+      if #available(iOS 15.0, *) {
+        return UIApplication.shared.connectedScenes
+          .compactMap { $0 as? UIWindowScene }
+          .flatMap { $0.windows }
+          .first { $0.isKeyWindow }
+      } else {
+        return UIApplication.shared.windows.first { $0.isKeyWindow }
+      }
+    }()
+    guard let controller = viewController ?? keyWindow?.rootViewController else {
       return nil
     }
     

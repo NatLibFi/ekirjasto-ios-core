@@ -99,6 +99,15 @@ class TPPBaseReaderViewController: UIViewController, Loggable {
     view.backgroundColor = TPPConfiguration.backgroundColor()
 
     navigationItem.rightBarButtonItems = makeNavigationBarButtons()
+
+    // When presented modally (iPad), add a close button
+    if presentingViewController != nil || navigationController?.presentingViewController != nil {
+      navigationItem.leftBarButtonItem = UIBarButtonItem(
+        barButtonSystemItem: .close,
+        target: self,
+        action: #selector(dismissReader))
+    }
+
     updateNavigationBar(animated: false)
 
     stackView = UIStackView(frame: view.bounds)
@@ -166,6 +175,13 @@ class TPPBaseReaderViewController: UIViewController, Loggable {
     accessibilityToolbar.accessibilityElementsHidden = false
   }
   
+  @objc private func dismissReader() {
+    if let locator = navigator.currentLocation {
+      lastReadPositionPoster.storeReadPosition(locator: locator)
+    }
+    dismiss(animated: true)
+  }
+
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     if let locator = navigator.currentLocation {

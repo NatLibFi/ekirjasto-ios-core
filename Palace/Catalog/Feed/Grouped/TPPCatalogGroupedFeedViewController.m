@@ -75,11 +75,17 @@ static CGFloat const kTableViewCrossfadeDuration = 0.3;
   [super viewDidLoad];
   
   self.view.backgroundColor = [TPPConfiguration backgroundColor];
-  
+
   self.refreshControl = [[UIRefreshControl alloc] init];
   [self.refreshControl addTarget:self action:@selector(userDidRefresh:) forControlEvents:UIControlEventValueChanged];
-  
-  self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+
+  UITableViewStyle tableStyle = UITableViewStylePlain;
+  if (@available(iOS 26, *)) {
+    // Grouped style disables sticky section headers,
+    // which avoids opaque headers clashing with the nav bar area.
+    tableStyle = UITableViewStyleGrouped;
+  }
+  self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:tableStyle];
   self.tableView.autoresizingMask = (UIViewAutoresizingFlexibleWidth |
                                      UIViewAutoresizingFlexibleHeight);
   self.tableView.alpha = 0.0;
@@ -88,7 +94,20 @@ static CGFloat const kTableViewCrossfadeDuration = 0.3;
   self.tableView.delegate = self;
   self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
   self.tableView.allowsSelection = NO;
-  if (@available(iOS 11.0, *)) {
+  if (@available(iOS 26, *)) {
+    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+      self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAutomatic;
+      // Hide the top scroll edge fade so section headers near the top
+      // are not blurred by the Liquid Glass nav bar effect.
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 260000
+      self.tableView.topEdgeEffect.hidden = YES;
+#endif
+    } else {
+      // On iPhone iOS 26, use Never so the table doesn't extend
+      // under the nav bar (matching pre-iOS 26 behavior).
+      self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
+  } else if (@available(iOS 11.0, *)) {
     self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
   }
   [self.tableView addSubview:self.refreshControl];
@@ -98,12 +117,27 @@ static CGFloat const kTableViewCrossfadeDuration = 0.3;
   self.facetBarView.entryPointView.dataSource = self;
   self.facetBarView.delegate = self;
   
-  [self.view addSubview:self.facetBarView];
-  
-  [self.facetBarView autoPinEdgeToSuperviewSafeArea:ALEdgeTop];// Added by Ellibs
+  // On iPad with iOS 26, move the segmented control into the navigation bar
+  // titleView so it merges with the Liquid Glass bar, and hide the facet bar.
+  BOOL useNavBarSegmentedControl = NO;
+  if (@available(iOS 26, *)) {
+    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+      useNavBarSegmentedControl = YES;
+    }
+  }
 
-  [self.facetBarView autoPinEdgeToSuperviewEdge:ALEdgeLeading];
-  [self.facetBarView autoPinEdgeToSuperviewEdge:ALEdgeTrailing];
+  if (useNavBarSegmentedControl) {
+    // Don't add the facet bar to the view at all on iPad iOS 26.
+    // Instead, create a segmented control in the navigation bar.
+    [self setupNavBarSegmentedControl];
+  } else {
+    [self.view addSubview:self.facetBarView];
+
+    [self.facetBarView autoPinEdgeToSuperviewSafeArea:ALEdgeTop];// Added by Ellibs
+
+    [self.facetBarView autoPinEdgeToSuperviewEdge:ALEdgeLeading];
+    [self.facetBarView autoPinEdgeToSuperviewEdge:ALEdgeTrailing];
+  }
   
   if(self.feed.openSearchURL) {
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
@@ -132,19 +166,71 @@ static CGFloat const kTableViewCrossfadeDuration = 0.3;
   [self enable3DTouch];
 }
 
+/// On iPad iOS 26, place the entry point segmented control (All/Audiobooks/eBooks)
+/// directly in the navigation bar's titleView so it integrates with Liquid Glass.
+- (void)setupNavBarSegmentedControl
+{
+  NSArray<TPPCatalogFacet *> *facets = self.feed.entryPoints;
+  if (facets.count < 2) {
+    return;
+  }
+
+  NSMutableArray<NSString *> *titles = [NSMutableArray arrayWithCapacity:facets.count];
+  for (TPPCatalogFacet *facet in facets) {
+    if (facet.title) {
+      [titles addObject:facet.title];
+    }
+  }
+  if (titles.count < 2) {
+    return;
+  }
+
+  UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:titles];
+  for (NSUInteger i = 0; i < facets.count; i++) {
+    if (facets[i].active) {
+      segmentedControl.selectedSegmentIndex = i;
+      break;
+    }
+  }
+  [segmentedControl addTarget:self
+                       action:@selector(navBarSegmentDidChange:)
+             forControlEvents:UIControlEventValueChanged];
+
+  self.remoteViewController.navigationItem.titleView = segmentedControl;
+}
+
+- (void)navBarSegmentDidChange:(UISegmentedControl *)sender
+{
+  NSArray<TPPCatalogFacet *> *facets = self.feed.entryPoints;
+  NSInteger index = sender.selectedSegmentIndex;
+  if (index >= 0 && index < (NSInteger)facets.count) {
+    [self entryPointViewDidSelectWithEntryPointFacet:facets[index]];
+  }
+}
+
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {
   [super didMoveToParentViewController:parent];
-  
+
   if(parent) {
+    // On iPad iOS 26, the facet bar is hidden (moved to nav bar) and
+    // contentInsetAdjustmentBehavior handles insets. Skip manual calculation.
+    // On iPhone iOS 26, the facet bar is still visible, so we still
+    // need manual insets to push the table below it.
+    if (@available(iOS 26, *)) {
+      if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        return;
+      }
+    }
+
     CGFloat top = parent.topLayoutGuide.length;
-    
+
     if (self.facetBarView.frame.size.height > 0) {
       top = CGRectGetMaxY(self.facetBarView.frame) + kTableViewInsetAdjustmentWithEntryPoints;
     }
-    
+
     CGFloat bottom = parent.bottomLayoutGuide.length;
-    
+
     UIEdgeInsets insets = UIEdgeInsetsMake(top, 0, bottom, 0);
     self.tableView.contentInset = insets;
     self.tableView.scrollIndicatorInsets = insets;
@@ -297,7 +383,13 @@ viewForHeaderInSection:(NSInteger const)section
   CGRect const frame = CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame), kSectionHeaderHeight);
   UIView *const view = [[UIView alloc] initWithFrame:frame];
   view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-  view.backgroundColor = [[TPPConfiguration backgroundColor] colorWithAlphaComponent:0.9];
+  if (@available(iOS 26, *)) {
+    // Use clear background — grouped style with non-sticky headers
+    // means they scroll with content and don't need a background.
+    view.backgroundColor = UIColor.clearColor;
+  } else {
+    view.backgroundColor = [[TPPConfiguration backgroundColor] colorWithAlphaComponent:0.9];
+  }
   
   // Creates a header button that displays the title of a category and allows the user to tap on it to view more books in that category.
   {
@@ -491,15 +583,27 @@ viewForHeaderInSection:(NSInteger const)section
 
   UIViewController *const viewController = [[TPPCatalogFeedViewController alloc]
                                             initWithURL:urlToLoad];
-  
-  UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 150)];
-  label.numberOfLines = 0;
-  label.lineBreakMode = NSLineBreakByWordWrapping;
-  label.textAlignment = NSTextAlignmentCenter;
-  label.font = [UIFont semiBoldPalaceFontOfSize: 16];
-  label.text = lane.title;
-  label.accessibilityTraits = UIAccessibilityTraitHeader;
-  viewController.navigationItem.titleView = label;
+
+  BOOL useStandardTitle = NO;
+  if (@available(iOS 26, *)) {
+    useStandardTitle = YES;
+  }
+
+  if (useStandardTitle) {
+    // On iOS 26, use the standard title and prevent extending under
+    // the top bar so content doesn't show through.
+    viewController.title = lane.title;
+    viewController.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
+  } else {
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 150)];
+    label.numberOfLines = 0;
+    label.lineBreakMode = NSLineBreakByWordWrapping;
+    label.textAlignment = NSTextAlignmentCenter;
+    label.font = [UIFont semiBoldPalaceFontOfSize: 16];
+    label.text = lane.title;
+    label.accessibilityTraits = UIAccessibilityTraitHeader;
+    viewController.navigationItem.titleView = label;
+  }
 
   [self.navigationController pushViewController:viewController animated:YES];
 }
