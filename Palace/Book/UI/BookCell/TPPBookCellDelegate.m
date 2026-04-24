@@ -188,7 +188,7 @@ static const int kServerUpdateDelay = 15;
       }];
       
       UIViewController *vc = [TPPPDFViewController createWithDocument:document metadata:metadata];
-      [[TPPRootTabBarController sharedController] pushViewController:vc animated:YES];
+      [self presentPDFReader:vc];
     }];
   } else {
     [self presentPDF:book];
@@ -206,11 +206,25 @@ static const int kServerUpdateDelay = 15;
 
   TPPPDFDocumentMetadata *metadata = [[TPPPDFDocumentMetadata alloc] initWith:book.identifier];
   metadata.title = book.title;
-  
+
   TPPPDFDocument *document = [[TPPPDFDocument alloc] initWithData:data];
-  
+
   UIViewController *vc = [TPPPDFViewController createWithDocument:document metadata:metadata];
-  [[TPPRootTabBarController sharedController] pushViewController:vc animated:YES];
+  [self presentPDFReader:vc];
+}
+
+/// Present the PDF reader, mirroring the EPUB reader presentation strategy.
+/// On iPad, the iOS 18+ floating tab bar is not hidden by
+/// hidesBottomBarWhenPushed, so the reader must be presented modally.
+- (void)presentPDFReader:(UIViewController *)vc {
+  TPPRootTabBarController *tabBar = [TPPRootTabBarController sharedController];
+  if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    nav.modalPresentationStyle = UIModalPresentationFullScreen;
+    [tabBar presentViewController:nav animated:YES completion:nil];
+  } else {
+    [tabBar pushViewController:vc animated:YES];
+  }
 }
 
 - (void)openAudiobook:(TPPBook *)book {

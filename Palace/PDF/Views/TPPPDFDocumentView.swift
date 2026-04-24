@@ -40,7 +40,9 @@ struct TPPPDFDocumentView: UIViewRepresentable {
         let elementTapped = self.pdfView.areaOfInterest(for: touchPoint)
         // If the tapped element is not interactive, change bar visibility
         if elementTapped.intersection([.linkArea, .controlArea, .popupArea, .textFieldArea]).isEmpty {
-          showingDocumentInfo.toggle()
+          withAnimation(.easeInOut(duration: 0.3)) {
+            showingDocumentInfo.toggle()
+          }
         }
       }
     })
@@ -49,6 +51,9 @@ struct TPPPDFDocumentView: UIViewRepresentable {
       isTracking = value
     }
     
+    // Don't steal touches from PDFKit's UIPageViewController, otherwise
+    // horizontal swipe-to-turn-page stops working on iOS 26.
+    pdfViewGestureRecognizer.cancelsTouchesInView = false
     pdfView.addGestureRecognizer(pdfViewGestureRecognizer)
 
     return pdfView

@@ -20,9 +20,10 @@ struct TPPPDFReaderView: View {
   }
 
   let document: TPPPDFDocument
-  
+  var onDismiss: (() -> Void)? = nil
+
   var body: some View {
-    TPPPDFNavigation(readerMode: $readerMode) { _ in
+    TPPPDFNavigation(readerMode: $readerMode, onDismiss: onDismiss) { _ in
       ZStack {
         documentView
           .onReceive(metadata.$remotePage, perform: showRemotePositionAlert)
