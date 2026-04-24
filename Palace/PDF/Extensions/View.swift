@@ -34,8 +34,13 @@ extension View {
 
   /// Shows the view when `when` condition is `true`
   /// - Parameter when: Condition when the view is visible
+  ///
+  /// When invisible, the view also stops receiving touches — otherwise
+  /// stacked invisible overlays would block taps/swipes on views below
+  /// (observed on iOS 26 with PDFKit's page-view-controller swipes).
   func visible(when: Bool) -> some View {
     opacity(when ? 1 : 0)
+      .allowsHitTesting(when)
   }
   
   /// Minimal size for toolbar buttons
