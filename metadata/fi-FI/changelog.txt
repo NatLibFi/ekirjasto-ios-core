@@ -1,5 +1,5 @@
 Kehitämme sovellusta ja korjaamme bugeja jatkuvasti. Tarkistathan, että sinulla on aina käytössäsi sovelluksen uusin versio.
 
 Tässä versiossa:
-- Sovelluksessa näytetään nyt tarkempia tietoja kirjan saatavuudesta, kuten vapaana olevien kappaleiden lukumäärä ja varausjonon pituus
-- Asetukset-välilehdelle on lisätty uusi osio, jonka kautta voit vastata käyttäjäkyselyihin
+- Käyttöliittymäpäivityksiä
+- Bugikorjauksia
