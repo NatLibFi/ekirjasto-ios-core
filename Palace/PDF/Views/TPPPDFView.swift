@@ -30,10 +30,6 @@ struct TPPPDFView: View {
         .edgesIgnoringSafeArea([.all])
 
       VStack {
-        if let title = document.title ?? metadata.title {
-          TPPPDFLabel(title)
-            .padding(.top)
-        }
         Spacer()
         if let pageLabel = document.page(at: metadata.currentPage)?.label, Int(pageLabel) != (metadata.currentPage + 1) {
           TPPPDFLabel("\(pageLabel) (\(metadata.currentPage + 1)/\(document.pageCount))")
@@ -51,15 +47,12 @@ struct TPPPDFView: View {
         }
       }
       .opacity(showingDocumentInfo ? 1 : 0)
-      .contentShape(Rectangle())
+      .allowsHitTesting(showingDocumentInfo)
     }
     .navigationBarHidden(!showingDocumentInfo)
     .onReceive(pageChangePublisher) { value in
       if let pdfView = (value.object as? PDFView), let page = pdfView.currentPage, let pageIndex = pdfView.document?.index(for: page) {
         metadata.currentPage = pageIndex
-        if isTracking {
-            showingDocumentInfo = false
-        }
       }
     }
   }

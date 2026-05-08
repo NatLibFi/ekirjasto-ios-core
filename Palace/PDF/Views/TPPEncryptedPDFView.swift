@@ -23,10 +23,6 @@ struct TPPEncryptedPDFView: View {
       TPPEncryptedPDFViewer(encryptedPDF: encryptedPDF, currentPage: $metadata.currentPage, showingDocumentInfo: $showingDocumentInfo)
         .edgesIgnoringSafeArea([.all])
       VStack {
-        if let title = encryptedPDF.title ?? metadata.title {
-          TPPPDFLabel(title)
-            .padding(.top)
-        }
         Spacer()
         TPPPDFLabel("\(metadata.currentPage + 1)/\(encryptedPDF.pageCount)")
         TPPPDFPreviewBar(document: encryptedPDF, currentPage: $metadata.currentPage)
@@ -37,7 +33,9 @@ struct TPPEncryptedPDFView: View {
         // TPPEncryptedPDFPageViewController doesn't receive double tap without this
       }
       .onTapGesture(count: 1) {
-        showingDocumentInfo.toggle()
+        withAnimation(.easeInOut(duration: 0.3)) {
+          showingDocumentInfo.toggle()
+        }
       }
     }
     .navigationBarHidden(!showingDocumentInfo)

@@ -40,10 +40,9 @@ struct TPPPDFNavigation<Content>: View where Content: View {
   }
   
   @EnvironmentObject var metadata: TPPPDFDocumentMetadata
-  
-  @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-  
+
   @Binding var readerMode: TPPPDFReaderMode
+  var onDismiss: (() -> Void)? = nil
 
   private var isShowingPdfContorls: Bool {
     readerMode == .previews || readerMode == .bookmarks || readerMode == .toc
@@ -62,37 +61,34 @@ struct TPPPDFNavigation<Content>: View where Content: View {
   var leadingItems: some View {
     HStack {
       TPPPDFBackButton {
-        presentationMode.wrappedValue.dismiss()
+        onDismiss?()
       }
-      
-      ZStack(alignment: .leading) {
-        TPPPDFToolbarButton(icon: "list.bullet") {
-          readerMode = TPPPDFReaderModeValues(rawValue: pickerSelection)?.readerMode ?? .previews
-          metadata.fetchBookmarks()
-        }
-        .visible(when: !isShowingPdfContorls)
 
+      if isShowingPdfContorls {
         Picker("", selection: $pickerSelection.onChange(changeReaderMode)) {
           ForEach(TPPPDFReaderModeValues.allValues) { readerModeValue in
             readerModeValue.image
               .tag(readerModeValue.rawValue)
           }
         }
-        .toolbarButtonSize()
         .pickerStyle(.segmented)
-        .visible(when: isShowingPdfContorls)
+        .frame(width: 160)
+      } else {
+        TPPPDFToolbarButton(icon: "list.bullet") {
+          readerMode = TPPPDFReaderModeValues(rawValue: pickerSelection)?.readerMode ?? .previews
+          metadata.fetchBookmarks()
+        }
       }
     }
   }
 
   @ViewBuilder
   var trailingItems: some View {
-    ZStack(alignment: .trailing) {
+    if isShowingPdfContorls {
       TPPPDFToolbarButton(text: Strings.TPPPDFNavigation.resume) {
         readerMode = .reader
       }
-      .visible(when: isShowingPdfContorls)
-
+    } else {
       HStack {
         TPPPDFToolbarButton(icon: "magnifyingglass") {
           readerMode = (readerMode == .search ? .reader : .search)
@@ -105,7 +101,6 @@ struct TPPPDFNavigation<Content>: View where Content: View {
           }
         }
       }
-      .visible(when: !isShowingPdfContorls)
     }
   }
 
