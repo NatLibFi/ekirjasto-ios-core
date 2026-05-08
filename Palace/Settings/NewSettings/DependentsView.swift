@@ -121,14 +121,23 @@ struct DependentsView: View {
                       .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
                       .padding()
                     
-                    // If a list of dependents is returned, show them in a picker
                   } else {
-                    Picker(tsx.select, selection: $id) {
-                      Text(tsx.selectADependent).tag(tsx.selectADependent)
-                      // Show the name of the fetched dependents and store their id
-                      ForEach(fetchedDependents, id: \.id) { dependent in
-                        Text(dependent.firstName).tag(dependent.id)
+                    // If a list of dependents is returned, show them in a picker
+                    Picker(tsx.select, selection: $selectedDependent) {
+                      
+                      // show the placeholder option at the top of the picker, tag is nil
+                      // label is "Select a dependent"
+                      Text(tsx.selectADependent)
+                        .tag(Optional<Dependent>.none)
+
+                      // create one option to the picker for each dependent
+                      ForEach(fetchedDependents) { dependent in
+                        // show the dependent's first name as label in the picker
+                        // The tag's value is the Dependent object
+                        Text(dependent.firstName)
+                          .tag(Optional(dependent))
                       }
+                      
                     }
                     
                   }
