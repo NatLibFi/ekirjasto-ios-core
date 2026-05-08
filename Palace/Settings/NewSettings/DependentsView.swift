@@ -10,17 +10,21 @@ import SwiftUI
 /**
  A model representing a dependent.
  
- The `Dependent` struct conforms to `Codable`, `Identifiable`, and `Hashable` protocols. It represents a dependent with an ID, first name, and last name. The struct provides custom encoding and decoding to map JSON keys to its properties.
+ The `Dependent` struct conforms to `Codable`, `Identifiable`, and `Hashable` protocols. It represents a dependent with an ID, date of birth, first name, and last name. The struct provides custom encoding and decoding to map JSON keys to its properties.
  
  - Properties:
- - id: A unique identifier for the dependent.
+ - uuid: A unique identifier for the dependent.
+ - govId: The date of birth of the dependent
  - firstName: The first name of the dependent.
  - lastName: The last name of the dependent.
  */
 struct Dependent: Codable, Identifiable, Hashable {
-  let id: String
+  let uuid = UUID()
+  let govId: String
   let firstName: String
   let lastName: String
+  
+  var id: UUID { uuid }
   
   private enum CodingKeys: String, CodingKey {
     case govId
@@ -30,14 +34,14 @@ struct Dependent: Codable, Identifiable, Hashable {
   
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    id = try container.decode(String.self, forKey: .govId) // The API returns govId but we decode it to "id"
+    govId = try container.decode(String.self, forKey: .govId)
     firstName = try container.decode(String.self, forKey: .firstName)
     lastName = try container.decode(String.self, forKey: .lastName)
   }
   
   func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(id, forKey: .govId) // The API expects govId so we encode it back to that
+    try container.encode(govId, forKey: .govId)
     try container.encode(firstName, forKey: .firstName)
     try container.encode(lastName, forKey: .lastName)
   }
