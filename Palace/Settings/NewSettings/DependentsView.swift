@@ -286,16 +286,17 @@ struct DependentsView: View {
             // Update UI properties with the fetched dependents
             self.showPicker = true
             self.fetchedDependents = dependents
+            
             if let firstDependent = fetchedDependents.first {
-              print(firstDependent.firstName)
-              // Store the first dependent's id to be used in the view's picker
-              self.id = firstDependent.id
-              self.isLoading = false
+              // Store the first dependent as selectedDependent
+              // this default is used in the picker
+              self.selectedDependent = firstDependent
             } else {
-              // fetchedDependents on tyhjä
-              print("No dependents available")
-              self.isLoading = false
+              self.selectedDependent = nil
             }
+            
+            self.isLoading = false
+
           case .failure(let error):
             // Handle error in fetching dependents
             self.isLoading = false
