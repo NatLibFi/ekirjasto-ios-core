@@ -69,7 +69,7 @@ struct DependentsView: View {
   @State var authDoc : OPDS2AuthenticationDocument?
   @State private var fetchedDependents: [Dependent] = []
   @State private var showPicker: Bool = false
-  @State private var id = ""
+  @State private var selectedDependent: Dependent? = nil
   @State private var alertMessage = ""
   @State private var showAlert = false
   @State private var showSuccess = false
