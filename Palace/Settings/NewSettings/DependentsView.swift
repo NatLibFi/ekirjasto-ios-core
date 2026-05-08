@@ -151,7 +151,7 @@ struct DependentsView: View {
           }
         
         // If the user has selected a dependent, we show them an email text field
-        if id != "" {
+        if let selected = selectedDependent {
           VStack {
             Text(tsx.guideText)
               .foregroundStyle(Color(uiColor: .lightGray))
@@ -170,7 +170,7 @@ struct DependentsView: View {
           VStack {
             // Tapping this button will send out the invite
             Button {
-              sendInviteToDependent(dependentId: id)
+              sendInviteToDependent(dependent: selected)
             } label: {
               HStack {
                 Text(tsx.sendButton)
@@ -389,57 +389,67 @@ struct DependentsView: View {
   /**
    Function that encodes the selected dependent's information to a JSON request body and makes a post request to the authentication service invite endpoint.
    - Parameters:
-   - dependentId: The user's selected id of the dependent
+   - dependent: The Dependent user has selected for invitation
    */
-  func sendInviteToDependent(dependentId: String) {
+  func sendInviteToDependent(dependent: Dependent) {
     print("Start Dependent invite function")
-    
+
     // Check here that the typed in email is valid and proceed if it's valid. Otherwise, show an alert.
     let emailValid = validate(self.inputEmail)
+
     if !emailValid {
       self.alertMessage = tsx.incorrectEmail
       self.showAlert = true
-    } else {
-      
-      // Get the locale of the current user. We assume the dependent most likely will prefer the same language for the invite.
-      let langCode = Locale.current.languageCode
-      
-      var jsonData: Data?
-      // Find the Dependent with the matching id (user selected it in the picker)
-      if let dependentObject = self.fetchedDependents.first(where: { $0.id == dependentId }) {
-        print("Found dependent: \(dependentObject)")
-        
-        // Map the Dependent's properties to a dictionary. Role is always "customer".
-        let dictionary: [String: String] = [
-          "firstName": dependentObject.firstName,
-          "lastName": dependentObject.lastName,
-          "govId": dependentObject.id,
-          "email": self.inputEmail,
-          "locale": langCode!,
-          "role": "customer"
-        ].compactMapValues { $0 }
-        print("data here: \(dictionary)")
-        // Encode the dictionary to JSON
-        do {
-          let encodedData = try JSONEncoder().encode(dictionary)
-          jsonData = encodedData
-        } catch {
-          print("Error encoding dictionary to JSON: \(error)")
-        }
-        // Shouldn't happen, but just in case, print the id if there's no matching Dependent
-      } else {
-        print("No matching dependent: \(dependentId)!")
-      }
-      
-      let inviteUrl = getLink(forRel: "invite")
-      
-      // Once the request is made, the user should be shown progress
-      self.isLoadingSend = true
-      
-      // Add all needed arguments to to create the post request. Print out the response from the API for success/fail
-      createHTTPRequest(httpMethod: "POST", url: inviteUrl!, accessToken: self.ekirjastoToken, jsonRequestBody: jsonData, contentType: "application/json") { result in
-        switch result {
-          // When the request is made successfully, show the user a message, print the response and update UI properties
+      return
+    }
+
+    // Get the locale of the current user.
+    // We assume the dependent most likely will prefer the same language for the invite.
+    // Use Finnish as fallback
+    let langCode = Locale.current.languageCode ?? "fi"
+
+    var jsonData: Data?
+
+    // Map the Dependent's properties to a dictionary. Role is always "customer".
+    let dictionary: [String: String] = [
+      "firstName": dependent.firstName,
+      "lastName": dependent.lastName,
+      "govId": dependent.govId,
+      "email": self.inputEmail,
+      "locale": langCode,
+      "role": "customer"
+    ]
+
+    // Encode the dictionary to JSON
+    do {
+      jsonData = try JSONEncoder().encode(dictionary)
+    } catch {
+      print("Error encoding dictionary to JSON: \(error)")
+    }
+
+    // just to be safe
+    guard let inviteUrl = getLink(forRel: "invite"),
+          let requestBody = jsonData
+    else {
+      print("Invalid Dependent invite URL or JSON request body")
+      return
+    }
+
+    // Once the request is made, the user should be shown progress
+    self.isLoadingSend = true
+
+    // Add all needed arguments to to create the post request. Print out the response from the API for success/fail
+    createHTTPRequest(
+      httpMethod: "POST",
+      url: inviteUrl,
+      accessToken: self.ekirjastoToken,
+      jsonRequestBody: requestBody,
+      contentType: "application/json"
+    ) { result in
+
+      switch result {
+      // When the request is made successfully, show the user a message, print the response and update UI properties
+
         case .success(let response):
           if let responseString = String(data: response, encoding: .utf8) {
             print("response: \(responseString)")
@@ -448,16 +458,24 @@ struct DependentsView: View {
             self.alertMessage = tsx.thanks
             self.inputEmail = ""
           } else {
-            let conversionError = NSError(domain: "ConversionErrorDomain", code: 1001, userInfo: [NSLocalizedDescriptionKey: "Failed to convert data to string"])
+            let conversionError = NSError(
+              domain: "ConversionErrorDomain",
+              code: 1001,
+              userInfo: [
+                NSLocalizedDescriptionKey: "Failed to convert data to string"
+              ]
+            )
             print("error: \(conversionError)")
           }
+
         case .failure(let error):
           // Handle reqeust errors
           self.isLoadingSend = false
           print("fail: \(error)")
         }
-      }
+
     }
+
   }
   
 
