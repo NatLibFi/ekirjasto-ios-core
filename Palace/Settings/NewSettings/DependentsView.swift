@@ -10,17 +10,21 @@ import SwiftUI
 /**
  A model representing a dependent.
  
- The `Dependent` struct conforms to `Codable`, `Identifiable`, and `Hashable` protocols. It represents a dependent with an ID, first name, and last name. The struct provides custom encoding and decoding to map JSON keys to its properties.
+ The `Dependent` struct conforms to `Codable`, `Identifiable`, and `Hashable` protocols. It represents a dependent with an ID, date of birth, first name, and last name. The struct provides custom encoding and decoding to map JSON keys to its properties.
  
  - Properties:
- - id: A unique identifier for the dependent.
+ - uuid: A unique identifier for the dependent.
+ - govId: The date of birth of the dependent
  - firstName: The first name of the dependent.
  - lastName: The last name of the dependent.
  */
 struct Dependent: Codable, Identifiable, Hashable {
-  let id: String
+  let uuid = UUID()
+  let govId: String
   let firstName: String
   let lastName: String
+  
+  var id: UUID { uuid }
   
   private enum CodingKeys: String, CodingKey {
     case govId
@@ -30,14 +34,14 @@ struct Dependent: Codable, Identifiable, Hashable {
   
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    id = try container.decode(String.self, forKey: .govId) // The API returns govId but we decode it to "id"
+    govId = try container.decode(String.self, forKey: .govId)
     firstName = try container.decode(String.self, forKey: .firstName)
     lastName = try container.decode(String.self, forKey: .lastName)
   }
   
   func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(id, forKey: .govId) // The API expects govId so we encode it back to that
+    try container.encode(govId, forKey: .govId)
     try container.encode(firstName, forKey: .firstName)
     try container.encode(lastName, forKey: .lastName)
   }
@@ -65,7 +69,7 @@ struct DependentsView: View {
   @State var authDoc : OPDS2AuthenticationDocument?
   @State private var fetchedDependents: [Dependent] = []
   @State private var showPicker: Bool = false
-  @State private var id = ""
+  @State private var selectedDependent: Dependent? = nil
   @State private var alertMessage = ""
   @State private var showAlert = false
   @State private var showSuccess = false
@@ -117,14 +121,23 @@ struct DependentsView: View {
                       .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
                       .padding()
                     
-                    // If a list of dependents is returned, show them in a picker
                   } else {
-                    Picker(tsx.select, selection: $id) {
-                      Text(tsx.selectADependent).tag(tsx.selectADependent)
-                      // Show the name of the fetched dependents and store their id
-                      ForEach(fetchedDependents, id: \.id) { dependent in
-                        Text(dependent.firstName).tag(dependent.id)
+                    // If a list of dependents is returned, show them in a picker
+                    Picker(tsx.select, selection: $selectedDependent) {
+                      
+                      // show the placeholder option at the top of the picker, tag is nil
+                      // label is "Select a dependent"
+                      Text(tsx.selectADependent)
+                        .tag(Optional<Dependent>.none)
+
+                      // create one option to the picker for each dependent
+                      ForEach(fetchedDependents) { dependent in
+                        // show the dependent's first name as label in the picker
+                        // The tag's value is the Dependent object
+                        Text(dependent.firstName)
+                          .tag(Optional(dependent))
                       }
+                      
                     }
                     
                   }
@@ -138,7 +151,7 @@ struct DependentsView: View {
           }
         
         // If the user has selected a dependent, we show them an email text field
-        if id != "" {
+        if let selected = selectedDependent {
           VStack {
             Text(tsx.guideText)
               .foregroundStyle(Color(uiColor: .lightGray))
@@ -157,7 +170,7 @@ struct DependentsView: View {
           VStack {
             // Tapping this button will send out the invite
             Button {
-              sendInviteToDependent(dependentId: id)
+              sendInviteToDependent(dependent: selected)
             } label: {
               HStack {
                 Text(tsx.sendButton)
@@ -273,16 +286,17 @@ struct DependentsView: View {
             // Update UI properties with the fetched dependents
             self.showPicker = true
             self.fetchedDependents = dependents
+            
             if let firstDependent = fetchedDependents.first {
-              print(firstDependent.firstName)
-              // Store the first dependent's id to be used in the view's picker
-              self.id = firstDependent.id
-              self.isLoading = false
+              // Store the first dependent as selectedDependent
+              // this default is used in the picker
+              self.selectedDependent = firstDependent
             } else {
-              // fetchedDependents on tyhjä
-              print("No dependents available")
-              self.isLoading = false
+              self.selectedDependent = nil
             }
+            
+            self.isLoading = false
+
           case .failure(let error):
             // Handle error in fetching dependents
             self.isLoading = false
@@ -375,57 +389,67 @@ struct DependentsView: View {
   /**
    Function that encodes the selected dependent's information to a JSON request body and makes a post request to the authentication service invite endpoint.
    - Parameters:
-   - dependentId: The user's selected id of the dependent
+   - dependent: The Dependent user has selected for invitation
    */
-  func sendInviteToDependent(dependentId: String) {
+  func sendInviteToDependent(dependent: Dependent) {
     print("Start Dependent invite function")
-    
+
     // Check here that the typed in email is valid and proceed if it's valid. Otherwise, show an alert.
     let emailValid = validate(self.inputEmail)
+
     if !emailValid {
       self.alertMessage = tsx.incorrectEmail
       self.showAlert = true
-    } else {
-      
-      // Get the locale of the current user. We assume the dependent most likely will prefer the same language for the invite.
-      let langCode = Locale.current.languageCode
-      
-      var jsonData: Data?
-      // Find the Dependent with the matching id (user selected it in the picker)
-      if let dependentObject = self.fetchedDependents.first(where: { $0.id == dependentId }) {
-        print("Found dependent: \(dependentObject)")
-        
-        // Map the Dependent's properties to a dictionary. Role is always "customer".
-        let dictionary: [String: String] = [
-          "firstName": dependentObject.firstName,
-          "lastName": dependentObject.lastName,
-          "govId": dependentObject.id,
-          "email": self.inputEmail,
-          "locale": langCode!,
-          "role": "customer"
-        ].compactMapValues { $0 }
-        print("data here: \(dictionary)")
-        // Encode the dictionary to JSON
-        do {
-          let encodedData = try JSONEncoder().encode(dictionary)
-          jsonData = encodedData
-        } catch {
-          print("Error encoding dictionary to JSON: \(error)")
-        }
-        // Shouldn't happen, but just in case, print the id if there's no matching Dependent
-      } else {
-        print("No matching dependent: \(dependentId)!")
-      }
-      
-      let inviteUrl = getLink(forRel: "invite")
-      
-      // Once the request is made, the user should be shown progress
-      self.isLoadingSend = true
-      
-      // Add all needed arguments to to create the post request. Print out the response from the API for success/fail
-      createHTTPRequest(httpMethod: "POST", url: inviteUrl!, accessToken: self.ekirjastoToken, jsonRequestBody: jsonData, contentType: "application/json") { result in
-        switch result {
-          // When the request is made successfully, show the user a message, print the response and update UI properties
+      return
+    }
+
+    // Get the locale of the current user.
+    // We assume the dependent most likely will prefer the same language for the invite.
+    // Use Finnish as fallback
+    let langCode = Locale.current.languageCode ?? "fi"
+
+    var jsonData: Data?
+
+    // Map the Dependent's properties to a dictionary. Role is always "customer".
+    let dictionary: [String: String] = [
+      "firstName": dependent.firstName,
+      "lastName": dependent.lastName,
+      "govId": dependent.govId,
+      "email": self.inputEmail,
+      "locale": langCode,
+      "role": "customer"
+    ]
+
+    // Encode the dictionary to JSON
+    do {
+      jsonData = try JSONEncoder().encode(dictionary)
+    } catch {
+      print("Error encoding dictionary to JSON: \(error)")
+    }
+
+    // just to be safe
+    guard let inviteUrl = getLink(forRel: "invite"),
+          let requestBody = jsonData
+    else {
+      print("Invalid Dependent invite URL or JSON request body")
+      return
+    }
+
+    // Once the request is made, the user should be shown progress
+    self.isLoadingSend = true
+
+    // Add all needed arguments to to create the post request. Print out the response from the API for success/fail
+    createHTTPRequest(
+      httpMethod: "POST",
+      url: inviteUrl,
+      accessToken: self.ekirjastoToken,
+      jsonRequestBody: requestBody,
+      contentType: "application/json"
+    ) { result in
+
+      switch result {
+      // When the request is made successfully, show the user a message, print the response and update UI properties
+
         case .success(let response):
           if let responseString = String(data: response, encoding: .utf8) {
             print("response: \(responseString)")
@@ -434,16 +458,24 @@ struct DependentsView: View {
             self.alertMessage = tsx.thanks
             self.inputEmail = ""
           } else {
-            let conversionError = NSError(domain: "ConversionErrorDomain", code: 1001, userInfo: [NSLocalizedDescriptionKey: "Failed to convert data to string"])
+            let conversionError = NSError(
+              domain: "ConversionErrorDomain",
+              code: 1001,
+              userInfo: [
+                NSLocalizedDescriptionKey: "Failed to convert data to string"
+              ]
+            )
             print("error: \(conversionError)")
           }
+
         case .failure(let error):
           // Handle reqeust errors
           self.isLoadingSend = false
           print("fail: \(error)")
         }
-      }
+
     }
+
   }
   
 
