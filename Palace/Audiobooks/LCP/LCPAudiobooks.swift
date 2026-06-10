@@ -50,32 +50,37 @@ import PalaceAudiobookToolkit
   }
 
   /// Content dictionary for `AudiobookFactory`
+  /// The completion handler is always called on the main thread.
   @objc func contentDictionary(completion: @escaping (_ json: NSDictionary?, _ error: NSError?) -> ()) {
-    let manifestPath = "manifest.json"
     Task {
       do {
         guard let url = FileURL(url: audiobookUrl) else {
-          completion(nil, LCPAudiobooks.nsError(for: NSError(domain: "LCPAudiobooks", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
+          await Self.finish(completion, nil, NSError(domain: "LCPAudiobooks", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"]))
           return
         }
         let asset = try await assetRetriever.retrieve(url: url, mediaType: .lcpProtectedAudiobook).get()
         let publication = try await publicationOpener.open(asset: asset, allowUserInteraction: false).get()
-        let manifestLink = publication.linkWithHREF(AnyURL(string: "/" + manifestPath)!) ?? publication.linkWithHREF(AnyURL(string: manifestPath)!)
-        if let manifestLink = manifestLink, let resource = publication.get(manifestLink) {
-          let data = try await resource.read().get()
-          if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? NSDictionary {
-            completion(json, nil)
-          } else {
-            completion(nil, LCPAudiobooks.nsError(for: NSError(domain: "LCPAudiobooks", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to parse manifest"])))
-          }
+        // Readium 3.x publications only serve links listed in the manifest,
+        // so manifest.json itself can no longer be fetched as a resource.
+        // The opened publication carries the parsed manifest instead.
+        if let manifestString = publication.jsonManifest,
+           let manifestData = manifestString.data(using: .utf8),
+           let json = try? JSONSerialization.jsonObject(with: manifestData, options: []) as? NSDictionary {
+          await Self.finish(completion, json, nil)
         } else {
-          completion(nil, LCPAudiobooks.nsError(for: NSError(domain: "LCPAudiobooks", code: -1, userInfo: [NSLocalizedDescriptionKey: "Resource not found"])))
+          await Self.finish(completion, nil, NSError(domain: "LCPAudiobooks", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to parse manifest"]))
         }
       } catch {
-        TPPErrorLogger.logError(error, summary: "Error reading LCP \(manifestPath) file", metadata: [self.audiobookUrlKey: self.audiobookUrl])
-        completion(nil, LCPAudiobooks.nsError(for: error))
+        TPPErrorLogger.logError(error, summary: "Error opening LCP audiobook", metadata: [self.audiobookUrlKey: self.audiobookUrl])
+        await Self.finish(completion, nil, LCPAudiobooks.nsError(for: error))
       }
     }
+  }
+
+  /// Delivers the completion on the main thread; callers feed UI flows.
+  @MainActor
+  private static func finish(_ completion: @escaping (NSDictionary?, NSError?) -> (), _ json: NSDictionary?, _ error: NSError?) {
+    completion(json, error)
   }
 
   /// Check if the book is LCP audiobook
