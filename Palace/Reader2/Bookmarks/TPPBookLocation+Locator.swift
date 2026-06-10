@@ -11,6 +11,17 @@ import ReadiumShared
 
 extension TPPBookLocation {
   static let r2Renderer = "readium2"
+
+  /// Serializes a dictionary of JSON-native values to a string.
+  /// (Readium 3.9 removed its public `serializeJSONString` helper.)
+  private static func jsonString(from dict: [String: Any]) -> String? {
+    guard JSONSerialization.isValidJSONObject(dict),
+          let data = try? JSONSerialization.data(withJSONObject: dict, options: [.sortedKeys])
+    else {
+      return nil
+    }
+    return String(data: data, encoding: .utf8)
+  }
   
   convenience init?(locator: Locator,
                     type: String,
@@ -28,10 +39,10 @@ extension TPPBookLocation {
       TPPBookLocation.bookProgressKey: locator.locations.totalProgression ?? 0.0,
       TPPBookLocation.titleKey: locator.title ?? "",
       TPPBookLocation.positionKey: locator.locations.position ?? 0.0,
-      TPPBookLocation.cssSelector: locator.locations.otherLocations[TPPBookLocation.cssSelector] ?? ""
+      TPPBookLocation.cssSelector: locator.locations.otherLocations[TPPBookLocation.cssSelector]?.string ?? ""
     ]
     
-    guard let jsonString = serializeJSONString(dict) else {
+    guard let jsonString = TPPBookLocation.jsonString(from: dict) else {
       Log.warn(#file, "Failed to serialize json string from dictionary - \(dict.debugDescription)")
       return nil
     }
@@ -68,7 +79,7 @@ extension TPPBookLocation {
       TPPBookLocation.cssSelector: cssSelector ?? ""
     ]
     
-    guard let jsonString = serializeJSONString(dict) else {
+    guard let jsonString = TPPBookLocation.jsonString(from: dict) else {
       Log.warn(#file, "Failed to serialize json string from dictionary - \(dict.debugDescription)")
       return nil
     }
@@ -91,9 +102,9 @@ extension TPPBookLocation {
     let title: String = dict[TPPBookLocation.titleKey] as? String ?? ""
     let position: Int? = dict[TPPBookLocation.positionKey] as? Int
 
-    var otherLocations = [String: Any]()
+    var otherLocations = [String: JSONValue]()
     if let cssSelector = dict[TPPBookLocation.cssSelector] as? String, !cssSelector.isEmpty {
-      otherLocations[TPPBookLocation.cssSelector] = cssSelector
+      otherLocations[TPPBookLocation.cssSelector] = .string(cssSelector)
     }
     
     let locations = Locator.Locations(fragments: [],
