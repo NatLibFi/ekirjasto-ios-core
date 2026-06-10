@@ -467,6 +467,24 @@ extension TPPBaseReaderViewController: NavigatorDelegate {
 
 extension TPPBaseReaderViewController: VisualNavigatorDelegate {
 
+  /// Keeps the page content clear of the book title and reading position
+  /// overlay labels. The navigator's default behavior only avoids the safe
+  /// area itself, but the title label sits just inside it.
+  func navigatorContentInset(_ navigator: VisualNavigator) -> UIEdgeInsets? {
+    let safeArea = view.window?.safeAreaInsets ?? view.safeAreaInsets
+    let margin = TPPBaseReaderViewController.overlayLabelMargin
+    let labelClearance = ceil(positionLabel.font.lineHeight) + 8
+    return UIEdgeInsets(
+      // The title label's top is at safeArea.top + margin / 2.
+      top: safeArea.top + margin / 2 + labelClearance,
+      left: 0,
+      // The position label hangs into the bottom safe area: its bottom is
+      // `margin` above the view's bottom edge, not the safe area's.
+      bottom: max(margin + labelClearance, safeArea.bottom),
+      right: 0
+    )
+  }
+
   func navigator(_ navigator: VisualNavigator, didTapAt point: CGPoint) {
     let viewport = navigator.view.bounds
     // Skips to previous/next pages if the tap is on the content edges.

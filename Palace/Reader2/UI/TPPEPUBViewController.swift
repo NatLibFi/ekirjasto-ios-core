@@ -30,6 +30,9 @@ class TPPEPUBViewController: TPPBaseReaderViewController {
 
     systemUserInterfaceStyle = UITraitCollection.current.userInterfaceStyle
 
+    // Vertical space for the reader's overlay labels is reserved via
+    // navigatorContentInset(_:) in TPPBaseReaderViewController.
+
     var config = EPUBNavigatorViewController.Configuration()
     config.preloadPreviousPositionCount = 2
     config.preloadNextPositionCount = 2
