@@ -4,6 +4,8 @@
 #import "TPPBookDownloadingCell.h"
 #import "TPPBookButtonsView.h"
 
+@class AudiobookBookmarkBusinessLogic;
+
 /* This class implements a shared delegate that performs all of its duties via the shared registry,
 shared cover registry, shared download center, et cetera. */
 @interface TPPBookCellDelegate : NSObject
@@ -15,5 +17,6 @@ shared cover registry, shared download center, et cetera. */
 + (instancetype)sharedDelegate;
 @property (nonatomic) TPPBook *book;
 @property (nonatomic) bool isSyncing;
+@property (nonatomic, strong) AudiobookBookmarkBusinessLogic *audiobookBookmarkBusinessLogic;
 
 @end

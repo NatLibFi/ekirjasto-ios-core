@@ -292,6 +292,7 @@
 		3312630F2A287F53006BA87D /* TPPAsync.m in Sources */ = {isa = PBXBuildFile; fileRef = 1183F35A194F847100DC322F /* TPPAsync.m */; };
 		331263102A287F53006BA87D /* TPPReloadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B20E6D19D9F6DD00877A23 /* TPPReloadView.m */; };
 		331263112A287F53006BA87D /* AudiobookBookmarkBusinessLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55E2FA729E7AFCD0093F916 /* AudiobookBookmarkBusinessLogic.swift */; };
+		AB7311A02E1A000100000002 /* AudiobookTrackMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7311A02E1A000100000001 /* AudiobookTrackMapper.swift */; };
 		331263122A287F53006BA87D /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FFB96328AED4850042907F /* ImageProvider.swift */; };
 		331263132A287F53006BA87D /* DownloadingBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5824BE02994AF4800DE76C2 /* DownloadingBookCell.swift */; };
 		331263142A287F53006BA87D /* PublicationOpeningError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D746FB2719B00E00C0E1B4 /* PublicationOpeningError.swift */; };
@@ -1188,6 +1189,7 @@
 		E55E2FA529E7A9660093F916 /* AudioBookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5231240285C291D007D1DB5 /* AudioBookmark.swift */; };
 		E55E2FA629E7A9670093F916 /* AudioBookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5231240285C291D007D1DB5 /* AudioBookmark.swift */; };
 		E55E2FA829E7AFCD0093F916 /* AudiobookBookmarkBusinessLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55E2FA729E7AFCD0093F916 /* AudiobookBookmarkBusinessLogic.swift */; };
+		AB7311A02E1A000100000004 /* AudiobookTrackMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7311A02E1A000100000001 /* AudiobookTrackMapper.swift */; };
 		E56067752A4C8858002ACE93 /* TokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56067742A4C8858002ACE93 /* TokenRequest.swift */; };
 		E56724BF2A13223700972828 /* TPPBookCellDelegate+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5024A8C2A0E8761006BF653 /* TPPBookCellDelegate+Extensions.swift */; };
 		E56724C12A132C1300972828 /* TPPAnnotationMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56724C02A132C1300972828 /* TPPAnnotationMock.swift */; };
@@ -1235,6 +1237,7 @@
 		E5D3288B292C0D68008BFD01 /* txstrings.json in Resources */ = {isa = PBXBuildFile; fileRef = E5D32881292C0D34008BFD01 /* txstrings.json */; };
 		E5E4907229280597005BFC55 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54DD4CF275C66F30013C200 /* Strings.swift */; };
 		E5ED734729F702D500EC2F67 /* AudiobookBookmarkBusinessLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55E2FA729E7AFCD0093F916 /* AudiobookBookmarkBusinessLogic.swift */; };
+		AB7311A02E1A000100000003 /* AudiobookTrackMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7311A02E1A000100000001 /* AudiobookTrackMapper.swift */; };
 		E5EFDE78298C43D300258CA3 /* BookButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EFDE77298C43D300258CA3 /* BookButtonState.swift */; };
 		E5EFDE79298C43DD00258CA3 /* BookButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EFDE77298C43D300258CA3 /* BookButtonState.swift */; };
 		E5EFDE7C298C4F8000258CA3 /* BookCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EFDE7B298C4F8000258CA3 /* BookCellModel.swift */; };
@@ -2062,6 +2065,7 @@
 		E551B360267D402B0026FC1B /* TPPAccountList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPPAccountList.swift; sourceTree = "<group>"; };
 		E553424F293FB23F004FF34A /* PalaceAudiobookToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PalaceAudiobookToolkit.xcodeproj; path = "ios-audiobooktoolkit/PalaceAudiobookToolkit.xcodeproj"; sourceTree = "<group>"; };
 		E55E2FA729E7AFCD0093F916 /* AudiobookBookmarkBusinessLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudiobookBookmarkBusinessLogic.swift; sourceTree = "<group>"; };
+		AB7311A02E1A000100000001 /* AudiobookTrackMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudiobookTrackMapper.swift; sourceTree = "<group>"; };
 		E56067742A4C8858002ACE93 /* TokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRequest.swift; sourceTree = "<group>"; };
 		E56724C02A132C1300972828 /* TPPAnnotationMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPPAnnotationMock.swift; sourceTree = "<group>"; };
 		E567C72B296743990079C28C /* BookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
@@ -3396,6 +3400,7 @@
 			isa = PBXGroup;
 			children = (
 				E55E2FA729E7AFCD0093F916 /* AudiobookBookmarkBusinessLogic.swift */,
+				AB7311A02E1A000100000001 /* AudiobookTrackMapper.swift */,
 				E59892EC28AC909000C44A85 /* AudiobookSampleToolbar.swift */,
 				E6D848E22171334800CEC142 /* TPPContentTypeBadge.swift */,
 			);
@@ -4728,6 +4733,7 @@
 				331263102A287F53006BA87D /* TPPReloadView.m in Sources */,
 				33FCF7E02AC4569C008E3B72 /* TPPAppDelegate+Extensions.swift in Sources */,
 				331263112A287F53006BA87D /* AudiobookBookmarkBusinessLogic.swift in Sources */,
+				AB7311A02E1A000100000002 /* AudiobookTrackMapper.swift in Sources */,
 				7530C8C72D80CA750024E184 /* FavoritesViewModel.swift in Sources */,
 				331263122A287F53006BA87D /* ImageProvider.swift in Sources */,
 				331263132A287F53006BA87D /* DownloadingBookCell.swift in Sources */,
@@ -5123,6 +5129,7 @@
 				73EB0A8325821DF4006BC997 /* TPPAsync.m in Sources */,
 				73EB0A8425821DF4006BC997 /* TPPReloadView.m in Sources */,
 				E5ED734729F702D500EC2F67 /* AudiobookBookmarkBusinessLogic.swift in Sources */,
+				AB7311A02E1A000100000003 /* AudiobookTrackMapper.swift in Sources */,
 				E5FFB96528AED4990042907F /* ImageProvider.swift in Sources */,
 				E523A458299FD81D00EF833B /* DownloadingBookCell.swift in Sources */,
 				21D746FD2719B00E00C0E1B4 /* PublicationOpeningError.swift in Sources */,
@@ -5779,6 +5786,7 @@
 				089E430C24A2459100310360 /* TPPLoginCellTypes.swift in Sources */,
 				1158812E1A894F4E008672C3 /* TPPAccountSignInViewController.m in Sources */,
 				E55E2FA829E7AFCD0093F916 /* AudiobookBookmarkBusinessLogic.swift in Sources */,
+				AB7311A02E1A000100000004 /* AudiobookTrackMapper.swift in Sources */,
 				75A33F792E0F022700C147CC /* TPPRootTabBarController+Extensions.swift in Sources */,
 				E59526EB28D24FC000C179DA /* AudiobookSample.swift in Sources */,
 				E5B2B8DA275952EC00150ED4 /* TPPSettingsView.swift in Sources */,

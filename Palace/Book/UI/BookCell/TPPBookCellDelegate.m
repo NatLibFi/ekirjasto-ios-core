@@ -31,7 +31,6 @@
 @property (nonatomic, weak) UIViewController *audiobookViewController;
 @property (strong) NSLock *refreshAudiobookLock;
 @property (nonatomic, strong) LoadingViewController *loadingViewController;
-@property (nonatomic, strong) AudiobookBookmarkBusinessLogic *audiobookBookmarkBusinessLogic;
 
 @end
 
@@ -307,7 +306,9 @@ static const int kServerUpdateDelay = 15;
                                             navBackTitle:navBackTitle
                                             playbackTrackerDelegate:timeTracker];
       self.book = book;
-      self.audiobookBookmarkBusinessLogic = [[AudiobookBookmarkBusinessLogic alloc] initWithBook:book];
+      self.audiobookBookmarkBusinessLogic = [[AudiobookBookmarkBusinessLogic alloc] initWithBook:book
+                                                                                       audiobook:audiobook
+                                                                                    manifestJSON:json];
 
       manager.refreshDelegate = self;
       manager.playbackPositionDelegate = self;
@@ -377,7 +378,9 @@ static const int kServerUpdateDelay = 15;
         [self stopLoading];
       }
       
-      [[TPPBookRegistry shared] syncLocationFor:book completion:^(ChapterLocation * _Nullable remoteLocation) {
+      [[TPPBookRegistry shared] syncLocationFor:book
+                                    trackMapper:self.audiobookBookmarkBusinessLogic.trackMapper
+                                     completion:^(ChapterLocation * _Nullable remoteLocation) {
         [self chooseLocalLocation:localLocation orRemoteLocation:remoteLocation forOperation:^(ChapterLocation *location) {
           [NSOperationQueue.mainQueue addOperationWithBlock:^{
             TPPLOG_F(@"Returning to Audiobook Location: %@", location);
