@@ -20,7 +20,9 @@ extension TPPBookLocation {
     // Create a json string from it and use it as the location string in NYPLBookLocation
     // There is no specific format to follow, the value of the keys can be change if needed
     let dict: [String : Any] = [
-      TPPBookLocation.hrefKey: locator.href,
+      // Locator.href is an AnyURL in Readium 3.x; store the string form,
+      // anything non-JSON-native makes NSJSONSerialization throw.
+      TPPBookLocation.hrefKey: locator.href.string,
       TPPBookLocation.typeKey: type,
       TPPBookLocation.chapterProgressKey: locator.locations.progression ?? 0.0,
       TPPBookLocation.bookProgressKey: locator.locations.totalProgression ?? 0.0,
@@ -100,7 +102,12 @@ extension TPPBookLocation {
                                       position: position,
                                       otherLocations: otherLocations)
     
-    return Locator(href: AnyURL(string: href)!,
+    guard let hrefURL = AnyURL(string: href) else {
+      Log.error(#file, "Failed to convert stored href to URL: \(href)")
+      return nil
+    }
+
+    return Locator(href: hrefURL,
                    mediaType: MediaType(type) ?? .binary,
                    title: title,
                    locations: locations)
