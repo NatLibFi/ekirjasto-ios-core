@@ -65,8 +65,13 @@ import PalaceAudiobookToolkit
         // The opened publication carries the parsed manifest instead.
         if let manifestString = publication.jsonManifest,
            let manifestData = manifestString.data(using: .utf8),
-           let json = try? JSONSerialization.jsonObject(with: manifestData, options: []) as? NSDictionary {
-          await Self.finish(completion, json, nil)
+           var json = (try? JSONSerialization.jsonObject(with: manifestData, options: [])) as? [String: Any] {
+          // AudiobookFactory selects the LCP audiobook class by comparing
+          // @context against this exact string; Readium re-serializes the
+          // context as an array, which the factory does not recognize.
+          // This path only handles LCP books (see canOpenBook).
+          json["@context"] = "https://readium.org/webpub-manifest/context.jsonld"
+          await Self.finish(completion, json as NSDictionary, nil)
         } else {
           await Self.finish(completion, nil, NSError(domain: "LCPAudiobooks", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to parse manifest"]))
         }
