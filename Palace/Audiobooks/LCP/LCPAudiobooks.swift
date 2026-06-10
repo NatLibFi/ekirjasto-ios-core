@@ -58,7 +58,7 @@ import PalaceAudiobookToolkit
           completion(nil, LCPAudiobooks.nsError(for: NSError(domain: "LCPAudiobooks", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
           return
         }
-        let asset = try await assetRetriever.retrieve(url: url).get()
+        let asset = try await assetRetriever.retrieve(url: url, mediaType: .lcpProtectedAudiobook).get()
         let publication = try await publicationOpener.open(asset: asset, allowUserInteraction: false).get()
         let manifestLink = publication.linkWithHREF(AnyURL(string: "/" + manifestPath)!) ?? publication.linkWithHREF(AnyURL(string: manifestPath)!)
         if let manifestLink = manifestLink, let resource = publication.get(manifestLink) {
@@ -109,7 +109,7 @@ extension LCPAudiobooks: DRMDecryptor {
           completion(NSError(domain: "LCPAudiobooks", code: -1))
           return
         }
-        let asset = try await assetRetriever.retrieve(url: assetUrl).get()
+        let asset = try await assetRetriever.retrieve(url: assetUrl, mediaType: .lcpProtectedAudiobook).get()
         let publication = try await publicationOpener.open(asset: asset, allowUserInteraction: false).get()
         let resourceLink = publication.linkWithHREF(AnyURL(string: "/" + url.path)!) ?? publication.linkWithHREF(AnyURL(string: url.path)!)
         if let resourceLink = resourceLink, let resource = publication.get(resourceLink) {

@@ -68,7 +68,9 @@ import ReadiumZIPFoundation
           completion(nil, nil)
           return
         }
-        let asset = try await assetRetriever.retrieve(url: url).get()
+        // Explicit media type: format sniffing can hand the PDF engine
+        // undecrypted content if the LCP protection is not detected.
+        let asset = try await assetRetriever.retrieve(url: url, mediaType: .lcpProtectedPDF).get()
         let publication = try await publicationOpener.open(asset: asset, allowUserInteraction: false).get()
         let manifestLink = publication.linkWithHREF(AnyURL(string: "/" + manifestPath)!) ?? publication.linkWithHREF(AnyURL(string: manifestPath)!)
         if let manifestLink = manifestLink, let resource = publication.get(manifestLink) {
