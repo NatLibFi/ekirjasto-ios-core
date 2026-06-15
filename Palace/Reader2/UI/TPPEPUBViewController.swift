@@ -41,9 +41,19 @@ class TPPEPUBViewController: TPPBaseReaderViewController {
     config.editingActions = [.lookup]
 
     // Load legacy preferences from UserDefaults if available
-    let preferences = EPUBPreferences.fromLegacyPreferences(
+    var preferences = EPUBPreferences.fromLegacyPreferences(
       fontFamilyValues: TPPReaderFont.allCases.map { $0.rawValue }
     )
+    // Match the Readium 2.x reader defaults when the user has no saved
+    // preference: enable the user typography layer (publisherStyles off) and
+    // justify body text. Without this, fresh installs fall back to ReadiumCSS's
+    // left-aligned default, unlike the previously shipped reader.
+    if preferences.publisherStyles == nil {
+      preferences.publisherStyles = false
+    }
+    if preferences.textAlign == nil {
+      preferences.textAlign = .justify
+    }
     config.preferences = preferences
 
     let navigator = try! EPUBNavigatorViewController(publication: publication,
