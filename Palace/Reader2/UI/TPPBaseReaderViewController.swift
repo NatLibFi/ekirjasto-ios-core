@@ -42,6 +42,11 @@ class TPPBaseReaderViewController: UIViewController, Loggable {
   private var isShowingSample: Bool = false
   private var initialLocation: Locator?
   private var subscriptions: Set<AnyCancellable> = []
+
+  /// Total number of positions ("pages") in the publication, shown in the
+  /// reading-position label. Readium 3.x exposes positions asynchronously,
+  /// so it is loaded once and cached; 0 until the load completes.
+  private var totalPositions: Int = 0
   
   // MARK: - Lifecycle
 
@@ -163,7 +168,9 @@ class TPPBaseReaderViewController: UIViewController, Loggable {
     
     // Accessibility
     updateViewsForVoiceOver(isRunning: UIAccessibility.isVoiceOverRunning)
-    
+
+    // Load the total position count for the "Page N of M" label.
+    loadTotalPositions()
   }
 
   override func willMove(toParent parent: UIViewController?) {
@@ -423,21 +430,8 @@ extension TPPBaseReaderViewController: NavigatorDelegate {
       lastReadPositionPoster.storeReadPosition(locator: locator)
     }
 
-    positionLabel.text = {
-      var chapterTitle = ""
-      if let title = locator.title {
-        chapterTitle = " (\(title))"
-      }
-      
-      if let position = locator.locations.position {
-        return String(format: Strings.TPPBaseReaderViewController.pageOf, position) + chapterTitle
-      } else if let progression = locator.locations.totalProgression {
-        return "\(progression)%" + chapterTitle
-      } else {
-        return nil
-      }
-    }()
-    
+    positionLabel.text = positionLabelText(for: locator)
+
     bookTitleLabel.text = publication.metadata.title
 
     if let resourceIndex = publication.resourceIndex(forLocator: locator),
@@ -445,6 +439,37 @@ extension TPPBaseReaderViewController: NavigatorDelegate {
       updateBookmarkButton(withState: true)
     } else {
       updateBookmarkButton(withState: false)
+    }
+  }
+
+  /// "Page N of M (Chapter)" for the reading-position label. The total M is
+  /// omitted until `totalPositions` has loaded (see `loadTotalPositions`).
+  private func positionLabelText(for locator: Locator) -> String? {
+    var chapterTitle = ""
+    if let title = locator.title {
+      chapterTitle = " (\(title))"
+    }
+
+    if let position = locator.locations.position {
+      let pageOf = String(format: Strings.TPPBaseReaderViewController.pageOf, position)
+      let total = totalPositions > 0 ? "\(totalPositions)" : ""
+      return pageOf + total + chapterTitle
+    } else if let progression = locator.locations.totalProgression {
+      return "\(progression)%" + chapterTitle
+    } else {
+      return nil
+    }
+  }
+
+  /// Loads the publication's total position count (async in Readium 3.x) and
+  /// refreshes the position label for the current location once available.
+  private func loadTotalPositions() {
+    Task { @MainActor in
+      guard let positions = try? await publication.positions().get() else { return }
+      totalPositions = positions.count
+      if let locator = navigator.currentLocation {
+        positionLabel.text = positionLabelText(for: locator)
+      }
     }
   }
 
