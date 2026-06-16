@@ -168,26 +168,30 @@ static const int kServerUpdateDelay = 15;
     NSURL *bookUrl = [[MyBooksDownloadCenter shared] fileUrlFor:book.identifier];
     LCPPDFs *decryptor = [[LCPPDFs alloc] initWithUrl:bookUrl];
     [decryptor extractWithUrl:bookUrl completion:^(NSURL *encryptedUrl, NSError *error) {
-      if (error) {
-        NSString *errorMessage = NSLocalizedString(@"Error extracting encrypted PDF file", nil);
-        [TPPErrorLogger logError:error
-                         summary:errorMessage
-                        metadata:@{ @"error": error }];
-        UIAlertController *alert = [TPPAlertUtils alertWithTitle:errorMessage error:error];
-        [TPPAlertUtils presentFromViewControllerOrNilWithAlertController:alert viewController:nil animated:YES completion:nil];
-        return;
-      }
-      NSData *encryptedData = [[NSData alloc] initWithContentsOfURL:encryptedUrl options:NSDataReadingMappedAlways error:nil];
+      // The completion may arrive on a background thread, and the extraction
+      // can fail with a nil URL and no error; guard both before touching UIKit.
+      dispatch_async(dispatch_get_main_queue(), ^{
+        if (error || encryptedUrl == nil) {
+          NSString *errorMessage = NSLocalizedString(@"Error extracting encrypted PDF file", nil);
+          [TPPErrorLogger logError:error
+                           summary:errorMessage
+                          metadata:(error ? @{ @"error": error } : nil)];
+          UIAlertController *alert = [TPPAlertUtils alertWithTitle:errorMessage error:error];
+          [TPPAlertUtils presentFromViewControllerOrNilWithAlertController:alert viewController:nil animated:YES completion:nil];
+          return;
+        }
+        NSData *encryptedData = [[NSData alloc] initWithContentsOfURL:encryptedUrl options:NSDataReadingMappedAlways error:nil];
 
-      TPPPDFDocumentMetadata *metadata = [[TPPPDFDocumentMetadata alloc] initWith:book.identifier];
-      metadata.title = book.title;
-      
-      TPPPDFDocument *document = [[TPPPDFDocument alloc] initWithEncryptedData:encryptedData decryptor:^NSData * _Nonnull(NSData *data, NSUInteger start, NSUInteger end) {
-        return [decryptor decryptDataWithData:data start:start end:end];
-      }];
-      
-      UIViewController *vc = [TPPPDFViewController createWithDocument:document metadata:metadata];
-      [self presentPDFReader:vc];
+        TPPPDFDocumentMetadata *metadata = [[TPPPDFDocumentMetadata alloc] initWith:book.identifier];
+        metadata.title = book.title;
+
+        TPPPDFDocument *document = [[TPPPDFDocument alloc] initWithEncryptedData:encryptedData decryptor:^NSData * _Nonnull(NSData *data, NSUInteger start, NSUInteger end) {
+          return [decryptor decryptDataWithData:data start:start end:end];
+        }];
+
+        UIViewController *vc = [TPPPDFViewController createWithDocument:document metadata:metadata];
+        [self presentPDFReader:vc];
+      });
     }];
   } else {
     [self presentPDF:book];

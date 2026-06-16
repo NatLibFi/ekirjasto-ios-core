@@ -59,9 +59,8 @@ import ReadiumZIPFoundation
     )
   }
 
-  /// Get PDF file name from the manifest file.
+  /// Get the PDF file's href (its path inside the archive) from the manifest.
   private func getPdfHref(completion: @escaping (_ pdfHref: String?, _ error: NSError?) -> ()) {
-    let manifestPath = "manifest.json"
     Task {
       do {
         guard let url = FileURL(url: pdfUrl) else {
@@ -72,14 +71,16 @@ import ReadiumZIPFoundation
         // undecrypted content if the LCP protection is not detected.
         let asset = try await assetRetriever.retrieve(url: url, mediaType: .lcpProtectedPDF).get()
         let publication = try await publicationOpener.open(asset: asset, allowUserInteraction: false).get()
-        let manifestLink = publication.linkWithHREF(AnyURL(string: "/" + manifestPath)!) ?? publication.linkWithHREF(AnyURL(string: manifestPath)!)
-        if let manifestLink = manifestLink, let resource = publication.get(manifestLink) {
-          let manifestData = try await resource.read().get()
-          let pdfManifest = try JSONDecoder().decode(PDFManifest.self, from: manifestData)
-          completion(pdfManifest.readingOrder.first?.href, nil)
-        } else {
+        // Readium 3.x publications only serve links listed in the manifest, so
+        // manifest.json can no longer be fetched as a resource. The opened
+        // publication carries the parsed manifest instead.
+        guard let manifestString = publication.jsonManifest,
+              let manifestData = manifestString.data(using: .utf8) else {
           completion(nil, nil)
+          return
         }
+        let pdfManifest = try JSONDecoder().decode(PDFManifest.self, from: manifestData)
+        completion(pdfManifest.readingOrder.first?.href, nil)
       } catch {
         TPPErrorLogger.logError(error, summary: "Error reading PDF path")
         let nsError = NSError(domain: "Palace.LCPPDFs", code: 0, userInfo: [
@@ -207,7 +208,20 @@ import ReadiumZIPFoundation
             completion(nil, nil)
             return
           }
-          guard let pdfEntry = try await archive.get(pdfHref) else {
+          // The manifest href and the archive entry path may differ by a
+          // leading slash depending on how Readium normalizes hrefs, so try
+          // both forms (this bit the Android migration).
+          let candidates = pdfHref.hasPrefix("/")
+            ? [pdfHref, String(pdfHref.dropFirst())]
+            : [pdfHref, "/" + pdfHref]
+          var pdfEntry: Entry?
+          for candidate in candidates {
+            if let entry = try await archive.get(candidate) {
+              pdfEntry = entry
+              break
+            }
+          }
+          guard let pdfEntry else {
             completion(nil, nil)
             return
           }
