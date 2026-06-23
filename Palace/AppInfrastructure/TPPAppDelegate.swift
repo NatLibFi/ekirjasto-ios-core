@@ -44,16 +44,10 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
     // New reachability notifications
     Reachability.shared.startMonitoring()
     
-    // TODO: Refactor this to use SceneDelegate instead
-    // If we use SceneDelegate now, the app crashes during TPPRootTabBarController.shared initialization.
-    // There can be other places in code that use TPPAppDelegate.window property.
-    window = UIWindow()
-    window?.backgroundColor = TPPConfiguration.backgroundColor()
-    window?.tintColor = TPPConfiguration.mainColor()
-    window?.tintAdjustmentMode = .normal
-    window?.makeKeyAndVisible()
-    window?.rootViewController = TPPRootTabBarController.shared()
-    
+    // The main window and root view controller are created in TPPSceneDelegate
+    // (scene-based lifecycle); `window` is populated there for the call sites
+    // that still read `appDelegate.window`. It is therefore nil at this point,
+    // so the tab-bar title offset below falls back to its default.
     let safeAreaInsets = window?.safeAreaInsets
     
     
@@ -307,10 +301,9 @@ class TPPAppDelegate: UIResponder, UIApplicationDelegate {
     return false
   }
   
-  func applicationDidBecomeActive(_ application: UIApplication) {
-    TPPErrorLogger.setUserID(TPPUserAccount.sharedAccount().barcode)
-  }
-  
+  // applicationDidBecomeActive is not called in scene-based apps;
+  // its logic moved to TPPSceneDelegate.sceneDidBecomeActive.
+
   func applicationWillTerminate(_ application: UIApplication) {
     self.audiobookLifecycleManager.willTerminate()
     NotificationCenter.default.removeObserver(self)
