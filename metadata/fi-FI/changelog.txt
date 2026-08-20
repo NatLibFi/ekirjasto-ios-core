@@ -1,5 +1,5 @@
 Kehitämme sovellusta ja korjaamme bugeja jatkuvasti. Tarkistathan, että sinulla on aina käytössäsi sovelluksen uusin versio.
 
 Tässä versiossa:
-- Käyttöliittymäpäivityksiä
-- Bugikorjauksia
+- Korjattu PDF-kirjojen sivunvaihto iPadilla
+- Parannettu kutsun lähettämistä lapselle tai huollettavalle
