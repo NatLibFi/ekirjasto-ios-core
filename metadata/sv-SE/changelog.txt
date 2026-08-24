@@ -1,5 +1,5 @@
 Vi utvecklar appen och åtgärdar buggar kontinuerligt. Kom ihåg att kontrollera att du alltid använder den nyaste versionen av appen.
 
 I den här versionen: 
-- UI-uppdateringar
-- Bugfixar
+- Åtgärdade sidbyte i PDF‑böcker på iPad
+- Förbättrad utskickning av inbjudan till ett minderårigt barn

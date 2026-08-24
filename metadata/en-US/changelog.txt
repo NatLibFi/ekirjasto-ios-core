@@ -1,5 +1,5 @@
 We are continually developing the app and fixing bugs. Please make sure that you are always using the latest version.
 
 In this version:
-- UI updates
-- Bug fixes
+- Fixed page turning in PDF books on iPad
+- Improved sending invitations to a child or dependent
