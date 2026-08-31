@@ -130,6 +130,17 @@ private let TPPRoundedButtonPadding: CGFloat = 10.0 //Edited by Ellibs
       updateColors()
     }
   }
+
+  // iOS 26 performance guard: -[UIControl state] queries isFocused while laying
+  // out a button's title/image, and that query walks the focus-environment
+  // ancestor chain up to the root focus system. During iPad window-resize /
+  // size-class transitions the navigation bar palette force-relays-out the whole
+  // view controller, so this fires for every button on every layout pass and
+  // pegs the main thread for tens of seconds. These are touch action buttons
+  // that never participate in the focus engine, so short-circuit the query.
+  override var isFocused: Bool {
+    false
+  }
   
   override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
     if (!self.isEnabled
