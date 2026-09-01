@@ -56,32 +56,50 @@ static CGFloat const width = 280;
 - (void)layoutSubviews
 {
   [super layoutSubviews];
+
+  // This view is hidden whenever content loaded successfully. Positioning its
+  // subviews assigns frames, and doing that on every layout pass can
+  // re-invalidate layout and spin into a loop at extreme iPad window geometries
+  // on iOS 26. There is nothing to show while hidden, so skip it.
+  if (self.hidden) {
+    return;
+  }
+
   CGFloat const padding = 5.0;
-  
+
+  // Frame writes below are guarded so a stable pass is a no-op — assigning the
+  // same frame each pass would keep re-triggering layout (see the loop above).
   {
     [self.titleLabel sizeToFit];
     [self.titleLabel centerInSuperview];
     CGRect frame = self.titleLabel.frame;
     frame.origin.y = 0;
-    self.titleLabel.frame = frame;
+    if (!CGRectEqualToRect(self.titleLabel.frame, frame)) {
+      self.titleLabel.frame = frame;
+    }
   }
-  
+
   {
     CGFloat h = [self.messageLabel sizeThatFits:
                  CGSizeMake(CGRectGetWidth(self.frame), CGFLOAT_MAX)].height;
-    
-    self.messageLabel.frame = CGRectMake(0,
-                                         CGRectGetMaxY(self.titleLabel.frame) + padding,
-                                         CGRectGetWidth(self.frame),
-                                         h);
+
+    CGRect const frame = CGRectMake(0,
+                                    CGRectGetMaxY(self.titleLabel.frame) + padding,
+                                    CGRectGetWidth(self.frame),
+                                    h);
+    if (!CGRectEqualToRect(self.messageLabel.frame, frame)) {
+      self.messageLabel.frame = frame;
+    }
   }
-  
+
   {
     [self.reloadButton sizeToFit];
     [self.reloadButton centerInSuperview];
     CGRect frame = self.reloadButton.frame;
     frame.origin.y = CGRectGetMaxY(self.messageLabel.frame) + padding;
-    self.reloadButton.frame = frame;
+    if (!CGRectEqualToRect(self.reloadButton.frame, frame)) {
+      self.reloadButton.frame = frame;
+    }
   }
 }
 
