@@ -42,20 +42,24 @@ class TPPReaderTOCBusinessLogic {
     Strings.TPPReaderTOCBusinessLogic.tocDisplayTitle
   }
 
-  func tocLocator(at index: Int) -> Locator? {
+  func tocLocator(at index: Int) async -> Locator? {
     guard tocElements.indices.contains(index) else {
       return nil
     }
     let link = tocElements[index].link
-    return Locator(href: link.url(), mediaType: link.mediaType ?? .html, title: link.title)
+    // Resolve the TOC link against the publication (the way Readium 3.x expects)
+    // rather than hand-building a Locator from the raw href. A hand-built
+    // Locator only resolved for same-document jumps — the first chapters —
+    // which is why selecting later chapters failed to navigate.
+    return await publication.locate(link)
   }
 
   func shouldSelectTOCItem(at index: Int) -> Bool {
-    // If the locator's href is #, then the item is not a link.
-    guard let locator = tocLocator(at: index), locator.href.string != "#" else {
+    // Non-link TOC entries (section headers) have href "#".
+    guard tocElements.indices.contains(index) else {
       return false
     }
-    return true
+    return tocElements[index].link.href != "#"
   }
 
   func titleAndLevel(forItemAt index: Int) -> (title: String, level: Int) {
