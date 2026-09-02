@@ -40,6 +40,27 @@ class TPPEPUBViewController: TPPBaseReaderViewController {
     config.decorationTemplates = HTMLDecorationTemplate.defaultTemplates()
     config.editingActions = [.lookup]
 
+    // Declare the bundled OpenDyslexic font to Readium 3.x. Setting the
+    // fontFamily preference to "OpenDyslexic" is not enough on its own: without
+    // an @font-face declaration pointing at the bundled files, the web view
+    // cannot resolve the name and falls back to a normal-looking system font.
+    // The preference uses the family name "OpenDyslexic"; the bundled files are
+    // named OpenDyslexic3-*.ttf.
+    if let regularURL = Bundle.main.url(forResource: "OpenDyslexic3-Regular", withExtension: "ttf"),
+       let boldURL = Bundle.main.url(forResource: "OpenDyslexic3-Bold", withExtension: "ttf"),
+       let regularFile = FileURL(url: regularURL),
+       let boldFile = FileURL(url: boldURL) {
+      config.fontFamilyDeclarations = [
+        CSSFontFamilyDeclaration(
+          fontFamily: FontFamily(rawValue: "OpenDyslexic"),
+          fontFaces: [
+            CSSFontFace(file: regularFile, style: .normal, weight: .standard(.normal)),
+            CSSFontFace(file: boldFile, style: .normal, weight: .standard(.bold)),
+          ]
+        ).eraseToAnyHTMLFontFamilyDeclaration(),
+      ]
+    }
+
     // Load legacy preferences from UserDefaults if available
     var preferences = EPUBPreferences.fromLegacyPreferences(
       fontFamilyValues: TPPReaderFont.allCases.map { $0.rawValue }

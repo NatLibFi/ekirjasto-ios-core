@@ -56,9 +56,11 @@ class TPPReaderSettings: ObservableObject {
     // Font size
     self.fontSize = preferences.fontSize ?? 1.0
 
-    // Font family
+    // Font family. The picker is driven by TPPReaderFont, so the stored index
+    // must be in that (4-item) space — not the separate 8-item fontFamilies
+    // list, which is what caused the picker to highlight/select the wrong font.
     if let family = preferences.fontFamily?.rawValue,
-       let index = TPPReaderSettings.fontFamilies.firstIndex(of: family) {
+       let index = TPPReaderFont.allCases.firstIndex(where: { $0.rawValue == family }) {
       self.fontFamilyIndex = index
     }
 
@@ -121,11 +123,18 @@ class TPPReaderSettings: ObservableObject {
   /// Changes selected font family
   func changeFontFamily(fontFamilyIndex: Int) {
     self.fontFamilyIndex = fontFamilyIndex
-    if fontFamilyIndex == 0 {
+    guard TPPReaderFont.allCases.indices.contains(fontFamilyIndex) else {
+      return
+    }
+    let readerFont = TPPReaderFont.allCases[fontFamilyIndex]
+    if readerFont == .original {
       preferences.fontFamily = nil
       preferences.publisherStyles = true
     } else {
-      preferences.fontFamily = FontFamily(rawValue: TPPReaderSettings.fontFamilies[fontFamilyIndex])
+      // Use the selected picker item's own font name. This previously indexed a
+      // separate 8-item list, so selecting "OpenDyslexic" (index 3) resolved to
+      // "Athelas" — the wrong font.
+      preferences.fontFamily = FontFamily(rawValue: readerFont.rawValue)
       preferences.publisherStyles = false
     }
     delegate?.submitPreferences(preferences)
