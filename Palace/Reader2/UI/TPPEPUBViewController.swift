@@ -61,10 +61,14 @@ class TPPEPUBViewController: TPPBaseReaderViewController {
       ]
     }
 
-    // Load legacy preferences from UserDefaults if available
-    var preferences = EPUBPreferences.fromLegacyPreferences(
-      fontFamilyValues: TPPReaderFont.allCases.map { $0.rawValue }
-    )
+    // Load the reader preferences the user last saved (shared across all
+    // ebooks). Only fall back to migrating the legacy Readium 2.x settings the
+    // first time, before anything has been saved in the 3.x format — otherwise
+    // the reader resets to defaults on every open.
+    var preferences = TPPEPUBViewController.loadSavedPreferences()
+      ?? EPUBPreferences.fromLegacyPreferences(
+        fontFamilyValues: TPPReaderFont.allCases.map { $0.rawValue }
+      )
     // Match the Readium 2.x reader defaults when the user has no saved
     // preference: enable the user typography layer (publisherStyles off) and
     // justify body text. Without this, fresh installs fall back to ReadiumCSS's
@@ -170,6 +174,31 @@ extension TPPEPUBViewController: TPPReaderSettingsDelegate {
   func submitPreferences(_ preferences: EPUBPreferences) {
     currentPreferences = preferences
     epubNavigator.submitPreferences(preferences)
+    // Persist so the choice is reused for this and every other ebook, and
+    // survives relaunches. Without this the change only lived on the in-memory
+    // navigator and was lost on close — after the Readium 3.x upgrade the
+    // reader reset to defaults on every open.
+    TPPEPUBViewController.savePreferences(preferences)
+  }
+
+  /// UserDefaults key holding the shared, JSON-encoded reader preferences.
+  private static let savedPreferencesKey = "TPPEPUBReaderPreferences"
+
+  /// The reader preferences the user last saved, shared across all ebooks.
+  static func loadSavedPreferences() -> EPUBPreferences? {
+    guard let data = UserDefaults.standard.data(forKey: savedPreferencesKey) else {
+      return nil
+    }
+    return try? JSONDecoder().decode(EPUBPreferences.self, from: data)
+  }
+
+  /// Persist the reader preferences so they apply to every ebook and survive
+  /// relaunches.
+  static func savePreferences(_ preferences: EPUBPreferences) {
+    guard let data = try? JSONEncoder().encode(preferences) else {
+      return
+    }
+    UserDefaults.standard.set(data, forKey: savedPreferencesKey)
   }
 
   /// Synchronize the UI appearance to the selected theme.
