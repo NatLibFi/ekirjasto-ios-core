@@ -1,5 +1,5 @@
 import UIKit
-import R2Shared
+import ReadiumShared
 
 protocol AnnotationsManager {
   func postListeningPosition(forBook bookID: String, selectorValue: String, completion: ((_ serverID: String?) -> Void)?)

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import R2Shared
+import ReadiumShared
 
 extension TPPReadiumBookmark {
 
@@ -26,7 +26,8 @@ extension TPPReadiumBookmark {
   /// - Returns: An object with R2 location information pointing at the same
   /// position the bookmark model is pointing to.
   func convertToR2(from publication: Publication) -> TPPBookmarkR2Location? {
-    guard let link = publication.link(withHREF: self.href) else {
+    guard let hrefUrl = AnyURL(string: self.href),
+          let link = publication.linkWithHREF(hrefUrl) else {
       return nil
     }
 
@@ -34,16 +35,16 @@ extension TPPReadiumBookmark {
     if let page = page, let pos = Int(page) {
       position = pos
     }
-    
+
     let locations = Locator.Locations(progression: Double(progressWithinChapter),
                                       totalProgression: Double(progressWithinBook),
                                       position: position)
-    let locator = Locator(href: link.href,
-                          type: publication.metadata.type ?? MediaType.xhtml.string,
+    let locator = Locator(href: link.url(),
+                          mediaType: link.mediaType ?? .html,
                           title: self.chapter,
                           locations: locations)
 
-    guard let resourceIndex = publication.readingOrder.firstIndex(withHREF: locator.href) else {
+    guard let resourceIndex = publication.readingOrder.firstIndex(where: { $0.url() == locator.href }) else {
       return nil
     }
 

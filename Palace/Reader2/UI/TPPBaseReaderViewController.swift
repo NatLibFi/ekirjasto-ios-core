@@ -10,8 +10,8 @@
 
 import SafariServices
 import UIKit
-import R2Navigator
-import R2Shared
+import ReadiumNavigator
+import ReadiumShared
 import Combine
 
 /// This class is meant to be subclassed by each publication format view controller. It contains the shared behavior, eg. navigation bar toggling.
@@ -42,6 +42,11 @@ class TPPBaseReaderViewController: UIViewController, Loggable {
   private var isShowingSample: Bool = false
   private var initialLocation: Locator?
   private var subscriptions: Set<AnyCancellable> = []
+
+  /// Total number of positions ("pages") in the publication, shown in the
+  /// reading-position label. Readium 3.x exposes positions asynchronously,
+  /// so it is loaded once and cached; 0 until the load completes.
+  private var totalPositions: Int = 0
   
   // MARK: - Lifecycle
 
@@ -163,7 +168,9 @@ class TPPBaseReaderViewController: UIViewController, Loggable {
     
     // Accessibility
     updateViewsForVoiceOver(isRunning: UIAccessibility.isVoiceOverRunning)
-    
+
+    // Load the total position count for the "Page N of M" label.
+    loadTotalPositions()
   }
 
   override func willMove(toParent parent: UIViewController?) {
@@ -391,7 +398,8 @@ class TPPBaseReaderViewController: UIViewController, Loggable {
   }
 
   @objc private func goBackward() {
-    navigator.goBackward(animated: false) {
+    Task {
+      await navigator.goBackward()
       if let title = self.navigator.currentLocation?.title {
         UIAccessibility.post(notification: .announcement, argument: title)
       }
@@ -399,7 +407,8 @@ class TPPBaseReaderViewController: UIViewController, Loggable {
   }
 
   @objc private func goForward() {
-    navigator.goForward(animated: false) {
+    Task {
+      await navigator.goForward()
       if let title = self.navigator.currentLocation?.title {
         UIAccessibility.post(notification: .announcement, argument: title)
       }
@@ -421,21 +430,8 @@ extension TPPBaseReaderViewController: NavigatorDelegate {
       lastReadPositionPoster.storeReadPosition(locator: locator)
     }
 
-    positionLabel.text = {
-      var chapterTitle = ""
-      if let title = locator.title {
-        chapterTitle = " (\(title))"
-      }
-      
-      if let position = locator.locations.position {
-        return String(format: Strings.TPPBaseReaderViewController.pageOf, position) + "\(publication.positions.count)" + chapterTitle
-      } else if let progression = locator.locations.totalProgression {
-        return "\(progression)%" + chapterTitle
-      } else {
-        return nil
-      }
-    }()
-    
+    positionLabel.text = positionLabelText(for: locator)
+
     bookTitleLabel.text = publication.metadata.title
 
     if let resourceIndex = publication.resourceIndex(forLocator: locator),
@@ -443,6 +439,37 @@ extension TPPBaseReaderViewController: NavigatorDelegate {
       updateBookmarkButton(withState: true)
     } else {
       updateBookmarkButton(withState: false)
+    }
+  }
+
+  /// "Page N of M (Chapter)" for the reading-position label. The total M is
+  /// omitted until `totalPositions` has loaded (see `loadTotalPositions`).
+  private func positionLabelText(for locator: Locator) -> String? {
+    var chapterTitle = ""
+    if let title = locator.title {
+      chapterTitle = " (\(title))"
+    }
+
+    if let position = locator.locations.position {
+      let pageOf = String(format: Strings.TPPBaseReaderViewController.pageOf, position)
+      let total = totalPositions > 0 ? "\(totalPositions)" : ""
+      return pageOf + total + chapterTitle
+    } else if let progression = locator.locations.totalProgression {
+      return "\(progression)%" + chapterTitle
+    } else {
+      return nil
+    }
+  }
+
+  /// Loads the publication's total position count (async in Readium 3.x) and
+  /// refreshes the position label for the current location once available.
+  private func loadTotalPositions() {
+    Task { @MainActor in
+      guard let positions = try? await publication.positions().get() else { return }
+      totalPositions = positions.count
+      if let locator = navigator.currentLocation {
+        positionLabel.text = positionLabelText(for: locator)
+      }
     }
   }
 
@@ -465,18 +492,33 @@ extension TPPBaseReaderViewController: NavigatorDelegate {
 
 extension TPPBaseReaderViewController: VisualNavigatorDelegate {
 
+  /// Keeps the page content clear of the book title and reading position
+  /// overlay labels. The navigator's default behavior only avoids the safe
+  /// area itself, but the title label sits just inside it.
+  func navigatorContentInset(_ navigator: VisualNavigator) -> UIEdgeInsets? {
+    let safeArea = view.window?.safeAreaInsets ?? view.safeAreaInsets
+    let margin = TPPBaseReaderViewController.overlayLabelMargin
+    let labelClearance = ceil(positionLabel.font.lineHeight) + 8
+    return UIEdgeInsets(
+      // The title label's top is at safeArea.top + margin / 2.
+      top: safeArea.top + margin / 2 + labelClearance,
+      left: 0,
+      // The position label hangs into the bottom safe area: its bottom is
+      // `margin` above the view's bottom edge, not the safe area's.
+      bottom: max(margin + labelClearance, safeArea.bottom),
+      right: 0
+    )
+  }
+
   func navigator(_ navigator: VisualNavigator, didTapAt point: CGPoint) {
     let viewport = navigator.view.bounds
     // Skips to previous/next pages if the tap is on the content edges.
     let thresholdRange = 0...(0.2 * viewport.width)
-    var moved = false
     if thresholdRange ~= point.x {
-      moved = navigator.goLeft(animated: false)
+      Task { await navigator.goLeft(options: NavigatorGoOptions()) }
     } else if thresholdRange ~= (viewport.maxX - point.x) {
-      moved = navigator.goRight(animated: false)
-    }
-
-    if !moved {
+      Task { await navigator.goRight(options: NavigatorGoOptions()) }
+    } else {
       toggleNavigationBar()
     }
   }
@@ -495,7 +537,7 @@ extension TPPBaseReaderViewController: TPPReaderPositionsDelegate {
     }
 
     if let location = loc as? Locator {
-      navigator.go(to: location)
+      Task { await navigator.go(to: location) }
     }
   }
 
@@ -510,7 +552,7 @@ extension TPPBaseReaderViewController: TPPReaderPositionsDelegate {
 
     let r2bookmark = bookmark.convertToR2(from: publication)
     if let locator = r2bookmark?.locator {
-      navigator.go(to: locator)
+      Task { await navigator.go(to: locator) }
     }
   }
 

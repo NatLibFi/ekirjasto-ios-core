@@ -11,8 +11,8 @@
 
 import UIKit
 import SwiftUI
-import R2Shared
-import R2Navigator
+import ReadiumShared
+import ReadiumNavigator
 
 class TPPEPUBViewController: TPPBaseReaderViewController {
 
@@ -20,47 +20,76 @@ class TPPEPUBViewController: TPPBaseReaderViewController {
   private let systemUserInterfaceStyle: UIUserInterfaceStyle
   let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(presentEPUBSearch))
 
+  /// Current preferences, updated when user changes settings
+  private var currentPreferences: EPUBPreferences = .empty
+
   init(publication: Publication,
        book: TPPBook,
        initialLocation: Locator?,
-       resourcesServer: ResourcesServer,
        forSample: Bool = false) {
 
     systemUserInterfaceStyle = UITraitCollection.current.userInterfaceStyle
-    let safeAreaInsets = UIApplication.shared.keyWindow?.safeAreaInsets ?? UIEdgeInsets()
-    let overlayLabelInset = TPPBaseReaderViewController.overlayLabelMargin * 2 // Vertical margin for labels
-    let contentInset: [UIUserInterfaceSizeClass: EPUBContentInsets] = [
-      .compact: (top: max(overlayLabelInset, safeAreaInsets.top), bottom: max(overlayLabelInset, safeAreaInsets.bottom)),
-      .regular: (top: max(overlayLabelInset, safeAreaInsets.top), bottom: max(overlayLabelInset, safeAreaInsets.bottom))
-    ]
 
-    // this config was suggested by R2 engineers as a way to limit the possible
-    // race conditions between restoring the initial location without
-    // interfering with the web view layout timing
-    // See: https://github.com/readium/r2-navigator-swift/issues/153
+    // Vertical space for the reader's overlay labels is reserved via
+    // navigatorContentInset(_:) in TPPBaseReaderViewController.
+
     var config = EPUBNavigatorViewController.Configuration()
     config.preloadPreviousPositionCount = 2
     config.preloadNextPositionCount = 2
     config.debugState = false
     config.decorationTemplates = HTMLDecorationTemplate.defaultTemplates()
     config.editingActions = [.lookup]
-    config.contentInset = contentInset
 
-    let navigator = EPUBNavigatorViewController(publication: publication,
+    // Declare the bundled OpenDyslexic font to Readium 3.x. Setting the
+    // fontFamily preference to "OpenDyslexic" is not enough on its own: without
+    // an @font-face declaration pointing at the bundled files, the web view
+    // cannot resolve the name and falls back to a normal-looking system font.
+    // The preference uses the family name "OpenDyslexic"; the bundled files are
+    // named OpenDyslexic3-*.ttf.
+    if let regularURL = Bundle.main.url(forResource: "OpenDyslexic3-Regular", withExtension: "ttf"),
+       let boldURL = Bundle.main.url(forResource: "OpenDyslexic3-Bold", withExtension: "ttf"),
+       let regularFile = FileURL(url: regularURL),
+       let boldFile = FileURL(url: boldURL) {
+      config.fontFamilyDeclarations = [
+        CSSFontFamilyDeclaration(
+          fontFamily: FontFamily(rawValue: "OpenDyslexic"),
+          fontFaces: [
+            CSSFontFace(file: regularFile, style: .normal, weight: .standard(.normal)),
+            CSSFontFace(file: boldFile, style: .normal, weight: .standard(.bold)),
+          ]
+        ).eraseToAnyHTMLFontFamilyDeclaration(),
+      ]
+    }
+
+    // Load the reader preferences the user last saved (shared across all
+    // ebooks). Only fall back to migrating the legacy Readium 2.x settings the
+    // first time, before anything has been saved in the 3.x format — otherwise
+    // the reader resets to defaults on every open.
+    var preferences = TPPEPUBViewController.loadSavedPreferences()
+      ?? EPUBPreferences.fromLegacyPreferences(
+        fontFamilyValues: TPPReaderFont.allCases.map { $0.rawValue }
+      )
+    // Match the Readium 2.x reader defaults when the user has no saved
+    // preference: enable the user typography layer (publisherStyles off) and
+    // justify body text. Without this, fresh installs fall back to ReadiumCSS's
+    // left-aligned default, unlike the previously shipped reader.
+    if preferences.publisherStyles == nil {
+      preferences.publisherStyles = false
+    }
+    if preferences.textAlign == nil {
+      preferences.textAlign = .justify
+    }
+    config.preferences = preferences
+
+    let navigator = try! EPUBNavigatorViewController(publication: publication,
                                                 initialLocation: initialLocation,
-                                                resourcesServer: resourcesServer,
                                                 config: config)
 
-    TPPAssociatedColors.shared.userSettings = navigator.userSettings
-    
-    // EPUBNavigatorViewController::init creates a UserSettings object and sets
-    // it into the publication. However, that UserSettings object will have the
-    // defaults options for the various user properties (fonts etc), so we need
-    // to re-set that to reflect our ad-hoc configuration.
-    publication.userProperties = navigator.userSettings.userProperties
+    TPPAssociatedColors.shared.currentTheme = preferences.theme
 
     super.init(navigator: navigator, publication: publication, book: book, forSample: forSample, initialLocation: initialLocation)
 
+    self.currentPreferences = preferences
     navigator.delegate = self
   }
 
@@ -80,28 +109,8 @@ class TPPEPUBViewController: TPPBaseReaderViewController {
 
   override open func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    if let appearance = epubNavigator.userSettings.userProperties.getProperty(reference: ReadiumCSSReference.appearance.rawValue) as? Enumerable {
-      self.setUIColor(for: appearance)
-    }
-    if let fontFamily = epubNavigator.userSettings.userProperties.getProperty(reference: ReadiumCSSReference.fontFamily.rawValue) as? Enumerable {
-      epubNavigator.userSettings.userProperties.removeProperty(forReference: ReadiumCSSReference.fontFamily)
-      epubNavigator.userSettings.userProperties.addEnumerable(
-        index: fontFamily.index,
-        values: TPPReaderFont.allCases.map { $0.rawValue },
-        reference: ReadiumCSSReference.fontFamily.rawValue,
-        name: ReadiumCSSName.fontFamily.rawValue
-      )
-    }
-
-    // "The --USER__advancedSettings: readium-advanced-on inline style must be
-    // set for html in order for the font-size setting to work."
-    // https://readium.org/readium-css/docs/CSS12-user_prefs.html#font-size
-    epubNavigator.userSettings.userProperties.addSwitchable(
-      onValue: TPPReaderAdvancedSettings.on.rawValue,
-      offValue: TPPReaderAdvancedSettings.off.rawValue,
-      on: true,
-      reference: ReadiumCSSReference.publisherDefault.rawValue,
-      name: ReadiumCSSName.publisherDefault.rawValue)
+    // Apply theme colors
+    setUIColor(for: currentPreferences.theme)
   }
 
   override open func viewWillDisappear(_ animated: Bool) {
@@ -115,7 +124,6 @@ class TPPEPUBViewController: TPPBaseReaderViewController {
 
     navigationController?.navigationBar.tintColor = TPPConfiguration.iconColor()
     tabBarController?.tabBar.tintColor = TPPConfiguration.iconColor()
-    epubNavigator.userSettings.save()
   }
 
   override func makeNavigationBarButtons() -> [UIBarButtonItem] {
@@ -135,16 +143,13 @@ class TPPEPUBViewController: TPPBaseReaderViewController {
   }
 
   @objc func presentUserSettings() {
-    let vc = TPPReaderSettingsVC.makeSwiftUIView(settings: epubNavigator.userSettings, delegate: self)
+    let vc = TPPReaderSettingsVC.makeSwiftUIView(preferences: currentPreferences, delegate: self)
     vc.modalPresentationStyle = .popover
     vc.popoverPresentationController?.delegate = self
     vc.popoverPresentationController?.barButtonItem = popoverUserconfigurationAnchor
     vc.preferredContentSize = CGSize(width: 320, height: 240)
 
     present(vc, animated: true) {
-      // Makes sure that the popover is dismissed also when tapping on one of
-      // the other UIBarButtonItems.
-      // ie. http://karmeye.com/2014/11/20/ios8-popovers-and-passthroughviews/
       vc.popoverPresentationController?.passthroughViews = nil
     }
   }
@@ -161,22 +166,44 @@ class TPPEPUBViewController: TPPBaseReaderViewController {
 // MARK: - TPPReaderSettingsDelegate
 
 extension TPPEPUBViewController: TPPReaderSettingsDelegate {
-  
-  internal func getUserSettings() -> UserSettings {
-    return epubNavigator.userSettings
+
+  func getPreferences() -> EPUBPreferences {
+    return currentPreferences
   }
-  
-  internal func updateUserSettingsStyle() {
-    DispatchQueue.main.async {
-      self.epubNavigator.updateUserSettingStyle()
+
+  func submitPreferences(_ preferences: EPUBPreferences) {
+    currentPreferences = preferences
+    epubNavigator.submitPreferences(preferences)
+    // Persist so the choice is reused for this and every other ebook, and
+    // survives relaunches. Without this the change only lived on the in-memory
+    // navigator and was lost on close — after the Readium 3.x upgrade the
+    // reader reset to defaults on every open.
+    TPPEPUBViewController.savePreferences(preferences)
+  }
+
+  /// UserDefaults key holding the shared, JSON-encoded reader preferences.
+  private static let savedPreferencesKey = "TPPEPUBReaderPreferences"
+
+  /// The reader preferences the user last saved, shared across all ebooks.
+  static func loadSavedPreferences() -> EPUBPreferences? {
+    guard let data = UserDefaults.standard.data(forKey: savedPreferencesKey) else {
+      return nil
     }
+    return try? JSONDecoder().decode(EPUBPreferences.self, from: data)
   }
-  
-  /// Synchronyze the UI appearance to the UserSettings.Appearance.
-  ///
-  /// - Parameter appearance: The appearance.
-  internal func setUIColor(for appearance: UserProperty) {
-    let colors = TPPAssociatedColors.colors(for: appearance)
+
+  /// Persist the reader preferences so they apply to every ebook and survive
+  /// relaunches.
+  static func savePreferences(_ preferences: EPUBPreferences) {
+    guard let data = try? JSONEncoder().encode(preferences) else {
+      return
+    }
+    UserDefaults.standard.set(data, forKey: savedPreferencesKey)
+  }
+
+  /// Synchronize the UI appearance to the selected theme.
+  func setUIColor(for theme: Theme?) {
+    let colors = TPPAssociatedColors.colors(forTheme: theme)
 
     navigator.view.backgroundColor = colors.backgroundColor
     view.backgroundColor = colors.backgroundColor
@@ -207,7 +234,6 @@ extension TPPEPUBViewController: UIGestureRecognizerDelegate {
 // MARK: - UIPopoverPresentationControllerDelegate
 
 extension TPPEPUBViewController: UIPopoverPresentationControllerDelegate {
-  // Prevent the popOver to be presented fullscreen on iPhones.
   func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle
   {
     return .none
@@ -216,14 +242,14 @@ extension TPPEPUBViewController: UIPopoverPresentationControllerDelegate {
 
 extension TPPEPUBViewController: EPUBSearchDelegate {
   func didSelect(location: Locator) {
-    
+
     defer {
       presentedViewController?.dismiss(animated: true)
-      navigator.go(to: location)
+      Task { await navigator.go(to: location) }
     }
-  
+
     if let navigator = navigator as? DecorableNavigator {
-      
+
       var decorations: [Decoration] = []
       decorations.append(Decoration(
         id: "search",

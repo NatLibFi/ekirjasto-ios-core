@@ -7,16 +7,7 @@
 //
 
 import Foundation
-import R2Shared
+import ReadiumShared
 
-// Extending R2Shared opening error to get underlying error message from Adobe DRM
-extension Publication.OpeningError {
-  var drmErrorDescription: String? {
-    switch self {
-    case .forbidden(let error):
-      return error?.localizedDescription
-    default:
-      return nil
-    }
-  }
-}
+// Publication.OpeningError was removed in Readium 3.x.
+// DRM errors are now surfaced through the standard Error protocol.

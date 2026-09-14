@@ -14,15 +14,42 @@ import PalaceAudiobookToolkit
   private var registry: TPPBookRegistryProvider
   private var annotationsManager: AnnotationsManager
   private var isSyncing: Bool = false
-  
+
+  /// Maps locations to and from the cross-platform v2 locator format.
+  /// When unset, bookmarks are written in the legacy v1 format and v2
+  /// bookmarks from other devices cannot be resolved.
+  @objc var trackMapper: AudiobookTrackMapper?
+
   @objc convenience init(book: TPPBook) {
     self.init(book: book, registry: TPPBookRegistry.shared, annotationsManager: TPPAnnotationsWrapper())
   }
-  
+
+  @objc convenience init(book: TPPBook, audiobook: Audiobook, manifestJSON: [String: Any]) {
+    self.init(book: book, registry: TPPBookRegistry.shared, annotationsManager: TPPAnnotationsWrapper())
+    self.trackMapper = AudiobookTrackMapper(spine: audiobook.spine, manifestJSON: manifestJSON)
+  }
+
   init(book: TPPBook, registry: TPPBookRegistryProvider, annotationsManager: AnnotationsManager) {
     self.book = book
     self.registry = registry
     self.annotationsManager = annotationsManager
+  }
+
+  /// Selector value for posting `location` to the annotations server:
+  /// the v2 locator when it can be mapped, the legacy v1 format otherwise.
+  private func selectorValue(for location: ChapterLocation) -> String? {
+    if let v2 = trackMapper?.v2SelectorString(for: location) {
+      return v2
+    }
+    return String(data: location.toData(), encoding: .utf8)
+  }
+
+  /// Resolves a server bookmark in either locator version to a `ChapterLocation`.
+  private func chapterLocation(from bookmark: AudioBookmark) -> ChapterLocation? {
+    if let mapper = trackMapper {
+      return mapper.chapterLocation(from: bookmark)
+    }
+    return ChapterLocation(audioBookmark: bookmark)
   }
   
   private func fetchLocalBookmarks() -> [ChapterLocation] {
@@ -45,7 +72,7 @@ import PalaceAudiobookToolkit
         return
       }
       
-      let chapterLocations = audioBookmarks.compactMap(ChapterLocation.init)
+      let chapterLocations = audioBookmarks.compactMap { self.chapterLocation(from: $0) }
       completion(chapterLocations)
     }
   }
@@ -60,8 +87,7 @@ import PalaceAudiobookToolkit
       
       // 1. Upload unsynced local bookmarks to server
       for bookmark in unsyncedLocalBookmarks {
-        let data = bookmark.toData()
-        guard let locationString = String(data: data, encoding: .utf8) else {
+        guard let locationString = selectorValue(for: bookmark) else {
           continue
         }
         
@@ -148,7 +174,15 @@ private extension Array where Element == ChapterLocation {
 
 extension AudiobookBookmarkBusinessLogic: AudiobookPlaybackPositionDelegate {
   public func saveListeningPosition(at location: String, completion: ((_ serverID: String?) -> Void)? = nil) {
-    annotationsManager.postListeningPosition(forBook: self.book.identifier, selectorValue: location, completion: completion)
+    // The player serializes its position in the legacy v1 format;
+    // re-encode as the v2 locator when possible before posting.
+    var selectorValue = location
+    if let data = location.data(using: .utf8),
+       let chapterLocation = ChapterLocation.fromData(data),
+       let v2 = trackMapper?.v2SelectorString(for: chapterLocation) {
+      selectorValue = v2
+    }
+    annotationsManager.postListeningPosition(forBook: self.book.identifier, selectorValue: selectorValue, completion: completion)
   }
 }
 
@@ -164,8 +198,7 @@ extension AudiobookBookmarkBusinessLogic: AudiobookBookmarkDelegate {
         }
       }
 
-      let data = location.toData()
-      guard let locationString = String(data: data, encoding: .utf8) else {
+      guard let locationString = selectorValue(for: location) else {
         return
       }
 

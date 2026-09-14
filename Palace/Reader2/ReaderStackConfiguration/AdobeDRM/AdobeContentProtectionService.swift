@@ -9,9 +9,9 @@
 #if FEATURE_DRM_CONNECTOR
 
 import Foundation
-import R2Shared
-import R2Streamer
-import R2Navigator
+import ReadiumShared
+import ReadiumStreamer
+import ReadiumNavigator
 
 /// Provides information about a publication's content protection and manages user rights.
 final class AdobeContentProtectionService: ContentProtectionService {

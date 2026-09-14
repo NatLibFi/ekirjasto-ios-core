@@ -32,15 +32,34 @@ import UIKit
   }
   
   var pageCount: Int {
-    document?.pageCount ?? 0
+    document?.numberOfPages ?? 0
   }
-  
+
   var title: String? {
-    document?.title
+    // CGPDFDocument properties became async closures in iOS 26 SDK.
+    // Extract title from the PDF info dictionary synchronously.
+    guard let document = document,
+          let info = document.info else { return nil }
+    var stringRef: CGPDFStringRef?
+    guard CGPDFDictionaryGetString(info, "Title", &stringRef),
+          let stringRef = stringRef,
+          let cfString = CGPDFStringCopyTextString(stringRef) else {
+      return nil
+    }
+    return cfString as String
   }
-  
+
   var cover: UIImage? {
-    document?.cover
+    guard let document = document, let page = document.page(at: 1) else { return nil }
+    let rect = page.getBoxRect(.mediaBox)
+    let renderer = UIGraphicsImageRenderer(size: rect.size)
+    return renderer.image { ctx in
+      UIColor.white.set()
+      ctx.fill(rect)
+      ctx.cgContext.translateBy(x: 0, y: rect.height)
+      ctx.cgContext.scaleBy(x: 1, y: -1)
+      ctx.cgContext.drawPDFPage(page)
+    }
   }
 
   func page(at n: Int) -> CGPDFPage? {
@@ -50,7 +69,7 @@ import UIKit
   }
   
   func makeThumbnails() {
-    let pageCount = self.document?.pageCount ?? 0
+    let pageCount = self.document?.numberOfPages ?? 0
     DispatchQueue.pdfThumbnailRenderingQueue.async {
       for page in 0..<pageCount {
         let pageNumber = NSNumber(value: page)

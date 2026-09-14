@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import R2Shared
+import ReadiumShared
 
 extension Publication {
 
@@ -44,7 +44,8 @@ extension Publication {
   /// - Returns: The `idref` related to the resource in question. This *should*
   /// be usable in R1 contexts.
   func idref(forHref href: String) -> String? {
-    let link = self.link(withHREF: href)
+    guard let url = AnyURL(string: href) else { return nil }
+    let link = self.linkWithHREF(url)
     return link?.properties["id"] as? String
   }
 
@@ -57,6 +58,6 @@ extension Publication {
   /// structures) pointed at by the given Locator.
   /// - parameter locator: The location for which we want the resource index of.
   func resourceIndex(forLocator locator: Locator) -> Int? {
-    return readingOrder.firstIndex(withHREF: locator.href)
+    return readingOrder.firstIndex(where: { $0.url() == locator.href })
   }
 }

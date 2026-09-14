@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import R2Shared
+import ReadiumShared
 import ReadiumLCP
-import ZIPFoundation
+import ReadiumZIPFoundation
 
 enum TPPLicensesServiceError: Error {
   case licenseError(message: String)
@@ -63,25 +63,19 @@ class TPPLicensesService: NSObject {
   /// - Parameters:
   ///   - lcpl: license URL
   ///   - file: LCP-protected file URL
-  func injectLicense(lcpl: URL, to file: URL, at path: String) throws {
-    guard let archive = Archive(url: file, accessMode: .update) else {
-      throw TPPLicensesServiceError.licenseError(message: "Error opening archive file \(file.path)")
-    }
-    
-    do {
-      // Removes the old License if it already exists in the archive, otherwise we get duplicated entries
-      if let oldLicense = archive[path] {
-        try archive.remove(oldLicense)
-      }
+  func injectLicense(lcpl: URL, to file: URL, at path: String) async throws {
+    let archive = try await Archive(url: file, accessMode: .update)
 
-      // Stores the License into the ZIP file
-      let data = try Data(contentsOf: lcpl)
-      try archive.addEntry(with: path, type: .file, uncompressedSize: UInt32(data.count), provider: { (position, size) -> Data in
-        return data[position..<size]
-      })
-    } catch {
-      throw TPPLicensesServiceError.licenseError(message: "Error injecting license file: \(error.localizedDescription)")
+    // Removes the old License if it already exists
+    if let oldLicense = try await archive.get(path) {
+      try await archive.remove(oldLicense)
     }
+
+    // Stores the License into the ZIP file
+    let data = try Data(contentsOf: lcpl)
+    try await archive.addEntry(with: path, type: .file, uncompressedSize: Int64(data.count), provider: { (position, size) -> Data in
+      return data[Int(position)..<Int(size)]
+    })
   }
   
   /// Defines path inside .zip file to write license file to.
@@ -108,11 +102,26 @@ extension TPPLicensesService: URLSessionDownloadDelegate {
     }
     // Check if we need to inject license file for the link ContentType
     if let licensePathInZip = self.pathInZip(for: link) {
+      // The temp file at `location` is deleted when this delegate returns.
+      // Copy it to a stable location first, then inject the license async.
+      let stableURL = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString + "." + location.pathExtension)
       do {
-        try self.injectLicense(lcpl: lcpl, to: location, at: licensePathInZip)
-        completionHandler?(location, nil)
+        try FileManager.default.copyItem(at: location, to: stableURL)
       } catch {
         completionHandler?(nil, error)
+        return
+      }
+      Task {
+        do {
+          try await self.injectLicense(lcpl: lcpl, to: stableURL, at: licensePathInZip)
+          await MainActor.run {
+            self.completionHandler?(stableURL, nil)
+          }
+        } catch {
+          await MainActor.run {
+            self.completionHandler?(nil, error)
+          }
+        }
       }
     }
   }

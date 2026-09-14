@@ -8,8 +8,8 @@
 
 import Combine
 import Foundation
-import R2Navigator
-import R2Shared
+import ReadiumNavigator
+import ReadiumShared
 
 class TPPTextToSpeech: ObservableObject {
   
@@ -66,7 +66,9 @@ class TPPTextToSpeech: ObservableObject {
       .throttle(for: 1, scheduler: RunLoop.main, latest: true)
       .drop(while: { _ in isMoving })
       .sink { locator in
-        isMoving = navigator.go(to: locator) {
+        isMoving = true
+        Task {
+          _ = await navigator.go(to: locator)
           isMoving = false
         }
       }
@@ -79,8 +81,9 @@ class TPPTextToSpeech: ObservableObject {
       synthesizer.start(from: locator)
     } else if let navigator = navigator as? VisualNavigator {
       // Gets the locator of the element at the top of the page.
-      navigator.firstVisibleElementLocator { [self] locator in
-        synthesizer.start(from: locator)
+      Task {
+        let locator = await navigator.firstVisibleElementLocator()
+        self.synthesizer.start(from: locator)
       }
     } else {
       synthesizer.start(from: navigator.currentLocation)

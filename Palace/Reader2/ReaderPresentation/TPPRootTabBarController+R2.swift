@@ -40,42 +40,7 @@ extension TPPRootTabBarController {
             forSample: false
           )
 
-        case .cancelled:
-          // .cancelled is returned when publication has restricted access
-          // to its resources and can't be rendered
-
-          TPPErrorLogger.logError(
-            nil,
-            summary: "Error accessing book resources",
-            metadata: [
-              "book": book.loggableDictionary
-            ]
-          )
-
-          let alertTitle = Strings.OpenBook.unableToOpenBookAlertTitle
-
-          let alertMessage = String.localizedStringWithFormat(
-            Strings.OpenBook.unableToOpenBookAlertMessage,
-            book.title
-          )
-
-          let alertController = TPPAlertUtils.alert(
-            title: alertTitle,
-            message: alertMessage
-          )
-
-          TPPAlertUtils.presentFromViewControllerOrNil(
-            alertController: alertController,
-            viewController: self,
-            animated: true,
-            completion: nil
-          )
-
         case .failure(let error):
-          // .failure is retured for an error raised while trying to unlock publication
-          // error is supposed to be visible to users,
-          // it is defined by ContentProtection error property
-
           TPPErrorLogger.logError(
             error,
             summary: "Error accessing book resources",
@@ -85,22 +50,18 @@ extension TPPRootTabBarController {
           )
 
           let alertTitle = Strings.OpenBook.unableToOpenBookAlertTitle
-
           let alertMessage = String.localizedStringWithFormat(
             Strings.OpenBook.unableToOpenBookAlertMessage,
             book.title
           )
-
           let errorMessage = String.localizedStringWithFormat(
             Strings.ErrorInformation.errorInformationAvailable,
             error.localizedDescription
           )
-
           let alertController = TPPAlertUtils.alert(
             title: alertTitle,
             message: "\(alertMessage)\n\n\(errorMessage)"
           )
-
           TPPAlertUtils.presentFromViewControllerOrNil(
             alertController: alertController,
             viewController: self,
@@ -148,67 +109,28 @@ extension TPPRootTabBarController {
             forSample: true
           )
 
-        case .cancelled:
-          // .cancelled is returned when publication has
-          // restricted access to its resources and can't be rendered
-
-          TPPErrorLogger.logError(
-            nil,
-            summary: "Error accessing book resources",
-            metadata: [
-              "book": book.loggableDictionary
-            ]
-          )
-
-          let alertTitle = Strings.OpenSample.unableToOpenSampleAlertTitle
-
-          let alertMessage = String.localizedStringWithFormat(
-            Strings.OpenSample.unableToOpenSampleAlertMessage,
-            book.title
-          )
-
-          let alertController = TPPAlertUtils.alert(
-            title: alertTitle,
-            message: alertMessage
-          )
-
-          TPPAlertUtils.presentFromViewControllerOrNil(
-            alertController: alertController,
-            viewController: self,
-            animated: true,
-            completion: nil
-          )
-
         case .failure(let error):
-          // .failure is retured for an error raised while trying to unlock publication
-          // error is supposed to be visible to users,
-          // it is defined by ContentProtection error property
-
           TPPErrorLogger.logError(
             error,
-            summary: "Error accessing book resources",
+            summary: "Error accessing sample resources",
             metadata: [
               "book": book.loggableDictionary
             ]
           )
 
           let alertTitle = Strings.OpenSample.unableToOpenSampleAlertTitle
-
           let alertMessage = String.localizedStringWithFormat(
             Strings.OpenSample.unableToOpenSampleAlertMessage,
             book.title
           )
-
           let errorMessage = String.localizedStringWithFormat(
             Strings.ErrorInformation.errorInformationAvailable,
             error.localizedDescription
           )
-
           let alertController = TPPAlertUtils.alert(
             title: alertTitle,
             message: "\(alertMessage)\n\n\(errorMessage)"
           )
-
           TPPAlertUtils.presentFromViewControllerOrNil(
             alertController: alertController,
             viewController: self,

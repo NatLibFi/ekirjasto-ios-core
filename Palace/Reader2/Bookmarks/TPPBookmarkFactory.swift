@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import R2Shared
+import ReadiumShared
 
 class TPPBookmarkFactory {
 
@@ -42,14 +42,13 @@ class TPPBookmarkFactory {
     let registryLoc = bookRegistry.location(forIdentifier: book.identifier)
     var href: String? = nil
 
-    href = bookmarkLoc.locator.href
+    href = bookmarkLoc.locator.href.string
 
     let chapter: String?
     if let locatorChapter = bookmarkLoc.locator.title {
       chapter = locatorChapter
-    } else if let tocLink = publication.tableOfContents.first(withHREF: bookmarkLoc.locator.href) {
-      chapter = tocLink.title
     } else {
+      // tableOfContents is async in Readium 3.x; use title from locator only
       chapter = nil
     }
 

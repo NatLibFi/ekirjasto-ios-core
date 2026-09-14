@@ -213,8 +213,10 @@ class TPPReaderPositionsVC: UIViewController, UITableViewDataSource, UITableView
 
     switch currentTab {
     case .toc:
-      if let locator = tocBusinessLogic?.tocLocator(at: indexPath.row) {
-        delegate?.positionsVC(self, didSelectTOCLocation: locator)
+      Task {
+        if let locator = await tocBusinessLogic?.tocLocator(at: indexPath.row) {
+          delegate?.positionsVC(self, didSelectTOCLocation: locator)
+        }
       }
     case .bookmarks:
       if let bookmark = bookmarksBusinessLogic?.bookmark(at: indexPath.row) {

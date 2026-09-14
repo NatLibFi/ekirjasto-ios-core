@@ -12,7 +12,7 @@
 
 import Foundation
 import UIKit
-import R2Shared
+import ReadiumShared
 import ReadiumLCP
 
 
@@ -33,7 +33,16 @@ import ReadiumLCP
   private var authenticationCallbacks: [String: (String?) -> Void] = [:]
   
   override init() {
-    self.lcpService = LCPService(client: lcpClient)
+    // These will be set up properly when LibraryService provides them
+    let httpClient = DefaultHTTPClient()
+    let assetRetriever = AssetRetriever(httpClient: httpClient)
+    self.lcpService = LCPService(
+      client: lcpClient,
+      licenseRepository: LCPKeychainLicenseRepository(),
+      passphraseRepository: LCPKeychainPassphraseRepository(),
+      assetRetriever: assetRetriever,
+      httpClient: httpClient
+    )
     super.init()
   }
   
@@ -46,20 +55,19 @@ import ReadiumLCP
   
   /// Fulfill LCP license publication.
   /// - Parameter file: LCP license file.
-  /// - Returns: fulfilled publication as `Deferred` (`CancellableReesult` interenally) object.
-  func fulfill(_ file: URL) -> Deferred<DRMFulfilledPublication, Error> {
-    return deferred { completion in
-      self.lcpService.acquirePublication(from: file) { result in
-        completion(result
-          .map {
-            DRMFulfilledPublication(
-              localURL: $0.localURL,
-              suggestedFilename: $0.suggestedFilename
-            )
-        }
-        .eraseToAnyError()
-        )
-      }
+  func fulfill(_ file: URL) async throws -> DRMFulfilledPublication {
+    guard let fileUrl = FileURL(url: file) else {
+      throw NSError(domain: "LCPLibraryService", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid file URL"])
+    }
+    let result = await lcpService.acquirePublication(from: .file(fileUrl))
+    switch result {
+    case .success(let acquired):
+      return DRMFulfilledPublication(
+        localURL: acquired.localURL.url,
+        suggestedFilename: acquired.suggestedFilename
+      )
+    case .failure(let error):
+      throw error
     }
   }
 
@@ -75,17 +83,19 @@ import ReadiumLCP
     return TPPLicensesService().acquirePublication(from: file) { progressValue in
       progress(progressValue)
     } completion: { localUrl, error in
-      guard error == nil else {
-        let domain = "LCP fulfillment error"
-        let code = TPPErrorCode.lcpDRMFulfillmentFail.rawValue
-        let errorDescription = (error as? LCPError)?.errorDescription ?? (error as? TPPLicensesServiceError)?.description ?? error?.localizedDescription
-        let nsError = NSError(domain: domain, code: code, userInfo: [
-          NSLocalizedDescriptionKey: errorDescription as Any
-        ])
-        completion(nil, nsError)
-        return
+      DispatchQueue.main.async {
+        guard error == nil else {
+          let domain = "LCP fulfillment error"
+          let code = TPPErrorCode.lcpDRMFulfillmentFail.rawValue
+          let errorDescription = (error as? TPPLicensesServiceError)?.description ?? error?.localizedDescription
+          let nsError = NSError(domain: domain, code: code, userInfo: [
+            NSLocalizedDescriptionKey: errorDescription as Any
+          ])
+          completion(nil, nsError)
+          return
+        }
+        completion(localUrl, nil)
       }
-      completion(localUrl, nil)
     }
   }
   

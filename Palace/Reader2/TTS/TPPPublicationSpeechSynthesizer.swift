@@ -9,8 +9,8 @@
 import Foundation
 import Combine
 import AVFoundation
-import R2Shared
-import R2Navigator
+import ReadiumShared
+import ReadiumNavigator
 
 /// Iterator direction
 private enum Direction {
@@ -249,7 +249,17 @@ public class TPPPublicationSpeechSynthesizer: NSObject, Loggable {
   /// Loads the utterances for the next publication `ContentElement` item in the given `direction`.
   private func loadNextUtterances(_ direction: Direction) -> Bool {
     do {
-      guard let content = try publicationIterator?.next(direction) else {
+      // ContentIterator.next is async in Readium 3.x; bridge to sync
+      var content: ContentElement?
+      let semaphore = DispatchSemaphore(value: 0)
+      Task {
+        if let iterator = publicationIterator {
+          content = (try? await iterator.next(direction)) ?? nil
+        }
+        semaphore.signal()
+      }
+      semaphore.wait()
+      guard let content = content else {
         return false
       }
       
@@ -384,12 +394,12 @@ private extension CursorList {
 }
 
 private extension ContentIterator {
-  func next(_ direction: Direction) throws -> ContentElement? {
+  func next(_ direction: Direction) async throws -> ContentElement? {
     switch direction {
     case .forward:
-      return try next()
+      return try await next()
     case .backward:
-      return try previous()
+      return try await previous()
     }
   }
 }

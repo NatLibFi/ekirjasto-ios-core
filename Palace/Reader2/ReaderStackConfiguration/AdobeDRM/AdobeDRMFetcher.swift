@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import R2Shared
+import ReadiumShared
 
 #if FEATURE_DRM_CONNECTOR
 

@@ -292,6 +292,7 @@
 		3312630F2A287F53006BA87D /* TPPAsync.m in Sources */ = {isa = PBXBuildFile; fileRef = 1183F35A194F847100DC322F /* TPPAsync.m */; };
 		331263102A287F53006BA87D /* TPPReloadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B20E6D19D9F6DD00877A23 /* TPPReloadView.m */; };
 		331263112A287F53006BA87D /* AudiobookBookmarkBusinessLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55E2FA729E7AFCD0093F916 /* AudiobookBookmarkBusinessLogic.swift */; };
+		AB7311A02E1A000100000002 /* AudiobookTrackMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7311A02E1A000100000001 /* AudiobookTrackMapper.swift */; };
 		331263122A287F53006BA87D /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FFB96328AED4850042907F /* ImageProvider.swift */; };
 		331263132A287F53006BA87D /* DownloadingBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5824BE02994AF4800DE76C2 /* DownloadingBookCell.swift */; };
 		331263142A287F53006BA87D /* PublicationOpeningError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D746FB2719B00E00C0E1B4 /* PublicationOpeningError.swift */; };
@@ -561,15 +562,15 @@
 		331264262A287F53006BA87D /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 03B092251E7883C400AD338D /* libiconv.tbd */; };
 		331264282A287F53006BA87D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A823D812192BABA400B55DE2 /* CoreGraphics.framework */; };
 		331264292A287F53006BA87D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03B092231E78839D00AD338D /* QuartzCore.framework */; };
-		3312642C2A287F53006BA87D /* R2Navigator in Frameworks */ = {isa = PBXBuildFile; productRef = 331262D42A287F53006BA87D /* R2Navigator */; };
+		3312642C2A287F53006BA87D /* ReadiumNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = 331262D42A287F53006BA87D /* ReadiumNavigator */; };
 		3312642D2A287F53006BA87D /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A352211BDE8E560040BF1D /* libicucore.tbd */; };
 		3312642F2A287F53006BA87D /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 331262DA2A287F53006BA87D /* SQLite */; };
-		331264302A287F53006BA87D /* R2Shared in Frameworks */ = {isa = PBXBuildFile; productRef = 331262D62A287F53006BA87D /* R2Shared */; };
+		331264302A287F53006BA87D /* ReadiumShared in Frameworks */ = {isa = PBXBuildFile; productRef = 331262D62A287F53006BA87D /* ReadiumShared */; };
 		331264312A287F53006BA87D /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 119503EA1993F91E009FB788 /* libc++.dylib */; };
 		331264332A287F53006BA87D /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA4F2321C68363B008853D7 /* LocalAuthentication.framework */; };
 		331264342A287F53006BA87D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A352251BDE8E700040BF1D /* SystemConfiguration.framework */; };
 		331264352A287F53006BA87D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A352231BDE8E640040BF1D /* Security.framework */; };
-		331264372A287F53006BA87D /* R2Streamer in Frameworks */ = {isa = PBXBuildFile; productRef = 331262D72A287F53006BA87D /* R2Streamer */; };
+		331264372A287F53006BA87D /* ReadiumStreamer in Frameworks */ = {isa = PBXBuildFile; productRef = 331262D72A287F53006BA87D /* ReadiumStreamer */; };
 		331264382A287F53006BA87D /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 331262D82A287F53006BA87D /* SwiftSoup */; };
 		331264392A287F53006BA87D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A3521F1BDE8E410040BF1D /* CFNetwork.framework */; };
 		3312643B2A287F53006BA87D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FCD2601B7BA79200BFEDD9 /* CoreLocation.framework */; };
@@ -1188,6 +1189,7 @@
 		E55E2FA529E7A9660093F916 /* AudioBookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5231240285C291D007D1DB5 /* AudioBookmark.swift */; };
 		E55E2FA629E7A9670093F916 /* AudioBookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5231240285C291D007D1DB5 /* AudioBookmark.swift */; };
 		E55E2FA829E7AFCD0093F916 /* AudiobookBookmarkBusinessLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55E2FA729E7AFCD0093F916 /* AudiobookBookmarkBusinessLogic.swift */; };
+		AB7311A02E1A000100000004 /* AudiobookTrackMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7311A02E1A000100000001 /* AudiobookTrackMapper.swift */; };
 		E56067752A4C8858002ACE93 /* TokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56067742A4C8858002ACE93 /* TokenRequest.swift */; };
 		E56724BF2A13223700972828 /* TPPBookCellDelegate+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5024A8C2A0E8761006BF653 /* TPPBookCellDelegate+Extensions.swift */; };
 		E56724C12A132C1300972828 /* TPPAnnotationMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56724C02A132C1300972828 /* TPPAnnotationMock.swift */; };
@@ -1235,6 +1237,7 @@
 		E5D3288B292C0D68008BFD01 /* txstrings.json in Resources */ = {isa = PBXBuildFile; fileRef = E5D32881292C0D34008BFD01 /* txstrings.json */; };
 		E5E4907229280597005BFC55 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54DD4CF275C66F30013C200 /* Strings.swift */; };
 		E5ED734729F702D500EC2F67 /* AudiobookBookmarkBusinessLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55E2FA729E7AFCD0093F916 /* AudiobookBookmarkBusinessLogic.swift */; };
+		AB7311A02E1A000100000003 /* AudiobookTrackMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7311A02E1A000100000001 /* AudiobookTrackMapper.swift */; };
 		E5EFDE78298C43D300258CA3 /* BookButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EFDE77298C43D300258CA3 /* BookButtonState.swift */; };
 		E5EFDE79298C43DD00258CA3 /* BookButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EFDE77298C43D300258CA3 /* BookButtonState.swift */; };
 		E5EFDE7C298C4F8000258CA3 /* BookCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EFDE7B298C4F8000258CA3 /* BookCellModel.swift */; };
@@ -1326,14 +1329,14 @@
 		E75ED6E32977320B006BBD5F /* single_entry.xml in Resources */ = {isa = PBXBuildFile; fileRef = 11F54C2419410BE40086FCAF /* single_entry.xml */; };
 		E75F4A2929C3AB1F006DFBD8 /* TPPPublicationSpeechSynthesizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75F4A2829C3AB1F006DFBD8 /* TPPPublicationSpeechSynthesizer.swift */; };
 		E75F4A2A29C3AB1F006DFBD8 /* TPPPublicationSpeechSynthesizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75F4A2829C3AB1F006DFBD8 /* TPPPublicationSpeechSynthesizer.swift */; };
-		E77D021A2931337000544180 /* R2Navigator in Frameworks */ = {isa = PBXBuildFile; productRef = E77D02192931337000544180 /* R2Navigator */; };
-		E77D021C2931337000544180 /* R2Shared in Frameworks */ = {isa = PBXBuildFile; productRef = E77D021B2931337000544180 /* R2Shared */; };
-		E77D021E2931337000544180 /* R2Streamer in Frameworks */ = {isa = PBXBuildFile; productRef = E77D021D2931337000544180 /* R2Streamer */; };
+		E77D021A2931337000544180 /* ReadiumNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = E77D02192931337000544180 /* ReadiumNavigator */; };
+		E77D021C2931337000544180 /* ReadiumShared in Frameworks */ = {isa = PBXBuildFile; productRef = E77D021B2931337000544180 /* ReadiumShared */; };
+		E77D021E2931337000544180 /* ReadiumStreamer in Frameworks */ = {isa = PBXBuildFile; productRef = E77D021D2931337000544180 /* ReadiumStreamer */; };
 		E77D02202931337000544180 /* ReadiumLCP in Frameworks */ = {isa = PBXBuildFile; productRef = E77D021F2931337000544180 /* ReadiumLCP */; };
 		E77D02252931357400544180 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = E77D02242931357400544180 /* SwiftSoup */; };
-		E77D02272931360100544180 /* R2Navigator in Frameworks */ = {isa = PBXBuildFile; productRef = E77D02262931360100544180 /* R2Navigator */; };
-		E77D02292931360100544180 /* R2Shared in Frameworks */ = {isa = PBXBuildFile; productRef = E77D02282931360100544180 /* R2Shared */; };
-		E77D022B2931360100544180 /* R2Streamer in Frameworks */ = {isa = PBXBuildFile; productRef = E77D022A2931360100544180 /* R2Streamer */; };
+		E77D02272931360100544180 /* ReadiumNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = E77D02262931360100544180 /* ReadiumNavigator */; };
+		E77D02292931360100544180 /* ReadiumShared in Frameworks */ = {isa = PBXBuildFile; productRef = E77D02282931360100544180 /* ReadiumShared */; };
+		E77D022B2931360100544180 /* ReadiumStreamer in Frameworks */ = {isa = PBXBuildFile; productRef = E77D022A2931360100544180 /* ReadiumStreamer */; };
 		E77D022D2931361700544180 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = E77D022C2931361700544180 /* SwiftSoup */; };
 		E78494992A8E99CF0059B4B0 /* PalaceAudiobookToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F9BABE2A8E6811001697DE /* PalaceAudiobookToolkit.framework */; };
 		E784949A2A8E99CF0059B4B0 /* PalaceAudiobookToolkit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E7F9BABE2A8E6811001697DE /* PalaceAudiobookToolkit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -2062,6 +2065,7 @@
 		E551B360267D402B0026FC1B /* TPPAccountList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPPAccountList.swift; sourceTree = "<group>"; };
 		E553424F293FB23F004FF34A /* PalaceAudiobookToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PalaceAudiobookToolkit.xcodeproj; path = "ios-audiobooktoolkit/PalaceAudiobookToolkit.xcodeproj"; sourceTree = "<group>"; };
 		E55E2FA729E7AFCD0093F916 /* AudiobookBookmarkBusinessLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudiobookBookmarkBusinessLogic.swift; sourceTree = "<group>"; };
+		AB7311A02E1A000100000001 /* AudiobookTrackMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudiobookTrackMapper.swift; sourceTree = "<group>"; };
 		E56067742A4C8858002ACE93 /* TokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRequest.swift; sourceTree = "<group>"; };
 		E56724C02A132C1300972828 /* TPPAnnotationMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPPAnnotationMock.swift; sourceTree = "<group>"; };
 		E567C72B296743990079C28C /* BookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
@@ -2219,18 +2223,18 @@
 				331264282A287F53006BA87D /* CoreGraphics.framework in Frameworks */,
 				331264292A287F53006BA87D /* QuartzCore.framework in Frameworks */,
 				33372CF72AC548EA0001BE2F /* FirebaseAnalytics in Frameworks */,
-				3312642C2A287F53006BA87D /* R2Navigator in Frameworks */,
+				3312642C2A287F53006BA87D /* ReadiumNavigator in Frameworks */,
 				363C61F42B14E5B800858AA5 /* ReadiumLCP in Frameworks */,
 				3312642D2A287F53006BA87D /* libicucore.tbd in Frameworks */,
 				3312642F2A287F53006BA87D /* SQLite in Frameworks */,
-				331264302A287F53006BA87D /* R2Shared in Frameworks */,
+				331264302A287F53006BA87D /* ReadiumShared in Frameworks */,
 				331264312A287F53006BA87D /* libc++.dylib in Frameworks */,
 				331264332A287F53006BA87D /* LocalAuthentication.framework in Frameworks */,
 				33372CFB2AC549040001BE2F /* FirebaseMessaging in Frameworks */,
 				33FCF7FE2AC45A7C008E3B72 /* FirebaseDynamicLinks in Frameworks */,
 				331264342A287F53006BA87D /* SystemConfiguration.framework in Frameworks */,
 				331264352A287F53006BA87D /* Security.framework in Frameworks */,
-				331264372A287F53006BA87D /* R2Streamer in Frameworks */,
+				331264372A287F53006BA87D /* ReadiumStreamer in Frameworks */,
 				331264382A287F53006BA87D /* SwiftSoup in Frameworks */,
 				331264392A287F53006BA87D /* CFNetwork.framework in Frameworks */,
 				3312643B2A287F53006BA87D /* CoreLocation.framework in Frameworks */,
@@ -2260,18 +2264,18 @@
 				73EB0B3325821DF4006BC997 /* libiconv.tbd in Frameworks */,
 				73EB0B3425821DF4006BC997 /* CoreGraphics.framework in Frameworks */,
 				73EB0B3525821DF4006BC997 /* QuartzCore.framework in Frameworks */,
-				E77D02272931360100544180 /* R2Navigator in Frameworks */,
+				E77D02272931360100544180 /* ReadiumNavigator in Frameworks */,
 				73EB0B3925821DF4006BC997 /* libicucore.tbd in Frameworks */,
 				E7498A8E2A0E7F840037DD93 /* FirebaseAnalytics in Frameworks */,
 				E7498A922A0E7F840037DD93 /* FirebaseDynamicLinks in Frameworks */,
 				E7498A942A0E7F840037DD93 /* FirebaseMessaging in Frameworks */,
 				E7CA1C502938107A009CC6FD /* SQLite in Frameworks */,
-				E77D02292931360100544180 /* R2Shared in Frameworks */,
+				E77D02292931360100544180 /* ReadiumShared in Frameworks */,
 				73EB0B3A25821DF4006BC997 /* libc++.dylib in Frameworks */,
 				73EB0B3B25821DF4006BC997 /* LocalAuthentication.framework in Frameworks */,
 				73EB0B3C25821DF4006BC997 /* SystemConfiguration.framework in Frameworks */,
 				73EB0B3D25821DF4006BC997 /* Security.framework in Frameworks */,
-				E77D022B2931360100544180 /* R2Streamer in Frameworks */,
+				E77D022B2931360100544180 /* ReadiumStreamer in Frameworks */,
 				E77D022D2931361700544180 /* SwiftSoup in Frameworks */,
 				73EB0B3E25821DF4006BC997 /* CFNetwork.framework in Frameworks */,
 				73EB0B3F25821DF4006BC997 /* CoreLocation.framework in Frameworks */,
@@ -2291,7 +2295,7 @@
 			files = (
 				E7F287792956566900EEB1E0 /* R2LCPClient.xcframework in Frameworks */,
 				03B092301E78871A00AD338D /* MediaPlayer.framework in Frameworks */,
-				E77D021A2931337000544180 /* R2Navigator in Frameworks */,
+				E77D021A2931337000544180 /* ReadiumNavigator in Frameworks */,
 				03B092281E78859E00AD338D /* CoreMedia.framework in Frameworks */,
 				03B0922E1E7886ED00AD338D /* CoreVideo.framework in Frameworks */,
 				03B0922C1E7886C900AD338D /* AVFoundation.framework in Frameworks */,
@@ -2307,7 +2311,7 @@
 				08A352241BDE8E640040BF1D /* Security.framework in Frameworks */,
 				08A352201BDE8E410040BF1D /* CFNetwork.framework in Frameworks */,
 				E7498A862A0E7F460037DD93 /* FirebaseAnalytics in Frameworks */,
-				E77D021C2931337000544180 /* R2Shared in Frameworks */,
+				E77D021C2931337000544180 /* ReadiumShared in Frameworks */,
 				84FCD2611B7BA79200BFEDD9 /* CoreLocation.framework in Frameworks */,
 				E77D02252931357400544180 /* SwiftSoup in Frameworks */,
 				A823D815192BABA400B55DE2 /* UIKit.framework in Frameworks */,
@@ -2324,7 +2328,7 @@
 				E77D02202931337000544180 /* ReadiumLCP in Frameworks */,
 				E72429632AC3276500D8AF75 /* PalaceAudiobookToolkit.framework in Frameworks */,
 				E7498A882A0E7F460037DD93 /* FirebaseCrashlytics in Frameworks */,
-				E77D021E2931337000544180 /* R2Streamer in Frameworks */,
+				E77D021E2931337000544180 /* ReadiumStreamer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3396,6 +3400,7 @@
 			isa = PBXGroup;
 			children = (
 				E55E2FA729E7AFCD0093F916 /* AudiobookBookmarkBusinessLogic.swift */,
+				AB7311A02E1A000100000001 /* AudiobookTrackMapper.swift */,
 				E59892EC28AC909000C44A85 /* AudiobookSampleToolbar.swift */,
 				E6D848E22171334800CEC142 /* TPPContentTypeBadge.swift */,
 			);
@@ -4069,9 +4074,9 @@
 			);
 			name = Ekirjasto;
 			packageProductDependencies = (
-				331262D42A287F53006BA87D /* R2Navigator */,
-				331262D62A287F53006BA87D /* R2Shared */,
-				331262D72A287F53006BA87D /* R2Streamer */,
+				331262D42A287F53006BA87D /* ReadiumNavigator */,
+				331262D62A287F53006BA87D /* ReadiumShared */,
+				331262D72A287F53006BA87D /* ReadiumStreamer */,
 				331262D82A287F53006BA87D /* SwiftSoup */,
 				331262DA2A287F53006BA87D /* SQLite */,
 				33FCF7FD2AC45A7C008E3B72 /* FirebaseDynamicLinks */,
@@ -4102,9 +4107,9 @@
 			);
 			name = "Palace-noDRM";
 			packageProductDependencies = (
-				E77D02262931360100544180 /* R2Navigator */,
-				E77D02282931360100544180 /* R2Shared */,
-				E77D022A2931360100544180 /* R2Streamer */,
+				E77D02262931360100544180 /* ReadiumNavigator */,
+				E77D02282931360100544180 /* ReadiumShared */,
+				E77D022A2931360100544180 /* ReadiumStreamer */,
 				E77D022C2931361700544180 /* SwiftSoup */,
 				E7CA1C4F2938107A009CC6FD /* SQLite */,
 				E7498A8D2A0E7F840037DD93 /* FirebaseAnalytics */,
@@ -4135,9 +4140,9 @@
 			);
 			name = Palace;
 			packageProductDependencies = (
-				E77D02192931337000544180 /* R2Navigator */,
-				E77D021B2931337000544180 /* R2Shared */,
-				E77D021D2931337000544180 /* R2Streamer */,
+				E77D02192931337000544180 /* ReadiumNavigator */,
+				E77D021B2931337000544180 /* ReadiumShared */,
+				E77D021D2931337000544180 /* ReadiumStreamer */,
 				E77D021F2931337000544180 /* ReadiumLCP */,
 				E77D02242931357400544180 /* SwiftSoup */,
 				E7CA1C4D29381068009CC6FD /* SQLite */,
@@ -4728,6 +4733,7 @@
 				331263102A287F53006BA87D /* TPPReloadView.m in Sources */,
 				33FCF7E02AC4569C008E3B72 /* TPPAppDelegate+Extensions.swift in Sources */,
 				331263112A287F53006BA87D /* AudiobookBookmarkBusinessLogic.swift in Sources */,
+				AB7311A02E1A000100000002 /* AudiobookTrackMapper.swift in Sources */,
 				7530C8C72D80CA750024E184 /* FavoritesViewModel.swift in Sources */,
 				331263122A287F53006BA87D /* ImageProvider.swift in Sources */,
 				331263132A287F53006BA87D /* DownloadingBookCell.swift in Sources */,
@@ -5123,6 +5129,7 @@
 				73EB0A8325821DF4006BC997 /* TPPAsync.m in Sources */,
 				73EB0A8425821DF4006BC997 /* TPPReloadView.m in Sources */,
 				E5ED734729F702D500EC2F67 /* AudiobookBookmarkBusinessLogic.swift in Sources */,
+				AB7311A02E1A000100000003 /* AudiobookTrackMapper.swift in Sources */,
 				E5FFB96528AED4990042907F /* ImageProvider.swift in Sources */,
 				E523A458299FD81D00EF833B /* DownloadingBookCell.swift in Sources */,
 				21D746FD2719B00E00C0E1B4 /* PublicationOpeningError.swift in Sources */,
@@ -5779,6 +5786,7 @@
 				089E430C24A2459100310360 /* TPPLoginCellTypes.swift in Sources */,
 				1158812E1A894F4E008672C3 /* TPPAccountSignInViewController.m in Sources */,
 				E55E2FA829E7AFCD0093F916 /* AudiobookBookmarkBusinessLogic.swift in Sources */,
+				AB7311A02E1A000100000004 /* AudiobookTrackMapper.swift in Sources */,
 				75A33F792E0F022700C147CC /* TPPRootTabBarController+Extensions.swift in Sources */,
 				E59526EB28D24FC000C179DA /* AudiobookSample.swift in Sources */,
 				E5B2B8DA275952EC00150ED4 /* TPPSettingsView.swift in Sources */,
@@ -9026,8 +9034,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
 			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 0.13.0;
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.15.0;
 			};
 		};
 		E7498A842A0E7F460037DD93 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
@@ -9042,8 +9050,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/readium/swift-toolkit.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.6.0;
+				kind = exactVersion;
+				version = 3.9.0;
 			};
 		};
 		E77D02232931357400544180 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
@@ -9067,26 +9075,26 @@
 			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 0.13.0;
+				minimumVersion = 0.15.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		331262D42A287F53006BA87D /* R2Navigator */ = {
+		331262D42A287F53006BA87D /* ReadiumNavigator */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 331262D52A287F53006BA87D /* XCRemoteSwiftPackageReference "swift-toolkit" */;
-			productName = R2Navigator;
+			productName = ReadiumNavigator;
 		};
-		331262D62A287F53006BA87D /* R2Shared */ = {
+		331262D62A287F53006BA87D /* ReadiumShared */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 331262D52A287F53006BA87D /* XCRemoteSwiftPackageReference "swift-toolkit" */;
-			productName = R2Shared;
+			productName = ReadiumShared;
 		};
-		331262D72A287F53006BA87D /* R2Streamer */ = {
+		331262D72A287F53006BA87D /* ReadiumStreamer */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 331262D52A287F53006BA87D /* XCRemoteSwiftPackageReference "swift-toolkit" */;
-			productName = R2Streamer;
+			productName = ReadiumStreamer;
 		};
 		331262D82A287F53006BA87D /* SwiftSoup */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -9168,20 +9176,20 @@
 			package = E7498A842A0E7F460037DD93 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
 		};
-		E77D02192931337000544180 /* R2Navigator */ = {
+		E77D02192931337000544180 /* ReadiumNavigator */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E77D02182931337000544180 /* XCRemoteSwiftPackageReference "swift-toolkit" */;
-			productName = R2Navigator;
+			productName = ReadiumNavigator;
 		};
-		E77D021B2931337000544180 /* R2Shared */ = {
+		E77D021B2931337000544180 /* ReadiumShared */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E77D02182931337000544180 /* XCRemoteSwiftPackageReference "swift-toolkit" */;
-			productName = R2Shared;
+			productName = ReadiumShared;
 		};
-		E77D021D2931337000544180 /* R2Streamer */ = {
+		E77D021D2931337000544180 /* ReadiumStreamer */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E77D02182931337000544180 /* XCRemoteSwiftPackageReference "swift-toolkit" */;
-			productName = R2Streamer;
+			productName = ReadiumStreamer;
 		};
 		E77D021F2931337000544180 /* ReadiumLCP */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -9193,20 +9201,20 @@
 			package = E77D02232931357400544180 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
 			productName = SwiftSoup;
 		};
-		E77D02262931360100544180 /* R2Navigator */ = {
+		E77D02262931360100544180 /* ReadiumNavigator */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E77D02182931337000544180 /* XCRemoteSwiftPackageReference "swift-toolkit" */;
-			productName = R2Navigator;
+			productName = ReadiumNavigator;
 		};
-		E77D02282931360100544180 /* R2Shared */ = {
+		E77D02282931360100544180 /* ReadiumShared */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E77D02182931337000544180 /* XCRemoteSwiftPackageReference "swift-toolkit" */;
-			productName = R2Shared;
+			productName = ReadiumShared;
 		};
-		E77D022A2931360100544180 /* R2Streamer */ = {
+		E77D022A2931360100544180 /* ReadiumStreamer */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E77D02182931337000544180 /* XCRemoteSwiftPackageReference "swift-toolkit" */;
-			productName = R2Streamer;
+			productName = ReadiumStreamer;
 		};
 		E77D022C2931361700544180 /* SwiftSoup */ = {
 			isa = XCSwiftPackageProductDependency;

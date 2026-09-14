@@ -7,10 +7,21 @@
 //
 
 import Foundation
-import R2Shared
+import ReadiumShared
 
 extension TPPBookLocation {
   static let r2Renderer = "readium2"
+
+  /// Serializes a dictionary of JSON-native values to a string.
+  /// (Readium 3.9 removed its public `serializeJSONString` helper.)
+  private static func jsonString(from dict: [String: Any]) -> String? {
+    guard JSONSerialization.isValidJSONObject(dict),
+          let data = try? JSONSerialization.data(withJSONObject: dict, options: [.sortedKeys])
+    else {
+      return nil
+    }
+    return String(data: data, encoding: .utf8)
+  }
   
   convenience init?(locator: Locator,
                     type: String,
@@ -20,16 +31,18 @@ extension TPPBookLocation {
     // Create a json string from it and use it as the location string in NYPLBookLocation
     // There is no specific format to follow, the value of the keys can be change if needed
     let dict: [String : Any] = [
-      TPPBookLocation.hrefKey: locator.href,
+      // Locator.href is an AnyURL in Readium 3.x; store the string form,
+      // anything non-JSON-native makes NSJSONSerialization throw.
+      TPPBookLocation.hrefKey: locator.href.string,
       TPPBookLocation.typeKey: type,
       TPPBookLocation.chapterProgressKey: locator.locations.progression ?? 0.0,
       TPPBookLocation.bookProgressKey: locator.locations.totalProgression ?? 0.0,
       TPPBookLocation.titleKey: locator.title ?? "",
       TPPBookLocation.positionKey: locator.locations.position ?? 0.0,
-      TPPBookLocation.cssSelector: locator.locations.otherLocations[TPPBookLocation.cssSelector] ?? ""
+      TPPBookLocation.cssSelector: locator.locations.otherLocations[TPPBookLocation.cssSelector]?.string ?? ""
     ]
     
-    guard let jsonString = serializeJSONString(dict) else {
+    guard let jsonString = TPPBookLocation.jsonString(from: dict) else {
       Log.warn(#file, "Failed to serialize json string from dictionary - \(dict.debugDescription)")
       return nil
     }
@@ -66,7 +79,7 @@ extension TPPBookLocation {
       TPPBookLocation.cssSelector: cssSelector ?? ""
     ]
     
-    guard let jsonString = serializeJSONString(dict) else {
+    guard let jsonString = TPPBookLocation.jsonString(from: dict) else {
       Log.warn(#file, "Failed to serialize json string from dictionary - \(dict.debugDescription)")
       return nil
     }
@@ -89,9 +102,9 @@ extension TPPBookLocation {
     let title: String = dict[TPPBookLocation.titleKey] as? String ?? ""
     let position: Int? = dict[TPPBookLocation.positionKey] as? Int
 
-    var otherLocations = [String: Any]()
+    var otherLocations = [String: JSONValue]()
     if let cssSelector = dict[TPPBookLocation.cssSelector] as? String, !cssSelector.isEmpty {
-      otherLocations[TPPBookLocation.cssSelector] = cssSelector
+      otherLocations[TPPBookLocation.cssSelector] = .string(cssSelector)
     }
     
     let locations = Locator.Locations(fragments: [],
@@ -100,8 +113,13 @@ extension TPPBookLocation {
                                       position: position,
                                       otherLocations: otherLocations)
     
-    return Locator(href: href,
-                   type: type,
+    guard let hrefURL = AnyURL(string: href) else {
+      Log.error(#file, "Failed to convert stored href to URL: \(href)")
+      return nil
+    }
+
+    return Locator(href: hrefURL,
+                   mediaType: MediaType(type) ?? .binary,
                    title: title,
                    locations: locations)
   }

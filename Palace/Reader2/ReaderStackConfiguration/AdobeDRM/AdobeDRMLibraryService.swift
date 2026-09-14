@@ -8,8 +8,8 @@
 
 import Foundation
 import UIKit
-import R2Shared
-import R2Streamer
+import ReadiumShared
+import ReadiumStreamer
 
 #if FEATURE_DRM_CONNECTOR
 

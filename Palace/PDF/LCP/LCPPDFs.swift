@@ -9,10 +9,10 @@
 #if LCP
 
 import Foundation
-import R2Shared
-import R2Streamer
+import ReadiumShared
+import ReadiumStreamer
 import ReadiumLCP
-import ZIPFoundation
+import ReadiumZIPFoundation
 
 /// LCP PDF helper class
 @objc class LCPPDFs: NSObject {
@@ -36,29 +36,50 @@ import ZIPFoundation
   
   private let pdfUrl: URL
   private var lcpService = LCPLibraryService()
-  private let streamer: Streamer
-  
-  
+  private let httpClient: HTTPClient
+  private let assetRetriever: AssetRetriever
+  private let publicationOpener: PublicationOpener
+
+
   @objc init?(url: URL) {
     guard let contentProtection = lcpService.contentProtection else {
       TPPErrorLogger.logError(nil, summary: "Uninitialized contentProtection in LCPPDFs")
       return nil
     }
     self.pdfUrl = url
-    self.streamer = Streamer(contentProtections: [contentProtection])
+    self.httpClient = DefaultHTTPClient()
+    self.assetRetriever = AssetRetriever(httpClient: httpClient)
+    self.publicationOpener = PublicationOpener(
+      parser: DefaultPublicationParser(
+        httpClient: httpClient,
+        assetRetriever: assetRetriever,
+        pdfFactory: DefaultPDFDocumentFactory()
+      ),
+      contentProtections: [contentProtection]
+    )
   }
-  
-  /// Get PDF file name from the manifest file.
+
+  /// Get the PDF file's href (its path inside the archive) from the manifest.
   private func getPdfHref(completion: @escaping (_ pdfHref: String?, _ error: NSError?) -> ()) {
-    let manifestPath = "manifest.json"
-    let asset = FileAsset(url: self.pdfUrl)
-    streamer.open(asset: asset, allowUserInteraction: false) { result in
+    Task {
       do {
-        let publication = try result.get()
-        let resource = publication.getResource(at: manifestPath)
-        let manifestData = try resource.read().get()
+        guard let url = FileURL(url: pdfUrl) else {
+          completion(nil, nil)
+          return
+        }
+        // Explicit media type: format sniffing can hand the PDF engine
+        // undecrypted content if the LCP protection is not detected.
+        let asset = try await assetRetriever.retrieve(url: url, mediaType: .lcpProtectedPDF).get()
+        let publication = try await publicationOpener.open(asset: asset, allowUserInteraction: false).get()
+        // Readium 3.x publications only serve links listed in the manifest, so
+        // manifest.json can no longer be fetched as a resource. The opened
+        // publication carries the parsed manifest instead.
+        guard let manifestString = publication.jsonManifest,
+              let manifestData = manifestString.data(using: .utf8) else {
+          completion(nil, nil)
+          return
+        }
         let pdfManifest = try JSONDecoder().decode(PDFManifest.self, from: manifestData)
-        resource.close()
         completion(pdfManifest.readingOrder.first?.href, nil)
       } catch {
         TPPErrorLogger.logError(error, summary: "Error reading PDF path")
@@ -181,19 +202,34 @@ import ZIPFoundation
         completion(nil, nil)
         return
       }
-      guard let archive = Archive(url: url, accessMode: .read) else {
-        completion(nil, nil)
-        return
-      }
-      guard let pdfEntry = archive[pdfHref] else {
-        completion(nil, nil)
-        return
-      }
-      do {
-        _ = try archive.extract(pdfEntry, to: resultUrl)
-        completion(resultUrl, nil)
-      } catch {
-        completion(nil, error)
+      Task {
+        do {
+          guard let archive = try? await Archive(url: url, accessMode: .read) else {
+            completion(nil, nil)
+            return
+          }
+          // The manifest href and the archive entry path may differ by a
+          // leading slash depending on how Readium normalizes hrefs, so try
+          // both forms (this bit the Android migration).
+          let candidates = pdfHref.hasPrefix("/")
+            ? [pdfHref, String(pdfHref.dropFirst())]
+            : [pdfHref, "/" + pdfHref]
+          var pdfEntry: Entry?
+          for candidate in candidates {
+            if let entry = try await archive.get(candidate) {
+              pdfEntry = entry
+              break
+            }
+          }
+          guard let pdfEntry else {
+            completion(nil, nil)
+            return
+          }
+          _ = try await archive.extract(pdfEntry, to: resultUrl)
+          completion(resultUrl, nil)
+        } catch {
+          completion(nil, error)
+        }
       }
     }
   }
@@ -208,17 +244,8 @@ import ZIPFoundation
   }
 }
 
-private extension Publication {
-  // R2 has changed its expectation about the leading slash;
-  // here we verify both cases.
-  func getResource(at path: String) -> Resource {
-    let resource = get("/" + path)
-    guard type(of: resource) != FailureResource.self else {
-      return get(path)
-    }
-    return resource
-  }
-}
+// Publication.getResource extension removed — Readium 3.x uses
+// publication.get() which returns nil instead of FailureResource.
 
 #endif
 

@@ -8,7 +8,7 @@
 //
 
 import Foundation
-import R2Shared
+import ReadiumShared
 
 struct DRMFulfilledPublication {
   let localURL: URL
@@ -17,14 +17,13 @@ struct DRMFulfilledPublication {
 
 
 protocol DRMLibraryService {
-  
-  /// Returns the `ContentProtection` which will be provided to the `Streamer`, to unlock
-  /// publications.
+
+  /// Returns the `ContentProtection` which will be provided to the publication opener.
   var contentProtection: ContentProtection? { get }
-  
+
   /// Returns whether this DRM can fulfill the given file into a protected publication.
   func canFulfill(_ file: URL) -> Bool
-  
+
   /// Fulfills the given file to the fully protected publication.
-  func fulfill(_ file: URL) -> Deferred<DRMFulfilledPublication, Error>
+  func fulfill(_ file: URL) async throws -> DRMFulfilledPublication
 }

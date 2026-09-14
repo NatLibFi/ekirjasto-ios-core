@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import R2Shared
+import ReadiumShared
 
 typealias TPPReaderTOCLink = (level: Int, link: Link)
 
@@ -21,7 +21,17 @@ class TPPReaderTOCBusinessLogic {
   init(r2Publication: Publication, currentLocation: Locator?) {
     self.publication = r2Publication
     self.currentLocation = currentLocation
-    self.tocElements = flatten(publication.tableOfContents)
+    // tableOfContents is async in Readium 3.x; load synchronously via Task
+    var toc: [Link] = []
+    let semaphore = DispatchSemaphore(value: 0)
+    Task {
+      if let result = try? await r2Publication.tableOfContents().get() {
+        toc = result
+      }
+      semaphore.signal()
+    }
+    semaphore.wait()
+    self.tocElements = flatten(toc)
   }
 
   private func flatten(_ links: [Link], level: Int = 0) -> [(level: Int, link: Link)] {
@@ -32,19 +42,24 @@ class TPPReaderTOCBusinessLogic {
     Strings.TPPReaderTOCBusinessLogic.tocDisplayTitle
   }
 
-  func tocLocator(at index: Int) -> Locator? {
+  func tocLocator(at index: Int) async -> Locator? {
     guard tocElements.indices.contains(index) else {
       return nil
     }
-    return Locator(link: tocElements[index].link)
+    let link = tocElements[index].link
+    // Resolve the TOC link against the publication (the way Readium 3.x expects)
+    // rather than hand-building a Locator from the raw href. A hand-built
+    // Locator only resolved for same-document jumps — the first chapters —
+    // which is why selecting later chapters failed to navigate.
+    return await publication.locate(link)
   }
 
   func shouldSelectTOCItem(at index: Int) -> Bool {
-    // If the locator's href is #, then the item is not a link.
-    guard let locator = tocLocator(at: index), locator.href != "#" else {
+    // Non-link TOC entries (section headers) have href "#".
+    guard tocElements.indices.contains(index) else {
       return false
     }
-    return true
+    return tocElements[index].link.href != "#"
   }
 
   func titleAndLevel(forItemAt index: Int) -> (title: String, level: Int) {

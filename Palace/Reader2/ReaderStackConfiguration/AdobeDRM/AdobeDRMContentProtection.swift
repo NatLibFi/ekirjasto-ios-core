@@ -9,7 +9,7 @@
 #if FEATURE_DRM_CONNECTOR
 
 import Foundation
-import R2Shared
+import ReadiumShared
 
 class AdobeDRMContentProtection: ContentProtection {
   func open(asset: PublicationAsset,

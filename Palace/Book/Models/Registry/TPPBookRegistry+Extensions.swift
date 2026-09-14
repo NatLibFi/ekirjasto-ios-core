@@ -10,15 +10,19 @@ import Foundation
 import PalaceAudiobookToolkit
 
 @objc extension TPPBookRegistry {
-  func syncLocation(for book: TPPBook, completion: @escaping (ChapterLocation?) -> Void) {
+  func syncLocation(for book: TPPBook, trackMapper: AudiobookTrackMapper?, completion: @escaping (ChapterLocation?) -> Void) {
     TPPAnnotations.syncReadingPosition(ofBook: book.identifier, toURL: book.annotationsURL) { readPos in
-      
+
       guard let bookmark = readPos as? AudioBookmark else {
         completion(nil)
         return
       }
 
-      completion(ChapterLocation(audioBookmark: bookmark))
+      if let trackMapper = trackMapper {
+        completion(trackMapper.chapterLocation(from: bookmark))
+      } else {
+        completion(ChapterLocation(audioBookmark: bookmark))
+      }
     }
   }
 }

@@ -12,8 +12,18 @@
 
 import R2LCPClient
 import ReadiumLCP
+import ReadiumShared
 
-let lcpService = LCPService(client: TPPLCPClient())
+let lcpService: LCPService = {
+  let httpClient = DefaultHTTPClient()
+  return LCPService(
+    client: TPPLCPClient(),
+    licenseRepository: LCPKeychainLicenseRepository(),
+    passphraseRepository: LCPKeychainPassphraseRepository(),
+    assetRetriever: AssetRetriever(httpClient: httpClient),
+    httpClient: httpClient
+  )
+}()
 
 /// Facade to the private R2LCPClient.framework.
 class TPPLCPClient: ReadiumLCP.LCPClient {
