@@ -11,7 +11,7 @@
 @property (nonatomic, weak) id<TPPCatalogLaneCellDelegate> delegate;
 @property (nonatomic, readonly) NSUInteger laneIndex;
 
-@property (nonatomic, readonly) NSArray *buttons;
+@property (nonatomic, readonly) NSArray *coverViews;
 @property (nonatomic, readonly) UIScrollView *scrollView;
 
 

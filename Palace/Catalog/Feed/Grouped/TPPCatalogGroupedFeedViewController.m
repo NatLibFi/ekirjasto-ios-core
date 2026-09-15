@@ -391,59 +391,79 @@ viewForHeaderInSection:(NSInteger const)section
     view.backgroundColor = [[TPPConfiguration backgroundColor] colorWithAlphaComponent:0.9];
   }
   
-  // Creates a header button that displays the title of a category and allows the user to tap on it to view more books in that category.
+  // Displays the lane title and lets the user tap to view more books in that
+  // category. This is a plain UILabel (not a UIButton) on purpose: a UIButton
+  // runs an expensive title + focus-system layout pass (-[UIControl state] ->
+  // -[UIView isFocused] -> focus-environment ancestor walk) every time it is
+  // laid out, and the iPad size-class transition force-relays-out every header,
+  // which pegged the main thread. A UILabel has no such path.
   {
-    UIButton *const button = [UIButton buttonWithType:UIButtonTypeSystem];
-    button.titleLabel.font = [UIFont palaceFontOfSize:21];
+    UILabel *const titleLabel = [[UILabel alloc] init];
+    titleLabel.font = [UIFont palaceFontOfSize:21];
+    titleLabel.textColor = [UIColor labelColor];
     NSString *const title = ((TPPCatalogLane *) self.feed.lanes[section]).title;
-    [button setTitle:title forState:UIControlStateNormal];
-    [button sizeToFit];
-    if (CGRectGetWidth(button.frame) > self.tableView.frame.size.width - 100) {
-      button.frame = CGRectMake(10, 5, self.tableView.frame.size.width - 100, CGRectGetHeight(button.frame));
+    titleLabel.text = title;
+    [titleLabel sizeToFit];
+    if (CGRectGetWidth(titleLabel.frame) > self.tableView.frame.size.width - 100) {
+      titleLabel.frame = CGRectMake(10, 5, self.tableView.frame.size.width - 100, CGRectGetHeight(titleLabel.frame));
     } else {
-      button.frame = CGRectMake(10, 5, CGRectGetWidth(button.frame), CGRectGetHeight(button.frame));
+      titleLabel.frame = CGRectMake(10, 5, CGRectGetWidth(titleLabel.frame), CGRectGetHeight(titleLabel.frame));
     }
-    button.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-    button.tag = section;
-    TPPCatalogLane *const lane = self.feed.lanes[button.tag];
-    button.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"%@ -lane", nil), lane.title];
-    button.accessibilityTraits = UIAccessibilityTraitHeader;
-    button.accessibilityHint = NSLocalizedString(@"Tap to view more books in this category", "Descriptive label for screen readers");
-    [button addTarget:self
-               action:@selector(didSelectCategory:)
-     forControlEvents:UIControlEventTouchUpInside];
-    button.exclusiveTouch = YES;
-    [view addSubview:button];
+    titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+    titleLabel.tag = section;
+    titleLabel.userInteractionEnabled = YES;
+    TPPCatalogLane *const lane = self.feed.lanes[titleLabel.tag];
+    titleLabel.isAccessibilityElement = YES;
+    titleLabel.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"%@ -lane", nil), lane.title];
+    titleLabel.accessibilityTraits = UIAccessibilityTraitHeader;
+    titleLabel.accessibilityHint = NSLocalizedString(@"Tap to view more books in this category", "Descriptive label for screen readers");
+    [titleLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didSelectCategory:)]];
+    [view addSubview:titleLabel];
   }
-  
-  // Creates a button with text and arrow and allows the user to tap on it to view more books in the category.
+
+  // "More >" affordance: a UILabel + arrow UIImageView inside a plain UIView
+  // (again, deliberately not a UIButton — see the note above).
   {
-    UIButton *const button = [UIButton buttonWithType:UIButtonTypeSystem];
-    button.titleLabel.font = [UIFont palaceFontOfSize:14]; //Edited by Ellibs
-    NSString *const title = NSLocalizedString(@"More", nil); //Edited by Ellibs
-    button.semanticContentAttribute = UISemanticContentAttributeForceRightToLeft; //Added by Ellibs
-    UIImage *readmoreArrow = [UIImage imageNamed:@"ArrowRight"]; //Added by Ellibs
-    [button setImage:readmoreArrow forState:UIControlStateNormal]; //Added by Ellibs
-    button.tintColor = [TPPConfiguration iconColor]; //Added by Ellibs
-    button.imageEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0); //Added by Ellibs
-    button.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10); //Added by Ellibs
-    [button setTitleColor:[TPPConfiguration compatiblePrimaryColor] forState:UIControlStateNormal]; //Added by Ellibs
-    [button setTitle:title forState:UIControlStateNormal];
-    [button sizeToFit];
-    button.frame = CGRectMake(CGRectGetWidth(view.frame) - CGRectGetWidth(button.frame) - 30, //Edited by Ellibs
-                              13,
-                              CGRectGetWidth(button.frame)+30, //Edited by Ellibs
-                              CGRectGetHeight(button.frame)+15);
-    button.tag = section;
-    TPPCatalogLane *const lane = self.feed.lanes[button.tag];
-    button.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"More %@ books", nil), lane.title];
-    button.accessibilityHint = NSLocalizedString(@"Tap to view more books in this category", "Descriptive label for screen readers");
-    button.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
-    [button addTarget:self
-               action:@selector(didSelectCategory:)
-     forControlEvents:UIControlEventTouchUpInside];
-    button.exclusiveTouch = YES;
-    [view addSubview:button];
+    UIView *const moreView = [[UIView alloc] init];
+    moreView.userInteractionEnabled = YES;
+    moreView.tag = section;
+
+    UILabel *const moreLabel = [[UILabel alloc] init];
+    moreLabel.font = [UIFont palaceFontOfSize:14];
+    moreLabel.text = NSLocalizedString(@"More", nil);
+    moreLabel.textColor = [TPPConfiguration compatiblePrimaryColor];
+    [moreLabel sizeToFit];
+
+    UIImage *const arrowImage = [[UIImage imageNamed:@"ArrowRight"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UIImageView *const arrow = [[UIImageView alloc] initWithImage:arrowImage];
+    arrow.tintColor = [TPPConfiguration iconColor];
+
+    CGFloat const gap = 8.0;
+    CGFloat const labelW = CGRectGetWidth(moreLabel.frame);
+    CGFloat const labelH = CGRectGetHeight(moreLabel.frame);
+    CGFloat const arrowH = labelH;
+    CGFloat const arrowW = (arrowImage.size.height > 0) ? (arrowImage.size.width * (arrowH / arrowImage.size.height)) : arrowH;
+    CGFloat const contentW = labelW + gap + arrowW;
+    CGFloat const contentH = labelH;
+    CGFloat const vpad = 8.0;
+
+    moreView.frame = CGRectMake(CGRectGetWidth(view.frame) - contentW - 30,
+                                13,
+                                contentW,
+                                contentH + vpad);
+    moreView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
+    moreLabel.frame = CGRectMake(0, vpad / 2.0, labelW, labelH);
+    arrow.frame = CGRectMake(labelW + gap, vpad / 2.0, arrowW, arrowH);
+    [moreView addSubview:moreLabel];
+    [moreView addSubview:arrow];
+
+    TPPCatalogLane *const lane = self.feed.lanes[moreView.tag];
+    moreView.isAccessibilityElement = YES;
+    moreView.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"More %@ books", nil), lane.title];
+    moreView.accessibilityHint = NSLocalizedString(@"Tap to view more books in this category", "Descriptive label for screen readers");
+    moreView.accessibilityTraits = UIAccessibilityTraitButton;
+    [moreView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didSelectCategory:)]];
+    [view addSubview:moreView];
   }
   return view;
 }
@@ -492,18 +512,18 @@ viewForHeaderInSection:(NSInteger const)section
   TPPCatalogLaneCell *laneCell = (TPPCatalogLaneCell *) cell;
   vc.view.tag = laneCell.laneIndex;
   
-  for (UIButton *button in laneCell.buttons) {
-    CGPoint referencePoint = [[button superview] convertPoint:location fromView:self.tableView];
-    if (CGRectContainsPoint(button.frame, referencePoint)) {
-      UIImageView *imgView = [[UIImageView alloc] initWithImage:button.imageView.image];
+  for (UIImageView *coverView in laneCell.coverViews) {
+    CGPoint referencePoint = [[coverView superview] convertPoint:location fromView:self.tableView];
+    if (CGRectContainsPoint(coverView.frame, referencePoint)) {
+      UIImageView *imgView = [[UIImageView alloc] initWithImage:coverView.image];
       imgView.contentMode = UIViewContentModeScaleAspectFill;
       [vc.view addSubview:imgView];
       [imgView autoPinEdgesToSuperviewEdges];
       vc.preferredContentSize = CGSizeZero;
-      previewingContext.sourceRect = [self.tableView convertRect:button.frame fromView:[button superview]];
-      
-      self.tempBookPosition = (int)button.tag;
-      
+      previewingContext.sourceRect = [self.tableView convertRect:coverView.frame fromView:[coverView superview]];
+
+      self.tempBookPosition = (int)coverView.tag;
+
       return vc;
     }
   }
@@ -566,9 +586,9 @@ viewForHeaderInSection:(NSInteger const)section
    }];
 }
 
-- (void)didSelectCategory:(UIButton *const)button
+- (void)didSelectCategory:(UITapGestureRecognizer *const)sender
 {
-  TPPCatalogLane *const lane = self.feed.lanes[button.tag];
+  TPPCatalogLane *const lane = self.feed.lanes[sender.view.tag];
 
   NSURL *urlToLoad = lane.subsectionURL;
   if (urlToLoad == nil) {
