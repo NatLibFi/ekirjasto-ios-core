@@ -629,6 +629,7 @@
 		33F69AA32A5BFD6900B0C835 /* LicensesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A9908F27EE4EF400D9486F /* LicensesService.swift */; };
 		33F69AA42A5BFDF100B0C835 /* LCPAudiobooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212B99D2258A36FD00C8BF79 /* LCPAudiobooks.swift */; };
 		33FCF7DF2AC45699008E3B72 /* TPPAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7498A7A2A0E349A0037DD93 /* TPPAppDelegate.swift */; };
+		AB5CE7E02E1A000100000002 /* TPPSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5CE7E02E1A000100000001 /* TPPSceneDelegate.swift */; };
 		33FCF7E02AC4569C008E3B72 /* TPPAppDelegate+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75499F62A1D6863009FF821 /* TPPAppDelegate+Extensions.swift */; };
 		33FCF7E12AC456BB008E3B72 /* MyBooksDownloadCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E544C4E82A395BE000B2DC9D /* MyBooksDownloadCenter.swift */; };
 		33FCF7E22AC45700008E3B72 /* DLNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E727EFAD2A1BFB20006AB1F2 /* DLNavigator.swift */; };
@@ -1306,9 +1307,11 @@
 		E7376ED0287E05F50095AADF /* TPPPDFPreviewThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7376ECF287E05F50095AADF /* TPPPDFPreviewThumbnail.swift */; };
 		E74752F727FF044400F5E7FA /* TPPSignInBusinessLogic+CardCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74752F627FF044400F5E7FA /* TPPSignInBusinessLogic+CardCreation.swift */; };
 		E7498A7C2A0E349A0037DD93 /* TPPAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7498A7A2A0E349A0037DD93 /* TPPAppDelegate.swift */; };
+		AB5CE7E02E1A000100000003 /* TPPSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5CE7E02E1A000100000001 /* TPPSceneDelegate.swift */; };
 		E7498A7E2A0E4F6A0037DD93 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7498A7D2A0E4F6A0037DD93 /* URL+Extensions.swift */; };
 		E7498A7F2A0E4F6A0037DD93 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7498A7D2A0E4F6A0037DD93 /* URL+Extensions.swift */; };
 		E7498A802A0E662E0037DD93 /* TPPAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7498A7A2A0E349A0037DD93 /* TPPAppDelegate.swift */; };
+		AB5CE7E02E1A000100000004 /* TPPSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5CE7E02E1A000100000001 /* TPPSceneDelegate.swift */; };
 		E7498A862A0E7F460037DD93 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E7498A852A0E7F460037DD93 /* FirebaseAnalytics */; };
 		E7498A882A0E7F460037DD93 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = E7498A872A0E7F460037DD93 /* FirebaseCrashlytics */; };
 		E7498A8A2A0E7F460037DD93 /* FirebaseDynamicLinks in Frameworks */ = {isa = PBXBuildFile; productRef = E7498A892A0E7F460037DD93 /* FirebaseDynamicLinks */; };
@@ -2157,6 +2160,7 @@
 		E7376ECF287E05F50095AADF /* TPPPDFPreviewThumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPPPDFPreviewThumbnail.swift; sourceTree = "<group>"; };
 		E74752F627FF044400F5E7FA /* TPPSignInBusinessLogic+CardCreation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TPPSignInBusinessLogic+CardCreation.swift"; sourceTree = "<group>"; };
 		E7498A7A2A0E349A0037DD93 /* TPPAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPPAppDelegate.swift; sourceTree = "<group>"; };
+		AB5CE7E02E1A000100000001 /* TPPSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPPSceneDelegate.swift; sourceTree = "<group>"; };
 		E7498A7D2A0E4F6A0037DD93 /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		E75423242AFC381E008CB7EF /* UserProfileDocument+Links.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserProfileDocument+Links.swift"; sourceTree = "<group>"; };
 		E75499F62A1D6863009FF821 /* TPPAppDelegate+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TPPAppDelegate+Extensions.swift"; sourceTree = "<group>"; };
@@ -2579,6 +2583,7 @@
 				0345BFD61DBF002E00398B6F /* APIKeys.swift */,
 				739ECB2325101CCE00691A70 /* NSNotification+TPP.swift */,
 				E7498A7A2A0E349A0037DD93 /* TPPAppDelegate.swift */,
+				AB5CE7E02E1A000100000001 /* TPPSceneDelegate.swift */,
 				E75499F62A1D6863009FF821 /* TPPAppDelegate+Extensions.swift */,
 				A93F9F9621CDACF700BD3B0C /* TPPAppReviewPrompt.swift */,
 				E6207B642118973800864143 /* TPPAppTheme.swift */,
@@ -4931,6 +4936,7 @@
 				331263B22A287F53006BA87D /* TPPBookContentMetadataFilesHelper.swift in Sources */,
 				331263B32A287F53006BA87D /* TPPContentTypeBadge.swift in Sources */,
 				33FCF7DF2AC45699008E3B72 /* TPPAppDelegate.swift in Sources */,
+				AB5CE7E02E1A000100000002 /* TPPSceneDelegate.swift in Sources */,
 				331263B42A287F53006BA87D /* AdobeContentProtectionService.swift in Sources */,
 				331263B52A287F53006BA87D /* TPPProblemReportViewController.m in Sources */,
 				75E833E42D73B4C100D2B840 /* LoansAndHoldsViewController.swift in Sources */,
@@ -5274,6 +5280,7 @@
 				73EB0ACD25821DF4006BC997 /* TPPMyBooksDownloadInfo.m in Sources */,
 				E5EFDE7D298C510500258CA3 /* BookCellModel.swift in Sources */,
 				E7498A7C2A0E349A0037DD93 /* TPPAppDelegate.swift in Sources */,
+				AB5CE7E02E1A000100000003 /* TPPSceneDelegate.swift in Sources */,
 				73EB0ACF25821DF4006BC997 /* TPPFacetView.m in Sources */,
 				2126FE3C25C059810095C45C /* ReaderError.swift in Sources */,
 				E51EB51529D5F46400022D24 /* String+Extensions.swift in Sources */,
@@ -5713,6 +5720,7 @@
 				118A0B1B19915BDF00792DDE /* TPPCatalogSearchViewController.m in Sources */,
 				7530C8C82D80CA750024E184 /* FavoritesViewModel.swift in Sources */,
 				E7498A802A0E662E0037DD93 /* TPPAppDelegate.swift in Sources */,
+				AB5CE7E02E1A000100000004 /* TPPSceneDelegate.swift in Sources */,
 				737DCB8C245CCF2300A8F297 /* TPPReaderBookmarksBusinessLogic.swift in Sources */,
 				E52E3C0528C19BAD0073DC4D /* EpubSample.swift in Sources */,
 				753D8D262DCE29B20092FD39 /* MyBooksSelectionCenter.swift in Sources */,
