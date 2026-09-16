@@ -607,7 +607,8 @@ protocol AnnotationsManager {
   }
 
   static var annotationsURL: URL? {
-    return TPPConfiguration.mainFeedURL()?.appendingPathComponent("annotations/")
+    let libraryAccount = AccountsManager.shared.currentAccount
+    return libraryAccount?.details?.getLicenseURL(.annotations)
   }
 
   private class func setDefaultAnnotationHeaders(forRequest request: inout URLRequest) {
