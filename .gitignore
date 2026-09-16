@@ -19,6 +19,10 @@ Palace.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
 # Ignore temporary files
 temp/
 
+# Ignore personal Codex instructions
+AGENTS.override.md
+**/AGENTS.override.md
+
 # Ignore Cartfile and Carfile.resolved (the bootstrap script copies them into
 # place, and they can contain a liblcp secret, so they shouldn't be committed)
 Cartfile
@@ -30,4 +34,3 @@ Cartfile.resolved
 
 # Ignore txios-cli (Transifex CLI tool), it's auto-downloaded and built
 txios-cli
-
