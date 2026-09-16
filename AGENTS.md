@@ -1,108 +1,23 @@
-# Codex ja AGENTS.md
+# AGENTS.md
 
-Käytämme `AGENTS.md`-tiedostoa yhteisten Codex-ohjeiden määrittelyyn. Tavoitteena on, että Codex noudattaa kaikissa projekteissamme samoja turvallisen kehittämisen periaatteita.
+## Security
 
-## Yhteinen AGENTS.md
+- Never commit or expose secrets, credentials, tokens, or personal data.
+- Never use production data or credentials for development or testing.
+- Never modify production or external systems without explicit user confirmation.
+- Never perform destructive operations without explicit user confirmation.
+- If security implications are unclear, stop and explain the uncertainty.
 
-Jokaisen repositoryn juuressa on versionhallintaan kuuluva:
-```text
-AGENTS.md
-```
+## APIs and Network Access
 
-Se sisältää kaikille kehittäjille yhteiset Codex-ohjeet, kuten turvallisuuteen, API- ja verkkokutsuihin sekä koodin kieleen liittyvät periaatteet.
-```text
-repository/
-├── AGENTS.md
-├── .gitignore
-├── src/
-└── ...
-```
+- Never make requests to APIs, services, or network endpoints without explicit
+  user confirmation immediately before execution. Each request requires
+  separate confirmation.
+- Do not test integrations against production APIs.
+- Never use discovered credentials, API keys, tokens, cookies, or environment
+  variables without explicit user confirmation.
 
-Yhteistä `AGENTS.md`-tiedostoa ei tule muuttaa henkilökohtaisten asetusten vuoksi. Kaikkia kehittäjiä koskevat muutokset tehdään normaalisti versionhallinnan kautta.
+## Communication
 
-## Kehittäjän omat paikalliset ohjeet
-
-Kehittäjä voi täydentää yhteisiä ohjeita repositorykohtaisilla henkilökohtaisilla ohjeilla.
-
-Luo repositoryn juureen:
-```text
-AGENTS.override.md
-```
-
-Rakenne on tällöin:
-```text
-repository/
-├── AGENTS.md
-├── AGENTS.override.md
-├── .gitignore
-├── src/
-└── ...
-```
-
-`AGENTS.override.md` on kehittäjäkohtainen eikä sitä tallenneta versionhallintaan.
-
-Lisää `.gitignore`-tiedostoon:
-```gitignore
-AGENTS.override.md
-**/AGENTS.override.md
-```
-
-Paikallisen tiedoston voi tämän jälkeen luoda esimerkiksi:
-```bash
-touch AGENTS.override.md
-```
-
-## Mitä AGENTS.override.md-tiedostoon voi laittaa?
-
-Override-tiedosto on tarkoitettu henkilökohtaisiin työskentelytapoihin ja Codexin käyttäytymistä koskeviin lisäohjeisiin.
-
-Esimerkiksi:
-```md
-# Personal Codex instructions
-
-- Explain larger changes before implementing them.
-- Prefer small and focused changes.
-- Show alternative implementations when there are meaningful trade-offs.
-- Do not run tests or write documentation unless I request it.
-```
-
-Jos ohjeen pitäisi koskea kaikkia kehittäjiä, se kuuluu yhteiseen `AGENTS.md`-tiedostoon eikä henkilökohtaiseen override-tiedostoon.
-
-Paikallisia ohjeita ei tule käyttää yhteisten turvallisuusperiaatteiden tarkoitukselliseen kiertämiseen.
-
-## Pidä ohjeet lyhyinä
-
-`AGENTS.md` ja `AGENTS.override.md` kannattaa pitää mahdollisimman lyhyinä ja tarkoituksenmukaisina.
-
-Codex lukee soveltuvat ohjeet osaksi työskentelykontekstiaan, joten pitkät ohjetiedostot lisäävät tokenien kulutusta. Pitkä ja tarpeettoman yksityiskohtainen ohjeistus voi myös vaikeuttaa olennaisten ohjeiden erottamista.
-
-Ohjeisiin kannattaa kirjoittaa ensisijaisesti asioita, joita Codex ei voi helposti päätellä lähdekoodista tai repositoryn muista tiedostoista.
-
-Vältä erityisesti:
-
-- saman asian toistamista
-- yleisen ohjelmointitiedon kirjoittamista
-- projektidokumentaation kopioimista `AGENTS.md`
-- tarpeettoman yksityiskohtaisia ohjeita
-
-## Lyhyesti
-
-Yhteiset ohjeet:
-```text
-AGENTS.md
-```
-
-- kuuluu versionhallintaan
-- sama yhteinen pohja jokaisessa repositoryssa
-- sisältää yhteiset turvallisuus- ja toimintaperiaatteet
-
-Kehittäjän omat lisäohjeet:
-```text
-AGENTS.override.md
-```
-
-- vain kehittäjän omalla koneella
-- ei versionhallintaan
-- sisältää henkilökohtaiset työskentelytavat ja lisäohjeet
-
-**Nyrkkisääntö:** jos ohje koskee kaikkia, muuta `AGENTS.md`ä. Jos ohje koskee vain omaa työskentelyäsi, lisää se `AGENTS.override.md`.
+- Always use English for code, identifiers, comments, and technical
+  documentation.
