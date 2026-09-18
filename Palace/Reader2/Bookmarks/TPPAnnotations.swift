@@ -54,9 +54,20 @@ protocol AnnotationsManager {
   /// is guaranteed to be called on the Main queue. Otherwise, this is called
   /// either on the same thread the function was invoked on or on the main
   /// thread.
-  class func requestServerSyncStatus(forAccount userAccount: TPPUserAccount,
-                                     completion: @escaping (_ enableSync: Bool) -> ()) {
-    
+  class func requestServerSyncStatus(
+    forAccount userAccount: TPPUserAccount,
+    completion: @escaping (_ enableSync: Bool) -> ()
+  ) {
+
+    // EKIRJASTO-251
+    // Check if annotations can be synced with server
+    guard allowAnnotationServerSync else {
+      // only local bookmarks are allowed
+      // so syncing is not possible
+      completion(false)
+      return
+    }
+
     guard syncIsPossible(userAccount) else {
       Log.debug(#file, "Account does not satisfy conditions for sync setting request.")
       completion(false)
@@ -78,31 +89,58 @@ protocol AnnotationsManager {
         settings.userHasSeenFirstTimeSyncMessage = true;
         Log.debug(#file, "Sync has already been enabled on the server. Enable here as well.")
         return
+
       } else if (!initialized && settings.userHasSeenFirstTimeSyncMessage == false) {
         Log.debug(#file, "Sync has never been initialized for the patron. Showing UIAlertController flow.")
-        let title = NSLocalizedString("E-Library Sync",comment: "")
-        let message = NSLocalizedString("Enable sync to save your reading position and bookmarks to your other devices.\n\nYou can change this any time in Settings.",comment: "")
-        let alertController = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
-        let notNowAction = UIAlertAction.init(title: NSLocalizedString("Not Now",comment: ""), style: .default, handler: { action in
-          completion(false)
-          settings.userHasSeenFirstTimeSyncMessage = true;
-        })
-        let enableSyncAction = UIAlertAction.init(title: NSLocalizedString("Enable Sync",comment: ""), style: .default, handler: { action in
-          self.updateServerSyncSetting(toEnabled: true) { success in
-            completion(success)
+
+        let title = NSLocalizedString("E-Library Sync", comment: "")
+        let message = NSLocalizedString(
+          "Enable sync to save your reading position and bookmarks to your other devices.\n\nYou can change this any time in Settings.",
+          comment: ""
+        )
+
+        let alertController = UIAlertController.init(
+          title: title,
+          message: message,
+          preferredStyle: .alert
+        )
+
+        let notNowAction = UIAlertAction.init(
+          title: NSLocalizedString("Not Now", comment: ""),
+          style: .default,
+          handler: { action in
+            completion(false)
             settings.userHasSeenFirstTimeSyncMessage = true;
-          }
-        })
+          })
+
+        let enableSyncAction = UIAlertAction.init(
+          title: NSLocalizedString("Enable Sync", comment: ""),
+          style: .default,
+          handler: { action in
+            self.updateServerSyncSetting(toEnabled: true) { success in
+              completion(success)
+              settings.userHasSeenFirstTimeSyncMessage = true;
+            }
+          })
+
         alertController.addAction(notNowAction)
         alertController.addAction(enableSyncAction)
         alertController.preferredAction = enableSyncAction
-        /* Don't show alert that mentions bookmark sync
-         TPPAlertUtils.presentFromViewControllerOrNil(alertController: alertController, viewController: nil, animated: true, completion: nil)
-         */
+
+        TPPAlertUtils.presentFromViewControllerOrNil(
+          alertController: alertController,
+          viewController: nil,
+          animated: true,
+          completion: nil
+        )
+
       } else {
         completion(false)
+
       }
+
     }
+
   }
 
   /// Ask the server to enable Annotations on the current user account for the
@@ -115,21 +153,44 @@ protocol AnnotationsManager {
   ///   - completion: if a network request is actually performed, this block
   /// is guaranteed to be called on the Main queue. Otherwise, this is called
   /// on the same thread the function was invoked on.
-  class func updateServerSyncSetting(toEnabled enabled: Bool, completion:@escaping (Bool)->()) {
+  class func updateServerSyncSetting(
+    toEnabled enabled: Bool,
+    completion:@escaping (Bool)->()
+  ) {
+
+    // EKIRJASTO-251
+    // Check if annotations can be synced with server
+    guard allowAnnotationServerSync else {
+      // only local bookmarks are allowed
+      // so syncing is not possible
+      completion(false)
+      return
+    }
+
     if (TPPUserAccount.sharedAccount().hasCredentials() &&
       AccountsManager.shared.currentAccount?.details?.supportsSimplyESync == true) {
-      guard let userProfileUrl = URL(string: AccountsManager.shared.currentAccount?.details?.userProfileUrl ?? "") else {
+
+      guard let userProfileUrl = URL(
+        string: AccountsManager.shared.currentAccount?.details?.userProfileUrl ?? ""
+      ) else {
         Log.error(#file, "Could not create user profile URL from string. Abandoning attempt to update sync setting.")
         completion(false)
         return
       }
+
       let parameters = ["settings": ["simplified:synchronize_annotations": enabled]] as [String : Any]
-      syncSettingUrlRequest(userProfileUrl, parameters, 20, { success in
-        if !success {
-          handleSyncSettingError()
-        }
-        completion(success)
+
+      syncSettingUrlRequest(
+        userProfileUrl,
+        parameters,
+        20,
+        { success in
+          if !success {
+            handleSyncSettingError()
+          }
+          completion(success)
       })
+
     }
   }
 
@@ -603,11 +664,29 @@ protocol AnnotationsManager {
   /// Annotation-syncing is possible only if the given `account` is signed-in
   /// and if the currently selected library supports it.
   class func syncIsPossible(_ account: TPPUserAccount) -> Bool {
+
+    // EKIRJASTO-251
+    // Check if bookmarks can be synced with server
+    guard allowAnnotationServerSync else {
+      // only local bookmarks are allowed
+      // so syncing is not possible
+      return false
+    }
+
     let library = AccountsManager.shared.currentAccount
     return account.hasCredentials() && library?.details?.supportsSimplyESync == true
   }
 
   class func syncIsPossibleAndPermitted() -> Bool {
+
+    // EKIRJASTO-251
+    // Check if bookmarks can be synced with server
+    guard allowAnnotationServerSync else {
+      // only local bookmarks are allowed
+      // so syncing is not possible
+      return false
+    }
+
     let acct = AccountsManager.shared.currentAccount
     return syncIsPossible(TPPUserAccount.sharedAccount()) && acct?.details?.syncPermissionGranted == true
   }
