@@ -32,6 +32,12 @@ protocol AnnotationsManager {
 @objcMembers final class TPPAnnotations: NSObject {
   // MARK: - Sync Settings
 
+  // This is a temporary variable to disable all annotation or bookmark syncing with the server
+  // Default is false to keep syncing disabled.
+  // This should be removed in the future when syncing is needed again for E-kirjasto app.
+  // You can use EKIRJASTO-251 identifier to find related code changes.
+  private static var allowAnnotationServerSync = false
+
   /// Shows (if needed) the opt-in flow for syncing the user bookmarks and
   /// reading position on the server.
   ///
