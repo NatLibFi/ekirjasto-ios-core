@@ -15,7 +15,6 @@ struct TPPSettingsView: View {
   @State private var orientation: UIDeviceOrientation = UIDevice.current.orientation
   @State private var selectedView: Int? = 0
   @State private var toggleLogoutWarning = false
-  @State private var toggleSyncBookmarks = AccountsManager.shared.accounts().first?.details?.syncPermissionGranted ?? false
   
   var body: some View {
     settingsListView
@@ -82,39 +81,6 @@ struct TPPSettingsView: View {
       }
     }
   }
-  
-  /* syncBookmarks button, not in use currently.
-   Can be implemented again when sync is available
-  @ViewBuilder private var syncBookmarksSection: some View {
-       Section(
-         footer: Text(NSLocalizedString("Save your reading position and bookmarks to all your other devices.", comment: "Explain to the user they can save their bookmarks in the cloud across all their devices."))
-       ) {
-         Toggle(isOn: $toggleSyncBookmarks) {
-           Text(Strings.Settings.syncBookmarks)
-             .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
-         }
-         .disabled(!syncEnabled)
-         .onChange(of: toggleSyncBookmarks) { value in
-           TPPSignInBusinessLogic.getShared { logic in
-             logic?.changeSyncPermission(to: value, postServerSyncCompletion: { value in
-               toggleSyncBookmarks = value
-             })
-           }
-         }
-         .onAppear {
-           TPPSignInBusinessLogic.getShared { logic in
-             logic?.checkSyncPermission(preWork: {
-               syncEnabled = false
-             }, postWork: { enableSync in
-               syncEnabled = true
-               toggleSyncBookmarks = enableSync
-             })
-           }
-         }
-       }
-       .font(Font(uiFont: UIFont.palaceFont(ofSize: 12)))
-     }
-  */
 
   @ViewBuilder private var settingsAndHelpSection: some View {
     Section {
@@ -149,18 +115,8 @@ struct TPPSettingsView: View {
   
   @ViewBuilder private var logoutRow: some View {
     Button {
-      TPPSignInBusinessLogic.getShared { logic in
-        if let _logic = logic {
-          if _logic.shouldShowSyncButton() && !self.toggleSyncBookmarks {
-            self.logoutText = Strings.Settings.signOutConfirmationBookSync
-          } else {
-            self.logoutText = Strings.Settings.signOutConfirmationNoBookSync
-          }
-        }
-        //Override the logout text so enabling Sync is not mentioned anymore
-        self.logoutText = Strings.Settings.signOutConfirmationNoBookSync
-        toggleLogoutWarning = true
-      }
+      self.logoutText = Strings.Settings.signOutConfirmationNoBookSync
+      toggleLogoutWarning = true
     } label: {
       buttonLabelHStackRow(
         title: Strings.Settings.signOut
