@@ -115,27 +115,66 @@ struct TPPSettingsView: View {
   
   @ViewBuilder private var logoutRow: some View {
     Button {
-      self.logoutText = Strings.Settings.signOutConfirmationNoBookSync
+      // show the logout warning when "Sign out" button is pressed
       toggleLogoutWarning = true
     } label: {
-      buttonLabelHStackRow(
-        title: Strings.Settings.signOut
-      )
-    }.alert(Strings.TPPSigninBusinessLogic.signout, isPresented: $toggleLogoutWarning) {
-      Button(Strings.Settings.signOut, role: .destructive) {
-        TPPSignInBusinessLogic.getShared { logic in
-          if let _logic = logic {
-            if let alert = _logic.logOutOrWarn() {
-              TPPRootTabBarController.shared().settingsViewController.present(alert, animated: true)
-            }
-          }
-        }
+      buttonLabelHStackRow(title: Strings.Settings.logoutTitle)
+    }.alert(
+      Strings.TPPSigninBusinessLogic.signout,
+      isPresented: $toggleLogoutWarning
+    ) {
+      // define the confirmation button on alert
+      // (the other button is default "Cancel")
+      Button(
+        Strings.Settings.logoutTitle,
+        role: .destructive
+      ) {
+        // set what happens when user choosese "Sign out"
+        handleLogout()
       }
     } message: {
-      Text(self.logoutText)
+      logoutMessage
     }
   }
+
+  // Helper function handling the logout process
+  private func handleLogout() {
+    TPPSignInBusinessLogic.getShared { logic in
   
+      if let _logic = logic {
+        // do the logout
+        // and be ready to prresent new alert to user
+        // if some another warning is needed before logging out
+        if let alert = _logic.logOutOrWarn() {
+          TPPRootTabBarController.shared().settingsViewController.present(
+            alert,
+            animated: true
+          )
+        }
+      }
+
+    }
+  }
+
+  // Helper to define message body for logout alert
+  private var logoutMessage: Text {
+    let hasDownloadedBooks = TPPBookRegistry.shared.downloadedBooks.count > 0
+
+    if hasDownloadedBooks {
+      // if user has downloaded books,
+      // return also a warning text
+      return Text(
+        Strings.Settings.logoutConfirmationMessage
+        + "\n\n"
+        + Strings.Settings.logoutWarningMessageDownloadedBooks
+      )
+    }
+
+    // return the basic message, no book downloads
+    return Text(Strings.Settings.logoutConfirmationMessage)
+
+  }
+
   @ViewBuilder private var registerPasskeyRow: some View {
     Button {
       let passkey = PasskeyManager(AccountsManager.shared.currentAccount!.authenticationDocument!)
