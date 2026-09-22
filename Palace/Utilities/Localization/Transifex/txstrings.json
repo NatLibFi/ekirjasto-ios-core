@@ -246,6 +246,9 @@
       "Are you sure you want to return \"%@\"?" : {
          "string" : "Are you sure you want to return \"%@\"?"
       },
+      "Are you sure you want to sign out?" : {
+         "string" : "Are you sure you want to sign out?"
+      },
       "Audiobook" : {
          "string" : "Audiobook"
       },
@@ -1275,11 +1278,17 @@
       "Your authentication details have expired. Please sign in again." : {
          "string" : "Your authentication details have expired. Please sign in again."
       },
+      "Your book bookmarks and downloads will be removed." : {
+         "string" : "Your book bookmarks and downloads will be removed."
+      },
       "Your book has not yet been downloaded." : {
          "string" : "Your book has not yet been downloaded."
       },
       "Your book is ready to read!" : {
          "string" : "Your book is ready to read!"
+      },
+      "Your bookmarks and book downloads will be removed." : {
+         "string" : "Your bookmarks and book downloads will be removed."
       },
       "Your bookmarks and reading positions are in the process of being saved to the server. Would you like to stop that and continue logging out?" : {
          "string" : "Your bookmarks and reading positions are in the process of being saved to the server. Would you like to stop that and continue logging out?"
@@ -1615,6 +1624,9 @@
       },
       "Are you sure you want to return \"%@\"?" : {
          "string" : "Haluatko varmasti palauttaa teoksen %@?"
+      },
+      "Are you sure you want to sign out?" : {
+         "string" : "Haluatko varmasti kirjautua ulos?"
       },
       "Audiobook" : {
          "string" : "Äänikirja"
@@ -2645,11 +2657,17 @@
       "Your authentication details have expired. Please sign in again." : {
          "string" : "Tunnistautumistietosi ovat vanhentuneet. Kirjaudu uudelleen sisään."
       },
+      "Your book bookmarks and downloads will be removed." : {
+         "string" : ""
+      },
       "Your book has not yet been downloaded." : {
          "string" : "Kirjaasi ei ole vielä ladattu."
       },
       "Your book is ready to read!" : {
          "string" : "Kirjasi on valmis luettavaksi!"
+      },
+      "Your bookmarks and book downloads will be removed." : {
+         "string" : "Kirjanmerkkisi ja lataamasi kirjat poistetaan."
       },
       "Your bookmarks and reading positions are in the process of being saved to the server. Would you like to stop that and continue logging out?" : {
          "string" : "Kirjanmerkkejäsi ja lukukohtiasi tallennetaan parhaillaan palvelimelle. Haluatko keskeyttää sen ja jatkaa uloskirjautumista?"
@@ -2985,6 +3003,9 @@
       },
       "Are you sure you want to return \"%@\"?" : {
          "string" : "Är du säker att du vill lämna tillbaka \"%@\"?"
+      },
+      "Are you sure you want to sign out?" : {
+         "string" : "Är du säker på att du vill logga ut?"
       },
       "Audiobook" : {
          "string" : "Ljudbok"
@@ -4015,11 +4036,17 @@
       "Your authentication details have expired. Please sign in again." : {
          "string" : "Dina autentiseringsuppgifter har löpt ut. Logga in på nytt."
       },
+      "Your book bookmarks and downloads will be removed." : {
+         "string" : ""
+      },
       "Your book has not yet been downloaded." : {
          "string" : "Din bok har ännu inte laddats ner."
       },
       "Your book is ready to read!" : {
          "string" : "Din bok är redo att läsas!"
+      },
+      "Your bookmarks and book downloads will be removed." : {
+         "string" : "Dina bokmärken och nedladdade böcker kommer att tas bort."
       },
       "Your bookmarks and reading positions are in the process of being saved to the server. Would you like to stop that and continue logging out?" : {
          "string" : "Dina bokmärken och läspositioner håller på att sparas på servern. Vill du stoppa processen och fortsätta med att logga ut?"
