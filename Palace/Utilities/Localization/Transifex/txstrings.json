@@ -1110,6 +1110,9 @@
       "This book is available to place on hold." : {
          "string" : "This book is available to place on hold."
       },
+      "This book is not currently part of the E-library collection." : {
+         "string" : "This book is not currently part of the E-library collection."
+      },
       "This reservation will be automatically cancelled in %@." : {
          "string" : "This reservation will be automatically cancelled in %@."
       },
@@ -2488,6 +2491,9 @@
       },
       "This book is available to place on hold." : {
          "string" : "Voit varata tämän kirjan."
+      },
+      "This book is not currently part of the E-library collection." : {
+         "string" : "Tämä kirja ei ole tällä hetkellä E-kirjaston kokoelmassa."
       },
       "This reservation will be automatically cancelled in %@." : {
          "string" : "Tämä varaus peruutetaan automaattisesti seuraavan ajan kuluttua: %@."
@@ -3868,6 +3874,9 @@
       "This book is available to place on hold." : {
          "string" : "Du kan reservera den här boken."
       },
+      "This book is not currently part of the E-library collection." : {
+         "string" : "Den här boken finns för tillfället inte i e-bibliotekets samling."
+      },
       "This reservation will be automatically cancelled in %@." : {
          "string" : "Denna reservation återkallas automatiskt om %@."
       },
@@ -4037,7 +4046,7 @@
          "string" : "Dina autentiseringsuppgifter har löpt ut. Logga in på nytt."
       },
       "Your book bookmarks and downloads will be removed." : {
-         "string" : ""
+         "string" : "Dina bokmärken och nedladdade böcker kommer att tas bort."
       },
       "Your book has not yet been downloaded." : {
          "string" : "Din bok har ännu inte laddats ner."

@@ -1,5 +1,6 @@
 Vi utvecklar appen och åtgärdar buggar kontinuerligt. Kom ihåg att kontrollera att du alltid använder den nyaste versionen av appen.
 
-I den här versionen: 
-- Åtgärdade sidbyte i PDF‑böcker på iPad
-- Förbättrad utskickning av inbjudan till ett minderårigt barn
+I den här uppdateringen:
+• Du kan nu lägga till bokmärken i ljudböcker
+• Ändring av appfönstrets storlek fungerar bättre på iPad
+• Viktiga bakgrundsuppdateringar och buggfixar
