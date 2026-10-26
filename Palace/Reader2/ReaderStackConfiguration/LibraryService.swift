@@ -200,7 +200,9 @@ final class LibraryService: Loggable {
 
       Log.debug(
         #file,
-        "Publication opened: \(publication.metadata.title), baseURL: \(publication.baseURL?.string ?? "nil"), readingOrder: \(publication.readingOrder.count) items"
+        "Publication opened, title=\(publication.metadata.title ?? "nil"), "
+          + "baseURL=\(publication.baseURL?.string ?? "nil"), "
+          + "readingOrder=\(publication.readingOrder.count) items"
       )
 
       // Restricted publications cannot be presented to the reader.
