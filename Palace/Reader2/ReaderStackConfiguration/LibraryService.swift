@@ -27,26 +27,34 @@ final class LibraryService: Loggable {
   let assetRetriever: AssetRetriever
   private let publicationOpener: PublicationOpener
   private var drmLibraryServices = [DRMLibraryService]()
+
   /// Keep strong references to the current asset and publication so
   /// the underlying container stays alive while the reader is open.
   var currentAsset: Asset?
   var currentPublication: Publication?
 
-  private lazy var documentDirectory = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+  private lazy var documentDirectory = try! FileManager.default.url(
+    for: .documentDirectory,
+    in: .userDomainMask,
+    appropriateFor: nil,
+    create: true
+  )
 
   init() {
     httpClient = DefaultHTTPClient()
     assetRetriever = AssetRetriever(httpClient: httpClient)
 
     #if LCP
-    drmLibraryServices.append(LCPLibraryService())
+      drmLibraryServices.append(LCPLibraryService())
     #endif
 
     #if FEATURE_DRM_CONNECTOR
-    drmLibraryServices.append(AdobeDRMLibraryService())
+      drmLibraryServices.append(AdobeDRMLibraryService())
     #endif
 
-    let contentProtections = drmLibraryServices.compactMap { $0.contentProtection }
+    let contentProtections = drmLibraryServices.compactMap {
+      $0.contentProtection
+    }
 
     publicationOpener = PublicationOpener(
       parser: DefaultPublicationParser(
@@ -56,15 +64,18 @@ final class LibraryService: Loggable {
       ),
       contentProtections: contentProtections
     )
+
   }
 
 
   // MARK: Opening
 
   /// Opens the Readium 2 Publication for the given `book`.
-  func openBook(_ book: TPPBook,
-                sender: UIViewController,
-                completion: @escaping (Result<Publication, LibraryServiceError>) -> Void) {
+  func openBook(
+    _ book: TPPBook,
+    sender: UIViewController,
+    completion: @escaping (Result<Publication, LibraryServiceError>) -> Void
+  ) {
 
     guard let bookUrl = book.url else {
       completion(.failure(.invalidBook))
@@ -72,56 +83,117 @@ final class LibraryService: Loggable {
     }
 
     Task {
-      await openAndPresent(url: bookUrl, bookIdentifier: book.identifier, allowUserInteraction: true, sender: sender, completion: completion)
+      await openAndPresent(
+        url: bookUrl,
+        bookIdentifier: book.identifier,
+        allowUserInteraction: true,
+        sender: sender,
+        completion: completion
+      )
     }
+
   }
 
-  func openSample(_ book: TPPBook,
-                  sampleURL: URL,
-                sender: UIViewController,
-                completion: @escaping (Result<Publication, LibraryServiceError>) -> Void) {
+  func openSample(
+    _ book: TPPBook,
+    sampleURL: URL,
+    sender: UIViewController,
+    completion: @escaping (Result<Publication, LibraryServiceError>) -> Void
+  ) {
+
     Task {
-      await openAndPresent(url: sampleURL, bookIdentifier: book.identifier, allowUserInteraction: true, sender: sender, completion: completion)
+      await openAndPresent(
+        url: sampleURL,
+        bookIdentifier: book.identifier,
+        allowUserInteraction: true,
+        sender: sender,
+        completion: completion
+      )
     }
+
   }
 
-  private func openAndPresent(url: URL, bookIdentifier: String, allowUserInteraction: Bool, sender: UIViewController?, completion: @escaping (Result<Publication, LibraryServiceError>) -> Void) async {
+  private func openAndPresent(
+    url: URL,
+    bookIdentifier: String,
+    allowUserInteraction: Bool,
+    sender: UIViewController?,
+    completion: @escaping (Result<Publication, LibraryServiceError>) -> Void
+  ) async {
+
     do {
+
       guard let fileUrl = FileURL(url: url) else {
         completion(.failure(.invalidBook))
         return
       }
+
       let asset = try await assetRetriever.retrieve(url: fileUrl).get()
       self.currentAsset = asset  // Retain asset to keep container open
+
       Log.debug(#file, "Asset retrieved: \(asset)")
-      let publication = try await publicationOpener.open(asset: asset, allowUserInteraction: allowUserInteraction, sender: sender).get()
-      Log.debug(#file, "Publication opened: \(publication.metadata.title), baseURL: \(publication.baseURL?.string ?? "nil"), readingOrder: \(publication.readingOrder.count) items")
+
+      let publication = try await publicationOpener.open(
+        asset: asset,
+        allowUserInteraction: allowUserInteraction,
+        sender: sender
+      ).get()
+
+      Log.debug(
+        #file,
+        "Publication opened: \(publication.metadata.title), baseURL: \(publication.baseURL?.string ?? "nil"), readingOrder: \(publication.readingOrder.count) items"
+      )
 
       guard !publication.isRestricted else {
         stopOpeningIndicator(identifier: bookIdentifier)
+
         if let error = publication.protectionError {
           completion(.failure(.openFailed(error)))
         } else {
-          completion(.failure(.openFailed(NSError(domain: "LibraryService", code: -1, userInfo: [NSLocalizedDescriptionKey: "Publication is restricted"]))))
+          completion(
+            .failure(
+              .openFailed(
+                NSError(
+                  domain: "LibraryService",
+                  code: -1,
+                  userInfo: [
+                    NSLocalizedDescriptionKey: "Publication is restricted"
+                  ]
+                )
+              )
+            )
+          )
         }
+
         return
       }
 
       self.currentPublication = publication
-      await MainActor.run { completion(.success(publication)) }
+      await MainActor.run {
+        completion(.success(publication))
+      }
     } catch {
       stopOpeningIndicator(identifier: bookIdentifier)
-      await MainActor.run { completion(.failure(.openFailed(error))) }
+      await MainActor.run {
+        completion(.failure(.openFailed(error)))
+      }
     }
+
   }
 
   /// Stops activity indicator on the`Read` button.
   private func stopOpeningIndicator(identifier: String) {
     let userInfo: [String: Any] = [
       TPPNotificationKeys.bookProcessingBookIDKey: identifier,
-      TPPNotificationKeys.bookProcessingValueKey: false
+      TPPNotificationKeys.bookProcessingValueKey: false,
     ]
-    NotificationCenter.default.post(name: NSNotification.TPPBookProcessingDidChange, object: nil, userInfo: userInfo)
+
+    NotificationCenter.default.post(
+      name: NSNotification.TPPBookProcessingDidChange,
+      object: nil,
+      userInfo: userInfo
+    )
+
   }
 
 }
