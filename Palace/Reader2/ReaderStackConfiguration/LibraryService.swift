@@ -106,7 +106,9 @@ final class LibraryService: Loggable {
   ) {
 
     guard let bookUrl = book.url else {
-      completion(.failure(.invalidBook))
+      Task { @MainActor in
+        completion(.failure(.invalidBook))
+      }
       return
     }
 
@@ -174,7 +176,9 @@ final class LibraryService: Loggable {
       // Convert the external URL to Readium's file URL representation
       // before opening it.
       guard let fileUrl = FileURL(url: url) else {
-        completion(.failure(.invalidBook))
+        await MainActor.run {
+          completion(.failure(.invalidBook))
+        }
         return
       }
 
@@ -200,37 +204,44 @@ final class LibraryService: Loggable {
       )
 
       // Restricted publications cannot be presented to the reader.
+      // Report the protection error on the main actor
+      // because the completion may update UIKit.
       guard !publication.isRestricted else {
-        stopOpeningIndicator(identifier: bookIdentifier)
+        await MainActor.run {
+          stopOpeningIndicator(identifier: bookIdentifier)
 
-        if let error = publication.protectionError {
-          completion(.failure(.openFailed(error)))
-        } else {
-          completion(
-            .failure(
-              .openFailed(
-                NSError(
-                  domain: "LibraryService",
-                  code: -1,
-                  userInfo: [
-                    NSLocalizedDescriptionKey: "Publication is restricted"
-                  ]
+          if let error = publication.protectionError {
+            completion(.failure(.openFailed(error)))
+          } else {
+            completion(
+              .failure(
+                .openFailed(
+                  NSError(
+                    domain: "LibraryService",
+                    code: -1,
+                    userInfo: [
+                      NSLocalizedDescriptionKey: "Publication is restricted"
+                    ]
+                  )
                 )
               )
             )
-          )
+          }
         }
 
         return
       }
 
       self.currentPublication = publication
+
+      // Deliver the result on the main actor
+      // because callers may update UIKit.
       await MainActor.run {
         completion(.success(publication))
       }
     } catch {
-      stopOpeningIndicator(identifier: bookIdentifier)
       await MainActor.run {
+        stopOpeningIndicator(identifier: bookIdentifier)
         completion(.failure(.openFailed(error)))
       }
     }
