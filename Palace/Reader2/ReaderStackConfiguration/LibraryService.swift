@@ -111,7 +111,7 @@ final class LibraryService: Loggable {
     }
 
     Task {
-      await openAndPresent(
+      await retrieveAndOpenPublication(
         url: bookUrl,
         bookIdentifier: book.identifier,
         allowUserInteraction: true,
@@ -140,7 +140,7 @@ final class LibraryService: Loggable {
   ) {
 
     Task {
-      await openAndPresent(
+      await retrieveAndOpenPublication(
         url: sampleURL,
         bookIdentifier: book.identifier,
         allowUserInteraction: true,
@@ -161,7 +161,7 @@ final class LibraryService: Loggable {
   ///   - allowUserInteraction: Whether the publication opener may interact with the user.
   ///   - sender: The view controller that initiated the opening flow.
   ///   - completion: Called with the opened publication or an opening error.
-  private func openAndPresent(
+  private func retrieveAndOpenPublication(
     url: URL,
     bookIdentifier: String,
     allowUserInteraction: Bool,
