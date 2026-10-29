@@ -1027,6 +1027,7 @@
 		7566BEA12EA7C612009EEF9C /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7566BEA02EA7C604009EEF9C /* ToastView.swift */; };
 		7566BEA22EA7C612009EEF9C /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7566BEA02EA7C604009EEF9C /* ToastView.swift */; };
 		7566BEA32EA7C612009EEF9C /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7566BEA02EA7C604009EEF9C /* ToastView.swift */; };
+		7577C6FF30939308009C595A /* TPPBookCoverRegistryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7577C6FE30939308009C595A /* TPPBookCoverRegistryTests.swift */; };
 		7582FFD02DB9188A0057AC71 /* BookSelectionButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582FFCF2DB918880057AC71 /* BookSelectionButtonsView.m */; };
 		7582FFD12DB9188A0057AC71 /* BookSelectionButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582FFCF2DB918880057AC71 /* BookSelectionButtonsView.m */; };
 		7582FFD22DB9188A0057AC71 /* BookSelectionButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582FFCF2DB918880057AC71 /* BookSelectionButtonsView.m */; };
@@ -1928,6 +1929,7 @@
 		7557C4332E8AF69E00181B79 /* UserNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationService.swift; sourceTree = "<group>"; };
 		7566BE9C2EA7C5F8009EEF9C /* ToastService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastService.swift; sourceTree = "<group>"; };
 		7566BEA02EA7C604009EEF9C /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
+		7577C6FE30939308009C595A /* TPPBookCoverRegistryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPPBookCoverRegistryTests.swift; sourceTree = "<group>"; };
 		7582FFCE2DB918630057AC71 /* BookSelectionButtonsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookSelectionButtonsView.h; sourceTree = "<group>"; };
 		7582FFCF2DB918880057AC71 /* BookSelectionButtonsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookSelectionButtonsView.m; sourceTree = "<group>"; };
 		7582FFD32DBADF240057AC71 /* BookSelectionButtonsState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookSelectionButtonsState.h; sourceTree = "<group>"; };
@@ -3685,6 +3687,7 @@
 				E5F8A57C28A48B8300A229AE /* BookPreviewTests.swift */,
 				E534510429FA238500D88BC6 /* AudiobookmarkTests.swift */,
 				E5024A8E2A0EB9D6006BF653 /* AudiobookBookmarkBusinessLogicTests.swift */,
+				7577C6FE30939308009C595A /* TPPBookCoverRegistryTests.swift */,
 			);
 			path = PalaceTests;
 			sourceTree = "<group>";
@@ -4592,6 +4595,7 @@
 				735771B12537691800067CEA /* TPPDRMAuthorizingMock.swift in Sources */,
 				E5F8A57D28A48B8300A229AE /* BookPreviewTests.swift in Sources */,
 				730EF263260955EF008E1DC3 /* TPPBookmarkSpecTests.swift in Sources */,
+				7577C6FF30939308009C595A /* TPPBookCoverRegistryTests.swift in Sources */,
 				B51C1DFE22860563003B49A5 /* OPDS2CatalogsFeedTests.swift in Sources */,
 				E5A0CEA42AA9855200C304EC /* TPPBookMock.swift in Sources */,
 				73A794BD2548E36100C59CC1 /* TPPBookCreationTests.swift in Sources */,
