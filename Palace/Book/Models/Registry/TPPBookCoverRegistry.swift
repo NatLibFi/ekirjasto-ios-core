@@ -16,7 +16,7 @@ class TPPBookCoverRegistry {
   ///   - handler: completion handler.
   func thumbnailImageForBook(_ book: TPPBook, handler: @escaping (_ image: UIImage?) -> Void) {
     guard let imagePath = pinnedThumbnailImageUrlOfBookIdentifier(book.identifier)?.path else {
-      handler(nil)
+      handler(self.getPlaceholderBookCoverImage())
       return
     }
     let isPinned = TPPBookRegistry.shared.book(forIdentifier: book.identifier) != nil
@@ -26,6 +26,8 @@ class TPPBookCoverRegistry {
       } else if let thumbnailUrl = book.imageThumbnailURL,
                 let fileUrl = self.pinnedThumbnailImageUrlOfBookIdentifier(book.identifier) {
         self.getBookCoverImage(url: thumbnailUrl, fileUrl: fileUrl, handler: handler, forBook: book)
+      } else {
+        handler(self.getPlaceholderBookCoverImage())
       }
     } else {
       if let thumbnailUrl = book.imageThumbnailURL {
