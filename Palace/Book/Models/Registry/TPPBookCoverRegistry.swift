@@ -264,9 +264,12 @@ class TPPBookCoverRegistry {
     return URLSession(configuration: configuration)
   }()
 
-  /// Directory URL for pinned images
+  /// Returns the directory for locally saved thumbnail images.
+  /// Creates the directory when it does not exist.
+  /// This property performs file system I/O and may return nil.
   private var pinnedThumbnailImageDirectoryURL: URL? {
 
+    // resolve the directory for the currently active user account.
     guard let accountsDirectoryUrl =
         TPPBookContentMetadataFilesHelper.currentAccountDirectory()
     else {
@@ -275,10 +278,14 @@ class TPPBookCoverRegistry {
     }
 
     do {
+      // store thumbnails in the current user's local on-device account data,
+      // the folder name is "pinned-thumbnail-images"
       let pinnedThumbnailsFolderUrl =
         accountsDirectoryUrl.appendingPathComponent("pinned-thumbnail-images")
 
-      if !FileManager.default.fileExists(atPath: pinnedThumbnailsFolderUrl.path) {
+      // create the thumbnail directory on first use
+      if !FileManager.default.fileExists(atPath: pinnedThumbnailsFolderUrl.path)
+      {
         try FileManager.default.createDirectory(
           at: pinnedThumbnailsFolderUrl,
           withIntermediateDirectories: true
@@ -287,7 +294,10 @@ class TPPBookCoverRegistry {
 
       return pinnedThumbnailsFolderUrl
     } catch {
-      Log.error(#file, "Failed to create pinned thumbnail images folder.")
+      Log.error(
+        #file,
+        "Failed to create pinned thumbnail images folder: \(error.localizedDescription)"
+      )
     }
 
     return nil
