@@ -42,8 +42,7 @@ class TPPBookCoverRegistry {
         self.getBookCoverImage(
           url: thumbnailUrl,
           fileUrl: fileUrl,
-          handler: handler,
-          forBook: book
+          handler: handler
         )
       } else {
         handler(self.getPlaceholderBookCoverImage())
@@ -55,8 +54,7 @@ class TPPBookCoverRegistry {
         self.getBookCoverImage(
           url: thumbnailUrl,
           fileUrl: nil,
-          handler: handler,
-          forBook: book
+          handler: handler
         )
       } else {
         handler(self.getPlaceholderBookCoverImage())
@@ -293,15 +291,13 @@ class TPPBookCoverRegistry {
 
   /// Downloads book cover image.
   /// - Parameters:
-  ///   - url: cover image URL.
+  ///   - url: URL for the books cover image
   ///   - fileUrl: file URL for storing the cover image.
   ///   - handler: completion handler.
-  ///   - book: `TPPBook` object.
   private func getBookCoverImage(
     url: URL,
     fileUrl: URL?,
-    handler: @escaping (_ image: UIImage?) -> Void,
-    forBook book: TPPBook
+    handler: @escaping (_ image: UIImage?) -> Void
   ) {
 
     urlSession.dataTask(with: URLRequest(url: url)) {
