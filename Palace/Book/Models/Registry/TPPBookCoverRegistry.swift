@@ -92,17 +92,28 @@ class TPPBookCoverRegistry {
 
   }
 
-  /// Downloads or creates book covers for the provided set of books.
+  /// Downloads thumbnail images for the provided set of books.
+  /// Uses the placeholder image when a thumbnail is unavailable.
   /// - Parameters:
-  ///   - books: A set of `TPPBook` objects.
-  ///   - handler: completion handler. `handler()` is called once, after all covers are downloaded.
+  ///   - books: The books whose thumbnail images should be loaded, a set of `TPPBook` objects
+  ///   - handler: Called once with an image for each book, completion handler
   func thumbnailImagesForBooks(
     _ books: Set<TPPBook>,
     handler: @escaping (_ bookIdentifiersToImages: [String: UIImage]) -> Void
   ) {
 
+    // Complete immediately if there are no books to load.
+    guard !books.isEmpty else {
+      handler([:])
+      return
+    }
+
+    // Collect one image for each requested book.
+    // Note: thread safety should be checked,
+    // URLSession callbacks may update this dictionary concurrently
     var result: [String: UIImage] = [:] {
       didSet {
+        // Notify the caller after all requested images are available.
         if _books.count == result.keys.count {
           DispatchQueue.main.async {
             handler(result)
@@ -113,6 +124,7 @@ class TPPBookCoverRegistry {
 
     var _books: [TPPBook] = []
 
+    // Keep only one book for each identifier.
     for b in books {
       if !_books.contains(where: { book in
         book.identifier == b.identifier
@@ -121,6 +133,7 @@ class TPPBookCoverRegistry {
       }
     }
 
+    // Load a thumbnail or use the placeholder when no URL is available.
     _books.forEach { book in
 
       guard let thumbnailUrl = book.imageThumbnailURL else {
@@ -131,13 +144,16 @@ class TPPBookCoverRegistry {
         return
       }
 
+      // Download the thumbnail asynchronously.
       urlSession.dataTask(with: URLRequest(url: thumbnailUrl)) {
         imageData,
         response,
         error in
         if let imageData = imageData, let image = UIImage(data: imageData) {
+          // Store the downloaded image.
           result[book.identifier] = image
         } else {
+          // Use the placeholder when the download or image decoding fails.
           DispatchQueue.main.async {
             result[book.identifier] = self.getPlaceholderBookCoverImage()
           }
