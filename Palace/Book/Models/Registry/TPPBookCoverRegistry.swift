@@ -31,7 +31,7 @@ class TPPBookCoverRegistry {
       if let thumbnailUrl = book.imageThumbnailURL {
         self.getBookCoverImage(url: thumbnailUrl, fileUrl: nil, handler: handler, forBook: book)
       } else {
-        handler(self.generateBookCoverImage(book))
+        handler(self.getPlaceholderBookCoverImage())
       }
     }
     
@@ -84,7 +84,7 @@ class TPPBookCoverRegistry {
     _books.forEach { book in
       guard let thumbnailUrl = book.imageThumbnailURL else {
         DispatchQueue.main.async {
-          result[book.identifier] = self.generateBookCoverImage(book)
+          result[book.identifier] = self.getPlaceholderBookCoverImage()
         }
 
         return
@@ -94,7 +94,7 @@ class TPPBookCoverRegistry {
           result[book.identifier] = image
         } else {
           DispatchQueue.main.async {
-            result[book.identifier] = self.generateBookCoverImage(book)
+            result[book.identifier] = self.getPlaceholderBookCoverImage()
           }
           
         }
@@ -223,26 +223,14 @@ class TPPBookCoverRegistry {
         }
       } else {
         DispatchQueue.main.async {
-          handler(self.generateBookCoverImage(book))
+          handler(self.getPlaceholderBookCoverImage())
         }
       }
     }.resume()
   }
   
-  /// Generates TenPrintCover cover for books.
-  /// - Parameter book: `TPPBook` object.
-  /// - Returns: cover image
-  private func generateBookCoverImage(_ book: TPPBook) -> UIImage? {
-    var image: UIImage?
-    let width: CGFloat = 80
-    let height: CGFloat = 120
-    let coverView = NYPLTenPrintCoverView(frame: CGRect(x: 0, y: 0, width: width, height: height), withTitle: book.title, withAuthor: book.authors, withScale: 0.4)
-    UIGraphicsBeginImageContextWithOptions(CGSize(width: width, height: height), true, 0)
-    if let context = UIGraphicsGetCurrentContext() {
-      coverView?.layer.render(in: context)
-      image = UIGraphicsGetImageFromCurrentImageContext()
-    }
-    UIGraphicsEndImageContext()
-    return image
+  /// Returns the placeholder image used when a book has no available cover.
+  private func getPlaceholderBookCoverImage() -> UIImage? {
+    ImageProviders.MyBooksView.bookPlaceholder
   }
 }
