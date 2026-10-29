@@ -6142,7 +6142,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SDKROOT)/usr/include/libxml2\"",
-					"\"$(SRCROOT)/ios-tenprintcover/TenPrintCover\"",
 					"\"$(SRCROOT)/ios-audiobook-overdrive/OverdriveProcessor\"",
 					"\"$(SRCROOT)/adept-ios\"",
 					"\"$(SRCROOT)/adobe-content-filter/public\"",
@@ -6454,7 +6453,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SDKROOT)/usr/include/libxml2\"",
-					"\"$(SRCROOT)/ios-tenprintcover/TenPrintCover\"",
 					"\"$(SRCROOT)/ios-audiobook-overdrive/OverdriveProcessor\"",
 					"\"$(SRCROOT)/adept-ios\"",
 					"\"$(SRCROOT)/adobe-content-filter/public\"",
@@ -6766,7 +6764,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SDKROOT)/usr/include/libxml2\"",
-					"\"$(SRCROOT)/ios-tenprintcover/TenPrintCover\"",
 					"\"$(SRCROOT)/ios-audiobook-overdrive/OverdriveProcessor\"",
 					"\"$(SRCROOT)/adept-ios\"",
 					"\"$(SRCROOT)/adobe-content-filter/public\"",
@@ -7078,7 +7075,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SDKROOT)/usr/include/libxml2\"",
-					"\"$(SRCROOT)/ios-tenprintcover/TenPrintCover\"",
 					"\"$(SRCROOT)/ios-audiobook-overdrive/OverdriveProcessor\"",
 					"\"$(SRCROOT)/adept-ios\"",
 					"\"$(SRCROOT)/adobe-content-filter/public\"",
@@ -7380,7 +7376,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SDKROOT)/usr/include/libxml2\"",
-					"\"$(SRCROOT)/ios-tenprintcover/TenPrintCover\"",
 					"\"$(SRCROOT)/ios-audiobook-overdrive/OverdriveProcessor\"",
 					"\"$(SRCROOT)/adept-ios\"",
 					"\"$(SRCROOT)/adobe-content-filter/public\"",
@@ -7681,7 +7676,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SDKROOT)/usr/include/libxml2\"",
-					"\"$(SRCROOT)/ios-tenprintcover/TenPrintCover\"",
 					"\"$(SRCROOT)/ios-audiobook-overdrive/OverdriveProcessor\"",
 					"\"$(SRCROOT)/adept-ios\"",
 					"\"$(SRCROOT)/adobe-content-filter/public\"",
@@ -7982,7 +7976,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SDKROOT)/usr/include/libxml2\"",
-					"\"$(SRCROOT)/ios-tenprintcover/TenPrintCover\"",
 					"\"$(SRCROOT)/ios-audiobook-overdrive/OverdriveProcessor\"",
 					"\"$(SRCROOT)/adept-ios\"",
 					"\"$(SRCROOT)/adobe-content-filter/public\"",
@@ -8283,7 +8276,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SDKROOT)/usr/include/libxml2\"",
-					"\"$(SRCROOT)/ios-tenprintcover/TenPrintCover\"",
 					"\"$(SRCROOT)/ios-audiobook-overdrive/OverdriveProcessor\"",
 					"\"$(SRCROOT)/adept-ios\"",
 					"\"$(SRCROOT)/adobe-content-filter/public\"",
@@ -8347,7 +8339,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SDKROOT)/usr/include/libxml2\"",
-					"\"$(SRCROOT)/ios-tenprintcover/TenPrintCover\"",
 					"\"$(SRCROOT)/ios-audiobook-overdrive/OverdriveProcessor\"",
 					"\"$(SRCROOT)/adept-ios\"",
 					"\"$(SRCROOT)/adobe-content-filter/public\"",
@@ -8410,7 +8401,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SDKROOT)/usr/include/libxml2\"",
-					"\"$(SRCROOT)/ios-tenprintcover/TenPrintCover\"",
 					"\"$(SRCROOT)/ios-audiobook-overdrive/OverdriveProcessor\"",
 					"\"$(SRCROOT)/adept-ios\"",
 					"\"$(SRCROOT)/adobe-content-filter/public\"",
