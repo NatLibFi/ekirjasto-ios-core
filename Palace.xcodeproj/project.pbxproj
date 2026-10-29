@@ -49,7 +49,6 @@
 		1111973C19880E8D0014462F /* TPPLinearView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1111973B19880E8D0014462F /* TPPLinearView.m */; };
 		1111973F1988226F0014462F /* TPPBookDetailDownloadFailedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1111973E1988226F0014462F /* TPPBookDetailDownloadFailedView.m */; };
 		11119742198827850014462F /* TPPBookDetailDownloadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11119741198827850014462F /* TPPBookDetailDownloadingView.m */; };
-		1112A8431A3249B4002B8CC1 /* libTenPrintCover.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1112A81F1A322C53002B8CC1 /* libTenPrintCover.a */; };
 		1114A6A1195884CB007507A2 /* TPPCatalogUngroupedFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 1114A6A0195884CB007507A2 /* TPPCatalogUngroupedFeed.m */; };
 		111559ED19B8FA590003BE94 /* TPPXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 111559EC19B8FA590003BE94 /* TPPXML.m */; };
 		1120749319D20BF9008203A4 /* TPPBookCellCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1120749219D20BF9008203A4 /* TPPBookCellCollectionViewController.m */; };
@@ -576,7 +575,6 @@
 		3312643B2A287F53006BA87D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FCD2601B7BA79200BFEDD9 /* CoreLocation.framework */; };
 		3312643C2A287F53006BA87D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A823D814192BABA400B55DE2 /* UIKit.framework */; };
 		3312643D2A287F53006BA87D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A823D810192BABA400B55DE2 /* Foundation.framework */; };
-		3312643F2A287F53006BA87D /* libTenPrintCover.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1112A81F1A322C53002B8CC1 /* libTenPrintCover.a */; };
 		331264402A287F53006BA87D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 119503E81993F919009FB788 /* libz.dylib */; };
 		331264432A287F53006BA87D /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 119503E61993F914009FB788 /* libxml2.dylib */; };
 		331264442A287F53006BA87D /* Minizip.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2198690C267E29B00041369E /* Minizip.xcframework */; };
@@ -979,7 +977,6 @@
 		73EB0B3F25821DF4006BC997 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FCD2601B7BA79200BFEDD9 /* CoreLocation.framework */; };
 		73EB0B4025821DF4006BC997 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A823D814192BABA400B55DE2 /* UIKit.framework */; };
 		73EB0B4125821DF4006BC997 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A823D810192BABA400B55DE2 /* Foundation.framework */; };
-		73EB0B4225821DF4006BC997 /* libTenPrintCover.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1112A81F1A322C53002B8CC1 /* libTenPrintCover.a */; };
 		73EB0B4525821DF4006BC997 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 119503E81993F919009FB788 /* libz.dylib */; };
 		73EB0B4625821DF4006BC997 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 119503E61993F914009FB788 /* libxml2.dylib */; };
 		73EB0B5925821DF4006BC997 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84B7A3431B84E8FE00584FB2 /* OFL.txt */; };
@@ -1411,26 +1408,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1112A81E1A322C53002B8CC1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1112A8191A322C53002B8CC1 /* TenPrintCover.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CCAC4FAE195B3DD700D775F5;
-			remoteInfo = TenPrintCover;
-		};
 		220AB4E72BB16DE100435D59 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A823D805192BABA400B55DE2 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 331262D32A287F53006BA87D;
 			remoteInfo = Ekirjasto;
-		};
-		59D9CC1B25FFDE1B00C89B81 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1112A8191A322C53002B8CC1 /* TenPrintCover.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 59D9CBF525FFDBC500C89B81;
-			remoteInfo = TenPrintCoverTests;
 		};
 		5A569A2B1B8351C6003B5B61 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1588,7 +1571,6 @@
 		1111973E1988226F0014462F /* TPPBookDetailDownloadFailedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPPBookDetailDownloadFailedView.m; sourceTree = "<group>"; };
 		11119740198827850014462F /* TPPBookDetailDownloadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPPBookDetailDownloadingView.h; sourceTree = "<group>"; };
 		11119741198827850014462F /* TPPBookDetailDownloadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPPBookDetailDownloadingView.m; sourceTree = "<group>"; };
-		1112A8191A322C53002B8CC1 /* TenPrintCover.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TenPrintCover.xcodeproj; path = "ios-tenprintcover/TenPrintCover.xcodeproj"; sourceTree = "<group>"; };
 		1114A69F195884CB007507A2 /* TPPCatalogUngroupedFeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPPCatalogUngroupedFeed.h; sourceTree = "<group>"; };
 		1114A6A0195884CB007507A2 /* TPPCatalogUngroupedFeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPPCatalogUngroupedFeed.m; sourceTree = "<group>"; };
 		1114A6AC1958B215007507A2 /* TPPLOG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TPPLOG.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -2244,7 +2226,6 @@
 				3312643B2A287F53006BA87D /* CoreLocation.framework in Frameworks */,
 				3312643C2A287F53006BA87D /* UIKit.framework in Frameworks */,
 				3312643D2A287F53006BA87D /* Foundation.framework in Frameworks */,
-				3312643F2A287F53006BA87D /* libTenPrintCover.a in Frameworks */,
 				33372CF92AC548FB0001BE2F /* FirebaseCrashlytics in Frameworks */,
 				331264402A287F53006BA87D /* libz.dylib in Frameworks */,
 				331264432A287F53006BA87D /* libxml2.dylib in Frameworks */,
@@ -2286,7 +2267,6 @@
 				73EB0B4025821DF4006BC997 /* UIKit.framework in Frameworks */,
 				E78494992A8E99CF0059B4B0 /* PalaceAudiobookToolkit.framework in Frameworks */,
 				73EB0B4125821DF4006BC997 /* Foundation.framework in Frameworks */,
-				73EB0B4225821DF4006BC997 /* libTenPrintCover.a in Frameworks */,
 				73EB0B4525821DF4006BC997 /* libz.dylib in Frameworks */,
 				73EB0B4625821DF4006BC997 /* libxml2.dylib in Frameworks */,
 				2198695B267E2A440041369E /* Minizip.xcframework in Frameworks */,
@@ -2323,7 +2303,6 @@
 				E7498A8A2A0E7F460037DD93 /* FirebaseDynamicLinks in Frameworks */,
 				A823D811192BABA400B55DE2 /* Foundation.framework in Frameworks */,
 				E7CA1C4E29381068009CC6FD /* SQLite in Frameworks */,
-				1112A8431A3249B4002B8CC1 /* libTenPrintCover.a in Frameworks */,
 				21986922267E29D70041369E /* PureLayout.xcframework in Frameworks */,
 				E795A7822A744F0A00314EC8 /* ULID in Frameworks */,
 				119503E91993F919009FB788 /* libz.dylib in Frameworks */,
@@ -2339,15 +2318,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1112A81A1A322C53002B8CC1 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				1112A81F1A322C53002B8CC1 /* libTenPrintCover.a */,
-				59D9CC1C25FFDE1B00C89B81 /* TenPrintCoverTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		1183F34D194F775400DC322F /* OPDS */ = {
 			isa = PBXGroup;
 			children = (
@@ -3555,7 +3525,6 @@
 				E5C1F52927990929005FC6B2 /* OverdriveProcessor.xcodeproj */,
 				E585662026979AC100A5FBD5 /* NYPLAEToolkit.xcodeproj */,
 				5A569A261B8351C6003B5B61 /* ADEPT.xcodeproj */,
-				1112A8191A322C53002B8CC1 /* TenPrintCover.xcodeproj */,
 				A823D816192BABA400B55DE2 /* Palace */,
 				A823D82F192BABA400B55DE2 /* PalaceTests */,
 				A823D80E192BABA400B55DE2 /* Products */,
@@ -4229,10 +4198,6 @@
 					ProductGroup = E7F9BAB92A8E6811001697DE /* Products */;
 					ProjectRef = E553424F293FB23F004FF34A /* PalaceAudiobookToolkit.xcodeproj */;
 				},
-				{
-					ProductGroup = 1112A81A1A322C53002B8CC1 /* Products */;
-					ProjectRef = 1112A8191A322C53002B8CC1 /* TenPrintCover.xcodeproj */;
-				},
 			);
 			projectRoot = "";
 			targets = (
@@ -4245,20 +4210,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		1112A81F1A322C53002B8CC1 /* libTenPrintCover.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libTenPrintCover.a;
-			remoteRef = 1112A81E1A322C53002B8CC1 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		59D9CC1C25FFDE1B00C89B81 /* TenPrintCoverTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = TenPrintCoverTests.xctest;
-			remoteRef = 59D9CC1B25FFDE1B00C89B81 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		5A569A2C1B8351C6003B5B61 /* libADEPT.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
