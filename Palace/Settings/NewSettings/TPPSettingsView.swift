@@ -15,7 +15,6 @@ struct TPPSettingsView: View {
   @State private var orientation: UIDeviceOrientation = UIDevice.current.orientation
   @State private var selectedView: Int? = 0
   @State private var toggleLogoutWarning = false
-  @State private var toggleSyncBookmarks = AccountsManager.shared.accounts().first?.details?.syncPermissionGranted ?? false
   
   var body: some View {
     settingsListView
@@ -82,39 +81,6 @@ struct TPPSettingsView: View {
       }
     }
   }
-  
-  /* syncBookmarks button, not in use currently.
-   Can be implemented again when sync is available
-  @ViewBuilder private var syncBookmarksSection: some View {
-       Section(
-         footer: Text(NSLocalizedString("Save your reading position and bookmarks to all your other devices.", comment: "Explain to the user they can save their bookmarks in the cloud across all their devices."))
-       ) {
-         Toggle(isOn: $toggleSyncBookmarks) {
-           Text(Strings.Settings.syncBookmarks)
-             .font(Font(uiFont: UIFont.palaceFont(ofSize: 16)))
-         }
-         .disabled(!syncEnabled)
-         .onChange(of: toggleSyncBookmarks) { value in
-           TPPSignInBusinessLogic.getShared { logic in
-             logic?.changeSyncPermission(to: value, postServerSyncCompletion: { value in
-               toggleSyncBookmarks = value
-             })
-           }
-         }
-         .onAppear {
-           TPPSignInBusinessLogic.getShared { logic in
-             logic?.checkSyncPermission(preWork: {
-               syncEnabled = false
-             }, postWork: { enableSync in
-               syncEnabled = true
-               toggleSyncBookmarks = enableSync
-             })
-           }
-         }
-       }
-       .font(Font(uiFont: UIFont.palaceFont(ofSize: 12)))
-     }
-  */
 
   @ViewBuilder private var settingsAndHelpSection: some View {
     Section {
@@ -149,37 +115,66 @@ struct TPPSettingsView: View {
   
   @ViewBuilder private var logoutRow: some View {
     Button {
-      TPPSignInBusinessLogic.getShared { logic in
-        if let _logic = logic {
-          if _logic.shouldShowSyncButton() && !self.toggleSyncBookmarks {
-            self.logoutText = Strings.Settings.signOutConfirmationBookSync
-          } else {
-            self.logoutText = Strings.Settings.signOutConfirmationNoBookSync
-          }
-        }
-        //Override the logout text so enabling Sync is not mentioned anymore
-        self.logoutText = Strings.Settings.signOutConfirmationNoBookSync
-        toggleLogoutWarning = true
-      }
+      // show the logout warning when "Sign out" button is pressed
+      toggleLogoutWarning = true
     } label: {
-      buttonLabelHStackRow(
-        title: Strings.Settings.signOut
-      )
-    }.alert(Strings.TPPSigninBusinessLogic.signout, isPresented: $toggleLogoutWarning) {
-      Button(Strings.Settings.signOut, role: .destructive) {
-        TPPSignInBusinessLogic.getShared { logic in
-          if let _logic = logic {
-            if let alert = _logic.logOutOrWarn() {
-              TPPRootTabBarController.shared().settingsViewController.present(alert, animated: true)
-            }
-          }
-        }
+      buttonLabelHStackRow(title: Strings.Settings.logoutTitle)
+    }.alert(
+      Strings.TPPSigninBusinessLogic.signout,
+      isPresented: $toggleLogoutWarning
+    ) {
+      // define the confirmation button on alert
+      // (the other button is default "Cancel")
+      Button(
+        Strings.Settings.logoutTitle,
+        role: .destructive
+      ) {
+        // set what happens when user choosese "Sign out"
+        handleLogout()
       }
     } message: {
-      Text(self.logoutText)
+      logoutMessage
     }
   }
+
+  // Helper function handling the logout process
+  private func handleLogout() {
+    TPPSignInBusinessLogic.getShared { logic in
   
+      if let _logic = logic {
+        // do the logout
+        // and be ready to prresent new alert to user
+        // if some another warning is needed before logging out
+        if let alert = _logic.logOutOrWarn() {
+          TPPRootTabBarController.shared().settingsViewController.present(
+            alert,
+            animated: true
+          )
+        }
+      }
+
+    }
+  }
+
+  // Helper to define message body for logout alert
+  private var logoutMessage: Text {
+    let hasDownloadedBooks = TPPBookRegistry.shared.downloadedBooks.count > 0
+
+    if hasDownloadedBooks {
+      // if user has downloaded books,
+      // return also a warning text
+      return Text(
+        Strings.Settings.logoutConfirmationMessage
+        + "\n\n"
+        + Strings.Settings.logoutWarningMessageDownloadedBooks
+      )
+    }
+
+    // return the basic message, no book downloads
+    return Text(Strings.Settings.logoutConfirmationMessage)
+
+  }
+
   @ViewBuilder private var registerPasskeyRow: some View {
     Button {
       let passkey = PasskeyManager(AccountsManager.shared.currentAccount!.authenticationDocument!)

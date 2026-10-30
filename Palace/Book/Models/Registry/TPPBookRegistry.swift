@@ -810,6 +810,19 @@ class TPPBookRegistry: NSObject, TPPBookRegistrySyncing {
       .map { $0.book }
   }
 
+  /// Returns all registered books that are downloaded
+  var downloadedBooks: [TPPBook] {
+    let matchingStates: [TPPBookState] = [
+      .DownloadSuccessful,
+      .Used,
+    ]
+    return
+      registry
+      .map { $0.value }
+      .filter { matchingStates.contains($0.state) }
+      .map { $0.book }
+  }
+
   /// Adds a book to the book registry until it is manually removed. It allows the application to
   /// present information about obtained books when offline. Attempting to add a book already present
   /// will overwrite the existing book as if `updateBook` were called. The location may be nil. The

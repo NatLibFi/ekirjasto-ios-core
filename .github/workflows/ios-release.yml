@@ -10,8 +10,6 @@ on:
 
 permissions:
   contents: read
-  issues: write
-  pull-requests: write
 
 concurrency:
   group: ios-release-${{ github.event.release.tag_name }}
@@ -55,7 +53,7 @@ jobs:
           fi
 
       - name: Checkout released version
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: ${{ github.event.release.tag_name }}
           fetch-depth: 0
@@ -149,52 +147,3 @@ jobs:
         env:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
         run: scripts/build.sh release_upload config:dev
-
-      - name: Mark PRs as released
-        shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
-          RELEASE_TAG: ${{ github.event.release.tag_name }}
-        run: |
-          set -euo pipefail
-
-          RELEASE_LABEL="release:${RELEASE_TAG}"
-
-          if ! gh label list \
-            --limit 1000 \
-            --json name \
-            --jq '.[].name' |
-            grep -Fxq "released"
-          then
-            echo "Creating label released"
-
-            gh label create "released" \
-              --color "0E8A16" \
-              --description "Included in a published release"
-          fi
-
-          gh pr list \
-            --state merged \
-            --label "${RELEASE_LABEL}" \
-            --limit 100 \
-            --json number,title \
-            --jq '
-              .[]
-              | [.number, .title]
-              | @tsv
-            ' \
-            > released-prs.txt
-
-          if [[ ! -s released-prs.txt ]]; then
-            echo \
-              "No PRs found with label ${RELEASE_LABEL}" >&2
-            exit 1
-          fi
-
-          while IFS=$'\t' read -r pr title
-          do
-            echo "Marking PR #${pr} as released: ${title}"
-
-            gh pr edit "${pr}" \
-              --add-label "released"
-          done < released-prs.txt

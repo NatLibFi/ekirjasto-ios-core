@@ -389,6 +389,21 @@ struct Strings {
       "User Surveys",
       comment: "Title of a button that links to a HTML resource containing E-library user surveys.")
 
+    static let logoutConfirmationMessage = NSLocalizedString(
+      "Are you sure you want to sign out?",
+      comment: "Basic message body for the alert shown to user when logging out."
+    )
+
+    static let logoutWarningMessageDownloadedBooks = NSLocalizedString(
+      "Your bookmarks and book downloads will be removed.",
+      comment: "Addition to the basic message body for the alert that is shown to user when logging out."
+    )
+
+    static let logoutTitle = NSLocalizedString(
+      "Sign out",
+      comment: "Title for the alert shown to user when logging out."
+    )
+
     // dependents
     static let dependentsButton = NSLocalizedString("Invite a Dependent", comment: "")
     static let dependents = NSLocalizedString("Dependents", comment: "")
