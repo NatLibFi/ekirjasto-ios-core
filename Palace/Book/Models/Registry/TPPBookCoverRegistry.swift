@@ -339,7 +339,10 @@ class TPPBookCoverRegistry {
             do {
               try imageData.write(to: fileUrl, options: .atomic)
             } catch {
-              // log error
+              Log.error(
+                #file,
+                "Error saving thumbnail file: \(error.localizedDescription)"
+              )
             }
           }
 
