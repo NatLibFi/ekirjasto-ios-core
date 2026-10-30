@@ -10,10 +10,10 @@ import Foundation
 
 class TPPBookCoverRegistry {
 
-  /// Downloads or returns cached cover image for the provided book.
+  /// Returns a cached thumbnail, downloads one when needed, or uses a placeholder.
   /// - Parameters:
-  ///   - book: `TPPBook` object.
-  ///   - handler: completion handler.
+  ///   - book: The book whose thumbnail image should be loaded, TPPBook object
+  ///   - handler: Called with the cached, downloaded, or placeholder image
   func thumbnailImageForBook(
     _ book: TPPBook,
     handler: @escaping (_ image: UIImage?) -> Void
@@ -27,6 +27,7 @@ class TPPBookCoverRegistry {
       return
     }
 
+    // a pinned book is saved in the user's local book registry.
     let isPinned =
       TPPBookRegistry.shared.book(forIdentifier: book.identifier) != nil
 
