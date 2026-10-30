@@ -166,7 +166,8 @@ class TPPBookCoverRegistry {
 
   }
 
-  /// Immediately returns the cached thumbnail if available, else nil. Generated images are not returned.
+  /// Immediately returns a thumbnail from the URL cache or nil.
+  /// Placeholder images are not returned.
   /// - Parameter book: book
   /// - Returns: cover image, if one is available.
   func cachedThumbnailImageForBook(_ book: TPPBook) -> UIImage? {
