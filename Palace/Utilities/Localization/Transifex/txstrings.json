@@ -177,6 +177,9 @@
       "Access mode" : {
          "string" : "Access mode"
       },
+      "Access to this book was revoked on %@." : {
+         "string" : "Access to this book was revoked on %@."
+      },
       "Accessibility" : {
          "string" : "Accessibility"
       },
@@ -1071,6 +1074,12 @@
       "The item you are trying to open is not currently supported." : {
          "string" : "The item you are trying to open is not currently supported."
       },
+      "The loan for this book expired on %@." : {
+         "string" : "The loan for this book expired on %@."
+      },
+      "The loan for this book was cancelled on %@." : {
+         "string" : "The loan for this book was cancelled on %@."
+      },
       "The page could not load due to a conection error." : {
          "string" : "The page could not load due to a conection error."
       },
@@ -1103,6 +1112,9 @@
       },
       "This book does not have any accessibility information available." : {
          "string" : "This book does not have any accessibility information available."
+      },
+      "This book has already been returned on %@." : {
+         "string" : "This book has already been returned on %@."
       },
       "This book is available to borrow." : {
          "string" : "This book is available to borrow."
@@ -1558,6 +1570,9 @@
       },
       "Access mode" : {
          "string" : "Saavutettavuus"
+      },
+      "Access to this book was revoked on %@." : {
+         "string" : "Käyttöoikeus tähän kirjaan peruutettiin %@."
       },
       "Accessibility" : {
          "string" : "Saavutettavuus"
@@ -2453,6 +2468,12 @@
       "The item you are trying to open is not currently supported." : {
          "string" : "Kohdetta, jota yrität avata, ei tueta tällä hetkellä."
       },
+      "The loan for this book expired on %@." : {
+         "string" : "Tämän kirjan lainan umpeutui %@."
+      },
+      "The loan for this book was cancelled on %@." : {
+         "string" : "Tämän kirjan laina peruutettiin %@."
+      },
       "The page could not load due to a conection error." : {
          "string" : "Sivua ei voitu ladata yhteysvirheen vuoksi."
       },
@@ -2485,6 +2506,9 @@
       },
       "This book does not have any accessibility information available." : {
          "string" : "Tällä kirjalla ei ole saavutettavuustietoja."
+      },
+      "This book has already been returned on %@." : {
+         "string" : "Tämä kirja on jo palautettu %@."
       },
       "This book is available to borrow." : {
          "string" : "Tämän kirjan voi lainata."
@@ -2940,6 +2964,9 @@
       },
       "Access mode" : {
          "string" : "Tillgänglighet"
+      },
+      "Access to this book was revoked on %@." : {
+         "string" : "Åtkomsten till den här boken återkallades %@."
       },
       "Accessibility" : {
          "string" : "Tillgänglighet"
@@ -3835,6 +3862,12 @@
       "The item you are trying to open is not currently supported." : {
          "string" : "Objektet du försöker öppna stöds inte för närvarande."
       },
+      "The loan for this book expired on %@." : {
+         "string" : "Lånet för den här boken gick ut %@."
+      },
+      "The loan for this book was cancelled on %@." : {
+         "string" : "Lånet för den här boken annullerades %@."
+      },
       "The page could not load due to a conection error." : {
          "string" : "Sidan kunde inte laddas på grund av ett anslutningsfel."
       },
@@ -3867,6 +3900,9 @@
       },
       "This book does not have any accessibility information available." : {
          "string" : "Den här boken har ännu ingen tillgänglighetsinformation."
+      },
+      "This book has already been returned on %@." : {
+         "string" : "Den här boken har redan lämnats tillbaka %@."
       },
       "This book is available to borrow." : {
          "string" : "Denna bok är tillgänglig för utlåning."

@@ -217,6 +217,26 @@ struct Strings {
   }
   
   struct Error {
+    static let bookAlreadyReturned = NSLocalizedString(
+      "This book has already been returned on %@.",
+      comment: "Message shown when user tries to open a book for which the loan has been returned."
+    )
+
+    static let bookLoanExpired = NSLocalizedString(
+      "The loan for this book expired on %@.",
+      comment: "Message shown when a user tries to open a book after its loan period has ended."
+    )
+
+    static let bookLoanCancelled = NSLocalizedString(
+      "The loan for this book was cancelled on %@.",
+      comment: "Message shown when a user tries to open a book for which the loan has been cancelled before it could be used."
+    )
+
+    static let bookAccessRevoked = NSLocalizedString(
+      "Access to this book was revoked on %@.",
+      comment: "Message shown when a user tries to open a book but the loan has been revoked."
+    )
+
     static let loginFailedErrorTitle = NSLocalizedString("Login Failed", comment: "")
     static let loadFailedError = NSLocalizedString("The page could not load due to a conection error.", comment: "")
     static let invalidCredentialsErrorTitle = NSLocalizedString("Invalid Credentials", comment: "")
